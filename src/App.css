@@ -1,0 +1,293 @@
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css');
+.App {
+    text-align: center;
+    font-family: 'Poppins', sans-serif !important;
+    overflow: hidden !important;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.search-icon::-webkit-input-placeholder {
+    font-family: 'Arial', FontAwesome;
+    font-weight: normal;
+    overflow: visible;
+    vertical-align: top;
+    display: inline-block !important;
+    padding-left: 10px;
+    padding-top: 2px;
+    font-size: large !important;
+}
+
+.bg-wallet {
+    background-color: #FCFCFC!important;
+}
+
+.scroll-y {
+    overflow-y: scroll !important;
+    scroll-behavior: smooth !important;
+    position: relative !important;
+    height: 75vh !important;
+}
+
+.scroll-y2 {
+    overflow-y: scroll !important;
+    scroll-behavior: smooth !important;
+    position: relative !important;
+    height: 50% !important;
+}
+
+.side-bar {
+    width: 35% !important;
+    padding-top: 5% !important;
+    padding-bottom: 5% !important;
+    align-items: center !important;
+}
+
+.side-barsy {
+    width: 35% !important;
+    padding-top: 10% !important;
+    padding-bottom: 10% !important;
+    align-items: center !important;
+}
+
+.my-modal {
+    margin-top: 4% !important;
+    max-width: 50% !important;
+    border-radius: 25% !important;
+    padding: 0% !important;
+}
+
+[title="twitt"]::before {
+    content: '\f099';
+    font-family: "Font Awesome 6 brands";
+    font-weight: 400;
+}
+
+.my-modal1 {
+    margin-top: 4% !important;
+    max-width: 30% !important;
+    border-radius: 25% !important;
+    padding: 0% !important;
+}
+
+.tab-nav {
+    cursor: pointer;
+}
+
+.account:hover {
+    background-color: #252859 !important;
+    color: #ffb85c;
+    cursor: pointer;
+}
+
+.isActive {
+    background-color: #252859 !important;
+    color: #ffb85c;
+    cursor: pointer;
+    border: 1px #ffb85c !important;
+}
+
+.res-home p {
+    font-size: small;
+}
+
+.rounded-down {
+    border-radius: 0 0 5% 5%;
+}
+
+.pic {
+    position: fixed;
+    z-index: 1;
+}
+
+.wide {
+    width: 90%;
+}
+
+.wider {
+    width: 90%;
+}
+
+.wide-40 {
+    width: 40%;
+}
+
+.wide-60 {
+    width: 60%;
+}
+
+.x-small {
+    font-size: x-small !important;
+}
+
+.blue-dark {
+    background-color: #252859 !important;
+    color: whitesmoke !important;
+}
+
+.peach {
+    background-color: #FCE3C2 !important;
+    color: #282c34 !important;
+}
+
+.top {
+    margin-top: 8px;
+}
+
+.bg-text {
+    background-color: #f7a335 !important;
+}
+
+.grey-text {
+    color: #8989898b;
+}
+
+.grey-back {
+    background-color: #fafafa;
+}
+
+.activeTab {
+    color: #ffb85c !important;
+}
+
+
+/* .theForm {
+    background-image: url("https://img.freepik.com/free-vector/strategic-consulting-concept-illustration_114360-8994.jpg?w=740&t=st=1678295724~exp=1678296324~hmac=d43819b5a3fbe5776cd679d2f5d57cde36a046d1ee3ec3decf5cd0f54370c9b9");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 50%;
+} */
+
+.sacco {
+    background-image: url("images/_.jpeg");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 30%;
+}
+
+.dollar {
+    background-image: url("images/_.jpeg") !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+}
+
+.light {
+    background-color: rgba(255, 255, 255, 0.637) !important;
+}
+
+.light-res-home {
+    background-color: #fafafa1f;
+}
+
+
+/* .lighter {
+    background-image: -webkit-linear-gradient(top, #1d2565ae, #ffb85c96);
+    background-clip: text;
+    color: transparent !important;
+    cursor: pointer !important;
+} */
+
+.border-active {
+    border: 1px soild #f7a335 !important;
+}
+
+.rounded-25 {
+    border-radius: 15px !important;
+}
+
+.active {
+    color: #f7a335 !important;
+    cursor: pointer !important;
+}
+
+.avatar {
+    margin-top: 30% !important;
+    width: 50% !important;
+    height: 50% !important;
+}
+
+.avatar-name {
+    margin-bottom: 30% !important;
+}
+
+button {
+    width: 50% !important;
+    align-items: center !important;
+    background-color: wheat;
+    border: none !important;
+    padding: 2% !important;
+}
+
+.blue-light {
+    color: #252859;
+}
+
+.bg-whiter {
+    background-color: rgb(225, 225, 225) !important;
+}
+
+.bolder {
+    font-weight: 700 !important;
+}
+
+.font-lighter {
+    font-weight: 150 !important;
+}
+
+.TabContent {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.wheat {
+    background-color: wheat !important;
+}
+
+.bottom-nav {
+    z-index: 1;
+    bottom: 0%;
+    position: fixed;
+}
+
+.progress.row {
+    padding-left: 0% !important;
+}
+
+.p-bar {
+    padding-left: 0% !important;
+}
