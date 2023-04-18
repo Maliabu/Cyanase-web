@@ -1,28 +1,29 @@
 import React from "react";
-import { FaArrowCircleLeft, FaPhoneAlt, FaWhatsapp, FaEnvelope, FaTwitter } from "react-icons/fa";
+import { FaWhatsapp, FaTwitter } from "react-icons/fa";
 import Pic from './Pic'
+import { ArrowLeftSquare, Call, Message } from "react-iconly";
 
 const ResContactUs = (props) => {
     return ( <
         div > < Pic / > <
         div className = "pt-5" >
         <
-        p className = "mt-5 p-3 bg-light text-center" > General Account Settings < /p></div >
+        p className = "mt-5 p-3 bg-light bolder" > Settings < /p></div >
         <
         div className = "px-5 res-home" >
         <
-        FaArrowCircleLeft size = { 30 }
+        ArrowLeftSquare size = { 30 }
         onClick = {
             () => { props.changeContactSetting(false) }
         }
-        className = "text-warning my-4 active" / > <
-        h6 className = "bolder" > Contact Us < /h6>   <
-        p > For more information or inquiries, please reach us.We are available 24 / 7 < /p>   <
+        className = "my-4" / > <
+        span className = "bolder" > Contact Us < /span>   <
+        p className = "bolder" > For more information or inquiries, please reach us.We are available 24 / 7 < /p>   <
         div className = "row mt-3" > <
         div className = "col-2 text-center" >
         <
-        FaPhoneAlt size = "25"
-        className = 'my-3 active' / >
+        Call size = "25"
+        className = 'my-3' / >
         <
         /
         div >
@@ -41,7 +42,7 @@ const ResContactUs = (props) => {
         div className = "col-2 text-center" >
         <
         FaWhatsapp size = "25"
-        className = 'my-3 active' / >
+        className = 'my-3' / >
         <
         /
         div >
@@ -59,8 +60,8 @@ const ResContactUs = (props) => {
         div className = "row " > <
         div className = "col-2 text-center" >
         <
-        FaEnvelope size = "25"
-        className = 'my-3 active' / >
+        Message size = "25"
+        className = 'my-3' / >
         <
         /
         div >
@@ -79,7 +80,7 @@ const ResContactUs = (props) => {
         div className = "col-2 text-center" >
         <
         FaTwitter size = "25"
-        className = 'my-3 active' / >
+        className = 'my-3' / >
         <
         /
         div >

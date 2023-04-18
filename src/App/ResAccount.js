@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FaArrowCircleLeft, FaUserCircle, FaPhoneAlt, FaEnvelope, FaCameraRetro } from "react-icons/fa";
+import { FaCameraRetro } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import ResChangeDetails from '../Accounts/ResChangeDetails';
 import Profile from '../images/Ellipse 6.png';
 import Form from 'react-bootstrap/Form';
 import Pic from '../Accounts/Pic'
+import { ArrowLeftSquare, Call, Camera, Message, User } from "react-iconly";
 
 const ResAccount = (props) => {
     const [show2, setShow2] = useState(false);
@@ -16,26 +17,26 @@ const ResAccount = (props) => {
     return ( < div > < Pic / > <
         div className = "pt-5" >
         <
-        h6 className = "mt-5 p-3 bg-light text-center" > General Account Settings < /h6></div >
+        h6 className = "mt-5 p-3 bg-light bolder" > Settings < /h6></div >
         <
-        div className = "px-5 res-home pb-5 mb-5" >
+        div className = "px-3 res-home pb-5 mb-5" >
         <
-        FaArrowCircleLeft size = { 30 }
+        ArrowLeftSquare size = { 30 }
         onClick = {
             () => { props.changeAccountSetting(false) }
         }
-        className = "text-warning my-3 " / > <
-        h6 className = "mt-2" > Account Details < /h6>  
+        className = " m-3 " / > <
+        span className = "mt-2 bolder" > Account Details < /span>  
 
         <
         div className = " px-5 text-center" > <
         img src = { Profile }
         width = '60%'
         height = '60%'
-        className = "mt-4"
+        className = "mt-5"
         alt = "investors" / > <
         p className = "border border-warning text-center rounded-4 mt-3 text-warning p-2"
-        onClick = { handleShow1 } > Change Photo < /p>< /
+        onClick = { handleShow1 } > < Camera set = 'broken' / > < /p>< /
         div >
         <
         Modal show = { show2 }
@@ -76,63 +77,68 @@ const ResAccount = (props) => {
         div className = "row mt-3 p-2" > <
         div className = "" >
         <
-        div className = "row p-2 px-3 border-bottom" > <
-        div className = "col-2" >
+        div className = "row p-2 px-3 " > <
+        div className = "col-1 px-2" >
         <
-        FaUserCircle size = "25"
-        className = ' active' / >
+        User size = "25"
+        set = 'broken'
+        className = ' ' / >
         <
         /
         div >
         <
-        div className = "col-10 " >
+        div className = "col-11 " >
         <
         h6 > Name <
-        div > < p className = "grey-text" > User Name < /p>  < /
+        div > < p className = "text-warning" > User Name < /p>  < /
         div > < /h6>  < /
         div >
         <
         /
         div >
         <
-        div className = "row p-2 px-3 border-bottom" > <
-        div className = "col-2" >
+        div className = "row p-2 px-3 " > <
+        div className = "col-1 px-2" >
         <
-        FaPhoneAlt size = "25"
-        className = ' active' / >
+        Call size = "25"
+        set = 'broken'
+        className = ' ' / >
         <
         /
         div >
         <
-        div className = "col-10" >
+        div className = "col-11" >
         <
         h6 > Phone <
-        div > < p className = "grey-text" > +256 772971878 < /p>  < /
+        div > < p className = "text-warning" > +256 772971878 < /p>  < /
         div > < /h6> < /
         div >
         <
         /
         div >
         <
-        div className = "row p-2 px-3 border-bottom" > <
-        div className = "col-2" >
+        div className = "row p-2 px-3 " > <
+        div className = "col-1 px-2" >
         <
-        FaEnvelope size = "25"
-        className = 'active' / >
+        Message size = "25"
+        set = 'broken'
+        className = '' / >
         <
         /
         div >
         <
-        div className = "col-10" >
+        div className = "col-11" >
         <
-        h6 > Email < div > < p className = "grey-text" > user @cyanase.com < /p > < /div > < /
+        h6 > Email < div > < p className = "text-warning" > user @cyanase.com < /p > < /div > < /
         h6 > < /
         div >
         <
         /
         div > <
-        p className = "bg-warning text-center rounded-4 mt-3 active text-dark p-2"
-        onClick = { handleShow2 } > Edit Account Details < /p>  < /
+        p className = "border border-warning text-warning text-center rounded-3 mt-3 p-2"
+        onClick = { handleShow2 } > Edit Account Details < /p> <
+        p className = "bg-warning text-dark text-center rounded-3 mt-3 p-2"
+        onClick = { handleShow2 } > Delete Account < /p> < /
         div >
         <
         /

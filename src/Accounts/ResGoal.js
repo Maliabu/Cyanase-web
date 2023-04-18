@@ -1,10 +1,10 @@
 import React from "react";
-import { FaUserClock, FaArrowCircleLeft } from 'react-icons/fa';
 import Form from 'react-bootstrap/Form';
 import '../App.css';
 import Pic from './Pic';
 import Goal from '../images/house.png';
 import GoalInvesting from '../images/Group 215.png'
+import { ArrowLeftSquare } from "react-iconly";
 
 class ResGoal extends React.Component {
     constructor(props) {
@@ -92,18 +92,22 @@ class ResGoal extends React.Component {
             } < Pic / > <
             div className = "pt-5" >
             <
-            h6 className = "mt-5 p-3 bg-light" > <
-            FaArrowCircleLeft size = { 25 }
-            className = "active mx-2"
+            h6 className = "mt-5 p-3 bg-light bolder" > <
+            ArrowLeftSquare size = { 25 }
+            className = "mx-2"
             onClick = {
                 () => { this.props.changeGoalSetting(false) }
             }
             /> Goals  < /
             h6 > < /div > <
             div className = "text-center" >
+
             <
-            FaUserClock className = "text-warning rounded-circle border border-warning p-2 mt-3"
-            size = "60" / > < /div><
+            img src = { GoalInvesting }
+            width = '50%'
+            className = "mt-5"
+            height = '40%'
+            alt = "investors" / > < /div><
             Step1 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             /> <
@@ -145,13 +149,8 @@ function Step1(props) {
         return null
     }
     return ( <
-        div className = "mt-3 mb-5 text-center" >
-        <
-        img src = { GoalInvesting }
-        width = '50%'
-        height = '40%'
-        alt = "investors" / > <
-        p className = "mx-5" > Let your dreams come true by investing
+        div className = "mt-3 mb-5 text-center" > <
+        p className = "mx-5 bolder" > Let your dreams come true by investing
         for them, create your goals here < /
         p > <
         img src = { Goal }
@@ -166,11 +165,11 @@ function Step2(props) {
     if (props.currentStep !== 2) {
         return null
     }
-    return ( < div className = "text-center p-3" >
+    return ( < div className = "text-center p-3 bolder" >
 
         <
         p className = "mt-3" > Add a Goal < /p> <
-        div className = "row bg-light py-4 p-3 font-lighter rounded-25" > <
+        div className = "row bg-light py-4 p-3 rounded-25" > <
         Form.Group className = "mb-3 bg-white rounded-4 p-3 px-5" >
         <
         p >
@@ -213,9 +212,9 @@ function Step3(props) {
         return null
     }
     return ( <
-        div className = "text-center px-3" > < p className = "mt-3" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
+        div className = "text-center px-3 bolder" > < p className = "mt-3" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
             default as monthly) < /p> <
-        div className = "row bg-light p-4 px-3 font-lighter rounded-25 mt-3" >
+        div className = "row bg-light p-4 px-3 rounded-25 mt-3" >
         <
         Form.Group className = "mb-3 bg-white rounded-4 p-3 px-5" >
         <
@@ -256,7 +255,7 @@ function Step4(props) {
         return null
     }
     return ( <
-        div className = "text-center" > <
+        div className = "text-center bolder" > <
         p className = "bolder my-3" > Deposit Type < /p> <
         p className = "mt-2" > How do you want to handle your investments < /p> <
         div className = "p-5 px-3 rounded-4 bg-light mt-3"

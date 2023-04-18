@@ -13,7 +13,7 @@ const Main = ({ id, activeTab, children, props }) => {
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
     return ( <
-        div className = " p-lg-2 rounded-25 scroll-y" >
+        div className = " p-lg-2 rounded-25 dollar scroll-y" >
         <
         div className = " rounded-25 d-none d-lg-block" >
 

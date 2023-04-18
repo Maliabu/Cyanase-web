@@ -1,0 +1,23 @@
+.wrapper {
+    border: 3px solid blue;
+}
+
+.container {
+    background-color: rgb(225, 225, 225);
+    height: 10px !important;
+    padding: 0%;
+    border-radius: 10px;
+}
+
+.barCompleted {
+    background-color: #ffb85c;
+    height: 10px;
+    width: 70%;
+    text-align: end;
+    border-radius: 10px;
+}
+
+.label {
+    font-size: 20px;
+    color: green;
+}

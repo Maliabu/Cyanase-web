@@ -17,7 +17,8 @@ import Clubs from '../Accounts/Clubs';
 import Profile from '../images/Ellipse 6.png';
 import Ad from '../images/Group 212.png';
 import ResGoals from './ResGoals'
-import { FaBell, FaHome, FaWallet, FaLightbulb, FaCog, FaBriefcase, FaUserClock } from 'react-icons/fa';
+import { FaLightbulb } from 'react-icons/fa';
+import { Home, Notification, Wallet, Setting, Work, AddUser } from 'react-iconly';
 
 const ResHome = () => {
     const [activeTab, setActiveTab] = useState("tab1");
@@ -57,7 +58,7 @@ const ResHome = () => {
             <
             p className = "bolder text-end mx-4 mt-2" > welcome back user <
             div className = " justify-content-center" > <
-            p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
+            span className = "px-1 font-lighter" > pick up where we left off < /span></div > < /p>< /
             div > <
             img src = { Profile }
             className = "rounded-circle mx-2 mt-3"
@@ -71,9 +72,11 @@ const ResHome = () => {
             p className = ' mx-3 font-lighter mt-4' > April 2 < br / > < span className = 'bolder' > Statistics < /span> < /p > < /div><
             div className = 'col' >
             <
-            div className = 'd-flex justify-content-end mx-3' > < FaWallet size = "35"
-            className = 'mt-4 mx-2 p-2 rounded-circle active light-res-home ' / > < FaUserClock size = "35"
-            className = 'rounded-circle light-res-home active p-2 mt-4'
+            div className = 'd-flex justify-content-end mx-3' > < Wallet size = "medium"
+            set = 'broken'
+            className = 'mt-4 mx-2 icon-padding rounded-circle active light-res-home ' / > < AddUser size = "medium"
+            set = 'broken'
+            className = 'mt-4 icon-padding rounded-circle active light-res-home '
             onClick = {
                 () => { setGoalSetting(true) }
             }
@@ -83,7 +86,7 @@ const ResHome = () => {
             div className = 'd-flex' >
             <
             span className = 'light-res-home rounded-4 wide-40' > <
-            p className = "bolder mt-3 text-center" > < FaWallet size = "15"
+            p className = "bolder mt-3 text-center" > < Wallet size = "medium"
             className = 'text-warning' /
             >
             <
@@ -91,7 +94,8 @@ const ResHome = () => {
             div className = "d-flex flex-row flex justify-content-center" > < p > UGX < /p> <
             h6 className = "px-1 font-lighter" > 45000 < /h6></div > < /p> < /span > <
             span className = 'light-res-home rounded-4 wide-60 mx-1' > <
-            p className = "bolder mt-3 text-center" > < FaBriefcase size = "15"
+            p className = "bolder mt-3 text-center" > < Work size = "15"
+            set = 'broken'
             className = 'text-warning' /
             >
             <
@@ -104,7 +108,7 @@ const ResHome = () => {
             div className = 'd-flex' >
             <
             span className = 'light-res-home rounded-4 wide-40' > <
-            p className = "bolder text-center mt-2" > < FaWallet size = "15"
+            p className = "bolder text-center mt-2" > < Wallet size = "15"
             className = 'text-warning d-none' /
             >
             <
@@ -112,7 +116,7 @@ const ResHome = () => {
             div className = "d-flex flex-row flex justify-content-center" > < p > USD < /p> <
             h6 className = "px-1 font-lighter" > 60 < /h6></div > < /p> < /span > <
             span className = 'light-res-home rounded-4 wide-60 mx-1' > <
-            p className = "bolder text-center mt-2" > < FaBriefcase size = "15"
+            p className = "bolder text-center mt-2" > < Work size = "15"
             className = 'text-warning d-none' /
             >
             <
@@ -128,7 +132,7 @@ const ResHome = () => {
             <
             p className = "bolder mx-4 mt-2" > Tips: <
             div className = " justify-content-center" > <
-            p className = "px-1 font-lighter" > Dont save your money, invest < /p></div > < /p>< /
+            span className = "px-1 font-lighter" > Dont save your money, invest < /span></div > < /p>< /
             div > < /
             div >
             <
@@ -137,12 +141,12 @@ const ResHome = () => {
             <
             p className = 'mx-3 bolder my-3' > Recent Activity < /p> <
             div className = "row mt-3 px-2 bg-light rounded-3 mx-1 " > <
-            div className = "col-9" >
+            div className = "col-8" >
             <
-            p className = "pt-3 bolder" > Deposit Amount: < span className = "font-lighter" > UDX 10000 < /span> < div className = "active" > Personal Investment < /div > < /p > < /
+            p className = "pt-3 bolder" > Deposit Amount: < span className = "font-lighter" > UGX 10000 < /span> < div className = "active" > Personal Investment < /div > < /p > < /
             div >
             <
-            div className = "col-3 text-end" >
+            div className = "col-4 text-end" >
             <
             p className = "pt-3" > < span className = "bolder" > 21 Jan < /span> <
             p > 3: 30 EAT <
@@ -168,8 +172,12 @@ const ResHome = () => {
         div className = 'd-flex rounded-4 flex-row w-100 text-dark d-block justify-content-center shadow-sm bg-white bottom-nav' >
         <
         div className = ' py-3 text-center' > <
-        TabNavItem title = { < span > < FaHome size = "20"
-            className = 'mt-2' / > < /span>
+        TabNavItem title = { < span > < Home size = "20"
+            set = 'broken'
+            className = 'mt-2' /
+            >
+            <
+            /span >
         }
         onClick = { handleTab1 }
         id = "tab1"
@@ -179,8 +187,9 @@ const ResHome = () => {
         />< /div > <
         div className = ' py-3 text-center' >
         <
-        TabNavItem title = { < span > < FaWallet size = "40"
-            className = 'rounded-circle border  p-2 mx-4' / > < /span>
+        TabNavItem title = { < span > < Wallet size = "medium"
+            set = 'broken'
+            className = 'rounded-circle border border-dark icon-padding mx-4' / > < /span>
         }
         onClick = { handleTab1 }
         id = "tab5"
@@ -190,7 +199,8 @@ const ResHome = () => {
         div > <
         div className = ' py-3 text-center' >
         <
-        TabNavItem title = { < span > < FaBell size = "20"
+        TabNavItem title = { < span > < Notification size = "20"
+            set = 'broken'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab3 }
@@ -202,7 +212,8 @@ const ResHome = () => {
         <
         div className = ' py-3 text-center' >
         <
-        TabNavItem title = { < span > < FaCog size = "20"
+        TabNavItem title = { < span > < Setting size = "20"
+            set = 'broken'
             className = 'mt-2 mx-4' / > < /span>
         }
         onClick = { handleTab3 }

@@ -20,9 +20,10 @@ import Header from '../images/Group 3525.png';
 import Profile from '../images/Ellipse 6.png';
 import ResHome from './ResHome';
 import Loans from './Loans'
-import { FaBell, FaHome, FaUserCircle, FaUsers, FaUniversity, FaWallet, FaHandHoldingUsd, FaDonate, FaUserCog, FaComments, FaLightbulb, FaBalanceScale, FaPhoneAlt } from 'react-icons/fa';
+import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
+import { Notification, Home, Wallet, User, People, Call, Chat, Setting, Chart } from 'react-iconly';
 
-const Home = () => {
+const MyHome = () => {
     const [activeTab, setActiveTab] = useState("tab1");
     //  Functions to handle Tab Switching
     const handleTab1 = () => {
@@ -109,7 +110,7 @@ const Home = () => {
         h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
         div className = ' py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaHome size = "20"
+        TabNavItem title = { < span > < Home size = "20"set = 'broken'
             className = 'mx-2' / > Home < /span >
         }
         onClick = { handleTab1 }
@@ -120,8 +121,10 @@ const Home = () => {
         />  < /div > <
         div className = ' py-3 d-flex flex-row ' >
         <
-        TabNavItem title = { < span > < FaUserCircle size = "20"
-            className = 'mx-2' / > Personal Investments < /span >
+        TabNavItem title = { < span > < User
+            set = 'broken'
+            size = "20"
+            className = 'mx-2' / > Personal Investment < /span >
         }
         onClick = { handleTab2 }
         id = "tab2"
@@ -130,7 +133,8 @@ const Home = () => {
         />< /div > <
         div className = ' py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaUsers size = "20"
+        TabNavItem title = { < span > < People size = "20"
+            set = 'broken'
             className = 'mx-2' / > SACCO Groups < /span >
         }
         onClick = { handleTab3 }
@@ -155,8 +159,9 @@ const Home = () => {
         h6 className = 'p-2 pt-5 grey-text' > ACTIVITY < /h6>   <
         div className = ' py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaWallet size = "20"
-            className = 'mx-2 border rounded-circle' / > Deposits < /span >
+        TabNavItem title = { < span > < Wallet size = "20"
+            set = 'broken'
+            className = 'mx-2' / > Deposits < /span >
         }
         onClick = { handleTab1 }
         id = "tab5"
@@ -188,7 +193,7 @@ const Home = () => {
         h6 className = 'p-2 pt-5 grey-text' > SETTINGS < /h6>   <
         div className = ' py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaUserCog size = "20"
+        TabNavItem title = { < span > < Setting size = "20"set = 'broken'
             className = 'mx-2' / > Account < /span >
         }
         onClick = { handleTab1 }
@@ -198,7 +203,7 @@ const Home = () => {
         />  < /div > <
         div className = ' py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaBalanceScale size = "20"
+        TabNavItem title = { < span > < Chart size = "20"set = 'broken'
             className = 'mx-2' / > Investments < /span >
         }
         onClick = { handleTab2 }
@@ -208,7 +213,7 @@ const Home = () => {
         />  < /div > <
         div className = 'py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaComments size = "20"
+        TabNavItem title = { < span > < Chat size = "20"set = 'broken'
             className = 'mx-2' / > FAQs < /span >
         }
         id = "tab10"
@@ -219,7 +224,8 @@ const Home = () => {
         <
         div className = 'py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaPhoneAlt size = "20"
+        TabNavItem title = { < span > < Call size = "20"
+            set = 'broken'
             className = 'mx-2' / > Contact Us < /span >
         }
         onClick = { handleTab3 }
@@ -244,7 +250,8 @@ const Home = () => {
         div > <
         div className = 'col-lg-1 d-md-none d-lg-block rounded-25' >
         <
-        FaBell size = "23"
+        Notification set = 'broken'
+        size = "23"
         className = 'active position-relative my-lg-2 my-3 mx-lg-5' / >
         <
         span className = "position-absolute top-15 start-65 translate-middle px-2 blue-dark rounded-pill" > <
@@ -312,4 +319,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default MyHome;

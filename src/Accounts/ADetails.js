@@ -85,8 +85,8 @@ const ADetails = (props) => {
         <
         div className = "col-6 px-5 text-center" > <
         img src = { Profile }
-        width = '50%'
-        height = '55%'
+        width = '40%'
+        height = '45%'
         className = "mt-4"
         alt = "investors" / > <
         h6 className = "border border-warning text-center rounded-25 mt-5 text-warning p-3"

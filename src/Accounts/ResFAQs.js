@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { FaArrowCircleLeft } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Ask from './Ask';
 import Pic from './Pic'
+import { ArrowLeftSquare } from "react-iconly";
 
 const ResFAQs = (props) => {
     const [show, setShow] = useState(false);
@@ -12,15 +12,15 @@ const ResFAQs = (props) => {
     return ( < div > < Pic / > <
         div className = "pt-5" >
         <
-        h6 className = "mt-5 p-3 bg-light text-center" > General Account Settings < /h6></div > <
+        h6 className = "mt-5 p-3 bg-light bolder" > Settings < /h6></div > <
         div className = "px-5 mb-5 pb-5 res-home" >
         <
-        FaArrowCircleLeft size = { 30 }
+        ArrowLeftSquare size = { 30 }
         onClick = {
             () => { props.changeFaqsSetting(false) }
         }
-        className = "text-warning my-3 active" / > <
-        p > FAQs < /p>   <
+        className = "my-3" / > <
+        span className = "bolder" > FAQs < /span>   <
         p > Get answers to a list of typical questions that you might wish to ask Cyanase < /p>   <
         div className = "row mt-3" >
         <

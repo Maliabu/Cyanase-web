@@ -61,7 +61,7 @@
     overflow-y: scroll !important;
     scroll-behavior: smooth !important;
     position: relative !important;
-    height: 75vh !important;
+    height: 80vh !important;
 }
 
 .scroll-y2 {
@@ -76,6 +76,10 @@
     padding-top: 5% !important;
     padding-bottom: 5% !important;
     align-items: center !important;
+}
+
+.icon-padding {
+    padding: 7px;
 }
 
 .side-barsy {
@@ -234,6 +238,15 @@
 .active {
     color: #f7a335 !important;
     cursor: pointer !important;
+    border-color: #f7a335 !important;
+}
+
+.blue-active {
+    color: #252859 !important;
+}
+
+.dont {
+    overflow: hidden !important;
 }
 
 .avatar {

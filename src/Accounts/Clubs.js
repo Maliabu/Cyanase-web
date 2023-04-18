@@ -34,8 +34,8 @@ const Clubs = ({...props }) => {
         <
         div className = "col-lg-3" > <
         img src = { Profile }
-        width = '80%'
-        height = '90%'
+        width = '100%'
+        height = '80%'
         className = "mt-lg-4"
         alt = "investors" / > < /div>  <
         div className = "col-lg-9 " > <
@@ -140,10 +140,13 @@ const Clubs = ({...props }) => {
         p className = "mx-4 mt-2" > < span className = "bolder" > Establish Law Court < /span> ...Created: 3 Aug...<span className="bolder">CHILL GRILLS CLUB</span > < /p > < /
         div > <
         h6 className = "mt-5" > Progress: 3 months to go < /h6>  <
-        ProgressBar completed = { 70 }
+        ProgressBar completed = { 80 }
+        customLabel = ""
+        isLabelVisible = { false }
         completedClassName = "barCompleted"
-        maxCompleted = { 100 }
-        ClassName = "barMax" /
+        maxCompletedClassName = "barMaxCompleted"
+        maxCompleted = { 200 }
+        barContainerClassName = "container" /
         >
         <
         p className = "mt-5" > Total Deposit < /p> <

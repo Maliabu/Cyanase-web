@@ -105,7 +105,7 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         <
         div className = "col-6" >
         <
-        h6 className = "px-5 pt-4 text-success text-center" > Successful < /h6> < /
+        h6 className = "px-5 pt-4 active text-center" > Successful < /h6> < /
         div >
         <
         div className = "col-3 text-end" >
@@ -140,10 +140,13 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         <
         /div> <
         h6 className = "mt-5" > Progress: 3 months to go < /h6>  <
-        ProgressBar completed = { 70 }
+        ProgressBar completed = { 80 }
+        customLabel = ""
+        isLabelVisible = { false }
         completedClassName = "barCompleted"
-        maxCompleted = { 100 }
-        ClassName = "barMax" /
+        maxCompletedClassName = "barMaxCompleted"
+        maxCompleted = { 200 }
+        barContainerClassName = "container" /
         >
         <
         p className = "mt-5" > Total Deposit < /p> <

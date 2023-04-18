@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import './style.scss';
 import React, { useState } from "react";
 import Deposit from "./Deposit";
 import Sacco from './Sacco';
@@ -16,8 +17,9 @@ import Clubs from '../Accounts/Clubs';
 import Profile from '../images/Ellipse 6.png';
 import ResGoal from '../Accounts/ResGoal';
 import ResHome from './ResHome';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import { FaBell, FaHome, FaWallet, FaLightbulb, FaCog, FaUserClock } from 'react-icons/fa';
+import ProgressBar from "@ramonak/react-progress-bar";
+import { FaLightbulb } from 'react-icons/fa';
+import { Home, Notification, Wallet, Setting, AddUser } from 'react-iconly';
 
 const ResGoals = () => {
     const [activeTab, setActiveTab] = useState("tab2");
@@ -96,17 +98,22 @@ const ResGoals = () => {
             <
             div className = 'p-3 d-flex' >
             <
-            FaUserClock className = "text-warning rounded-circle border border-warning p-2"
-            size = "35" / > < p className = 'bolder mx-3 mt-2' > Build a Mansion < /p> < /
+            AddUser size = "large"
+            set = 'broken'
+            className = 'rounded-circle border border-dark p-2' / > < p className = 'bolder mx-3 mt-2' > Build a Mansion < /p> < /
             div >
             <
             div className = 'bg-light p-3 rounded-4' >
             <
             p className = 'bolder mt-2' > Progress: < span className = 'font-lighter' > 13 months to go < /span></p >
             <
-            ProgressBar now = { 70 }
-            className = "p-bar"
-            variant = "warning" /
+            ProgressBar completed = { 80 }
+            customLabel = ""
+            isLabelVisible = { false }
+            completedClassName = "barCompleted"
+            maxCompletedClassName = "barMaxCompleted"
+            maxCompleted = { 200 }
+            barContainerClassName = "container" /
             >
             <
             p className = 'bolder mt-3' > Total Deposit: < span className = 'font-lighter' > UGX 45000 < /span></p >
@@ -130,7 +137,7 @@ const ResGoals = () => {
         div className = 'd-flex rounded-4 flex-row w-100 text-dark d-block justify-content-center shadow-sm bg-white bottom-nav' >
         <
         div className = ' py-3 text-center' > <
-        TabNavItem title = { < span > < FaHome size = "20"
+        TabNavItem title = { < span > < Home size = "20"
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab1 }
@@ -141,8 +148,9 @@ const ResGoals = () => {
         />< /div > <
         div className = ' py-3 text-center' >
         <
-        TabNavItem title = { < span > < FaWallet size = "40"
-            className = 'rounded-circle border  p-2 mx-4' / > < /span>
+        TabNavItem title = { < span > < Wallet size = "medium"
+            set = 'broken'
+            className = 'rounded-circle border border-dark icon-padding mx-4' / > < /span>
         }
         onClick = { handleTab1 }
         id = "tab5"
@@ -152,7 +160,7 @@ const ResGoals = () => {
         div > <
         div className = ' py-3 text-center' >
         <
-        TabNavItem title = { < span > < FaBell size = "20"
+        TabNavItem title = { < span > < Notification size = "20"
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab3 }
@@ -164,7 +172,7 @@ const ResGoals = () => {
         <
         div className = ' py-3 text-center' >
         <
-        TabNavItem title = { < span > < FaCog size = "20"
+        TabNavItem title = { < span > < Setting size = "20"
             className = 'mt-2 mx-4' / > < /span>
         }
         onClick = { handleTab3 }

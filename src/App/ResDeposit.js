@@ -1,9 +1,10 @@
 import React from "react";
-import { FaUserCircle, FaUsers, FaUniversity } from 'react-icons/fa';
+import { FaUniversity } from 'react-icons/fa';
 import Form from 'react-bootstrap/Form';
 import Deposit from '../images/deposit.png';
 import Pic from '../Accounts/Pic';
 import Goal from '../images/house.png';
+import { People, User } from "react-iconly";
 
 class ResDeposit extends React.Component {
         constructor(props) {
@@ -23,7 +24,7 @@ class ResDeposit extends React.Component {
         procedures() {
             let currentStep = this.state.currentStep
             if (currentStep === 0) {
-                this.procedure.next = "Choose where you want to make your deposit."
+                this.procedure.next = "Choose where to deposit."
             }
             if (currentStep === 1) {
                 this.procedure.next = "Choose how you wish to make your deposit."
@@ -34,7 +35,7 @@ class ResDeposit extends React.Component {
             if (currentStep === 3) {
                 this.procedure.next = "Make your deposit"
             }
-            return ( < p className = "bolder active" > { this.procedure.next } < /p>)
+            return ( < p className = "bolder" > { this.procedure.next } < /p>)
             }
             handleChange = event => {
                 const { name, value } = event.target
@@ -185,14 +186,14 @@ class ResDeposit extends React.Component {
                 return null;
             }
             return ( <
-                div className = "bg-light text-center rounded-4 p-2 py-5 res-home" > <
-                div className = "row mx-2 bg-white rounded-25" >
+                div className = "text-center rounded-4 py-3 res-home" > <
+                div className = "row shadow-sm mx-2 bg-white rounded-25" >
                 <
                 div className = "col-4 rounded-25 p-2 text-center" >
                 <
                 div >
                 <
-                FaUserCircle size = "40"
+                User size = "xlarge"
                 className = 'active mt-4' / > < /div>   < /
                 div >
                 <
@@ -204,13 +205,13 @@ class ResDeposit extends React.Component {
                 /
                 div >
                 <
-                div className = "row mt-3 mx-2 bg-white rounded-25" >
+                div className = "row shadow-sm mt-3 mx-2 bg-white rounded-25" >
                 <
                 div className = "col-4 rounded-25 p-2 text-center" >
                 <
                 div >
                 <
-                FaUsers size = "50"
+                People size = "xlarge"
                 className = 'active mt-4' / > < /div>   < /
                 div >
                 <
@@ -222,7 +223,7 @@ class ResDeposit extends React.Component {
                 /
                 div >
                 <
-                div className = "row mt-3 mx-2 bg-white rounded-25" >
+                div className = "row shadow-sm mt-3 mx-2 bg-white rounded-25" >
                 <
                 div className = "col-4 rounded-25 p-2 text-center" >
                 <
@@ -233,7 +234,8 @@ class ResDeposit extends React.Component {
                 div >
                 <
                 div className = "col-8 p-2 rounded-25 text-center" > <
-                p className = "mt-2 bolder" > ORGANIZATIONS and COMPANIES < /p > < /
+                p className = "mt-2 bolder" > ORGANIZATIONS and COMPANIES < /p ><
+                p className = "font-lighter" > Make deposits to your API Account < /p>  < /
                 div >
                 <
                 /
