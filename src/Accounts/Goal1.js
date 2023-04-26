@@ -74,7 +74,14 @@ class Goal1 extends React.Component {
             }
             return null;
         }
-
+        returnToGoals = () => {
+            setTimeout(() => {
+                document.getElementById("alert").innerHTML = "Goal Created successfully"
+            }, 1000)
+            return setTimeout(() => {
+                this.props.close1()
+            }, 2000)
+        }
         nextButton() {
             let currentStep = this.state.currentStep;
             if (currentStep < 7) {
@@ -90,8 +97,9 @@ class Goal1 extends React.Component {
                 return ( <
                     h6 className = "py-3 mx-5 text-center bg-warning rounded-4"
                     type = "button"
-                    onClick = { this._next } >
-                    Deposit to Continue <
+                    id = "alert"
+                    onClick = { this.returnToGoals } >
+                    Create this Goal <
                     /h6>   )
                 }
                 return null;

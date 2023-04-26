@@ -5,7 +5,7 @@ import Profile from '../images/Ellipse 6.png';
 import Profile1 from '../images/Ellipse 197.png';
 import Profile2 from '../images/Ellipse 203.png';
 import Profile3 from '../images/Ellipse 205.png';
-import Goal from './Goal';
+import Goal1 from './Goal1';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { FaDonate, FaHandHoldingUsd } from 'react-icons/fa';
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -166,7 +166,7 @@ const Saccos = ({...props }) => {
         onHide = { handleClose1 } {...props } >
         <
         Form validated = { true } > <
-        Goal / > < /Form> < /
+        Goal1 / > < /Form> < /
         Offcanvas >
         <
         h6 className = "grey-text p-3 blue-dark rounded-25" > PERMISSIONS < /h6>   <

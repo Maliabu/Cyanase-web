@@ -5,14 +5,10 @@ import Modal from 'react-bootstrap/Modal';
 import Learn1 from '../Accounts/Learn1';
 import ResDeposit from './ResDeposit';
 import './style.scss';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Goal from '../Accounts/Goal';
 import { Wallet } from "react-iconly";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
-    const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
-    const handleClose1 = () => setShow1(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     return ( < div > < div className = " d-none d-sm-block" > <
@@ -115,14 +111,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         h6 className = " pt-4 active text-end" > Created Aug 8 < /h6>  < /
         div > < /div > < /
-        div >
-        <
-        Offcanvas show = { show1 }
-        placement = "end"
-        className = "side-barsy pt-5"
-        onHide = { handleClose1 } {...props } > <
-        Goal / > < /
-        Offcanvas > < /
+        div > < /
         div > < /
         div > < /div> <
         div className = "d-block d-sm-none" >

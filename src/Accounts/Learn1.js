@@ -2,6 +2,7 @@ import React from "react";
 import { Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
+import Profile1 from '../images/Ellipse 178.png';
 
 class Learn1 extends React.Component {
     constructor(props) {
@@ -10,7 +11,9 @@ class Learn1 extends React.Component {
             currentStep: 1,
             payment_means: '',
             deposit_amount: 0,
-            currency: ''
+            currency: '',
+            deposit_category: "",
+            category_name: ""
         }
     }
 
@@ -35,6 +38,20 @@ class Learn1 extends React.Component {
     }
     handleSubmit = event => {
         event.preventDefault()
+    }
+    _saccoCategory = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep + 6
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+    _afterSacco = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep - 5
+        this.setState({
+            currentStep: currentStep
+        })
     }
 
     _next = () => {
@@ -73,7 +90,8 @@ class Learn1 extends React.Component {
     nextButton() {
         let currentStep = this.state.currentStep;
         let payment_means = this.state.payment_means;
-        if (currentStep < 4) {
+        let deposit_category = this.state.deposit_category;
+        if (currentStep === 1 && deposit_category === "personal investment") {
             return ( <
                 h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
                 type = "button"
@@ -82,7 +100,35 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 4 && payment_means === "offline") {
+        if (currentStep === 7) {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._afterSacco } >
+                Next <
+                /h6>        
+            )
+        }
+
+        if (currentStep === 1 && deposit_category === "sacco/club") {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._saccoCategory } >
+                Next <
+                /h6>        
+            )
+        }
+        if (currentStep < 5) {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._next } >
+                Next <
+                /h6>        
+            )
+        }
+        if (currentStep === 5 && payment_means === "offline") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
                 type = "button"
@@ -91,7 +137,7 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 4 && payment_means === "wallet") {
+        if (currentStep === 5 && payment_means === "wallet") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
                 type = "button" >
@@ -120,6 +166,7 @@ class Learn1 extends React.Component {
             height = '80%'
             alt = "investors" / > <
             Step1 currentStep = { this.state.currentStep }
+            deposit_category = { this.state.deposit_category }
             handleChange = { this.handleChange }
             getTab9 = { this.getTab9() }
             /> <
@@ -128,10 +175,13 @@ class Learn1 extends React.Component {
             /> <
             Step3 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
+            /> <
+            Step4 currentStep = { this.state.currentStep }
+            handleChange = { this.handleChange }
             currency = { this.state.currency }
             payment_means = { this.state.payment_means }
             /> <
-            Step4 currentStep = { this.state.currentStep }
+            Step5 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             deposit_amount = { this.state.deposit_amount }
@@ -141,15 +191,15 @@ class Learn1 extends React.Component {
             }
             currency = { this.state.currency }
             /> <
-            Step5 currentStep = { this.state.currentStep }
+            Step6 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             total_deposit = { this.getTotalDeposit() }
             currency = { this.state.currency }
-            />  { this.nextButton() }{ this.previousButton() }
-
-            <
-            /form> < /
+            />  <Step7  currentStep = { this.state.currentStep }
+            handleChange = { this.handleChange }
+            /> { this.nextButton() } { this.previousButton() } < /
+            form > < /
             React.Fragment >
         );
     }
@@ -163,37 +213,38 @@ function Step1(props) {
         console.log("risk profile")
     }
     return ( <
-        div className = " text-center" > <
-        h6 className = "mt-2" > Choose your payment means. < /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
+        div className = " text-start" > <
+        h6 className = "mt-2 text-center" > Choose where you wish to make your deposit. < /h6> <
+        div className = "p-3 rounded-4 mt-3"
         key = "radio" >
         <
         div key = { `default-radio` }
-        className = "mb-3" > <
-        Form.Check label = "WALLET. I want to deposit from my wallet to make this deposit to my personal investment account"
-        name = "payment_means"
+        className = "mb-3" >
+        <
+        h5 className = "font-lighter" > PERSONAL INVESTMENT < /h5> <
+        Form.Check label = "I wish to deposit to my Personal Account. Basic or Dollar Account"
+        name = "deposit_category"
         type = "radio"
         onChange = { props.handleChange }
-        className = "mx-5"
-        value = "wallet"
+        value = "personal"
         required id = "default-radio" /
         >
         <
-        Form.Check label = "OFFLINE. Deposit directly to our bank account and let us reconcile your account"
-        name = "payment_means"
+        h5 className = "font-lighter mt-5" > SACCO GROUP / INVESTMENT CLUB < /h5> <
+        Form.Check label = "I want to deposit to my Sacco Group or Investment Club"
+        name = "deposit_category"
         onChange = { props.handleChange }
         type = "radio"
-        className = "mt-3 mx-5"
-        value = "offline"
+        value = "sacco/club"
         required id = "default-radio" /
         >
         <
-        Form.Check label = "ONLINE. Make an instant deposit on our platform"
-        name = "payment_means"
+        h5 className = "font-lighter mt-5" > INSTITUTION / ORGANIZATION < /h5>  <
+        Form.Check label = "I am making this deposit towards my API Account as an API User"
+        name = "deposit_category"
         onChange = { props.handleChange }
         type = "radio"
-        className = "mt-3 mx-5"
-        value = "online"
+        value = "institution"
         required id = "default-radio" /
         >
         <
@@ -210,9 +261,58 @@ function Step2(props) {
     if (props.currentStep !== 2) {
         return null
     }
+    if (props.id === "personal") {
+        console.log("risk profile")
+    }
     return ( <
-        div className = "text-center" > <
-        h6 className = "mt-2" > Choose the currency in which you would like to invest your money <
+        div className = " text-start" > <
+        h6 className = "mt-2 text-center" > Choose your payment means. < /h6> <
+        div className = "p-5 px-3 rounded-25 mt-3"
+        key = "radio" >
+        <
+        div key = { `default-radio` }
+        className = "mb-3" >
+        <
+        h5 className = "font-lighter" > WALLET < /h5> <
+        Form.Check label = "I want to deposit from my wallet to make this deposit to my personal investment account"
+        name = "payment_means"
+        type = "radio"
+        onChange = { props.handleChange }
+        value = "wallet"
+        required id = "default-radio" /
+        >
+        <
+        h5 className = "font-lighter mt-5" > OFFLINE < /h5> <
+        Form.Check label = "Deposit directly to our bank account and let us reconcile your account"
+        name = "payment_means"
+        onChange = { props.handleChange }
+        type = "radio"
+        value = "offline"
+        required id = "default-radio" /
+        >
+        <
+        h5 className = "font-lighter mt-5" > ONLINE < /h5> <
+        Form.Check label = "Make an instant deposit on our platform"
+        name = "payment_means"
+        onChange = { props.handleChange }
+        type = "radio"
+        value = "online"
+        required id = "default-radio" /
+        >
+        <
+        /
+        div > < /div > < /
+        div >
+    );
+}
+
+function Step3(props) {
+    if (props.currentStep !== 3) {
+        return null
+    }
+    return ( <
+        div className = "text-start" > <
+        h6 className = "mt-2 text-center" > Choose the currency in which you would like to invest your money <
         /h6> <
         div className = "p-5 px-3 rounded-25 mt-3"
         key = "radio" >
@@ -225,7 +325,6 @@ function Step2(props) {
         name = "currency"
         type = "radio"
         onChange = { props.handleChange }
-        className = "mx-5"
         value = "UGX"
         required id = "default-radio" /
         >
@@ -235,7 +334,6 @@ function Step2(props) {
         name = "currency"
         onChange = { props.handleChange }
         type = "radio"
-        className = " mx-5"
         value = "USD"
         required id = "default-radio" /
         >
@@ -245,8 +343,8 @@ function Step2(props) {
     );
 }
 
-function Step3(props) {
-    if (props.currentStep !== 3) {
+function Step4(props) {
+    if (props.currentStep !== 4) {
         return null
     }
     if (props.payment_means === "wallet") {
@@ -292,8 +390,8 @@ function Step3(props) {
     );
 }
 
-function Step4(props) {
-    if (props.currentStep !== 4) {
+function Step5(props) {
+    if (props.currentStep !== 5) {
         return null
     }
     if (props.payment_means === "offline") {
@@ -321,8 +419,8 @@ function Step4(props) {
     )
 }
 
-function Step5(props) {
-    if (props.currentStep !== 5) {
+function Step6(props) {
+    if (props.currentStep !== 6) {
         return null
     } else if (props.payment_means === "offline") {
         return ( <
@@ -376,4 +474,39 @@ function Step5(props) {
             div >
         );
     }
-    export default Learn1;
+
+    function Step7(props) {
+        if (props.currentStep !== 7) {
+            return null
+        }
+        return ( < div >
+            <
+            h6 className = "text-center my-3" > Select the Sacco Group / Investment Club you wish to deposit to: Only groups and clubs you belong to are listed here. < /h6> <
+            div className = "row text-start px-3 my-3" >
+            <
+            div className = "col-1" >
+            <
+            Form.Check onChange = { props.handleChange }
+            type = "radio"
+            name = "category_name"
+            className = "mt-4"
+            required id = "default-radio" /
+            >
+            <
+            /div> <
+            div className = "col-11 py-3" >
+            <
+            div className = "row" >
+            <
+            div className = "col-3" > <
+            img src = { Profile1 }
+            width = '90%'
+            height = '90%'
+            alt = "investors" / > < /div> <
+            div className = "col-9" > < h6 className = "mt-3" > MUBS SACCO < /h6> < /div > < /
+            div > <
+            /div> < /
+            div > <
+            /div>)
+        }
+        export default Learn1;

@@ -6,7 +6,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import './style.scss';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import TopUp from '../Accounts/TopUp';
-import Goal from '../Accounts/Goal';
+import Goal1 from '../Accounts/Goal1';
 import Modal from 'react-bootstrap/Modal';
 import Learn1 from '../Accounts/Learn1';
 import { AddUser } from "react-iconly";
@@ -84,8 +84,7 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         dialogClassName = "my-modal1" >
         <
         Learn1 tab9 = { props.handletab9 }
-        / > <
-        /
+        / > < /
         Modal > < /
         div >
         <
@@ -165,7 +164,8 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         placement = "end"
         className = "side-barsy pt-5"
         onHide = { handleClose1 } {...props } > <
-        Goal / > < /
+        Goal1 close1 = { handleClose1 }
+        / > < /
         Offcanvas > < /
         div > < /
         div > < /

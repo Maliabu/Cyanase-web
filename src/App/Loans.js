@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaHandHoldingUsd } from 'react-icons/fa';
 import './style.scss';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import Goal from '../Accounts/Goal';
+import Goal1 from '../Accounts/Goal1';
 import Modal from 'react-bootstrap/Modal';
 import PDeposit from '../Accounts/PDeposit';
 
@@ -125,7 +125,7 @@ const Loans = ({ id, activeTab, children, name, ...props }) => {
         placement = "end"
         className = "side-barsy pt-5"
         onHide = { handleClose1 } {...props } > <
-        Goal / > < /
+        Goal1 / > < /
         Offcanvas > < /
         div > < /
         div > < /
