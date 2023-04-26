@@ -7,7 +7,7 @@ import './style.scss';
 import Modal from 'react-bootstrap/Modal';
 import Learn from '../Accounts/Learn'
 
-const Main = ({ id, activeTab, children, props }) => {
+const Main = ({ id, activeTab, children, ...props }) => {
     const [show1, setShow1] = useState(false);
 
     const handleClose1 = () => setShow1(false);
@@ -97,7 +97,7 @@ const Main = ({ id, activeTab, children, props }) => {
         dialogClassName = "my-modal1" >
         <
         Learn close = { handleClose1 }
-        callBack = { props }
+        tab2 = { props.handletab2 }
         / > < /
         Modal > < /
         div >
@@ -110,12 +110,12 @@ const Main = ({ id, activeTab, children, props }) => {
         div className = "col-lg-3 d-none d-sm-block rounded-25 blue-dark py-5 px-2 text-center" >
         <
         h5 className = "bolder" > Your Statistics < /h5>  <
-        h5 className = "pt-5 bolder" > Sacco Activity < /h5>   <
+        h5 className = "pt-5 bolder" > Activity < /h5>   <
         div className = "d-flex flex-row flex justify-content-center" >
         <
-        div className = "w-25" > 35 % < /div> <
-        div className = "w-25" > 20 % < /div> <
-        div className = "w-25" > 15 % < /div> < /
+        div className = "w-25" > 0 % < /div> <
+        div className = "w-25" > 0 % < /div> <
+        div className = "w-25" > 0 % < /div> < /
         div >
         <
         div className = "d-flex flex-row flex justify-content-center" >

@@ -29,7 +29,7 @@ const Withdraw = ({ id, activeTab, children, name, ...props }) => {
         <
         FaDonate size = "80"
         className = 'mx-2 rounded-circle text-warning border-warning p-3 border' / > <
-        h1 className = "bolder my-3 p-3 shadow-sm rounded-4" > Withdraws < /h1>  <
+        h1 className = "my-3 p-3 shadow-sm rounded-4" > Withdraws < /h1>  <
         div className = "d-flex flex-row flex justify-content-center" > <
         h6 className = "px-5 py-3 mt-3 mx-2 border border-warning text-warning rounded-25"
         onClick = { handleShow2 } >
@@ -49,7 +49,7 @@ const Withdraw = ({ id, activeTab, children, name, ...props }) => {
 
         <
         h6 className = "pt-5" > RECENT ACTIVITY < /h6>   <
-        div className = "row mt-3 bg-white px-4 rounded-4" >
+        div className = "row mt-3 bg-white shadow-sm px-4 rounded-4" >
         <
         div className = "col-4" >
         <

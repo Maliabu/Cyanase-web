@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FaArrowCircleLeft, FaUserLock, FaUserTie, FaUserShield } from "react-icons/fa";
+import { FaUserLock, FaUserTie, FaUserShield } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import ChangePassword from './ChangePassword';
 import NKin from './NKin';
 import ADetails from './ADetails';
+import { ArrowLeftSquare } from "react-iconly";
 
 const Account = (props) => {
         const [accountDetails, setAccountDetails] = useState(false);
@@ -21,7 +22,8 @@ const Account = (props) => {
             }
             return ( < div >
                 <
-                FaArrowCircleLeft size = { 30 }
+                ArrowLeftSquare size = "large"
+                set = "broken"
                 onClick = {
                     () => { props.changeAccountSetting(false) }
                 }

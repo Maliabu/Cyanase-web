@@ -107,7 +107,7 @@ class Login extends Component {
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <
-            h2 className = 'text-center py-5' > LOGIN < /h2> <
+            h2 className = 'text-center' > LOGIN < /h2> <
             h6 className = 'active' > < b > Enter your Credentials below to login to your API Account < /b>  < /
             h6 > <
             /

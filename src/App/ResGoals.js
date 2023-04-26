@@ -124,7 +124,7 @@ const ResGoals = () => {
             p onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = 'p-2 border border-warning rounded-4 text-warning text-center mx-5 mt-3' > Add a new Goal < /p> < /
+            className = 'p-2 border border-warning rounded-3 text-warning text-center mx-5 mt-3' > Add a new Goal < /p> < /
             div > <
             /
             div >

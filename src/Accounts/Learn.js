@@ -17,7 +17,7 @@ const Learn = (props) => {
             h6 className = "px-5 py-3 mt-5 mx-2 bg-warning rounded-25"
             onClick = {
                 () => {
-                    props.close(true)
+                    props.tab2()
                 }
             } >
             Get Started < /h6> <

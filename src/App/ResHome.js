@@ -41,6 +41,14 @@ const ResHome = () => {
         // update the state to tab2
         setActiveTab("tab3");
     };
+    const handleTab5 = () => {
+        // update the state to tab2
+        setActiveTab("tab5");
+    };
+    const handleTab8 = () => {
+        // update the state to tab2
+        setActiveTab("tab8");
+    };
     const handleTab12 = () => {
         // update the state to tab2
         setActiveTab("tab12");
@@ -191,7 +199,7 @@ const ResHome = () => {
             set = 'broken'
             className = 'rounded-circle border border-dark icon-padding mx-4' / > < /span>
         }
-        onClick = { handleTab1 }
+        onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab } > < span > hi < /span> < /
@@ -216,7 +224,7 @@ const ResHome = () => {
             set = 'broken'
             className = 'mt-2 mx-4' / > < /span>
         }
-        onClick = { handleTab3 }
+        onClick = { handleTab8 }
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
@@ -237,7 +245,8 @@ const ResHome = () => {
         activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }
         / > < /TabContent > <
         TabContent id = "tab5"
-        activeTab = { activeTab } > < Deposit / > < /TabContent> <
+        activeTab = { activeTab } > < Deposit handletab5 = { handleTab5 }
+        / > < /TabContent > <
         TabContent id = "tab7"
         activeTab = { activeTab } > < Notify / > < /TabContent> <
         TabContent id = "tab8"

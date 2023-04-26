@@ -38,6 +38,34 @@ const MyHome = () => {
         // update the state to tab2
         setActiveTab("tab3");
     };
+    const handleTab4 = () => {
+        // update the state to tab1
+        setActiveTab("tab4");
+    };
+    const handleTab5 = () => {
+        // update the state to tab2
+        setActiveTab("tab5");
+    };
+    const handleTab6 = () => {
+        // update the state to tab2
+        setActiveTab("tab6");
+    };
+    const handleTab7 = () => {
+        // update the state to tab1
+        setActiveTab("tab7");
+    };
+    const handleTab8 = () => {
+        // update the state to tab2
+        setActiveTab("tab8");
+    };
+    const handleTab9 = () => {
+        // update the state to tab2
+        setActiveTab("tab9");
+    };
+    const handleTab10 = () => {
+        // update the state to tab2
+        setActiveTab("tab10");
+    };
     const handleTab12 = () => {
         // update the state to tab2
         setActiveTab("tab12");
@@ -45,6 +73,10 @@ const MyHome = () => {
     const handleTab13 = () => {
         // update the state to tab2
         setActiveTab("tab13");
+    };
+    const handleTab15 = () => {
+        // update the state to tab2
+        setActiveTab("tab15");
     };
     return ( <
         div className = 'row' > <
@@ -80,7 +112,7 @@ const MyHome = () => {
         /div>   < /
         div >
         <
-        div className = 'col-lg-2 d-none d-sm-block shadow-sm' > <
+        div className = 'col-lg-2 d-none d-sm-block bg-light' > <
         div > <
         img src = { Header }
         width = '60%'
@@ -149,7 +181,7 @@ const MyHome = () => {
         TabNavItem title = { < span > < FaUniversity size = "20"
             className = 'mx-2' / > Investment Clubs < /span >
         }
-        onClick = { handleTab3 }
+        onClick = { handleTab4 }
         id = "tab4"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
@@ -163,7 +195,7 @@ const MyHome = () => {
             set = 'broken'
             className = 'mx-2' / > Deposits < /span >
         }
-        onClick = { handleTab1 }
+        onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
@@ -173,7 +205,7 @@ const MyHome = () => {
         TabNavItem title = { < span > < FaHandHoldingUsd size = "20"
             className = 'mx-2' / > Loans < /span >
         }
-        onClick = { handleTab2 }
+        onClick = { handleTab6 }
         id = "tab6"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
@@ -183,7 +215,7 @@ const MyHome = () => {
         TabNavItem title = { < span > < FaDonate size = "20"
             className = 'mx-2' / > Withdraws < /span >
         }
-        onClick = { handleTab3 }
+        onClick = { handleTab7 }
         id = "tab7"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
@@ -196,7 +228,7 @@ const MyHome = () => {
         TabNavItem title = { < span > < Setting size = "20"set = 'broken'
             className = 'mx-2' / > Account < /span >
         }
-        onClick = { handleTab1 }
+        onClick = { handleTab8 }
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
@@ -206,7 +238,7 @@ const MyHome = () => {
         TabNavItem title = { < span > < Chart size = "20"set = 'broken'
             className = 'mx-2' / > Investments < /span >
         }
-        onClick = { handleTab2 }
+        onClick = { handleTab9 }
         id = "tab9"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
@@ -217,6 +249,7 @@ const MyHome = () => {
             className = 'mx-2' / > FAQs < /span >
         }
         id = "tab10"
+        onClick = { handleTab10 }
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /
@@ -245,8 +278,8 @@ const MyHome = () => {
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
         h6 className = 'mt-2' > <
-        FaLightbulb size = "25"
-        className = 'position-relative blue-dark px-1 rounded-circle' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
+        FaLightbulb size = "35"
+        className = 'position-relative border border-warning text-warning p-2 rounded-circle' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
         div className = 'col-lg-1 d-md-none d-lg-block rounded-25' >
         <
@@ -278,10 +311,11 @@ const MyHome = () => {
         div > < /
         div > <
         TabContent id = "tab1"
-        activeTab = { activeTab } > < Main parentCallback2 = { handleTab2 }
+        activeTab = { activeTab } > < Main handletab2 = { handleTab2 }
         / > < /TabContent > <
         TabContent id = "tab2"
-        activeTab = { activeTab } > < Personal / > < /TabContent> <
+        activeTab = { activeTab } > < Personal /
+        > < /TabContent > <
         TabContent id = "tab3"
         activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
         activeTab = { activeTab }
@@ -291,17 +325,22 @@ const MyHome = () => {
         activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }
         / > < /TabContent > <
         TabContent id = "tab5"
-        activeTab = { activeTab } > < Deposit / > < /TabContent> <
+        activeTab = { activeTab } > < Deposit handletab9 = { handleTab9 }
+        / > < /TabContent > <
         TabContent id = "tab6"
         activeTab = { activeTab } > < Loans / > < /TabContent> <
         TabContent id = "tab7"
         activeTab = { activeTab } > < Withdraw / > < /TabContent> <
         TabContent id = "tab8"
-        activeTab = { activeTab } > < Settings / > < /TabContent><
+        activeTab = { activeTab } > < Settings handletab8 = { handleTab8 }
+        handletab10 = { handleTab10 }
+        handletab15 = { handleTab15 }
+        / > < /TabContent > <
         TabContent id = "tab9"
         activeTab = { activeTab } > < RiskProfile / > < /TabContent> <
         TabContent id = "tab10"
-        activeTab = { activeTab } > < FAQs / > < /TabContent><
+        activeTab = { activeTab } > < FAQs handletab8 = { handleTab8 }
+        / > < /TabContent > <
         TabContent id = "tab11"
         activeTab = { activeTab } > < Api / > < /TabContent><
         TabContent id = "tab12"
@@ -309,7 +348,8 @@ const MyHome = () => {
         TabContent id = "tab13"
         activeTab = { activeTab } > < Clubs / > < /TabContent><
         TabContent id = "tab15"
-        activeTab = { activeTab } > < ContactUs / > < /TabContent> < /
+        activeTab = { activeTab } > < ContactUs handletab8 = { handleTab8 }
+        / > < /TabContent > < /
         div >
         <
         div className = "d-block d-sm-none" >

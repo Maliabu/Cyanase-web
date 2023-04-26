@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FaArrowCircleLeft, FaUserCircle, FaPhoneAlt, FaEnvelope, FaCameraRetro } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import ChangeDetails from './ChangeDetails';
 import Profile from '../images/Ellipse 6.png';
 import Form from 'react-bootstrap/Form';
+import { ArrowLeftSquare, Call, Message, User } from "react-iconly";
+import { FaCameraRetro } from "react-icons/fa";
 
 const ADetails = (props) => {
     const [show2, setShow2] = useState(false);
@@ -14,7 +15,8 @@ const ADetails = (props) => {
     const handleShow1 = () => setShow1(true);
     return ( < div >
         <
-        FaArrowCircleLeft size = { 30 }
+        ArrowLeftSquare size = "large"
+        set = "broken"
         onClick = {
             () => { props.changeAccountDetails(false) }
         }
@@ -26,7 +28,8 @@ const ADetails = (props) => {
         div className = "row p-2 px-3 border-bottom" > <
         div className = "col-1 px-3" >
         <
-        FaUserCircle size = "30"
+        User size = "large"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -45,7 +48,8 @@ const ADetails = (props) => {
         div className = "row p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        FaPhoneAlt size = "30"
+        Call size = "large"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -64,7 +68,8 @@ const ADetails = (props) => {
         div className = "row p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        FaEnvelope size = "30"
+        Message size = "large"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -107,7 +112,8 @@ const ADetails = (props) => {
         <
         div className = "text-center p-5" >
         <
-        FaCameraRetro size = "70"
+        FaCameraRetro size = "xlarge"
+        set = "broken"
         className = 'm-5 p-2 border rounded-circle border-warning text-warning' / >
         <
         h4 className = "my-3 text-center" > Change Profile Photo < /h4> <

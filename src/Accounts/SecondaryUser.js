@@ -106,8 +106,8 @@ function SecondaryUser() {
         onSubmit = { handleSubmit(onSubmit) } >
         <
         div className = 'row justify-center p-lg-3 p-sm-12' > <
-        h2 className = 'text-center py-lg-5' > SECONDARY USER ACCOUNT < /h2> <
-        h6 > Register as an API user by filling in the following details.On submitting, details will be verified by our team and we will contact you on the way forward. < /h6><
+        h2 className = 'text-center' > SECONDARY USER ACCOUNT < /h2> <
+        h6 > Register as a Secondary user by filling in the following details. < /h6><
         h6 className = 'active' > < b > All fields are Required < /b>  < /
         h6 > <
         /

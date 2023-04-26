@@ -7,9 +7,10 @@ import Profile2 from '../images/Ellipse 203.png';
 import Profile3 from '../images/Ellipse 205.png';
 import Goal from './Goal';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { FaWallet, FaUsers, FaDonate, FaHandHoldingUsd } from 'react-icons/fa';
+import { FaDonate, FaHandHoldingUsd } from 'react-icons/fa';
 import ProgressBar from "@ramonak/react-progress-bar";
 import Form from 'react-bootstrap/Form';
+import { People, Wallet } from "react-iconly";
 import Stat from '../images/Group 3577.png';
 import PDeposit from './PDeposit';
 import Modal from 'react-bootstrap/Modal';
@@ -40,13 +41,13 @@ const Saccos = ({...props }) => {
         alt = "investors" / > < /div>  <
         div className = "col-lg-9 " > <
         h3 className = "mt-lg-5 font-lighter" >
-        CHILL GRILLS CLUB < /h3>  <
+        LAWYERS HUB < /h3>  <
         p > Created: Jan 2020... <
         span className = "bolder" > 32 Members < /span> < /p > < /div > < /
         div > < /
         div >
         <
-        div className = "col-lg-4 bg-light rounded-25 text-center" >
+        div className = "col-lg-4 rounded-25 text-center" >
         <
         h6 className = "mt-lg-5 mt-3 bolder" >
         FOUNDERS < /h6>  <
@@ -98,9 +99,9 @@ const Saccos = ({...props }) => {
         div > < /
         div >
         <
-        div className = "col-lg-4 text-center py-lg-5 p-2 rounded-25 bg-light" > <
-        FaWallet className = "border border-dark rounded-circle p-2 my-3"
-        size = "50" / >
+        div className = "col-lg-4 text-center py-lg-5 p-2 rounded-25 " > <
+        Wallet className = "border border-dark rounded-circle p-2 my-3"
+        size = "xlarge" / >
         <
         h6 className = "bolder" > Total Deposits < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
@@ -129,15 +130,15 @@ const Saccos = ({...props }) => {
         div className = "col-lg-4 rounded-25 px-3 my-lg-0 my-3" >
 
         <
-        h6 className = "grey-text p-3 blue-dark rounded-25" > YOUR CLUB GOALS < /h6>   <
+        h6 className = "grey-text p-3 blue-dark rounded-25" > YOUR SACCO GOALS < /h6>   <
         div className = "p-4 bg-white shadow-sm rounded-25 mt-3" >
         <
         div className = "d-flex flex-row flex" >
         <
         span className = "mt-2" > <
-        FaUsers className = " rounded-circle blue-dark p-1"
-        size = "40" / > < /span> <
-        p className = "mx-4 mt-2" > < span className = "bolder" > Establish Law Court < /span> ...Created: 3 Aug...<span className="bolder">CHILL GRILLS CLUB</span > < /p > < /
+        People className = " rounded-circle border border-dark p-1"
+        size = "large" / > < /span> <
+        p className = "mx-4 mt-2" > < span className = "bolder" > Establish Law Court < /span> ...Created: 3 Aug< /p > < /
         div > <
         h6 className = "mt-5" > Progress: 3 months to go < /h6> <
         ProgressBar completed = { 80 }

@@ -61,14 +61,14 @@ const Sacco = (props) => {
         /
         div >
         <
-        div className = "col-5" >
+        div className = "col-6" >
         <
         p className = "pt-3" > < span className = "bolder" > MUBS SACCO < /span> <
         span > Created Mar 2020 <
         /span>   < /
         p > < /
         div > <
-        div className = "col-4 text-end" >
+        div className = "col-3 text-end" >
         <
         p className = "pt-4" > 45 Members < /
         p > <

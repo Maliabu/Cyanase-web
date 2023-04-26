@@ -1,5 +1,5 @@
 import React from "react";
-import { FaWallet } from 'react-icons/fa';
+import { Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 
@@ -10,10 +10,8 @@ class Learn1 extends React.Component {
             currentStep: 1,
             payment_means: '',
             deposit_amount: 0,
-            currency: '',
-            fee: 200
+            currency: ''
         }
-        this.total_deposit = 0;
     }
 
     handleChange = event => {
@@ -24,9 +22,19 @@ class Learn1 extends React.Component {
         console.log(this.state)
     }
 
+    getTotalDeposit() {
+        this.total_deposit = parseFloat(this.getFee()) + parseFloat(this.state.deposit_amount)
+        return this.total_deposit
+    }
+    getFee() {
+        this.fee = (2 / 100) * this.state.deposit_amount
+        return this.fee
+    }
+    getTab9() {
+        return this.props.tab9
+    }
     handleSubmit = event => {
         event.preventDefault()
-        console.log(this.state)
     }
 
     _next = () => {
@@ -104,8 +112,8 @@ class Learn1 extends React.Component {
                           render the form steps and pass required props in
                         */
             } <
-            FaWallet className = "text-warning rounded-circle border border-warning p-3"
-            size = "70" / > < br / > <
+            Wallet className = "text-warning rounded-circle border border-warning p-2"
+            size = "xlarge" / > < br / > <
             img src = { DepositPic }
             width = '25%'
             className = "my-3"
@@ -113,6 +121,7 @@ class Learn1 extends React.Component {
             alt = "investors" / > <
             Step1 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
+            getTab9 = { this.getTab9() }
             /> <
             Step2 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
@@ -126,13 +135,17 @@ class Learn1 extends React.Component {
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             deposit_amount = { this.state.deposit_amount }
-            fee = { this.state.fee }
-            total_deposit = { parseInt(this.state.deposit_amount) + parseInt(this.state.fee) }
+            total_deposit = { this.getTotalDeposit() }
+            fee = {
+                this.getFee()
+            }
             currency = { this.state.currency }
             /> <
             Step5 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
+            total_deposit = { this.getTotalDeposit() }
+            currency = { this.state.currency }
             />  { this.nextButton() }{ this.previousButton() }
 
             <
@@ -186,7 +199,8 @@ function Step1(props) {
         <
         /
         div > < /div > <
-        h6 className = "py-3 rounded-3 bg-warning text-center" >
+        h6 className = "py-3 rounded-3 bg-warning text-center"
+        onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> < /
         div >
     );
@@ -286,7 +300,7 @@ function Step4(props) {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > Continue to deposit < /h6>   <
-            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee}</span > .Your Total deposit is < span className = "bolder" > { props.currency } < /span> < span className = "bolder active" > { props.total_deposit } < /span > < /
+            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h4 > < /
             div >
         )
@@ -300,8 +314,8 @@ function Step4(props) {
     return ( <
         div className = "text-center" > <
         h4 className = "font-lighter my-3" > Deposit from Wallet < /h4> <
-        h6 className = "mt-2" > Done < /h6>   <
-        h4 className = "py-5 font-lighter" > You have deposited < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee}</span > .Your Total deposit is < span className = "bolder" > { props.currency } < /span> < span className = "bolder active" > { props.total_deposit } < /span > < /
+        h6 className = "mt-2" > Confirm to Continue < /h6>   <
+        h4 className = "py-5 font-lighter" > You have deposited < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
         h4 > < /
         div >
     )
@@ -315,7 +329,8 @@ function Step5(props) {
             div className = "text-center" > <
             h4 className = "bolder my-3" > Make an Offline Deposit < /h4> <
             h6 className = "mt-2" > Procedure < /h6>   <
-            h4 className = "py-5 font-lighter" > Deposit money to our bank account and proceed to send us your deposit receipt < /
+            h4 className = "py-5 font-lighter" > Deposit < span className = "bolder" > { props.currency } < /span>: <span className="bolder">{ props.total_deposit} </span >
+            to our bank account and proceed to send us your deposit receipt < /
             h4 >
             <
             div className = "row" >
@@ -336,7 +351,7 @@ function Step5(props) {
             div > <
             /div>  <
             h6 className = "my-5" > Send your deposit receipt to our Email: <
-            span className = "bolder active" > < u > deposit @cyanase.com < /u> < /span > < /h6>  < /
+            span className = "bolder active" > < u > 'deposit@cyanase.com' < /u> < /span > < /h6>  < /
             div >
         )
     } else if (props.payment_means === "online") {

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Wallet from '../images/wallet.png';
-import { FaUserClock } from 'react-icons/fa';
 import ProgressBar from "@ramonak/react-progress-bar";
 import './style.scss';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import TopUp from '../Accounts/TopUp';
 import Goal from '../Accounts/Goal';
 import Modal from 'react-bootstrap/Modal';
-import PDeposit from '../Accounts/PDeposit';
+import Learn1 from '../Accounts/Learn1';
+import { AddUser } from "react-iconly";
 
 const Personal = ({ id, activeTab, children, name, ...props }) => {
     const [show, setShow] = useState(false);
@@ -23,6 +23,7 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
 
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
+    console.log(props)
 
     return ( <
         div > <
@@ -41,7 +42,7 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         alt = "investors" / > <
         h5 className = "bolder mt-5" > Account Balance < /h5> <
         div className = "d-flex flex-row flex justify-content-center w-100" > UGX <
-        h1 className = "px-2 font-lighter" > 356, 000.0 < /h1> < /
+        h1 className = "px-2 font-lighter" > 0.0 < /h1> < /
         div >
         <
         div className = "d-flex flex-row flex justify-content-center" >
@@ -74,7 +75,7 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         TopUp / > < /
         Offcanvas.Body > < /
         Offcanvas > <
-        h6 className = "px-5 py-3 mt-3 mx-2 border border-warning text-warning rounded-25"
+        h6 className = "px-5 py-3 mt-3 mx-2 border d-none border-warning text-warning rounded-25"
         onClick = { handleShow2 } >
         Deposit < /h6> </div >
         <
@@ -82,9 +83,10 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         onHide = { handleClose2 }
         dialogClassName = "my-modal1" >
         <
-        PDeposit / >
-        <
-        /Modal> < /
+        Learn1 tab9 = { props.handletab9 }
+        / > <
+        /
+        Modal > < /
         div >
         <
         /div>  <
@@ -126,7 +128,7 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         div className = "row p-2 bg-light rounded-25" >
         <
         div className = "text-start col-6 p-2" > YOUR PERSONAL GOALS < /div> <
-        div className = "text-end col-6 p-2" > < span className = "  rounded-pill blue-dark text-white px-2 py-1" > 1 < /span> < /div > < /
+        div className = "text-end col-6 p-2" > < span className = " px-2 py-1" > 1 < /span> < /div > < /
         div >
         <
         div className = "p-4 bg-white shadow-sm rounded-25 mt-3" >
@@ -134,8 +136,8 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         div className = "d-flex flex-row flex" >
         <
         span className = "mt-2" > <
-        FaUserClock className = " rounded-circle blue-dark p-1"
-        size = "40" / > < /span> <
+        AddUser className = " rounded-circle border border-dark p-1"
+        size = "large" / > < /span> <
         p className = "mx-4 mt-2" > < span className = "bolder" > Build a Mansion < /span> ...Created: 3 Aug</p >
         <
         /div> <

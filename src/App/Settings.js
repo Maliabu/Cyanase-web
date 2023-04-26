@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
-import { FaBell, FaComments, FaPhoneAlt, FaUserCircle } from "react-icons/fa";
 import Account from '../Accounts/Account';
 import Notifications from '../Accounts/Notifications';
-import ContactUs from '../Accounts/ContactUs';
-import FAQs from '../Accounts/FAQs';
+import { Call, Chat, Notification, User } from "react-iconly";
 
-const Settings = ({ id, activeTab, children }) => {
+const Settings = ({ id, activeTab, children, ...props }) => {
     const [accountSetting, setAccountSetting] = useState(false);
     const [notifications, setNotifications] = useState(false);
-    const [contacts, setContacts] = useState(false);
-    const [faqs, setFaqs] = useState(false);
     if (accountSetting) {
         return ( < Account changeAccountSetting = { setAccountSetting }
             / >
@@ -23,16 +19,6 @@ const Settings = ({ id, activeTab, children }) => {
             / >
         )
     }
-    if (contacts) {
-        return ( < ContactUs changeContactSetting = { setContacts }
-            / >
-        )
-    }
-    if (faqs) {
-        return ( < FAQs changeFaqsSetting = { setFaqs }
-            / >
-        )
-    }
     return ( <
         div className = "scroll-y" >
         <
@@ -40,7 +26,8 @@ const Settings = ({ id, activeTab, children }) => {
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        FaUserCircle size = "50"
+        User size = "xlarge"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -61,7 +48,8 @@ const Settings = ({ id, activeTab, children }) => {
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        FaBell size = "50"
+        Notification size = "xlarge"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -82,7 +70,8 @@ const Settings = ({ id, activeTab, children }) => {
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        FaComments size = "50"
+        Chat size = "xlarge"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -92,7 +81,7 @@ const Settings = ({ id, activeTab, children }) => {
         <
         h4 className = "active bolder"
         onClick = {
-            () => { setFaqs(true) }
+            () => { props.handletab10() }
         } > FAQs < /h4> <
         h6 > Learn More About Cyanase < /h6> < /
         div >
@@ -103,7 +92,8 @@ const Settings = ({ id, activeTab, children }) => {
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        FaPhoneAlt size = "50"
+        Call size = "xlarge"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -113,7 +103,7 @@ const Settings = ({ id, activeTab, children }) => {
         <
         h4 className = "active bolder"
         onClick = {
-            () => { setContacts(true) }
+            () => { props.handletab15() }
         } > Help Centre < /h4> <
         h6 > Call, Whatsapp, Emails < /h6> < /
         div >

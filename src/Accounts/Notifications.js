@@ -1,12 +1,13 @@
 import React from "react";
-import { FaArrowCircleLeft } from "react-icons/fa";
 import Form from 'react-bootstrap/Form';
+import { ArrowLeftSquare } from "react-iconly";
 
 const Notifications = (props) => {
     return ( <
         div >
         <
-        FaArrowCircleLeft size = { 30 }
+        ArrowLeftSquare size = "large"
+        set = "broken"
         onClick = {
             () => { props.changeNotificationSetting(false) }
         }

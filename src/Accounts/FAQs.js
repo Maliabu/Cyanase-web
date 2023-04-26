@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FaArrowCircleLeft } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Ask from './Ask';
+import { ArrowLeftSquare } from "react-iconly";
 
 const FAQs = (props) => {
     const [show, setShow] = useState(false);
@@ -11,9 +11,10 @@ const FAQs = (props) => {
     return ( <
         div className = "scroll-y" >
         <
-        FaArrowCircleLeft size = { 30 }
+        ArrowLeftSquare size = "large"
+        set = "broken"
         onClick = {
-            () => { props.changeFaqsSetting(false) }
+            () => { props.handletab8() }
         }
         className = "text-warning my-4 active" / > <
         h1 > FAQs < /h1>   <

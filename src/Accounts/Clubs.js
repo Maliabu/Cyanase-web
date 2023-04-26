@@ -7,7 +7,8 @@ import Profile2 from '../images/Ellipse 203.png';
 import Profile3 from '../images/Ellipse 205.png';
 import Goal from './Goal';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { FaWallet, FaUsers, FaDonate, FaHandHoldingUsd } from 'react-icons/fa';
+import { FaDonate, FaHandHoldingUsd, FaUniversity } from 'react-icons/fa';
+import { Wallet } from "react-iconly";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Form from 'react-bootstrap/Form';
 import Stat from '../images/Group 3577.png';
@@ -46,7 +47,7 @@ const Clubs = ({...props }) => {
         div > < /
         div >
         <
-        div className = "col-lg-4 bg-light rounded-25 text-center" >
+        div className = "col-lg-4 rounded-25 text-center" >
         <
         h6 className = "mt-lg-5 mt-3 bolder" >
         FOUNDERS < /h6>  <
@@ -98,9 +99,9 @@ const Clubs = ({...props }) => {
         div > < /
         div >
         <
-        div className = "col-lg-4 text-center py-lg-5 p-2 rounded-25 bg-light" > <
-        FaWallet className = "border border-dark rounded-circle p-2 my-3"
-        size = "50" / >
+        div className = "col-lg-4 text-center py-lg-5 p-2 rounded-25" > <
+        Wallet className = "border border-dark rounded-circle p-2 my-3"
+        size = "xlarge" / >
         <
         h6 className = "bolder" > Total Deposits < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
@@ -135,9 +136,9 @@ const Clubs = ({...props }) => {
         div className = "d-flex flex-row flex" >
         <
         span className = "mt-2" > <
-        FaUsers className = " rounded-circle blue-dark p-1"
-        size = "40" / > < /span> <
-        p className = "mx-4 mt-2" > < span className = "bolder" > Establish Law Court < /span> ...Created: 3 Aug...<span className="bolder">CHILL GRILLS CLUB</span > < /p > < /
+        FaUniversity className = " rounded-circle border border-dark p-1"
+        size = "30" / > < /span> <
+        p className = "mx-4 mt-2" > < span className = "bolder" > Establish Law Court < /span> ...Created: 3 Aug < /p > < /
         div > <
         h6 className = "mt-5" > Progress: 3 months to go < /h6>  <
         ProgressBar completed = { 80 }

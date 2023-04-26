@@ -1,13 +1,15 @@
 import React from "react";
-import { FaArrowCircleLeft, FaPhoneAlt, FaWhatsapp, FaEnvelope, FaTwitter } from "react-icons/fa";
+import { ArrowLeftSquare, Call, Message } from "react-iconly";
+import { FaWhatsapp, FaTwitter } from "react-icons/fa";
 
 const ContactUs = (props) => {
     return ( <
         div >
         <
-        FaArrowCircleLeft size = { 30 }
+        ArrowLeftSquare size = "large"
+        set = "broken"
         onClick = {
-            () => { props.changeContactSetting(false) }
+            () => { props.handletab8() }
         }
         className = "text-warning my-4 active" / > <
         h1 > Contact Us < /h1>   <
@@ -15,7 +17,8 @@ const ContactUs = (props) => {
         div className = "row mt-3" > <
         div className = "col-1 text-center" >
         <
-        FaPhoneAlt size = "30"
+        Call size = "large"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
@@ -53,7 +56,8 @@ const ContactUs = (props) => {
         div className = "row " > <
         div className = "col-1 text-center" >
         <
-        FaEnvelope size = "30"
+        Message size = "large"
+        set = "broken"
         className = 'my-5 active' / >
         <
         /
