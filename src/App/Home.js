@@ -22,8 +22,26 @@ import ResHome from './ResHome';
 import Loans from './Loans'
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
 import { Notification, Home, Wallet, User, People, Call, Chat, Setting, Chart } from 'react-iconly';
+import axios from 'axios';
+import { API_URL_GET_AUTH_USER } from '../api';
 
 const MyHome = () => {
+    const token = localStorage.getItem('token')
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    console.log(token)
+    axios.get(`${API_URL_GET_AUTH_USER}`, {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        }).then((res) => {
+            console.log(res.data.first_name)
+            setFirstName(res.data.first_name)
+            setLastName(res.data.last_name)
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     const [activeTab, setActiveTab] = useState("tab1");
     //  Functions to handle Tab Switching
     const handleTab1 = () => {
@@ -104,8 +122,8 @@ const MyHome = () => {
         /div> <
         div className = 'col-6 px-2' >
         <
-        h5 > username < /h5> <
-        h6 > User < /h6> < /
+        h5 > { firstName } < /h5> <
+        h6 > personal Account < /h6> < /
         div > <
         /div></div >
         <
@@ -120,21 +138,19 @@ const MyHome = () => {
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-5 p-3 mx-3 blue-dark rounded-25' >
+        div className = 'row my-5 p-2 mx-3 blue-dark rounded-25' >
         <
         div className = 'col-4' >
         <
         img src = { Profile }
-        className = "rounded-circle"
+        className = "rounded-circle mt-2"
         width = '100%'
-        height = '80%'
+        height = '70%'
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-6 px-2' >
-        <
-        h5 > username < /h5> <
-        h6 > User < /h6> < /
+        div className = 'col-7' > < div className = 'flexName d-flex' > < p > { firstName } < /p> &nbsp; <p>{ lastName }</p > < /div><
+        p className = 'bolder' > Personal < /p>< /
         div > <
         /div> <
         div className = 'px-3 my-5 text-start scroll-y2' >
@@ -315,7 +331,9 @@ const MyHome = () => {
         / > < /TabContent > <
         TabContent id = "tab2"
         activeTab = { activeTab } > < Personal /
-        > < /TabContent > <
+        >
+        <
+        /TabContent > <
         TabContent id = "tab3"
         activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
         activeTab = { activeTab }

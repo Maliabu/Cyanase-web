@@ -291,6 +291,12 @@ button {
     background-color: wheat !important;
 }
 
+.flexName p {
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 5px !important;
+}
+
 .bottom-nav {
     z-index: 1;
     bottom: 0%;
@@ -323,4 +329,9 @@ input[type='radio']:checked:after {
     visibility: visible;
     border: 1px solid #ffffff;
     display: none !important;
+}
+
+.message {
+    z-index: 1;
+    top: 10%;
 }

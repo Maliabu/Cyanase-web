@@ -3,16 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { API_URL_LOGIN } from '../api';
+import { API_EMAIL_VERIFY } from '../api';
 import axios from 'axios';
 
-class Login extends Component {
+class VerifyEmail extends Component {
     //state for form data
     state = {
-        username: '',
-        password: ''
+        verificationcode: ''
     };
-
     success = () => {
         document.getElementById("successMessage").innerHTML = "Successful"
         document.getElementById("successMessage").style.backgroundColor = "green"
@@ -36,9 +34,8 @@ class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let form_data = new FormData();
-        form_data.append('password', this.state.password);
-        form_data.append('username', this.state.username);
-        axios.post(`${API_URL_LOGIN}`, form_data, {
+        form_data.append('verificationcode', this.state.verificationcode);
+        axios.post(`${API_EMAIL_VERIFY}`, form_data, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -116,16 +113,12 @@ class Login extends Component {
                     errorDisplay(response);
                     errorSignUp()
                 }
-                console.log(response)
-                const token = response.data.token
-                localStorage.setItem('token', token)
-                console.log(token)
-
                 /**
                  * The 'then' method is executed only when the request is successfull.
                  */
                 document.getElementById("guest").innerHTML = response.data.user.first_name
-                    // window.location.href = 'https://localhost/8000/api/';
+                    // history.pushState(response.data.user, 'success', 'https://localhost/8000/api/')
+                window.location.href = 'https://localhost/8000/api/';
             });
         this.success();
     }
@@ -138,41 +131,31 @@ class Login extends Component {
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <
-            h2 className = 'text-center' > LOGIN < /h2> <
-            h6 className = 'active mt-3' > < b > Enter your Credentials below to login to your API Account < /b>  < /
+            h2 className = 'text-center' > VERIFY YOUR ACCOUNT < /h2> <
+            h6 className = 'active mt-3' > < b > Enter Verification Code < /b>  < /
             h6 > <
             /
             div > <
             Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
-            Form.Label > username < /Form.Label> <
-            Form.Control type = "text"
-            id = 'username'
+            Form.Label > Code < /Form.Label> <
+            Form.Control type = "number"
+            id = 'verificationcode'
             required = "required"
-            value = { this.state.username }
+            value = { this.state.verificationcode }
             onChange = { this.handleChange }
-            placeholder = "support@cyanase.com" / > <
-            /Form.Group>  <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
-            <
-            Form.Label > Password < /Form.Label> <
-            Form.Control type = "password"
-            id = 'password'
-            required = "required"
-            value = { this.state.password }
-            onChange = { this.handleChange }
-            placeholder = "password" / > <
-            /Form.Group>  <
+            placeholder = "_ _ _ _ _" / > <
+            /Form.Group> <
             div className = 'row justify-content-center' > <
             Button variant = "warning"
             className = 'shadow text-center'
             id = 'successMessage'
             type = "submit" >
-            Login <
+            Submit <
             /Button> < /
             div >
             <
-            p className = 'mt-5' > IF you dont have an account, please < span className = 'active bolder' > { this.props.button } { this.props.code } < /span></p >
+            p className = 'mt-5' > IF you dont have an account, please < span className = 'active bolder' > { this.props.button } < /span></p >
             <
             p id = "errorMessage"
             className = 'py-3 mt-3 rounded border text-center fade-in'
@@ -193,4 +176,4 @@ class Login extends Component {
         );
     }
 }
-export default Login;
+export default VerifyEmail;

@@ -13,7 +13,7 @@ class SignUp extends Component {
         company_name: '',
         website: '',
         country: '',
-        user_type: '',
+        user_type: 'business',
         phone: '',
         email: '',
         moa: null,
@@ -112,9 +112,10 @@ class SignUp extends Component {
     }
     render() {
         return ( <
-            div >
+            div > <
+            div className = 'row p-lg-5 justify-content-center bg-light' >
             <
-            Form className = 'rounded-lg '
+            Form className = 'rounded-4 mt-lg-5 shadow-sm bg-white p-lg-5 col-lg-5'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <
@@ -222,9 +223,9 @@ class SignUp extends Component {
             className = 'py-3 mt-3 rounded border text-center fade-in'
             style = {
                 { display: 'none' }
-            } > hey < /p> < /
+            } > hey < /p> <p>Back to <span className='active bolder'>{this.props.button}</span > < /p>< /
             div > < /
-            Form > < /
+            Form > < /div > < /
             div >
         );
     }

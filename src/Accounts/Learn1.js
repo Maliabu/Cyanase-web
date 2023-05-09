@@ -3,6 +3,8 @@ import { Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 import Profile1 from '../images/Ellipse 178.png';
+import { API_URL_DEPOSIT } from '../api';
+import axios from 'axios';
 
 class Learn1 extends React.Component {
     constructor(props) {
@@ -38,6 +40,16 @@ class Learn1 extends React.Component {
     }
     handleSubmit = event => {
         event.preventDefault()
+        let form_data = new FormData();
+        form_data.append('payment_means', this.state.payment_means);
+        form_data.append('currency', this.state.currency);
+        form_data.append('deposit_category', this.state.deposit_category);
+        form_data.append('deposit_amount', this.state.deposit_amount);
+        axios.post(`${API_URL_DEPOSIT}`, form_data, {
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
     }
     _saccoCategory = () => {
         let currentStep = this.state.currentStep
@@ -70,16 +82,31 @@ class Learn1 extends React.Component {
         })
     }
 
-    /*
-     * the functions for our button
-     */
+    _prevBeforeSacco = () => {
+            this.setState({
+                currentStep: 1
+            })
+        }
+        /*
+         * the functions for our button
+         */
     previousButton() {
         let currentStep = this.state.currentStep;
+        let deposit_category = this.state.deposit_category;
         if (currentStep !== 1) {
             return ( <
                 h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-25"
                 type = "button"
                 onClick = { this._prev } >
+                Previous <
+                /h6>
+            )
+        }
+        if (currentStep === 7 && deposit_category === 'sacco/club') {
+            return ( <
+                h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._prevBeforeSacco } >
                 Previous <
                 /h6>
             )
@@ -470,7 +497,7 @@ function Step6(props) {
             Form.Control.Feedback type = "invalid" >
             This field is required. <
             /Form.Control.Feedback> < /
-            Form.Group > < button className = "btn btn-warning btn-block my-3" > Submit < /button> < /
+            Form.Group > < /
             div >
         );
     }
