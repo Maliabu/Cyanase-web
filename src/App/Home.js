@@ -21,18 +21,16 @@ import Profile from '../images/Ellipse 6.png';
 import ResHome from './ResHome';
 import Loans from './Loans'
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
-import { Notification, Home, Wallet, User, People, Call, Chat, Setting, Chart } from 'react-iconly';
+import { Notification, Home, Wallet, User, People, Call, Activity, Setting } from 'react-iconly';
 import axios from 'axios';
-import { API_URL_GET_AUTH_USER } from '../api';
+import { API_URL_GET_AUTH_USER, TOKEN } from '../api';
 
 const MyHome = () => {
-    const token = localStorage.getItem('token')
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
-    console.log(token)
     axios.get(`${API_URL_GET_AUTH_USER}`, {
             headers: {
-                "Authorization": `Token ${token}`
+                "Authorization": `Token ${TOKEN}`
             }
         }).then((res) => {
             console.log(res.data.first_name)
@@ -251,7 +249,7 @@ const MyHome = () => {
         />  < /div > <
         div className = ' py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Chart size = "20"set = 'broken'
+        TabNavItem title = { < span > < Activity size = "20"set = 'broken'
             className = 'mx-2' / > Investments < /span >
         }
         onClick = { handleTab9 }
@@ -261,7 +259,7 @@ const MyHome = () => {
         />  < /div > <
         div className = 'py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Chat size = "20"set = 'broken'
+        TabNavItem title = { < span > < Activity size = "20"set = 'broken'
             className = 'mx-2' / > FAQs < /span >
         }
         id = "tab10"
@@ -372,7 +370,8 @@ const MyHome = () => {
         <
         div className = "d-block d-sm-none" >
         <
-        ResHome / > < /div> < /
+        ResHome name = { firstName }
+        / > < /div > < /
         div >
     );
 }

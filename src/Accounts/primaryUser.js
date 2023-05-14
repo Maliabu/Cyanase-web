@@ -28,7 +28,7 @@ const BasicExample = () => {
         <
         div className = 'col-lg-7 px-lg-5' >
         <
-        div className = 'd-flex flex-row p-lg-3 shadow-sm justify-content-center rounded-25 flex' >
+        div className = 'd-flex flex-row p-lg-3 border justify-content-center rounded-3 flex' >
         <
         div className = ' py-2 px-lg-3' >
 
@@ -61,7 +61,7 @@ const BasicExample = () => {
         <
         h1 className = 'w-100 text-center mt-5 pt-5' > Welcome to the API User Portal.This Portal is
         for API Accounts creations only. < /h1> <
-        h6 className = 'text-center mt-5 p-3 border border-active rounded-25' > For more information or help, contact support at:
+        h6 className = 'text-center mt-5 p-3 bg-light rounded-3' > For more information or help, contact support at:
         <
         u className = 'active ' > support @cyanase.com < /u> < /
         h6 >

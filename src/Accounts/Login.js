@@ -132,9 +132,9 @@ class Login extends Component {
     render() {
         return ( <
             div > <
-            div className = 'row p-lg-5 justify-content-center bg-light' >
+            div className = 'row rounded-4 justify-content-center bg-light p-1' >
             <
-            Form className = ' mt-lg-5 shadow-sm bg-white p-lg-5 col-lg-5'
+            Form className = 'shadow-sm bg-white rounded-4 p-lg-5'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <

@@ -6,6 +6,7 @@ import Risk from '../images/Group 130.png'
 import { FaBalanceScale } from "react-icons/fa";
 import RProfile from '../Accounts/RProfile';
 import Modal from 'react-bootstrap/Modal';
+import { Activity } from "react-iconly";
 
 const RiskProfile = ({ id, activeTab, children }) => {
     const [show2, setShow2] = useState(false);
@@ -25,13 +26,12 @@ const RiskProfile = ({ id, activeTab, children }) => {
         alt = "investors" / >
         <
         /div> <
-        div className = "col-6 p-5 mt-5 text-center" >
+        div className = "col-6 p-5 text-center" > <
+        div className = "row p-5 bg-white rounded-25" >
         <
-        h1 > RISK PROFILE < /h1> <
-        div className = "row p-5 mt-5 bg-white rounded-25" >
-        <
-        h4 > Investor Risk Profiler < /h4>  <
-        FaBalanceScale size = "30"
+        h4 className = "active bolder" > Investor Risk Profiler < /h4>  <
+        Activity size = "xlarge"
+        set = "broken"
         className = 'my-5 text-warning' / >
         <
         p >
@@ -39,9 +39,10 @@ const RiskProfile = ({ id, activeTab, children }) => {
         for grading purposes.Thus we don not share it with any third parties or use it
         for any other activities. <
         /p> < /
-        div > <
-        h6 className = "py-3 px-5 mt-5 border border-warning text-warning rounded-25"
-        onClick = { handleShow2 } > COMPLETE YOUR PROFILE < /h6> < /
+        div > < h6 className = "mt-3 p-5 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 bg-light active" > Incomplete < /span> < /
+        h6 > <
+        h6 className = "py-3 px-5 mt-3 border border-warning text-warning rounded-3"
+        onClick = { handleShow2 } > Complete Your Risk profile < /h6> < /
         div > <
         Modal show = { show2 }
         onHide = { handleClose2 }

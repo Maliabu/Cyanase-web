@@ -113,9 +113,9 @@ class SignUp extends Component {
     render() {
         return ( <
             div > <
-            div className = 'row p-lg-5 justify-content-center bg-light' >
+            div className = 'row justify-content-center bg-light rounded-4 p-1' >
             <
-            Form className = 'rounded-4 mt-lg-5 shadow-sm bg-white p-lg-5 col-lg-5'
+            Form className = 'rounded-4 shadow-sm bg-white p-lg-5'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <
@@ -125,7 +125,7 @@ class SignUp extends Component {
             h6 > <
             /
             div > <
-            Form.Group className = "mb-3 shadow rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
             Form.Label > Company Name < /Form.Label> <
             Form.Control type = "text"
@@ -134,7 +134,7 @@ class SignUp extends Component {
             onChange = { this.handleChange }
             placeholder = "Cyanase Investors Limited" / > <
             /Form.Group>  <
-            Form.Group className = "mb-3 shadow rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
             Form.Label > Website < /Form.Label> <
             Form.Control type = "text"
@@ -143,7 +143,7 @@ class SignUp extends Component {
             onChange = { this.handleChange }
             placeholder = "cyanase.com" / > <
             /Form.Group> <
-            Form.Group className = "mb-3 shadow rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
             Form.Label > Country < /Form.Label> <
             Form.Control type = "text"
@@ -159,7 +159,7 @@ class SignUp extends Component {
             option value = "Telecom" > Telecom < /option> <
             option value = "Social Media" > Social Media < /option> < /
             Form.Select > <
-            Form.Group className = "mb-3 shadow rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
             Form.Label > Phone < /Form.Label> <
             Form.Control type = "phone"
@@ -168,7 +168,7 @@ class SignUp extends Component {
             onChange = { this.handleChange }
             placeholder = "+256 772971878" / > <
             /Form.Group> <
-            Form.Group className = "mb-3 shadow rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
             Form.Label > Email address < /Form.Label> <
             Form.Control type = "email"
@@ -193,7 +193,7 @@ class SignUp extends Component {
             onChange = { this.handleFileChange }
             / > < /
             Form.Group > <
-            Form.Group className = "mb-3 shadow rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
             Form.Label > Password < /Form.Label> <
             Form.Control type = "password"
@@ -203,7 +203,7 @@ class SignUp extends Component {
             placeholder = "Create a strong Password" / >
             <
             /Form.Group>  <
-            Form.Group className = "mb-3 shadow rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
             <
             Form.Label > Password < /Form.Label> <
             Form.Control type = "password"

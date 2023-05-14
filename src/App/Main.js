@@ -5,13 +5,34 @@ import Deposit from '../images/Path 80.png';
 import Networth from '../images/Path 3.png';
 import './style.scss';
 import Modal from 'react-bootstrap/Modal';
-import Learn from '../Accounts/Learn'
+import Learn from '../Accounts/Learn';
+import axios from "axios";
+import { API_URL_GET_AUTH_USER, TOKEN } from "../api";
 
 const Main = ({ id, activeTab, children, ...props }) => {
     const [show1, setShow1] = useState(false);
-
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
+    const [deposit, setDeposit] = useState("")
+    const [networth, setNetworth] = useState("")
+    const [dollarDeposit, setDollarDeposit] = useState("")
+    const [dollarNetworth, setDollarNetworth] = useState("")
+    axios.get(`${API_URL_GET_AUTH_USER}`, {
+            headers: {
+                "Authorization": `Token ${TOKEN}`
+            }
+        }).then((res) => {
+            if (res.data.currency === "UGX") {
+                setDeposit(res.data.deposit_amount)
+                setNetworth(res.data.net_worth)
+            } else {
+                setDollarDeposit(res.data.deposit_amount)
+                setDollarNetworth(res.data.net_worth)
+            }
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     return ( <
         div className = " p-lg-2 rounded-25 dollar scroll-y" >
         <
@@ -28,7 +49,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         h5 className = "bolder mt-4" > Deposit < /h5> <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h1 className = "px-2 font-lighter" > 0.0 < /h1></div >
+        h1 className = "px-2 font-lighter" > { deposit } < /h1></div >
         <
         img src = { Deposit }
         className = "pt-2 d-none d-sm-block"
@@ -43,7 +64,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         h5 className = "bolder mt-4" > Networth < /h5> <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h1 className = "px-2 font-lighter" > 0.0 < /h1></div >
+        h1 className = "px-2 font-lighter" > { networth } < /h1></div >
         <
         img src = { Networth }
         className = "pt-2 d-none d-sm-block"
@@ -88,7 +109,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         div > <
         div className = "col-lg-4 p-lg-5 text-center" >
         <
-        h6 className = "px-lg-5 py-3 rounded-25 border border-warning text-warning text-center"
+        h6 className = "px-lg-5 py-3 rounded-4 border border-warning text-warning text-center"
         onClick = { handleShow1 } > Learn More < /h6> < /
         div >
         <

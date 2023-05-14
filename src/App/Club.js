@@ -45,8 +45,8 @@ const Club = (props) => {
         div className = "col-4 rounded-25 px-3" >
 
         <
-        h6 className = "p-3 rounded-25 blue-dark" > RECOMMENDED CLUBS < /h6>   <
-        div className = "mt-3 px-3 py-2 bg-wallet shadow-sm rounded-25" >
+        h6 className = "p-3 rounded-3 blue-dark" > RECOMMENDED CLUBS < /h6>   <
+        div className = "mt-3 px-3 py-2 bg-light rounded-3" >
         <
         div className = "row py-2" >
         <

@@ -154,9 +154,10 @@ function SecondaryUser(props) {
 
                 return ( <
                     React.Fragment > <
-                    div className = 'row p-lg-5 justify-content-center bg-light' >
+                    div className = 'row justify-content-center bg-light p-1 rounded-4' >
                     <
-                    form className = ' mt-lg-5 shadow-sm bg-white p-lg-5 col-lg-5'
+                    // col-lg-5 should do the trick for responsiveness
+                    form className = 'shadow-sm bg-white p-lg-5 rounded-4'
                     onSubmit = { handleSubmit(onSubmit) } >
                     <
                     div className = 'row justify-center p-lg-3 p-sm-12' > <

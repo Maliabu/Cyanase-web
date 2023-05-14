@@ -47,7 +47,7 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         <
         div className = "d-flex flex-row flex justify-content-center" >
         <
-        h6 className = "px-5 py-3 mt-3 border border-warning text-warning rounded-25 "
+        h6 className = "px-5 py-3 mt-3 border border-warning text-warning rounded-4"
         onClick = { handleShow } >
         Top Up < /h6>  <
         Offcanvas show = { show }
@@ -124,10 +124,10 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         /
         div > <
         div className = "col-4 rounded-25 px-4" > <
-        div className = "row p-2 bg-light rounded-25" >
+        div className = "row p-2 bg-light rounded-3" >
         <
         div className = "text-start col-6 p-2" > YOUR PERSONAL GOALS < /div> <
-        div className = "text-end col-6 p-2" > < span className = " px-2 py-1" > 1 < /span> < /div > < /
+        div className = "text-end col-6 p-2" > < span className = " px-2 py-1 bolder" > 1 < /span> < /div > < /
         div >
         <
         div className = "p-4 bg-white shadow-sm rounded-25 mt-3" >
@@ -151,13 +151,13 @@ const Personal = ({ id, activeTab, children, name, ...props }) => {
         >
         <
         p className = "mt-5" > Total Deposit < /p> <
-        p className = "text-center border p-2 rounded-25" > < span className = "bolder mx-2" > UGX < /span> 10,000 < /p >
+        p className = "text-center bg-light bolder p-2 rounded-3" > < span className = " mx-2" > UGX < /span> 10,000 < /p >
         <
         /
         div >
 
         <
-        h6 className = "px-5 py-3 mt-3 border border-warning text-center text-warning rounded-25"
+        h6 className = "px-5 py-3 mt-3 border border-warning text-center text-warning rounded-4"
         onClick = { handleShow1 } >
         New Goal < /h6>  <
         Offcanvas show = { show1 }

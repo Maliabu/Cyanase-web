@@ -42,6 +42,10 @@
     }
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .search-icon::-webkit-input-placeholder {
     font-family: 'Arial', FontAwesome;
     font-weight: normal;
@@ -68,7 +72,7 @@
     overflow-y: scroll !important;
     scroll-behavior: smooth !important;
     position: relative !important;
-    height: 50% !important;
+    height: 70vh !important;
 }
 
 .side-bar {

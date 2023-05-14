@@ -20,7 +20,7 @@ import ResGoals from './ResGoals'
 import { FaLightbulb } from 'react-icons/fa';
 import { Home, Notification, Wallet, Setting, Work, AddUser } from 'react-iconly';
 
-const ResHome = () => {
+const ResHome = (props) => {
     const [activeTab, setActiveTab] = useState("tab1");
     const [goalSetting, setGoalSetting] = useState(false);
     //  Functions to handle Tab Switching
@@ -64,7 +64,7 @@ const ResHome = () => {
             <
             div className = 'rounded-4 light-res-home wide' >
             <
-            p className = "bolder text-end mx-4 mt-2" > welcome back user <
+            p className = "bolder text-end mx-4 mt-2" > welcome back < span > { props.name } < /span> <
             div className = " justify-content-center" > <
             span className = "px-1 font-lighter" > pick up where we left off < /span></div > < /p>< /
             div > <

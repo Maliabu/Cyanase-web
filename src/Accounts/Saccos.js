@@ -130,8 +130,8 @@ const Saccos = ({...props }) => {
         div className = "col-lg-4 rounded-25 px-3 my-lg-0 my-3" >
 
         <
-        h6 className = "grey-text p-3 blue-dark rounded-25" > YOUR SACCO GOALS < /h6>   <
-        div className = "p-4 bg-white shadow-sm rounded-25 mt-3" >
+        h6 className = "grey-text p-3 blue-dark rounded-3" > YOUR SACCO GOALS < /h6>   <
+        div className = "p-4 bg-white shadow-sm rounded-4 mt-3" >
         <
         div className = "d-flex flex-row flex" >
         <
@@ -169,7 +169,7 @@ const Saccos = ({...props }) => {
         Goal1 / > < /Form> < /
         Offcanvas >
         <
-        h6 className = "grey-text p-3 blue-dark rounded-25" > PERMISSIONS < /h6>   <
+        h6 className = "grey-text p-3 blue-dark rounded-3" > PERMISSIONS < /h6>   <
         h6 className = "py-3 mt-3 border border-warning text-center text-warning rounded-25"
         onClick = { handleShow2 } >
         Deposit < /h6> < /

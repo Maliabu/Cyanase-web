@@ -5,6 +5,8 @@ import Profile from '../images/Ellipse 6.png';
 import Form from 'react-bootstrap/Form';
 import { ArrowLeftSquare, Call, Message, User } from "react-iconly";
 import { FaCameraRetro } from "react-icons/fa";
+import { API_URL_GET_AUTH_USER, TOKEN } from "../api";
+import axios from "axios";
 
 const ADetails = (props) => {
     const [show2, setShow2] = useState(false);
@@ -13,6 +15,23 @@ const ADetails = (props) => {
     const [show1, setShow1] = useState(false);
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [email, setEmail] = useState("")
+    axios.get(`${API_URL_GET_AUTH_USER}`, {
+            headers: {
+                "Authorization": `Token ${TOKEN}`
+            }
+        }).then((res) => {
+            setFirstName(res.data.first_name)
+            setLastName(res.data.last_name)
+            setPhoneNumber(res.data.profile.phoneno)
+            setEmail(res.data.email)
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     return ( < div >
         <
         ArrowLeftSquare size = "large"
@@ -38,7 +57,7 @@ const ADetails = (props) => {
         div className = "col-11 mt-5" >
         <
         h4 > Name < /h4> <
-        h6 > < p className = "grey-text" > User Name < /p>  < /
+        h6 > < div className = 'flexName d-flex grey-text' > < p > { firstName } < /p> &nbsp; <p>{ lastName }</p > < /div>  < /
         h6 > < /
         div >
         <
@@ -58,7 +77,7 @@ const ADetails = (props) => {
         div className = "col-11 mt-5" >
         <
         h4 > Phone < /h4> <
-        h6 > < p className = "grey-text" > +256 772971878 < /p>  < /
+        h6 > < p className = "grey-text" > { phoneNumber } < /p>  < /
         h6 > < /
         div >
         <
@@ -78,7 +97,7 @@ const ADetails = (props) => {
         div className = "col-11 mt-5" >
         <
         h4 > Email < /h4> <
-        h6 > < p className = "grey-text" > user @cyanase.com < /p> < /
+        h6 > < p className = "grey-text" > { email } < /p> < /
         h6 > < /
         div >
         <
@@ -112,7 +131,7 @@ const ADetails = (props) => {
         <
         div className = "text-center p-5" >
         <
-        FaCameraRetro size = "xlarge"
+        FaCameraRetro size = "70"
         set = "broken"
         className = 'm-5 p-2 border rounded-circle border-warning text-warning' / >
         <
