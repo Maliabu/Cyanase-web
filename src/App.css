@@ -46,30 +46,19 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-.search-icon::-webkit-input-placeholder {
-    font-family: 'Arial', FontAwesome;
-    font-weight: normal;
-    overflow: visible;
-    vertical-align: top;
-    display: inline-block !important;
-    padding-left: 10px;
-    padding-top: 2px;
-    font-size: large !important;
-}
-
 .bg-wallet {
     background-color: #FCFCFC!important;
 }
 
 .scroll-y {
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     scroll-behavior: smooth !important;
     position: relative !important;
     height: 80vh !important;
 }
 
 .scroll-y2 {
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     scroll-behavior: smooth !important;
     position: relative !important;
     height: 70vh !important;
@@ -250,7 +239,7 @@ body::-webkit-scrollbar {
 }
 
 .dont {
-    overflow: hidden !important;
+    overflow: auto !important;
 }
 
 .avatar {

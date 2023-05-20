@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { API_URL_LOGIN } from '../api';
 import axios from 'axios';
+import MessageBox from './MessageBox';
 
 class Login extends Component {
     //state for form data
@@ -12,6 +13,7 @@ class Login extends Component {
         username: '',
         password: ''
     };
+    Show = true;
 
     success = () => {
         document.getElementById("successMessage").innerHTML = "Successful"
@@ -24,7 +26,11 @@ class Login extends Component {
         document.getElementById("errorMessage").innerText = "You are logged in"
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
-        }, 6000);
+        }, 2000);
+        setTimeout(() => { <
+            MessageBox show = { this.Show }
+            / >
+        }, 2000);
     }
     handleChange = (e) => {
         this.setState({

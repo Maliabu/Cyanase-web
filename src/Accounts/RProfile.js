@@ -206,7 +206,6 @@ class RProfile extends React.Component {
         switch (score) {
             case this.range(18, 28):
                 InvestorProfile = "Low/Conservative";
-                console.log(this.range(18, 28))
                 break;
             case this.range(29, 40):
                 InvestorProfile = "Moderate";
@@ -214,7 +213,7 @@ class RProfile extends React.Component {
             case this.range(41, 50):
                 InvestorProfile = "Assertive (Growth)";
                 break;
-            case this.range(51, 55):
+            case this.range(51, 60):
                 InvestorProfile = "Aggressive";
                 break;
             default:
@@ -293,7 +292,7 @@ class RProfile extends React.Component {
     }
     result = () => {
         setTimeout(() => {
-            document.getElementById("alert").style.backgroundColor = "green";
+            document.getElementById("alert").style.backgroundColor = "orange";
             document.getElementById("alert").style.color = "white";
             document.getElementById("alert").innerHTML = "Reviewing your score..."
         }, 0)
@@ -304,7 +303,7 @@ class RProfile extends React.Component {
     nextButton() {
         let currentStep = this.state.currentStep;
         if (currentStep === 0) {
-            return ( < div className = "blue-dark m-0 p-3 text-center" > <
+            return ( < div className = "bg-light m-0 py-5 text-center" > <
                 Button className = "py-3 mx-5 text-center m-0 text-dark rounded-3"
                 variant = "warning"
                 type = "button"

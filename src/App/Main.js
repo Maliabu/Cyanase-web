@@ -152,7 +152,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         height = '10%'
         alt = "investors" / >
         <
-        h6 className = "pt-5 bolder" > Total Networth < /h6> <
+        h6 className = "pt-5 bolder" > Total Deposits < /h6> <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
         h3 className = "px-2 font-lighter" > 0.0 < /h3></div >
         <
@@ -162,7 +162,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         height = '10%'
         alt = "investors" / >
         <
-        h6 className = "pt-5 bolder" > Total Investments < /h6>  <
+        h6 className = "pt-5 bolder" > Total Networth < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
         h3 className = "px-2 font-lighter" > 0.0 < /h3></div >
         <

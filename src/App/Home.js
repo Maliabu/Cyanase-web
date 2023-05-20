@@ -21,7 +21,7 @@ import Profile from '../images/Ellipse 6.png';
 import ResHome from './ResHome';
 import Loans from './Loans'
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
-import { Notification, Home, Wallet, User, People, Call, Activity, Setting } from 'react-iconly';
+import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Message, Chat } from 'react-iconly';
 import axios from 'axios';
 import { API_URL_GET_AUTH_USER, TOKEN } from '../api';
 
@@ -259,7 +259,7 @@ const MyHome = () => {
         />  < /div > <
         div className = 'py-3 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Activity size = "20"set = 'broken'
+        TabNavItem title = { < span > < Chat size = "20"set = 'broken'
             className = 'mx-2' / > FAQs < /span >
         }
         id = "tab10"
