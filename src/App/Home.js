@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import React, { useState } from "react";
+import { UserRequests, PersonalRequests } from '../Api/MainRequests';
+import React, { useState, useEffect } from "react";
 import Personal from "./Personal";
 import Deposit from "./Deposit";
 import Sacco from './Sacco';
@@ -19,28 +20,25 @@ import Clubs from '../Accounts/Clubs';
 import Header from '../images/Group 3525.png';
 import Profile from '../images/Ellipse 6.png';
 import ResHome from './ResHome';
-import Loans from './Loans'
+import Loans from './Loans';
+import Logout from '../Accounts/Logout';
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
-import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Message, Chat } from 'react-iconly';
-import axios from 'axios';
-import { API_URL_GET_AUTH_USER, TOKEN } from '../api';
+import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
 
 const MyHome = () => {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
-    axios.get(`${API_URL_GET_AUTH_USER}`, {
-            headers: {
-                "Authorization": `Token ${TOKEN}`
-            }
-        }).then((res) => {
-            console.log(res.data.first_name)
-            setFirstName(res.data.first_name)
-            setLastName(res.data.last_name)
-        })
-        .catch((error) => {
-            console.error(error)
-        })
+    const [span, setSpan] = useState([])
     const [activeTab, setActiveTab] = useState("tab1");
+    useEffect(() => {
+        PersonalRequests().then(res => {
+            setSpan(res[2]);
+        });
+        UserRequests().then(res => {
+            setFirstName(res.first_name)
+            setLastName(res.last_name)
+        })
+    }, []);
     //  Functions to handle Tab Switching
     const handleTab1 = () => {
         // update the state to tab1
@@ -359,6 +357,8 @@ const MyHome = () => {
         / > < /TabContent > <
         TabContent id = "tab11"
         activeTab = { activeTab } > < Api / > < /TabContent><
+        TabContent id = "tab14"
+        activeTab = { activeTab } > < Logout / > < /TabContent><
         TabContent id = "tab12"
         activeTab = { activeTab } > < Saccos / > < /TabContent> <
         TabContent id = "tab13"

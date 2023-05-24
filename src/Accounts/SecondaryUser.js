@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/esm/Button';
 import '../App.css';
-import { API_URL } from '../api';
+import { API_URL } from '../apis';
 import axios from 'axios';
 import { useState } from "react";
 import { useForm } from "react-hook-form";

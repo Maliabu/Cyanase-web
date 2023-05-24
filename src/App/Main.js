@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { MainRequests, PersonalRequests } from '../Api/MainRequests'
+import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Deposit from '../images/Path 80.png';
@@ -6,33 +7,33 @@ import Networth from '../images/Path 3.png';
 import './style.scss';
 import Modal from 'react-bootstrap/Modal';
 import Learn from '../Accounts/Learn';
-import axios from "axios";
-import { API_URL_GET_AUTH_USER, TOKEN } from "../api";
 
 const Main = ({ id, activeTab, children, ...props }) => {
     const [show1, setShow1] = useState(false);
+    const [span, setSpan] = useState([])
+    const [deposit, setDeposit] = useState(0);
+    const [dollar, setDollar] = useState(0);
+    const [depositProgress, setDepositProgress] = useState([]);
+    const [networth, setDepositNetworth] = useState(0);
+    const [dollarNetworth, setDollarNetworth] = useState(0);
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
-    const [deposit, setDeposit] = useState("")
-    const [networth, setNetworth] = useState("")
-    const [dollarDeposit, setDollarDeposit] = useState("")
-    const [dollarNetworth, setDollarNetworth] = useState("")
-    axios.get(`${API_URL_GET_AUTH_USER}`, {
-            headers: {
-                "Authorization": `Token ${TOKEN}`
-            }
-        }).then((res) => {
-            if (res.data.currency === "UGX") {
-                setDeposit(res.data.deposit_amount)
-                setNetworth(res.data.net_worth)
-            } else {
-                setDollarDeposit(res.data.deposit_amount)
-                setDollarNetworth(res.data.net_worth)
-            }
+    useEffect(() => {
+        PersonalRequests().then(res => {
+            setSpan(res[2]); // array(14)
+        });
+        MainRequests().then(res => {
+            setDeposit(res[0]);
+            setDollar(res[1]);
+            setDepositNetworth(res[2]);
+            setDollarNetworth(res[3]);
+            setDepositProgress(res[4]);
         })
-        .catch((error) => {
-            console.error(error)
-        })
+    }, []);
+    let depositTotal = 0
+    span.map(goal => (
+        depositTotal += parseInt(goal.deposit[0])
+    ))
     return ( <
         div className = " p-lg-2 rounded-25 dollar scroll-y" >
         <
@@ -49,7 +50,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         h5 className = "bolder mt-4" > Deposit < /h5> <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h1 className = "px-2 font-lighter" > { deposit } < /h1></div >
+        h1 className = "px-2 font-lighter" > { deposit - depositTotal } < /h1></div >
         <
         img src = { Deposit }
         className = "pt-2 d-none d-sm-block"
@@ -86,14 +87,14 @@ const Main = ({ id, activeTab, children, ...props }) => {
         div className = "p-lg-5 light shadow rounded-25 w-50 text-center" > <
         h5 className = "bolder mt-4" > Deposit < /h5>  <
         div className = "d-flex flex-row flex justify-content-center" > USD <
-        h1 className = "px-2 font-lighter" > 0.0 < /h1></div > < /
+        h1 className = "px-2 font-lighter" > { dollar } < /h1></div > < /
         div >
         <
         div className = "shadow light rounded-25 p-lg-5 mx-3 px-lg-3 w-50 text-center" >
         <
         h5 className = "bolder mt-4" > Networth < /h5> <
         div className = "d-flex flex-row flex justify-content-center" > USD <
-        h1 className = "px-2 font-lighter" > 0.0 < /h1></div >
+        h1 className = "px-2 font-lighter" > { dollarNetworth } < /h1></div >
         <
         /
         div > <
@@ -134,7 +135,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         h5 className = "pt-5 bolder" > Activity < /h5>   <
         div className = "d-flex flex-row flex justify-content-center" >
         <
-        div className = "w-25" > 0 % < /div> <
+        div className = "w-25" > { depositProgress.length } % < /div> <
         div className = "w-25" > 0 % < /div> <
         div className = "w-25" > 0 % < /div> < /
         div >
@@ -154,7 +155,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         h6 className = "pt-5 bolder" > Total Deposits < /h6> <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h3 className = "px-2 font-lighter" > 0.0 < /h3></div >
+        h3 className = "px-2 font-lighter" > { networth } < /h3></div >
         <
         img src = { Networth }
         className = "py-2 mt-3"
@@ -164,7 +165,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         h6 className = "pt-5 bolder" > Total Networth < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h3 className = "px-2 font-lighter" > 0.0 < /h3></div >
+        h3 className = "px-2 font-lighter" > { networth } < /h3></div >
+        <
+        div className = "d-flex flex-row flex justify-content-center" > USD <
+        h1 className = "px-2 font-lighter" > { dollarNetworth } < /h1></div >
         <
         img src = { Networth }
         className = "py-2 mt-3"

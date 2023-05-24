@@ -1,50 +1,32 @@
 import React from "react";
-import { AddUser } from 'react-iconly';
+import { AddUser, Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
-import '../App.css';
-import axios from "axios";
-import { API_URL_GOAL, TOKEN } from "../apis";
+import DepositPic from '../images/deposit.png';
+import Profile1 from '../images/Ellipse 178.png';
+import { API_URL_GOAL_DEPOSIT, TOKEN } from '../apis';
+import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
+import ProgressBar from "@ramonak/react-progress-bar";
 
-class Goal1 extends React.Component {
+class Goal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentStep: 1,
-            goal_name: '',
-            goal_period: 0,
-            goal_amount: 0,
-            deposit_type: '',
-            deposit_rate: '',
-            deposit_reminder_day: '',
+            currentStep: 0,
             payment_means: '',
             deposit_amount: 0,
             currency: '',
             deposit_category: "",
-            account_type: ""
+            account_type: "",
+            goal_id: this.props.id
         }
     }
-    getAccountType() {
-        let currency = this.state.currency
-        let accountType = this.state.account_type
-        if (currency === "UGX") {
-            accountType = "basic"
-        } else {
-            accountType = "dollar"
-        }
-        return accountType
-    }
-    getDepositAmount() {
-        this.month = 12
-        this.period = parseInt(this.state.goal_period) * this.month
-        this.DepositAmount = parseInt(this.state.goal_amount) / this.period
-
-        if (this.state.goal_period > 1) {
-            this.interest = this.DepositAmount * (15 / 100)
-            this.newDepositAmount = this.DepositAmount + this.interest
-        }
-
-        return this.DepositAmount
+    handleChange = event => {
+        const { name, value } = event.target
+        this.setState({
+            [name]: value
+        })
+        console.log(this.state)
     }
     getTotalDeposit() {
         this.total_deposit = parseFloat(this.getFee()) + parseFloat(this.state.deposit_amount)
@@ -57,9 +39,31 @@ class Goal1 extends React.Component {
     getTab9() {
         return this.props.tab9
     }
+    getName() {
+        let goalName = this.props.name
+        let goalId = this.props.id
+        let goalAmount = parseInt(this.props.amount)
+        let deposit = parseInt(this.props.deposit)
+        let created = (this.props.created).slice(0, 10)
+        let percent = 100
+        let progress = (percent - ((goalAmount - deposit) / goalAmount * percent)).toFixed(2)
+        return [goalName, goalAmount, deposit, created, progress, percent, goalId]
+    }
+    getAccountType() {
+        let currency = this.state.currency
+        let accountType = this.state.account_type
+        if (currency === "UGX") {
+            accountType = "basic"
+        } else {
+            accountType = "dollar"
+        }
+        return accountType
+    }
+
     submitButton = () => {
         let currentStep = this.state.currentStep;
-        if (currentStep === 13) {
+        let payment_means = this.state.payment_means
+        if (currentStep === 5 && payment_means === "online") {
             return ( <
                 div className = 'row justify-content-center' > <
                 p id = "errorMessage"
@@ -79,27 +83,7 @@ class Goal1 extends React.Component {
         }
         return null
     }
-    nextButton() {
-        let currentStep = this.state.currentStep;
-        if (currentStep < 14) {
-            return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
-                type = "button"
-                onClick = { this._next } >
-                Next <
-                /h6>        
-            )
-        }
-        return null;
-    }
-    handleChange = event => {
-        const { name, value } = event.target
-        this.setState({
-            [name]: value
-        })
-        console.log(this.state)
-    }
-    success(goal, currency, amount) {
+    success(amount, currency, goal) {
         document.getElementById("successMessage").innerHTML = "Successful"
         document.getElementById("successMessage").style.backgroundColor = "green"
         document.getElementById("successMessage").style.color = "white"
@@ -107,27 +91,23 @@ class Goal1 extends React.Component {
         document.getElementById("errorMessage").style.display = 'block'
         document.getElementById("errorMessage").style.color = "green"
         document.getElementById("errorMessage").style.borderColor = "green"
-        document.getElementById("errorMessage").innerText = "You have successfully created a goal to " + goal + " of " + currency + " " + amount
+        document.getElementById("errorMessage").innerText = "You have successfully made a deposit of " + currency + " " + amount + " to " + goal
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
         }, 4000);
     }
     handleSubmit = () => {
         let form_data = new FormData();
-        let goal = this.state.goal_name;
+        let amount = this.state.deposit_amount;
         let currency = this.state.currency;
-        let amount = this.state.goal_amount;
-        form_data.append('goal_name', this.state.goal_name);
-        form_data.append('goal_amount', this.state.goal_amount);
-        form_data.append('goal_period', this.state.goal_period);
-        form_data.append('deposit_type', this.state.deposit_type);
-        form_data.append('deposit_reminder_day', this.state.deposit_reminder_day);
+        let goal = this.getName()[1];
         form_data.append('payment_means', this.state.payment_means);
         form_data.append('currency', this.state.currency);
         form_data.append('deposit_category', this.state.deposit_category);
         form_data.append('deposit_amount', this.state.deposit_amount);
         form_data.append('account_type', this.getAccountType());
-        axios.post(`${API_URL_GOAL}`, form_data, {
+        form_data.append('goal_id', this.state.goal_id);
+        axios.post(`${API_URL_GOAL_DEPOSIT}`, form_data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     'Accept': 'application/json',
@@ -150,7 +130,7 @@ class Goal1 extends React.Component {
                     document.getElementById("successMessage").style.color = "white"
                     document.getElementById("successMessage").style.borderColor = "red"
                     setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Goal not created"
+                        document.getElementById("successMessage").innerHTML = "Deposit Unsuccessful"
                     }, 2000);
                 }
                 if (error.response) {
@@ -177,11 +157,26 @@ class Goal1 extends React.Component {
                     console.log('Error', error.message);
                 }
             });
-        this.success(goal, currency, amount);
+        this.success(amount, currency, goal);
     }
+    _saccoCategory = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep + 6
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+    _afterSacco = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep - 5
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+
     _next = () => {
         let currentStep = this.state.currentStep
-        currentStep = currentStep >= 2 ? currentStep + 1 : currentStep + 1
+        currentStep = currentStep >= 1 ? currentStep + 1 : currentStep + 1
         this.setState({
             currentStep: currentStep
         })
@@ -189,18 +184,24 @@ class Goal1 extends React.Component {
 
     _prev = () => {
         let currentStep = this.state.currentStep
-        currentStep = currentStep <= 1 ? 7 : currentStep - 1
+        currentStep = currentStep <= 0 ? 0 : currentStep - 1
         this.setState({
             currentStep: currentStep
         })
     }
 
-    /*
-     * the functions for our button
-     */
+    _prevBeforeSacco = () => {
+            this.setState({
+                currentStep: 1
+            })
+        }
+        /*
+         * the functions for our button
+         */
     previousButton() {
         let currentStep = this.state.currentStep;
-        if (currentStep !== 1) {
+        let deposit_category = this.state.deposit_category;
+        if (currentStep !== 0) {
             return ( <
                 h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-25"
                 type = "button"
@@ -209,30 +210,123 @@ class Goal1 extends React.Component {
                 /h6>
             )
         }
+        if (currentStep === 7 && deposit_category === 'sacco/club') {
+            return ( <
+                h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._prevBeforeSacco } >
+                Previous <
+                /h6>
+            )
+        }
         return null;
     }
-    returnToGoals = () => {
-        setTimeout(() => {
-            document.getElementById("alert").innerHTML = "Goal Created successfully"
-        }, 1000)
-        return setTimeout(() => {
-            this.props.close1()
-        }, 2000)
+    heading() {
+        let currentStep = this.state.currentStep;
+        if (currentStep === 0) {
+            return null
+        }
+        return ( < div > <
+            Wallet className = "text-warning rounded-circle border border-warning p-2"
+            size = "xlarge" / > < br / > <
+            img src = { DepositPic }
+            width = '25%'
+            className = "my-3"
+            height = '80%'
+            alt = "investors" / > < /div>
+        )
+    }
+
+    nextButton() {
+        let currentStep = this.state.currentStep;
+        let payment_means = this.state.payment_means;
+        let deposit_category = this.state.deposit_category;
+        if (currentStep === 0) {
+            return ( <
+                h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
+                type = "button"
+                onClick = { this._next } >
+                Deposit to this goal <
+                /h6>        
+            )
+        }
+        if (currentStep === 1 && deposit_category === "personal investment") {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._next } >
+                Next <
+                /h6>        
+            )
+        }
+        if (currentStep === 7) {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._afterSacco } >
+                Next <
+                /h6>        
+            )
+        }
+
+        if (currentStep === 1 && deposit_category === "sacco/club") {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                type = "button"
+                onClick = { this._saccoCategory } >
+                Next <
+                /h6>        
+            )
+        }
+        if (currentStep === 5 && payment_means === "offline") {
+            return ( <
+                h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
+                type = "button"
+                onClick = { this._next } >
+                Continue <
+                /h6>        
+            )
+        }
+        if (currentStep === 5 && payment_means === "wallet") {
+            return ( <
+                h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
+                type = "button" >
+                OK <
+                /h6>        
+            )
+        }
+        if (currentStep < 5) {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                onClick = { this._next } >
+                Next <
+                /h6>        
+            )
+        }
+        return null;
     }
 
     render() {
         return ( <
             React.Fragment >
             <
-            form className = "px-5 scroll-y"
+            form className = "p-5 text-center"
             onSubmit = { this.handleSubmit } > {
                 /* 
                           render the form steps and pass required props in
                         */
-            } < div className = "mt-5 text-center" > <
-            AddUser className = "border border-dark text-center rounded-circle p-2 mt-5"
-            size = "xlarge" / > < /div> <
+            } { this.heading() } <
+            Step0 currentStep = { this.state.currentStep }
+            handleChange = { this.handleChange }
+            name = { this.getName()[0] }
+            amount = { this.getName()[1] }
+            deposit = { this.getName()[2] }
+            created = { this.getName()[3] }
+            progress = { this.getName()[4] }
+            percent = { this.getName()[5] }
+            /> <
             Step1 currentStep = { this.state.currentStep }
+            deposit_category = { this.state.deposit_category }
             handleChange = { this.handleChange }
             /> <
             Step2 currentStep = { this.state.currentStep }
@@ -240,46 +334,13 @@ class Goal1 extends React.Component {
             /> <
             Step3 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            deposit_amount = { this.getDepositAmount() }
-            goal_period = { this.state.goal_period }
-            goal_amount = { this.state.goal_amount }
-            />  <
+            /> <
             Step4 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step5 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step6 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step7 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            goal = { this.state.goal_name }
-            goal_period = { this.state.goal_period }
-            goal_amount = { this.state.goal_amount }
-            deposit_type = { this.state.deposit_type }
-            deposit_rate = { this.state.deposit_rate }
-            deposit_reminder_day = { this.state.deposit_reminder_day }
-            deposit_amount = { this.getDepositAmount() }
-            /> <
-            Step8 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            deposit_category = { this.state.deposit_category }
-            getTab9 = { this.getTab9() }
-            /> <
-            Step9 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step10 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step11 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             currency = { this.state.currency }
             payment_means = { this.state.payment_means }
             /> <
-            Step12 currentStep = { this.state.currentStep }
+            Step5 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             deposit_amount = { this.state.deposit_amount }
@@ -289,280 +350,86 @@ class Goal1 extends React.Component {
             }
             currency = { this.state.currency }
             /> <
-            Step13 currentStep = { this.state.currentStep }
+            Step6 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             total_deposit = { this.getTotalDeposit() }
             currency = { this.state.currency }
-            /> { this.nextButton() } { this.previousButton() }{this.submitButton()}< /
+            />  <Step7  currentStep = { this.state.currentStep }
+            handleChange = { this.handleChange }
+            /> { this.nextButton() } { this.previousButton() } {this.submitButton()}< /
             form > < /
             React.Fragment >
         );
     }
 }
 
+function Step0(props) {
+    if (props.currentStep !== 0) {
+        return null
+    }
+    if (props.id === "personal") {
+        console.log("risk profile")
+    }
+    return ( <
+        div className = "py-3" > <
+        div className = "row py-3" >
+        <
+        div className = "col-6 p-5 p-lg-3" >
+        <
+        div className = "py-5 my-5 mx-5 bg-light rounded-circle" > < AddUser set = "two-tone"
+        className = "my-5"
+        size = "xlarge" /
+        >
+        <
+        /div> < /
+        div >
+        <
+        div className = "col-6 p-5 p-lg-3 text-start" >
+        <
+        div className = "flex-row p-3" >
+        <
+        h6 className = "bolder" > Goal Name: < /h6> <
+        p className = "font-weight-lighter" > { props.name }...created {
+            props.created
+        } < /p> < /
+        div > <
+        div className = "flex-row p-3" >
+        <
+        h6 className = "bolder" > Goal Amount: < /h6><
+        div className = "d-flex flex-row flex justify-content-center" > UGX <
+        h2 className = "px-2 font-lighter" > { props.amount } < /h2></div > < /
+        div > <
+        div className = "row p-3" >
+        <
+        p className = "bolder" > Progress: < span className = "active" > {
+            props.progress
+        } % < /span> < /p > <
+        ProgressBar completed = { props.progress }
+        isLabelVisible = { false }
+        maxCompleted = { props.percent }
+        bgColor = "orange" /
+        >
+        <
+        /div> <
+        div className = "flex-row mt-2 p-3" >
+        <
+        h6 className = "bolder" > Total Deposit Made: < /h6> <
+        div className = "d-flex flex-row flex justify-content-center" > UGX <
+        h4 className = "px-2 font-lighter" > { props.deposit } < /h4></div > < /
+        div > <
+        /div> < /
+        div > < /
+        div >
+    );
+}
+
 function Step1(props) {
     if (props.currentStep !== 1) {
         return null
     }
-    return ( <
-        div className = "pt-5 text-center" >
-        <
-        h4 className = "bolder mt-5" > Goal Investing < /h4>  <
-        h6 className = "mx-5" > Let your dreams come true by investing
-        for them, < p className = "mx-5" > create your goals here < /p>  < /
-        h6 > < /div >
-    );
-}
-
-function Step2(props) {
-    if (props.currentStep !== 2) {
-        return null
-    }
-    return ( < div className = "text-center p-5" >
-        <
-        h6 className = "" > Add a Goal < /h6> <
-        div className = "row bg-light py-4 p-5 rounded-25 mt-5" > <
-        Form.Group className = "mb-3 bg-white p-3 px-5" >
-        <
-        Form.Label > What is your Goal ? < /Form.Label>  <
-        Form.Control type = "text"
-        id = 'text'
-        name = "goal_name"
-        onChange = { props.handleChange }
-        required placeholder = "Build a mansion" / >
-        <
-        Form.Control.Feedback type = "invalid" >
-        This field is required. <
-        /Form.Control.Feedback> < /
-        Form.Group >
-        <
-        Form.Group className = "mb-3 bg-white p-3 px-5" >
-        <
-        Form.Label > How long do you wish to accomplish this Goal ? (years) < /Form.Label>  <
-        Form.Control type = "number"
-        id = 'number'
-        name = "goal_period"
-        onChange = { props.handleChange }
-        required placeholder = "1 " / >
-        <
-        Form.Control.Feedback type = "invalid" >
-        This field is required. <
-        /Form.Control.Feedback> < /
-        Form.Group >
-        <
-        /
-        div >
-        <
-        /div>
-    );
-}
-
-function Step3(props) {
-    if (props.currentStep !== 3) {
-        return null
-    }
-    return ( <
-        div className = "text-center px-5" > < h6 className = "mt-5" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
-            default as monthly) < /h6> <
-        div className = "row bg-light p-4 px-3 rounded-25 mt-5" >
-        <
-        Form.Group className = "mb-3 bg-white p-3 px-5" >
-        <
-        Form.Label > My Goal Amount is : < /Form.Label>  <
-        Form.Control type = "number"
-        name = "goal_amount"
-        id = 'phone'
-        onChange = { props.handleChange }
-        required placeholder = "UGX 10,000" / >
-        <
-        Form.Control.Feedback type = "invalid" >
-        This field is required. <
-        /Form.Control.Feedback> < /
-        Form.Group >
-        <
-        p > You will have to make monthly deposists of: { props.deposit_amount } < /p> < /
-        div >
-        <
-        /div>
-    );
-}
-
-function Step4(props) {
-    if (props.currentStep !== 4) {
-        return null
-    }
-    return ( <
-        div className = "text-center" > <
-        h4 className = "bolder my-3" > Deposit Type < /h4> <
-        h6 className = "mt-2" > How do you want to handle your investments < /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "mb-3" >
-        <
-        Form.Check label = "AUTO DEPOSIT. Make your deposits automatic such that you do not miss out a single day"
-        name = "deposit_type"
-        type = "radio"
-        onChange = { props.handleChange }
-        className = "mx-5"
-        value = "auto"
-        required id = "default-radio" /
-        >
-        <
-        Form.Check label = "MANUALLY INVEST. Let me make my own deposits"
-        name = "deposit_type"
-        onChange = { props.handleChange }
-        type = "radio"
-        className = "mt-5 mx-5"
-        value = "manual"
-        required id = "default-radio" /
-        >
-        <
-        /
-        div > < /div ></div >
-    );
-}
-
-function Step5(props) {
-    if (props.currentStep !== 5) {
-        return null
-    }
-    return ( <
-        div className = "text-center pt-5" > <
-        h4 className = "bolder my-3" > Deposit Rate < /h4> <
-        h6 className = "mt-2" > How often do you want to deposit to this goal < /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "mb-3" >
-        <
-        Form.Check label = "WEEKLY"
-        name = "deposit_rate"
-        type = "radio"
-        onChange = { props.handleChange }
-        className = "mx-5 text-start"
-        value = "weekly"
-        required id = "default-radio" /
-        >
-        <
-        Form.Check label = "MONTHLY"
-        name = "deposit_rate"
-        onChange = { props.handleChange }
-        type = "radio"
-        className = "mt-5 text-start mx-5"
-        value = "monthly"
-        required id = "default-radio" /
-        >
-        <
-        /
-        div > < /div ></div >
-    );
-}
-
-function Step6(props) {
-    if (props.currentStep !== 6) {
-        return null
-    }
-    return ( <
-        div className = "p-5" >
-        <
-        div className = "text-center" > < /div> <
-        h4 className = "bolder my-3 text-center" > Set A Reminder < /h4> <
-        h6 className = "mt-2" > Let us remind you when you forget to deposit < /h6>  <
-        div key = { `default-radio` }
-        className = "mb-3" >
-        <
-        Form.Check label = "Monday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Monday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Tuesday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Tuesday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Wednesday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Wdnesday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Thursday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Thursday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Friday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Friday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Saturday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Saturday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Sunday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Sunday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        /
-        div > < /
-        div >
-    );
-}
-
-function Step7(props) {
-    if (props.currentStep !== 7) {
-        return null
-    }
-    console.log(props)
-    return ( <
-        div className = "p-5 text-center" >
-        <
-        h4 className = "bolder my-3" > Deposit < /h4> <
-        h6 className = "mt-2" > Make a Deposit to
-        continue < /h6> <
-        div className = "py-5 px-3 rounded-25" >
-        <
-        p > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at UGX< span className = "bolder" > { props.goal_amount } < /span >
-        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of UGX < span className = "bolder" > { props.deposit_amount } < /span > < /p > <
-        p > We shall remind you every: < span className = "bolder" > { props.deposit_reminder_day } < /span></p >
-        <
-        /
-        div > < /
-        div >
-    );
-}
-
-function Step8(props) {
-    if (props.currentStep !== 8) {
-        return null
+    if (props.id === "personal") {
+        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <
@@ -605,12 +472,16 @@ function Step8(props) {
         h6 className = "py-3 rounded-3 bg-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> < /
-        div > );
+        div >
+    );
 }
 
-function Step9(props) {
-    if (props.currentStep !== 9) {
+function Step2(props) {
+    if (props.currentStep !== 2) {
         return null
+    }
+    if (props.id === "personal") {
+        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <
@@ -650,11 +521,12 @@ function Step9(props) {
         <
         /
         div > < /div > < /
-        div > );
+        div >
+    );
 }
 
-function Step10(props) {
-    if (props.currentStep !== 10) {
+function Step3(props) {
+    if (props.currentStep !== 3) {
         return null
     }
     return ( <
@@ -686,11 +558,12 @@ function Step10(props) {
         >
         <
         /
-        div > < /div ></div > );
+        div > < /div ></div >
+    );
 }
 
-function Step11(props) {
-    if (props.currentStep !== 11) {
+function Step4(props) {
+    if (props.currentStep !== 4) {
         return null
     }
     if (props.payment_means === "wallet") {
@@ -736,8 +609,8 @@ function Step11(props) {
     );
 }
 
-function Step12(props) {
-    if (props.currentStep !== 12) {
+function Step5(props) {
+    if (props.currentStep !== 5) {
         return null
     }
     if (props.payment_means === "offline") {
@@ -765,8 +638,8 @@ function Step12(props) {
     )
 }
 
-function Step13(props) {
-    if (props.currentStep !== 13) {
+function Step6(props) {
+    if (props.currentStep !== 6) {
         return null
     } else if (props.payment_means === "offline") {
         return ( <
@@ -820,4 +693,39 @@ function Step13(props) {
             div >
         );
     }
-    export default Goal1;
+
+    function Step7(props) {
+        if (props.currentStep !== 7) {
+            return null
+        }
+        return ( < div >
+            <
+            h6 className = "text-center my-3" > Select the Sacco Group / Investment Club you wish to deposit to: Only groups and clubs you belong to are listed here. < /h6> <
+            div className = "row text-start px-3 my-3" >
+            <
+            div className = "col-1" >
+            <
+            Form.Check onChange = { props.handleChange }
+            type = "radio"
+            name = "category_name"
+            className = "mt-4"
+            required id = "default-radio" /
+            >
+            <
+            /div> <
+            div className = "col-11 py-3" >
+            <
+            div className = "row" >
+            <
+            div className = "col-3" > <
+            img src = { Profile1 }
+            width = '90%'
+            height = '90%'
+            alt = "investors" / > < /div> <
+            div className = "col-9" > < h6 className = "mt-3" > MUBS SACCO < /h6> < /div > < /
+            div > <
+            /div> < /
+            div > <
+            /div>)
+        }
+        export default Goal;

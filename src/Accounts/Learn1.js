@@ -3,8 +3,9 @@ import { Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 import Profile1 from '../images/Ellipse 178.png';
-import { API_URL_DEPOSIT } from '../api';
+import { API_URL_DEPOSIT, TOKEN } from '../apis';
 import axios from 'axios';
+import Button from "react-bootstrap/esm/Button";
 
 class Learn1 extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class Learn1 extends React.Component {
             deposit_amount: 0,
             currency: '',
             deposit_category: "",
-            category_name: ""
+            account_type: ""
         }
     }
 
@@ -38,18 +39,114 @@ class Learn1 extends React.Component {
     getTab9() {
         return this.props.tab9
     }
-    handleSubmit = event => {
-        event.preventDefault()
+    getAccountType() {
+        let currency = this.state.currency
+        let accountType = this.state.account_type
+        if (currency === "UGX") {
+            accountType = "basic"
+        } else {
+            accountType = "dollar"
+        }
+        return accountType
+    }
+
+    submitButton = () => {
+        let currentStep = this.state.currentStep;
+        let payment_means = this.state.payment_means
+        if (currentStep === 5 && payment_means === "online") {
+            return ( <
+                div className = 'row justify-content-center' > <
+                p id = "errorMessage"
+                className = 'py-3 mt-3 rounded border text-center fade-in'
+                style = {
+                    { display: 'none' }
+                } > hey < /p>  <
+                Button variant = "warning"
+                className = 'shadow text-center'
+                id = 'successMessage'
+                onClick = { this.handleSubmit }
+                type = "button" >
+                Submit <
+                /Button> < /
+                div >
+            )
+        }
+        return null
+    }
+    success(amount, currency, category) {
+        document.getElementById("successMessage").innerHTML = "Successful"
+        document.getElementById("successMessage").style.backgroundColor = "green"
+        document.getElementById("successMessage").style.color = "white"
+        document.getElementById("successMessage").style.borderColor = "green"
+        document.getElementById("errorMessage").style.display = 'block'
+        document.getElementById("errorMessage").style.color = "green"
+        document.getElementById("errorMessage").style.borderColor = "green"
+        document.getElementById("errorMessage").innerText = "You have successfully made a deposit of " + currency + " " + amount + " to your " + category + " account"
+        setTimeout(() => {
+            document.getElementById("errorMessage").style.display = 'none'
+        }, 4000);
+    }
+    handleSubmit = () => {
         let form_data = new FormData();
+        let amount = this.state.deposit_amount;
+        let currency = this.state.currency;
+        let category = this.state.deposit_category;
         form_data.append('payment_means', this.state.payment_means);
         form_data.append('currency', this.state.currency);
         form_data.append('deposit_category', this.state.deposit_category);
         form_data.append('deposit_amount', this.state.deposit_amount);
+        form_data.append('account_type', this.getAccountType());
         axios.post(`${API_URL_DEPOSIT}`, form_data, {
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    'Accept': 'application/json',
+                    "Authorization": `Token ${ TOKEN }`
+                }
+            })
+            .catch(function(error) {
+                const errorDisplay = (errorText) => {
+                    document.getElementById("errorMessage").innerText = errorText
+                    document.getElementById("errorMessage").style.display = 'block'
+                    document.getElementById("errorMessage").style.color = "red"
+                    document.getElementById("errorMessage").style.borderColor = "red"
+                    setTimeout(() => {
+                        document.getElementById("errorMessage").style.display = 'none'
+                    }, 6000);
+                }
+                const errorSignUp = () => {
+                    document.getElementById("successMessage").innerHTML = "Something went wrong"
+                    document.getElementById("successMessage").style.backgroundColor = "red"
+                    document.getElementById("successMessage").style.color = "white"
+                    document.getElementById("successMessage").style.borderColor = "red"
+                    setTimeout(() => {
+                        document.getElementById("successMessage").innerHTML = "Deposit Unsuccessful"
+                    }, 2000);
+                }
+                if (error.response) {
+                    if (error.response.status === 400) {
+                        errorDisplay(error.response.data.email || error.response.data.phone || error.response.data.password)
+                    } else if (error.response.status === 500) {
+                        errorDisplay(error.response.data)
+                    } else if (error.response.status === 404) {
+                        errorDisplay(error.response.data)
+                    }
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                    errorSignUp();
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+            });
+        this.success(amount, currency, category);
     }
     _saccoCategory = () => {
         let currentStep = this.state.currentStep
@@ -146,15 +243,6 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep < 5) {
-            return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
-                type = "button"
-                onClick = { this._next } >
-                Next <
-                /h6>        
-            )
-        }
         if (currentStep === 5 && payment_means === "offline") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
@@ -169,6 +257,14 @@ class Learn1 extends React.Component {
                 h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
                 type = "button" >
                 OK <
+                /h6>        
+            )
+        }
+        if (currentStep < 5) {
+            return ( <
+                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                onClick = { this._next } >
+                Next <
                 /h6>        
             )
         }
@@ -225,7 +321,7 @@ class Learn1 extends React.Component {
             currency = { this.state.currency }
             />  <Step7  currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            /> { this.nextButton() } { this.previousButton() } < /
+            /> { this.nextButton() } { this.previousButton() } {this.submitButton()}< /
             form > < /
             React.Fragment >
         );

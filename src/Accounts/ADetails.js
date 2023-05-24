@@ -5,7 +5,7 @@ import Profile from '../images/Ellipse 6.png';
 import Form from 'react-bootstrap/Form';
 import { ArrowLeftSquare, Call, Message, User } from "react-iconly";
 import { FaCameraRetro } from "react-icons/fa";
-import { API_URL_GET_AUTH_USER, TOKEN } from "../api";
+import { API_URL_GET_AUTH_USER, TOKEN } from "../apis";
 import axios from "axios";
 
 const ADetails = (props) => {

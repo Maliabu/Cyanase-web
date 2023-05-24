@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { API_URL_LOGIN } from '../api';
+import { API_URL_LOGIN } from '../apis';
 import axios from 'axios';
 import MessageBox from './MessageBox';
 
@@ -131,7 +131,7 @@ class Login extends Component {
                  * The 'then' method is executed only when the request is successfull.
                  */
                 document.getElementById("guest").innerHTML = response.data.user.first_name
-                    // window.location.href = 'https://localhost/8000/api/';
+                window.location.href = 'https://localhost/3000//';
             });
         this.success();
     }
