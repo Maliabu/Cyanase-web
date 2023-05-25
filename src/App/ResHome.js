@@ -93,15 +93,23 @@ const ResHome = (props) => {
             div > < /div >  <
             div className = 'd-flex' >
             <
-            span className = 'light-res-home text-center rounded-4 wide-40' > <
-            span className = "bolder mt-3 text-center" > < Wallet size = "medium"
-            className = 'text-warning' /
+            <<
+            << << < HEAD span className = 'light-res-home text-center rounded-4 wide-40' > <
+            span className = "bolder mt-3 text-center" > < Wallet size = "medium" ===
+            === =
+            span className = 'light-res-home rounded-4 wide-40' > <
+            p className = "bolder mt-3 text-center" > < Wallet size = "medium" >>>
+            >>> > 3 f730d2663d1d731a30105a69eb23d92b7589842 className = 'text-warning' /
             >
             <
             br / > Deposit <
-            div className = "d-flex flex-row flex justify-content-center" > < p > UGX < /p> <
-            h6 className = "px-1 font-lighter" > 45000 < /h6></div > < /span> < /span > <
-            span className = 'light-res-home rounded-4 wide-60 mx-1' > <
+            div className = "d-flex flex-row flex justify-content-center" > < p > UGX < /p> < <<
+            << << < HEAD h6 className = "px-1 font-lighter" > 45000 < /h6></div > < /span> < /span > <
+            ===
+            === =
+            h6 className = "px-1 font-lighter" > 45000 < /h6></div > < /p> < /span > <
+            >>>
+            >>> > 3 f730d2663d1d731a30105a69eb23d92b7589842 span className = 'light-res-home rounded-4 wide-60 mx-1' > <
             p className = "bolder mt-3 text-center" > < Work size = "15"
             set = 'broken'
             className = 'text-warning' /
