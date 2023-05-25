@@ -46,9 +46,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    } <<
-    << << < HEAD
-} ===
-=== =
-} >>>
->>> > 3 f730d2663d1d731a30105a69eb23d92b7589842
+    }
+}
