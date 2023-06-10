@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUserTie } from "react-icons/fa";
 import Form from 'react-bootstrap/Form';
+import { Button } from "react-bootstrap";
 
 const NKin = () => {
     return ( <
@@ -59,8 +60,8 @@ const NKin = () => {
         /Form.Control.Feedback> < /
         Form.Group >
         <
-        h6 className = "p-3 bg-warning rounded-25 text-center"
-        type = "submit" > Change < /h6> < /
+        Button variant = "warning"
+        type = "submit" > Change < /Button> < /
         Form > < /
         div >
     )

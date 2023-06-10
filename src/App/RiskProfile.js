@@ -9,14 +9,19 @@ import { Activity } from "react-iconly";
 
 const RiskProfile = ({ id, activeTab, children }) => {
     const [show2, setShow2] = useState(false);
-
+    const [theStatus, setTheStatus] = useState("incomplete");
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
+    const getStatus = (status) => {
+        setTheStatus(status)
+        console.log(status)
+        return status
+    }
     return ( <
         div > <
-        div className = "row py-5 bg-light px-2 rounded-25" >
+        div className = "row py-5 bg-light px-2 rounded-4" >
         <
-        div className = "col-6 bg-white rounded-25 p-2" >
+        div className = "col-6 bg-white rounded-4 p-2" >
         <
         img src = { Risk }
         width = '90%'
@@ -31,16 +36,18 @@ const RiskProfile = ({ id, activeTab, children }) => {
         h4 className = "active bolder" > Investor Risk Profiler < /h4>  <
         Activity size = "xlarge"
         set = "broken"
-        className = 'my-5 text-warning' / >
+        className = 'my-5 active' / >
         <
         p >
         The risk profiler is intended to grade and check how much you can accommodate an investment risk.The information you provide here is strictly
         for grading purposes.Thus we don not share it with any third parties or use it
         for any other activities. <
         /p> < /
-        div > < h6 className = "mt-3 p-5 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 bg-light active" > Incomplete < /span> < /
+        div > < h6 className = "mt-3 p-5 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 bg-light active" > {
+            theStatus
+        } < /span> < /
         h6 > <
-        h6 className = "py-3 px-5 mt-3 border border-warning text-warning rounded-3"
+        h6 className = "py-3 px-5 mt-3 warning rounded-3"
         onClick = { handleShow2 } > Complete Your Risk profile < /h6> < /
         div > <
         Modal show = { show2 }
@@ -48,7 +55,8 @@ const RiskProfile = ({ id, activeTab, children }) => {
         dialogClassName = "my-modal" >
 
         <
-        RProfile / > < /
+        RProfile status = { getStatus }
+        / > < /
         Modal > < /
         div > < /
         div >

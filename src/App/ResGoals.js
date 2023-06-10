@@ -1,9 +1,11 @@
+import { PersonalRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './style.scss';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Deposit from "./Deposit";
 import Sacco from './Sacco';
+import { FaLightbulb } from 'react-icons/fa';
 import Club from './Club';
 import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
@@ -17,13 +19,28 @@ import Clubs from '../Accounts/Clubs';
 import Profile from '../images/Ellipse 6.png';
 import ResGoal from '../Accounts/ResGoal';
 import ResHome from './ResHome';
-import ProgressBar from "@ramonak/react-progress-bar";
-import { FaLightbulb } from 'react-icons/fa';
 import { Home, Notification, Wallet, Setting, AddUser } from 'react-iconly';
+import ProgressBar from '@ramonak/react-progress-bar';
+import { Modal } from 'react-bootstrap';
+import Goal from '../Accounts/Goal'
 
 const ResGoals = () => {
     const [activeTab, setActiveTab] = useState("tab2");
     const [goalSetting, setGoalSetting] = useState(false);
+    const [span, setSpan] = useState([])
+    const [holdId, setHoldId] = useState("");
+    const [holdName, setHoldName] = useState("");
+    const [holdAmount, setHoldAmount] = useState("");
+    let [holdDeposit, setHoldDeposit] = useState("");
+    const [holdCreated, setHoldCreated] = useState("");
+    const [show3, setShow3] = useState(false);
+    const handleClose3 = () => setShow3(false);
+    const handleShow3 = () => setShow3(true);
+    useEffect(() => {
+        PersonalRequests().then(res => {
+            setSpan(res[2]); // array(14)
+        });
+    }, []);
     //  Functions to handle Tab Switching
     if (goalSetting) {
         return ( < ResGoal changeGoalSetting = { setGoalSetting }
@@ -58,27 +75,39 @@ const ResGoals = () => {
             div >
         )
     };
+
+    function getId(id, name, amount, deposit, created) {
+        setHoldId(id)
+        setHoldName(name)
+        setHoldAmount(amount)
+        setHoldDeposit(deposit)
+        setHoldCreated(created)
+        handleShow3()
+    }
     const Main = () => {
-        return ( < div className = 'p-1 res-home' > < div className = "blue-dark p-2 rounded-4" >
+        let progress
+        return ( < div className = 'p-1 res-home' > < div className = "blue-dark px-2 rounded-4" >
             <
-            div className = 'd-flex mt-2' >
+            div className = 'row' > <
+            div className = 'col-10' > <
+            p className = ' mx-3 bolder mt-3' > Your Goals < /p > < /div >
             <
-            div className = 'rounded-4 light-res-home wide' >
+            div className = 'rounded-4 d-none light-res-home wide' >
             <
             p className = "bolder text-end mx-4 mt-2" > welcome back user <
             div className = " justify-content-center" > <
             p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
-            div > <
-            img src = { Profile }
-            className = "rounded-circle mx-2 mt-3"
-            width = '10%'
-            height = '10%'
-            alt = "investors" / > < /
-            div > <
-            div className = 'text-center' > <
-            p className = ' mx-3 font-lighter mt-4' > Your Goals < /p > < /div >
+            div >
             <
-            div className = 'd-flex mt-2' > < FaLightbulb size = "35"
+            div className = 'col-2' > <
+            img src = { Profile }
+            className = "rounded-circle mt-2"
+            width = '100%'
+            height = '60%'
+            alt = "investors" / > < /div> < /
+            div >
+            <
+            div className = 'd-flex mt-2 d-none' > < FaLightbulb size = "35"
             className = 'mt-3 mx-2 p-2 rounded-circle light-res-home text-warning' / >
             <
             div className = 'rounded-4 light-res-home wider' >
@@ -94,37 +123,60 @@ const ResGoals = () => {
             <
             div className = 'bg-light p-2 rounded-4' >
             <
-            div className = 'p-2 bg-white shadow-sm rounded-4' >
+            div className = "scroll-y2 pb-lg-5 mb-lg-5" > {
+                span.map(goal => ( <
+                    div className = "p-4 shadow rounded-4 mt-3"
+                    key = { goal.goal_id } > <
+                    div className = "d-flex flex-row flex" > <
+                    span className = "mt-1" > <
+                    AddUser className = " rounded-circle border border-dark p-1"
+                    size = "large" / > < /span>  <
+                    h6 className = "mx-4" > < span className = "active"
+                    onClick = {
+                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
+                    } > {
+                        (goal.goal_name).toUpperCase()
+                    } < /span><br/ > < p > created {
+                        (goal.created).slice(0, 10)
+                    } < /p >  < /
+                    h6 > < /
+                    div >
+                    <
+                    p className = 'pt-2' > Progress: {
+                        progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
+                    } %
+                    <
+                    span >
+                    <
+                    ProgressBar completed = { progress }
+                    maxCompleted = { 100 }
+                    isLabelVisible = { false }
+                    bgColor = 'orange' /
+                    >
+                    <
+                    /span> < /
+                    p > <
+                    span className = "bolder d-none" > { goal.deposit[0] } < /span > <
+                    span className = "active d-none" > { goal.goal_amount } < /span > < /
+                    div >
+                ))
+            } <
+            /div>  <
+            Modal show = { show3 }
+            onHide = { handleClose3 }
+            dialogClassName = "" > <
+            Goal id = { holdId }
+            name = { holdName }
+            amount = { holdAmount }
+            deposit = { holdDeposit }
+            created = { holdCreated }
+            / > < /
+            Modal >
             <
-            div className = 'p-3 d-flex' >
-            <
-            AddUser size = "large"
-            set = 'broken'
-            className = 'rounded-circle border border-dark p-2' / > < p className = 'bolder mx-3 mt-2' > Build a Mansion < /p> < /
-            div >
-            <
-            div className = 'bg-light p-3 rounded-4' >
-            <
-            p className = 'bolder mt-2' > Progress: < span className = 'font-lighter' > 13 months to go < /span></p >
-            <
-            ProgressBar completed = { 80 }
-            customLabel = ""
-            isLabelVisible = { false }
-            completedClassName = "barCompleted"
-            maxCompletedClassName = "barMaxCompleted"
-            maxCompleted = { 200 }
-            barContainerClassName = "container" /
-            >
-            <
-            p className = 'bolder mt-3' > Total Deposit: < span className = 'font-lighter' > UGX 45000 < /span></p >
-            <
-            /
-            div > <
-            /div> <
-            p onClick = {
+            h6 onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = 'p-2 border border-warning rounded-3 text-warning text-center mx-5 mt-3' > Add a new Goal < /p> < /
+            className = 'p-2 rounded-3 border border-warning active text-center mx-5 mt-3' > Add a new Goal < /h6> < /
             div > <
             /
             div >
@@ -148,9 +200,9 @@ const ResGoals = () => {
         />< /div > <
         div className = ' py-3 text-center' >
         <
-        TabNavItem title = { < span > < Wallet size = "medium"
+        TabNavItem title = { < span > < Wallet size = "20"
             set = 'broken'
-            className = 'rounded-circle border border-dark icon-padding mx-4' / > < /span>
+            className = 'mt-2 mx-4' / > < /span>
         }
         onClick = { handleTab1 }
         id = "tab5"

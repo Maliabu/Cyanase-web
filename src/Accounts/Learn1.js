@@ -75,16 +75,19 @@ class Learn1 extends React.Component {
     }
     success(amount, currency, category) {
         document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "green"
+        document.getElementById("successMessage").style.backgroundColor = "orangered"
         document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "green"
+        document.getElementById("successMessage").style.borderColor = "orangered"
         document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "green"
-        document.getElementById("errorMessage").style.borderColor = "green"
+        document.getElementById("errorMessage").style.color = "orangered"
+        document.getElementById("errorMessage").style.borderColor = "orangered"
         document.getElementById("errorMessage").innerText = "You have successfully made a deposit of " + currency + " " + amount + " to your " + category + " account"
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
         }, 4000);
+        setTimeout(() => {
+            window.location.pathname = "/home"
+        }, 5000);
     }
     handleSubmit = () => {
         let form_data = new FormData();
@@ -192,7 +195,7 @@ class Learn1 extends React.Component {
         let deposit_category = this.state.deposit_category;
         if (currentStep !== 1) {
             return ( <
-                h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._prev } >
                 Previous <
@@ -201,7 +204,7 @@ class Learn1 extends React.Component {
         }
         if (currentStep === 7 && deposit_category === 'sacco/club') {
             return ( <
-                h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._prevBeforeSacco } >
                 Previous <
@@ -217,7 +220,7 @@ class Learn1 extends React.Component {
         let deposit_category = this.state.deposit_category;
         if (currentStep === 1 && deposit_category === "personal investment") {
             return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -226,7 +229,7 @@ class Learn1 extends React.Component {
         }
         if (currentStep === 7) {
             return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._afterSacco } >
                 Next <
@@ -236,7 +239,7 @@ class Learn1 extends React.Component {
 
         if (currentStep === 1 && deposit_category === "sacco/club") {
             return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._saccoCategory } >
                 Next <
@@ -245,7 +248,7 @@ class Learn1 extends React.Component {
         }
         if (currentStep === 5 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Continue <
@@ -254,7 +257,7 @@ class Learn1 extends React.Component {
         }
         if (currentStep === 5 && payment_means === "wallet") {
             return ( <
-                h6 className = "py-3 mx-5 text-center bg-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
                 type = "button" >
                 OK <
                 /h6>        
@@ -262,7 +265,7 @@ class Learn1 extends React.Component {
         }
         if (currentStep < 5) {
             return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 onClick = { this._next } >
                 Next <
                 /h6>        
@@ -281,7 +284,7 @@ class Learn1 extends React.Component {
                           render the form steps and pass required props in
                         */
             } <
-            Wallet className = "text-warning rounded-circle border border-warning p-2"
+            Wallet className = "rounded-circle warning p-2"
             size = "xlarge" / > < br / > <
             img src = { DepositPic }
             width = '25%'
@@ -353,27 +356,31 @@ function Step1(props) {
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5" > SACCO GROUP / INVESTMENT CLUB < /h5> <
+        h5 className = "font-lighter d-none mt-5" > SACCO GROUP / INVESTMENT CLUB < /h5> <
         Form.Check label = "I want to deposit to my Sacco Group or Investment Club"
         name = "deposit_category"
         onChange = { props.handleChange }
         type = "radio"
+        className = "d-none"
         value = "sacco/club"
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5" > INSTITUTION / ORGANIZATION < /h5>  <
+        h5 className = "font-lighter d-none mt-5" > INSTITUTION / ORGANIZATION < /h5>  <
         Form.Check label = "I am making this deposit towards my API Account as an API User"
         name = "deposit_category"
         onChange = { props.handleChange }
         type = "radio"
+        className = "d-none"
         value = "institution"
         required id = "default-radio" /
         >
         <
         /
-        div > < /div > <
-        h6 className = "py-3 rounded-3 bg-warning text-center"
+        div > < /div >  <
+        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Treasury Bills < /span> < /
+        h6 > <
+        h6 className = "py-3 rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> < /
         div >
@@ -396,16 +403,17 @@ function Step2(props) {
         div key = { `default-radio` }
         className = "mb-3" >
         <
-        h5 className = "font-lighter" > WALLET < /h5> <
+        h5 className = "font-lighter d-none" > WALLET < /h5> <
         Form.Check label = "I want to deposit from my wallet to make this deposit to my personal investment account"
         name = "payment_means"
         type = "radio"
         onChange = { props.handleChange }
         value = "wallet"
+        className = "d-none"
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5" > OFFLINE < /h5> <
+        h5 className = "font-lighter" > OFFLINE < /h5> <
         Form.Check label = "Deposit directly to our bank account and let us reconcile your account"
         name = "payment_means"
         onChange = { props.handleChange }

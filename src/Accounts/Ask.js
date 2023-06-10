@@ -19,7 +19,7 @@ const Ask = () => {
         rows = { 3 }
         /> < /
         Form.Group > <
-        h6 className = "p-3 bg-warning rounded-25 text-center"
+        h6 className = "p-3 bg-warning rounded-3 active text-dark text-center"
         type = "submit" > Submit < /h6> < /
         Form > < /
         div >

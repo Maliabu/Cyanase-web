@@ -54,8 +54,8 @@ return ( <
     div className = "row scroll-y " > <
     div className = "col-8 bg-light p-3 rounded-25" >
     <
-    h6 className = " p-2 mt-2" > WALLET < /h6>  <
-    div className = "row bg-white rounded-25 p-5" >
+    h6 className = " p-2 mt-2 d-none" > WALLET < /h6>  <
+    div className = "row bg-white d-none rounded-4 p-5" >
     <
     div className = " px-3 text-center " >
     <
@@ -71,7 +71,7 @@ return ( <
     <
     div className = "d-flex flex-row flex justify-content-center" >
     <
-    h6 className = "px-5 py-3 mt-3 border border-warning text-warning rounded-4"
+    h6 className = "px-5 py-3 mt-3 warning rounded-3"
     onClick = { handleShow } >
     Top Up < /h6>  <
     Offcanvas show = { show }
@@ -99,7 +99,7 @@ return ( <
     TopUp / > < /
     Offcanvas.Body > < /
     Offcanvas > <
-    h6 className = "px-5 py-3 mt-3 mx-2 border d-none border-warning text-warning rounded-25"
+    h6 className = "px-5 py-3 mt-3 mx-2 warning rounded-3"
     onClick = { handleShow2 } >
     Deposit < /h6> </div >
     <
@@ -115,7 +115,7 @@ return ( <
     /div>  <
     div >
     <
-    div className = "scroll-y" >
+    div className = "row scroll-y" >
     <
     h6 className = "pt-5" > RECENT ACTIVITY < /h6> {deposits.map(deposit => ( <
     div className = "row mt-3 px-4 bg-white rounded-4"
@@ -148,18 +148,18 @@ div >
     <
     /
 div > <
-    div className = "col-4 rounded-25 px-4 " > <
+    div className = "col-4 px-4 " > <
     div className = "row p-2 bg-light rounded-3" >
     <
     div className = "text-start col-6 p-2" > YOUR PERSONAL GOALS < /div> <
-div className = "text-end col-6 p-2" > < span className = " px-2 py-1 bolder" > { span.length } < /span> < /div > < /
+div className = "text-end col-6 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
 div > <
-    h6 className = "px-5 py-3 mt-3 border border-warning text-center text-warning rounded-4"
+    h6 className = "px-5 py-3 mt-3 warning text-center rounded-3"
 onClick = { handleShow1 } >
     New Goal < /h6>  <
-div className = "scroll-y pb-5 mb-5" > {
+div className = "scroll-y bg-light rounded-4 p-1 pb-5 mb-5" > {
         span.map(goal => ( <
-            div className = "p-4 bg-white shadow-sm rounded-4 mt-3"
+            div className = "p-4 bg-white rounded-4 mt-3"
             key = { goal.goal_id } > <
             div className = "d-flex flex-row flex" > <
             span className = "mt-2" > <
@@ -169,7 +169,7 @@ div className = "scroll-y pb-5 mb-5" > {
             onClick = {
                 () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
             } > { goal.goal_name } < /span>< span > ...created { (goal.created).slice(0,10) } < /span > < /p >  <
-            span className = "bolder" > { goal.deposit[0] } < span className = "active" > { goal.goal_amount } < /span > < /span > < /
+            span className = "bolder" > Total Deposit: < span className = "font-lighter" > { goal.deposit[0] } < /span> < span className = "active d-none" > { goal.goal_amount } < /span > < /span > < /
             div > <
             /
             div >
@@ -178,7 +178,7 @@ div className = "scroll-y pb-5 mb-5" > {
     /div> <
 Modal show = { show3 }
 onHide = { handleClose3 }
-dialogClassName = "my-modal" > <
+dialogClassName = "" > <
     Goal id = { holdId }
 name = { holdName }
 amount = { holdAmount }

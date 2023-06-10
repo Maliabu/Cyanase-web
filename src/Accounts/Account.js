@@ -27,7 +27,7 @@ const Account = (props) => {
                 onClick = {
                     () => { props.changeAccountSetting(false) }
                 }
-                className = "text-warning my-4 active" / > <
+                className = " my-4 active" / > <
                 h1 > Account Settings < /h1>  <
                 div className = "row mt-3 p-2 px-3 border-bottom" > <
                 div className = "col-1" >

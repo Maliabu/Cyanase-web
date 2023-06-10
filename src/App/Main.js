@@ -35,7 +35,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         depositTotal += parseInt(goal.deposit[0])
     ))
     return ( <
-        div className = " p-lg-2 rounded-25 dollar scroll-y" >
+        div className = " p-lg-2 rounded-25 scroll-y" >
         <
         div className = " rounded-25 d-none d-lg-block" >
 
@@ -53,12 +53,16 @@ const Main = ({ id, activeTab, children, ...props }) => {
         h1 className = "px-2 font-lighter" > { deposit - depositTotal } < /h1></div >
         <
         img src = { Deposit }
-        className = "pt-2 d-none d-sm-block"
+        className = "pt-2 d-none"
         width = '100%'
         height = '30%'
         alt = "investors" / >
         <
-        /
+        div className = ' mt-4' >
+        <
+        span className = 'py-3 px-5 warning active text-center rounded-3' > Withdraw < /span> <
+        span className = 'py-3 px-5 warning active text-center rounded-3 mx-2'
+        onClick = { props.handletab5 } > Deposit < /span> </div > < /
         div >
         <
         div className = "blue-dark p-lg-4 mx-2 rounded-25 w-50 text-center" >
@@ -110,7 +114,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         div > <
         div className = "col-lg-4 p-lg-5 text-center" >
         <
-        h6 className = "px-lg-5 py-3 rounded-4 border border-warning text-warning text-center"
+        h6 className = "px-lg-5 py-3 rounded-3 warning active text-center"
         onClick = { handleShow1 } > Learn More < /h6> < /
         div >
         <

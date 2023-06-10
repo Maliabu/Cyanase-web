@@ -133,18 +133,18 @@ class Login extends Component {
     render() {
         return ( <
             div > <
-            div className = 'row rounded-4 justify-content-center bg-light p-5' >
+            div className = 'row rounded-4 justify-content-center bg-light p-lg-5 p-2' >
             <
-            Form className = 'shadow-sm bg-white rounded-4 p-lg-5 col-lg-5'
+            Form className = 'bg-whiter rounded-4 p-lg-5 py-3 col-lg-5 col-12'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <
             h2 className = 'text-center' > LOGIN < /h2> <
-            h6 className = 'active mt-3' > < b > Enter your Credentials below to login to your API Account < /b>  < /
+            h6 className = 'active mt-3 text-center' > < b > Enter your Credentials below to login to your API Account < /b>  < /
             h6 > <
             /
             div > <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 shadow-sm rounded-2 p-3 px-5" >
             <
             Form.Label > username < /Form.Label> <
             Form.Control type = "text"
@@ -154,7 +154,7 @@ class Login extends Component {
             onChange = { this.handleChange }
             placeholder = "support@cyanase.com" / > <
             /Form.Group>  <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
+            Form.Group className = "mb-3 shadow-sm rounded-2 p-3 px-5" >
             <
             Form.Label > Password < /Form.Label> <
             Form.Control type = "password"
@@ -173,7 +173,7 @@ class Login extends Component {
             /Button> < /
             div >
             <
-            p className = 'mt-5' > If you dont have an account, please < span className = 'active bolder' > { this.props.button } < /span></p >
+            p className = 'mt-5 text-center' > If you dont have an account, please < span className = 'active bolder' > { this.props.button } < /span></p >
             <
             p id = "errorMessage"
             className = 'py-3 mt-3 rounded border text-center fade-in'

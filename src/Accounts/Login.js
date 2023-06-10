@@ -17,12 +17,12 @@ class Login extends Component {
 
     success = () => {
         document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "green"
+        document.getElementById("successMessage").style.backgroundColor = "orange"
         document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "green"
+        document.getElementById("successMessage").style.borderColor = "orange"
         document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "green"
-        document.getElementById("errorMessage").style.borderColor = "green"
+        document.getElementById("errorMessage").style.color = "orange"
+        document.getElementById("errorMessage").style.borderColor = "orange"
         document.getElementById("errorMessage").innerText = "You are logged in"
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
@@ -131,7 +131,7 @@ class Login extends Component {
                  * The 'then' method is executed only when the request is successfull.
                  */
                 document.getElementById("guest").innerHTML = response.data.user.first_name
-                window.location.href = 'https://localhost/3000//';
+                window.location.pathname = "/"
             });
         this.success();
     }
@@ -185,16 +185,7 @@ class Login extends Component {
             style = {
                 { display: 'none' }
             } > hey < /p>  < /
-            Form >
-            <
-            div className = "mt-5 bg-light d-none rounded row justify-content-center" >
-            <
-            img className = 'rounded-circle text-center avatar border border-warning'
-            src = "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg"
-            alt = "investors" / > <
-            h4 className = 'avatar-name text-center mt-2 p-3 bg-text'
-            id = 'guest' > Guest < /h4> < /
-            div > < /div> < /
+            Form > < /div> < /
             div >
         );
     }

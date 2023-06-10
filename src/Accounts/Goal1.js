@@ -83,7 +83,7 @@ class Goal1 extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep < 14) {
             return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -101,16 +101,19 @@ class Goal1 extends React.Component {
     }
     success(goal, currency, amount) {
         document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "green"
+        document.getElementById("successMessage").style.backgroundColor = "orange"
         document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "green"
+        document.getElementById("successMessage").style.borderColor = "orange"
         document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "green"
-        document.getElementById("errorMessage").style.borderColor = "green"
+        document.getElementById("errorMessage").style.color = "orange"
+        document.getElementById("errorMessage").style.borderColor = "orange"
         document.getElementById("errorMessage").innerText = "You have successfully created a goal to " + goal + " of " + currency + " " + amount
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
         }, 4000);
+        setTimeout(() => {
+            window.location.pathname = "/home"
+        }, 5000);
     }
     handleSubmit = () => {
         let form_data = new FormData();
@@ -202,7 +205,7 @@ class Goal1 extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep !== 1) {
             return ( <
-                h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-25"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._prev } >
                 Previous <
@@ -321,7 +324,7 @@ function Step2(props) {
     }
     return ( < div className = "text-center p-5" >
         <
-        h6 className = "" > Add a Goal < /h6> <
+        h4 className = "font-lighter" > Add a Goal < /h4> <
         div className = "row bg-light py-4 p-5 rounded-25 mt-5" > <
         Form.Group className = "mb-3 bg-white p-3 px-5" >
         <
@@ -394,7 +397,7 @@ function Step4(props) {
     }
     return ( <
         div className = "text-center" > <
-        h4 className = "bolder my-3" > Deposit Type < /h4> <
+        h4 className = "font-lighter my-3" > Deposit Type < /h4> <
         h6 className = "mt-2" > How do you want to handle your investments < /h6> <
         div className = "p-5 px-3 rounded-25 mt-3"
         key = "radio" >
@@ -431,9 +434,9 @@ function Step5(props) {
     }
     return ( <
         div className = "text-center pt-5" > <
-        h4 className = "bolder my-3" > Deposit Rate < /h4> <
+        h4 className = "font-lighter my-3" > Deposit Rate < /h4> <
         h6 className = "mt-2" > How often do you want to deposit to this goal < /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
+        div className = " mt-3"
         key = "radio" >
         <
         div key = { `default-radio` }
@@ -443,7 +446,7 @@ function Step5(props) {
         name = "deposit_rate"
         type = "radio"
         onChange = { props.handleChange }
-        className = "mx-5 text-start"
+        className = "text-start"
         value = "weekly"
         required id = "default-radio" /
         >
@@ -452,7 +455,7 @@ function Step5(props) {
         name = "deposit_rate"
         onChange = { props.handleChange }
         type = "radio"
-        className = "mt-5 text-start mx-5"
+        className = "mt-5 text-start "
         value = "monthly"
         required id = "default-radio" /
         >
@@ -470,7 +473,7 @@ function Step6(props) {
         div className = "p-5" >
         <
         div className = "text-center" > < /div> <
-        h4 className = "bolder my-3 text-center" > Set A Reminder < /h4> <
+        h4 className = "font-lighter my-3 text-center" > Set A Reminder < /h4> <
         h6 className = "mt-2" > Let us remind you when you forget to deposit < /h6>  <
         div key = { `default-radio` }
         className = "mb-3" >
@@ -550,10 +553,10 @@ function Step7(props) {
         continue < /h6> <
         div className = "py-5 px-3 rounded-25" >
         <
-        p > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at UGX< span className = "bolder" > { props.goal_amount } < /span >
-        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of UGX < span className = "bolder" > { props.deposit_amount } < /span > < /p > <
-        p > We shall remind you every: < span className = "bolder" > { props.deposit_reminder_day } < /span></p >
-        <
+        h6 > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at UGX< span className = "bolder" > { props.goal_amount } < /span >
+        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of UGX < span className = "bolder" > { props.deposit_amount } < /span > < /h6 > <
+        h6 > We shall remind you every: < span className = "bolder" > { props.deposit_reminder_day } < /span> < /
+        h6 > <
         /
         div > < /
         div >
@@ -565,7 +568,7 @@ function Step8(props) {
         return null
     }
     return ( <
-        div className = " text-start" > <
+        div className = " text-start mx-5" > <
         h6 className = "mt-2 text-center" > Choose where you wish to make your deposit. < /h6> <
         div className = "p-3 rounded-4 mt-3"
         key = "radio" >
@@ -582,27 +585,31 @@ function Step8(props) {
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5" > SACCO GROUP / INVESTMENT CLUB < /h5> <
+        h5 className = "font-lighter mt-5 d-none" > SACCO GROUP / INVESTMENT CLUB < /h5> <
         Form.Check label = "I want to deposit to my Sacco Group or Investment Club"
         name = "deposit_category"
         onChange = { props.handleChange }
         type = "radio"
         value = "sacco/club"
+        className = "d-none"
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5" > INSTITUTION / ORGANIZATION < /h5>  <
+        h5 className = "font-lighter mt-5 d-none" > INSTITUTION / ORGANIZATION < /h5>  <
         Form.Check label = "I am making this deposit towards my API Account as an API User"
         name = "deposit_category"
         onChange = { props.handleChange }
         type = "radio"
+        className = "d-none"
         value = "institution"
         required id = "default-radio" /
         >
         <
         /
-        div > < /div > <
-        h6 className = "py-3 rounded-3 bg-warning text-center"
+        div > < /div ><
+        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Treasury Bills < /span> < /
+        h6 > <
+        h6 className = "py-3 rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> < /
         div > );
@@ -621,16 +628,17 @@ function Step9(props) {
         div key = { `default-radio` }
         className = "mb-3" >
         <
-        h5 className = "font-lighter" > WALLET < /h5> <
+        h5 className = "font-lighter d-none" > WALLET < /h5> <
         Form.Check label = "I want to deposit from my wallet to make this deposit to my personal investment account"
         name = "payment_means"
         type = "radio"
+        className = "d-none"
         onChange = { props.handleChange }
         value = "wallet"
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5" > OFFLINE < /h5> <
+        h5 className = "font-lighter" > OFFLINE < /h5> <
         Form.Check label = "Deposit directly to our bank account and let us reconcile your account"
         name = "payment_means"
         onChange = { props.handleChange }
@@ -700,7 +708,7 @@ function Step11(props) {
             h4 className = "py-3 bolder" > Wallet Balance: < span className = "font-lighter" > < span > { props.currency } < /span> 0.00 < /span >
             <
             /h4 > <
-            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+            Form.Group className = "mb-3 bg-light p-3 p-5" >
             <
             Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
             Form.Control type = "number"
@@ -719,7 +727,7 @@ function Step11(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        Form.Group className = "my-3 bg-light p-3 p-5" >
         <
         Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
         Form.Control type = "number"
@@ -804,7 +812,7 @@ function Step13(props) {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+            Form.Group className = "my-3 bg-light p-3 p-5" >
             <
             Form.Label > Amount to Deposit < /Form.Label>  <
             Form.Control type = "number"

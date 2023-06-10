@@ -51,10 +51,14 @@ class Auth extends React.Component {
         return ( <
             React.Fragment >
             <
-            div className = 'row px-3 py-4 justify-content-center' > < p > <
+            div className = 'row py-4 justify-content-center' > < p > <
             img src = { Header }
             width = '10%'
-            className = "mx-lg-5"
+            className = "mx-lg-5 d-none d-lg-block"
+            alt = "investors" / > < /p><p><
+            img src = { Header }
+            width = '40%'
+            className = "d-block d-sm-none mx-auto"
             alt = "investors" / > < /p> <
             Step1 currentStep = { this.state.currentStep }
             signup = { this.nextButton() }

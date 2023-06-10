@@ -22,22 +22,22 @@ class RProfile extends React.Component {
             question8: 0,
             question9: 0,
             question10: 0,
-            question11: 0
+            question11: 0,
+            status: "incomplete"
         }
     }
     RPHeader() {
         return ( < div > < div className = "row" >
             <
             div className = "col-6" > < Activity size = "xlarge"
-            className = "text-warning mx-5"
+            className = "active mx-5"
             set = "broken" / > < /div> <
             div className = "col-6 text-end" > <
-            FaRegWindowClose className = "active d-none d-xs-block text-warning p-2 mx-lg-5 mx-3 px-2 rounded-circle"
+            FaRegWindowClose className = "d-none d-xs-block text-warning p-2 mx-lg-5 mx-3 px-2 rounded-circle"
             size = "50" / > < /div> < /
-            div > < h5 className = "my-3 text-warning mx-lg-5 mx-3 px-2" > Risk Profile < /h5> < /
+            div > < h5 className = "my-3 active mx-lg-5 mx-3 px-2" > Risk Profile < /h5> < /
             div > )
     }
-
     handleChange = event => {
         const { name, value } = event.target
         this.setState({
@@ -52,7 +52,7 @@ class RProfile extends React.Component {
         console.log(getPercentage, currentStep)
         return getPercentage
     }
-    conservative() {
+    conservativeA() {
         return ( <
             Table className = "text-center blue-dark" >
             <
@@ -75,6 +75,25 @@ class RProfile extends React.Component {
             td > 10 % < /td><
             td > 5 % < /td> < /
             tr > <
+            /tbody> < /
+            Table >
+        )
+    }
+    conservativeB() {
+        return ( <
+            Table className = "text-center blue-dark" >
+            <
+            thead >
+            <
+            tr > <
+            th > Conservative < /th> <
+            th > Cash < /th> <
+            th > Credit < /th> <
+            th > Venture < /th><
+            th > Absolute Return < /th>  < /
+            tr > <
+            /thead> <
+            tbody > <
             tr > <
             td > B(24– 28 pts) < /td> <
             td > 30 % < /td> <
@@ -86,7 +105,7 @@ class RProfile extends React.Component {
             Table >
         )
     }
-    moderate() {
+    moderateA() {
         return ( <
             Table className = "text-center blue-dark" >
             <
@@ -109,6 +128,25 @@ class RProfile extends React.Component {
             td > 17.5 % < /td><
             td > 7.5 % < /td> < /
             tr > <
+            /tbody> < /
+            Table >
+        )
+    }
+    moderateB() {
+        return ( <
+            Table className = "text-center blue-dark" >
+            <
+            thead >
+            <
+            tr > <
+            th > Conservative < /th> <
+            th > Cash < /th> <
+            th > Credit < /th> <
+            th > Venture < /th><
+            th > Absolute Return < /th>  < /
+            tr > <
+            /thead> <
+            tbody > <
             tr > <
             td > B(35– 40 pts) < /td> <
             td > 15 % < /td> <
@@ -120,7 +158,7 @@ class RProfile extends React.Component {
             Table >
         )
     }
-    assertive() {
+    assertiveA() {
         return ( <
             Table className = "text-center blue-dark" >
             <
@@ -143,6 +181,25 @@ class RProfile extends React.Component {
             td > 30 % < /td><
             td > 15 % < /td> < /
             tr > <
+            /tbody> < /
+            Table >
+        )
+    }
+    assertiveB() {
+        return ( <
+            Table className = "text-center blue-dark" >
+            <
+            thead >
+            <
+            tr > <
+            th > Conservative < /th> <
+            th > Cash < /th> <
+            th > Credit < /th> <
+            th > Venture < /th><
+            th > Absolute Return < /th>  < /
+            tr > <
+            /thead> <
+            tbody > <
             tr > <
             td > B(45– 50 pts) < /td> <
             td > 10 % < /td> <
@@ -154,7 +211,7 @@ class RProfile extends React.Component {
             Table >
         )
     }
-    aggressive() {
+    aggressiveA() {
         return ( <
             Table className = "text-center blue-dark" >
             <
@@ -177,6 +234,25 @@ class RProfile extends React.Component {
             td > 40 % < /td><
             td > 30 % < /td> < /
             tr > <
+            /tbody> < /
+            Table >
+        )
+    }
+    aggressiveB() {
+        return ( <
+            Table className = "text-center blue-dark" >
+            <
+            thead >
+            <
+            tr > <
+            th > Conservative < /th> <
+            th > Cash < /th> <
+            th > Credit < /th> <
+            th > Venture < /th><
+            th > Absolute Return < /th>  < /
+            tr > <
+            /thead> <
+            tbody > <
             tr > <
             td > B(56– 60 pts) < /td> <
             td > 5 % < /td> <
@@ -193,6 +269,18 @@ class RProfile extends React.Component {
         console.log(this.score)
         return this.score
     }
+    getStatus() {
+        let status = this.state.status
+        let score = this.getResult()[0]
+        if (score === "Incomplete Risk Profile") {
+            status = "incomplete"
+            this.props.status(status)
+        } else {
+            status = "complete"
+            this.props.status(status)
+        }
+        return status
+    }
     range(start, end) {
         let score = this.scoreResult();
         if (start <= score && score <= end) {
@@ -203,59 +291,76 @@ class RProfile extends React.Component {
     getResult() {
         let InvestorProfile = "";
         let score = this.scoreResult();
+        let id = ""
         switch (score) {
-            case this.range(18, 28):
+            case this.range(18, 23):
                 InvestorProfile = "Low/Conservative";
+                id = "A"
                 break;
-            case this.range(29, 40):
+            case this.range(24, 28):
+                InvestorProfile = "Low/Conservative";
+                id = "B"
+                break;
+            case this.range(29, 34):
                 InvestorProfile = "Moderate";
+                id = "A"
                 break;
-            case this.range(41, 50):
+            case this.range(35, 40):
+                InvestorProfile = "Moderate";
+                id = "B"
+                break;
+            case this.range(41, 45):
                 InvestorProfile = "Assertive (Growth)";
+                id = "A"
                 break;
-            case this.range(51, 60):
+            case this.range(46, 50):
+                InvestorProfile = "Assertive (Growth)";
+                id = "B"
+                break;
+            case this.range(51, 55):
                 InvestorProfile = "Aggressive";
+                id = "A"
+                break;
+            case this.range(56, 60):
+                InvestorProfile = "Aggressive";
+                id = "B"
                 break;
             default:
                 InvestorProfile = "Incomplete Risk Profile";
         }
-        return InvestorProfile
+        return [InvestorProfile, id]
     }
     allocateResources() {
-        let resource = this.getResult();
-        let conservatives = this.conservative();
-        let moderates = this.moderate();
-        let assertives = this.assertive();
-        let aggressives = this.aggressive();
-        if (resource === "Low/Conservative") {
-            return conservatives
-        } else if (resource === "Moderate") {
-            return moderates
-        } else if (resource === "Assertive (Growth)") {
-            return assertives
-        } else if (resource === "Aggressive") {
-            return aggressives
+        let resource = this.getResult()[0];
+        let id = this.getResult()[1];
+        let conservativesA = this.conservativeA();
+        let moderatesA = this.moderateA();
+        let assertivesA = this.assertiveA();
+        let aggressivesA = this.aggressiveA();
+        let conservativesB = this.conservativeB();
+        let moderatesB = this.moderateB();
+        let assertivesB = this.assertiveB();
+        let aggressivesB = this.aggressiveB();
+        if (resource === "Low/Conservative" && id === "A") {
+            return conservativesA
+        } else if (resource === "Low/Conservative" && id === "B") {
+            return conservativesB
+        } else if (resource === "Assertive (Growth)" && id === "A") {
+            return assertivesA
+        } else if (resource === "Aggressive" && id === "A") {
+            return aggressivesA
+        } else if (resource === "Moderate" && id === "A") {
+            return moderatesA
+        } else if (resource === "Moderate" && id === "B") {
+            return moderatesB
+        } else if (resource === "Assertive (Growth)" && id === "B") {
+            return assertivesB
+        } else if (resource === "Aggressive" && id === "B") {
+            return aggressivesB
         }
-        // switch (resource) {
-        //     case "Low/Conservative":
-        //         return conservatives;
-        //         break;
-        //     case "Moderate":
-        //         return moderates;
-        //         break;
-        //     case "Assertive (Growth)":
-        //         return assertives;
-        //         break;
-        //     case "Aggressive":
-        //         return aggressives;
-        //         break;
-        //     default:
-        //         return null
-        // }
     }
 
     handleSubmit = event => {
-        event.preventDefault()
         console.log(this.state)
     }
     _next = () => {
@@ -279,22 +384,22 @@ class RProfile extends React.Component {
      */
     previousButton() {
         let currentStep = this.state.currentStep;
-        if (currentStep === 12) {
-            return ( < div className = "p-3 blue-dark m-0 text-center" > <
-                h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-3"
-                type = "button"
-                onClick = { this._prev } >
-                Previous <
-                /h6></div >
-            )
-        }
         if (currentStep !== 0) {
             return ( <
-                h6 className = "py-3 mx-5 text-center border border-warning text-warning rounded-3"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._prev } >
                 Previous <
                 /h6>
+            )
+        }
+        if (currentStep < 12) {
+            return ( < div className = "p-3 m-0 text-center" > <
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                type = "button"
+                onClick = { this._prev } >
+                Previous <
+                /h6></div >
             )
         }
         return null;
@@ -321,7 +426,7 @@ class RProfile extends React.Component {
                 /Button>  </div > )
         } else if (currentStep < 11) {
             return ( <
-                h6 className = "py-3 mx-5 border text-center border-warning text-warning rounded-3"
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -334,6 +439,15 @@ class RProfile extends React.Component {
                 variant = "warning"
                 id = "alert"
                 onClick = { this.result } >
+                Get Score <
+                /Button> </div > )
+        } else if (currentStep === 12) {
+            return ( < div className = "text-center mb-3" > <
+                Button className = "text-center rounded-3"
+                type = "button"
+                variant = "warning"
+                id = "alert"
+                onClick = { this.handleSubmit() } >
                 Submit <
                 /Button> </div > )
         } else
@@ -422,6 +536,7 @@ class RProfile extends React.Component {
             getResult = { this.getResult() }
             score = { this.scoreResult() }
             resourceAllocation = { this.allocateResources() }
+            status = { this.getStatus() }
             /> { this.nextButton() } { this.previousButton() }< /
             form > < /
             React.Fragment >
@@ -435,10 +550,10 @@ function Step0(props) {
     }
     return ( <
         div className = " p-lg-5 p-3 text-center blue-dark" > < Activity size = "xlarge"
-        className = "text-warning"
+        className = "active"
         set = "broken" / > <
         h4 className = "bolder my-3" > RISK PROFILE < /h4> <
-        h6 className = "mt-2 text-warning" > Complete your Risk Profile < /h6>  <
+        h6 className = "mt-2 active" > Complete your Risk Profile < /h6>  <
         h6 > This is a questionnaire to be filled by the intending Investor(you).This will help us, help you keep trackOf your investments and help you every step of the way.This document is a mandatory part of each investor’ s Esteemed investing lifespan. <
         /h6><h6>
         It is mandatory
@@ -520,7 +635,7 @@ function Step2(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > What is your < span className = "bolder" > Investment Time Horizon < /span> ? < /
@@ -588,7 +703,7 @@ function Step3(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Where have you < span className = "bolder" > Invested in the Past ? < /span> ? < /
@@ -656,7 +771,7 @@ function Step4(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > What would you hold as < span className = "bolder" > Maximun Loss to your Portfolio < /span> ? < /
@@ -724,7 +839,7 @@ function Step5(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > How mucn < span className = "bolder" > Capital < /span> are you considering <span className = "bolder">to Invest</span > ? < /
@@ -792,7 +907,7 @@ function Step6(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > What are your < span className = "bolder" > Source of Funds < /span> ? < /
@@ -861,7 +976,7 @@ function Step7(props) {
     }
     console.log(props)
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Tax savings, in some instances, can be obtained from investments albeit taking on more risk. < /
@@ -932,7 +1047,7 @@ function Step8(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > The table below shows the < span className = "bolder" > highest one - year gain and One - year loss on five different hypothetical Investments of $10, 000. < /span>  < /
@@ -1038,7 +1153,7 @@ function Step9(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Do you feel you are appropriately covered against < span className = "bolder" > Personal and / or business risks, < /span>such as accidents, Illness, trauma 
@@ -1089,7 +1204,7 @@ function Step10(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Would you consider borrowing money to make a future < span className = "bolder" > Investment < /span> ? < /
@@ -1139,10 +1254,10 @@ function Step11(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-5" > { props.header } <
+        div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > Considering the < span className = "bolder" > negative impact of inflation on your Savings, < /span>growth investing if often used to counteract its effect, while 
+        h4 className = "blue-light mx-lg-5 px-2" > Considering the < span className = "bolder" > negative impact of inflation on your Savings, < /span>growth investing if often used to counteract its effect, while 
         exposing you to short - term volatility. ? < /
         h4 > <
         h4 className = "blue-light mx-5 px-2" > Which of the following options best resonates you ? < /
@@ -1201,18 +1316,29 @@ function Step12(props) {
         return null
     }
     return ( <
-        div className = " p-5 text-center blue-dark" > < Activity size = "xlarge"
-        className = "text-warning"
+        div className = " p-lg-5 p-3" > < Activity size = "xlarge"
+        className = "active"
         set = "broken" / > <
-        h4 className = "bolder my-3" > RISK PROFILE < /h4>  <
-        h6 className = "my-3 text-warning" > You have successfully submitted your Risk Profile, you can now proceed as a more professional investor <
+        h4 className = "bolder active my-3" > Risk profile < /h4>  <
+        h6 className = "my-3" > You have successfully submitted your Risk Profile, you can now proceed as a more professional investor <
         /h6> <
-        h6 > Your Score: < span className = "p-2 border rounded-3 text-warning border-warning" > { props.score } < /span> < /
+        h6 > Your Score: < span className = "p-2 rounded-circle blue-dark" > { props.score } < /span> < /
         h6 > <
-        h6 className = "mt-5" > Based on your score, your Risk Analysis is: < span className = "p-2 rounded-3 text-dark bg-warning" > { props.getResult } < /span>  < /
+        h6 className = "mt-5" > Based on your score, your Risk Analysis is: < span className = "p-2 active" > { props.getResult } < /span>  < /
         h6 >
         <
-        div className = "text-warning mt-5" > < h6 > Your assets will be allocated as follows: < /h6> { props.resourceAllocation } < /div > < /
+        div className = " mt-5" > < h6 > Your assets will be allocated as follows: < /h6> { props.resourceAllocation } < /div >
+        <
+        span className = "d-none" > { props.status } < /span>  <
+        div className = "p-lg-5 p-3 bg-light rounded-3" >
+        <
+        h6 className = "bolder" > Complete your deposit by selecting an investment option: < /h6>  <
+        Form.Select className = "my-3"
+        required defaultValue = "Select an investment option"
+        name = "investment_option" > <
+        option value = "Tbills" > Treasury Bills < /option> <
+        option value = "Tbonds" > Treasury Bonds < /option> < /
+        Form.Select > < /div> < /
         div >
     );
 }

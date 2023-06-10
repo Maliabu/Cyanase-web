@@ -141,11 +141,11 @@ body::-webkit-scrollbar {
 }
 
 .wide-40 {
-    width: 40%;
+    width: 45%;
 }
 
 .wide-60 {
-    width: 60%;
+    width: 55%;
 }
 
 .x-small {
@@ -158,7 +158,7 @@ body::-webkit-scrollbar {
 }
 
 .peach {
-    background-color: #FCE3C2 !important;
+    background-color: #ffefdb !important;
     color: #282c34 !important;
 }
 
@@ -180,6 +180,11 @@ body::-webkit-scrollbar {
 
 .activeTab {
     color: #ffb85c !important;
+}
+
+.activeTab1 {
+    background-color: #ffb85c !important;
+    color: #252859;
 }
 
 
@@ -229,9 +234,35 @@ body::-webkit-scrollbar {
 }
 
 .active {
-    color: #f7a335 !important;
+    color: #ff9100 !important;
     cursor: pointer !important;
-    border-color: #f7a335 !important;
+    border-color: #ff9100 !important;
+}
+
+.warning {
+    color: #ff9100 !important;
+    cursor: pointer !important;
+    border: 2px solid #ff9100 !important;
+    border-color: #ff9100 !important;
+}
+
+.bk-warning {
+    color: rgb(0, 0, 0) !important;
+    cursor: pointer !important;
+    border: none !important;
+    background-color: #ffa632 !important;
+    box-shadow: 2px 3px 5px #4141418e;
+}
+
+.activer {
+    color: #ffffff !important;
+    cursor: pointer !important;
+    background-color: #f7a335 !important;
+    padding: 7px;
+    padding-bottom: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 50%;
 }
 
 .blue-active {
@@ -265,7 +296,18 @@ button {
 }
 
 .bg-whiter {
-    background-color: rgb(225, 225, 225) !important;
+    background-color: rgb(255, 255, 255) !important;
+    /* box-shadow: 1px 2px 8px rgb(191, 191, 191); */
+}
+
+.bg-red {
+    background-color: rgba(221, 153, 153, 0.153);
+}
+
+.PhoneInputCountryIcon {
+    width: 12%;
+    height: 12%;
+    padding: 2%;
 }
 
 .bolder {
@@ -293,6 +335,7 @@ button {
 .bottom-nav {
     z-index: 1;
     bottom: 0%;
+    padding-bottom: 15px;
     position: fixed;
 }
 

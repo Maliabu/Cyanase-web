@@ -11,7 +11,7 @@ const ContactUs = (props) => {
         onClick = {
             () => { props.handletab8() }
         }
-        className = "text-warning my-4 active" / > <
+        className = "my-4 active" / > <
         h1 > Contact Us < /h1>   <
         h6 > For more information or inquiries, please reach us.We are available 24 / 7 < /h6>   <
         div className = "row mt-3" > <
