@@ -7,6 +7,7 @@ import { API_URL_GOAL_DEPOSIT, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { success, fail, catch_errors } from "../Api/RequestFunctions";
 
 class Goal extends React.Component {
     constructor(props) {
@@ -66,11 +67,16 @@ class Goal extends React.Component {
         if (currentStep === 5 && payment_means === "online") {
             return ( <
                 div className = 'row justify-content-center' > <
-                p id = "errorMessage"
-                className = 'py-3 mt-3 rounded border text-center fade-in'
+                h6 id = "errorMessage"
+                className = 'py-3 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /p>  <
+                } > hey < /h6> <
+                h6 id = "infoMessage"
+                className = 'py-3 mt-3 rounded warning text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6>  <
                 Button variant = "warning"
                 className = 'shadow text-center'
                 id = 'successMessage'
@@ -101,9 +107,6 @@ class Goal extends React.Component {
     }
     handleSubmit = () => {
         let form_data = new FormData();
-        let amount = this.state.deposit_amount;
-        let currency = this.state.currency;
-        let goal = this.getName()[0];
         form_data.append('payment_means', this.state.payment_means);
         form_data.append('currency', this.state.currency);
         form_data.append('deposit_category', this.state.deposit_category);
@@ -118,49 +121,15 @@ class Goal extends React.Component {
                 }
             })
             .catch(function(error) {
-                const errorDisplay = (errorText) => {
-                    document.getElementById("errorMessage").innerText = errorText
-                    document.getElementById("errorMessage").style.display = 'block'
-                    document.getElementById("errorMessage").style.color = "red"
-                    document.getElementById("errorMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("errorMessage").style.display = 'none'
-                    }, 6000);
-                }
-                const errorSignUp = () => {
-                    document.getElementById("successMessage").innerHTML = "Something went wrong"
-                    document.getElementById("successMessage").style.backgroundColor = "red"
-                    document.getElementById("successMessage").style.color = "white"
-                    document.getElementById("successMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Deposit Unsuccessful"
-                    }, 2000);
-                }
-                if (error.response) {
-                    if (error.response.status === 400) {
-                        errorDisplay(error.response.data.email || error.response.data.phone || error.response.data.password)
-                    } else if (error.response.status === 500) {
-                        errorDisplay(error.response.data)
-                    } else if (error.response.status === 404) {
-                        errorDisplay(error.response.data)
-                    }
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                    errorSignUp();
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
+                catch_errors(error)
+            })
+            .then(function(response) {
+                if (response.status === 200 && response.data.success === false) {
+                    fail(response.data.message)
                 } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
+                    success("You have created a goal successfully", "", "successful");
                 }
             });
-        this.success(amount, currency, goal);
     }
     _saccoCategory = () => {
         let currentStep = this.state.currentStep
@@ -331,6 +300,7 @@ class Goal extends React.Component {
             Step1 currentStep = { this.state.currentStep }
             deposit_category = { this.state.deposit_category }
             handleChange = { this.handleChange }
+            investmentoption = { this.props.option }
             /> <
             Step2 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
@@ -474,7 +444,7 @@ function Step1(props) {
         <
         /
         div > <
-        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Treasury Bills < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentoption } < /span> < /
         h6 > < /div > < /
         div >
     );

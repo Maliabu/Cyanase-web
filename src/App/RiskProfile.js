@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { GetRiskProfile } from "../Api/MainRequests";
 import React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,14 +11,17 @@ import { Activity } from "react-iconly";
 
 const RiskProfile = ({ id, activeTab, children }) => {
     const [show2, setShow2] = useState(false);
-    const [theStatus, setTheStatus] = useState("incomplete");
+    const [complete, setComplete] = useState("Incomplete");
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
-    const getStatus = (status) => {
-        setTheStatus(status)
-        console.log(status)
-        return status
-    }
+    useEffect(() => {
+        GetRiskProfile().then(res => {
+            console.log(res)
+            if (res.status === true) {
+                setComplete("Complete")
+            }
+        });
+    }, []);
     return ( <
         div > <
         div className = "row py-5 bg-light px-2 rounded-4" >
@@ -44,7 +49,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
         for any other activities. <
         /p> < /
         div > < h6 className = "mt-3 p-5 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 bg-light active" > {
-            theStatus
+            complete
         } < /span> < /
         h6 > <
         h6 className = "py-3 px-5 mt-3 warning rounded-3"
@@ -55,8 +60,10 @@ const RiskProfile = ({ id, activeTab, children }) => {
         dialogClassName = "my-modal" >
 
         <
-        RProfile status = { getStatus }
-        / > < /
+        RProfile /
+        >
+        <
+        /
         Modal > < /
         div > < /
         div >

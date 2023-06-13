@@ -4,6 +4,7 @@ import { API_URL_USER_PROFILE_PHOTO, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import { FaCameraRetro } from "react-icons/fa";
+import { success, fail, catch_errors } from "../Api/RequestFunctions";
 
 class Photo extends React.Component {
     state = {
@@ -33,7 +34,7 @@ class Photo extends React.Component {
     }
     handleSubmit = () => {
         let form_data = new FormData();
-        form_data.append('photo', this.state.photo, this.state.photo.name);
+        form_data.append('photo', this.state.photo.name);
         console.log(this.state)
         axios.post(`${API_URL_USER_PROFILE_PHOTO}`, form_data, {
                 headers: {
@@ -43,40 +44,16 @@ class Photo extends React.Component {
                 }
             })
             .catch(function(error) {
-                const errorDisplay = (errorText) => {
-                    document.getElementById("errorMessage").innerText = errorText
-                    document.getElementById("errorMessage").style.display = 'block'
-                    document.getElementById("errorMessage").style.color = "red"
-                    document.getElementById("errorMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("errorMessage").style.display = 'none'
-                    }, 6000);
-                }
-                const errorSignUp = () => {
-                    document.getElementById("successMessage").innerHTML = "Something went wrong"
-                    document.getElementById("successMessage").style.backgroundColor = "red"
-                    document.getElementById("successMessage").style.color = "white"
-                    document.getElementById("successMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Upload Unsuccessful"
-                    }, 2000);
-                }
-                if (error.response) {
-                    if (error.response.status === 400) {
-                        errorDisplay(error.response.data.message)
-                    } else if (error.response.status === 500) {
-                        errorDisplay(error.response.data.message)
-                    } else if (error.response.status === 404) {
-                        errorDisplay(error.response.data.message)
-                    }
-                    errorSignUp();
-                } else if (error.request) {
-                    errorDisplay(error.response.data.message)
+                catch_errors(error)
+            })
+            .then(function(response) {
+                console.log(response)
+                if (response.data.success === false) {
+                    fail(response.data.message)
                 } else {
-                    errorDisplay(error.response.data.message)
+                    success("You have successfully edited your profile photo", "/home", "successful");
                 }
             });
-        this.success();
     }
 
     render() {
@@ -100,10 +77,10 @@ class Photo extends React.Component {
             <
             Form.Label > Choose Photo < /Form.Label>  <
             Form.Control type = "file"
-            onChange = {
-                (e) => this.handleChange(e)
-            }
             id = "photo"
+            onChange = {
+                this.handleChange
+            }
             placeholder = "No image chosen" / >
             <
             /

@@ -5,6 +5,7 @@ import '../App.css';
 import axios from "axios";
 import { API_URL_GOAL, TOKEN } from "../apis";
 import Button from "react-bootstrap/esm/Button";
+import { success, fail, catch_errors } from "../Api/RequestFunctions";
 
 class Goal1 extends React.Component {
     constructor(props) {
@@ -62,11 +63,16 @@ class Goal1 extends React.Component {
         if (currentStep === 13) {
             return ( <
                 div className = 'row justify-content-center' > <
-                p id = "errorMessage"
-                className = 'py-3 mt-3 rounded border text-center fade-in'
+                h6 id = "errorMessage"
+                className = 'py-3 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /p>  <
+                } > hey < /h6> <
+                h6 id = "infoMessage"
+                className = 'py-3 mt-3 rounded warning text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6> <
                 Button variant = "warning"
                 className = 'shadow text-center'
                 id = 'successMessage'
@@ -117,9 +123,6 @@ class Goal1 extends React.Component {
     }
     handleSubmit = () => {
         let form_data = new FormData();
-        let goal = this.state.goal_name;
-        let currency = this.state.currency;
-        let amount = this.state.goal_amount;
         form_data.append('goal_name', this.state.goal_name);
         form_data.append('goal_amount', this.state.goal_amount);
         form_data.append('goal_period', this.state.goal_period);
@@ -138,49 +141,15 @@ class Goal1 extends React.Component {
                 }
             })
             .catch(function(error) {
-                const errorDisplay = (errorText) => {
-                    document.getElementById("errorMessage").innerText = errorText
-                    document.getElementById("errorMessage").style.display = 'block'
-                    document.getElementById("errorMessage").style.color = "red"
-                    document.getElementById("errorMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("errorMessage").style.display = 'none'
-                    }, 6000);
-                }
-                const errorSignUp = () => {
-                    document.getElementById("successMessage").innerHTML = "Something went wrong"
-                    document.getElementById("successMessage").style.backgroundColor = "red"
-                    document.getElementById("successMessage").style.color = "white"
-                    document.getElementById("successMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Goal not created"
-                    }, 2000);
-                }
-                if (error.response) {
-                    if (error.response.status === 400) {
-                        errorDisplay(error.response.data.email || error.response.data.phone || error.response.data.password)
-                    } else if (error.response.status === 500) {
-                        errorDisplay(error.response.data)
-                    } else if (error.response.status === 404) {
-                        errorDisplay(error.response.data)
-                    }
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                    errorSignUp();
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
+                catch_errors(error)
+            })
+            .then(function(response) {
+                if (response.status === 200 && response.data.success === false) {
+                    fail(response.data.message)
                 } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
+                    success("You have created a goal successfully", "/home", "successful");
                 }
             });
-        this.success(goal, currency, amount);
     }
     _next = () => {
         let currentStep = this.state.currentStep
@@ -270,6 +239,7 @@ class Goal1 extends React.Component {
             handleChange = { this.handleChange }
             deposit_category = { this.state.deposit_category }
             getTab9 = { this.getTab9() }
+            investmentOption = { this.props.option }
             /> <
             Step9 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
@@ -324,7 +294,7 @@ function Step2(props) {
     }
     return ( < div className = "text-center p-5" >
         <
-        h4 className = "font-lighter" > Add a Goal < /h4> <
+        h4 className = "bolder" > Add a Goal < /h4> <
         div className = "row bg-light py-4 p-5 rounded-25 mt-5" > <
         Form.Group className = "mb-3 bg-white p-3 px-5" >
         <
@@ -384,7 +354,9 @@ function Step3(props) {
         /Form.Control.Feedback> < /
         Form.Group >
         <
-        p > You will have to make monthly deposists of: { props.deposit_amount } < /p> < /
+        p > You will have to make monthly deposists of: {
+            (props.deposit_amount).toFixed(2)
+        } < /p> < /
         div >
         <
         /div>
@@ -397,7 +369,7 @@ function Step4(props) {
     }
     return ( <
         div className = "text-center" > <
-        h4 className = "font-lighter my-3" > Deposit Type < /h4> <
+        h4 className = "bolder my-3" > Deposit Type < /h4> <
         h6 className = "mt-2" > How do you want to handle your investments < /h6> <
         div className = "p-5 px-3 rounded-25 mt-3"
         key = "radio" >
@@ -434,7 +406,7 @@ function Step5(props) {
     }
     return ( <
         div className = "text-center pt-5" > <
-        h4 className = "font-lighter my-3" > Deposit Rate < /h4> <
+        h4 className = "bolder my-3" > Deposit Rate < /h4> <
         h6 className = "mt-2" > How often do you want to deposit to this goal < /h6> <
         div className = " mt-3"
         key = "radio" >
@@ -473,7 +445,7 @@ function Step6(props) {
         div className = "p-5" >
         <
         div className = "text-center" > < /div> <
-        h4 className = "font-lighter my-3 text-center" > Set A Reminder < /h4> <
+        h4 className = "bolder my-3 text-center" > Set A Reminder < /h4> <
         h6 className = "mt-2" > Let us remind you when you forget to deposit < /h6>  <
         div key = { `default-radio` }
         className = "mb-3" >
@@ -554,7 +526,7 @@ function Step7(props) {
         div className = "py-5 px-3 rounded-25" >
         <
         h6 > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at UGX< span className = "bolder" > { props.goal_amount } < /span >
-        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of UGX < span className = "bolder" > { props.deposit_amount } < /span > < /h6 > <
+        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of UGX < span className = "bolder" > { (props.deposit_amount).toFixed(2) } < /span > < /h6 > <
         h6 > We shall remind you every: < span className = "bolder" > { props.deposit_reminder_day } < /span> < /
         h6 > <
         /
@@ -568,7 +540,9 @@ function Step8(props) {
         return null
     }
     return ( <
-        div className = " text-start mx-5" > <
+        div className = " text-start mx-5" >
+        <
+        h4 className = "bolder text-center mt-3" > Deposit to this Goal < /h4> <
         h6 className = "mt-2 text-center" > Choose where you wish to make your deposit. < /h6> <
         div className = "p-3 rounded-4 mt-3"
         key = "radio" >
@@ -607,9 +581,9 @@ function Step8(props) {
         <
         /
         div > < /div ><
-        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Treasury Bills < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
         h6 > <
-        h6 className = "py-3 rounded-3 bk-warning text-center"
+        h6 className = "py-3 rounded-3 d-none bk-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> < /
         div > );

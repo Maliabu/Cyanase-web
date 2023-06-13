@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,11 +7,18 @@ import Learn1 from '../Accounts/Learn1';
 import ResDeposit from './ResDeposit';
 import './style.scss';
 import { Wallet } from "react-iconly";
+import { GetRiskProfile } from "../Api/MainRequests";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
     const [show2, setShow2] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
+    const [investmentOption, setinvestmentoption] = useState("")
+    useEffect(() => {
+        GetRiskProfile().then(res => {
+            setinvestmentoption(res.investment_option)
+        });
+    }, []);
     return ( < div > < div className = " d-none d-sm-block" > <
         div className = "row" > <
         div className = "col-8 bg-light p-3 rounded-4 " >
@@ -34,6 +42,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         dialogClassName = "my-modal1" >
         <
         Learn1 tab9 = { props.handletab9 }
+        option = { investmentOption }
         / > < /
         Modal > < /
         div >

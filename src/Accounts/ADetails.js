@@ -1,10 +1,10 @@
+import { useEffect } from "react";
+import { UserRequests, GetNextOfKin } from "../Api/MainRequests";
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import ChangeDetails from './ChangeDetails';
 import Profile from '../images/Ellipse 6.png';
 import { ArrowLeftSquare, Call, Message, User } from "react-iconly";
-import { API_URL_GET_AUTH_USER, TOKEN } from "../apis";
-import axios from "axios";
 import Photo from './photo'
 
 const ADetails = (props) => {
@@ -18,19 +18,26 @@ const ADetails = (props) => {
     const [lastName, setLastName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [email, setEmail] = useState("")
-    axios.get(`${API_URL_GET_AUTH_USER}`, {
-            headers: {
-                "Authorization": `Token ${TOKEN}`
-            }
-        }).then((res) => {
-            setFirstName(res.data.first_name)
-            setLastName(res.data.last_name)
-            setPhoneNumber(res.data.profile.phoneno)
-            setEmail(res.data.email)
+    const [firstNok, setFirstNok] = useState("")
+    const [lastNok, setLastNok] = useState("")
+    const [phoneNok, setPhoneNok] = useState("")
+    const [emailNok, setEmailNok] = useState("")
+    useEffect(() => {
+        UserRequests().then(res => {
+            console.log(res)
+            setFirstName(res.first_name)
+            setLastName(res.last_name)
+            setPhoneNumber(res.profile.phoneno)
+            setEmail(res.email)
+        });
+        GetNextOfKin().then(res => {
+            console.log(res)
+            setFirstNok(res.kin_first_name)
+            setLastNok(res.kin_last_name)
+            setPhoneNok(res.kin_phone)
+            setEmailNok(res.kin_email)
         })
-        .catch((error) => {
-            console.error(error)
-        })
+    }, []);
     return ( < div >
         <
         ArrowLeftSquare size = "large"
@@ -38,86 +45,95 @@ const ADetails = (props) => {
         onClick = {
             () => { props.changeAccountDetails(false) }
         }
-        className = "active my-4" / > <
+        className = "active mt-4" / > <
         h1 > Account Details < /h1>  <
-        div className = "row px-3" > <
+        div className = "row px-3 scroll-y" > <
         div className = "col-6" >
         <
-        div className = "row p-2 px-3 border-bottom" > <
+        div className = "row p-2 px-3" > <
         div className = "col-1 px-3" >
         <
         User size = "large"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-5" >
+        div className = "col-11 mt-3" >
         <
         h5 > Name < /h5> <
-        h6 > < div className = 'flexName d-flex grey-text' > < p > { firstName } < /p> &nbsp; <p>{ lastName }</p > < /div>  < /
+        h6 > < div className = 'flexName d-flex bolder' > < p > { firstName } < /p> &nbsp; <p>{ lastName }</p > < /div>  < /
         h6 > < /
         div >
         <
         /
         div >
         <
-        div className = "row px-3 border-bottom" > <
+        div className = "row px-3" > <
         div className = "col-1" >
         <
         Call size = "large"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-5" >
+        div className = "col-11 mt-3" >
         <
         h5 > Phone < /h5> <
-        h6 > < p className = "grey-text" > { phoneNumber } < /p>  < /
+        h6 > < p className = "bolder" > { phoneNumber } < /p>  < /
         h6 > < /
         div >
         <
         /
         div >
         <
-        div className = "row px-3 border-bottom" > <
+        div className = "row px-3" > <
         div className = "col-1" >
         <
         Message size = "large"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-5" >
+        div className = "col-11 mt-3" >
         <
         h5 > Email < /h5> <
-        h6 > < p className = "grey-text" > { email } < /p> < /
+        h6 > < p className = "bolder" > { email } < /p> < /
         h6 > < /
         div >
         <
         /
         div >
         <
-        p className = "bolder grey-text mt-3" > Account Details: < span className = "text-dark" > Your account details are not changeable, contact support
-        for more information < /span></p >
+        div className = "p-3 mt-3 px-5 rounded-3 warning" >
         <
-        p className = "bolder mt-3" > Support: < span className = "active" > < u > support @cyanase.com < /u> < /span > < /p >  <
-        p className = "bolder grey-text mt-3" > All Rights Reserved < /p> < /
+        h5 className = "bolder py-3" > Next Of Kin Details < /h5>  <
+        h6 > FirstName: < span className = "bolder text-dark" > { firstNok } < /span>  < /
+        h6 > <
+        h6 > LastName: < span className = "bolder text-dark" > { lastNok } < /span>  < /
+        h6 > <
+        h6 > Email: < span className = "bolder text-dark" > { emailNok } < /span>  < /
+        h6 > <
+        h6 > Phone: < span className = "bolder text-dark" > { phoneNok } < /span> < /
+        h6 > < /
+        div > <
+        p className = "bolder bolder mt-3" > Account Details: < span className = "text-danger" > Your account details are not changeable, contact support
+        for more information < /span></p > < /
         div >
         <
         div className = "col-6 px-5 text-center" > <
         img src = { Profile }
         width = '40%'
-        height = '40%'
+        height = '30%'
         className = "mt-4"
         alt = "investors" / >
         <
-        p className = "bolder grey-text mt-5" > Account Type: < span className = "text-dark" > Personal < /span></p >
+        p className = "bolder bolder mt-5" > Account Type: < span className = "text-dark" > Personal < /span></p >
         <
         h6 className = "warning text-center rounded-3 mt-3 mx-5 p-3"
         onClick = { handleShow1 } > Change Photo < /h6> <

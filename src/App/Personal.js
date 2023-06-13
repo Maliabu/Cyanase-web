@@ -1,4 +1,4 @@
-import { PersonalRequests, MainRequests } from "../Api/MainRequests";
+import { PersonalRequests, MainRequests, GetRiskProfile } from "../Api/MainRequests";
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,12 +32,16 @@ const handleShow1 = () => setShow1(true);
 const [show2, setShow2] = useState(false);
 const handleClose2 = () => setShow2(false);
 const handleShow2 = () => setShow2(true);
+const [investmentOption, setinvestmentoption] = useState("")
 useEffect(() => {
     PersonalRequests().then(res => {
         setSpan(res[2]); // array(14)
     });
     MainRequests().then(res => {
         setDeposits(res[4]);
+    });
+    GetRiskProfile().then(res => {
+        setinvestmentoption(res.investment_option)
     });
 }, []);
 
@@ -184,6 +188,7 @@ name = { holdName }
 amount = { holdAmount }
 deposit = { holdDeposit }
 created = { holdCreated }
+option = { investmentOption }
 / > < /
 Modal >
     <
@@ -192,6 +197,7 @@ placement = "end"
 className = "side-barsy pt-5"
 onHide = { handleClose1 } {...props } > <
     Goal1 close1 = { handleClose1 }
+option = { investmentOption }
 tab9 = { props.handletab9 }
 / > < /
 Offcanvas > < /

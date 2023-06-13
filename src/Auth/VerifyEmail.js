@@ -5,26 +5,37 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { API_URL_LOGIN } from '../apis';
 import axios from 'axios';
+import Header from '../images/Group 3525.png';
 
 class Login extends Component {
     //state for form data
     state = {
-        username: '',
-        password: ''
+        verificationcode: ''
     };
     Show = true;
-
-    success = () => {
-        document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
-        document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.color = "white"
+    getCode = () => {
+        document.getElementById("infoMessage").innerText = "Code sent, check your email"
         document.getElementById("infoMessage").style.display = 'block'
         document.getElementById("infoMessage").style.color = "#ff8a00"
         document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
-        document.getElementById("infoMessage").innerText = "You are logged in"
         setTimeout(() => {
             document.getElementById("infoMessage").style.display = 'none'
-        }, 4000);
+        }, 3000);
+    }
+
+    success = () => {
+        document.getElementById("successMessage").innerHTML = "Successful"
+        document.getElementById("successMessage").style.backgroundColor = "orange"
+        document.getElementById("successMessage").style.color = "white"
+        document.getElementById("successMessage").style.border = "block"
+        document.getElementById("successMessage").style.borderColor = "orange"
+        document.getElementById("infoMessage").style.display = 'block'
+        document.getElementById("infoMessage").style.color = "#ff8a00"
+        document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
+        document.getElementById("infoMessage").innerText = "Your account has been verified successfully"
+        setTimeout(() => {
+            document.getElementById("errorMessage").style.display = 'none'
+        }, 2000);
     }
     handleChange = (e) => {
         this.setState({
@@ -35,8 +46,7 @@ class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let form_data = new FormData();
-        form_data.append('password', this.state.password);
-        form_data.append('username', this.state.username);
+        form_data.append('verificationcode', this.state.verificationcode);
         axios.post(`${API_URL_LOGIN}`, form_data, {
                 headers: {
                     "Content-Type": "application/json"
@@ -56,8 +66,9 @@ class Login extends Component {
                     document.getElementById("successMessage").innerHTML = "Something went wrong"
                     document.getElementById("successMessage").style.backgroundColor = "red"
                     document.getElementById("successMessage").style.color = "white"
+                    document.getElementById("successMessage").style.borderColor = "red"
                     setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
+                        document.getElementById("successMessage").innerHTML = "Verification Unsuccessful"
                     }, 2000);
                 }
                 if (error.response) {
@@ -71,8 +82,16 @@ class Login extends Component {
                     } else if (error.response.status === 403) {
                         errorDisplay(responses)
                     }
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    // console.log(error.response.data);
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
                     errorSignUp();
                 } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
                     console.log(error.request);
                     errorDisplay(error);
                     errorSignUp();
@@ -86,9 +105,9 @@ class Login extends Component {
             .then((response) => {
                 const errorDisplay = (response) => {
                     document.getElementById("errorMessage").innerText = response.data.message
-                    document.getElementById("errorMessage").style.display = 'block'
                     document.getElementById("errorMessage").style.color = "red"
                     document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+                    document.getElementById("errorMessage").style.display = 'block'
                     setTimeout(() => {
                         document.getElementById("errorMessage").style.display = 'none'
                     }, 6000);
@@ -97,80 +116,78 @@ class Login extends Component {
                     document.getElementById("successMessage").innerHTML = "Something went wrong"
                     document.getElementById("successMessage").style.backgroundColor = "red"
                     document.getElementById("successMessage").style.color = "white"
+                    document.getElementById("successMessage").style.borderColor = "red"
                     setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
+                        document.getElementById("successMessage").innerHTML = "Verification Unsuccessful"
                     }, 2000);
-                    setTimeout(() => {
-                        document.getElementById("successMessage").style.backgroundColor = "none"
-                    }, 1000);
                 }
-                if (response.data.success === false && response.status === 200) {
+                if (response) {
                     errorDisplay(response);
                     errorSignUp()
-                } else {
-                    this.success()
-                    window.location.pathname = "/home"
                 }
                 console.log(response)
-                const token = response.data.token
-                localStorage.setItem('token', token)
-
-                /**
-                 * The 'then' method is executed only when the request is successfull.
-                 */
+                    // window.location.pathname = "/"
             });
+        this.success();
     }
     render() {
         return ( <
             div > <
+            div className = 'row py-4 justify-content-center' > < p > <
+            img src = { Header }
+            width = '10%'
+            className = "mx-lg-5 d-none d-lg-block"
+            alt = "investors" / > < /p><p><
+            img src = { Header }
+            width = '40%'
+            className = "d-block d-sm-none mx-auto"
+            alt = "investors" / > < /p></div > <
             div className = 'row rounded-4 justify-content-center bg-light p-lg-5 p-2' >
             <
             Form className = 'bg-whiter rounded-4 p-lg-5 py-3 col-lg-5 col-12'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <
-            h2 className = 'text-center' > LOGIN < /h2> <
-            h6 className = 'active mt-3 text-center' > < b > Enter your Credentials below to login to your API Account < /b>  < /
+            h2 className = 'text-center' > Verify Account < /h2> <
+            h6 className = 'active mt-3 text-center' > < b > Enter the verification code sent to "Email" < /b>  < /
             h6 > <
             /
             div > <
             Form.Group className = "mb-3 shadow-sm rounded-2 p-3 px-5" >
             <
-            Form.Label > Email < /Form.Label> <
+            Form.Label > Verification Code < /Form.Label> <
             Form.Control type = "text"
-            id = 'username'
-            required = "required"
-            value = { this.state.username }
+            id = 'verificationcode'
+            required value = { this.state.username }
             onChange = { this.handleChange }
-            placeholder = "support@cyanase.com" / > < /
-            Form.Group > <
-            Form.Group className = "mb-3 shadow-sm rounded-2 p-3 px-5" >
-            <
-            Form.Label > Password < /Form.Label> <
-            Form.Control type = "password"
-            id = 'password'
-            required = "required"
-            value = { this.state.password }
-            onChange = { this.handleChange }
-            placeholder = "password" / > < /
+            placeholder = "000000" / > <
+            p id = "errorCode"
+            className = 'p-2 rounded-2 px-3 bg-red'
+            style = {
+                { display: 'none' }
+            } > hey < /p> < /
             Form.Group > <
             div className = 'row justify-content-center' > <
             Button variant = "warning"
             className = 'shadow text-center'
             id = 'successMessage'
             type = "submit" >
-            Login <
+            Submit Code <
             /Button> < /
             div >
             <
-            p className = 'mt-5 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > Forgot password? < /span > < /p > <
+            p className = 'mt-5 text-center' > If you didnt receive the code, click here to < span className = 'active bolder'
+            onClick = {
+                () => this.getCode()
+            } > Resend < /span> a new code to your email.</p >
+            <
             h6 id = "errorMessage"
-            className = 'py-2 mt-3 rounded border border-danger text-center fade-in'
+            className = 'py-2 mt-3 rounded border border-danger text-center'
             style = {
                 { display: 'none' }
-            } > hey < /h6><
+            } > hey < /h6> <
             h6 id = "infoMessage"
-            className = 'py-2 mt-3 rounded warning text-center fade-in'
+            className = 'py-2 mt-3 rounded warning text-center'
             style = {
                 { display: 'none' }
             } > hey < /h6>  < /

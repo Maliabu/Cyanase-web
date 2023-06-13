@@ -6,6 +6,9 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Table from 'react-bootstrap/Table';
 import { Activity } from "react-iconly";
 import Button from "react-bootstrap/esm/Button";
+import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import axios from "axios";
+import { API_URL_ADD_AUTH_USER_RISK_PROFILE, TOKEN } from "../apis";
 
 class RProfile extends React.Component {
     constructor(props) {
@@ -23,7 +26,7 @@ class RProfile extends React.Component {
             question9: 0,
             question10: 0,
             question11: 0,
-            status: "incomplete"
+            investment_option: ''
         }
     }
     RPHeader() {
@@ -269,18 +272,6 @@ class RProfile extends React.Component {
         console.log(this.score)
         return this.score
     }
-    getStatus() {
-        let status = this.state.status
-        let score = this.getResult()[0]
-        if (score === "Incomplete Risk Profile") {
-            status = "incomplete"
-            this.props.status(status)
-        } else {
-            status = "complete"
-            this.props.status(status)
-        }
-        return status
-    }
     range(start, end) {
         let score = this.scoreResult();
         if (start <= score && score <= end) {
@@ -359,10 +350,6 @@ class RProfile extends React.Component {
             return aggressivesB
         }
     }
-
-    handleSubmit = event => {
-        console.log(this.state)
-    }
     _next = () => {
         let currentStep = this.state.currentStep
         currentStep = currentStep >= 12 ? currentStep : currentStep + 1
@@ -391,15 +378,6 @@ class RProfile extends React.Component {
                 onClick = { this._prev } >
                 Previous <
                 /h6>
-            )
-        }
-        if (currentStep < 12) {
-            return ( < div className = "p-3 m-0 text-center" > <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
-                type = "button"
-                onClick = { this._prev } >
-                Previous <
-                /h6></div >
             )
         }
         return null;
@@ -441,17 +419,81 @@ class RProfile extends React.Component {
                 onClick = { this.result } >
                 Get Score <
                 /Button> </div > )
-        } else if (currentStep === 12) {
-            return ( < div className = "text-center mb-3" > <
-                Button className = "text-center rounded-3"
-                type = "button"
-                variant = "warning"
-                id = "alert"
-                onClick = { this.handleSubmit() } >
-                Submit <
-                /Button> </div > )
         } else
             return null;
+    }
+    validate = () => {
+        let investment_option = this.state.investment_option
+
+        if (investment_option.length === 0) {
+            investment_option = "Tbills"
+        }
+    }
+    handleSubmit = () => {
+        let form_data = new FormData();
+        form_data.append('qn1', this.state.question1);
+        form_data.append('qn2', this.state.question2);
+        form_data.append('qn3', this.state.question3);
+        form_data.append('qn4', this.state.question4);
+        form_data.append('qn5', this.state.question5);
+        form_data.append('qn6', this.state.question6);
+        form_data.append('qn7', this.state.question7);
+        form_data.append('qn8', this.state.question8);
+        form_data.append('qn9', this.state.question9);
+        form_data.append('qn10', this.state.question10);
+        form_data.append('qn11', this.state.question11);
+        form_data.append('investment_option', this.state.investment_option);
+        form_data.append('risk_analysis', this.getResult()[0]);
+        form_data.append('score', this.scoreResult());
+        this.validate()
+        console.log(form_data)
+        axios.post(`${API_URL_ADD_AUTH_USER_RISK_PROFILE}`, form_data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    'Accept': 'application/json',
+                    "Authorization": `Token ${ TOKEN }`
+                }
+            })
+            .catch(function(error) {
+                catch_errors(error)
+            })
+            .then(function(response) {
+                if (response.status === 200 && response.data.success === false) {
+                    fail(response.data.message)
+                } else {
+                    success("You have successfully edited your risk profile", "/home", "successful");
+                }
+            });
+    }
+    submitButton = () => {
+        let currentStep = this.state.currentStep;
+        if (currentStep === 12) {
+            return ( <
+                div className = 'row justify-content-center mx-5 mb-3' > <
+                h6 id = "errorMessage"
+                className = 'py-2 mt-3 mx-5 rounded border border-danger text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6> <
+                h6 id = "infoMessage"
+                className = 'py-2 mt-3 mx-5 rounded warning text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6>   <
+                Button variant = "warning"
+                className = 'shadow text-center'
+                id = 'successMessage'
+                onClick = {
+                    this.handleSubmit
+                }
+                type = "button" >
+                Submit <
+                /Button> < /
+                div >
+            )
+        } else {
+            return null
+        }
     }
     render() {
         return ( <
@@ -536,8 +578,7 @@ class RProfile extends React.Component {
             getResult = { this.getResult() }
             score = { this.scoreResult() }
             resourceAllocation = { this.allocateResources() }
-            status = { this.getStatus() }
-            /> { this.nextButton() } { this.previousButton() }< /
+            /> { this.nextButton() } { this.previousButton() }{this.submitButton()}< /
             form > < /
             React.Fragment >
         );
@@ -1329,13 +1370,14 @@ function Step12(props) {
         <
         div className = " mt-5" > < h6 > Your assets will be allocated as follows: < /h6> { props.resourceAllocation } < /div >
         <
-        span className = "d-none" > { props.status } < /span>  <
         div className = "p-lg-5 p-3 bg-light rounded-3" >
         <
         h6 className = "bolder" > Complete your deposit by selecting an investment option: < /h6>  <
         Form.Select className = "my-3"
         required defaultValue = "Select an investment option"
+        onChange = { props.handleChange }
         name = "investment_option" > <
+        option value = "" > Select < /option> <
         option value = "Tbills" > Treasury Bills < /option> <
         option value = "Tbonds" > Treasury Bonds < /option> < /
         Form.Select > < /div> < /

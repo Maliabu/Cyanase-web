@@ -59,6 +59,7 @@ class SignUp extends Component {
         form_data.append('email', this.state.email);
         form_data.append('password', this.state.password);
         form_data.append('coi', this.state.coi, this.state.coi.name);
+        console.log(this.state.moa, this.state.moa.name)
         axios.post(`${API_URL}`, form_data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -215,7 +216,7 @@ class SignUp extends Component {
             <
             /Form.Group> <div className='row justify-content-center'><
             Button variant = "warning"
-            className = 'shadow text-center'
+            className = 'shadow text-center d-none'
             id = 'successMessage'
             type = "submit" >
             Submit <
@@ -224,7 +225,7 @@ class SignUp extends Component {
             className = 'py-3 mt-3 rounded border text-center fade-in'
             style = {
                 { display: 'none' }
-            } > hey < /p> <p>Back to <span className='active bolder'>{this.props.button}</span > < /p>< /
+            } > hey < /p>< /
             div > < /
             Form > < /div > < /
             div >

@@ -179,11 +179,11 @@ body::-webkit-scrollbar {
 }
 
 .activeTab {
-    color: #ffb85c !important;
+    color: #ff9215 !important;
 }
 
 .activeTab1 {
-    background-color: #ffb85c !important;
+    background-color: #ff8b10 !important;
     color: #252859;
 }
 
@@ -219,7 +219,7 @@ body::-webkit-scrollbar {
 
 
 /* .lighter {
-    background-image: -webkit-linear-gradient(top, #1d2565ae, #ffb85c96);
+    background-image: -webkit-linear-gradient(top, #1d2565ae, #ff353535);
     background-clip: text;
     color: transparent !important;
     cursor: pointer !important;
@@ -370,4 +370,24 @@ input[type='radio']:checked:after {
 .message {
     z-index: 1;
     top: 10%;
+}
+
+.form-check-input:checked {
+    background-color: #ff8c00 !important;
+    border-color: #ff9d00dd !important;
+}
+
+.form-control:focus {
+    color: #ff8c00 !important;
+    background-color: #fff !important;
+    border-color: #ffbd716f !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.25rem rgba(253, 149, 13, 0.25) !important;
+}
+
+input:-internal-autofill-selected {
+    appearance: menulist-button !important;
+    background-image: none !important;
+    background-color: -internal-light-dark(rgb(232, 240, 254), rgba(126, 97, 70, 0.4)) !important;
+    color: fieldtext !important;
 }

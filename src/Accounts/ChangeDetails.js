@@ -11,19 +11,10 @@ const ChangeDetails = () => {
         h1 > Delete Account < /h1>  <
         Form >
         <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3" >
-        <
-        Form.Label > Confirm < /Form.Label>  <
-        Form.Control type = "check"
-        id = 'number'
-        required / >
-        <
-        Form.Control.Feedback type = "invalid" >
-        This field is required. <
-        /Form.Control.Feedback> < /
-        Form.Group >
-        <
-        h6 className = "p-3 bg-danger active text-white rounded-3 text-center"
+        h4 className = "bolder p-2" > Confirm < /h4> <
+        h6 className = "pt-3" > By deleting this account, your data will be removed from our system permanently. < /h6> <
+        h6 className = "bolder text-danger py-3" > I acknowledge that is wish to delete my account whatsoever < /h6> <
+        h6 className = "p-3 bg-danger d-none active text-white rounded-3 text-center"
         type = "submit" > Delete < /h6> < /
         Form > < /
         div >

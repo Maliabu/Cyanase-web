@@ -117,18 +117,50 @@ function SecondaryUser(props) {
             document.getElementById("errorConfirmP").style.display = "none"
         }
     }
+    const User = async() => {
+        try {
+            const response = await axios.post(`${API_URL}`, formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            console.log(response)
+            return response;
+        } catch (error) {
+            return error ? error.response ? error.response.data : error : error.message;
+        }
+    };
     const success = () => {
         document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "green"
         document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "green"
+        document.getElementById("successMessage").style.backgroundColor = '#ff8a00'
         document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "green"
-        document.getElementById("errorMessage").style.borderColor = "green"
+        document.getElementById("errorMessage").style.color = "#ff8a00"
+        document.getElementById("errorMessage").style.backgroundColor = '#ffb85c3c'
         document.getElementById("errorMessage").innerText = "Proceed to verify your email at " + formData.email
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
-        }, 6000);
+        }, 2000);
+    }
+    const errorDisplay = (response) => {
+        document.getElementById("errorMessage").innerText = response.data.message
+        document.getElementById("errorMessage").style.display = 'block'
+        document.getElementById("errorMessage").style.color = "red"
+        document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+        setTimeout(() => {
+            document.getElementById("errorMessage").style.display = 'none'
+        }, 2000);
+    }
+    const errorSignUp = () => {
+        document.getElementById("successMessage").innerHTML = "Something went wrong"
+        document.getElementById("successMessage").style.backgroundColor = "red"
+        document.getElementById("successMessage").style.color = "white"
+        setTimeout(() => {
+            document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
+        }, 2000);
+        setTimeout(() => {
+            document.getElementById("successMessage").style.backgroundColor = "none"
+        }, 1000);
     }
     const handleChange = (event) => {
         const name = event.target.name;
@@ -146,7 +178,7 @@ function SecondaryUser(props) {
             return ( <
                 div className = 'row justify-content-center' > <
                 p id = "errorMessage"
-                className = 'py-3 mt-3 rounded border text-center fade-in'
+                className = 'py-3 mt-3 rounded text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /p>  <
@@ -197,59 +229,16 @@ function SecondaryUser(props) {
         function onSubmit() {
             validate3()
             formData.profile = formData2
-            console.log(formData)
-            axios.post(`${API_URL}`, formData, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .catch(function(error) {
-                    const errorDisplay = () => {
-                        document.getElementById("errorMessage").innerText = error.response.data.message
-                        document.getElementById("errorMessage").style.display = 'block'
-                        document.getElementById("errorMessage").style.color = "red"
-                        document.getElementById("errorMessage").style.borderColor = "red"
-                        setTimeout(() => {
-                            document.getElementById("errorMessage").style.display = 'none'
-                        }, 6000);
-                    }
-                    const errorSignUp = () => {
-                        document.getElementById("successMessage").innerHTML = "Something went wrong"
-                        document.getElementById("successMessage").style.backgroundColor = "red"
-                        document.getElementById("successMessage").style.color = "white"
-                        document.getElementById("successMessage").style.borderColor = "red"
-                        setTimeout(() => {
-                            document.getElementById("successMessage").innerHTML = "SignUp Unsuccessful"
-                        }, 2000);
-                    }
-                    if (error.response) {
-                        const response = error.response.data.detail
-                        if (error.response.status === 400) {
-                            errorDisplay(response)
-                        } else if (error.response.status === 500) {
-                            errorDisplay(response)
-                        } else if (error.response.status === 404) {
-                            errorDisplay(response)
-                        } else if (error.response.status === 403) {
-                            errorDisplay(response)
-                        }
-                        // The request was made and the server responded with a status code
-                        // that falls out of the range of 2xx
-                        console.log(error.response.data.message);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                        errorSignUp();
-                    } else if (error.request) {
-                        // The request was made but no response was received
-                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                        // http.ClientRequest in node.js
-                        console.log(error.request);
-                    } else {
-                        // Something happened in setting up the request that triggered an Error
-                        console.log('Error', error.message);
-                    }
-                });
-            success();
+            User().then(response => {
+                console.log(response)
+                if (response.data.success === false || response.success === false) {
+                    errorDisplay(response)
+                    errorSignUp()
+                } else {
+                    success()
+                    window.location.pathname = "/verify"
+                }
+            });
         }
         return ( <
             React.Fragment > <
@@ -389,7 +378,6 @@ function SecondaryUser(props) {
             Form.Label > Country and Phone < /Form.Label> <
             PhoneInput international placeholder = "Enter phone number"
             name = "phone_no"
-            defaultCountry = 'UG'
             country = { props.country }
             onCountryChange = { props.setCountry }
             value = { props.value }
