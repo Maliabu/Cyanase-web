@@ -7,8 +7,9 @@ import { API_URL_DEPOSIT, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import { FaHandHoldingUsd } from "react-icons/fa";
 
-class Learn1 extends React.Component {
+class Withdraw extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -16,11 +17,11 @@ class Learn1 extends React.Component {
             payment_means: '',
             deposit_amount: 0,
             currency: '',
-            investment_option: this.props.option,
             deposit_category: "",
             account_type: ""
         }
     }
+
     handleChange = event => {
         const { name, value } = event.target
         this.setState({
@@ -43,10 +44,10 @@ class Learn1 extends React.Component {
     getAccountType() {
         let currency = this.state.currency
         let accountType = this.state.account_type
-        if (currency === "USD") {
-            accountType = "dollar"
-        } else {
+        if (currency === "UGX") {
             accountType = "basic"
+        } else {
+            accountType = "dollar"
         }
         return accountType
     }
@@ -83,7 +84,6 @@ class Learn1 extends React.Component {
         let form_data = new FormData();
         form_data.append('payment_means', this.state.payment_means);
         form_data.append('currency', this.state.currency);
-        form_data.append('investment_option', this.state.investment_option);
         form_data.append('deposit_category', this.state.deposit_category);
         form_data.append('deposit_amount', this.state.deposit_amount);
         form_data.append('account_type', this.getAccountType());
@@ -101,7 +101,7 @@ class Learn1 extends React.Component {
                 if (response.status === 200 && response.data.success === false) {
                     fail(response.data.message)
                 } else {
-                    success("You have deposited successfully", "/home", "successful");
+                    success("You have deposited successfully", "", "successful");
                 }
             });
     }
@@ -238,13 +238,10 @@ class Learn1 extends React.Component {
                           render the form steps and pass required props in
                         */
             } <
-            Wallet className = "rounded-circle warning p-2"
-            size = "xlarge" / > < br / > <
-            img src = { DepositPic }
-            width = '25%'
-            className = "my-3"
-            height = '80%'
-            alt = "investors" / > <
+            FaHandHoldingUsd className = "rounded-circle warning p-2"
+            size = "40" / > < br / >
+            <
+            h2 className = "bolder" > Withdraw < /h2> <
             Step1 currentStep = { this.state.currentStep }
             deposit_category = { this.state.deposit_category }
             handleChange = { this.handleChange }
@@ -295,16 +292,17 @@ function Step1(props) {
     }
     return ( <
         div className = " text-start" > <
-        h6 className = "mt-2 text-center" > Choose where you wish to make your deposit. < /h6> <
-        div className = "p-3 rounded-4 mt-3"
+        h6 className = "mt-2 text-center" > Choose which investment you wish to withdraw from. < /h6> <
+        h6 className = "bolder active text-center" > All fields are required, do select. < /h6> <
+        div className = "p-3 rounded-4 mt-5"
         key = "radio" >
         <
         div key = { `default-radio` }
         className = "mb-3" >
         <
         h5 className = "font-lighter" > PERSONAL INVESTMENT < /h5> <
-        Form.Check label = "I wish to deposit to my Personal Account. Basic or Dollar Account"
-        name = "deposit_category"
+        Form.Check label = "I wish to withdraw from my Personal Investments"
+        name = "withdraw_category"
         type = "radio"
         onChange = { props.handleChange }
         value = "personal"
@@ -332,12 +330,7 @@ function Step1(props) {
         >
         <
         /
-        div > < /div >  <
-        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
-        h6 > <
-        h6 className = "py-3 rounded-3 bk-warning text-center"
-        onClick = { props.getTab9 } >
-        Edit my Risk Profile before deposit < /h6> < /
+        div > < /div > < /
         div >
     );
 }
@@ -595,4 +588,4 @@ function Step6(props) {
             div > <
             /div>)
         }
-        export default Learn1;
+        export default Withdraw;

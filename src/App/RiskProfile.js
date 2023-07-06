@@ -24,7 +24,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
     }, []);
     return ( <
         div > <
-        div className = "row py-5 bg-light px-2 rounded-4" >
+        div className = "row py-5 bg-lighter px-2 rounded-4" >
         <
         div className = "col-6 bg-white rounded-4 p-2" >
         <
@@ -38,21 +38,21 @@ const RiskProfile = ({ id, activeTab, children }) => {
         div className = "col-6 p-5 text-center" > <
         div className = "row p-5 bg-white rounded-25" >
         <
-        h4 className = "active bolder" > Investor Risk Profiler < /h4>  <
+        h4 className = "active bolder" > Investor Risk Profile < /h4>  <
         Activity size = "xlarge"
         set = "broken"
         className = 'my-5 active' / >
         <
-        p >
-        The risk profiler is intended to grade and check how much you can accommodate an investment risk.The information you provide here is strictly
+        h6 >
+        The risk profile is intended to grade and check how much you can accommodate an investment risk.The information you provide here is strictly
         for grading purposes.Thus we don not share it with any third parties or use it
         for any other activities. <
-        /p> < /
-        div > < h6 className = "mt-3 p-5 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 bg-light active" > {
+        /h6> < /
+        div > < h6 className = "mt-3 p-5 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 status" > {
             complete
         } < /span> < /
         h6 > <
-        h6 className = "py-3 px-5 mt-3 warning rounded-3"
+        h6 className = "py-3 px-5 mt-3 mx-5 bk-warning rounded-3"
         onClick = { handleShow2 } > Complete Your Risk profile < /h6> < /
         div > <
         Modal show = { show2 }

@@ -138,7 +138,7 @@ const MyHome = () => {
         /div>   < /
         div >
         <
-        div className = 'col-lg-2 d-none d-sm-block bg-light' > <
+        div className = 'col-lg-2 d-none d-lg-block bg-lighter' > <
         div > <
         img src = { Header }
         width = '60%'
@@ -180,7 +180,7 @@ const MyHome = () => {
         TabNavItem title = { < span > < User
             set = 'broken'
             size = "20"
-            className = 'mx-2' / > Personal Investment < /span >
+            className = 'mx-2' / > My Investments < /span >
         }
         onClick = { handleTab2 }
         id = "tab2"
@@ -317,7 +317,7 @@ const MyHome = () => {
         span > { count } < /span> < /
         span > < /span> < /
         div > <
-        div className = " col-lg-3 col-10 rounded shadow-sm text-center" >
+        div className = " col-lg-3 col-10 rounded bg-lighter text-center" >
         <
         div className = 'flex-row d-flex py-2 my-2 justify-content-center' > <
         TabNavItem title = "API Account"
@@ -337,7 +337,7 @@ const MyHome = () => {
         div > <
         TabContent id = "tab1"
         activeTab = { activeTab } > < Main handletab2 = { handleTab2 }
-        handletab5 = { handleTab5 }
+        handletab9 = { handleTab9 }
         / > < /TabContent > <
         TabContent id = "tab2"
         activeTab = { activeTab } > < Personal /
@@ -391,7 +391,7 @@ const MyHome = () => {
         >
         <
         /Modal> <
-        div className = "d-block d-md-none" >
+        div className = "d-block d-lg-none" >
         <
         ResHome name = { firstName }
         / > < /div > < /

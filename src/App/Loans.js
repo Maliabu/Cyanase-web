@@ -20,7 +20,7 @@ const Loans = ({ id, activeTab, children, name, ...props }) => {
     return ( <
         div > <
         div className = "row scroll-y " > <
-        div className = "col-8 bg-light p-3 rounded-4 " >
+        div className = "col-8 bg-lighter p-3 rounded-4 " >
         <
         h6 className = " p-2 mt-2" > LOANS < /h6>  <
         div className = "row bg-white rounded-4 py-5" >
@@ -82,7 +82,7 @@ const Loans = ({ id, activeTab, children, name, ...props }) => {
         /
         div > <
         div className = "col-4 rounded-4 px-4" > <
-        div className = "row p-2 bg-light rounded-25" >
+        div className = "row p-2 bg-lighter rounded-25" >
         <
         div className = "text-start col-6 p-2" > YOUR ACTIVE LOANS < /div> <
         div className = "text-end col-6 p-2" > < span className = "  rounded-pill blue-dark text-white px-2 py-1" > 2 < /span> < /div > < /

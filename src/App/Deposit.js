@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Learn1 from '../Accounts/Learn1';
 import ResDeposit from './ResDeposit';
 import './style.scss';
+import Depo from '../images/depo.png'
 import { Wallet } from "react-iconly";
 import { GetRiskProfile } from "../Api/MainRequests";
 
@@ -21,19 +22,30 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
     }, []);
     return ( < div > < div className = " d-none d-sm-block" > <
         div className = "row" > <
-        div className = "col-8 bg-light p-3 rounded-4 " >
+        div className = "col-8 dollar p-3 rounded-4 " >
         <
-        h6 className = " p-2 mt-2" > DEPOSIT < /h6>  <
-        div className = "row shadow-sm bg-white rounded-4 py-5" >
+        h6 className = " py-3" > DEPOSIT < /h6>  <
+        div className = "row blue-dark rounded-4 py-5" >
         <
         div className = " text-center" >
+        <
+        img src = { Depo }
+        className = "pt-2 d-none"
+        width = '20%'
+        height = '40%'
+        alt = "investors" / >
         <
         Wallet size = "xlarge"
         set = "broken"
         className = 'mx-2 rounded-circle warning p-2' / > <
         h1 className = "my-3 p-3" > Deposit < /h1>  <
+        div className = "" >
+        <
+        h6 className = "px-5" > Make Deposists of any amount towards any market, you can on the other hand make goal based deposits to any goal, we shall keep track
+        for you here.Make your deposit here. < /h6> < /
+        div > <
         div className = "d-flex flex-row flex justify-content-center" > <
-        h6 className = "px-5 py-3 mt-3 mx-2 warning rounded-3"
+        h6 className = "px-5 py-3 mt-3 mx-2 bk-warning rounded-3"
         onClick = { handleShow2 } >
         Make a Deposit < /h6> </div >
         <
@@ -49,7 +61,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         /div>  <
         div > <
-        div className = "row justify-content-center bg-white shadow-sm p-5 mt-3 rounded-4" >
+        div className = "col-5 d-none justify-content-center lightest shadow-sm p-5 mt-3 rounded-4" >
         <
         h6 className = "px-5" > Make Deposists of any amount towards any market, you can on the other hand make goal based deposits to any goal, we shall keep track
         for you here.Make your deposit here. < /h6> < /
@@ -61,7 +73,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         /
         div > <
         div className = "col-4 rounded-4 px-4" > <
-        div className = "row p-2 bg-light rounded-3" >
+        div className = "row p-2 bg-lighter rounded-3" >
         <
         div className = "text-start col-6 p-2" > PROCEDURE < /div>  < /
         div >
@@ -71,7 +83,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 mt-3 rounded-circle text-center bg-light" > 1 < /
+        p className = "p-2 mt-3 rounded-circle text-center bg-lighter" > 1 < /
         p >
         <
         /
@@ -85,7 +97,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 mt-3 rounded-circle text-center bg-light" > 2 < /
+        p className = "p-2 mt-3 rounded-circle text-center bg-lighter" > 2 < /
         p >
         <
         /
@@ -100,7 +112,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 mt-3 rounded-circle text-center bg-light" > 3 < /
+        p className = "p-2 mt-3 rounded-circle text-center bg-lighter" > 3 < /
         p >
         <
         /

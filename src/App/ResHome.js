@@ -13,6 +13,7 @@ import Notify from '../Accounts/Notify';
 import TabContent from "../Accounts/TabContent";
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
+import Chart from 'react-apexcharts';
 import Saccos from '../Accounts/Saccos';
 import Clubs from '../Accounts/Clubs';
 import Profile from '../images/Ellipse 6.png';
@@ -29,6 +30,38 @@ const ResHome = (props) => {
     const [dollar, setDollar] = useState(0);
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
+    const [options, setOptions] = useState({
+        options: {
+            chart: {
+                id: 'apexchart-example'
+            },
+            theme: {
+                mode: 'light',
+                palette: 'palette7',
+            },
+            xaxis: {
+                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "JUl", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            },
+            colors: ['#252859', '#E91E63', '#FF9800'],
+
+        },
+        series: [{
+                name: 'T.bills',
+                data: [90, 40, 135, 15],
+            },
+            {
+                name: 'T.bonds',
+                data: [30, 40, 75, 50, 49, 60],
+            },
+            {
+                name: 'Stocks',
+                data: [10, 4, 35, 5, 125],
+            }
+        ],
+        stroke: {
+            curve: 'smooth',
+        }
+    })
     useEffect(() => {
         PersonalRequests().then(res => {
             setSpan(res[2]); // array(14)
@@ -79,11 +112,11 @@ const ResHome = (props) => {
         setActiveTab1("tab13");
     };
     const Main = () => {
-        return ( < div className = 'p-1 res-home' > < div className = "blue-dark p-2 rounded-4" >
+        return ( < div className = 'p-1 bg-light res-home' > < div className = "bg-white p-2 rounded-4" >
             <
             div className = 'd-flex mt-2' >
             <
-            div className = 'rounded-4 shadow-lg wide' >
+            div className = 'rounded-4 bg-light wide' >
             <
             p className = "bolder text-end mx-4 mt-2" > welcome back < span className = 'text-warning' > { props.name } < /span> <
             span className = " justify-content-center" > <
@@ -103,36 +136,65 @@ const ResHome = (props) => {
             <
             div className = 'd-flex justify-content-end mx-1' > < Wallet size = "medium"
             set = 'broken'
-            className = ' mx-2 icon-padding d-none rounded-circle active light-res-home ' / > < p className = 'mt-2 icon-padding rounded-3 px-4 active border border-warning '
+            className = ' mx-2 icon-padding d-none rounded-circle active light-res-home ' / > < p className = 'mt-2 icon-padding rounded-3 p-2 active border border-warning '
             onClick = {
                 () => { setGoalSetting(true) }
             } >
             Goals < /p> < /
             div > < /
             div > < /div >  <
-            div className = 'd-flex' >
+            div className = 'blue-dark d-flex rounded-4' >
             <
-            span className = 'text-center shadow-lg rounded-4 wide-40' > <
-            p className = "bolder mt-3 text-center" > < Wallet size = "medium"
-            className = 'text-warning' /
+            span className = 'text-center rounded-4 wide-60' > <
+            p className = "bolder mt-3" > < Wallet size = "medium"
+            className = 'text-warning d-none' /
             >
             <
             br / > Deposit <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> < h5 className = "px-1 font-lighter" > { deposit - depositTotal }  < /
-            h5 > < /div > < /p > < /span > <
-            span className = 'shadow-lg rounded-4 wide-60 mx-1' > <
+            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> < h4 className = "px-1 font-lighter" > { deposit - depositTotal }  < /
+            h4 > < /div > < /p > < /span > < span className = 'py-4' > < p className = 'mt-2 icon-padding rounded-3 p-2 active border border-warning '
+            onClick = {
+                () => { setGoalSetting(true) }
+            } >
+            Deposit < /p> </span > < /
+            div >
+
+            <
+            div className = '' > <
+            Chart options = { options.options }
+            series = { options.series }
+            className = "w-100 bg-white rounded-3 mt-2"
+            type = "area"
+            height = { 300 }
+            /></div > <
+            div className = 'blue-dark mt-2 d-flex rounded-4' >
+            <
+            span className = ' rounded-4 wide-60 mx-1' > <
             p className = "bolder mt-3 text-center" > < Work size = "15"
             set = 'broken'
-            className = 'text-warning' /
+            className = 'text-warning d-none' /
             >
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> <
-            h5 className = "px-1 font-lighter" > { networth } < /h5></div > < /p>  < /span > < /
+            h4 className = "px-1 font-lighter" > { networth } < /h4></div > < /p>  < /span > < span className = 'py-4' > < p className = 'mt-2 icon-padding rounded-3 p-2 active border border-warning '
+            onClick = {
+                () => { setGoalSetting(true) }
+            } >
+            Withdraw < /p> </span > < /
             div >
+
             <
-            p className = 'my-3 bolder mx-2' > Dollar Account < /p> <
-            div className = 'd-flex' >
+            div className = '' > <
+            Chart options = { options.options }
+            series = { options.series }
+            className = "w-100 d-none"
+            type = "area"
+            height = { 400 }
+            /></div >
+            <
+            p className = 'my-3 d-none bolder mx-2' > Dollar Account < /p> <
+            div className = 'd-flex d-none' >
             <
             span className = 'shadow-lg rounded-4 wide-40' > <
             p className = "bolder text-center mt-2" > < Wallet size = "15"
@@ -155,7 +217,7 @@ const ResHome = (props) => {
             div className = 'd-flex mt-2' > < FaLightbulb size = "35"
             className = 'mt-3 mx-2 p-2 rounded-circle light-res-home text-warning' / >
             <
-            div className = 'rounded-4 shadow-lg wider' >
+            div className = 'rounded-4 bg-light wider' >
             <
             p className = "bolder mx-4 mt-2" > Tips: <
             div className = " justify-content-center" > <

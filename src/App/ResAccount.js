@@ -17,7 +17,7 @@ const ResAccount = (props) => {
     return ( < div > < Pic / > <
         div className = "pt-5" >
         <
-        h6 className = "mt-5 p-3 bg-light bolder" > Settings < /h6></div >
+        h6 className = "mt-5 p-3 bg-lighter bolder" > Settings < /h6></div >
         <
         div className = "px-3 res-home pb-5 mb-5" >
         <

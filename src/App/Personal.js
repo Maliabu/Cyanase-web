@@ -10,10 +10,12 @@ import Goal1 from '../Accounts/Goal1';
 import Modal from 'react-bootstrap/Modal';
 import Learn1 from '../Accounts/Learn1';
 import Goal from '../Accounts/Goal'
+import Chart from 'react-apexcharts';
 import { AddUser } from "react-iconly";
 
 const Personal = ({...props }) => {
 const [span, setSpan] = useState([])
+const [mine, setMine] = useState([])
 const [deposits, setDeposits] = useState([])
 const [show, setShow] = useState(false);
 const [holdId, setHoldId] = useState("");
@@ -38,12 +40,47 @@ useEffect(() => {
         setSpan(res[2]); // array(14)
     });
     MainRequests().then(res => {
-        setDeposits(res[4]);
+        setDeposits(res[6]);
+        setMine(res[4])
     });
     GetRiskProfile().then(res => {
         setinvestmentoption(res.investment_option)
     });
 }, []);
+
+const groupArrayObjects = mine.reduce((group, obj) => {
+    const { name, datas } = obj;
+    if (!group[name]) {
+        group[name] = {
+            name: name,
+            data: []
+        };
+    }
+    group[name].data.push(datas);
+    return group;
+}, {});
+const results = Object.values(groupArrayObjects);
+const options = {
+    seriesDonut: results.map(option => summ(option.data)),
+    optionsDonut: {
+        labels: results.map(option => (option.name)),
+        chart: {
+            type: 'donut',
+        },
+        colors: ['#252859', '#E91E63', '#FF9800'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    }
+}
 
 function getId(id, name, amount, deposit, created) {
     setHoldId(id)
@@ -53,41 +90,83 @@ function getId(id, name, amount, deposit, created) {
     setHoldCreated(created)
     handleShow3()
 }
+
+function summ(array) {
+    let sum = 0
+    array.forEach(item => {
+        sum = sum + item
+    });
+    return sum
+}
 return ( <
     div > <
-    div className = "row scroll-y " > <
-    div className = "col-8 bg-light p-3 rounded-25" >
+    div className = "row " > <
+    div className = "col-8 bg-lighter p-3 rounded-25" >
     <
-    h6 className = " p-2 mt-2 d-none" > WALLET < /h6>  <
-    div className = "row bg-white d-none rounded-4 p-5" >
+    h6 className = " p-2 mt-2" > MY INVESTMENTS < /h6>  <
+    div className = "row justify-content-center rounded-4 p-3" >
     <
-    div className = " px-3 text-center " >
+    div className = "row p-3" > <
+    div className = "col" >
+    <
+    /
+    div > < /div> <
+    div className = "row" >
+    <
+    div className = "row" >
+    <
+    div className = "col-5 text-center" > <
+    Chart options = { options.optionsDonut }
+    series = { options.seriesDonut }
+    className = "w-100"
+    type = "donut"
+    height = { 200 }
+    />  < /div > <
+    div className = "col-7 text-center" >
+    <
+    h6 className = "grey-text py-2" > Summary Data < /h6> {
+    results.map(option => ( <
+        div className = "row mt-2 py-3 bg-white rounded-3" >
+        <
+        div className = "col-3" > < h6 className = "bolder" > { option.name } < /h6> < /
+        div >
+        <
+        div className = "col" > < h6 className = "bolder active" > Rate: {
+            (option.data).length
+        } < /h6> < /div > <
+        div className = "col" > < h6 className = "bolder" > Total: UGX {
+            (summ(option.data)) * 1000
+        } < /h6> < /div > < /
+        div > ))
+} < /div > < /
+div > < /div> <
+div className = " px-3 d-none text-center " >
     <
     img src = { Wallet }
-    className = "pt-2"
-    width = '10%'
-    height = '30%'
-    alt = "investors" / > <
-    h5 className = "bolder mt-3" > Account Balance < /h5> <
-    div className = "d-flex flex-row flex justify-content-center w-100" > UGX <
+className = "pt-2 d-none"
+width = '10%'
+height = '30%'
+alt = "investors" / > <
+    h5 className = "bolder mt-3 d-none" > Account Balance < /h5> <
+div className = "d-flex flex-row d-none flex justify-content-center w-100" > UGX <
     h1 className = "px-2 font-lighter" > 0.0 < /h1> < /
-    div >
+div >
     <
-    div className = "d-flex flex-row flex justify-content-center" >
+    div className = "d-flex flex-row d-none flex justify-content-center" >
     <
     h6 className = "px-5 py-3 mt-3 warning rounded-3"
-    onClick = { handleShow } >
+onClick = { handleShow } >
     Top Up < /h6>  <
-    Offcanvas show = { show }
-    placement = "end"
-    className = "side-bar"
-    onHide = { handleClose } {...props } >
+Offcanvas show = { show }
+placement = "end"
+className = "side-bar"
+onHide = { handleClose } {...props } >
     <
     img src = { Wallet }
-    className = "pt-2 text-center"
-    width = '100'
-    height = '100'
-    alt = "investors" / >
+className = "pt-2 text-center"
+width = '100'
+height = '100'
+alt = "investors" / >
     <
     Offcanvas.Header
     // closeButton
@@ -97,54 +176,52 @@ return ( <
     Offcanvas.Title className = "bolder" > Top Up < /Offcanvas.Title> </div >
     <
     /
-    Offcanvas.Header > <
+Offcanvas.Header > <
     Offcanvas.Body className = "px-5" >
     <
     TopUp / > < /
-    Offcanvas.Body > < /
-    Offcanvas > <
+Offcanvas.Body > < /
+Offcanvas > <
     h6 className = "px-5 py-3 mt-3 mx-2 warning rounded-3"
-    onClick = { handleShow2 } >
+onClick = { handleShow2 } >
     Deposit < /h6> </div >
     <
     Modal show = { show2 }
-    onHide = { handleClose2 }
-    dialogClassName = "my-modal1" >
+onHide = { handleClose2 }
+dialogClassName = "my-modal1" >
     <
     Learn1 tab9 = { props.handletab9 }
-    / > < /
-    Modal > < /
-    div >
+/ > < /
+Modal > < /
+div >
     <
     /div>  <
-    div >
+div >
     <
-    div className = "row scroll-y" >
+    div className = "row p-3 scroll-y3" >
     <
-    h6 className = "pt-5" > RECENT ACTIVITY < /h6> {deposits.map(deposit => ( <
-    div className = "row mt-3 px-4 bg-white rounded-4"
-    key = { deposit.deposit_id } >
+    h6 className = "pt-3" > RECENT ACTIVITY < /h6> {deposits.map(deposit => ( <
+div className = "row mt-2 p-4 bg-white rounded-3"
+key = { deposit.deposit_id } >
     <
-    div className = "col-3" >
+    div className = "col" >
     <
-    p className = "pt-3" > < span className = "bolder" > Deposit < /span> <
-    p > { deposit.currency } { deposit.deposit_amount } < /p>   < /
-    p >
-    <
+    h6 className = "" > < span className = "bolder" > Deposit < /span> { deposit.currency } { deposit.deposit_amount }  < /
+h6 > <
     /
-    div >
+div >
     <
     div className = "col-6" >
     <
-    h6 className = "px-5 pt-4 active text-center" > { deposit.deposit_category } < /h6> < /
-    div >
+    h6 className = "px-5 active text-center" > { deposit.deposit_category } < /h6> < /
+div >
     <
-    div className = "col-3 text-end" >
+    div className = "col text-end" >
     <
-    p className = "pt-3" > < span className = "bolder" > created < /span > {
-    (deposit.created.slice(0, 10))
-} < /
-p > <
+    h6 className = " bolder" > {
+        (deposit.created)
+    } < /
+h6 > <
     /div > < /
 div > ))
 } < /div> < /
@@ -152,16 +229,16 @@ div >
     <
     /
 div > <
-    div className = "col-4 px-4 " > <
-    div className = "row p-2 bg-light rounded-3" >
+    div className = "col-4 px-3 " > <
+    div className = "row p-2 bg-lighter rounded-3" >
     <
-    div className = "text-start col-6 p-2" > YOUR PERSONAL GOALS < /div> <
+    div className = "text-start col-6 px-2 p-2" > YOUR PERSONAL GOALS < /div> <
 div className = "text-end col-6 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
 div > <
-    h6 className = "px-5 py-3 mt-3 warning text-center rounded-3"
+    h6 className = "px-5 py-3 mt-3 bk-warning text-center rounded-3"
 onClick = { handleShow1 } >
     New Goal < /h6>  <
-div className = "scroll-y bg-light rounded-4 p-1 pb-5 mb-5" > {
+div className = "bg-lighter rounded-4 p-1 pb-5 mb-5" > {
         span.map(goal => ( <
             div className = "p-4 bg-white rounded-4 mt-3"
             key = { goal.goal_id } > <
@@ -202,7 +279,9 @@ tab9 = { props.handletab9 }
 / > < /
 Offcanvas > < /
 div > < /
-div > < /
+div >
+    <
+    /
 div >
 )
 };

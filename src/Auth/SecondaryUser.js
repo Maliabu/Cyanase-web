@@ -117,19 +117,6 @@ function SecondaryUser(props) {
             document.getElementById("errorConfirmP").style.display = "none"
         }
     }
-    const User = async() => {
-        try {
-            const response = await axios.post(`${API_URL}`, formData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            console.log(response)
-            return response;
-        } catch (error) {
-            return error ? error.response ? error.response.data : error : error.message;
-        }
-    };
     const success = () => {
         document.getElementById("successMessage").innerHTML = "Successful"
         document.getElementById("successMessage").style.color = "white"
@@ -141,26 +128,6 @@ function SecondaryUser(props) {
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
         }, 2000);
-    }
-    const errorDisplay = (response) => {
-        document.getElementById("errorMessage").innerText = response.data.message
-        document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "red"
-        document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
-        setTimeout(() => {
-            document.getElementById("errorMessage").style.display = 'none'
-        }, 2000);
-    }
-    const errorSignUp = () => {
-        document.getElementById("successMessage").innerHTML = "Something went wrong"
-        document.getElementById("successMessage").style.backgroundColor = "red"
-        document.getElementById("successMessage").style.color = "white"
-        setTimeout(() => {
-            document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
-        }, 2000);
-        setTimeout(() => {
-            document.getElementById("successMessage").style.backgroundColor = "none"
-        }, 1000);
     }
     const handleChange = (event) => {
         const name = event.target.name;
@@ -229,16 +196,82 @@ function SecondaryUser(props) {
         function onSubmit() {
             validate3()
             formData.profile = formData2
-            User().then(response => {
-                console.log(response)
-                if (response.data.success === false || response.success === false) {
-                    errorDisplay(response)
-                    errorSignUp()
-                } else {
-                    success()
-                    window.location.pathname = "/verify"
-                }
-            });
+            axios.post(`${API_URL}`, formData, {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .catch(function(error) {
+                    const errorDisplay = () => {
+                        document.getElementById("errorMessage").innerText = error.response
+                        document.getElementById("errorMessage").style.display = 'block'
+                        document.getElementById("errorMessage").style.color = "red"
+                        document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+                        setTimeout(() => {
+                            document.getElementById("errorMessage").style.display = 'none'
+                        }, 6000);
+                    }
+                    const errorSignUp = () => {
+                        document.getElementById("successMessage").innerHTML = "Something went wrong"
+                        document.getElementById("successMessage").style.backgroundColor = "red"
+                        document.getElementById("successMessage").style.color = "white"
+                        setTimeout(() => {
+                            document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
+                        }, 2000);
+                    }
+                    if (error.response) {
+                        const responses = error.response.data.detail
+                        if (error.response.status === 400) {
+                            errorDisplay(responses)
+                        } else if (error.response.status === 500) {
+                            errorDisplay(responses)
+                        } else if (error.response.status === 404) {
+                            errorDisplay(responses)
+                        } else if (error.response.status === 403) {
+                            errorDisplay(responses)
+                        }
+                        errorSignUp();
+                    } else if (error.request) {
+                        console.log(error.request);
+                        errorDisplay(error);
+                        errorSignUp();
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', error.message);
+                        errorSignUp();
+                        errorDisplay(error);
+                    }
+                })
+                .then((response) => {
+                    const errorDisplay = (response) => {
+                        document.getElementById("errorMessage").innerText = response.data.message
+                        document.getElementById("errorMessage").style.display = 'block'
+                        document.getElementById("errorMessage").style.color = "red"
+                        document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+                        setTimeout(() => {
+                            document.getElementById("errorMessage").style.display = 'none'
+                        }, 6000);
+                    }
+                    const errorSignUp = () => {
+                        document.getElementById("successMessage").innerHTML = "Something went wrong"
+                        document.getElementById("successMessage").style.backgroundColor = "red"
+                        document.getElementById("successMessage").style.color = "white"
+                        setTimeout(() => {
+                            document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
+                        }, 2000);
+                        setTimeout(() => {
+                            document.getElementById("successMessage").style.backgroundColor = "none"
+                        }, 1000);
+                    }
+                    if (response.data.success === false && response.status === 200) {
+                        errorDisplay(response);
+                        errorSignUp()
+                    } else {
+                        success()
+                        window.location.pathname = ""
+                    }
+                    console.log(response)
+                });
         }
         return ( <
             React.Fragment > <

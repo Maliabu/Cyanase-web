@@ -50,6 +50,10 @@ body::-webkit-scrollbar {
     background-color: #FCFCFC!important;
 }
 
+.bg-lighter {
+    background-color: #f2f3f4 !important;
+}
+
 .scroll-y {
     overflow-y: auto !important;
     scroll-behavior: smooth !important;
@@ -62,6 +66,13 @@ body::-webkit-scrollbar {
     scroll-behavior: smooth !important;
     position: relative !important;
     height: 70vh !important;
+}
+
+.scroll-y3 {
+    overflow-y: auto !important;
+    scroll-behavior: smooth !important;
+    position: relative !important;
+    height: 40vh !important;
 }
 
 .side-bar {
@@ -145,7 +156,7 @@ body::-webkit-scrollbar {
 }
 
 .wide-60 {
-    width: 55%;
+    width: 65%;
 }
 
 .x-small {
@@ -203,10 +214,10 @@ body::-webkit-scrollbar {
 }
 
 .dollar {
-    background-image: url("images/_.jpeg") !important;
-    background-position: center;
+    background-image: url("images/depo.png") !important;
+    background-position: bottom;
     background-repeat: no-repeat;
-    background-size: 50%;
+    background-size: 30%;
 }
 
 .light {
@@ -223,7 +234,11 @@ body::-webkit-scrollbar {
     background-clip: text;
     color: transparent !important;
     cursor: pointer !important;
-} */
+} gives gradient text */
+
+.lightest {
+    background-color: rgba(255, 255, 255, 0.805);
+}
 
 .border-active {
     border: 1px soild #f7a335 !important;
@@ -246,11 +261,16 @@ body::-webkit-scrollbar {
     border-color: #ff9100 !important;
 }
 
+.status {
+    color: #ff9100 !important;
+    background-color: #ffe3be;
+}
+
 .bk-warning {
-    color: rgb(0, 0, 0) !important;
+    color: rgb(20, 20, 20) !important;
     cursor: pointer !important;
     border: none !important;
-    background-color: #ffa632 !important;
+    background-color: #ffb34f !important;
     box-shadow: 2px 3px 5px #4141418e;
 }
 

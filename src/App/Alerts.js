@@ -22,7 +22,7 @@ const Alert = () => {
         h6 > < /div > < /
         div > <
         /div> <
-        div className = "col-lg-4 bg-light rounded-3 p-lg-5" >
+        div className = "col-lg-4 shadow-sm rounded-3 p-lg-4" >
         <
         h4 className = "bolder" > Help < /h4> <
         h6 className = "active" > 'support@cyanase.com' < /h6> < /

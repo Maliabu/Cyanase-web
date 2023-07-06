@@ -112,7 +112,7 @@ const ADetails = (props) => {
         <
         div className = "p-3 mt-3 px-5 rounded-3 warning" >
         <
-        h5 className = "bolder py-3" > Next Of Kin Details < /h5>  <
+        h5 className = "bolder text-dark py-3" > Next Of Kin Details < /h5>  <
         h6 > FirstName: < span className = "bolder text-dark" > { firstNok } < /span>  < /
         h6 > <
         h6 > LastName: < span className = "bolder text-dark" > { lastNok } < /span>  < /
