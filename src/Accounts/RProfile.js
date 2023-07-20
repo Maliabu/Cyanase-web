@@ -6,7 +6,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Table from 'react-bootstrap/Table';
 import { Activity } from "react-iconly";
 import Button from "react-bootstrap/esm/Button";
-import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import axios from "axios";
 import { API_URL_ADD_AUTH_USER_RISK_PROFILE, TOKEN } from "../apis";
 
@@ -384,8 +384,8 @@ class RProfile extends React.Component {
     }
     result = () => {
         setTimeout(() => {
-            document.getElementById("alert").style.backgroundColor = "orange";
-            document.getElementById("alert").style.color = "white";
+            document.getElementById("alert").style.backgroundColor = "#ffb34f";
+            document.getElementById("alert").style.color = "black";
             document.getElementById("alert").innerHTML = "Reviewing your score..."
         }, 0)
         return (setTimeout(() => {
@@ -430,6 +430,7 @@ class RProfile extends React.Component {
         }
     }
     handleSubmit = () => {
+        preloader()
         let form_data = new FormData();
         form_data.append('qn1', this.state.question1);
         form_data.append('qn2', this.state.question2);
@@ -1372,7 +1373,7 @@ function Step12(props) {
         <
         div className = "p-lg-5 p-3 bg-light rounded-3" >
         <
-        h6 className = "bolder" > Complete your deposit by selecting an investment option: < /h6>  <
+        h6 className = "bolder" > OR: manage your own investment by selecting an investment option: < /h6>  <
         Form.Select className = "my-3"
         required defaultValue = "Select an investment option"
         onChange = { props.handleChange }

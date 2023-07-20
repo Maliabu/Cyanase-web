@@ -6,7 +6,9 @@ import Profile1 from '../images/Ellipse 178.png';
 import { API_URL_DEPOSIT, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
-import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
+import Checkout from "../payment/checkout";
+import { getCurrency } from "../payment/GetCurrency";
 
 class Learn1 extends React.Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class Learn1 extends React.Component {
             currentStep: 1,
             payment_means: '',
             deposit_amount: 0,
-            currency: '',
+            currency: getCurrency(this.props.country),
             investment_option: this.props.option,
             deposit_category: "",
             account_type: ""
@@ -28,13 +30,12 @@ class Learn1 extends React.Component {
         })
         console.log(this.state)
     }
-
     getTotalDeposit() {
         this.total_deposit = parseFloat(this.getFee()) + parseFloat(this.state.deposit_amount)
         return this.total_deposit
     }
     getFee() {
-        this.fee = (2 / 100) * this.state.deposit_amount
+        this.fee = ((1.4 / 100) * this.state.deposit_amount).toFixed(2)
         return this.fee
     }
     getTab9() {
@@ -50,36 +51,8 @@ class Learn1 extends React.Component {
         }
         return accountType
     }
-
-    submitButton = () => {
-        let currentStep = this.state.currentStep;
-        let payment_means = this.state.payment_means
-        if (currentStep === 5 && payment_means === "online") {
-            return ( <
-                div className = 'row justify-content-center' > <
-                h6 id = "errorMessage"
-                className = 'py-3 mt-3 rounded border border-danger text-center'
-                style = {
-                    { display: 'none' }
-                } > hey < /h6> <
-                h6 id = "infoMessage"
-                className = 'py-3 mt-3 rounded warning text-center'
-                style = {
-                    { display: 'none' }
-                } > hey < /h6>   <
-                Button variant = "warning"
-                className = 'shadow text-center'
-                id = 'successMessage'
-                onClick = { this.handleSubmit }
-                type = "button" >
-                Submit <
-                /Button> < /
-                div >
-            )
-        }
-        return null
-    }
     handleSubmit = () => {
+        preloader()
         let form_data = new FormData();
         form_data.append('payment_means', this.state.payment_means);
         form_data.append('currency', this.state.currency);
@@ -105,16 +78,23 @@ class Learn1 extends React.Component {
                 }
             });
     }
+    getStatus(status) {
+        if (status === "successful") {
+            return "successful"
+        }
+        console.log(status)
+        return status
+    }
     _saccoCategory = () => {
         let currentStep = this.state.currentStep
-        currentStep = currentStep + 6
+        currentStep = currentStep + 5
         this.setState({
             currentStep: currentStep
         })
     }
     _afterSacco = () => {
         let currentStep = this.state.currentStep
-        currentStep = currentStep - 5
+        currentStep = currentStep - 4
         this.setState({
             currentStep: currentStep
         })
@@ -156,7 +136,7 @@ class Learn1 extends React.Component {
                 /h6>
             )
         }
-        if (currentStep === 7 && deposit_category === 'sacco/club') {
+        if (currentStep === 6 && deposit_category === 'sacco/club') {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
@@ -166,6 +146,35 @@ class Learn1 extends React.Component {
             )
         }
         return null;
+    }
+
+    submitButton = () => {
+        let currentStep = this.state.currentStep;
+        let payment_means = this.state.payment_means
+        if (currentStep === 4 && payment_means === "online") {
+            return ( <
+                div className = 'row justify-content-center' > <
+                h6 id = "errorMessage"
+                className = 'py-3 mt-3 rounded border border-danger text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6> <
+                h6 id = "infoMessage"
+                className = 'py-3 mt-3 rounded warning text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6>   <
+                Button variant = "warning"
+                className = 'shadow text-center'
+                id = 'successMessage'
+                onClick = { this.handleSubmit }
+                type = "button" >
+                Submit <
+                /Button> < /
+                div >
+            )
+        }
+        return null
     }
 
     nextButton() {
@@ -181,7 +190,7 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 7) {
+        if (currentStep === 6) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
@@ -200,7 +209,7 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 5 && payment_means === "offline") {
+        if (currentStep === 4 && payment_means === "offline") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
                 type = "button"
@@ -209,7 +218,7 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 5 && payment_means === "wallet") {
+        if (currentStep === 4 && payment_means === "wallet") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
                 type = "button" >
@@ -217,7 +226,7 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep < 5) {
+        if (currentStep < 4) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 onClick = { this._next } >
@@ -253,33 +262,38 @@ class Learn1 extends React.Component {
             /> <
             Step2 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            /> <
+            /><
             Step3 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step4 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             currency = { this.state.currency }
             payment_means = { this.state.payment_means }
             /> <
-            Step5 currentStep = { this.state.currentStep }
+            Step4 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
+            phone = { this.props.phone }
+            email = { this.props.email }
+            name = { this.props.lastname }
+            country = { this.props.country }
             payment_means = { this.state.payment_means }
             deposit_amount = { this.state.deposit_amount }
             total_deposit = { this.getTotalDeposit() }
             fee = {
                 this.getFee()
             }
+            submit = { this.handleSubmit }
+            status = { this.getStatus }
+            getCurr = { getCurrency(this.props.country) }
             currency = { this.state.currency }
             /> <
-            Step6 currentStep = { this.state.currentStep }
+            Step5 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             total_deposit = { this.getTotalDeposit() }
             currency = { this.state.currency }
-            />  <Step7  currentStep = { this.state.currentStep }
+            getCurr = { getCurrency(this.props.country) }
+            />  <Step6  currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            /> { this.nextButton() } { this.previousButton() } {this.submitButton()}< /
+            /> { this.nextButton() } { this.previousButton() }< /
             form > < /
             React.Fragment >
         );
@@ -333,7 +347,7 @@ function Step1(props) {
         <
         /
         div > < /div >  <
-        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
         h6 > <
         h6 className = "py-3 rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
@@ -396,43 +410,6 @@ function Step3(props) {
     if (props.currentStep !== 3) {
         return null
     }
-    return ( <
-        div className = "text-start" > <
-        h6 className = "mt-2 text-center" > Choose the currency in which you would like to invest your money <
-        /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "mb-3" >
-        <
-        h4 className = "font-lighter" > BASIC ACCOUNT < /h4> <
-        Form.Check label = "Deposit and maintain your account in your local currency.(Transaction charges apply)"
-        name = "currency"
-        type = "radio"
-        onChange = { props.handleChange }
-        value = "UGX"
-        required id = "default-radio" /
-        >
-        <
-        h4 className = "font-lighter mt-5" > DOLLAR ACCOUNT < /h4> <
-        Form.Check label = "Deposit in your local currency and we shall change it to USD(Standard charges apply)"
-        name = "currency"
-        onChange = { props.handleChange }
-        type = "radio"
-        value = "USD"
-        required id = "default-radio" /
-        >
-        <
-        /
-        div > < /div ></div >
-    );
-}
-
-function Step4(props) {
-    if (props.currentStep !== 4) {
-        return null
-    }
     if (props.payment_means === "wallet") {
         return ( <
             div className = "text-center" > <
@@ -476,22 +453,39 @@ function Step4(props) {
     );
 }
 
-function Step5(props) {
-    if (props.currentStep !== 5) {
+function Step4(props) {
+    function parentCallback(someStatus) {
+        props.status(someStatus)
+        console.log(someStatus)
+        return someStatus
+    }
+    if (props.currentStep !== 4) {
         return null
     }
     if (props.payment_means === "offline") {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > Continue to deposit < /h6>   <
-            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h4 > < /
             div >
         )
     }
     if (props.payment_means === "online") {
         return ( <
-            div className = "text-center" > < h1 className = "py-5" > FlutterWave < /h1> < /
+            div className = "text-center" >
+            <
+            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h4 >
+            <
+            Checkout phone = { props.phone }
+            country = { props.country }
+            name = { props.name }
+            email = { props.email }
+            amount = { props.total_deposit }
+            currency = { props.getCurr }
+            callBack = { parentCallback }
+            / > < /
             div >
         );
     }
@@ -505,8 +499,8 @@ function Step5(props) {
     )
 }
 
-function Step6(props) {
-    if (props.currentStep !== 6) {
+function Step5(props) {
+    if (props.currentStep !== 5) {
         return null
     } else if (props.payment_means === "offline") {
         return ( <
@@ -551,7 +545,8 @@ function Step6(props) {
             onChange = { props.handleChange }
             name = "deposit_amount"
             id = 'phone'
-            required placeholder = "UGX 10,000" / >
+            required placeholder =
+            " 10,000" / >
             <
             Form.Control.Feedback type = "invalid" >
             This field is required. <
@@ -561,8 +556,8 @@ function Step6(props) {
         );
     }
 
-    function Step7(props) {
-        if (props.currentStep !== 7) {
+    function Step6(props) {
+        if (props.currentStep !== 6) {
             return null
         }
         return ( < div >

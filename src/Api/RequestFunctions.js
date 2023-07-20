@@ -1,3 +1,6 @@
+export const preloader = () => {
+    document.getElementById("successMessage").innerHTML = "processing..."
+}
 export const success = (message, redirect, successMessage) => {
     document.getElementById("successMessage").innerHTML = successMessage
     document.getElementById("successMessage").style.backgroundColor = "orange"
@@ -7,11 +10,11 @@ export const success = (message, redirect, successMessage) => {
     document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
     document.getElementById("infoMessage").innerText = message
     setTimeout(() => {
-        document.getElementById("errorMessage").style.display = 'none'
-    }, 4000);
+        document.getElementById("infoMessage").style.display = 'none'
+    }, 2000);
     setTimeout(() => {
         window.location.pathname = redirect
-    }, 5000);
+    }, 2000);
 }
 export const fail = (error) => {
     document.getElementById("successMessage").innerHTML = "Something went wrong"
@@ -23,7 +26,7 @@ export const fail = (error) => {
     document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
     setTimeout(() => {
         document.getElementById("errorMessage").style.display = 'none'
-    }, 4000);
+    }, 3000);
     setTimeout(() => {
         document.getElementById("successMessage").innerHTML = "Unsuccessful"
     }, 2000);

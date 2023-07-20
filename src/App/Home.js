@@ -28,8 +28,7 @@ import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-ico
 import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
 
 const MyHome = () => {
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
+    const [name, setName] = useState("")
     const [account, setAccount] = useState("")
     const [span, setSpan] = useState([])
     const [activeTab, setActiveTab] = useState("tab1");
@@ -45,8 +44,7 @@ const MyHome = () => {
             setSpan(res[2]);
         });
         UserRequests().then(res => {
-            setFirstName(res.first_name)
-            setLastName(res.last_name)
+            setName(res.first_name + " " + res.last_name)
             setAccount(res.profile.user_type)
         })
     }, []);
@@ -130,7 +128,7 @@ const MyHome = () => {
         /div> <
         div className = 'col-6 px-2' >
         <
-        h5 > { firstName } < /h5> <
+        h5 > { name } < /h5> <
         h6 > personal Account < /h6> < /
         div > <
         /div></div >
@@ -146,18 +144,18 @@ const MyHome = () => {
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-5 p-2 mx-3 blue-dark rounded-25' >
+        div className = 'row my-5 py-2 mx-2 blue-dark rounded-4' >
         <
         div className = 'col-4' >
         <
         img src = { Profile }
         className = "rounded-circle mt-2"
         width = '100%'
-        height = '70%'
+        height = '80%'
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-7' > < div className = 'flexName d-flex' > < p > { lastName } < /p> < /div > <
+        div className = 'col-7' > < div className = 'flexName d-flex' > < p > { name } < /p> < /div > <
         p className = 'bolder' > { account } < /p > < /
         div > <
         /div> <
@@ -393,7 +391,7 @@ const MyHome = () => {
         /Modal> <
         div className = "d-block d-lg-none" >
         <
-        ResHome name = { firstName }
+        ResHome name = { name }
         / > < /div > < /
         div >
     );

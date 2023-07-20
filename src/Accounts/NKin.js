@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { API_URL_USER_NEXTOFKIN, TOKEN } from "../apis";
 import { useForm } from "react-hook-form";
-import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 
 const NKin = () => {
     const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const NKin = () => {
     const { handleSubmit } = useForm()
 
     function onSubmit() {
-        console.log(formData)
+        preloader()
         axios.post(`${API_URL_USER_NEXTOFKIN}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",

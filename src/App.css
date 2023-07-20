@@ -52,6 +52,15 @@ body::-webkit-scrollbar {
 
 .bg-lighter {
     background-color: #f2f3f4 !important;
+    /* background: -webkit-linear-gradient(right, #f2f3f4, rgba(255, 255, 255, 0.626), #f2f3f4); */
+}
+
+.modals {
+    border-top: 30px solid #ffb85c;
+}
+
+.modals-left {
+    border-left: 10px solid #ffb85c;
 }
 
 .scroll-y {

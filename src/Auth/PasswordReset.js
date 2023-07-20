@@ -33,7 +33,7 @@ class PasswordReset extends Component {
         document.getElementById("infoMessage").style.display = 'block'
         document.getElementById("infoMessage").style.color = "#ff8a00"
         document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
-        document.getElementById("infoMessage").innerText = "Your account has been verified successfully"
+        document.getElementById("infoMessage").innerText = "Your password has been changed successfully"
         setTimeout(() => {
             document.getElementById("errorMessage").style.display = 'none'
         }, 2000);
@@ -69,7 +69,7 @@ class PasswordReset extends Component {
                     document.getElementById("successMessage").style.color = "white"
                     document.getElementById("successMessage").style.borderColor = "red"
                     setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Verification Unsuccessful"
+                        document.getElementById("successMessage").innerHTML = "Password Reset Unsuccessful"
                     }, 2000);
                 }
                 if (error.response) {
@@ -143,9 +143,9 @@ class PasswordReset extends Component {
             width = '40%'
             className = "d-block d-sm-none mx-auto"
             alt = "investors" / > < /p></div > <
-            div className = 'row rounded-4 justify-content-center bg-light p-lg-5 p-2' >
+            div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-2' >
             <
-            Form className = 'bg-whiter rounded-4 p-lg-5 py-3 col-lg-5 col-12'
+            Form className = 'bg-white rounded-4 p-lg-5 py-3 col-lg-5 col-12'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <

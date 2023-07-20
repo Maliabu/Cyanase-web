@@ -1,4 +1,4 @@
-import { PersonalRequests, MainRequests, GetRiskProfile } from "../Api/MainRequests";
+import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile } from "../Api/MainRequests";
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +12,7 @@ import Learn1 from '../Accounts/Learn1';
 import Goal from '../Accounts/Goal'
 import Chart from 'react-apexcharts';
 import { AddUser } from "react-iconly";
+import { getCurrency } from "../payment/GetCurrency";
 
 const Personal = ({...props }) => {
 const [span, setSpan] = useState([])
@@ -19,6 +20,8 @@ const [mine, setMine] = useState([])
 const [deposits, setDeposits] = useState([])
 const [show, setShow] = useState(false);
 const [holdId, setHoldId] = useState("");
+const [country, setCountry] = useState("");
+const [phone, setPhone] = useState("");
 const [holdName, setHoldName] = useState("");
 const [holdAmount, setHoldAmount] = useState("");
 let [holdDeposit, setHoldDeposit] = useState("");
@@ -46,6 +49,10 @@ useEffect(() => {
     GetRiskProfile().then(res => {
         setinvestmentoption(res.investment_option)
     });
+    UserRequests().then(res => {
+        setCountry(res.profile.country)
+        setPhone(res.profile.phoneno)
+    })
 }, []);
 
 const groupArrayObjects = mine.reduce((group, obj) => {
@@ -67,18 +74,22 @@ const options = {
         chart: {
             type: 'donut',
         },
-        colors: ['#252859', '#E91E63', '#FF9800'],
+        colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
         responsive: [{
             breakpoint: 480,
             options: {
                 chart: {
-                    width: 200
+                    height: 500,
+                    width: 300
                 },
                 legend: {
                     position: 'bottom'
                 }
             }
-        }]
+        }],
+        legend: {
+            position: 'bottom'
+        }
     }
 }
 
@@ -106,7 +117,7 @@ return ( <
     h6 className = " p-2 mt-2" > MY INVESTMENTS < /h6>  <
     div className = "row justify-content-center rounded-4 p-3" >
     <
-    div className = "row p-3" > <
+    div className = "row" > <
     div className = "col" >
     <
     /
@@ -118,15 +129,17 @@ return ( <
     div className = "col-5 text-center" > <
     Chart options = { options.optionsDonut }
     series = { options.seriesDonut }
-    className = "w-100"
-    type = "donut"
-    height = { 200 }
-    />  < /div > <
+    height = { 400 }
+    width = { 300 }
+    type = "donut" /
+    >
+    <
+    /div > <
     div className = "col-7 text-center" >
     <
-    h6 className = "grey-text py-2" > Summary Data < /h6> {
+    h6 className = "grey-text d-none py-2" > Summary Data of all your investments < /h6> {
     results.map(option => ( <
-        div className = "row mt-2 py-3 bg-white rounded-3" >
+        div className = "row modals-left mt-2 py-3 bg-white rounded-3" >
         <
         div className = "col-3" > < h6 className = "bolder" > { option.name } < /h6> < /
         div >
@@ -134,7 +147,7 @@ return ( <
         div className = "col" > < h6 className = "bolder active" > Rate: {
             (option.data).length
         } < /h6> < /div > <
-        div className = "col" > < h6 className = "bolder" > Total: UGX {
+        div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
             (summ(option.data)) * 1000
         } < /h6> < /div > < /
         div > ))
@@ -148,7 +161,7 @@ width = '10%'
 height = '30%'
 alt = "investors" / > <
     h5 className = "bolder mt-3 d-none" > Account Balance < /h5> <
-div className = "d-flex flex-row d-none flex justify-content-center w-100" > UGX <
+div className = "d-flex flex-row d-none flex justify-content-center w-100" > getCurrency(country) <
     h1 className = "px-2 font-lighter" > 0.0 < /h1> < /
 div >
     <
@@ -238,19 +251,19 @@ div > <
     h6 className = "px-5 py-3 mt-3 bk-warning text-center rounded-3"
 onClick = { handleShow1 } >
     New Goal < /h6>  <
-div className = "bg-lighter rounded-4 p-1 pb-5 mb-5" > {
+div className = " p-1 pb-5 mb-5" > {
         span.map(goal => ( <
-            div className = "p-4 bg-white rounded-4 mt-3"
+            div className = "p-4 bg-white rounded-3 modals-left shadow-sm mt-3"
             key = { goal.goal_id } > <
             div className = "d-flex flex-row flex" > <
             span className = "mt-2" > <
-            AddUser className = " rounded-circle border border-dark p-1"
+            AddUser className = " rounded-circle warning p-1"
             size = "large" / > < /span>  <
             p className = "mx-4" > < span className = "bolder active"
             onClick = {
                 () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
             } > { goal.goal_name } < /span>< span > ...created { (goal.created).slice(0,10) } < /span > < /p >  <
-            span className = "bolder" > Total Deposit: < span className = "font-lighter" > { goal.deposit[0] } < /span> < span className = "active d-none" > { goal.goal_amount } < /span > < /span > < /
+            span className = "bolder" > Total Deposit: < span className = "active" > { goal.deposit[0] } < /span> < span className = "active d-none" > { goal.goal_amount } < /span > < /span > < /
             div > <
             /
             div >
@@ -265,6 +278,8 @@ name = { holdName }
 amount = { holdAmount }
 deposit = { holdDeposit }
 created = { holdCreated }
+country = { country }
+phone = { phone }
 option = { investmentOption }
 / > < /
 Modal >
@@ -276,6 +291,7 @@ onHide = { handleClose1 } {...props } > <
     Goal1 close1 = { handleClose1 }
 option = { investmentOption }
 tab9 = { props.handletab9 }
+country = { country }
 / > < /
 Offcanvas > < /
 div > < /

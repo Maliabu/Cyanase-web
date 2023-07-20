@@ -142,9 +142,9 @@ class Login extends Component {
             width = '40%'
             className = "d-block d-sm-none mx-auto"
             alt = "investors" / > < /p></div > <
-            div className = 'row rounded-4 justify-content-center bg-light p-lg-5 p-2' >
+            div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-2' >
             <
-            Form className = 'bg-whiter rounded-4 p-lg-5 py-3 col-lg-5 col-12'
+            Form className = 'bg-white rounded-4 p-lg-5 py-3 col-lg-5 col-12'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <

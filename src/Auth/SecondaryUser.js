@@ -119,8 +119,8 @@ function SecondaryUser(props) {
     }
     const success = () => {
         document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.backgroundColor = '#ff8a00'
+        document.getElementById("successMessage").style.color = "black"
+        document.getElementById("successMessage").style.backgroundColor = '#ffb34f'
         document.getElementById("errorMessage").style.display = 'block'
         document.getElementById("errorMessage").style.color = "#ff8a00"
         document.getElementById("errorMessage").style.backgroundColor = '#ffb85c3c'
@@ -216,7 +216,7 @@ function SecondaryUser(props) {
                         document.getElementById("successMessage").style.backgroundColor = "red"
                         document.getElementById("successMessage").style.color = "white"
                         setTimeout(() => {
-                            document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
+                            document.getElementById("successMessage").innerHTML = "SignUp Unsuccessful"
                         }, 2000);
                     }
                     if (error.response) {
@@ -257,7 +257,7 @@ function SecondaryUser(props) {
                         document.getElementById("successMessage").style.backgroundColor = "red"
                         document.getElementById("successMessage").style.color = "white"
                         setTimeout(() => {
-                            document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
+                            document.getElementById("successMessage").innerHTML = "SignUp Unsuccessful"
                         }, 2000);
                         setTimeout(() => {
                             document.getElementById("successMessage").style.backgroundColor = "none"
@@ -275,10 +275,10 @@ function SecondaryUser(props) {
         }
         return ( <
             React.Fragment > <
-            div className = 'row justify-content-center bg-light p-lg-5 p-2 rounded-4' >
+            div className = 'row justify-content-center bg-lighter p-lg-5 p-2 rounded-4' >
             <
             // col-lg-5 should do the trick for responsiveness
-            form className = 'bg-whiter p-lg-5 rounded-4 col-lg-5'
+            form className = 'bg-white p-lg-5 rounded-4 col-lg-5'
             onSubmit = { handleSubmit(onSubmit) } >
             <
             div className = 'row justify-center p-lg-3 pt-5 p-sm-12' > <

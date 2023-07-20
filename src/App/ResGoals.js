@@ -125,13 +125,13 @@ const ResGoals = () => {
             <
             div className = "scroll-y2 pb-lg-5 mb-lg-5" > {
                 span.map(goal => ( <
-                    div className = "p-4 shadow rounded-4 mt-3"
+                    div className = "p-4 shadow res-home rounded-4 mt-3"
                     key = { goal.goal_id } > <
                     div className = "d-flex flex-row flex" > <
                     span className = "mt-1" > <
                     AddUser className = " rounded-circle border border-dark p-1"
                     size = "large" / > < /span>  <
-                    h6 className = "mx-4" > < span className = "active"
+                    p className = "mx-4" > < span className = "active"
                     onClick = {
                         () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
                     } > {
@@ -139,7 +139,7 @@ const ResGoals = () => {
                     } < /span><br/ > < p > created {
                         (goal.created).slice(0, 10)
                     } < /p >  < /
-                    h6 > < /
+                    p > < /
                     div >
                     <
                     p className = 'pt-2' > Progress: {
@@ -173,10 +173,10 @@ const ResGoals = () => {
             / > < /
             Modal >
             <
-            h6 onClick = {
+            p onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = 'p-2 rounded-3 border border-warning active text-center mx-5 mt-3' > Add a new Goal < /h6> < /
+            className = 'p-2 rounded-3 bk-warning text-center mx-5 mt-3' > Add a new Goal < /p> < /
             div > <
             /
             div >

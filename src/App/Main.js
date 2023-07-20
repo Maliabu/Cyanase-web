@@ -1,9 +1,9 @@
-import { MainRequests, PersonalRequests, GetRiskProfile } from '../Api/MainRequests'
+import { MainRequests, PersonalRequests, Networth, UserRequests, GetRiskProfile, PendingWithdrawRequests } from '../Api/MainRequests'
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Deposit from '../images/Path 80.png';
-import Networth from '../images/Path 3.png';
+import Networths from '../images/Path 3.png';
 import Chart from 'react-apexcharts';
 import './style.scss';
 import Modal from 'react-bootstrap/Modal';
@@ -12,6 +12,7 @@ import Learn1 from '../Accounts/Learn1';
 import Withdraw from '../Accounts/Withdraw'
 import { Wallet } from 'react-iconly';
 import { FaHandHoldingUsd } from 'react-icons/fa';
+import { getCurrency } from '../payment/GetCurrency';
 
 const Main = ({ id, activeTab, children, ...props }) => {
     const [show1, setShow1] = useState(false);
@@ -19,13 +20,19 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [show3, setShow3] = useState(false);
     const [span, setSpan] = useState([])
     const [graph, setGraph] = useState([])
+    const [country, setCountry] = useState([])
+    const [email, setEmail] = useState([])
+    const [name, setName] = useState([])
+    const [phone, setPhone] = useState([])
+    const [withdraws, setWithdraw] = useState([])
     const [dates, setDates] = useState([])
     const [deposit, setDeposit] = useState(0);
+    const [totalDeposit, setTotalDeposit] = useState(0);
     const [dollar, setDollar] = useState(0);
     const [depositProgress, setDepositProgress] = useState([]);
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
-    const [investmentOption, setinvestmentoption] = useState("")
+    const [investmentOption, setinvestmentoption] = useState("Cash | Venture | Credit")
     let thisYear = new Date().getFullYear()
     let depos = []
     let cart = []
@@ -36,6 +43,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         categories = depo.investment_option
         cart.push(categories)
         depos.push(amount)
+        return graph
     })
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
@@ -48,17 +56,34 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setSpan(res[2]); // array goals
         });
         MainRequests().then(res => {
-            setDeposit(res[0]);
             setDollar(res[1]);
-            setDepositNetworth(res[2]);
+            setTotalDeposit(res[2]);
             setDollarNetworth(res[3]);
             setDepositProgress(res[4]);
             setGraph(res[4]); // array deposits
             setDates(res[5])
+            console.log(res)
         })
         GetRiskProfile().then(res => {
-            setinvestmentoption(res.investment_option)
+            if (res.investment_option === undefined) {
+                setinvestmentoption("Cash | Venture | Credit")
+            } else {
+                setinvestmentoption(res.investment_option)
+            }
         });
+        UserRequests().then(res => {
+            setCountry(res.profile.country)
+            setName(res.last_name + " " + res.first_name)
+            setPhone(res.profile.phoneno)
+            setEmail(res.email)
+        });
+        Networth().then(res => {
+            setDeposit(res[1])
+            setDepositNetworth(res[2])
+        });
+        PendingWithdrawRequests().then(res => {
+            setWithdraw(res)
+        })
     }, []);
     let depositTotal = 0
     span.map(goal => (
@@ -88,36 +113,20 @@ const Main = ({ id, activeTab, children, ...props }) => {
                     text: 'Investments for ' + thisYear
                 },
                 categories: dates,
+                // categories: ['jun', 'jul', 'aug'],
             },
             yaxis: {
                 title: {
-                    text: 'In Thousands(000) of UGX'
+                    text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: ['#252859', '#E91E63', '#FF9800'],
+            colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
 
         },
         series: result,
+        // series: [2, 60, 4],
         stroke: {
             curve: 'smooth',
-        },
-        seriesDonut: [44, 55, 41],
-        optionsDonut: {
-            chart: {
-                type: 'donut',
-            },
-            colors: ['#252859', '#E91E63', '#FF9800'],
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
         }
     }
     return ( <
@@ -138,8 +147,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
         div className = "p-lg-4 bg-white rounded-4 col text-center" >
         <
         h5 className = "bolder mt-3" > Deposit < /h5> <
-        div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h1 className = "px-2 font-lighter" > { deposit - depositTotal } < /h1></div >
+        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+        h1 className = "px-2 font-lighter" > { deposit } < /h1></div >
         <
         img src = { Deposit }
         className = "pt-2 d-none"
@@ -162,6 +171,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         Learn1 tab9 = { props.handletab9 }
         option = { investmentOption }
+        country = { country }
+        lastname = { name }
+        email = { email }
+        phone = { phone }
         / > < /
         Modal >
         <
@@ -172,10 +185,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         div className = "blue-dark p-lg-4 rounded-4 col mx-3 text-center" >
         <
         h5 className = "bolder mt-3" > Networth < /h5> <
-        div className = "d-flex flex-row flex justify-content-center" > UGX <
+        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
         h1 className = "px-2 font-lighter" > { networth } < /h1></div >
         <
-        img src = { Networth }
+        img src = { Networths }
         className = "pt-2"
         width = '80%'
         height = '30%'
@@ -193,7 +206,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         series = { options.series }
         className = "w-100"
         type = "area"
-        height = { 400 }
+        height = { 300 }
         /></div > <
         div className = 'rounded-4 row bg-white p-5' >
         <
@@ -207,7 +220,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         div className = 'col-6 text-center' >
         <
         h5 className = "bolder mt-3" > Networth < /h5> <
-        div className = "d-flex flex-row flex justify-content-center" > UGX <
+        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
         h1 className = "px-2 font-lighter" > { networth } < /h1></div >
         <
         /div><
@@ -223,10 +236,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         onHide = { handleClose2 }
         dialogClassName = "my-modal1" >
         <
-        Withdraw /
-        >
-        <
-        /
+        Withdraw country = { country }
+        phone = { phone }
+        fullname = { name }
+        / > < /
         Modal > <
         /div> < /
         div >
@@ -284,75 +297,76 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         /
         div > <
-        div className = "col-lg-3 d-none d-sm-block rounded-4 blue-dark py-5 px-2 text-center" >
-
+        div className = "col-lg-3 d-none d-sm-block px-2 text-center" >
         <
-        h5 className = "bolder mt-3" > Your Statistics < /h5>  <
-        h5 className = "pt-5 bolder" > Activity < /h5>   
-
+        div className = ' px-2 py-3 rounded-4 scroll-y3 bg-lighter' >
         <
-        Chart options = { options.optionsDonut }
-        series = { options.seriesDonut }
-        className = "d-none"
-        type = "donut"
-        width = { 300 }
-        height = { 300 }
-        /> <
-        div className = "d-flex flex-row p-3 flex justify-content-center" >
+        h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
+        withdraws.map(withdraw => ( <
+            div className = 'row p-3 mx-3 mt-2 bg-white rounded-3 modals-left' >
+            <
+            div className = 'col-8 text-start' > { withdraw.currency } { withdraw.withdraw_amount } < /div> <
+            div className = 'col-4 text-end grey-text bolder' > { withdraw.created } < /div> < /
+            div >
+        ))
+    } < /div><div className='blue-dark p-3 mt-3 rounded-4'> <
+    h5 className = "bolder mt-5" > Your Statistics < /h5>  <
+    h5 className = "pt-3 bolder" > Activity < /h5>    <
+    div className = "d-flex flex-row p-3 flex justify-content-center" >
         <
         div className = "w-25" > { depositProgress.length } % < /div> <
-        div className = "w-25" > 0 % < /div> <
-        div className = "w-25" > 0 % < /div> < /
-        div >
+    div className = "w-25" > 0 % < /div> <
+    div className = "w-25" > 0 % < /div> < /
+    div >
         <
         div className = "d-flex flex-row flex justify-content-center" >
         <
         div className = "w-25" > Deposits < /div> <
-        div className = "w-25" > Loans < /div> <
-        div className = "w-25" > Withdraws < /div> < /
-        div >
+    div className = "w-25" > Loans < /div> <
+    div className = "w-25" > Withdraws < /div> < /
+    div >
         <
-        img src = { Networth }
-        className = "py-2 mt-3"
-        width = '80%'
-        height = '10%'
-        alt = "investors" / >
+        img src = { Networths }
+    className = "py-2 mt-3"
+    width = '80%'
+    height = '10%'
+    alt = "investors" / >
         <
         h6 className = "pt-5 bolder d-none" > Total Deposits < /h6> <
-        div className = "d-flex d-none flex-row flex justify-content-center" > UGX <
+    div className = "d-flex d-none flex-row flex justify-content-center" > { getCurrency(country) } <
         h3 className = "px-2 font-lighter" > { networth } < /h3></div >
         <
-        img src = { Networth }
-        className = "py-2 d-none mt-3"
-        width = '80%'
-        height = '10%'
-        alt = "investors" / >
+        img src = { Networths }
+    className = "py-2 d-none mt-3"
+    width = '80%'
+    height = '10%'
+    alt = "investors" / >
         <
         h6 className = "pt-5 bolder" > Total Deposit < /h6>  <
-        div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h3 className = "px-2 font-lighter" > { networth } < /h3></div >
+    div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+        h3 className = "px-2 font-lighter" > { totalDeposit } < /h3></div >
         <
-        img src = { Networth }
-        className = "py-2 mt-3"
-        width = '80%'
-        height = '10%'
-        alt = "investors" / >
+        img src = { Networths }
+    className = "py-2 mt-3"
+    width = '80%'
+    height = '10%'
+    alt = "investors" / >
         <
         h6 className = "pt-5 bolder" > Total Networth < /h6>  <
-        div className = "d-flex flex-row flex justify-content-center" > UGX <
+    div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
         h1 className = "px-2 font-lighter" > { dollarNetworth } < /h1></div >
         <
-        img src = { Networth }
-        className = "py-2 mt-3"
-        width = '80%'
-        height = '10%'
-        alt = "investors" / >
+        img src = { Networths }
+    className = "py-2 mt-3"
+    width = '80%'
+    height = '10%'
+    alt = "investors" / >
         <
         /
-        div > < /
-        div > < /
-        div > < /div>
-    );
+    div > < /div> < /
+    div > < /
+    div > < /div>
+);
 };
 
 export default Main;

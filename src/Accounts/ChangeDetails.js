@@ -6,7 +6,7 @@ const ChangeDetails = () => {
     return ( <
         div className = "p-5 text-center" > <
         FaTrashAlt size = "70"
-        className = 'my-5 active rounded-circle border border-warning p-2' / >
+        className = 'my-5 text-danger rounded-circle border border-danger p-2' / >
         <
         h1 > Delete Account < /h1>  <
         Form >

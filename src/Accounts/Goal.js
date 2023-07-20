@@ -7,7 +7,10 @@ import { API_URL_GOAL_DEPOSIT, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
+import { getCurrency } from "../payment/GetCurrency";
+import Withdraw from './Withdraw'
+import Checkout from "../payment/checkout";
 
 class Goal extends React.Component {
     constructor(props) {
@@ -16,9 +19,10 @@ class Goal extends React.Component {
             currentStep: 0,
             payment_means: '',
             deposit_amount: 0,
-            currency: '',
+            currency: getCurrency(this.props.country),
             deposit_category: "",
             account_type: "",
+            investment_option: "Cash | Venture | Credit",
             goal_id: this.props.id
         }
     }
@@ -53,7 +57,7 @@ class Goal extends React.Component {
     getAccountType() {
         let currency = this.state.currency
         let accountType = this.state.account_type
-        if (currency === "UGX") {
+        if (currency === getCurrency(this.props.country)) {
             accountType = "basic"
         } else {
             accountType = "dollar"
@@ -61,10 +65,17 @@ class Goal extends React.Component {
         return accountType
     }
 
+    getStatus(status) {
+        if (status === "successful") {
+            return "successful"
+        }
+        console.log(status)
+        return status
+    }
     submitButton = () => {
         let currentStep = this.state.currentStep;
         let payment_means = this.state.payment_means
-        if (currentStep === 5 && payment_means === "online") {
+        if (currentStep === 4 && payment_means === "online") {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
@@ -89,29 +100,15 @@ class Goal extends React.Component {
         }
         return null
     }
-    success(amount, currency, goal) {
-        document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "orange"
-        document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "orange"
-        document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "orange"
-        document.getElementById("errorMessage").style.borderColor = "orange"
-        document.getElementById("errorMessage").innerText = "You have successfully made a deposit of " + currency + " " + amount + " to " + goal
-        setTimeout(() => {
-            document.getElementById("errorMessage").style.display = 'none'
-        }, 4000);
-        setTimeout(() => {
-            window.location.pathname = "/home"
-        }, 5000);
-    }
     handleSubmit = () => {
+        preloader()
         let form_data = new FormData();
         form_data.append('payment_means', this.state.payment_means);
         form_data.append('currency', this.state.currency);
         form_data.append('deposit_category', this.state.deposit_category);
         form_data.append('deposit_amount', this.state.deposit_amount);
         form_data.append('account_type', this.getAccountType());
+        form_data.append('investment_option', this.state.investment_option);
         form_data.append('goal_id', this.state.goal_id);
         axios.post(`${API_URL_GOAL_DEPOSIT}`, form_data, {
                 headers: {
@@ -127,20 +124,20 @@ class Goal extends React.Component {
                 if (response.status === 200 && response.data.success === false) {
                     fail(response.data.message)
                 } else {
-                    success("You have created a goal successfully", "", "successful");
+                    success("You have deposited to this goal successfully", "/home", "successful");
                 }
             });
     }
     _saccoCategory = () => {
         let currentStep = this.state.currentStep
-        currentStep = currentStep + 6
+        currentStep = currentStep + 5
         this.setState({
             currentStep: currentStep
         })
     }
     _afterSacco = () => {
         let currentStep = this.state.currentStep
-        currentStep = currentStep - 5
+        currentStep = currentStep - 4
         this.setState({
             currentStep: currentStep
         })
@@ -149,6 +146,13 @@ class Goal extends React.Component {
     _next = () => {
         let currentStep = this.state.currentStep
         currentStep = currentStep >= 1 ? currentStep + 1 : currentStep + 1
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+    _withdraw = () => {
+        let currentStep = this.state.currentStep
+        currentStep = 7
         this.setState({
             currentStep: currentStep
         })
@@ -163,8 +167,13 @@ class Goal extends React.Component {
     }
 
     _prevBeforeSacco = () => {
+        this.setState({
+            currentStep: 1
+        })
+    }
+    _prevwithdraw = () => {
             this.setState({
-                currentStep: 1
+                currentStep: 0
             })
         }
         /*
@@ -173,6 +182,24 @@ class Goal extends React.Component {
     previousButton() {
         let currentStep = this.state.currentStep;
         let deposit_category = this.state.deposit_category;
+        if (currentStep === 6 && deposit_category === 'sacco/club') {
+            return ( <
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                type = "button"
+                onClick = { this._prevBeforeSacco } >
+                Previous <
+                /h6>
+            )
+        }
+        if (currentStep === 7) {
+            return ( <
+                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                type = "button"
+                onClick = { this._prevwithdraw } >
+                Previous <
+                /h6>
+            )
+        }
         if (currentStep !== 0) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
@@ -182,20 +209,11 @@ class Goal extends React.Component {
                 /h6>
             )
         }
-        if (currentStep === 7 && deposit_category === 'sacco/club') {
-            return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
-                type = "button"
-                onClick = { this._prevBeforeSacco } >
-                Previous <
-                /h6>
-            )
-        }
         return null;
     }
     heading() {
         let currentStep = this.state.currentStep;
-        if (currentStep === 0) {
+        if (currentStep === 0 || currentStep === 7) {
             return null
         }
         return ( < div > <
@@ -209,6 +227,18 @@ class Goal extends React.Component {
         )
     }
 
+    wButton() {
+        let currentStep = this.state.currentStep;
+        if (currentStep === 0) {
+            return ( <
+                h6 className = "py-3 px-4 bk-warning text-center rounded-3"
+                type = "button"
+                onClick = { this._withdraw } >
+                Withdraw <
+                /h6>        
+            )
+        }
+    }
     nextButton() {
         let currentStep = this.state.currentStep;
         let payment_means = this.state.payment_means;
@@ -231,7 +261,7 @@ class Goal extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 7) {
+        if (currentStep === 6) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
@@ -250,7 +280,7 @@ class Goal extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 5 && payment_means === "offline") {
+        if (currentStep === 4 && payment_means === "offline") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
                 type = "button"
@@ -259,7 +289,7 @@ class Goal extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep === 5 && payment_means === "wallet") {
+        if (currentStep === 4 && payment_means === "wallet") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
                 type = "button" >
@@ -267,7 +297,7 @@ class Goal extends React.Component {
                 /h6>        
             )
         }
-        if (currentStep < 5) {
+        if (currentStep < 4) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 onClick = { this._next } >
@@ -282,7 +312,7 @@ class Goal extends React.Component {
         return ( <
             React.Fragment >
             <
-            form className = "p-lg-5 p-2 text-center"
+            form className = "p-lg-5 p-4 modals rounded-2 text-center"
             onSubmit = { this.handleSubmit } > {
                 /* 
                           render the form steps and pass required props in
@@ -296,6 +326,8 @@ class Goal extends React.Component {
             created = { this.getName()[3] }
             progress = { this.getName()[4] }
             percent = { this.getName()[5] }
+            currency = { this.state.currency }
+            next = { this.wButton() }
             /> <
             Step1 currentStep = { this.state.currentStep }
             deposit_category = { this.state.deposit_category }
@@ -304,18 +336,21 @@ class Goal extends React.Component {
             /> <
             Step2 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            /> <
+            />  <
             Step3 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step4 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             currency = { this.state.currency }
             payment_means = { this.state.payment_means }
             /> <
-            Step5 currentStep = { this.state.currentStep }
+            Step4 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
+            phone = { this.props.phone }
+            email = { this.props.email }
+            name = { this.props.lastname }
+            country = { this.props.country }
+            status = { this.getStatus }
+            getCurr = { getCurrency(this.props.country) }
             deposit_amount = { this.state.deposit_amount }
             total_deposit = { this.getTotalDeposit() }
             fee = {
@@ -323,15 +358,21 @@ class Goal extends React.Component {
             }
             currency = { this.state.currency }
             /> <
-            Step6 currentStep = { this.state.currentStep }
+            Step5 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             total_deposit = { this.getTotalDeposit() }
             currency = { this.state.currency }
-            />  <Step7  currentStep = { this.state.currentStep }
+            />  <Step6  currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            /> { this.nextButton() } { this.previousButton() } {this.submitButton()}< /
-            form > < /
+            /> <Step7  currentStep = { this.state.currentStep }
+            handleChange = { this.handleChange }
+            goalid = { this.state.goal_id }
+            phone = { this.props.phone }
+            /> { this.nextButton() } { this.previousButton() } { this.submitButton() } < /
+            form >
+            <
+            /
             React.Fragment >
         );
     }
@@ -358,7 +399,7 @@ function Step0(props) {
         /div> < /
         div >
         <
-        div className = "px-lg-5 p-3 text-start" >
+        div className = " px-3 text-start" >
         <
         div className = "flex-row p-3" >
         <
@@ -370,7 +411,7 @@ function Step0(props) {
         div className = "flex-row p-3" >
         <
         h6 className = "bolder" > Goal Amount: < /h6><
-        div className = "d-flex flex-row flex justify-content-center" > UGX <
+        div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
         h2 className = "px-2 font-lighter" > { props.amount } < /h2></div > < /
         div > <
         div className = "row p-3" >
@@ -388,10 +429,21 @@ function Step0(props) {
         div className = "flex-row mt-2 p-3" >
         <
         h6 className = "bolder" > Total Deposit Made: < /h6> <
-        div className = "d-flex flex-row flex justify-content-center" > UGX <
-        h4 className = "px-2 font-lighter" > { props.deposit } < /h4></div > < /
+        div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
+        h4 className = "px-2 font-lighter" > { props.deposit } < /h4></div >
+        <
+        /
         div > <
-        /div> < /
+        div className = "row mt-2 p-3 border-top border-bottom" >
+        <
+        div className = "col p-2" >
+        <
+        h6 className = "bolder" > Networth: < /h6> <
+        div className = "d-flex flex-row flex" > { props.currency } <
+        h4 className = "px-2 font-lighter" > { props.deposit } < /h4></div > < /div><div className="col"> {props.next} < /
+        div > < /div >  <
+        h6 className = "bolder py-3" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
+        div > < /
         div > < /
         div >
     );
@@ -444,7 +496,7 @@ function Step1(props) {
         <
         /
         div > <
-        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentoption } < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Cash | Venture | Credit < /span> < /
         h6 > < /div > < /
         div >
     );
@@ -504,43 +556,6 @@ function Step3(props) {
     if (props.currentStep !== 3) {
         return null
     }
-    return ( <
-        div className = "text-start" > <
-        h6 className = "mt-2 text-center" > Choose the currency in which you would like to invest your money <
-        /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "mb-3" >
-        <
-        h4 className = "font-lighter" > BASIC ACCOUNT < /h4> <
-        Form.Check label = "Deposit and maintain your account in your local currency.(Transaction charges apply)"
-        name = "currency"
-        type = "radio"
-        onChange = { props.handleChange }
-        value = "UGX"
-        required id = "default-radio" /
-        >
-        <
-        h4 className = "font-lighter mt-5" > DOLLAR ACCOUNT < /h4> <
-        Form.Check label = "Deposit in your local currency and we shall change it to USD(Standard charges apply)"
-        name = "currency"
-        onChange = { props.handleChange }
-        type = "radio"
-        value = "USD"
-        required id = "default-radio" /
-        >
-        <
-        /
-        div > < /div ></div >
-    );
-}
-
-function Step4(props) {
-    if (props.currentStep !== 4) {
-        return null
-    }
     if (props.payment_means === "wallet") {
         return ( <
             div className = "text-center" > <
@@ -584,8 +599,13 @@ function Step4(props) {
     );
 }
 
-function Step5(props) {
-    if (props.currentStep !== 5) {
+function Step4(props) {
+    function parentCallback(someStatus) {
+        props.status(someStatus)
+        console.log(someStatus)
+        return someStatus
+    }
+    if (props.currentStep !== 4) {
         return null
     }
     if (props.payment_means === "offline") {
@@ -597,24 +617,26 @@ function Step5(props) {
             div >
         )
     }
-    if (props.payment_means === "online") {
-        return ( <
-            div className = "text-center" > < h1 className = "py-5" > FlutterWave < /h1> < /
-            div >
-        );
-    }
     return ( <
-        div className = "text-center" > <
-        h4 className = "font-lighter my-3" > Deposit from Wallet < /h4> <
-        h6 className = "mt-2" > Confirm to Continue < /h6>   <
-        h4 className = "py-5 font-lighter" > You have deposited < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
-        h4 > < /
+        div className = "text-center" >
+        <
+        h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+        h4 >
+        <
+        Checkout phone = { props.phone }
+        country = { props.country }
+        name = { props.name }
+        email = { props.email }
+        amount = { props.total_deposit }
+        currency = { props.getCurr }
+        callBack = { parentCallback }
+        / > < /
         div >
     )
 }
 
-function Step6(props) {
-    if (props.currentStep !== 6) {
+function Step5(props) {
+    if (props.currentStep !== 5) {
         return null
     } else if (props.payment_means === "offline") {
         return ( <
@@ -659,7 +681,7 @@ function Step6(props) {
             onChange = { props.handleChange }
             name = "deposit_amount"
             id = 'phone'
-            required placeholder = "UGX 10,000" / >
+            required placeholder = " 10,000" / >
             <
             Form.Control.Feedback type = "invalid" >
             This field is required. <
@@ -669,8 +691,8 @@ function Step6(props) {
         );
     }
 
-    function Step7(props) {
-        if (props.currentStep !== 7) {
+    function Step6(props) {
+        if (props.currentStep !== 6) {
             return null
         }
         return ( < div >
@@ -703,4 +725,13 @@ function Step6(props) {
             div > <
             /div>)
         }
-        export default Goal;
+
+        function Step7(props) {
+            if (props.currentStep !== 7) {
+                return null
+            }
+            return ( < Withdraw goalid = { props.goalid }
+                phone = { props.phone }
+                / > )
+            }
+            export default Goal;

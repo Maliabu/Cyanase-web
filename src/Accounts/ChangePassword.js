@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import axios from "axios";
 import { API_URL_USER_UPDATE_PASSWORD, TOKEN } from "../apis";
 import { Button } from "react-bootstrap";
+import { success, catch_errors, preloader, fail } from "../Api/RequestFunctions";
 
 class ChangePassword extends Component {
     //state for form data
@@ -12,20 +13,6 @@ class ChangePassword extends Component {
         confirmpassword: ''
     };
     Show = true;
-
-    success = () => {
-        document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "green"
-        document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "green"
-        document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "green"
-        document.getElementById("errorMessage").style.borderColor = "green"
-        document.getElementById("errorMessage").innerText = "Password Updated"
-        setTimeout(() => {
-            document.getElementById("errorMessage").style.display = 'none'
-        }, 2000);
-    }
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
@@ -34,6 +21,7 @@ class ChangePassword extends Component {
     };
 
     handleSubmit = (e) => {
+        preloader()
         e.preventDefault();
         let form_data = new FormData();
         form_data.append('password', this.state.password);
@@ -46,72 +34,15 @@ class ChangePassword extends Component {
                 }
             })
             .catch(function(error) {
-                const errorDisplay = () => {
-                    document.getElementById("errorMessage").innerText = error.response
-                    document.getElementById("errorMessage").style.display = 'block'
-                    document.getElementById("errorMessage").style.color = "red"
-                    document.getElementById("errorMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("errorMessage").style.display = 'none'
-                    }, 6000);
-                }
-                const errorSignUp = () => {
-                    document.getElementById("successMessage").innerHTML = "Something went wrong"
-                    document.getElementById("successMessage").style.backgroundColor = "red"
-                    document.getElementById("successMessage").style.color = "white"
-                    document.getElementById("successMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Update Unsuccessful"
-                    }, 4000);
-                }
-                if (error.response) {
-                    const responses = error.response.data.detail
-                    if (error.response.status === 400) {
-                        errorDisplay(responses)
-                    } else if (error.response.status === 500) {
-                        errorDisplay(responses)
-                    } else if (error.response.status === 404) {
-                        errorDisplay(responses)
-                    } else if (error.response.status === 403) {
-                        errorDisplay(responses)
-                    }
-                    errorSignUp();
-                } else if (error.request) {
-                    console.log(error.request);
-                    errorDisplay(error);
-                    errorSignUp();
-                } else {
-                    console.log('Error', error.message);
-                    errorSignUp();
-                    errorDisplay(error);
-                }
+                catch_errors(error)
             })
-            .then((response) => {
-                const errorDisplay = (response) => {
-                    document.getElementById("errorMessage").innerText = response.data.message
-                    document.getElementById("errorMessage").style.display = 'block'
-                    document.getElementById("errorMessage").style.color = "red"
-                    document.getElementById("errorMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("errorMessage").style.display = 'none'
-                    }, 6000);
+            .then(function(response) {
+                if (response.status === 200 && response.data.success === false) {
+                    fail(response.data.message)
+                } else {
+                    success("Password updated successfully", "/", "successful");
                 }
-                const errorSignUp = () => {
-                    document.getElementById("successMessage").innerHTML = "Something went wrong"
-                    document.getElementById("successMessage").style.backgroundColor = "red"
-                    document.getElementById("successMessage").style.color = "white"
-                    document.getElementById("successMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Login Unsuccessful"
-                    }, 2000);
-                }
-                if (response.data.success === false && response.status === 200) {
-                    errorDisplay(response);
-                    errorSignUp()
-                }
-                window.location.pathname = "/"
             });
-        this.success();
     }
     render() {
         return ( <
@@ -125,7 +56,7 @@ class ChangePassword extends Component {
             Form.Group className = "mb-3 bg-white shadow-sm p-3" >
             <
             Form.Label > Enter your New password < /Form.Label>  <
-            Form.Control type = "text"
+            Form.Control type = "password"
             id = "password"
             value = { this.state.password }
             onChange = { this.handleChange }
@@ -139,7 +70,7 @@ class ChangePassword extends Component {
             Form.Group className = "mb-3 bg-white shadow-sm p-3" >
             <
             Form.Label > Repeat your New password < /Form.Label>  <
-            Form.Control type = "text"
+            Form.Control type = "password"
             id = "confirmpassword"
             value = { this.state.confirmpassword }
             onChange = { this.handleChange }
@@ -150,11 +81,16 @@ class ChangePassword extends Component {
             /Form.Control.Feedback> < /
             Form.Group >
             <
-            p id = "errorMessage"
-            className = 'py-3 mt-3 rounded border text-center fade-in'
+            h6 id = "errorMessage"
+            className = 'py-3 mt-3 rounded border border-danger text-center'
             style = {
                 { display: 'none' }
-            } > hey < /p> <
+            } > hey < /h6> <
+            h6 id = "infoMessage"
+            className = 'py-3 mt-3 rounded warning text-center'
+            style = {
+                { display: 'none' }
+            } > hey < /h6>  <
             Button variant = "warning"
             className = 'shadow text-center'
             id = 'successMessage'

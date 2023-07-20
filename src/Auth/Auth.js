@@ -2,6 +2,7 @@ import React from "react";
 import Login from './Login';
 import SignUp from './SecondaryUser';
 import Header from '../images/Group 3525.png';
+// import Checkout from "../payment/checkout";
 
 class Auth extends React.Component {
     constructor(props) {

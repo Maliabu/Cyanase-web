@@ -25,7 +25,8 @@ const Notify = () => {
                 div >
                 <
                 p className = "x-small text-end" > < span className = "blue-dark rounded-4 p-1 px-2" > {
-                    (deposit.created.slice(0, 10)) } < /span>  < /
+                    (deposit.created)
+                } < /span>  < /
                 p > < /div> < /
                 p > < /
                 div >

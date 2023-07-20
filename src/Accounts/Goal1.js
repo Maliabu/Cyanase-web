@@ -5,7 +5,8 @@ import '../App.css';
 import axios from "axios";
 import { API_URL_GOAL, TOKEN } from "../apis";
 import Button from "react-bootstrap/esm/Button";
-import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
+import { getCurrency } from "../payment/GetCurrency";
 
 class Goal1 extends React.Component {
     constructor(props) {
@@ -20,7 +21,8 @@ class Goal1 extends React.Component {
             deposit_reminder_day: '',
             payment_means: '',
             deposit_amount: 0,
-            currency: '',
+            currency: getCurrency(this.props.country),
+            investment_option: "Cash | Venture | Credit",
             deposit_category: "",
             account_type: ""
         }
@@ -28,7 +30,7 @@ class Goal1 extends React.Component {
     getAccountType() {
         let currency = this.state.currency
         let accountType = this.state.account_type
-        if (currency === "UGX") {
+        if (currency === getCurrency(this.props.country)) {
             accountType = "basic"
         } else {
             accountType = "dollar"
@@ -60,7 +62,7 @@ class Goal1 extends React.Component {
     }
     submitButton = () => {
         let currentStep = this.state.currentStep;
-        if (currentStep === 13) {
+        if (currentStep === 12) {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
@@ -87,7 +89,7 @@ class Goal1 extends React.Component {
     }
     nextButton() {
         let currentStep = this.state.currentStep;
-        if (currentStep < 14) {
+        if (currentStep < 13) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
@@ -105,23 +107,8 @@ class Goal1 extends React.Component {
         })
         console.log(this.state)
     }
-    success(goal, currency, amount) {
-        document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "orange"
-        document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "orange"
-        document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "orange"
-        document.getElementById("errorMessage").style.borderColor = "orange"
-        document.getElementById("errorMessage").innerText = "You have successfully created a goal to " + goal + " of " + currency + " " + amount
-        setTimeout(() => {
-            document.getElementById("errorMessage").style.display = 'none'
-        }, 4000);
-        setTimeout(() => {
-            window.location.pathname = "/home"
-        }, 5000);
-    }
     handleSubmit = () => {
+        preloader()
         let form_data = new FormData();
         form_data.append('goal_name', this.state.goal_name);
         form_data.append('goal_amount', this.state.goal_amount);
@@ -130,6 +117,7 @@ class Goal1 extends React.Component {
         form_data.append('deposit_reminder_day', this.state.deposit_reminder_day);
         form_data.append('payment_means', this.state.payment_means);
         form_data.append('currency', this.state.currency);
+        form_data.append('investment_option', this.state.investment_option);
         form_data.append('deposit_category', this.state.deposit_category);
         form_data.append('deposit_amount', this.state.deposit_amount);
         form_data.append('account_type', this.getAccountType());
@@ -234,6 +222,7 @@ class Goal1 extends React.Component {
             deposit_rate = { this.state.deposit_rate }
             deposit_reminder_day = { this.state.deposit_reminder_day }
             deposit_amount = { this.getDepositAmount() }
+            currency = { this.state.currency }
             /> <
             Step8 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
@@ -243,16 +232,13 @@ class Goal1 extends React.Component {
             /> <
             Step9 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            /> <
+            /><
             Step10 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step11 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             currency = { this.state.currency }
             payment_means = { this.state.payment_means }
             /> <
-            Step12 currentStep = { this.state.currentStep }
+            Step11 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             deposit_amount = { this.state.deposit_amount }
@@ -262,7 +248,7 @@ class Goal1 extends React.Component {
             }
             currency = { this.state.currency }
             /> <
-            Step13 currentStep = { this.state.currentStep }
+            Step12 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             payment_means = { this.state.payment_means }
             total_deposit = { this.getTotalDeposit() }
@@ -347,7 +333,7 @@ function Step3(props) {
         name = "goal_amount"
         id = 'phone'
         onChange = { props.handleChange }
-        required placeholder = "UGX 10,000" / >
+        required placeholder = " 10,000" / >
         <
         Form.Control.Feedback type = "invalid" >
         This field is required. <
@@ -525,8 +511,8 @@ function Step7(props) {
         continue < /h6> <
         div className = "py-5 px-3 rounded-25" >
         <
-        h6 > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at UGX< span className = "bolder" > { props.goal_amount } < /span >
-        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of UGX < span className = "bolder" > { (props.deposit_amount).toFixed(2) } < /span > < /h6 > <
+        h6 > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at {props.currency}< span className = "bolder" > { props.goal_amount } < /span >
+        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of {props.currency} < span className = "bolder" > { (props.deposit_amount).toFixed(2) } < /span > < /h6 > <
         h6 > We shall remind you every: < span className = "bolder" > { props.deposit_reminder_day } < /span> < /
         h6 > <
         /
@@ -581,7 +567,7 @@ function Step8(props) {
         <
         /
         div > < /div ><
-        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Cash | Venture | Credit < /span> < /
         h6 > <
         h6 className = "py-3 rounded-3 d-none bk-warning text-center"
         onClick = { props.getTab9 } >
@@ -639,42 +625,6 @@ function Step10(props) {
     if (props.currentStep !== 10) {
         return null
     }
-    return ( <
-        div className = "text-start" > <
-        h6 className = "mt-2 text-center" > Choose the currency in which you would like to invest your money <
-        /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "mb-3" >
-        <
-        h4 className = "font-lighter" > BASIC ACCOUNT < /h4> <
-        Form.Check label = "Deposit and maintain your account in your local currency.(Transaction charges apply)"
-        name = "currency"
-        type = "radio"
-        onChange = { props.handleChange }
-        value = "UGX"
-        required id = "default-radio" /
-        >
-        <
-        h4 className = "font-lighter mt-5" > DOLLAR ACCOUNT < /h4> <
-        Form.Check label = "Deposit in your local currency and we shall change it to USD(Standard charges apply)"
-        name = "currency"
-        onChange = { props.handleChange }
-        type = "radio"
-        value = "USD"
-        required id = "default-radio" /
-        >
-        <
-        /
-        div > < /div ></div > );
-}
-
-function Step11(props) {
-    if (props.currentStep !== 11) {
-        return null
-    }
     if (props.payment_means === "wallet") {
         return ( <
             div className = "text-center" > <
@@ -718,8 +668,8 @@ function Step11(props) {
     );
 }
 
-function Step12(props) {
-    if (props.currentStep !== 12) {
+function Step11(props) {
+    if (props.currentStep !== 11) {
         return null
     }
     if (props.payment_means === "offline") {
@@ -747,8 +697,8 @@ function Step12(props) {
     )
 }
 
-function Step13(props) {
-    if (props.currentStep !== 13) {
+function Step12(props) {
+    if (props.currentStep !== 12) {
         return null
     } else if (props.payment_means === "offline") {
         return ( <
@@ -793,7 +743,7 @@ function Step13(props) {
             onChange = { props.handleChange }
             name = "deposit_amount"
             id = 'phone'
-            required placeholder = "UGX 10,000" / >
+            required placeholder = "10,000" / >
             <
             Form.Control.Feedback type = "invalid" >
             This field is required. <
