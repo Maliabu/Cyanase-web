@@ -17,6 +17,7 @@ import { getCurrency } from "../payment/GetCurrency";
 const Personal = ({...props }) => {
 const [span, setSpan] = useState([])
 const [mine, setMine] = useState([])
+const [name, setName] = useState()
 const [deposits, setDeposits] = useState([])
 const [show, setShow] = useState(false);
 const [holdId, setHoldId] = useState("");
@@ -52,6 +53,7 @@ useEffect(() => {
     UserRequests().then(res => {
         setCountry(res.profile.country)
         setPhone(res.profile.phoneno)
+        setName(res.first_name + " " + res.last_name)
     })
 }, []);
 
@@ -275,6 +277,7 @@ onHide = { handleClose3 }
 dialogClassName = "" > <
     Goal id = { holdId }
 name = { holdName }
+fullname = { name }
 amount = { holdAmount }
 deposit = { holdDeposit }
 created = { holdCreated }
@@ -290,6 +293,7 @@ className = "side-barsy pt-5"
 onHide = { handleClose1 } {...props } > <
     Goal1 close1 = { handleClose1 }
 option = { investmentOption }
+fullname = { name }
 tab9 = { props.handletab9 }
 country = { country }
 / > < /

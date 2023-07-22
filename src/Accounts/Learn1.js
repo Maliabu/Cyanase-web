@@ -9,41 +9,48 @@ import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
+import { useState } from 'react';
+import { useForm } from "react-hook-form";
 
-class Learn1 extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            currentStep: 1,
-            payment_means: '',
-            deposit_amount: 0,
-            currency: getCurrency(this.props.country),
-            investment_option: this.props.option,
-            deposit_category: "",
-            account_type: ""
-        }
+function Learn1(props) {
+    const globalRefId = "";
+    const refID = localStorage.getItem("ref_id") ? localStorage.getItem("ref_id") : 0;
+    const ref = localStorage.getItem("ref") ? localStorage.getItem("ref") : "";
+    const [step, setStep] = useState(1)
+    const [formData, setFormData] = useState({
+        "payment_means": '',
+        "deposit_amount": 0,
+        "currency": getCurrency(props.country),
+        "investment_option": props.option,
+        "deposit_category": "",
+        "account_type": "",
+        "reference": refID, // i need it here
+        "reference_id": ref
+    });
+    formData.reference = ref
+    formData.reference_id = refID
+    console.log(formData)
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setFormData({...formData, [name]: value })
+        console.log(formData)
     }
-    handleChange = event => {
-        const { name, value } = event.target
-        this.setState({
-            [name]: value
-        })
-        console.log(this.state)
+    const getTotalDeposit = () => {
+        let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
+        return total_deposit
     }
-    getTotalDeposit() {
-        this.total_deposit = parseFloat(this.getFee()) + parseFloat(this.state.deposit_amount)
-        return this.total_deposit
+    const getFee = () => {
+        let fee = ((1.4 / 100) * formData.deposit_amount).toFixed(2)
+        return fee
     }
-    getFee() {
-        this.fee = ((1.4 / 100) * this.state.deposit_amount).toFixed(2)
-        return this.fee
+    const getTab9 = () => {
+        return props.tab9
     }
-    getTab9() {
-        return this.props.tab9
-    }
-    getAccountType() {
-        let currency = this.state.currency
-        let accountType = this.state.account_type
+    const { handleSubmit } = useForm();
+    const getAccountType = () => {
+        let currency = formData.currency
+        let accountType = formData.account_type
         if (currency === "USD") {
             accountType = "dollar"
         } else {
@@ -51,16 +58,12 @@ class Learn1 extends React.Component {
         }
         return accountType
     }
-    handleSubmit = () => {
+
+    function onSubmit() {
         preloader()
-        let form_data = new FormData();
-        form_data.append('payment_means', this.state.payment_means);
-        form_data.append('currency', this.state.currency);
-        form_data.append('investment_option', this.state.investment_option);
-        form_data.append('deposit_category', this.state.deposit_category);
-        form_data.append('deposit_amount', this.state.deposit_amount);
-        form_data.append('account_type', this.getAccountType());
-        axios.post(`${API_URL_DEPOSIT}`, form_data, {
+        formData.account_type = getAccountType()
+        console.log(formData)
+        axios.post(`${API_URL_DEPOSIT}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     'Accept': 'application/json',
@@ -75,72 +78,25 @@ class Learn1 extends React.Component {
                     fail(response.data.message)
                 } else {
                     success("You have deposited successfully", "/home", "successful");
+                    localStorage.removeItem("ref_id")
+                    localStorage.removeItem("ref")
                 }
             });
+
     }
-    getStatus(status) {
-        if (status === "successful") {
-            return "successful"
-        }
-        console.log(status)
-        return status
-    }
-    _saccoCategory = () => {
-        let currentStep = this.state.currentStep
-        currentStep = currentStep + 5
-        this.setState({
-            currentStep: currentStep
-        })
-    }
-    _afterSacco = () => {
-        let currentStep = this.state.currentStep
-        currentStep = currentStep - 4
-        this.setState({
-            currentStep: currentStep
-        })
+    const _next = () => {
+        setStep(step + 1)
     }
 
-    _next = () => {
-        let currentStep = this.state.currentStep
-        currentStep = currentStep >= 2 ? currentStep + 1 : currentStep + 1
-        this.setState({
-            currentStep: currentStep
-        })
+    const _prev = () => {
+        setStep(step - 1)
     }
-
-    _prev = () => {
-        let currentStep = this.state.currentStep
-        currentStep = currentStep <= 1 ? 1 : currentStep - 1
-        this.setState({
-            currentStep: currentStep
-        })
-    }
-
-    _prevBeforeSacco = () => {
-            this.setState({
-                currentStep: 1
-            })
-        }
-        /*
-         * the functions for our button
-         */
-    previousButton() {
-        let currentStep = this.state.currentStep;
-        let deposit_category = this.state.deposit_category;
-        if (currentStep !== 1) {
+    const previousButton = () => {
+        if (step !== 1) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
-                onClick = { this._prev } >
-                Previous <
-                /h6>
-            )
-        }
-        if (currentStep === 6 && deposit_category === 'sacco/club') {
-            return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
-                type = "button"
-                onClick = { this._prevBeforeSacco } >
+                onClick = { _prev } >
                 Previous <
                 /h6>
             )
@@ -148,10 +104,9 @@ class Learn1 extends React.Component {
         return null;
     }
 
-    submitButton = () => {
-        let currentStep = this.state.currentStep;
-        let payment_means = this.state.payment_means
-        if (currentStep === 4 && payment_means === "online") {
+    const submitButton = () => {
+        let payment_means = formData.payment_means;
+        if (step === 4 && payment_means === "online") {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
@@ -167,7 +122,7 @@ class Learn1 extends React.Component {
                 Button variant = "warning"
                 className = 'shadow text-center'
                 id = 'successMessage'
-                onClick = { this.handleSubmit }
+                onClick = { onSubmit }
                 type = "button" >
                 Submit <
                 /Button> < /
@@ -177,20 +132,19 @@ class Learn1 extends React.Component {
         return null
     }
 
-    nextButton() {
-        let currentStep = this.state.currentStep;
-        let payment_means = this.state.payment_means;
-        let deposit_category = this.state.deposit_category;
-        if (currentStep === 1 && deposit_category === "personal investment") {
+    const nextButton = () => {
+        let payment_means = formData.payment_means;
+        let deposit_category = formData.deposit_category
+        if (step === 1 && deposit_category === "personal investment") {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
-                onClick = { this._next } >
+                onClick = { _next } >
                 Next <
                 /h6>        
             )
         }
-        if (currentStep === 6) {
+        if (step === 6) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
@@ -199,105 +153,86 @@ class Learn1 extends React.Component {
                 /h6>        
             )
         }
-
-        if (currentStep === 1 && deposit_category === "sacco/club") {
-            return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
-                type = "button"
-                onClick = { this._saccoCategory } >
-                Next <
-                /h6>        
-            )
-        }
-        if (currentStep === 4 && payment_means === "offline") {
+        if (step === 4 && payment_means === "offline") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
                 type = "button"
-                onClick = { this._next } >
+                onClick = { _next } >
                 Continue <
                 /h6>        
             )
         }
-        if (currentStep === 4 && payment_means === "wallet") {
-            return ( <
-                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
-                type = "button" >
-                OK <
-                /h6>        
-            )
-        }
-        if (currentStep < 4) {
+        if (step < 4) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
-                onClick = { this._next } >
+                onClick = { _next } >
                 Next <
                 /h6>        
             )
         }
-        return null;
+        return null
     }
 
-    render() {
-        return ( <
-            React.Fragment >
-            <
-            form className = "p-5 text-center"
-            onSubmit = { this.handleSubmit } > {
-                /* 
-                          render the form steps and pass required props in
-                        */
-            } <
-            Wallet className = "rounded-circle warning p-2"
-            size = "xlarge" / > < br / > <
-            img src = { DepositPic }
-            width = '25%'
-            className = "my-3"
-            height = '80%'
-            alt = "investors" / > <
-            Step1 currentStep = { this.state.currentStep }
-            deposit_category = { this.state.deposit_category }
-            handleChange = { this.handleChange }
-            getTab9 = { this.getTab9() }
-            investmentOption = { this.props.option }
-            /> <
-            Step2 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /><
-            Step3 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            currency = { this.state.currency }
-            payment_means = { this.state.payment_means }
-            /> <
-            Step4 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            phone = { this.props.phone }
-            email = { this.props.email }
-            name = { this.props.lastname }
-            country = { this.props.country }
-            payment_means = { this.state.payment_means }
-            deposit_amount = { this.state.deposit_amount }
-            total_deposit = { this.getTotalDeposit() }
-            fee = {
-                this.getFee()
-            }
-            submit = { this.handleSubmit }
-            status = { this.getStatus }
-            getCurr = { getCurrency(this.props.country) }
-            currency = { this.state.currency }
-            /> <
-            Step5 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            payment_means = { this.state.payment_means }
-            total_deposit = { this.getTotalDeposit() }
-            currency = { this.state.currency }
-            getCurr = { getCurrency(this.props.country) }
-            />  <Step6  currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> { this.nextButton() } { this.previousButton() }< /
-            form > < /
-            React.Fragment >
-        );
-    }
+    return ( <
+        React.Fragment >
+        <
+        form className = "p-5 text-center"
+        onSubmit = { handleSubmit(onSubmit) } > {
+            /* 
+                      render the form steps and pass required props in
+                    */
+        } <
+        Wallet className = "rounded-circle warning p-2"
+        size = "xlarge" / > < br / > <
+        img src = { DepositPic }
+        width = '25%'
+        className = "my-3"
+        height = '80%'
+        alt = "investors" / > <
+        Step1 currentStep = { step }
+        deposit_category = { formData.deposit_category }
+        handleChange = { handleChange }
+        getTab9 = { getTab9() }
+        investmentOption = { props.option }
+        /> <
+        Step2 currentStep = { step }
+        handleChange = { handleChange }
+        /><
+        Step3 currentStep = { step }
+        handleChange = { handleChange }
+        currency = { formData.currency }
+        payment_means = { formData.payment_means }
+        /> <
+        Step4 currentStep = { step }
+        handleChange = { handleChange }
+        phone = { props.phone }
+        email = { props.email }
+        name = { props.lastname }
+        country = { props.country }
+        globalRefId = { globalRefId }
+        payment_means = { formData.payment_means }
+        deposit_amount = { formData.deposit_amount }
+        total_deposit = { getTotalDeposit() }
+        fee = {
+            getFee()
+        }
+        submit = { onSubmit }
+        getCurr = { getCurrency(props.country) }
+        currency = { formData.currency }
+        /> <
+        Step5 currentStep = { step }
+        handleChange = { handleChange }
+        payment_means = { formData.payment_means }
+        total_deposit = { getTotalDeposit() }
+        currency = { formData.currency }
+        getCurr = { getCurrency(props.country) }
+        />  <Step6  currentStep = { step }
+        handleChange = { handleChange }
+        /> { nextButton() } { previousButton() }{submitButton()}< /
+        form > < /
+        React.Fragment >
+    );
+
 }
 
 function Step1(props) {
@@ -452,11 +387,18 @@ function Step3(props) {
         div >
     );
 }
-
+// must pass your global var as a prop to step 4</Form.Control.Feedback>
 function Step4(props) {
+    function referenceCallBack(ref, ref_id) {
+        localStorage.setItem("ref", ref);
+        localStorage.setItem("ref_id", ref_id);
+        return ref
+    }
+
     function parentCallback(someStatus) {
-        props.status(someStatus)
-        console.log(someStatus)
+        if (someStatus === "successful") {
+            return props.submit()
+        }
         return someStatus
     }
     if (props.currentStep !== 4) {
@@ -485,6 +427,9 @@ function Step4(props) {
             amount = { props.total_deposit }
             currency = { props.getCurr }
             callBack = { parentCallback }
+            refer = { referenceCallBack } //is this where you need the value? - no, that is the prop accessing the value
+            // from checkout.js
+            //Where is this value supposed to be used?  -you can prbabl go and try to access it, but we can first check if  props.globalRefId  is being set.
             / > < /
             div >
         );
@@ -557,7 +502,7 @@ function Step5(props) {
     }
 
     function Step6(props) {
-        if (props.currentStep !== 6) {
+        if (props.step !== 6) {
             return null
         }
         return ( < div >

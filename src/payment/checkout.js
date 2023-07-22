@@ -1,10 +1,12 @@
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { useState } from 'react';
 
-export default function Checkout({ name, phone, amount, country, currency, email, callBack }) {
+export default function Checkout({ name, phone, amount, currency, email, callBack, refer }) {
     const [statuss, setStatus] = useState("unsuccessful")
+    const [reference, setref] = useState("")
+    const [ref_id, setrefId] = useState(0)
     callBack(statuss)
-    console.log(name, phone, email, country, amount)
+    refer(reference, ref_id)
     const config = {
         public_key: 'FLWPUBK_TEST-955232eaa38c733225e42cee9597d1ca-X',
         tx_ref: Date.now(),
@@ -25,23 +27,23 @@ export default function Checkout({ name, phone, amount, country, currency, email
     const handleFlutterPayment = useFlutterwave(config);
     return ( < div className = "App" >
         <
-        h5 className = 'bolder' > Click below to checkout < /h5>
-
-        <
         h6 onClick = {
             () => {
                 handleFlutterPayment({
                     callback: (response) => {
                         setStatus(response.status)
+                        setref(response.flw_ref)
+                        setrefId(response.transaction_id)
                         console.log(response);
+
                         closePaymentModal() // this will close the modal programmatically
                     },
                     onClose: () => {},
                 });
             }
         }
-        className = 'status active p-2 rounded-3 mt-3' >
-        Click to deposit <
+        className = 'bk-warning active p-3 mx-5 rounded-3 mt-3' >
+        Checkout <
         /h6> < /
         div >
     );

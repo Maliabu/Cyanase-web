@@ -1,6 +1,6 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
-import { API_URL_WITHDRAW, TOKEN } from '../apis';
+import { API_URL_MM_WITHDRAW, API_URL_BANK_WITHDRAW, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
@@ -57,8 +57,7 @@ class Withdraw extends React.Component {
 
     submitButton = () => {
         let currentStep = this.state.currentStep;
-        let withdraw_channel = this.state.withdraw_channel
-        if (currentStep === 4 && withdraw_channel === "bank") {
+        if (currentStep === 4) {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
@@ -91,31 +90,57 @@ class Withdraw extends React.Component {
         form_data.append('withdraw_category', this.state.withdraw_category);
         form_data.append('withdraw_amount', this.state.withdraw_amount);
         form_data.append('account_type', this.getAccountType());
-        if (this.state.goalid !== "") {
-            form_data.append('goal_id', this.state.goalid)
-        }
         if (this.state.withdraw_channel === "bank") {
+            if (this.state.goalid !== "") {
+                form_data.append('goal_id', this.state.goalid)
+            }
             form_data.append('account_number', this.state.account_number)
             form_data.append('account_bank', this.state.account_bank)
             form_data.append('beneficiary_name', this.state.beneficiary_name)
+            axios.post(`${API_URL_BANK_WITHDRAW}`, form_data, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Accept': 'application/json',
+                        "Authorization": `Token ${ TOKEN }`
+                    }
+                })
+                .catch(function(error) {
+                    catch_errors(error)
+                })
+                .then(function(response) {
+                    if (response.status === 200 && response.data.success === false) {
+                        fail(response.data.message)
+                    } else {
+                        success("Your withdraw is now pending approval", "/home", "successful");
+                    }
+                });
         }
-        axios.post(`${API_URL_WITHDRAW}`, form_data, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    'Accept': 'application/json',
-                    "Authorization": `Token ${ TOKEN }`
-                }
-            })
-            .catch(function(error) {
-                catch_errors(error)
-            })
-            .then(function(response) {
-                if (response.status === 200 && response.data.success === false) {
-                    fail(response.data.message)
-                } else {
-                    success("Your withdraw is now pending approval", "/home", "successful");
-                }
-            });
+
+        if (this.state.withdraw_channel === "mobile money") {
+            if (this.state.goalid !== "") {
+                form_data.append('goal_id', this.state.goalid)
+            }
+            form_data.append('account_number', this.state.account_number)
+            form_data.append('account_bank', this.state.account_bank)
+            form_data.append('beneficiary_name', this.state.beneficiary_name)
+            axios.post(`${API_URL_MM_WITHDRAW}`, form_data, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Accept': 'application/json',
+                        "Authorization": `Token ${ TOKEN }`
+                    }
+                })
+                .catch(function(error) {
+                    catch_errors(error)
+                })
+                .then(function(response) {
+                    if (response.status === 200 && response.data.success === false) {
+                        fail(response.data.message)
+                    } else {
+                        success("Your withdraw is now pending approval", "/home", "successful");
+                    }
+                });
+        }
     }
     _saccoCategory = () => {
         let currentStep = this.state.currentStep
@@ -502,6 +527,19 @@ function Step4(props) {
         id = 'phone'
         required placeholder = { props.phone }
         / > <
+        Form.Control.Feedback type = "invalid" >
+        This field is required. <
+        /Form.Control.Feedback> < /
+        Form.Group > <
+        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        <
+        Form.Label > Account Bank(Mobile Money Option) < /Form.Label>  <
+        Form.Control type = "text"
+        onChange = { props.handleChange }
+        name = "account_bank"
+        id = 'phone'
+        required placeholder = "code" / >
+        <
         Form.Control.Feedback type = "invalid" >
         This field is required. <
         /Form.Control.Feedback> < /

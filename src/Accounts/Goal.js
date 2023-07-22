@@ -369,6 +369,8 @@ class Goal extends React.Component {
             handleChange = { this.handleChange }
             goalid = { this.state.goal_id }
             phone = { this.props.phone }
+            fullname = { this.props.fullname }
+            country = { this.props.country }
             /> { this.nextButton() } { this.previousButton() } { this.submitButton() } < /
             form >
             <
@@ -732,6 +734,8 @@ function Step5(props) {
             }
             return ( < Withdraw goalid = { props.goalid }
                 phone = { props.phone }
+                fullname = { props.fullname }
+                country = { props.country }
                 / > )
             }
             export default Goal;

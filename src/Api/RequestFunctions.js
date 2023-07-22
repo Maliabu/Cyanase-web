@@ -26,7 +26,7 @@ export const fail = (error) => {
     document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
     setTimeout(() => {
         document.getElementById("errorMessage").style.display = 'none'
-    }, 3000);
+    }, 6000);
     setTimeout(() => {
         document.getElementById("successMessage").innerHTML = "Unsuccessful"
     }, 2000);

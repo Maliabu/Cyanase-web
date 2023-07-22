@@ -62,7 +62,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setDepositProgress(res[4]);
             setGraph(res[4]); // array deposits
             setDates(res[5])
-            console.log(res)
         })
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
@@ -90,18 +89,26 @@ const Main = ({ id, activeTab, children, ...props }) => {
         depositTotal += parseInt(goal.deposit[0])
     ))
     const groupArrayObject = graph.reduce((group, obj) => {
-        const { name, datas } = obj;
-        if (!group[name]) {
-            group[name] = {
+        const { name, datas, date } = obj;
+        if (!group[date]) {
+            group[date] = {
+                date: date,
                 name: name,
                 data: []
             };
         }
-        group[name].data.push(datas);
+        group[date].data.push(datas);
         return group;
     }, {});
     const result = Object.values(groupArrayObject);
-    console.log(result)
+
+    // function onlyUnique(value, index, array) {
+    //     return array.indexOf(value) === index;
+    // }
+
+    // const newDates = result.map(date => (
+    //     date.date
+    // ));
     const options = {
         options: {
             chart: {
@@ -242,9 +249,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
         / > < /
         Modal > <
         /div> < /
-        div >
-        <
-        /div> < /div > <
+        div > < /
+        div > < /
+        div > <
         div >
         <
         div className = "py-5 d-none" >

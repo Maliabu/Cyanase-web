@@ -1,8 +1,10 @@
 export const API_URL = "http://localhost:8000/api/v1/en/register/user/";
 export const API_URL_DEPOSIT = "http://localhost:8000/api/v1/en/make/deposit/";
-export const API_URL_WITHDRAW = "http://localhost:8000/api/v1/en/make/bank/withdraw/";
+export const API_URL_BANK_WITHDRAW = "http://localhost:8000/api/v1/en/make/bank/withdraw/";
+export const API_URL_MM_WITHDRAW = "http://localhost:8000/api/v1/en/make/mm/withdraw/";
 export const API_URL_GOAL_DEPOSIT = "http://localhost:8000/api/v1/en/make/goal/deposit/";
 export const API_URL_GET_DEPOSIT = "http://localhost:8000/api/v1/en/get/deposit/";
+export const API_URL_GET_SUB_STATUS = "http://localhost:8000/api/v1/en/get/subscription/status/";
 export const API_URL_GET_WITHDRAW = "http://localhost:8000/api/v1/en/get/withdraw/";
 export const API_URL_GET_PENDING_WITHDRAW = "http://localhost:8000/api/v1/en/get/pending/withdraw/";
 export const API_URL_GET_GOAL_WITHDRAW = "http://localhost:8000/api/v1/en/get/goal/withdraw/";

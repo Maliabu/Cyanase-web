@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { UserRequests, PersonalRequests } from '../Api/MainRequests';
+import { UserRequests, PersonalRequests, SubscriptionRequests } from '../Api/MainRequests';
 import React, { useState, useEffect } from "react";
 import Personal from "./Personal";
 import Deposit from "./Deposit";
@@ -23,6 +23,7 @@ import ResHome from './ResHome';
 import Loans from './Loans';
 import Modal from 'react-bootstrap/Modal';
 import Alert from './Alerts'
+import Subscribe from '../Accounts/Subscribe'
 import Logout from '../Accounts/Logout';
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
 import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
@@ -31,13 +32,22 @@ const MyHome = () => {
     const [name, setName] = useState("")
     const [account, setAccount] = useState("")
     const [span, setSpan] = useState([])
+    const [country, setCountry] = useState([])
+    const [email, setEmail] = useState([])
+    const [phone, setPhone] = useState([])
     const [activeTab, setActiveTab] = useState("tab1");
     const [show3, setShow3] = useState(false);
     const handleClose3 = () => setShow3(false);
+    const [show4, setShow4] = useState(false);
+    const handleClose4 = () => setShow4(false);
     const [count, setCount] = useState("1")
+    const [subStatus, setSubStatus] = useState()
     const handleShow3 = () => {
         setCount("No Alerts")
         setShow3(true)
+    };
+    const handleShow4 = () => {
+        setShow4(true)
     };
     useEffect(() => {
         PersonalRequests().then(res => {
@@ -46,6 +56,12 @@ const MyHome = () => {
         UserRequests().then(res => {
             setName(res.first_name + " " + res.last_name)
             setAccount(res.profile.user_type)
+            setCountry(res.profile.country)
+            setPhone(res.profile.phoneno)
+            setEmail(res.email)
+        })
+        SubscriptionRequests().then(res => {
+            setSubStatus(res.status)
         })
     }, []);
     //  Functions to handle Tab Switching
@@ -296,7 +312,7 @@ const MyHome = () => {
         div > <
         div className = 'col-lg-10 col-md-9 d-none d-lg-block px-lg-5 px-4' >
         <
-        div className = "row py-5" >
+        div className = "row pt-5" >
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
         h6 className = 'mt-2' > <
@@ -332,7 +348,11 @@ const MyHome = () => {
         />  < /
         div > < /
         div > < /
-        div > <
+        div >
+        <
+        div className = 'text-end pt-3' > < h6 className = ' p-2 mx-3' > Account: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
+        onClick = { handleShow4 } > { subStatus } < /span>  < /
+        h6 > < /div > <
         TabContent id = "tab1"
         activeTab = { activeTab } > < Main handletab2 = { handleTab2 }
         handletab9 = { handleTab9 }
@@ -388,6 +408,16 @@ const MyHome = () => {
         Alert /
         >
         <
+        /Modal> <
+        Modal show = { show4 }
+        onHide = { handleClose4 }
+        dialogClassName = "my-modal1" > <
+        Subscribe substatus = { subStatus }
+        country = { country }
+        lastname = { name }
+        email = { email }
+        phone = { phone }
+        / > <
         /Modal> <
         div className = "d-block d-lg-none" >
         <
