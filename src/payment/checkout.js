@@ -1,14 +1,11 @@
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import { useState } from 'react';
+import axios from 'axios';
+import { catch_errors, success, fail, preloader } from '../Api/RequestFunctions';
+import { API_URL_DEPOSIT, TOKEN } from '../apis';
 
-export default function Checkout({ name, phone, amount, currency, email, callBack, refer }) {
-    const [statuss, setStatus] = useState("unsuccessful")
-    const [reference, setref] = useState("")
-    const [ref_id, setrefId] = useState(0)
-    callBack(statuss)
-    refer(reference, ref_id)
+export default function Checkout({ name, phone, amount, currency, email, data, submit }) {
     const config = {
-        public_key: 'FLWPUBK_TEST-955232eaa38c733225e42cee9597d1ca-X',
+        public_key: 'FLWPUBK_TEST-99f83b787d32f5195dcf295dce44c3ab-X',
         tx_ref: Date.now(),
         amount: amount,
         currency: currency,
@@ -31,11 +28,31 @@ export default function Checkout({ name, phone, amount, currency, email, callBac
             () => {
                 handleFlutterPayment({
                     callback: (response) => {
-                        setStatus(response.status)
-                        setref(response.flw_ref)
-                        setrefId(response.transaction_id)
+                        if (response.status === "successful") {
+                            data.reference = response.flw_ref
+                            data.reference_id = response.transaction_id
+                            submit()
+                            preloader()
+                            axios.post(`${API_URL_DEPOSIT}`, data, {
+                                    headers: {
+                                        "Content-Type": "multipart/form-data",
+                                        'Accept': 'application/json',
+                                        "Authorization": `Token ${ TOKEN }`
+                                    }
+                                })
+                                .catch(function(error) {
+                                    catch_errors(error)
+                                })
+                                .then(function(response) {
+                                    if (response.status === 200 && response.data.success === false) {
+                                        fail(response.data.message)
+                                    } else {
+                                        success("You have deposited successfully", "/home", "successful");
+                                    }
+                                });
+                            console.log(data)
+                        }
                         console.log(response);
-
                         closePaymentModal() // this will close the modal programmatically
                     },
                     onClose: () => {},

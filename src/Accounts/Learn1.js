@@ -3,10 +3,10 @@ import { Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 import Profile1 from '../images/Ellipse 178.png';
-import { API_URL_DEPOSIT, TOKEN } from '../apis';
-import axios from 'axios';
+// import { API_URL_DEPOSIT, TOKEN } from '../apis';
+// import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
-import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
+import { preloader } from "../Api/RequestFunctions";
 import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
@@ -14,8 +14,6 @@ import { useForm } from "react-hook-form";
 
 function Learn1(props) {
     const globalRefId = "";
-    const refID = localStorage.getItem("ref_id") ? localStorage.getItem("ref_id") : 0;
-    const ref = localStorage.getItem("ref") ? localStorage.getItem("ref") : "";
     const [step, setStep] = useState(1)
     const [formData, setFormData] = useState({
         "payment_means": '',
@@ -24,18 +22,16 @@ function Learn1(props) {
         "investment_option": props.option,
         "deposit_category": "",
         "account_type": "",
-        "reference": refID, // i need it here
-        "reference_id": ref
+        "reference": "",
+        "reference_id": 0
+
     });
-    formData.reference = ref
-    formData.reference_id = refID
-    console.log(formData)
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setFormData({...formData, [name]: value })
-        console.log(formData)
-    }
+        setFormData({...formData, [name]: value });
+    };
+
     const getTotalDeposit = () => {
         let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
         return total_deposit
@@ -58,30 +54,30 @@ function Learn1(props) {
         }
         return accountType
     }
+    formData.account_type = getAccountType()
 
     function onSubmit() {
         preloader()
-        formData.account_type = getAccountType()
-        console.log(formData)
-        axios.post(`${API_URL_DEPOSIT}`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    'Accept': 'application/json',
-                    "Authorization": `Token ${ TOKEN }`
-                }
-            })
-            .catch(function(error) {
-                catch_errors(error)
-            })
-            .then(function(response) {
-                if (response.status === 200 && response.data.success === false) {
-                    fail(response.data.message)
-                } else {
-                    success("You have deposited successfully", "/home", "successful");
-                    localStorage.removeItem("ref_id")
-                    localStorage.removeItem("ref")
-                }
-            });
+        console.log(formData);
+        // axios.post(`${API_URL_DEPOSIT}`, formData, {
+        //         headers: {
+        //             "Content-Type": "multipart/form-data",
+        //             'Accept': 'application/json',
+        //             "Authorization": `Token ${ TOKEN }`
+        //         }
+        //     })
+        //     .catch(function(error) {
+        //         catch_errors(error)
+        //     })
+        //     .then(function(response) {
+        //         if (response.status === 200 && response.data.success === false) {
+        //             fail(response.data.message)
+        //         } else {
+        //             success("You have deposited successfully", "/home", "successful");
+        //             // localStorage.removeItem("ref_id")
+        //             // localStorage.removeItem("ref")
+        //         }
+        //     });
 
     }
     const _next = () => {
@@ -122,7 +118,6 @@ function Learn1(props) {
                 Button variant = "warning"
                 className = 'shadow text-center'
                 id = 'successMessage'
-                onClick = { onSubmit }
                 type = "button" >
                 Submit <
                 /Button> < /
@@ -217,6 +212,7 @@ function Learn1(props) {
             getFee()
         }
         submit = { onSubmit }
+        data = { formData }
         getCurr = { getCurrency(props.country) }
         currency = { formData.currency }
         /> <
@@ -232,6 +228,9 @@ function Learn1(props) {
         form > < /
         React.Fragment >
     );
+
+
+    //csn you test this?</form>
 
 }
 
@@ -387,20 +386,9 @@ function Step3(props) {
         div >
     );
 }
-// must pass your global var as a prop to step 4</Form.Control.Feedback>
-function Step4(props) {
-    function referenceCallBack(ref, ref_id) {
-        localStorage.setItem("ref", ref);
-        localStorage.setItem("ref_id", ref_id);
-        return ref
-    }
 
-    function parentCallback(someStatus) {
-        if (someStatus === "successful") {
-            return props.submit()
-        }
-        return someStatus
-    }
+function Step4(props) {
+    console.log(props.data)
     if (props.currentStep !== 4) {
         return null
     }
@@ -420,16 +408,14 @@ function Step4(props) {
             h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h4 >
             <
-            Checkout phone = { props.phone }
+            Checkout phone = { props.phone } // here the checkout form is rendered after which it returns response
             country = { props.country }
             name = { props.name }
             email = { props.email }
             amount = { props.total_deposit }
             currency = { props.getCurr }
-            callBack = { parentCallback }
-            refer = { referenceCallBack } //is this where you need the value? - no, that is the prop accessing the value
-            // from checkout.js
-            //Where is this value supposed to be used?  -you can prbabl go and try to access it, but we can first check if  props.globalRefId  is being set.
+            data = { props.data }
+            submit = { props.submit }
             / > < /
             div >
         );

@@ -16,25 +16,9 @@ class Photo extends React.Component {
         })
         console.log(this.state)
     };
-    success() {
-        document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "green"
-        document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.borderColor = "green"
-        document.getElementById("errorMessage").style.display = 'block'
-        document.getElementById("errorMessage").style.color = "green"
-        document.getElementById("errorMessage").style.borderColor = "green"
-        document.getElementById("errorMessage").innerText = "Upload Successful"
-        setTimeout(() => {
-            document.getElementById("errorMessage").style.display = 'none'
-        }, 4000);
-        // setTimeout(() => {
-        //     window.location.pathname = "/home"
-        // }, 5000);
-    }
     handleSubmit = () => {
         let form_data = new FormData();
-        form_data.append('photo', this.state.photo.name);
+        form_data.append('photo', this.state);
         console.log(this.state)
         axios.post(`${API_URL_USER_PROFILE_PHOTO}`, form_data, {
                 headers: {

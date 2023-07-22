@@ -9,6 +9,7 @@ import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import axios from "axios";
 import { API_URL_ADD_AUTH_USER_RISK_PROFILE, TOKEN } from "../apis";
+import { options } from "./InvestmentOps";
 
 class RProfile extends React.Component {
     constructor(props) {
@@ -1377,10 +1378,13 @@ function Step12(props) {
         Form.Select className = "my-3"
         required defaultValue = "Select an investment option"
         onChange = { props.handleChange }
-        name = "investment_option" > <
-        option value = "" > Select < /option> <
-        option value = "Tbills" > Treasury Bills < /option> <
-        option value = "Tbonds" > Treasury Bonds < /option> < /
+        name = "investment_option" > {
+            options.map(option => {
+                return <
+                    option value = { option.name }
+                id = "investmentOption" > { option.name } < /option>
+            })
+        } < /
         Form.Select > < /div> < /
         div >
     );
