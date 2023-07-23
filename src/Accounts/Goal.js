@@ -9,7 +9,7 @@ import Button from "react-bootstrap/esm/Button";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import { getCurrency } from "../payment/GetCurrency";
-import Withdraw from './Withdraw'
+import GoalWithdraw from './GoalWithdraw'
 import Checkout from "../payment/checkout";
 
 class Goal extends React.Component {
@@ -47,12 +47,26 @@ class Goal extends React.Component {
     getName() {
         let goalName = this.props.name
         let goalId = this.props.id
+        let goalNetworth = this.props.networth
         let goalAmount = parseInt(this.props.amount)
         let deposit = parseInt(this.props.deposit)
         let created = (this.props.created).slice(0, 10)
         let percent = 100
         let progress = (percent - ((goalAmount - deposit) / goalAmount * percent)).toFixed(2)
-        return [goalName, goalAmount, deposit, created, progress, percent, goalId]
+        return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNetworth]
+    }
+    checkWithdrawStatus = () => {
+        let goalAmount = parseInt(this.props.amount)
+        let deposit = parseInt(this.props.deposit)
+        if ((goalAmount % deposit) > 0) {
+            return ( <
+                h6 className = "py-3 px-4 bk-warning text-center rounded-3"
+                type = "button"
+                onClick = { this._withdraw } >
+                withdraw <
+                /h6>        
+            )
+        } else return null
     }
     getAccountType() {
         let currency = this.state.currency
@@ -227,18 +241,6 @@ class Goal extends React.Component {
         )
     }
 
-    wButton() {
-        let currentStep = this.state.currentStep;
-        if (currentStep === 0) {
-            return ( <
-                h6 className = "py-3 px-4 bk-warning text-center rounded-3"
-                type = "button"
-                onClick = { this._withdraw } >
-                Withdraw <
-                /h6>        
-            )
-        }
-    }
     nextButton() {
         let currentStep = this.state.currentStep;
         let payment_means = this.state.payment_means;
@@ -326,8 +328,9 @@ class Goal extends React.Component {
             created = { this.getName()[3] }
             progress = { this.getName()[4] }
             percent = { this.getName()[5] }
+            networth = { this.getName()[7] }
             currency = { this.state.currency }
-            next = { this.wButton() }
+            next = { this.checkWithdrawStatus() }
             /> <
             Step1 currentStep = { this.state.currentStep }
             deposit_category = { this.state.deposit_category }
@@ -370,6 +373,7 @@ class Goal extends React.Component {
             goalid = { this.state.goal_id }
             phone = { this.props.phone }
             fullname = { this.props.fullname }
+            networth = { this.getName()[2] }
             country = { this.props.country }
             /> { this.nextButton() } { this.previousButton() } { this.submitButton() } < /
             form >
@@ -442,7 +446,7 @@ function Step0(props) {
         <
         h6 className = "bolder" > Networth: < /h6> <
         div className = "d-flex flex-row flex" > { props.currency } <
-        h4 className = "px-2 font-lighter" > { props.deposit } < /h4></div > < /div><div className="col"> {props.next} < /
+        h4 className = "px-2 font-lighter" > { props.networth } < /h4></div > < /div><div className="col"> {props.next} < /
         div > < /div >  <
         h6 className = "bolder py-3" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
         div > < /
@@ -732,10 +736,11 @@ function Step5(props) {
             if (props.currentStep !== 7) {
                 return null
             }
-            return ( < Withdraw goalid = { props.goalid }
+            return ( < GoalWithdraw goalid = { props.goalid }
                 phone = { props.phone }
                 fullname = { props.fullname }
                 country = { props.country }
+                networth = { props.networth }
                 / > )
             }
             export default Goal;

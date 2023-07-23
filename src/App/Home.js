@@ -62,6 +62,7 @@ const MyHome = () => {
         })
         SubscriptionRequests().then(res => {
             setSubStatus(res.status)
+            console.log(res.status)
         })
     }, []);
     //  Functions to handle Tab Switching
@@ -417,8 +418,8 @@ const MyHome = () => {
         lastname = { name }
         email = { email }
         phone = { phone }
-        / > <
-        /Modal> <
+        / > < /
+        Modal > <
         div className = "d-block d-lg-none" >
         <
         ResHome name = { name }

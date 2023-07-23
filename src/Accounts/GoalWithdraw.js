@@ -1,13 +1,13 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
-import { API_URL_MM_WITHDRAW, API_URL_BANK_WITHDRAW, TOKEN } from '../apis';
+import { API_URL_GOAL_MM_WITHDRAW, API_URL_GOAL_BANK_WITHDRAW, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { getCurrency } from "../payment/GetCurrency";
 
-class Withdraw extends React.Component {
+class GoalWithdraw extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -123,49 +123,55 @@ class Withdraw extends React.Component {
         form_data.append('withdraw_amount', this.state.withdraw_amount);
         form_data.append('account_type', this.getAccountType());
         if (this.state.withdraw_channel === "bank") {
-            form_data.append('account_number', this.state.account_number)
-            form_data.append('account_bank', this.state.account_bank)
-            form_data.append('beneficiary_name', this.state.beneficiary_name)
-            axios.post(`${API_URL_BANK_WITHDRAW}`, form_data, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        'Accept': 'application/json',
-                        "Authorization": `Token ${ TOKEN }`
-                    }
-                })
-                .catch(function(error) {
-                    catch_errors(error)
-                })
-                .then(function(response) {
-                    if (response.status === 200 && response.data.success === false) {
-                        fail(response.data.message)
-                    } else {
-                        success("Your withdraw is now pending approval", "/home", "successful");
-                    }
-                });
+            if (this.state.goalid !== "") {
+                form_data.append('goalid', this.state.goalid)
+                form_data.append('account_number', this.state.account_number)
+                form_data.append('account_bank', this.state.account_bank)
+                form_data.append('beneficiary_name', this.state.beneficiary_name)
+                axios.post(`${API_URL_GOAL_BANK_WITHDRAW}`, form_data, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            'Accept': 'application/json',
+                            "Authorization": `Token ${ TOKEN }`
+                        }
+                    })
+                    .catch(function(error) {
+                        catch_errors(error)
+                    })
+                    .then(function(response) {
+                        if (response.status === 200 && response.data.success === false) {
+                            fail(response.data.message)
+                        } else {
+                            success("Your withdraw is now pending approval", "/home", "successful");
+                        }
+                    });
+            }
         }
 
         if (this.state.withdraw_channel === "mobile money") {
-            form_data.append('account_number', this.state.account_number)
-            form_data.append('account_bank', this.state.account_bank)
-            form_data.append('beneficiary_name', this.state.beneficiary_name)
-            axios.post(`${API_URL_MM_WITHDRAW}`, form_data, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        'Accept': 'application/json',
-                        "Authorization": `Token ${ TOKEN }`
-                    }
-                })
-                .catch(function(error) {
-                    catch_errors(error)
-                })
-                .then(function(response) {
-                    if (response.status === 200 && response.data.success === false) {
-                        fail(response.data.message)
-                    } else {
-                        success("Your withdraw is now pending approval", "/home", "successful");
-                    }
-                });
+            if (this.state.goalid !== "") {
+                form_data.append('goalid', this.state.goalid)
+                form_data.append('account_number', this.state.account_number)
+                form_data.append('account_bank', this.state.account_bank)
+                form_data.append('beneficiary_name', this.state.beneficiary_name)
+                axios.post(`${API_URL_GOAL_MM_WITHDRAW}`, form_data, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            'Accept': 'application/json',
+                            "Authorization": `Token ${ TOKEN }`
+                        }
+                    })
+                    .catch(function(error) {
+                        catch_errors(error)
+                    })
+                    .then(function(response) {
+                        if (response.status === 200 && response.data.success === false) {
+                            fail(response.data.message)
+                        } else {
+                            success("Your withdraw is now pending approval", "/home", "successful");
+                        }
+                    });
+            }
         }
     }
     _saccoCategory = () => {
@@ -614,4 +620,4 @@ function Step5(props) {
             div >
         );
     }
-    export default Withdraw;
+    export default GoalWithdraw;

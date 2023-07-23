@@ -24,6 +24,7 @@ const [holdId, setHoldId] = useState("");
 const [country, setCountry] = useState("");
 const [phone, setPhone] = useState("");
 const [holdName, setHoldName] = useState("");
+const [holdNetworth, setHoldNetworth] = useState("");
 const [holdAmount, setHoldAmount] = useState("");
 let [holdDeposit, setHoldDeposit] = useState("");
 const [holdCreated, setHoldCreated] = useState("");
@@ -95,12 +96,13 @@ const options = {
     }
 }
 
-function getId(id, name, amount, deposit, created) {
+function getId(id, name, amount, deposit, networth, created) {
     setHoldId(id)
     setHoldName(name)
     setHoldAmount(amount)
     setHoldDeposit(deposit)
     setHoldCreated(created)
+    setHoldNetworth(networth)
     handleShow3()
 }
 
@@ -141,7 +143,7 @@ return ( <
     <
     h6 className = "grey-text d-none py-2" > Summary Data of all your investments < /h6> {
     results.map(option => ( <
-        div className = "row modals-left mt-2 py-3 bg-white rounded-3" >
+        div className = "row mt-2 py-3 bg-white rounded-3" >
         <
         div className = "col-3" > < h6 className = "bolder" > { option.name } < /h6> < /
         div >
@@ -263,7 +265,7 @@ div className = " p-1 pb-5 mb-5" > {
             size = "large" / > < /span>  <
             p className = "mx-4" > < span className = "bolder active"
             onClick = {
-                () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
+                () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created)
             } > { goal.goal_name } < /span>< span > ...created { (goal.created).slice(0,10) } < /span > < /p >  <
             span className = "bolder" > Total Deposit: < span className = "active" > { goal.deposit[0] } < /span> < span className = "active d-none" > { goal.goal_amount } < /span > < /span > < /
             div > <
@@ -282,6 +284,7 @@ amount = { holdAmount }
 deposit = { holdDeposit }
 created = { holdCreated }
 country = { country }
+networth = { holdNetworth }
 phone = { phone }
 option = { investmentOption }
 / > < /

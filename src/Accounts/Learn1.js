@@ -23,7 +23,8 @@ function Learn1(props) {
         "deposit_category": "",
         "account_type": "",
         "reference": "",
-        "reference_id": 0
+        "reference_id": 0,
+        "tx_ref": 0
 
     });
     const handleChange = (event) => {

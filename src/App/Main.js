@@ -245,6 +245,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         Withdraw country = { country }
         phone = { phone }
+        networth = { networth }
         fullname = { name }
         / > < /
         Modal > <
@@ -310,7 +311,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         <
         h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
         withdraws.map(withdraw => ( <
-            div className = 'row p-3 mx-3 mt-2 bg-white rounded-3 modals-left' >
+            div className = 'row p-3 mx-3 mt-2 bg-white rounded-3' >
             <
             div className = 'col-8 text-start' > { withdraw.currency } { withdraw.withdraw_amount } < /div> <
             div className = 'col-4 text-end grey-text bolder' > { withdraw.created } < /div> < /
