@@ -82,12 +82,22 @@ const Main = ({ id, activeTab, children, ...props }) => {
         });
         PendingWithdrawRequests().then(res => {
             setWithdraw(res)
+            console.log(res)
         })
     }, []);
     let depositTotal = 0
     span.map(goal => (
         depositTotal += parseInt(goal.deposit[0])
     ))
+    const wwithdraw = () => {
+        let total_withdraws = []
+        withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
+        let sum = 0;
+        for (let i = 0; i < total_withdraws.length; i++) {
+            sum += total_withdraws[i];
+        }
+        return sum
+    }
     const groupArrayObject = graph.reduce((group, obj) => {
         const { name, datas, date } = obj;
         if (!group[date]) {
@@ -350,7 +360,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     height = '10%'
     alt = "investors" / >
         <
-        h6 className = "pt-5 bolder" > Total Deposit < /h6>  <
+        h6 className = "pt-5 bolder" > Total Deposits < /h6>  <
     div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
         h3 className = "px-2 font-lighter" > { totalDeposit } < /h3></div >
         <
@@ -360,9 +370,11 @@ const Main = ({ id, activeTab, children, ...props }) => {
     height = '10%'
     alt = "investors" / >
         <
-        h6 className = "pt-5 bolder" > Total Networth < /h6>  <
+        h6 className = "pt-5 bolder" > Total Withdraws < /h6>  <
     div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-        h1 className = "px-2 font-lighter" > { dollarNetworth } < /h1></div >
+        h3 className = "px-2 font-lighter" > {
+            wwithdraw()
+        } < /h3></div >
         <
         img src = { Networths }
     className = "py-2 mt-3"
