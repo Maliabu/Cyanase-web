@@ -322,9 +322,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
     h5 className = "pt-3 bolder" > Activity < /h5>    <
     div className = "d-flex flex-row p-3 flex justify-content-center" >
         <
-        div className = "w-25" > { depositProgress.length } % < /div> <
-    div className = "w-25" > 0 % < /div> <
-    div className = "w-25" > 0 % < /div> < /
+        div className = "w-25" > { depositProgress.length } < /div> <
+    div className = "w-25" > 0 < /div> <
+    div className = "w-25" > 0 < /div> < /
     div >
         <
         div className = "d-flex flex-row flex justify-content-center" >
