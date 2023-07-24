@@ -2,14 +2,7 @@ export const preloader = () => {
     document.getElementById("successMessage").innerHTML = "processing..."
 }
 export const preloaderCheckout = () => {
-    document.getElementById("checkout").innerHTML = "processing..."
-        // setTimeout(() => {
-        //     document.getElementById("checkout").style.display = 'block'
-        //     document.getElementById("checkoutMessage").innerHTML = "could be slow network please wait..."
-        // }, 3000);
-    setTimeout(() => {
-        document.getElementById("checkout").innerHTML = "checkout"
-    }, 5000);
+    document.getElementById("checkout").innerHTML = "Checkout..."
 }
 export const success = (message, redirect, successMessage) => {
     document.getElementById("successMessage").innerHTML = successMessage

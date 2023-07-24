@@ -10,7 +10,7 @@ function Subscribe(props) {
     const [formData, setFormData] = useState({
         "reference_id": 0,
         "reference": "",
-        "tx_ref": 0,
+        "tx_ref": "CYANASE-TEST-001",
         "amount": 20500
 
     });
@@ -69,6 +69,10 @@ function Subscribe(props) {
 
     const nextButton = () => {
         if (step === 1) {
+            let subscriptionStatus = props.substatus
+            if (subscriptionStatus === "subscribed") {
+                return null
+            }
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"

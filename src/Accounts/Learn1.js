@@ -24,7 +24,7 @@ function Learn1(props) {
         "account_type": "",
         "reference": "",
         "reference_id": 0,
-        "tx_ref": 0
+        "tx_ref": "CYANASE-TEST-001"
 
     });
     const handleChange = (event) => {
