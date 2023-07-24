@@ -172,7 +172,7 @@ function Learn1(props) {
     return ( <
         React.Fragment >
         <
-        form className = "p-5 text-center"
+        form className = "p-4 text-center"
         onSubmit = { handleSubmit(onSubmit) } > {
             /* 
                       render the form steps and pass required props in

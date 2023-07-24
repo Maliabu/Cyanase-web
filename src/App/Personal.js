@@ -23,6 +23,7 @@ const [show, setShow] = useState(false);
 const [holdId, setHoldId] = useState("");
 const [country, setCountry] = useState("");
 const [phone, setPhone] = useState("");
+const [email, setEmail] = useState("");
 const [holdName, setHoldName] = useState("");
 const [holdNetworth, setHoldNetworth] = useState("");
 const [holdAmount, setHoldAmount] = useState("");
@@ -54,6 +55,7 @@ useEffect(() => {
     UserRequests().then(res => {
         setCountry(res.profile.country)
         setPhone(res.profile.phoneno)
+        setEmail(res.email)
         setName(res.first_name + " " + res.last_name)
     })
 }, []);
@@ -295,10 +297,17 @@ placement = "end"
 className = "side-barsy pt-5"
 onHide = { handleClose1 } {...props } > <
     Goal1 close1 = { handleClose1 }
+name = { holdName }
+email = { email }
+amount = { holdAmount }
+deposit = { holdDeposit }
+created = { holdCreated }
+country = { country }
+networth = { holdNetworth }
+phone = { phone }
 option = { investmentOption }
 fullname = { name }
 tab9 = { props.handletab9 }
-country = { country }
 / > < /
 Offcanvas > < /
 div > < /

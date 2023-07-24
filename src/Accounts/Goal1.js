@@ -2,67 +2,83 @@ import React from "react";
 import { AddUser } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import '../App.css';
-import axios from "axios";
-import { API_URL_GOAL, TOKEN } from "../apis";
 import Button from "react-bootstrap/esm/Button";
-import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import { getCurrency } from "../payment/GetCurrency";
+import { useState } from "react";
+import Checkout from "../payment/checkout";
+import { useForm } from "react-hook-form";
 
-class Goal1 extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            currentStep: 1,
-            goal_name: '',
-            goal_period: 0,
-            goal_amount: 0,
-            deposit_type: '',
-            deposit_rate: '',
-            deposit_reminder_day: '',
-            payment_means: '',
-            deposit_amount: 0,
-            currency: getCurrency(this.props.country),
-            investment_option: "Cash | Venture | Credit",
-            deposit_category: "",
-            account_type: ""
-        }
+function Goal1(props) {
+    const [step, setStep] = useState(1)
+    const [formData, setFormData] = useState({
+        "goal_name": '',
+        "goal_period": 1,
+        "goal_amount": 0,
+        "deposit_type": '',
+        "deposit_rate": '',
+        "deposit_reminder_day": '',
+        "payment_means": '',
+        "deposit_amount": 0,
+        "currency": getCurrency(props.country),
+        "investment_option": props.option,
+        "deposit_category": "",
+        "account_type": "",
+        "reference": "",
+        "reference_id": 0,
+        "tx_ref": "CYANASE-TEST-001"
+
+    })
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setFormData({...formData, [name]: value });
     }
-    getAccountType() {
-        let currency = this.state.currency
-        let accountType = this.state.account_type
-        if (currency === getCurrency(this.props.country)) {
+    console.log(formData)
+    const { handleSubmit } = useForm();
+    const getAccountType = () => {
+        let currency = formData.currency
+        let accountType = formData.account_type
+        if (currency === getCurrency(props.country)) {
             accountType = "basic"
         } else {
             accountType = "dollar"
         }
         return accountType
     }
-    getDepositAmount() {
-        this.month = 12
-        this.period = parseInt(this.state.goal_period) * this.month
-        this.DepositAmount = parseInt(this.state.goal_amount) / this.period
+    const getDepositAmount = () => {
+        let month = 12
+        let period = parseInt(formData.goal_period) * month
+        let DepositAmount = parseInt(formData.goal_amount) / period
 
-        if (this.state.goal_period > 1) {
-            this.interest = this.DepositAmount * (15 / 100)
-            this.newDepositAmount = this.DepositAmount + this.interest
-        }
+        return DepositAmount
+    }
+    const getTotalDeposit = () => {
+        let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
+        return total_deposit
+    }
+    const getFee = () => {
+        let fee = ((1.4 / 100) * formData.deposit_amount).toFixed(2)
+        return fee
+    }
+    const getTab9 = () => {
+        return props.tab9
+    }
+    const _next = () => {
+        setStep(step + 1)
+    }
 
-        return this.DepositAmount
+    const _prev = () => {
+        setStep(step - 1)
     }
-    getTotalDeposit() {
-        this.total_deposit = parseFloat(this.getFee()) + parseFloat(this.state.deposit_amount)
-        return this.total_deposit
-    }
-    getFee() {
-        this.fee = (2 / 100) * this.state.deposit_amount
-        return this.fee
-    }
-    getTab9() {
-        return this.props.tab9
-    }
-    submitButton = () => {
-        let currentStep = this.state.currentStep;
-        if (currentStep === 12) {
+
+    function onSubmit() {}
+
+    /*
+     * the functions for our button
+     */
+    const submitButton = () => {
+        let payment_means = formData.payment_means;
+        if (step === 11 && payment_means === "online") {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
@@ -74,11 +90,10 @@ class Goal1 extends React.Component {
                 className = 'py-3 mt-3 rounded warning text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /h6> <
+                } > hey < /h6>   <
                 Button variant = "warning"
                 className = 'shadow text-center'
                 id = 'successMessage'
-                onClick = { this.handleSubmit }
                 type = "button" >
                 Submit <
                 /Button> < /
@@ -87,177 +102,125 @@ class Goal1 extends React.Component {
         }
         return null
     }
-    nextButton() {
-        let currentStep = this.state.currentStep;
-        if (currentStep < 13) {
+    const nextButton = () => {
+        if (step === 11) {
+            return null
+        }
+        if (step < 13) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
-                onClick = { this._next } >
+                onClick = { _next } >
                 Next <
                 /h6>        
             )
         }
         return null;
     }
-    handleChange = event => {
-        const { name, value } = event.target
-        this.setState({
-            [name]: value
-        })
-        console.log(this.state)
-    }
-    handleSubmit = () => {
-        preloader()
-        let form_data = new FormData();
-        form_data.append('goal_name', this.state.goal_name);
-        form_data.append('goal_amount', this.state.goal_amount);
-        form_data.append('goal_period', this.state.goal_period);
-        form_data.append('deposit_type', this.state.deposit_type);
-        form_data.append('deposit_reminder_day', this.state.deposit_reminder_day);
-        form_data.append('payment_means', this.state.payment_means);
-        form_data.append('currency', this.state.currency);
-        form_data.append('investment_option', this.state.investment_option);
-        form_data.append('deposit_category', this.state.deposit_category);
-        form_data.append('deposit_amount', this.state.deposit_amount);
-        form_data.append('account_type', this.getAccountType());
-        axios.post(`${API_URL_GOAL}`, form_data, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    'Accept': 'application/json',
-                    "Authorization": `Token ${ TOKEN }`
-                }
-            })
-            .catch(function(error) {
-                catch_errors(error)
-            })
-            .then(function(response) {
-                if (response.status === 200 && response.data.success === false) {
-                    fail(response.data.message)
-                } else {
-                    success("You have created a goal successfully", "/home", "successful");
-                }
-            });
-    }
-    _next = () => {
-        let currentStep = this.state.currentStep
-        currentStep = currentStep >= 2 ? currentStep + 1 : currentStep + 1
-        this.setState({
-            currentStep: currentStep
-        })
-    }
-
-    _prev = () => {
-        let currentStep = this.state.currentStep
-        currentStep = currentStep <= 1 ? 7 : currentStep - 1
-        this.setState({
-            currentStep: currentStep
-        })
-    }
-
-    /*
-     * the functions for our button
-     */
-    previousButton() {
-        let currentStep = this.state.currentStep;
-        if (currentStep !== 1) {
+    const previousButton = () => {
+        if (step !== 1) {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
-                onClick = { this._prev } >
+                onClick = { _prev } >
                 Previous <
                 /h6>
             )
         }
         return null;
     }
-    returnToGoals = () => {
+    const returnToGoals = () => {
         setTimeout(() => {
             document.getElementById("alert").innerHTML = "Goal Created successfully"
         }, 1000)
         return setTimeout(() => {
-            this.props.close1()
+            props.close1()
         }, 2000)
     }
 
-    render() {
-        return ( <
-            React.Fragment >
-            <
-            form className = "px-5 scroll-y"
-            onSubmit = { this.handleSubmit } > {
-                /* 
-                          render the form steps and pass required props in
-                        */
-            } < div className = "mt-5 text-center" > <
-            AddUser className = "border border-dark text-center rounded-circle p-2 mt-5"
-            size = "xlarge" / > < /div> <
-            Step1 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step2 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step3 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            deposit_amount = { this.getDepositAmount() }
-            goal_period = { this.state.goal_period }
-            goal_amount = { this.state.goal_amount }
-            />  <
-            Step4 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step5 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step6 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /> <
-            Step7 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            goal = { this.state.goal_name }
-            goal_period = { this.state.goal_period }
-            goal_amount = { this.state.goal_amount }
-            deposit_type = { this.state.deposit_type }
-            deposit_rate = { this.state.deposit_rate }
-            deposit_reminder_day = { this.state.deposit_reminder_day }
-            deposit_amount = { this.getDepositAmount() }
-            currency = { this.state.currency }
-            /> <
-            Step8 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            deposit_category = { this.state.deposit_category }
-            getTab9 = { this.getTab9() }
-            investmentOption = { this.props.option }
-            /> <
-            Step9 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            /><
-            Step10 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            currency = { this.state.currency }
-            payment_means = { this.state.payment_means }
-            /> <
-            Step11 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            payment_means = { this.state.payment_means }
-            deposit_amount = { this.state.deposit_amount }
-            total_deposit = { this.getTotalDeposit() }
-            fee = {
-                this.getFee()
-            }
-            currency = { this.state.currency }
-            /> <
-            Step12 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            payment_means = { this.state.payment_means }
-            total_deposit = { this.getTotalDeposit() }
-            currency = { this.state.currency }
-            /> { this.nextButton() } { this.previousButton() }{this.submitButton()}< /
-            form > < /
-            React.Fragment >
-        );
-    }
+    return ( <
+        React.Fragment >
+        <
+        form className = "px-5 scroll-y"
+        onSubmit = { handleSubmit } > {
+            /* 
+                      render the form steps and pass required props in
+                    */
+        } < div className = "mt-5 text-center" > <
+        AddUser className = "border border-dark text-center rounded-circle p-2 mt-5"
+        size = "xlarge" / > < /div> <
+        Step1 currentStep = { step }
+        handleChange = { handleChange }
+        /> <
+        Step2 currentStep = { step }
+        handleChange = { handleChange }
+        /> <
+        Step3 currentStep = { step }
+        handleChange = { handleChange }
+        deposit_amount = { getDepositAmount() }
+        goal_period = { formData.goal_period }
+        goal_amount = { formData.goal_amount }
+        />  <
+        Step4 currentStep = { step }
+        handleChange = { handleChange }
+        /> <
+        Step5 currentStep = { step }
+        handleChange = { handleChange }
+        /> <
+        Step6 currentStep = { step }
+        handleChange = { handleChange }
+        /> <
+        Step7 currentStep = { step }
+        handleChange = { handleChange }
+        goal = { formData.goal_name }
+        goal_period = { formData.goal_period }
+        goal_amount = { formData.goal_amount }
+        deposit_type = { formData.deposit_type }
+        deposit_rate = { formData.deposit_rate }
+        deposit_reminder_day = { formData.deposit_reminder_day }
+        deposit_amount = { getDepositAmount() }
+        currency = { formData.currency }
+        /> <
+        Step8 currentStep = { step }
+        handleChange = { handleChange }
+        deposit_category = { formData.deposit_category }
+        getTab9 = { getTab9() }
+        investmentOption = { props.option }
+        /> <
+        Step9 currentStep = { step }
+        handleChange = { handleChange }
+        /><
+        Step10 currentStep = { step }
+        handleChange = { handleChange }
+        currency = { formData.currency }
+        payment_means = { formData.payment_means }
+        /> <
+        Step11 currentStep = { step }
+        phone = { props.phone }
+        email = { props.email }
+        name = { props.fullname }
+        country = { props.country }
+        handleChange = { handleChange }
+        payment_means = { formData.payment_means }
+        deposit_amount = { formData.deposit_amount }
+        total_deposit = { getTotalDeposit() }
+        fee = {
+            getFee()
+        }
+        getCurr = { getCurrency(props.country) }
+        submit = { onSubmit }
+        data = { formData }
+        currency = { formData.currency }
+        /> <
+        Step12 currentStep = { step }
+        handleChange = { handleChange }
+        payment_means = { formData.payment_means }
+        total_deposit = { getTotalDeposit() }
+        currency = { formData.currency }
+        /> { nextButton() } { previousButton() }{submitButton()}< /
+        form > < /
+        React.Fragment >
+    );
 }
 
 function Step1(props) {
@@ -526,9 +489,7 @@ function Step8(props) {
         return null
     }
     return ( <
-        div className = " text-start mx-5" >
-        <
-        h4 className = "bolder text-center mt-3" > Deposit to this Goal < /h4> <
+        div className = " text-start" > <
         h6 className = "mt-2 text-center" > Choose where you wish to make your deposit. < /h6> <
         div className = "p-3 rounded-4 mt-3"
         key = "radio" >
@@ -545,17 +506,17 @@ function Step8(props) {
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5 d-none" > SACCO GROUP / INVESTMENT CLUB < /h5> <
+        h5 className = "font-lighter d-none mt-5" > SACCO GROUP / INVESTMENT CLUB < /h5> <
         Form.Check label = "I want to deposit to my Sacco Group or Investment Club"
         name = "deposit_category"
         onChange = { props.handleChange }
         type = "radio"
-        value = "sacco/club"
         className = "d-none"
+        value = "sacco/club"
         required id = "default-radio" /
         >
         <
-        h5 className = "font-lighter mt-5 d-none" > INSTITUTION / ORGANIZATION < /h5>  <
+        h5 className = "font-lighter d-none mt-5" > INSTITUTION / ORGANIZATION < /h5>  <
         Form.Check label = "I am making this deposit towards my API Account as an API User"
         name = "deposit_category"
         onChange = { props.handleChange }
@@ -566,10 +527,10 @@ function Step8(props) {
         >
         <
         /
-        div > < /div ><
-        h6 className = "bolder p-lg-4 p-3 bg-light rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Cash | Venture | Credit < /span> < /
+        div > < /div >  <
+        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
         h6 > <
-        h6 className = "py-3 rounded-3 d-none bk-warning text-center"
+        h6 className = "py-3 rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> < /
         div > );
@@ -578,6 +539,9 @@ function Step8(props) {
 function Step9(props) {
     if (props.currentStep !== 9) {
         return null
+    }
+    if (props.id === "personal") {
+        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <
@@ -592,9 +556,9 @@ function Step9(props) {
         Form.Check label = "I want to deposit from my wallet to make this deposit to my personal investment account"
         name = "payment_means"
         type = "radio"
-        className = "d-none"
         onChange = { props.handleChange }
         value = "wallet"
+        className = "d-none"
         required id = "default-radio" /
         >
         <
@@ -632,7 +596,7 @@ function Step10(props) {
             h4 className = "py-3 bolder" > Wallet Balance: < span className = "font-lighter" > < span > { props.currency } < /span> 0.00 < /span >
             <
             /h4 > <
-            Form.Group className = "mb-3 bg-light p-3 p-5" >
+            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
             <
             Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
             Form.Control type = "number"
@@ -651,7 +615,7 @@ function Step10(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-        Form.Group className = "my-3 bg-light p-3 p-5" >
+        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
         <
         Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
         Form.Control type = "number"
@@ -676,14 +640,27 @@ function Step11(props) {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > Continue to deposit < /h6>   <
-            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h4 > < /
             div >
         )
     }
     if (props.payment_means === "online") {
         return ( <
-            div className = "text-center" > < h1 className = "py-5" > FlutterWave < /h1> < /
+            div className = "text-center" >
+            <
+            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h4 >
+            <
+            Checkout phone = { props.phone } // here the checkout form is rendered after which it returns response
+            country = { props.country }
+            name = { props.name }
+            email = { props.email }
+            amount = { props.deposit_amount }
+            currency = { props.getCurr }
+            data = { props.data }
+            submit = { props.submit }
+            / > < /
             div >
         );
     }
@@ -736,14 +713,15 @@ function Step12(props) {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-            Form.Group className = "my-3 bg-light p-3 p-5" >
+            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
             <
             Form.Label > Amount to Deposit < /Form.Label>  <
             Form.Control type = "number"
             onChange = { props.handleChange }
             name = "deposit_amount"
             id = 'phone'
-            required placeholder = "10,000" / >
+            required placeholder =
+            " 10,000" / >
             <
             Form.Control.Feedback type = "invalid" >
             This field is required. <
