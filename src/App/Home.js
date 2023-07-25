@@ -359,9 +359,8 @@ const MyHome = () => {
         handletab9 = { handleTab9 }
         / > < /TabContent > <
         TabContent id = "tab2"
-        activeTab = { activeTab } > < Personal /
-        >
-        <
+        activeTab = { activeTab } > < Personal handletab9 = { handleTab9 }
+        / > <
         /TabContent > <
         TabContent id = "tab3"
         activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }

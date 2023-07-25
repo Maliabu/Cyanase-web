@@ -284,6 +284,7 @@ name = { holdName }
 fullname = { name }
 amount = { holdAmount }
 deposit = { holdDeposit }
+email = { email }
 created = { holdCreated }
 country = { country }
 networth = { holdNetworth }

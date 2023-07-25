@@ -5,8 +5,8 @@ import '../App.css';
 import Button from "react-bootstrap/esm/Button";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from "react";
-import Checkout from "../payment/checkout";
 import { useForm } from "react-hook-form";
+import GoalCreate from "../payment/GoalCreate";
 
 function Goal1(props) {
     const [step, setStep] = useState(1)
@@ -70,6 +70,7 @@ function Goal1(props) {
     const _prev = () => {
         setStep(step - 1)
     }
+    formData.account_type = getAccountType()
 
     function onSubmit() {}
 
@@ -128,14 +129,6 @@ function Goal1(props) {
             )
         }
         return null;
-    }
-    const returnToGoals = () => {
-        setTimeout(() => {
-            document.getElementById("alert").innerHTML = "Goal Created successfully"
-        }, 1000)
-        return setTimeout(() => {
-            props.close1()
-        }, 2000)
     }
 
     return ( <
@@ -303,9 +296,9 @@ function Step3(props) {
         /Form.Control.Feedback> < /
         Form.Group >
         <
-        p > You will have to make monthly deposists of: {
+        h6 > You will have to make monthly deposists of: {
             (props.deposit_amount).toFixed(2)
-        } < /p> < /
+        } < /h6> < /
         div >
         <
         /div>
@@ -326,20 +319,22 @@ function Step4(props) {
         div key = { `default-radio` }
         className = "mb-3" >
         <
-        Form.Check label = "AUTO DEPOSIT. Make your deposits automatic such that you do not miss out a single day"
+        h5 className = "font-lighter text-start" > AUTO DEPOSIT < /h5>  <
+        Form.Check label = "Make your deposits automatic such that you do not miss out a single day"
         name = "deposit_type"
         type = "radio"
         onChange = { props.handleChange }
-        className = "mx-5"
+        className = "text-start"
         value = "auto"
         required id = "default-radio" /
         >
         <
-        Form.Check label = "MANUALLY INVEST. Let me make my own deposits"
+        h5 className = "font-lighter text-start mt-5" > I WILL DEPOSIT BY MYSELF < /h5>  <
+        Form.Check label = "Let me make my own deposits"
         name = "deposit_type"
         onChange = { props.handleChange }
         type = "radio"
-        className = "mt-5 mx-5"
+        className = "text-start"
         value = "manual"
         required id = "default-radio" /
         >
@@ -474,8 +469,8 @@ function Step7(props) {
         continue < /h6> <
         div className = "py-5 px-3 rounded-25" >
         <
-        h6 > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at {props.currency}< span className = "bolder" > { props.goal_amount } < /span >
-        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of {props.currency} < span className = "bolder" > { (props.deposit_amount).toFixed(2) } < /span > < /h6 > <
+        h5 className = "font-lighter" > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at {props.currency}< span className = "bolder" > { props.goal_amount } < /span >
+        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making monthly deposits of {props.currency} < span className = "bolder" > { (props.deposit_amount).toFixed(2) } < /span > < /h5 > <
         h6 > We shall remind you every: < span className = "bolder" > { props.deposit_reminder_day } < /span> < /
         h6 > <
         /
@@ -652,7 +647,7 @@ function Step11(props) {
             h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h4 >
             <
-            Checkout phone = { props.phone } // here the checkout form is rendered after which it returns response
+            GoalCreate phone = { props.phone } // here the checkout form is rendered after which it returns response
             country = { props.country }
             name = { props.name }
             email = { props.email }

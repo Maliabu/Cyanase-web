@@ -98,6 +98,12 @@ const Main = ({ id, activeTab, children, ...props }) => {
         }
         return sum
     }
+    const wwithdraws = () => {
+        let total_withdraws = []
+        withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
+        let withdraw = total_withdraws.length
+        return withdraw
+    }
     const groupArrayObject = graph.reduce((group, obj) => {
         const { name, datas, date } = obj;
         if (!group[date]) {
@@ -317,7 +323,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         div > <
         div className = "col-lg-3 d-none d-sm-block px-2 text-center" >
         <
-        div className = ' px-2 py-3 rounded-4 scroll-y3 bg-lighter' >
+        div className = ' px-2 py-3 mt-3 rounded-4 scroll-y3 bg-lighter' >
         <
         h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
         withdraws.map(withdraw => ( <
@@ -328,19 +334,18 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div >
         ))
     } < /div><div className='blue-dark p-3 mt-3 rounded-4'> <
-    h5 className = "bolder mt-5" > Your Statistics < /h5>  <
-    h5 className = "pt-3 bolder" > Activity < /h5>    <
-    div className = "d-flex flex-row p-3 flex justify-content-center" >
+    h5 className = "bolder mt-5" > Your Statistics < /h5>    <
+    div className = "d-flex flex-row p-2 flex justify-content-center" >
         <
         div className = "w-25" > { depositProgress.length } < /div> <
-    div className = "w-25" > 0 < /div> <
-    div className = "w-25" > 0 < /div> < /
+    div className = "w-25 d-none" > 0 < /div> <
+    div className = "w-25" > { wwithdraws() } < /div> < /
     div >
         <
         div className = "d-flex flex-row flex justify-content-center" >
         <
-        div className = "w-25" > Deposits < /div> <
-    div className = "w-25" > Loans < /div> <
+        div className = "w-25 mx-2" > Deposits < /div> <
+    div className = "w-25 d-none" > Loans < /div> <
     div className = "w-25" > Withdraws < /div> < /
     div >
         <
