@@ -127,7 +127,8 @@ const MyHome = () => {
         div className = 'col-3' > <
         img src = { Header }
         width = '80%'
-        className = 'mx-lg-5 mx-sm-4 mt-lg-5 mt-sm-4 '
+        // online change
+        className = 'mx-4 mt-3 '
         height = '40%'
         alt = "investors" / > < /div> <
         div className = 'col-6' > < /div> <
@@ -176,10 +177,11 @@ const MyHome = () => {
         p className = 'bolder' > { account } < /p > < /
         div > <
         /div> <
-        div className = 'px-3 my-5 text-start scroll-y2' >
+        // online change my-5 to my-3
+        div className = 'px-3 my-2 text-start scroll-y2' >
         <
         h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
-        div className = ' py-3 d-flex flex-row' >
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Home size = "20"set = 'broken'
             className = 'mx-2' / > Home < /span >
@@ -190,7 +192,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row ' >
+        div className = ' py-2 d-flex flex-row ' >
         <
         TabNavItem title = { < span > < User
             set = 'broken'
@@ -202,7 +204,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />< /div > <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < People size = "20"
             set = 'broken'
@@ -215,7 +217,7 @@ const MyHome = () => {
         />  < /
         div >
         <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaUniversity size = "20"
             className = 'mx-2' / > Investment Clubs < /span >
@@ -227,8 +229,8 @@ const MyHome = () => {
         />  < /
         div >
         <
-        h6 className = 'p-2 pt-5 grey-text' > ACTIVITY < /h6>   <
-        div className = ' py-3 d-flex flex-row' >
+        h6 className = 'p-2 pt-3 grey-text' > ACTIVITY < /h6>   <
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
             set = 'broken'
@@ -239,7 +241,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaHandHoldingUsd size = "20"
             className = 'mx-2' / > Loans < /span >
@@ -249,7 +251,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaDonate size = "20"
             className = 'mx-2' / > Withdraws < /span >
@@ -261,8 +263,8 @@ const MyHome = () => {
         />  < /
         div >
         <
-        h6 className = 'p-2 pt-5 grey-text' > SETTINGS < /h6>   <
-        div className = ' py-3 d-flex flex-row' >
+        h6 className = 'p-2 pt-3 grey-text' > SETTINGS < /h6>   <
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Setting size = "20"set = 'broken'
             className = 'mx-2' / > Account < /span >
@@ -272,7 +274,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row' >
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Activity size = "20"set = 'broken'
             className = 'mx-2' / > Investments < /span >
@@ -282,7 +284,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = 'py-3 d-flex flex-row' >
+        div className = 'py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Chat size = "20"set = 'broken'
             className = 'mx-2' / > FAQs < /span >
@@ -294,7 +296,8 @@ const MyHome = () => {
         />  < /
         div >
         <
-        div className = 'py-3 d-flex flex-row' >
+        //online change from py-3, my-5
+        div className = 'py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Call size = "20"
             set = 'broken'
@@ -360,8 +363,8 @@ const MyHome = () => {
         / > < /TabContent > <
         TabContent id = "tab2"
         activeTab = { activeTab } > < Personal handletab9 = { handleTab9 }
-        / > <
-        /TabContent > <
+        / > < /
+        TabContent > <
         TabContent id = "tab3"
         activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
         activeTab = { activeTab }
