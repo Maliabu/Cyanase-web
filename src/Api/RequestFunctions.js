@@ -19,6 +19,18 @@ export const success = (message, redirect, successMessage) => {
         window.location.pathname = redirect
     }, 2000);
 }
+export const success1 = (message, redirect, successMessage) => {
+    document.getElementById("successMessage").innerHTML = successMessage
+    document.getElementById("successMessage").style.backgroundColor = "orange"
+    document.getElementById("successMessage").style.color = "black"
+    document.getElementById("infoMessage").style.display = 'block'
+    document.getElementById("infoMessage").style.color = "#ff8a00"
+    document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
+    document.getElementById("infoMessage").innerText = message
+    setTimeout(() => {
+        document.getElementById("infoMessage").style.display = 'none'
+    }, 4000);
+}
 export const fail = (error) => {
     document.getElementById("successMessage").innerHTML = "Something went wrong"
     document.getElementById("successMessage").style.backgroundColor = "red"

@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { UserRequests, GetNextOfKin } from "../Api/MainRequests";
+import { UserRequests, GetNextOfKin, ProfilePhoto } from "../Api/MainRequests";
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import ChangeDetails from './ChangeDetails';
-import Profile from '../images/Ellipse 6.png';
+import Profile from '../images/Ellipse 6.png'
 import { ArrowLeftSquare, Call, Message, User } from "react-iconly";
 import Photo from './photo'
 
@@ -22,6 +22,7 @@ const ADetails = (props) => {
     const [lastNok, setLastNok] = useState("")
     const [phoneNok, setPhoneNok] = useState("")
     const [emailNok, setEmailNok] = useState("")
+    const [profile, setProfile] = useState({ Profile })
     useEffect(() => {
         UserRequests().then(res => {
             console.log(res)
@@ -36,8 +37,13 @@ const ADetails = (props) => {
             setLastNok(res.kin_last_name)
             setPhoneNok(res.kin_phone)
             setEmailNok(res.kin_email)
+        });
+        ProfilePhoto().then(res => {
+            console.log(res)
+            setProfile(res)
         })
     }, []);
+    console.log(Profile)
     return ( < div >
         <
         ArrowLeftSquare size = "large"
@@ -127,7 +133,7 @@ const ADetails = (props) => {
         div >
         <
         div className = "col-6 px-5 text-center" > <
-        img src = { Profile }
+        img src = { profile }
         width = '40%'
         height = '30%'
         className = "mt-4"

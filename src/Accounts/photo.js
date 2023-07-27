@@ -20,7 +20,7 @@ class Photo extends React.Component {
         let form_data = new FormData();
         form_data.append('photo', this.state);
         console.log(this.state)
-        axios.post(`${API_URL_USER_PROFILE_PHOTO}`, form_data, {
+        axios.post(`${API_URL_USER_PROFILE_PHOTO}`, this.state, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     'Accept': 'application/json',
@@ -69,19 +69,26 @@ class Photo extends React.Component {
             <
             /
             Form.Group > <
-            div className = 'row justify-content-center' > <
-            p id = "errorMessage"
-            className = 'py-3 mt-3 rounded border text-center fade-in'
+            div className = 'row justify-content-center' >
+            <
+            h6 id = "errorMessage"
+            className = 'py-3 mt-3 rounded border border-danger text-center'
             style = {
                 { display: 'none' }
-            } > hey < /p>  <
+            } > hey < /h6> <
+            h6 id = "infoMessage"
+            className = 'py-3 mt-3 rounded warning text-center'
+            style = {
+                { display: 'none' }
+            } > hey < /h6>   <
             Button variant = "warning"
             className = 'shadow text-center'
             id = 'successMessage'
             onClick = { this.handleSubmit }
             type = "button" >
             Save Photo <
-            /Button> < /
+            /Button> <
+            /
             div > < /
             div > < /
             form > < /
