@@ -10,6 +10,9 @@ body {
     /* overflow: hidden !important; */
 }
 
+
+/* online change */
+
 p,
 h1,
 h2,
@@ -17,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-size: small !important;
+    font-size: medium !important;
 }
 
 

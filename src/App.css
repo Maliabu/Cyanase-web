@@ -266,7 +266,8 @@ body::-webkit-scrollbar {
 .warning {
     color: #ff9100 !important;
     cursor: pointer !important;
-    font-size: small !important;
+    /* online change */
+    font-size: medium !important;
     border: 2px solid #ff9100 !important;
     border-color: #ff9100 !important;
 }
