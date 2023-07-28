@@ -158,17 +158,17 @@ const MyHome = () => {
         div > <
         img src = { Header }
         width = '60%'
-        className = 'mx-3 mt-3 '
+        className = 'mx-4 mt-4 '
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-3 py-2 mx-2 blue-dark rounded-4' >
+        div className = 'row my-4 py-2 mx-2 blue-dark rounded-4' >
         <
         div className = 'col-4' >
         <
         img src = { Profile }
         className = "rounded-circle mt-2"
-        width = '90%'
+        width = '100%'
         height = '70%'
         alt = "investors" / >
         <
@@ -183,7 +183,8 @@ const MyHome = () => {
         h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
         div className = ' py-2 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Home size = "10"set = 'broken'
+        TabNavItem title = { < span > < Home size = "small"
+            set = 'broken'
             className = 'mx-2' / > Home < /span >
         }
         onClick = { handleTab1 }
@@ -196,7 +197,7 @@ const MyHome = () => {
         <
         TabNavItem title = { < span > < User
             set = 'broken'
-            size = "10"
+            size = "small"
             className = 'mx-2' / > My Investments < /span >
         }
         onClick = { handleTab2 }
@@ -206,7 +207,7 @@ const MyHome = () => {
         />< /div > <
         div className = ' py-2 d-flex flex-row d-none' >
         <
-        TabNavItem title = { < span > < People size = "10"
+        TabNavItem title = { < span > < People size = "small"
             set = 'broken'
             className = 'mx-2' / > SACCO Groups < /span >
         }
@@ -219,7 +220,7 @@ const MyHome = () => {
         <
         div className = ' py-2 d-flex flex-row d-none' >
         <
-        TabNavItem title = { < span > < FaUniversity size = "10"
+        TabNavItem title = { < span > < FaUniversity size = "small"
             className = 'mx-2' / > Investment Clubs < /span >
         }
         onClick = { handleTab4 }
@@ -232,7 +233,7 @@ const MyHome = () => {
         h6 className = 'p-2 pt-3 grey-text' > ACTIVITY < /h6>   <
         div className = ' py-2 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Wallet size = "10"
+        TabNavItem title = { < span > < Wallet size = "small"
             set = 'broken'
             className = 'mx-2' / > Deposits < /span >
         }
@@ -243,7 +244,7 @@ const MyHome = () => {
         />  < /div > <
         div className = ' py-2 d-flex flex-row d-none' >
         <
-        TabNavItem title = { < span > < FaHandHoldingUsd size = "10"
+        TabNavItem title = { < span > < FaHandHoldingUsd size = "small"
             className = 'mx-2' / > Loans < /span >
         }
         onClick = { handleTab6 }
@@ -253,7 +254,7 @@ const MyHome = () => {
         />  < /div > <
         div className = ' py-2 d-flex flex-row d-none' >
         <
-        TabNavItem title = { < span > < FaDonate size = "10"
+        TabNavItem title = { < span > < FaDonate size = "small"
             className = 'mx-2' / > Withdraws < /span >
         }
         onClick = { handleTab7 }
@@ -266,7 +267,7 @@ const MyHome = () => {
         h6 className = 'p-2 pt-3 grey-text' > SETTINGS < /h6>   <
         div className = ' py-2 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Setting size = "10"set = 'broken'
+        TabNavItem title = { < span > < Setting size = "small"set = 'broken'
             className = 'mx-2' / > Account < /span >
         }
         onClick = { handleTab8 }
@@ -276,7 +277,7 @@ const MyHome = () => {
         />  < /div > <
         div className = ' py-2 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Activity size = "10"set = 'broken'
+        TabNavItem title = { < span > < Activity size = "small"set = 'broken'
             className = 'mx-2' / > Investments < /span >
         }
         onClick = { handleTab9 }
@@ -286,7 +287,7 @@ const MyHome = () => {
         />  < /div > <
         div className = 'py-2 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Chat size = "10"set = 'broken'
+        TabNavItem title = { < span > < Chat size = "small"set = 'broken'
             className = 'mx-2' / > FAQs < /span >
         }
         id = "tab10"
@@ -299,7 +300,7 @@ const MyHome = () => {
         //online change from py-3, my-5
         div className = 'py-2 d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Call size = "10"
+        TabNavItem title = { < span > < Call size = "small"
             set = 'broken'
             className = 'mx-2' / > Contact Us < /span >
         }
@@ -320,18 +321,18 @@ const MyHome = () => {
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
         h6 className = 'mt-2' > <
-        FaLightbulb size = "10"
-        className = 'position-relative' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
+        FaLightbulb size = "20"
+        className = 'position-relative active' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
         div className = 'col-lg-1 d-md-none d-lg-block text-center' >
         <
         span >
         <
         Notification set = 'broken'
-        size = "10"
+        size = "small"
         onClick = { handleShow3 }
         className = 'active position-relative my-lg-2 my-3' / > <
-        span className = "position-absolute top-15 start-65 translate-middle px-2 blue-dark rounded-pill" > <
+        span className = "position-absolute top-15 start-65 translate-middle px-1 d-none blue-dark rounded-pill" > <
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <

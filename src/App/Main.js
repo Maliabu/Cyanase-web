@@ -169,8 +169,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
                 withdraws.map(withdraw => ( <
                     div className = 'row p-3 mx-3 mt-2 bg-white rounded-3' >
                     <
-                    div className = 'col-8 text-start' > { withdraw.currency } { withdraw.withdraw_amount } < /div> <
-                    div className = 'col-4 text-end grey-text bolder' > { withdraw.created } < /div> < /
+                    div className = 'col-8 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
+                    div className = 'col-4 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                     div >
                 ))
             )
@@ -206,7 +206,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div className = ' my-3' >
             <
             span className = 'py-3 d-none px-5 warning active text-center rounded-3' > Withdraw < /span>  <
-            h6 className = 'p-2 px-5 warning text-center rounded-3'
+            h6 className = 'p-3 px-5 mx-5 warning text-center rounded-3'
             onClick = { handleShow3 } > <
             Wallet size = "medium"
             set = "broken"
@@ -275,7 +275,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'my-3' >
             <
-            h6 className = 'py-2 warning px-5 text-center rounded-3'
+            h6 className = 'py-3 warning px-5 text-center rounded-3'
             onClick = { handleShow2 } > < FaHandHoldingUsd size = "20"
             className = 'mx-2 d-none' / > Withdraw < /h6></div >
             <
@@ -326,7 +326,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-lg-4 p-lg-5 text-center" >
             <
-            h6 className = "px-lg-5 py-2 rounded-3 warning text-center"
+            h6 className = "px-lg-4 py-3 rounded-3 warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <
@@ -355,16 +355,16 @@ const Main = ({ id, activeTab, children, ...props }) => {
         h5 className = "bolder mt-5" > Your Statistics < /h5>    <
         div className = "d-flex flex-row p-2 flex justify-content-center" >
             <
-            div className = "w-25" > { depositProgress.length } < /div> <
-        div className = "w-25 d-none" > 0 < /div> <
-        div className = "w-25" > { wwithdraws() } < /div> < /
+            div className = "w-25" > < h6 > { depositProgress.length } < /h6>< /div > <
+            div className = "w-25 d-none" > < h6 > 0 < /h6> < /div > <
+            div className = "w-25" > < h6 > { wwithdraws() } < /h6> < /div > < /
         div >
             <
             div className = "d-flex flex-row flex justify-content-center" >
             <
-            div className = "w-25 mx-2" > Deposits < /div> <
-        div className = "w-25 d-none" > Loans < /div> <
-        div className = "w-25" > Withdraws < /div> < /
+            div className = "w-25 mx-2" > < h6 > Deposits < /h6> < /div > <
+            div className = "w-25 d-none" > < h6 > Loans < /h6> < /div > <
+            div className = "w-25" > < h6 > Withdraws < /h6> < /div > < /
         div >
             <
             img src = { Networths }
