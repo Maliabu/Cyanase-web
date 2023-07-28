@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import Learn from '../Accounts/Learn';
 import Learn1 from '../Accounts/Learn1';
 import Withdraw from '../Accounts/Withdraw'
-import { Wallet } from 'react-iconly';
+import { Wallet, Image, Filter } from 'react-iconly';
 import { FaHandHoldingUsd } from 'react-icons/fa';
 import { getCurrency } from '../payment/GetCurrency';
 
@@ -106,17 +106,19 @@ const Main = ({ id, activeTab, children, ...props }) => {
     }
     const groupArrayObject = graph.reduce((group, obj) => {
         const { name, datas, date } = obj;
-        if (!group[date]) {
-            group[date] = {
+        if (!group[name]) {
+            group[name] = {
                 date: date,
                 name: name,
                 data: []
             };
         }
-        group[date].data.push(datas);
+        group[name].data.push(datas);
         return group;
     }, {});
     const result = Object.values(groupArrayObject);
+    console.log(result)
+    console.log(graph)
 
     // function onlyUnique(value, index, array) {
     //     return array.indexOf(value) === index;
@@ -152,246 +154,262 @@ const Main = ({ id, activeTab, children, ...props }) => {
             curve: 'smooth',
         }
     }
-    return ( <
-        div className = " p-lg-2 scroll-y" >
-        <
-        div className = " d-none d-lg-block" >
+    const pendingWithdraws = () => {
+        if (withdraws.length === 0) {
+            return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+                Image size = "large"
+                set = "broken"
+                className = 'mx-2 grey-text' / > <
+                Filter size = "large"
+                set = "broken"
+                className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
+                h6 > < /div > )
+            }
+            else return (
+                withdraws.map(withdraw => ( <
+                    div className = 'row p-3 mx-3 mt-2 bg-white rounded-3' >
+                    <
+                    div className = 'col-8 text-start' > { withdraw.currency } { withdraw.withdraw_amount } < /div> <
+                    div className = 'col-4 text-end grey-text bolder' > { withdraw.created } < /div> < /
+                    div >
+                ))
+            )
 
-        <
-        h6 > YOUR STATISTICS < /h6>   <
-        div className = "row" >
-        <
-        div className = "col-lg-9 rounded-4 col-md-12 p-3" >
-        <
-        div className = 'row p-3 bg-lighter rounded-4' >
-        <
-        div className = "row" >
-        <
-        div className = "p-lg-4 bg-white rounded-4 col text-center" >
-        <
-        h5 className = "bolder mt-3" > Deposit < /h5> <
-        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-        h1 className = "px-2 font-lighter" > { deposit } < /h1></div >
-        <
-        img src = { Deposit }
-        className = "pt-2 d-none"
-        width = '100%'
-        height = '30%'
-        alt = "investors" / >
-        <
-        div className = ' my-3' >
-        <
-        span className = 'py-3 d-none px-5 warning active text-center rounded-3' > Withdraw < /span>  <
-        span className = 'p-3 px-5 warning active bolder text-center rounded-3'
-        onClick = { handleShow3 } > <
-        Wallet size = "medium"
-        set = "broken"
-        className = 'mx-2 d-none' / > Deposit < /span> </div >
-        <
-        Modal show = { show3 }
-        onHide = { handleClose3 }
-        dialogClassName = "my-modal1" >
-        <
-        Learn1 tab9 = { props.handletab9 }
-        option = { investmentOption }
-        country = { country }
-        lastname = { name }
-        email = { email }
-        phone = { phone }
-        / > < /
-        Modal >
-        <
-        /
-        div >
-
-        <
-        div className = "blue-dark p-lg-4 rounded-4 col mx-3 text-center" >
-        <
-        h5 className = "bolder mt-3" > Networth < /h5> <
-        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-        h1 className = "px-2 font-lighter" > { networth } < /h1></div >
-        <
-        img src = { Networths }
-        className = "pt-2"
-        width = '80%'
-        height = '30%'
-        alt = "investors" / >
-        <
-        div className = 'my-3 d-none' >
-        <
-        span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
-        className = 'mx-5' / > Withdraw < /span></div > < /
-        div > < /div> <
-        div className = 'row bg-lighter p-3' >
-        <
-        div className = '' > <
-        Chart options = { options.options }
-        series = { options.series }
-        className = "w-100"
-        type = "area"
-        height = { 300 }
-        /></div > <
-        div className = 'rounded-4 row bg-white p-5' >
-        <
-        div className = 'col-3' >
-        <
-        h5 className = 'bolder' > Investment Details < /h5> <
-        h6 > Your current Investment Option as per your risk profile: < span className = 'bolder active' > T.bonds < /span> < /
-        h6 >
-        <
-        /div> <
-        div className = 'col-6 text-center' >
-        <
-        h5 className = "bolder mt-3" > Networth < /h5> <
-        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-        h1 className = "px-2 font-lighter" > { networth } < /h1></div >
-        <
-        /div><
-        div className = 'col-3' >
-        <
-        div className = 'my-3' >
-        <
-        span className = 'py-3 warning px-5 text-center rounded-3'
-        onClick = { handleShow2 } > < FaHandHoldingUsd size = "20"
-        className = 'mx-2 d-none' / > Withdraw < /span></div >
-        <
-        Modal show = { show2 }
-        onHide = { handleClose2 }
-        dialogClassName = "my-modal1" >
-        <
-        Withdraw country = { country }
-        phone = { phone }
-        networth = { networth }
-        fullname = { name }
-        / > < /
-        Modal > <
-        /div> < /
-        div > < /
-        div > < /
-        div > <
-        div >
-        <
-        div className = "py-5 d-none" >
-        <
-        h6 > DOLLAR ACCOUNT < /h6>     <
-        div className = "d-flex flex-row flex mt-3 my-2 " >
-        <
-        div className = "p-lg-5 light shadow rounded-25 w-50 text-center" > <
-        h5 className = "bolder mt-4" > Deposit < /h5>  <
-        div className = "d-flex flex-row flex justify-content-center" > USD <
-        h1 className = "px-2 font-lighter" > { dollar } < /h1></div > < /
-        div >
-        <
-        div className = "shadow light rounded-25 p-lg-5 mx-3 px-lg-3 w-50 text-center" >
-        <
-        h5 className = "bolder mt-4" > Networth < /h5> <
-        div className = "d-flex flex-row flex justify-content-center" > USD <
-        h1 className = "px-2 font-lighter" > { dollarNetworth } < /h1></div >
-        <
-        /
-        div > <
-        /div>  < /
-        div > <
-        div className = "row rounded-25 w-100" >
-        <
-        div className = "col-lg-8 mt-5" > <
-        h4 className = "bolder" > Welcome to Cyanase < /h4>  <
-        h6 > Investments products, loans, sacco groups, investment clubs all in one package.Including our API
-        for integration < /h6> <h6>What products are you looking for? < /
-        h6 > < /
-        div > <
-        div className = "col-lg-4 p-lg-5 text-center" >
-        <
-        h6 className = "px-lg-5 py-3 rounded-3 warning active text-center"
-        onClick = { handleShow1 } > Learn More < /h6> < /
-        div >
-        <
-        Modal show = { show1 }
-        onHide = { handleClose1 }
-        dialogClassName = "my-modal1" >
-        <
-        Learn close = { handleClose1 }
-        tab2 = { props.handletab2 }
-        / > < /
-        Modal > < /
-        div >
-        <
-        /
-        div >
-        <
-        /
-        div > <
-        div className = "col-lg-3 d-none d-sm-block px-2 text-center" >
-        <
-        div className = ' px-2 py-3 mt-3 rounded-4 scroll-y3 bg-lighter' >
-        <
-        h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
-        withdraws.map(withdraw => ( <
-            div className = 'row p-3 mx-3 mt-2 bg-white rounded-3' >
+        }
+        return ( <
+            div className = " p-lg-2 scroll-y" >
             <
-            div className = 'col-8 text-start' > { withdraw.currency } { withdraw.withdraw_amount } < /div> <
-            div className = 'col-4 text-end grey-text bolder' > { withdraw.created } < /div> < /
+            div className = " d-none d-lg-block" >
+
+            <
+            h6 > YOUR STATISTICS < /h6>   <
+            div className = "row" >
+            <
+            div className = "col-lg-9 rounded-4 col-md-12 p-3" >
+            <
+            div className = 'row p-3 bg-lighter rounded-4' >
+            <
+            div className = "row" >
+            <
+            div className = "p-lg-4 bg-white rounded-4 col text-center" >
+            <
+            h5 className = "bolder mt-3" > Deposit < /h5> <
+            div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+            h1 className = "px-2 font-lighter" > { deposit } < /h1></div >
+            <
+            img src = { Deposit }
+            className = "pt-2 d-none"
+            width = '100%'
+            height = '30%'
+            alt = "investors" / >
+            <
+            div className = ' my-3' >
+            <
+            span className = 'py-3 d-none px-5 warning active text-center rounded-3' > Withdraw < /span>  <
+            span className = 'p-3 px-5 warning active bolder text-center rounded-3'
+            onClick = { handleShow3 } > <
+            Wallet size = "medium"
+            set = "broken"
+            className = 'mx-2 d-none' / > Deposit < /span> </div >
+            <
+            Modal show = { show3 }
+            onHide = { handleClose3 }
+            dialogClassName = "my-modal1" >
+            <
+            Learn1 tab9 = { props.handletab9 }
+            option = { investmentOption }
+            country = { country }
+            lastname = { name }
+            email = { email }
+            phone = { phone }
+            / > < /
+            Modal >
+            <
+            /
             div >
-        ))
-    } < /div><div className='blue-dark p-3 mt-3 rounded-4'> <
-    h5 className = "bolder mt-5" > Your Statistics < /h5>    <
-    div className = "d-flex flex-row p-2 flex justify-content-center" >
-        <
-        div className = "w-25" > { depositProgress.length } < /div> <
-    div className = "w-25 d-none" > 0 < /div> <
-    div className = "w-25" > { wwithdraws() } < /div> < /
-    div >
-        <
-        div className = "d-flex flex-row flex justify-content-center" >
-        <
-        div className = "w-25 mx-2" > Deposits < /div> <
-    div className = "w-25 d-none" > Loans < /div> <
-    div className = "w-25" > Withdraws < /div> < /
-    div >
-        <
-        img src = { Networths }
-    className = "py-2 mt-3"
-    width = '80%'
-    height = '10%'
-    alt = "investors" / >
-        <
-        h6 className = "pt-5 bolder d-none" > Total Deposits < /h6> <
-    div className = "d-flex d-none flex-row flex justify-content-center" > { getCurrency(country) } <
-        h3 className = "px-2 font-lighter" > { networth } < /h3></div >
-        <
-        img src = { Networths }
-    className = "py-2 d-none mt-3"
-    width = '80%'
-    height = '10%'
-    alt = "investors" / >
-        <
-        h6 className = "pt-5 bolder" > Total Deposits < /h6>  <
-    div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-        h3 className = "px-2 font-lighter" > { totalDeposit } < /h3></div >
-        <
-        img src = { Networths }
-    className = "py-2 mt-3"
-    width = '80%'
-    height = '10%'
-    alt = "investors" / >
-        <
-        h6 className = "pt-5 bolder" > Total Withdraws < /h6>  <
-    div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-        h3 className = "px-2 font-lighter" > {
-            wwithdraw()
-        } < /h3></div >
-        <
-        img src = { Networths }
-    className = "py-2 mt-3"
-    width = '80%'
-    height = '10%'
-    alt = "investors" / >
-        <
-        /
-    div > < /div> < /
-    div > < /
-    div > < /div>
-);
+
+            <
+            div className = "blue-dark p-lg-4 rounded-4 col mx-3 text-center" >
+            <
+            h5 className = "bolder mt-3" > Networth < /h5> <
+            div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+            h1 className = "px-2 font-lighter" > { networth } < /h1></div >
+            <
+            img src = { Networths }
+            className = "pt-2"
+            width = '80%'
+            height = '30%'
+            alt = "investors" / >
+            <
+            div className = 'my-3 d-none' >
+            <
+            span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
+            className = 'mx-5' / > Withdraw < /span></div > < /
+            div > < /div> <
+            div className = 'row bg-lighter p-3' >
+            <
+            div className = '' > <
+            Chart options = { options.options }
+            series = { options.series }
+            className = "w-100"
+            type = "area"
+            height = { 300 }
+            /></div > <
+            div className = 'rounded-4 row bg-white p-5' >
+            <
+            div className = 'col-3' >
+            <
+            h5 className = 'bolder' > Investment Details < /h5> <
+            h6 > Your current Investment Option as per your risk profile: < span className = 'bolder active' > T.bonds < /span> < /
+            h6 >
+            <
+            /div> <
+            div className = 'col-6 text-center' >
+            <
+            h5 className = "bolder mt-3" > Networth < /h5> <
+            div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+            h1 className = "px-2 font-lighter" > { networth } < /h1></div >
+            <
+            /div><
+            div className = 'col-3' >
+            <
+            div className = 'my-3' >
+            <
+            span className = 'py-3 warning px-5 text-center rounded-3'
+            onClick = { handleShow2 } > < FaHandHoldingUsd size = "20"
+            className = 'mx-2 d-none' / > Withdraw < /span></div >
+            <
+            Modal show = { show2 }
+            onHide = { handleClose2 }
+            dialogClassName = "my-modal1" >
+            <
+            Withdraw country = { country }
+            phone = { phone }
+            networth = { networth }
+            fullname = { name }
+            / > < /
+            Modal > <
+            /div> < /
+            div > < /
+            div > < /
+            div > <
+            div >
+            <
+            div className = "py-5 d-none" >
+            <
+            h6 > DOLLAR ACCOUNT < /h6>     <
+            div className = "d-flex flex-row flex mt-3 my-2 " >
+            <
+            div className = "p-lg-5 light shadow rounded-25 w-50 text-center" > <
+            h5 className = "bolder mt-4" > Deposit < /h5>  <
+            div className = "d-flex flex-row flex justify-content-center" > USD <
+            h1 className = "px-2 font-lighter" > { dollar } < /h1></div > < /
+            div >
+            <
+            div className = "shadow light rounded-25 p-lg-5 mx-3 px-lg-3 w-50 text-center" >
+            <
+            h5 className = "bolder mt-4" > Networth < /h5> <
+            div className = "d-flex flex-row flex justify-content-center" > USD <
+            h1 className = "px-2 font-lighter" > { dollarNetworth } < /h1></div >
+            <
+            /
+            div > <
+            /div>  < /
+            div > <
+            div className = "row rounded-25 w-100" >
+            <
+            div className = "col-lg-8 mt-5" > <
+            h4 className = "bolder" > Welcome to Cyanase < /h4>  <
+            h6 > Investments products, loans, sacco groups, investment clubs all in one package.Including our API
+            for integration < /h6> <h6>What products are you looking for? < /
+            h6 > < /
+            div > <
+            div className = "col-lg-4 p-lg-5 text-center" >
+            <
+            h6 className = "px-lg-5 py-3 rounded-3 warning active text-center"
+            onClick = { handleShow1 } > Learn More < /h6> < /
+            div >
+            <
+            Modal show = { show1 }
+            onHide = { handleClose1 }
+            dialogClassName = "my-modal1" >
+            <
+            Learn close = { handleClose1 }
+            tab2 = { props.handletab2 }
+            / > < /
+            Modal > < /
+            div >
+            <
+            /
+            div >
+            <
+            /
+            div > <
+            div className = "col-lg-3 d-none d-sm-block px-2 text-center" >
+            <
+            div className = ' px-2 py-3 mt-3 rounded-4 scroll-y3 bg-lighter' >
+            <
+            h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
+            pendingWithdraws()
+        } < /div><div className='blue-dark p-3 mt-3 rounded-4'> <
+        h5 className = "bolder mt-5" > Your Statistics < /h5>    <
+        div className = "d-flex flex-row p-2 flex justify-content-center" >
+            <
+            div className = "w-25" > { depositProgress.length } < /div> <
+        div className = "w-25 d-none" > 0 < /div> <
+        div className = "w-25" > { wwithdraws() } < /div> < /
+        div >
+            <
+            div className = "d-flex flex-row flex justify-content-center" >
+            <
+            div className = "w-25 mx-2" > Deposits < /div> <
+        div className = "w-25 d-none" > Loans < /div> <
+        div className = "w-25" > Withdraws < /div> < /
+        div >
+            <
+            img src = { Networths }
+        className = "py-2 mt-3"
+        width = '80%'
+        height = '10%'
+        alt = "investors" / >
+            <
+            h6 className = "pt-5 bolder d-none" > Total Deposits < /h6> <
+        div className = "d-flex d-none flex-row flex justify-content-center" > { getCurrency(country) } <
+            h3 className = "px-2 font-lighter" > { networth } < /h3></div >
+            <
+            img src = { Networths }
+        className = "py-2 d-none mt-3"
+        width = '80%'
+        height = '10%'
+        alt = "investors" / >
+            <
+            h6 className = "pt-5 bolder" > Total Deposits < /h6>  <
+        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+            h3 className = "px-2 font-lighter" > { totalDeposit } < /h3></div >
+            <
+            img src = { Networths }
+        className = "py-2 mt-3"
+        width = '80%'
+        height = '10%'
+        alt = "investors" / >
+            <
+            h6 className = "pt-5 bolder" > Total Withdraws < /h6>  <
+        div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+            h3 className = "px-2 font-lighter" > {
+                wwithdraw()
+            } < /h3></div >
+            <
+            img src = { Networths }
+        className = "py-2 mt-3"
+        width = '80%'
+        height = '10%'
+        alt = "investors" / >
+            <
+            /
+        div > < /div> < /
+        div > < /
+        div > < /div>
+    );
 };
 
 export default Main;

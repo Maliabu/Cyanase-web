@@ -20,7 +20,7 @@ function Goal1(props) {
         "payment_means": '',
         "deposit_amount": 0,
         "currency": getCurrency(props.country),
-        "investment_option": props.option,
+        "investment_option": "Cash | Venture | Credit",
         "deposit_category": "",
         "account_type": "",
         "reference": "",
@@ -523,11 +523,8 @@ function Step8(props) {
         <
         /
         div > < /div >  <
-        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
-        h6 > <
-        h6 className = "py-3 rounded-3 bk-warning text-center"
-        onClick = { props.getTab9 } >
-        Edit my Risk Profile before deposit < /h6> < /
+        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Cash | Venture | Credit < /span> < /
+        h6 > < /
         div > );
 }
 

@@ -78,7 +78,8 @@ function Goal(props) {
     const checkWithdrawStatus = () => {
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
-        if (goalAmount === deposit) {
+        let networth = parseInt(props.networth)
+        if (networth === 0) { return null } else if (goalAmount === deposit) {
             return ( <
                 h6 className = "py-3 px-4 bk-warning text-center rounded-3"
                 type = "button"
@@ -154,12 +155,22 @@ function Goal(props) {
     const nextButton = () => {
         let payment_means = formData.payment_means;
         let deposit_category = formData.deposit_category;
-        if (step === 0) {
+        let goalAmount = parseInt(props.amount)
+        let deposit = parseInt(props.deposit)
+        let goalName = props.name
+        if (step === 0 && goalAmount !== deposit) {
             return ( <
                 h6 className = "py-3 mx-5 warning text-center rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Deposit to this goal <
+                /h6>        
+            )
+        } else if (step === 0 && goalAmount === deposit) {
+            return ( <
+                h6 className = "p-2 bg-lighter grey-text text-center rounded-3"
+                type = "button" >
+                Congrats!!...You can now: { goalName } <
                 /h6>        
             )
         }
@@ -263,7 +274,7 @@ function Goal(props) {
         goalid = { formData.goal_id }
         phone = { props.phone }
         fullname = { props.fullname }
-        networth = { getName()[2] }
+        networth = { getName()[7] }
         country = { props.country }
         /> { nextButton() } { previousButton() } { submitButton() } < /
         form >

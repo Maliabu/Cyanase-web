@@ -33,42 +33,6 @@ class GoalWithdraw extends React.Component {
         console.log(this.state)
     }
 
-    // getTotalWithdraw() {
-    //     let data = new FormData()
-    //     let fee = this.state.fee
-    //     let amount = this.state.withdraw_amount
-    //     let currency = this.state.currency
-    //     let type = this.state.withdraw_channel
-    //     if (this.state.withdraw_channel === "bank") {
-    //         type = "account"
-    //     } else {
-    //         type = "mobilemoney"
-    //     }
-    //     data.append('amount', amount)
-    //     data.append('currency', currency)
-    //     data.append('type', type)
-    //     console.log(amount, currency, type)
-    //     axios.post(`${API_URL_GET_WITHDRAW_FEE}`, data, {
-    //             headers: {
-    //                 "Content-Type": "multipart/form-data",
-    //                 'Accept': 'application/json',
-    //                 "Authorization": `Token ${ TOKEN }`
-    //             }
-    //         })
-    //         .catch(function(error) {
-    //             fee = 0
-    //             catch_errors(error)
-    //         })
-    //         .then(function(response) {
-    //             if (response.status === 200 && response.data.success === false) {
-    //                 fee = 0
-    //             } else {
-    //                 fee = response.data[0].fee
-    //                 amount = parseFloat(fee) + parseFloat(amount)
-    //             }
-    //         });
-    //     return amount
-    // }
     getFee() {
         this.fee = (2 / 100) * this.state.withdraw_amount
         return this.fee
@@ -252,7 +216,8 @@ class GoalWithdraw extends React.Component {
         if (currentStep === 3) {
             let withdrawAmount = this.state.withdraw_amount
             let networth = this.props.networth
-            let threshold = 1000
+            console.log(networth - withdrawAmount)
+            let threshold = 0
             if ((networth - withdrawAmount) < threshold) {
                 return ( <
                     h6 className = "status p-2 rounded-3" >

@@ -1,6 +1,6 @@
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import axios from 'axios';
-import { catch_errors, success, fail, preloader, preloaderCheckout } from '../Api/RequestFunctions';
+import { catch_errors, success, fail, preloader, preloaderCheckouts } from '../Api/RequestFunctions';
 import { API_URL_SUBSCRIBE, TOKEN } from '../apis';
 
 export default function Subscription({ name, phone, amount, currency, email, data, submit }) {
@@ -8,7 +8,7 @@ export default function Subscription({ name, phone, amount, currency, email, dat
         public_key: 'FLWPUBK_TEST-99f83b787d32f5195dcf295dce44c3ab-X',
         tx_ref: Date.now(),
         amount: amount,
-        currency: currency,
+        currency: "UGX",
         payment_options: 'card,mobilemoney,ussd',
         customer: {
             email: email,
@@ -26,7 +26,7 @@ export default function Subscription({ name, phone, amount, currency, email, dat
         <
         h6 onClick = {
             () => {
-                preloaderCheckout()
+                preloaderCheckouts()
                 handleFlutterPayment({
                     callback: (response) => {
                         if (response.status === "successful") {
@@ -62,7 +62,7 @@ export default function Subscription({ name, phone, amount, currency, email, dat
             }
         }
         className = 'bk-warning active p-3 mx-5 rounded-3 mt-3'
-        id = "checkout" >
+        id = "checkouts" >
         Checkout <
         /h6> < /
         div >

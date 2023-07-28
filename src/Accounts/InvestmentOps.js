@@ -8,7 +8,7 @@ export const options = [{
     "name": "Tbonds",
     "handler": "UAP"
 }, {
-    "name": "stocks",
+    "name": "Stocks",
     "handler": "MTN",
 }, {
     "name": "Cash | Venture | Credit",

@@ -4,6 +4,9 @@ export const preloader = () => {
 export const preloaderCheckout = () => {
     document.getElementById("checkout").innerHTML = "Checkout..."
 }
+export const preloaderCheckouts = () => {
+    document.getElementById("checkouts").innerHTML = "Checkout..."
+}
 export const success = (message, redirect, successMessage) => {
     document.getElementById("successMessage").innerHTML = successMessage
     document.getElementById("successMessage").style.backgroundColor = "orange"
