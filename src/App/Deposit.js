@@ -38,7 +38,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         Wallet size = "xlarge"
         set = "broken"
         className = 'mx-2 rounded-circle warning p-2' / > <
-        h1 className = "my-3 p-3" > Deposit < /h1>  <
+        h1 className = " p-3" > Deposit < /h1>  <
         div className = "" >
         <
         h6 className = "px-5" > Make Deposists of any amount towards any market, you can on the other hand make goal based deposits to any goal, we shall keep track
@@ -75,7 +75,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         div className = "col-4 rounded-4 px-4" > <
         div className = "row p-2 bg-lighter rounded-3" >
         <
-        div className = "text-start col-6 p-2" > PROCEDURE < /div>  < /
+        div className = "text-start col-6 p-2" > < h6 > PROCEDURE < /h6> < /div > < /
         div >
         <
         div className = "p-2 mt-3 bg-white rounded-4" > <
@@ -83,7 +83,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 mt-3 rounded-circle text-center bg-lighter" > 1 < /
+        p className = "p-2 px-3 mt-3 rounded-circle text-center bg-lighter" > 1 < /
         p >
         <
         /
@@ -105,7 +105,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-10" >
         <
-        h6 className = " pt-4" > Choose where to make your Deposit
+        h6 className = " pt-3" > Choose where to make your Deposit
         for example Treasury Bills < /h6>< /
         div > < /div > <
         div className = "row px-3 bg-white mt-2 shadow-sm rounded-4" >
@@ -122,7 +122,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         h6 className = " pt-4" > Make the Deposit < /h6>< /
         div > < /div > <
-        div className = "row justify-content-center bg-white shadow-sm p-3 p-lg-5 mt-3 rounded-4" >
+        div className = "row justify-content-center bg-white shadow-sm p-4 mt-3 rounded-4" >
         <
         h4 className = "bolder text-center p-3" > Investor Risk profile < /h4> <
         h6 className = "text-center" > Your risk profile helps us invest your money accordingly,

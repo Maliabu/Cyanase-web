@@ -133,7 +133,7 @@ const Personal = ({...props }) => {
                     nextResult.map(option => ( <
                         div className = "row mt-2 py-3 bg-white rounded-3" >
                         <
-                        div className = "col-3" > < h6 className = "bolder" > { option.name } < /h6> < /
+                        div className = "col-4" > < h6 className = "bolder" > { option.name } < /h6> < /
                         div >
                         <
                         div className = "col" > < h6 className = "bolder active" > Rate: {
@@ -159,7 +159,7 @@ const Personal = ({...props }) => {
                     }
                     else return (
                         rev.map(deposit => ( <
-                            div className = "row mt-2 p-4 bg-white rounded-3"
+                            div className = "row mt-2 p-3 bg-white rounded-3"
                             key = { deposit.deposit_id } >
                             <
                             div className = "col" >
@@ -197,16 +197,14 @@ const Personal = ({...props }) => {
                     div className = "col" >
                     <
                     /
-                    div > < /div> <
-                    div className = "row" >
-                    <
+                    div > < /div>  <
                     div className = "row" >
                     <
                     div className = "col-5 text-center" > <
                     Chart options = { options.optionsDonut }
                     series = { options.seriesDonut }
-                    height = { 400 }
-                    width = { 300 }
+                    height = { 300 }
+                    width = { 200 }
                     type = "donut" /
                     >
                     <
@@ -216,8 +214,8 @@ const Personal = ({...props }) => {
                     h6 className = "grey-text d-none py-2" > Summary Data of all your investments < /h6> {
                     myInvestments()
                 } < /div > < /
-                div > < /div> <
-                div className = " px-3 d-none text-center " >
+                div > <
+                    div className = "px-3 d-none text-center " >
                     <
                     img src = { Wallet }
                 className = "pt-2 d-none"
@@ -285,15 +283,15 @@ const Personal = ({...props }) => {
                     div className = "col-4 px-3 " > <
                     div className = "row p-2 bg-lighter rounded-3" >
                     <
-                    div className = "text-start col-6 px-2 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
-                    div className = "text-end col-6 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
+                    div className = "text-start col-9 px-2 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
+                    div className = "text-end col-3 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
                 div > <
                     h6 className = "px-5 py-3 mt-3 bk-warning text-center rounded-3"
                 onClick = { handleShow1 } >
                     New Goal < /h6>  <
                 div className = " p-1 pb-5 mb-5" > {
                         span.map(goal => ( <
-                            div className = "p-4 bg-white rounded-3 modals-left shadow-sm mt-3"
+                            div className = "px-4 bg-white rounded-3 modals-left shadow-sm mt-3"
                             key = { goal.goal_id } > <
                             div className = "d-flex flex-row flex" > <
                             span className = "mt-2" > <

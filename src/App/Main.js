@@ -186,8 +186,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'row p-3 bg-lighter rounded-4' >
             <
-            div className = "row" >
-            <
             div className = "p-lg-3 bg-white rounded-4 col text-center" >
             <
             h5 className = "bolder mt-3" > Deposit < /h5> <
@@ -242,7 +240,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
             className = 'mx-5' / > Withdraw < /span></div > < /
-            div > < /div> <
+            div > <
             div className = 'row bg-lighter p-3' >
             <
             div className = '' > <
@@ -250,7 +248,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             series = { options.series }
             className = "w-100"
             type = "area"
-            height = { 200 }
+            height = { 250 }
             /></div > <
             div className = 'rounded-4 row bg-white p-4' >
             <
