@@ -609,11 +609,11 @@ function Step1(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-lg-5 mx-3 px-2" > What are your < span className = "bolder" > objectives
-        for Investing < /span> ? < /
+        h4 className = "blue-light mx-lg-5 mx-3 px-2" > What are your objectives
+        for Investing ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -660,7 +660,7 @@ function Step1(props) {
         div > <
         div className = "row px-5 rounded-25 mt-3" >
         <
-        p className = "text-end" > Progress: { props.currentStep }
+        p className = "text-end" > Progress : { props.currentStep }
         /11</p >
         <
         ProgressBar now = { props.percentage }
@@ -681,7 +681,7 @@ function Step2(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > What is your < span className = "bolder" > Investment Time Horizon < /span> ? < /
+        h4 className = "blue-light mx-5 px-2" > What is your Investment Time Horizon ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -728,7 +728,7 @@ function Step2(props) {
         div > <
         div className = "row px-5 rounded-25 mt-3" >
         <
-        p className = "text-end" > Progress: { props.currentStep }
+        p className = "text-end" > Progress : { props.currentStep }
         /11</p >
         <
         ProgressBar now = { props.percentage }
@@ -749,7 +749,7 @@ function Step3(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > Where have you < span className = "bolder" > Invested in the Past ? < /span> ? < /
+        h4 className = "blue-light mx-5 px-2" > Where have you Invested in the Past ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -817,7 +817,7 @@ function Step4(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > What would you hold as < span className = "bolder" > Maximun Loss to your Portfolio < /span> ? < /
+        h4 className = "blue-light mx-5 px-2" > What would you hold as Maximun Loss to your Portfolio ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -864,7 +864,7 @@ function Step4(props) {
         div > <
         div className = "row px-5 rounded-25 mt-3" >
         <
-        p className = "text-end" > Progress: { props.currentStep }
+        p className = "text-end" > Progress : { props.currentStep }
         /11</p >
         <
         ProgressBar now = { props.percentage }
@@ -885,7 +885,7 @@ function Step5(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > How mucn < span className = "bolder" > Capital < /span> are you considering <span className = "bolder">to Invest</span > ? < /
+        h4 className = "blue-light mx-5 px-2" > How much Capital are you considering to Invest ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -953,7 +953,7 @@ function Step6(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > What are your < span className = "bolder" > Source of Funds < /span> ? < /
+        h4 className = "blue-light mx-5 px-2" > What are your Source of Funds ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -1000,7 +1000,7 @@ function Step6(props) {
         div > <
         div className = "row px-5 rounded-25 mt-3" >
         <
-        p className = "text-end" > Progress: { props.currentStep }
+        p className = "text-end" > Progress : { props.currentStep }
         /11</p >
         <
         ProgressBar now = { props.percentage }
@@ -1025,7 +1025,7 @@ function Step7(props) {
         h4 className = "blue-light mx-5 px-2" > Tax savings, in some instances, can be obtained from investments albeit taking on more risk. < /
         h4 >
         <
-        h4 className = "blue-light mx-5 px-2" > Which of the following best describes your < span className = "bolder" > Goal < /span> ? < /
+        h4 className = "blue-light mx-5 px-2" > Which of the following best describes your Goal ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -1072,7 +1072,7 @@ function Step7(props) {
         div > <
         div className = "row px-5 rounded-25 mt-3" >
         <
-        p className = "text-end" > Progress: { props.currentStep }
+        p className = "text-end" > Progress : { props.currentStep }
         /11</p >
         <
         ProgressBar now = { props.percentage }
@@ -1093,10 +1093,10 @@ function Step8(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > The table below shows the < span className = "bolder" > highest one - year gain and One - year loss on five different hypothetical Investments of $10, 000. < /span>  < /
+        h4 className = "blue-light mx-5 px-2" > The table below shows the highest one - year gain and One - year loss on five different hypothetical Investments of $10, 000. < /
         h4 >
         <
-        h4 className = "blue-light mx-5 px-2" > Given the potential Profit / Loss, where would you < span className = "bolder" > invest your money < /span> ? < /
+        h4 className = "blue-light mx-5 px-2" > Given the potential Profit / Loss, where would you invest your money ? < /
         h4 > < div className = "mx-5 mt-3" >
         <
         Table striped className = "text-center" >
@@ -1178,7 +1178,7 @@ function Step8(props) {
         div > <
         div className = "row px-5 rounded-25 mt-3" >
         <
-        p className = "text-end" > Progress: { props.currentStep }
+        p className = "text-end" > Progress : { props.currentStep }
         /11</p >
         <
         ProgressBar now = { props.percentage }
@@ -1199,8 +1199,7 @@ function Step9(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > Do you feel you are appropriately covered against < span className = "bolder" > Personal and / or business risks, < /span>such as accidents, Illness, trauma 
-        or death ? < /
+        h4 className = "blue-light mx-5 px-2" > Do you feel you are appropriately covered against Personal and / or business risks, such as accidents, Illness, trauma or death ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -1250,7 +1249,7 @@ function Step10(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-5 px-2" > Would you consider borrowing money to make a future < span className = "bolder" > Investment < /span> ? < /
+        h4 className = "blue-light mx-5 px-2" > Would you consider borrowing money to make a future Investment ? < /
         h4 > <
         div className = "blue-dark py-4 px-5 mt-4" >
         <
@@ -1279,7 +1278,7 @@ function Step10(props) {
         div > <
         div className = "row px-5 rounded-25 mt-3" >
         <
-        p className = "text-end" > Progress: { props.currentStep }
+        p className = "text-end" > Progress : { props.currentStep }
         /11</p >
         <
         ProgressBar now = { props.percentage }
@@ -1300,8 +1299,9 @@ function Step11(props) {
         div className = " py-5 mt-lg-5" > { props.header } <
         div >
         <
-        h4 className = "blue-light mx-lg-5 px-2" > Considering the < span className = "bolder" > negative impact of inflation on your Savings, < /span>growth investing if often used to counteract its effect, while 
-        exposing you to short - term volatility. ? < /
+        h4 className = "blue-light mx-lg-5 px-2" > Considering the negative impact of inflation on your Savings, growth investing
+        if often used to counteract its effect,
+        while exposing you to short - term volatility. ? < /
         h4 > <
         h4 className = "blue-light mx-5 px-2" > Which of the following options best resonates you ? < /
         h4 > <
