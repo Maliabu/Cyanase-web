@@ -52,7 +52,7 @@ const ADetails = (props) => {
             () => { props.changeAccountDetails(false) }
         }
         className = "active mt-4" / > <
-        h1 > Account Details < /h1>  <
+        h3 > Account Details < /h3>  <
         div className = "row px-3 scroll-y" > <
         div className = "col-6" >
         <

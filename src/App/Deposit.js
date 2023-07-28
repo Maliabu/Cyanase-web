@@ -24,7 +24,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         div className = "row" > <
         div className = "col-8 dollar p-3 rounded-4 " >
         <
-        h6 className = " py-3" > DEPOSIT < /h6>  <
+        h6 > DEPOSIT < /h6>  <
         div className = "row blue-dark rounded-4 py-5" >
         <
         div className = " text-center" >
@@ -97,7 +97,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 mt-3 rounded-circle text-center bg-lighter" > 2 < /
+        p className = "p-2 px-3 mt-3 rounded-circle text-center bg-lighter" > 2 < /
         p >
         <
         /
@@ -112,7 +112,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 mt-3 rounded-circle text-center bg-lighter" > 3 < /
+        p className = "p-2 mt-3 px-3 rounded-circle text-center bg-lighter" > 3 < /
         p >
         <
         /

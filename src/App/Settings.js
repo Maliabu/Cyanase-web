@@ -22,11 +22,11 @@ const Settings = ({ id, activeTab, children, ...props }) => {
     return ( <
         div className = "scroll-y" >
         <
-        h1 > General Account Settings < /h1> <
+        h3 > General Account Settings < /h3> <
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        User size = "xlarge"
+        User size = "medium"
         set = "broken"
         className = 'my-5 active' / >
         <
@@ -48,7 +48,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        Notification size = "xlarge"
+        Notification size = "medium"
         set = "broken"
         className = 'my-5 active' / >
         <
@@ -70,7 +70,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        Chat size = "xlarge"
+        Chat size = "medium"
         set = "broken"
         className = 'my-5 active' / >
         <
@@ -92,7 +92,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         div className = "row mt-3 p-2 px-3 border-bottom" > <
         div className = "col-1" >
         <
-        Call size = "xlarge"
+        Call size = "medium"
         set = "broken"
         className = 'my-5 active' / >
         <

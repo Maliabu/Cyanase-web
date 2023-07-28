@@ -28,7 +28,7 @@ const Account = (props) => {
                     () => { props.changeAccountSetting(false) }
                 }
                 className = " my-4 active" / > <
-                h1 > Account Settings < /h1>  <
+                h3 > Account Settings < /h3>  <
                 div className = "row mt-3 p-2 px-3 border-bottom" > <
                 div className = "col-1" >
                 <

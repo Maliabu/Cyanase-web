@@ -24,7 +24,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
     }, []);
     return ( <
         div > <
-        div className = "row py-5 bg-lighter px-2 rounded-4" >
+        div className = "row py-3 bg-lighter px-2 rounded-4" >
         <
         div className = "col-6 bg-white rounded-4 p-2" >
         <
@@ -36,7 +36,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
         <
         /div> <
         div className = "col-6 p-5 text-center" > <
-        div className = "row p-5 bg-white rounded-25" >
+        div className = "row p-3 bg-white rounded-25" >
         <
         h4 className = "active bolder" > Investor Risk Profile < /h4>  <
         Activity size = "xlarge"
@@ -48,7 +48,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
         for grading purposes.Thus we don not share it with any third parties or use it
         for any other activities. <
         /h6> < /
-        div > < h6 className = "mt-3 p-5 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 status" > {
+        div > < h6 className = "mt-3 p-4 bg-white rounded-3 bolder" > Risk profile Status: < span className = "rounded-2 px-5 mx-3 py-2 status" > {
             complete
         } < /span> < /
         h6 > <

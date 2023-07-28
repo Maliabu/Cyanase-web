@@ -341,7 +341,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-lg-3 d-none d-sm-block px-2 text-center" >
             <
-            div className = ' px-2 py-3 mt-3 rounded-4 scroll-y3 bg-lighter' >
+            div className = ' px-2 py-3 rounded-4 scroll-y3 bg-lighter' >
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()

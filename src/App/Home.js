@@ -321,7 +321,7 @@ const MyHome = () => {
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
         h6 className = 'mt-2' > <
-        FaLightbulb size = "20"
+        FaLightbulb size = "15"
         className = 'position-relative active' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
         div className = 'col-lg-1 d-md-none d-lg-block text-center' >
