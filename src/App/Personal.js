@@ -285,8 +285,8 @@ const Personal = ({...props }) => {
                     div className = "col-4 px-3 " > <
                     div className = "row p-2 bg-lighter rounded-3" >
                     <
-                    div className = "text-start col-6 px-2 p-2" > YOUR PERSONAL GOALS < /div> <
-                div className = "text-end col-6 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
+                    div className = "text-start col-6 px-2 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
+                    div className = "text-end col-6 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
                 div > <
                     h6 className = "px-5 py-3 mt-3 bk-warning text-center rounded-3"
                 onClick = { handleShow1 } >

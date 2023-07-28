@@ -15,7 +15,8 @@ body {
 
 p,
 h5,
-h6 {
+h6,
+span {
     font-size: 12px !important;
 }
 
