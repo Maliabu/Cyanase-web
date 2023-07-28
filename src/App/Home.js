@@ -181,7 +181,7 @@ const MyHome = () => {
         div className = 'px-3 my-2 text-start scroll-y2' >
         <
         h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
-        div className = ' py-2 d-flex flex-row' >
+        div className = ' py-3 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Home size = "small"
             set = 'broken'
@@ -193,7 +193,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row ' >
+        div className = ' py-3 d-flex flex-row ' >
         <
         TabNavItem title = { < span > < User
             set = 'broken'
@@ -205,7 +205,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />< /div > <
-        div className = ' py-2 d-flex flex-row d-none' >
+        div className = ' py-3 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < People size = "small"
             set = 'broken'
@@ -218,7 +218,7 @@ const MyHome = () => {
         />  < /
         div >
         <
-        div className = ' py-2 d-flex flex-row d-none' >
+        div className = ' py-3 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaUniversity size = "small"
             className = 'mx-2' / > Investment Clubs < /span >
@@ -231,7 +231,7 @@ const MyHome = () => {
         div >
         <
         h6 className = 'p-2 pt-3 grey-text' > ACTIVITY < /h6>   <
-        div className = ' py-2 d-flex flex-row' >
+        div className = ' py-3 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Wallet size = "small"
             set = 'broken'
@@ -242,7 +242,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row d-none' >
+        div className = ' py-3 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaHandHoldingUsd size = "small"
             className = 'mx-2' / > Loans < /span >
@@ -252,7 +252,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row d-none' >
+        div className = ' py-3 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaDonate size = "small"
             className = 'mx-2' / > Withdraws < /span >
@@ -265,7 +265,7 @@ const MyHome = () => {
         div >
         <
         h6 className = 'p-2 pt-3 grey-text' > SETTINGS < /h6>   <
-        div className = ' py-2 d-flex flex-row' >
+        div className = ' py-3 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Setting size = "small"set = 'broken'
             className = 'mx-2' / > Account < /span >
@@ -275,7 +275,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row' >
+        div className = ' py-3 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Activity size = "small"set = 'broken'
             className = 'mx-2' / > Investments < /span >
@@ -285,7 +285,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = 'py-2 d-flex flex-row' >
+        div className = 'py-3 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Chat size = "small"set = 'broken'
             className = 'mx-2' / > FAQs < /span >
@@ -298,7 +298,7 @@ const MyHome = () => {
         div >
         <
         //online change from py-3, my-5
-        div className = 'py-2 d-flex flex-row' >
+        div className = 'py-3 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Call size = "small"
             set = 'broken'
@@ -317,7 +317,7 @@ const MyHome = () => {
         div > <
         div className = 'col-lg-10 col-md-9 d-none d-lg-block px-lg-5 px-4' >
         <
-        div className = "row pt-5" >
+        div className = "row pt-4" >
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
         h6 className = 'mt-2' > <
@@ -331,14 +331,14 @@ const MyHome = () => {
         Notification set = 'broken'
         size = "small"
         onClick = { handleShow3 }
-        className = 'active position-relative my-lg-2 my-3' / > <
+        className = 'active position-relative my-lg-2' / > <
         span className = "position-absolute top-15 start-65 translate-middle px-1 d-none blue-dark rounded-pill" > <
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <
         div className = " col-lg-3 col-10 rounded bg-lighter text-center" >
         <
-        div className = 'flex-row d-flex py-2 my-2 justify-content-center' > <
+        div className = 'flex-row d-flex py-1 my-2 justify-content-center' > <
         TabNavItem title = "API Account"
         onClick = { handleTab2 }
         id = "tab11"

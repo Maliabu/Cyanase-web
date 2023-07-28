@@ -167,10 +167,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
             }
             else return (
                 withdraws.map(withdraw => ( <
-                    div className = 'row p-3 mx-3 mt-2 bg-white rounded-3' >
+                    div className = 'row p-2 mx-3 mt-2 bg-white rounded-3' >
                     <
-                    div className = 'col-8 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
-                    div className = 'col-4 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
+                    div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
+                    div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                     div >
                 ))
             )
@@ -191,7 +191,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = "row" >
             <
-            div className = "p-lg-4 bg-white rounded-4 col text-center" >
+            div className = "p-lg-3 bg-white rounded-4 col text-center" >
             <
             h5 className = "bolder mt-3" > Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
@@ -229,7 +229,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div >
 
             <
-            div className = "blue-dark p-lg-4 rounded-4 col mx-3 text-center" >
+            div className = "blue-dark p-lg-3 rounded-4 col mx-3 text-center" >
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
