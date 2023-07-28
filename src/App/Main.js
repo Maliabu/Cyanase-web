@@ -167,7 +167,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             }
             else return (
                 withdraws.map(withdraw => ( <
-                    div className = 'row p-2 mx-3 mt-2 bg-white rounded-2' >
+                    div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
                     <
                     div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
                     div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
@@ -192,7 +192,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h3 className = "px-2 font-lighter" > { deposit } < /h3></div >
+            h2 className = "px-2 font-lighter" > { deposit } < /h2></div >
             <
             img src = { Deposit }
             className = "pt-2 d-none"
@@ -230,7 +230,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h3 className = "px-2 font-lighter" > { networth } < /h3></div >
+            h2 className = "px-2 font-lighter" > { networth } < /h2></div >
             <
             img src = { Networths }
             className = "pt-2"
@@ -250,9 +250,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             series = { options.series }
             className = "w-100"
             type = "area"
-            height = { 300 }
+            height = { 200 }
             /></div > <
-            div className = 'rounded-4 row bg-white p-3' >
+            div className = 'rounded-4 row bg-white p-4' >
             <
             div className = 'col-3' >
             <
@@ -306,7 +306,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-4" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > USD <
-            h1 className = "px-2 font-lighter" > { dollarNetworth } < /h1></div >
+            h2 className = "px-2 font-lighter" > { dollarNetworth } < /h2></div >
             <
             /
             div > <

@@ -162,7 +162,7 @@ const MyHome = () => {
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-4 py-2 mx-2 blue-dark rounded-3' >
+        div className = 'row my-5 py-2 mx-2 blue-dark rounded-4' >
         <
         div className = 'col-4' >
         <
