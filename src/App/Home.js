@@ -126,14 +126,14 @@ const MyHome = () => {
         <
         div className = 'col-3' > <
         img src = { Header }
-        width = '80%'
+        width = '75%'
         // online change
-        className = 'mx-4 mt-3 '
-        height = '40%'
+        className = 'mx-3 mt-3 '
+        height = '35%'
         alt = "investors" / > < /div> <
         div className = 'col-6' > < /div> <
         div className = 'col-3' > <
-        div className = 'row my-lg-5 p-3 mx-lg-3 blue-dark rounded-3' >
+        div className = 'row m-3 p-3 blue-dark rounded-3' >
         <
         div className = 'col-5' >
         <
@@ -144,7 +144,7 @@ const MyHome = () => {
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-6 px-2' >
+        div className = 'col-6' >
         <
         h5 > { name } < /h5> <
         h6 > personal Account < /h6> < /
