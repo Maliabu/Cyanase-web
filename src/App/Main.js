@@ -167,7 +167,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             }
             else return (
                 withdraws.map(withdraw => ( <
-                    div className = 'row p-2 mx-3 mt-2 bg-white rounded-3' >
+                    div className = 'row p-2 mx-3 mt-2 bg-white rounded-2' >
                     <
                     div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
                     div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
@@ -179,13 +179,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         return ( <
             div className = " p-lg-2 scroll-y" >
             <
-            div className = " d-none d-lg-block" >
-
-            <
-            h6 > YOUR STATISTICS < /h6>   <
+            div className = " d-none d-lg-block" > <
             div className = "row" >
             <
-            div className = "col-lg-9 rounded-4 col-md-12 p-3" >
+            div className = "col-lg-9 rounded-4 col-md-12" >
             <
             div className = 'row p-3 bg-lighter rounded-4' >
             <
@@ -255,7 +252,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             type = "area"
             height = { 300 }
             /></div > <
-            div className = 'rounded-4 row bg-white p-5' >
+            div className = 'rounded-4 row bg-white p-3' >
             <
             div className = 'col-3' >
             <
@@ -275,9 +272,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'my-3' >
             <
-            h6 className = 'py-3 warning px-5 text-center rounded-3'
-            onClick = { handleShow2 } > < FaHandHoldingUsd size = "20"
-            className = 'mx-2 d-none' / > Withdraw < /h6></div >
+            h6 className = 'py-3 warning text-center rounded-3'
+            onClick = { handleShow2 } > Withdraw < /h6></div >
             <
             Modal show = { show2 }
             onHide = { handleClose2 }
@@ -351,8 +347,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()
-        } < /div><div className='blue-dark p-3 mt-3 rounded-4'> <
-        h5 className = "bolder mt-5" > Your Statistics < /h5>    <
+        } < /div><div className='blue-dark p-2 mt-3 rounded-4'> <
+        h5 className = "bolder mt-4" > Your Statistics < /h5>    <
         div className = "d-flex flex-row p-2 flex justify-content-center" >
             <
             div className = "w-25" > < h6 > { depositProgress.length } < /h6>< /div > <

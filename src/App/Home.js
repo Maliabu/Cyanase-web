@@ -162,7 +162,7 @@ const MyHome = () => {
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-4 py-2 mx-2 blue-dark rounded-4' >
+        div className = 'row my-4 py-2 mx-2 blue-dark rounded-3' >
         <
         div className = 'col-4' >
         <
@@ -178,10 +178,10 @@ const MyHome = () => {
         div > <
         /div> <
         // online change my-5 to my-3
-        div className = 'px-3 my-2 text-start scroll-y2' >
+        div className = 'px-3 my-3 text-start scroll-y2' >
         <
         h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
-        div className = ' py-3 d-flex flex-row' >
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Home size = "small"
             set = 'broken'
@@ -193,7 +193,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row ' >
+        div className = ' py-2 d-flex flex-row ' >
         <
         TabNavItem title = { < span > < User
             set = 'broken'
@@ -205,7 +205,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />< /div > <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < People size = "small"
             set = 'broken'
@@ -218,7 +218,7 @@ const MyHome = () => {
         />  < /
         div >
         <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaUniversity size = "small"
             className = 'mx-2' / > Investment Clubs < /span >
@@ -230,8 +230,8 @@ const MyHome = () => {
         />  < /
         div >
         <
-        h6 className = 'p-2 pt-3 grey-text' > ACTIVITY < /h6>   <
-        div className = ' py-3 d-flex flex-row' >
+        h6 className = 'p-2 pt-4 grey-text' > ACTIVITY < /h6>   <
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Wallet size = "small"
             set = 'broken'
@@ -242,7 +242,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaHandHoldingUsd size = "small"
             className = 'mx-2' / > Loans < /span >
@@ -252,7 +252,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row d-none' >
+        div className = ' py-2 d-flex flex-row d-none' >
         <
         TabNavItem title = { < span > < FaDonate size = "small"
             className = 'mx-2' / > Withdraws < /span >
@@ -264,8 +264,8 @@ const MyHome = () => {
         />  < /
         div >
         <
-        h6 className = 'p-2 pt-3 grey-text' > SETTINGS < /h6>   <
-        div className = ' py-3 d-flex flex-row' >
+        h6 className = 'p-2 pt-4 grey-text' > SETTINGS < /h6>   <
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Setting size = "small"set = 'broken'
             className = 'mx-2' / > Account < /span >
@@ -275,7 +275,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-3 d-flex flex-row' >
+        div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Activity size = "small"set = 'broken'
             className = 'mx-2' / > Investments < /span >
@@ -285,7 +285,7 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = 'py-3 d-flex flex-row' >
+        div className = 'py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Chat size = "small"set = 'broken'
             className = 'mx-2' / > FAQs < /span >
@@ -298,7 +298,7 @@ const MyHome = () => {
         div >
         <
         //online change from py-3, my-5
-        div className = 'py-3 d-flex flex-row' >
+        div className = 'py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Call size = "small"
             set = 'broken'
