@@ -195,7 +195,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h1 className = "px-2 font-lighter" > { deposit } < /h1></div >
+            h3 className = "px-2 font-lighter" > { deposit } < /h3></div >
             <
             img src = { Deposit }
             className = "pt-2 d-none"
@@ -206,11 +206,11 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div className = ' my-3' >
             <
             span className = 'py-3 d-none px-5 warning active text-center rounded-3' > Withdraw < /span>  <
-            span className = 'p-3 px-5 warning active bolder text-center rounded-3'
+            h6 className = 'p-2 px-5 warning text-center rounded-3'
             onClick = { handleShow3 } > <
             Wallet size = "medium"
             set = "broken"
-            className = 'mx-2 d-none' / > Deposit < /span> </div >
+            className = 'mx-2 d-none' / > Deposit < /h6> </div >
             <
             Modal show = { show3 }
             onHide = { handleClose3 }
@@ -233,7 +233,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h1 className = "px-2 font-lighter" > { networth } < /h1></div >
+            h3 className = "px-2 font-lighter" > { networth } < /h3></div >
             <
             img src = { Networths }
             className = "pt-2"
@@ -275,9 +275,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'my-3' >
             <
-            span className = 'py-3 warning px-5 text-center rounded-3'
+            h6 className = 'py-2 warning px-5 text-center rounded-3'
             onClick = { handleShow2 } > < FaHandHoldingUsd size = "20"
-            className = 'mx-2 d-none' / > Withdraw < /span></div >
+            className = 'mx-2 d-none' / > Withdraw < /h6></div >
             <
             Modal show = { show2 }
             onHide = { handleClose2 }
@@ -326,7 +326,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-lg-4 p-lg-5 text-center" >
             <
-            h6 className = "px-lg-5 py-3 rounded-3 warning active text-center"
+            h6 className = "px-lg-5 py-2 rounded-3 warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <

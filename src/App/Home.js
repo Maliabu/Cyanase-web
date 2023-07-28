@@ -320,7 +320,7 @@ const MyHome = () => {
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
         h6 className = 'mt-2' > <
-        FaLightbulb size = "35"
+        FaLightbulb size = "20"
         className = 'position-relative warning p-2 rounded-circle' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
         div className = 'col-lg-1 d-md-none d-lg-block text-center' >
@@ -328,7 +328,7 @@ const MyHome = () => {
         span >
         <
         Notification set = 'broken'
-        size = "23"
+        size = "15"
         onClick = { handleShow3 }
         className = 'active position-relative my-lg-2 my-3' / > <
         span className = "position-absolute top-15 start-65 translate-middle px-2 blue-dark rounded-pill" > <
