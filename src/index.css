@@ -32,6 +32,22 @@ button {
     font-size: 12px !important;
 }
 
+::-ms-check label {
+    font-size: 12px !important;
+}
+
+::-ms-check {
+    font-size: 12px !important;
+}
+
+:focus {
+    font-size: 12px !important;
+}
+
+:focus::after {
+    font-size: 12px !important;
+}
+
 
 /* code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;

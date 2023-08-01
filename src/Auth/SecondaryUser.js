@@ -249,7 +249,7 @@ function SecondaryUser(props) {
         }
         return ( <
             div > <
-            Form.Group className = "mb-3 rounded-3 p-3"
+            Form.Group className = " rounded-3 p-3"
             controlId = "formBasicDate" >
             <
             Form.Label > < h6 > First Name < /h6> < /Form.Label > <
@@ -263,7 +263,7 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 rounded-3 p-3"
+            Form.Group className = " rounded-3 p-3"
             controlId = "formBasicText" >
             <
             Form.Label > < h6 > Last Name < /h6> < /Form.Label > <
@@ -277,7 +277,7 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 rounded-3 p-3"
+            Form.Group className = " rounded-3 p-3"
             controlId = "formBasicText" >
             <
             Form.Label > < h6 > Email < /h6> < /Form.Label > <
@@ -314,7 +314,7 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 d-none shadow-sm rounded-3 p-3"
+            Form.Group className = " d-none shadow-sm rounded-3 p-3"
             controlId = "formBasicText" >
             <
             Form.Label > < h6 > Country < /h6> < /Form.Label > <
@@ -368,7 +368,7 @@ function SecondaryUser(props) {
         }
         return ( <
             div > <
-            Form.Group className = "mb-3 rounded-3 p-3"
+            Form.Group className = " rounded-3 p-3"
             controlId = "formBasicDate" >
             <
             Form.Label > < h6 > Password < /h6> < /Form.Label > <
@@ -382,7 +382,7 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 rounded-3 p-3"
+            Form.Group className = " rounded-3 p-3"
             controlId = "formBasicText" >
             <
             Form.Label > < h6 > Repeat Password < /h6> < /Form.Label > <

@@ -337,7 +337,7 @@ function Step0(props) {
         <
         h6 className = "bolder" > Total Deposit Made: < /h6> <
         div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
-        h4 className = "px-2 font-lighter" > { props.deposit } < /h4></div >
+        h3 className = "px-2 font-lighter" > { props.deposit } < /h3></div >
         <
         /
         div > <
@@ -347,7 +347,7 @@ function Step0(props) {
         <
         h6 className = "bolder" > Networth: < /h6> <
         div className = "d-flex flex-row flex" > { props.currency } <
-        h4 className = "px-2 font-lighter" > { props.networth } < /h4></div > < /div><div className="col"> {props.next} < /
+        h3 className = "px-2 font-lighter" > { props.networth } < /h3></div > < /div><div className="col"> {props.next} < /
         div > < /div >  <
         h6 className = "bolder py-3" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
         div > < /

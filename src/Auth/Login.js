@@ -56,7 +56,7 @@ class Login extends Component {
             h6 > <
             /
             div > <
-            Form.Group className = "mb-3 rounded-2 p-3" >
+            Form.Group className = " rounded-2 p-3" >
             <
             Form.Label > < h6 > Email < /h6> < /Form.Label > <
             Form.Control type = "text"
@@ -66,7 +66,7 @@ class Login extends Component {
             onChange = { this.handleChange }
             placeholder = "support@cyanase.com" / > < /
             Form.Group > <
-            Form.Group className = "mb-3 rounded-2 p-3" >
+            Form.Group className = " rounded-2 p-3" >
             <
             Form.Label > < h6 > Password < /h6> < /Form.Label > <
             Form.Control type = "password"

@@ -433,9 +433,9 @@ function Step3(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > How much would you like to Withdraw from your account ? < /h6>  <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        Form.Group className = "mb-3 p-3" >
         <
-        Form.Label > Amount to Withdraw in { props.currency } < /Form.Label>  <
+        Form.Label > < h6 > Amount to Withdraw in { props.currency } < /h6> < /Form.Label > <
         Form.Control type = "number"
         onChange = { props.handleChange }
         name = "withdraw_amount"
@@ -460,9 +460,9 @@ function Step4(props) {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > Enter your bank details to proceed < /h6>   <
-            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+            Form.Group className = " p-3" >
             <
-            Form.Label > Account Number < /Form.Label>  <
+            Form.Label > < h6 > Account Number < /h6> < /Form.Label > <
             Form.Control type = "number"
             onChange = { props.handleChange }
             name = "account_number"
@@ -473,9 +473,9 @@ function Step4(props) {
             This field is required. <
             /Form.Control.Feedback> < /
             Form.Group > <
-            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+            Form.Group className = "mb-3 p-3" >
             <
-            Form.Label > Account Bank(Code) < /Form.Label>  <
+            Form.Label > < h6 > Account Bank(Code) < /h6> < /Form.Label > <
             Form.Control type = "text"
             onChange = { props.handleChange }
             name = "account_bank"
@@ -492,9 +492,9 @@ function Step4(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > Confirm your phone number < /h6>   <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        Form.Group className = " p-3" >
         <
-        Form.Label > Confirm Phone Number < /Form.Label>  <
+        Form.Label > < h6 > Confirm Phone Number < /h6> < /Form.Label > <
         Form.Control type = "number"
         onChange = { props.handleChange }
         name = "account_number"
@@ -505,9 +505,9 @@ function Step4(props) {
         This field is required. <
         /Form.Control.Feedback> < /
         Form.Group > <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        Form.Group className = "mb-3 p-3" >
         <
-        Form.Label > Account Bank(Mobile Money Option) < /Form.Label>  <
+        Form.Label > < h6 > Account Bank(Mobile Money Option) < /h6> < /Form.Label > <
         Form.Control type = "text"
         onChange = { props.handleChange }
         name = "account_bank"
