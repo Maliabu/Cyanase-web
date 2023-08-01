@@ -169,7 +169,7 @@ const MyHome = () => {
         img src = { Profile }
         className = "rounded-circle mt-2"
         width = '100%'
-        height = '60%'
+        height = '50%'
         alt = "investors" / >
         <
         /div> <
@@ -355,7 +355,7 @@ const MyHome = () => {
         div > < /
         div >
         <
-        div className = 'text-end pt-3' > < h6 className = ' p-2 mx-3' > Account: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
+        div className = 'text-end pt-3' > < h6 className = ' p-2 mx-3' > Account Subscription: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
         h6 > < /div > <
         TabContent id = "tab1"

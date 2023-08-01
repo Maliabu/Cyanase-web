@@ -237,10 +237,10 @@ function Step2(props) {
     return ( < div className = "text-center p-5" >
         <
         h4 className = "bolder" > Add a Goal < /h4> <
-        div className = "row bg-light py-4 p-5 rounded-25 mt-5" > <
+        div className = "row py-4 rounded-25 mt-5" > <
         Form.Group className = "mb-3 bg-white p-3 px-5" >
         <
-        Form.Label > What is your Goal ? < /Form.Label>  <
+        Form.Label > < h6 > What is your Goal ? < /h6> < /Form.Label > <
         Form.Control type = "text"
         id = 'text'
         name = "goal_name"
@@ -254,8 +254,8 @@ function Step2(props) {
         <
         Form.Group className = "mb-3 bg-white p-3 px-5" >
         <
-        Form.Label > How long do you wish to accomplish this Goal ? (years) < /Form.Label>  <
-        Form.Control type = "number"
+        Form.Label > < h6 > How long do you wish to accomplish this Goal ? (years) < /h6> < /Form.Label > <
+            Form.Control type = "number"
         id = 'number'
         name = "goal_period"
         onChange = { props.handleChange }
@@ -284,7 +284,7 @@ function Step3(props) {
         <
         Form.Group className = "mb-3 bg-white p-3 px-5" >
         <
-        Form.Label > My Goal Amount is : < /Form.Label>  <
+        Form.Label > < h6 > My Goal Amount is : < /h6> < /Form.Label > <
         Form.Control type = "number"
         name = "goal_amount"
         id = 'phone'
@@ -607,9 +607,9 @@ function Step10(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        Form.Group className = "mb-3 p-3 p-5" >
         <
-        Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
+        Form.Label > < h6 > Amount to Deposit in { props.currency } < /h6> < /Form.Label > <
         Form.Control type = "number"
         onChange = { props.handleChange }
         name = "deposit_amount"
