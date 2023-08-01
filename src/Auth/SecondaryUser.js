@@ -249,10 +249,10 @@ function SecondaryUser(props) {
         }
         return ( <
             div > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 rounded-3 p-3"
             controlId = "formBasicDate" >
             <
-            Form.Label > First Name < /Form.Label> <
+            Form.Label > < h6 > First Name < /h6> < /Form.Label > <
             Form.Control type = "text"
             name = "first_name"
             onChange = { props.change }
@@ -263,10 +263,10 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 rounded-3 p-3"
             controlId = "formBasicText" >
             <
-            Form.Label > Last Name < /Form.Label> <
+            Form.Label > < h6 > Last Name < /h6> < /Form.Label > <
             Form.Control type = "text"
             name = "last_name"
             onChange = { props.change }
@@ -277,10 +277,10 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 rounded-3 p-3"
             controlId = "formBasicText" >
             <
-            Form.Label > Email < /Form.Label> <
+            Form.Label > < h6 > Email < /h6> < /Form.Label > <
             Form.Control type = "email"
             name = "email"
             onChange = { props.change }
@@ -300,10 +300,10 @@ function SecondaryUser(props) {
         }
         return ( <
             div > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 shadow-sm rounded-3 p-3"
             controlId = "formBasicText" >
             <
-            Form.Label > Date of Birth < /Form.Label> <
+            Form.Label > < h6 > Date of Birth < /h6> < /Form.Label > <
             Form.Control type = "date"
             name = "birth_date"
             onChange = { props.change2 }
@@ -314,10 +314,10 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 d-none shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 d-none shadow-sm rounded-3 p-3"
             controlId = "formBasicText" >
             <
-            Form.Label > Country < /Form.Label> <
+            Form.Label > < h6 > Country < /h6> < /Form.Label > <
             Form.Control type = "text"
             name = "country"
             value = { props.value }
@@ -330,7 +330,7 @@ function SecondaryUser(props) {
             } > hey < /p> < /
             Form.Group >
             <
-            Form.Label > Gender < /Form.Label> <
+            Form.Label > < h6 > Gender < /h6> < /Form.Label > <
             Form.Select name = "gender"
             onChange = { props.change2 } > <
             option value = "Gender" > Select your gender < /option> <
@@ -342,9 +342,9 @@ function SecondaryUser(props) {
             style = {
                 { display: 'none' }
             } > hey < /p>   <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5" >
+            Form.Group className = "mb-3 shadow-sm rounded-3 p-3" >
             <
-            Form.Label > Country and Phone < /Form.Label> <
+            Form.Label > < h6 > Country and Phone < /h6> < /Form.Label > <
             PhoneInput international placeholder = "Enter phone number"
             name = "phone_no"
             country = { props.country }
@@ -368,10 +368,10 @@ function SecondaryUser(props) {
         }
         return ( <
             div > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 rounded-3 p-3"
             controlId = "formBasicDate" >
             <
-            Form.Label > Password < /Form.Label> <
+            Form.Label > < h6 > Password < /h6> < /Form.Label > <
             Form.Control type = "password"
             name = "password"
             onChange = { props.change }
@@ -382,10 +382,10 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 rounded-3 p-3"
             controlId = "formBasicText" >
             <
-            Form.Label > Repeat Password < /Form.Label> <
+            Form.Label > < h6 > Repeat Password < /h6> < /Form.Label > <
             Form.Control type = "password"
             name = "confirmpassword"
             onChange = { props.change }

@@ -52,13 +52,13 @@ class Login extends Component {
             <
             div className = 'row justify-center p-3' > <
             h2 className = 'text-center' > LOGIN < /h2> <
-            h6 className = 'active mt-3 text-center' > < b > Enter your Credentials below to login to your API Account < /b>  < /
+            h6 className = ' mt-3 text-center' > < b > Enter your Credentials below to login to your API Account < /b>  < /
             h6 > <
             /
             div > <
-            Form.Group className = "mb-3 shadow-sm rounded-2 p-3 px-5" >
+            Form.Group className = "mb-3 rounded-2 p-3" >
             <
-            Form.Label > Email < /Form.Label> <
+            Form.Label > < h6 > Email < /h6> < /Form.Label > <
             Form.Control type = "text"
             id = 'username'
             required = "required"
@@ -66,9 +66,9 @@ class Login extends Component {
             onChange = { this.handleChange }
             placeholder = "support@cyanase.com" / > < /
             Form.Group > <
-            Form.Group className = "mb-3 shadow-sm rounded-2 p-3 px-5" >
+            Form.Group className = "mb-3 rounded-2 p-3" >
             <
-            Form.Label > Password < /Form.Label> <
+            Form.Label > < h6 > Password < /h6> < /Form.Label > <
             Form.Control type = "password"
             id = 'password'
             required = "required"
