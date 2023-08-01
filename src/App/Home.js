@@ -158,7 +158,7 @@ const MyHome = () => {
         div > <
         img src = { Header }
         width = '60%'
-        className = 'mx-4 mt-4 '
+        className = 'mx-4 mt-5 '
         height = '80%'
         alt = "investors" / > <
         /div>   <
