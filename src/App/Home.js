@@ -54,7 +54,7 @@ const MyHome = () => {
             setSpan(res[2]);
         });
         UserRequests().then(res => {
-            setName(res.first_name + " " + res.last_name)
+            setName(res.first_name)
             setAccount(res.profile.user_type)
             setCountry(res.profile.country)
             setPhone(res.profile.phoneno)
@@ -169,11 +169,11 @@ const MyHome = () => {
         img src = { Profile }
         className = "rounded-circle mt-2"
         width = '100%'
-        height = '80%'
+        height = '70%'
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-8' > < p > { name } < /p>  <
+        div className = 'col-8' > { name } <
         p className = 'bolder' > { account } < /p > < /
         div > <
         /div> <
