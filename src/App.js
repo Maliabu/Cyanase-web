@@ -11,6 +11,7 @@ import Logout from './Accounts/Logout';
 import Auth from './Auth/Auth';
 import Verify from './Auth/VerifyEmail'
 import PasswordReset from './Auth/PasswordReset'
+import ResetPassword from './Auth/ResetPassword'
 
 export default function App() {
     return ( <
@@ -31,6 +32,9 @@ export default function App() {
         /><
         Route path = "/reset/password"
         element = { < PasswordReset / > }
+        /><
+        Route path = "/password/reset"
+        element = { < ResetPassword / > }
         /> < /
         Routes > <
         /Router>

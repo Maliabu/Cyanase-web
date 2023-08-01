@@ -13,12 +13,10 @@ class Login extends Component {
         username: '',
         password: ''
     };
-    Show = true;
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         });
-        console.log(this.state, this.props);
     };
     handleSubmit = (e) => {
         preloader()
@@ -87,7 +85,7 @@ class Login extends Component {
             /Button> < /
             div >
             <
-            p className = 'mt-5 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > Forgot password? < /span > < /p > <
+            p className = 'mt-5 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p > <
             h6 id = "errorMessage"
             className = 'py-2 mt-3 rounded border border-danger text-center fade-in'
             style = {

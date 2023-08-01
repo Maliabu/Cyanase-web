@@ -3,146 +3,44 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { API_URL_LOGIN } from '../apis';
+import { API_URL_PASSWORD_RESET } from '../apis';
 import axios from 'axios';
-import Header from '../images/Group 3525.png';
+import { success1, catch_errors, preloader, fail } from '../Api/RequestFunctions';
 
 class PasswordReset extends Component {
     //state for form data
     state = {
-        password: '',
-        confirmpassword: ''
+        email: '',
     };
-    Show = true;
-    getCode = () => {
-        document.getElementById("infoMessage").innerText = "Code sent, check your email"
-        document.getElementById("infoMessage").style.display = 'block'
-        document.getElementById("infoMessage").style.color = "#ff8a00"
-        document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
-        setTimeout(() => {
-            document.getElementById("infoMessage").style.display = 'none'
-        }, 3000);
-    }
-
-    success = () => {
-        document.getElementById("successMessage").innerHTML = "Successful"
-        document.getElementById("successMessage").style.backgroundColor = "orange"
-        document.getElementById("successMessage").style.color = "white"
-        document.getElementById("successMessage").style.border = "block"
-        document.getElementById("successMessage").style.borderColor = "orange"
-        document.getElementById("infoMessage").style.display = 'block'
-        document.getElementById("infoMessage").style.color = "#ff8a00"
-        document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
-        document.getElementById("infoMessage").innerText = "Your password has been changed successfully"
-        setTimeout(() => {
-            document.getElementById("errorMessage").style.display = 'none'
-        }, 2000);
-    }
     handleChange = (e) => {
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.name]: e.target.value
         });
-        console.log(this.state, this.props);
     };
     handleSubmit = (e) => {
+        preloader()
         e.preventDefault();
         let form_data = new FormData();
-        form_data.append('verificationcode', this.state.verificationcode);
-        axios.post(`${API_URL_LOGIN}`, form_data, {
+        form_data.append('email', this.state.email);
+        axios.post(`${API_URL_PASSWORD_RESET}`, form_data, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
             .catch(function(error) {
-                const errorDisplay = () => {
-                    document.getElementById("errorMessage").innerText = error.response
-                    document.getElementById("errorMessage").style.display = 'block'
-                    document.getElementById("errorMessage").style.color = "red"
-                    document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
-                    setTimeout(() => {
-                        document.getElementById("errorMessage").style.display = 'none'
-                    }, 6000);
-                }
-                const errorSignUp = () => {
-                    document.getElementById("successMessage").innerHTML = "Something went wrong"
-                    document.getElementById("successMessage").style.backgroundColor = "red"
-                    document.getElementById("successMessage").style.color = "white"
-                    document.getElementById("successMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Password Reset Unsuccessful"
-                    }, 2000);
-                }
-                if (error.response) {
-                    const responses = error.response.data.detail
-                    if (error.response.status === 400) {
-                        errorDisplay(responses)
-                    } else if (error.response.status === 500) {
-                        errorDisplay(responses)
-                    } else if (error.response.status === 404) {
-                        errorDisplay(responses)
-                    } else if (error.response.status === 403) {
-                        errorDisplay(responses)
-                    }
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    // console.log(error.response.data);
-                    // console.log(error.response.status);
-                    // console.log(error.response.headers);
-                    errorSignUp();
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
-                    errorDisplay(error);
-                    errorSignUp();
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
-                    errorSignUp();
-                    errorDisplay(error);
-                }
+                catch_errors(error)
             })
-            .then((response) => {
-                const errorDisplay = (response) => {
-                    document.getElementById("errorMessage").innerText = response.data.message
-                    document.getElementById("errorMessage").style.color = "red"
-                    document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
-                    document.getElementById("errorMessage").style.display = 'block'
-                    setTimeout(() => {
-                        document.getElementById("errorMessage").style.display = 'none'
-                    }, 6000);
+            .then(function(response) {
+                if (response.status === 200 && response.data.success === false) {
+                    fail(response.data.message)
+                } else {
+                    success1("Almost there. Please check your email for a password reset link", "Successful");
                 }
-                const errorSignUp = () => {
-                    document.getElementById("successMessage").innerHTML = "Something went wrong"
-                    document.getElementById("successMessage").style.backgroundColor = "red"
-                    document.getElementById("successMessage").style.color = "white"
-                    document.getElementById("successMessage").style.borderColor = "red"
-                    setTimeout(() => {
-                        document.getElementById("successMessage").innerHTML = "Verification Unsuccessful"
-                    }, 2000);
-                }
-                if (response) {
-                    errorDisplay(response);
-                    errorSignUp()
-                }
-                console.log(response)
-                    // window.location.pathname = "/"
             });
-        this.success();
     }
     render() {
         return ( <
             div > <
-            div className = 'row py-4 justify-content-center' > < p > <
-            img src = { Header }
-            width = '10%'
-            className = "mx-lg-5 d-none d-lg-block"
-            alt = "investors" / > < /p><p><
-            img src = { Header }
-            width = '40%'
-            className = "d-block d-sm-none mx-auto"
-            alt = "investors" / > < /p></div > <
             div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-2' >
             <
             Form className = 'bg-white rounded-4 p-lg-5 py-3 col-lg-5 col-12'
@@ -150,33 +48,19 @@ class PasswordReset extends Component {
             <
             div className = 'row justify-center p-3' > <
             h2 className = 'text-center' > Password Reset < /h2> <
-            h6 className = 'active mt-3 text-center' > < b > Reset your password < /b>  < /
+            h6 className = 'active mt-3 text-center' > < b > Enter your account email to receive a password reset link < /b>  < /
             h6 > <
             /
             div > <
             Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
             controlId = "formBasicDate" >
             <
-            Form.Label > Password < /Form.Label> <
-            Form.Control type = "password"
-            name = "password"
+            Form.Label > Email < /Form.Label> <
+            Form.Control type = "email"
+            name = "email"
             onChange = { this.handleChange }
-            placeholder = "create a strong password" / > <
-            p id = "errorPassword"
-            className = 'p-2 rounded-2 px-3 bg-red'
-            style = {
-                { display: 'none' }
-            } > hey < /p> < /
-            Form.Group > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
-            controlId = "formBasicText" >
-            <
-            Form.Label > Repeat Password < /Form.Label> <
-            Form.Control type = "password"
-            name = "confirmpassword"
-            onChange = { this.handleChange }
-            placeholder = "confirm password" / > <
-            p id = "errorConfirmP"
+            placeholder = "your email here" / > <
+            p id = "errorEmail"
             className = 'p-2 rounded-2 px-3 bg-red'
             style = {
                 { display: 'none' }
@@ -201,7 +85,9 @@ class PasswordReset extends Component {
             style = {
                 { display: 'none' }
             } > hey < /h6>  < /
-            Form > < /div> < /
+            Form > < /div>  <
+            p className = 'mt-lg-5 mt-4 text-center' > Back to < span className = 'active bolder' > { this.props.button } < /span >< /p > <
+            /
             div >
         );
     }

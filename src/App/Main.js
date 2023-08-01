@@ -254,7 +254,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'col-3' >
             <
-            h5 className = 'bolder' > Investment Details < /h5> <
+            h4 className = 'bolder' > Investment Details < /h4> <
             h6 > Your current Investment Option as per your risk profile: < span className = 'bolder active' > T.bonds < /span> < /
             h6 >
             <

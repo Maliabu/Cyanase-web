@@ -2,6 +2,7 @@ import React from "react";
 import Login from './Login';
 import SignUp from './SecondaryUser';
 import Header from '../images/Group 3525.png';
+import PasswordReset from './PasswordReset'
 // import Checkout from "../payment/checkout";
 
 class Auth extends React.Component {
@@ -21,10 +22,28 @@ class Auth extends React.Component {
     }
     _login = () => {
         let currentStep = this.state.currentStep
-        currentStep = currentStep - 1
+        currentStep = 1
         this.setState({
             currentStep: currentStep
         })
+    }
+    _resetPassword = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep + 2
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+    resetPassword() {
+        let currentStep = this.state.currentStep;
+        if (currentStep === 1) {
+            return ( <
+                span type = "button"
+                onClick = { this._resetPassword } >
+                Forgot Password ? <
+                /span>        
+            )
+        }
     }
 
     nextButton() {
@@ -45,9 +64,16 @@ class Auth extends React.Component {
                 /span>        
             )
         }
+        if (currentStep === 3) {
+            return ( <
+                span type = "button"
+                onClick = { this._login } >
+                Login <
+                /span>        
+            )
+        }
         return null;
     }
-
     render() {
         return ( <
             React.Fragment >
@@ -63,8 +89,12 @@ class Auth extends React.Component {
             alt = "investors" / > < /p> <
             Step1 currentStep = { this.state.currentStep }
             signup = { this.nextButton() }
+            passwordReset = { this.resetPassword() }
             /> <
             Step2 currentStep = { this.state.currentStep }
+            login = { this.nextButton() }
+            /><
+            Step3 currentStep = { this.state.currentStep }
             login = { this.nextButton() }
             /> < /
             div > < /
@@ -80,6 +110,7 @@ function Step1(props) {
     return ( < div >
         <
         Login button = { props.signup }
+        passwordReset = { props.passwordReset }
         / > < /
         div > );
 }
@@ -91,4 +122,13 @@ function Step2(props) {
     return ( < SignUp button = { props.login }
         / > );
     }
-    export default Auth;
+
+    function Step3(props) {
+        if (props.currentStep !== 3) {
+            return null
+        }
+        return ( < PasswordReset passwordReset = { props.passwordReset }
+            button = { props.login }
+            / > );
+        }
+        export default Auth;

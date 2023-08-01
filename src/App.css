@@ -403,9 +403,11 @@ input[type='radio']:checked:after {
     top: 10%;
 }
 
-.form-check-input:checked {
+
+/* .form-check-input:checked {
     background-color: #ff8c00 !important;
     border-color: #ff9d00dd !important;
+    font-size: medium !important;
 }
 
 .form-control:focus {
@@ -414,11 +416,19 @@ input[type='radio']:checked:after {
     border-color: #ffbd716f !important;
     outline: 0 !important;
     box-shadow: 0 0 0 0.25rem rgba(253, 149, 13, 0.25) !important;
+    font-size: medium !important;
+} */
+
+.logo {
+    width: 20% !important;
+    height: 20% !important;
 }
 
-input:-internal-autofill-selected {
+
+/* input:-internal-autofill-selected {
     appearance: menulist-button !important;
     background-image: none !important;
     background-color: -internal-light-dark(rgb(232, 240, 254), rgba(126, 97, 70, 0.4)) !important;
     color: fieldtext !important;
-}
+    font-size: medium !important;
+} */

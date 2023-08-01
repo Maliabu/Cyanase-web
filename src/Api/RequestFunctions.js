@@ -22,7 +22,7 @@ export const success = (message, redirect, successMessage) => {
         window.location.pathname = redirect
     }, 2000);
 }
-export const success1 = (message, redirect, successMessage) => {
+export const success1 = (message, successMessage) => {
     document.getElementById("successMessage").innerHTML = successMessage
     document.getElementById("successMessage").style.backgroundColor = "orange"
     document.getElementById("successMessage").style.color = "black"
