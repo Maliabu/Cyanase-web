@@ -54,7 +54,7 @@ const MyHome = () => {
             setSpan(res[2]);
         });
         UserRequests().then(res => {
-            setName(res.first_name)
+            setName(res.first_name + " " + res.last_name)
             setAccount(res.profile.user_type)
             setCountry(res.profile.country)
             setPhone(res.profile.phoneno)
@@ -167,14 +167,15 @@ const MyHome = () => {
         div className = 'col-4' >
         <
         img src = "http://127.0.0.1:8000/static/photo.png"
-        className = "rounded-circle mt-2 object-fit-cover img-head"
+        className = "rounded-circle object-fit-cover img-head"
         width = '100%'
         height = '80%'
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-8 py-2' > < h6 > { name } < /h6><
-        h6 className = 'bolder' > { account } < /h6 > < /
+        div className = 'col-8 py-2' > < h6 className = 'lh-1' > { name } <
+        span className = 'bolder' > { account } < /span>  < /
+        h6 > < /
         div > <
         /div> <
         // online change my-5 to my-3
