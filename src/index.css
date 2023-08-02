@@ -32,6 +32,16 @@ button {
     font-size: 12px !important;
 }
 
+.img-head {
+    height: 50px;
+    width: 50px;
+}
+
+.img-back {
+    height: 300px;
+    width: 300px;
+}
+
 ::-ms-check label {
     font-size: 12px !important;
 }

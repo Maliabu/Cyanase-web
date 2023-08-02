@@ -167,7 +167,7 @@ const MyHome = () => {
         div className = 'col-4' >
         <
         img src = "http://127.0.0.1:8000/static/photo.png"
-        className = "rounded-circle mt-2"
+        className = "rounded-circle mt-2 object-fit-cover img-head"
         width = '100%'
         height = '80%'
         alt = "investors" / >
