@@ -166,15 +166,15 @@ const MyHome = () => {
         <
         div className = 'col-4' >
         <
-        img src = { Profile }
+        img src = "http://127.0.0.1:8000/static/photo.png"
         className = "rounded-circle mt-2"
         width = '100%'
-        height = '70%'
+        height = '80%'
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-8' > { name } <
-        p className = 'bolder' > { account } < /p > < /
+        div className = 'col-8 py-2' > < h6 > { name } < /h6><
+        h6 className = 'bolder' > { account } < /h6 > < /
         div > <
         /div> <
         // online change my-5 to my-3

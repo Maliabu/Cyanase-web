@@ -1,9 +1,8 @@
 import { useEffect } from "react";
-import { UserRequests, GetNextOfKin, ProfilePhoto } from "../Api/MainRequests";
+import { UserRequests, GetNextOfKin } from "../Api/MainRequests";
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import ChangeDetails from './ChangeDetails';
-import Profile from '../images/Ellipse 6.png'
 import { ArrowLeftSquare, Call, Message, User } from "react-iconly";
 import Photo from './photo'
 
@@ -22,7 +21,6 @@ const ADetails = (props) => {
     const [lastNok, setLastNok] = useState("")
     const [phoneNok, setPhoneNok] = useState("")
     const [emailNok, setEmailNok] = useState("")
-    const [profile, setProfile] = useState({ Profile })
     useEffect(() => {
         UserRequests().then(res => {
             console.log(res)
@@ -38,12 +36,7 @@ const ADetails = (props) => {
             setPhoneNok(res.kin_phone)
             setEmailNok(res.kin_email)
         });
-        ProfilePhoto().then(res => {
-            console.log(res)
-            setProfile(res)
-        })
     }, []);
-    console.log(Profile)
     return ( < div >
         <
         ArrowLeftSquare size = "large"
@@ -133,10 +126,9 @@ const ADetails = (props) => {
         div >
         <
         div className = "col-6 px-5 text-center" > <
-        img src = { profile }
-        width = '40%'
-        height = '30%'
-        className = "mt-4"
+        img src = "http://127.0.0.1:8000/static/photo.png"
+        height = "40%"
+        className = "mt-4 rounded-circle object-fit-cover w-50"
         alt = "investors" / >
         <
         p className = "bolder bolder mt-5" > Account Type: < span className = "text-dark" > Personal < /span></p >

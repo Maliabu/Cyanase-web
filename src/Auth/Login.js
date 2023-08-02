@@ -58,7 +58,7 @@ class Login extends Component {
             div > <
             Form.Group className = " rounded-2 px-3" >
             <
-            Form.Label > < h6 > Email < /h6> < /Form.Label > <
+            Form.Label > < h6 className = 'm-0' > Email < /h6> < /Form.Label > <
             Form.Control type = "text"
             id = 'username'
             required = "required"
@@ -66,9 +66,9 @@ class Login extends Component {
             onChange = { this.handleChange }
             placeholder = "support@cyanase.com" / > < /
             Form.Group > <
-            Form.Group className = " rounded-2 px-3" >
+            Form.Group className = " rounded-2 px-3 my-2" >
             <
-            Form.Label > < h6 > Password < /h6> < /Form.Label > <
+            Form.Label > < h6 className = 'm-0' > Password < /h6> < /Form.Label > <
             Form.Control type = "password"
             id = 'password'
             required = "required"
@@ -78,7 +78,7 @@ class Login extends Component {
             Form.Group > <
             div className = 'row justify-content-center' > <
             Button variant = "warning"
-            className = 'shadow text-center'
+            className = 'shadow mt-2 text-center'
             id = 'successMessage'
             type = "submit" >
             Login <
