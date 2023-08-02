@@ -8,16 +8,30 @@ import ResDeposit from './ResDeposit';
 import './style.scss';
 import Depo from '../images/depo.png'
 import { Wallet } from "react-iconly";
-import { GetRiskProfile } from "../Api/MainRequests";
+import { GetRiskProfile, UserRequests } from "../Api/MainRequests";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
     const [show2, setShow2] = useState(false);
+    const [country, setCountry] = useState([])
+    const [email, setEmail] = useState([])
+    const [name, setName] = useState([])
+    const [phone, setPhone] = useState([])
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     const [investmentOption, setinvestmentoption] = useState("")
     useEffect(() => {
         GetRiskProfile().then(res => {
-            setinvestmentoption(res.investment_option)
+            if (res.investment_option === undefined) {
+                setinvestmentoption("Cash | Venture | Credit")
+            } else {
+                setinvestmentoption(res.investment_option)
+            }
+        });
+        UserRequests().then(res => {
+            setCountry(res.profile.country)
+            setName(res.last_name + " " + res.first_name)
+            setPhone(res.profile.phoneno)
+            setEmail(res.email)
         });
     }, []);
     return ( < div > < div className = " d-none d-sm-block" > <
@@ -138,7 +152,29 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         div > < /div> <
         div className = "d-block d-sm-none" >
         <
-        ResDeposit tab9 = { props.handletab9 }
+        div className = 'row p-2 px-3' > <
+        div className = 'col-10 bg-lighter rounded-4' > <
+        p className = ' mx-3 bolder mt-3' > Deposit < /p > < /div >
+        <
+        div className = 'rounded-4 d-none light-res-home wide' >
+        <
+        p className = "bolder text-end mx-4 mt-2" > welcome back user <
+        div className = " justify-content-center" > <
+        p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
+        div >
+        <
+        div className = 'col-2' > <
+        img src = "http://127.0.0.1:8000/static/photo.png"
+        className = "rounded-circle object-fit-cover mt-2 img-head"
+        alt = "investors" / > < /div> < /
+        div >
+        <
+        Learn1 tab9 = { props.handletab9 }
+        option = { investmentOption }
+        country = { country }
+        lastname = { name }
+        email = { email }
+        phone = { phone }
         / > < /div > < /div >
     );
 };

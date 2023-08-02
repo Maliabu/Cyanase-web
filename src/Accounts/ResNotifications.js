@@ -46,7 +46,7 @@ const ResNotifications = (props) => {
         required id = "default-checkbox" /
         >
         <
-        p > Get me product updates and and investment newsletters < /p> < /
+        p > Get more product updates and and investment newsletters < /p> < /
         Form > < /
         div >
         <

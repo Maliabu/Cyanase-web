@@ -25,7 +25,7 @@ import { Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
 
 const ResGoals = () => {
-    const [activeTab, setActiveTab] = useState("tab2");
+    const [activeTab, setActiveTab1] = useState("tab2");
     const [goalSetting, setGoalSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [holdId, setHoldId] = useState("");
@@ -49,23 +49,23 @@ const ResGoals = () => {
     }
     const handleTab1 = () => {
         // update the state to tab1
-        setActiveTab("tab1");
+        setActiveTab1("tab1");
     };
     const handleTab3 = () => {
         // update the state to tab2
-        setActiveTab("tab3");
+        setActiveTab1("tab3");
     };
     const handleTab12 = () => {
         // update the state to tab2
-        setActiveTab("tab12");
+        setActiveTab1("tab12");
     };
     const handleTab13 = () => {
         // update the state to tab2
-        setActiveTab("tab13");
+        setActiveTab1("tab13");
     };
-    const TabNavItem = ({ id, activeTab, title, setActiveTab }) => {
+    const TabNavItem = ({ id, activeTab, title, setActiveTab1 }) => {
         const handleClick = () => {
-            setActiveTab(id);
+            setActiveTab1(id);
         };
         return ( < div className = "px-3 tab-nav lighter" >
             <
@@ -86,10 +86,10 @@ const ResGoals = () => {
     }
     const Main = () => {
         let progress
-        return ( < div className = 'p-1 res-home' > < div className = "blue-dark px-2 rounded-4" >
+        return ( < div className = 'p-1 res-home' > < div >
             <
-            div className = 'row' > <
-            div className = 'col-10' > <
+            div className = 'row p-2 px-3' > <
+            div className = 'col-10 bg-lighter rounded-4' > <
             p className = ' mx-3 bolder mt-3' > Your Goals < /p > < /div >
             <
             div className = 'rounded-4 d-none light-res-home wide' >
@@ -100,10 +100,8 @@ const ResGoals = () => {
             div >
             <
             div className = 'col-2' > <
-            img src = { Profile }
-            className = "rounded-circle mt-2"
-            width = '100%'
-            height = '60%'
+            img src = "http://127.0.0.1:8000/static/photo.png"
+            className = "rounded-circle object-fit-cover mt-2 img-head"
             alt = "investors" / > < /div> < /
             div >
             <
@@ -125,7 +123,7 @@ const ResGoals = () => {
             <
             div className = "scroll-y2 pb-lg-5 mb-lg-5" > {
                 span.map(goal => ( <
-                    div className = "p-4 shadow res-home rounded-4 mt-3"
+                    div className = "p-4 bg-white res-home rounded-4 mt-3"
                     key = { goal.goal_id } > <
                     div className = "d-flex flex-row flex" > <
                     span className = "mt-1" > <
@@ -196,7 +194,7 @@ const ResGoals = () => {
         id = "tab1"
         className = "twitter"
         activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
+        setActiveTab1 = { setActiveTab1 }
         />< /div > <
         div className = ' py-3 text-center' >
         <
@@ -207,7 +205,7 @@ const ResGoals = () => {
         onClick = { handleTab1 }
         id = "tab5"
         activeTab = { activeTab }
-        setActiveTab = { setActiveTab } > < span > hi < /span> < /
+        setActiveTab1 = { setActiveTab1 } > < span > hi < /span> < /
         TabNavItem > < /
         div > <
         div className = ' py-3 text-center' >
@@ -218,7 +216,7 @@ const ResGoals = () => {
         onClick = { handleTab3 }
         id = "tab7"
         activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
+        setActiveTab1 = { setActiveTab1 }
         />  < /
         div >
         <
@@ -230,7 +228,7 @@ const ResGoals = () => {
         onClick = { handleTab3 }
         id = "tab8"
         activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
+        setActiveTab1 = { setActiveTab1 }
         />  < /
         div > < /
         div > <
@@ -242,7 +240,7 @@ const ResGoals = () => {
         TabContent id = "tab3"
         activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
         activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
+        setActiveTab1 = { setActiveTab1 }
         / > < /TabContent > <
         TabContent id = "tab4"
         activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }

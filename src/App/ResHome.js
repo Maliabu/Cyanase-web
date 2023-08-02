@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests } from '../Api/MainRequests';
+import { MainRequests, PersonalRequests, Networth, UserRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import React, { useState, useEffect } from "react";
@@ -6,6 +6,7 @@ import Personal from "./Personal";
 import Deposit from "./Deposit";
 import Sacco from './Sacco';
 import Club from './Club';
+import Learn1 from '../Accounts/Learn1'
 import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
 import Api from '../Accounts/primaryUser';
@@ -16,52 +17,66 @@ import FAQs from '../Accounts/FAQs';
 import Chart from 'react-apexcharts';
 import Saccos from '../Accounts/Saccos';
 import Clubs from '../Accounts/Clubs';
-import Profile from '../images/Ellipse 6.png';
 import Ad from '../images/Group 212.png';
 import ResGoals from './ResGoals'
+import { getCurrency } from '../payment/GetCurrency';
 import { FaLightbulb } from 'react-icons/fa';
-import { Home, Notification, Wallet, Setting, Work } from 'react-iconly';
+import { Home, Notification, Wallet, Setting, Work, TimeCircle } from 'react-iconly';
 
 const ResHome = (props) => {
     const [activeTab, setActiveTab1] = useState("tab1");
     const [goalSetting, setGoalSetting] = useState(false);
+    const [depositSetting, setDepositSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [deposit, setDeposit] = useState(0);
     const [dollar, setDollar] = useState(0);
+    const [graph, setGraph] = useState([])
+    const [country, setCountry] = useState([])
+    const [dates, setDates] = useState([])
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
-    const [options, setOptions] = useState({
+    let thisYear = new Date().getFullYear()
+    const groupArrayObject = graph.reduce((group, obj) => {
+        const { name, datas, date } = obj;
+        if (!group[name]) {
+            group[name] = {
+                date: date,
+                name: name,
+                data: []
+            };
+        }
+        group[name].data.push(datas);
+        return group;
+    }, {});
+    const result = Object.values(groupArrayObject);
+    const options = {
         options: {
             chart: {
                 id: 'apexchart-example'
             },
-            theme: {
-                mode: 'light',
-                palette: 'palette7',
-            },
             xaxis: {
-                show: false
+                name: '2023',
+                title: {
+                    text: 'Investments for ' + thisYear
+                },
+                categories: dates,
+                // categories: ['jun', 'jul', 'aug'],
             },
             yaxis: {
-                show: false
+                show: false,
+                title: {
+                    text: 'In Thousands(000) of ' + getCurrency(country)
+                }
             },
-            colors: ['#252859', '#E91E63', '#FF9800'],
+            colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
 
         },
-        series: [{
-                name: 'T.bills',
-                data: [90, 40, 135, 15],
-            },
-            {
-                name: 'T.bonds',
-                data: [30, 40, 75, 50, 49, 60],
-            },
-            {
-                name: 'Stocks',
-                data: [10, 4, 35, 5, 125],
-            }
-        ]
-    })
+        series: result,
+        // series: [2, 60, 4],
+        stroke: {
+            curve: 'smooth',
+        }
+    }
     useEffect(() => {
         PersonalRequests().then(res => {
             setSpan(res[2]); // array(14)
@@ -69,9 +84,16 @@ const ResHome = (props) => {
         MainRequests().then(res => {
             setDeposit(res[0]);
             setDollar(res[1]);
-            setDepositNetworth(res[2]);
+            setGraph(res[4]); // array deposits
+            setDates(res[5])
             setDollarNetworth(res[3]);
         })
+        Networth().then(res => {
+            setDepositNetworth(res[2]);
+        })
+        UserRequests().then(res => {
+            setCountry(res.profile.country)
+        });
     }, []);
     let depositTotal = 0
     span.map(goal => (
@@ -80,6 +102,11 @@ const ResHome = (props) => {
         //  Functions to handle Tab Switching
     if (goalSetting) {
         return ( < ResGoals changeGoalSetting = { setGoalSetting }
+            / >
+        )
+    }
+    if (depositSetting) {
+        return ( < Deposit changeDepositSetting = { setDepositSetting }
             / >
         )
     }
@@ -112,20 +139,18 @@ const ResHome = (props) => {
         setActiveTab1("tab13");
     };
     const Main = () => {
-        return ( < div className = 'p-1 blue-dark res-home' > < div className = "bg-white text-dark p-2 rounded-4" >
+        return ( < div className = 'p-1 bg-lighter res-home' > < div className = "bg-white text-dark p-2 rounded-4" >
             <
             div className = 'd-flex mt-2' >
             <
-            div className = 'rounded-4 bg-light wide' >
+            div className = 'rounded-4 bg-lighter wide' >
             <
-            p className = "text-end mx-4 mt-2" > welcome back < span className = 'text-warning' > { props.name } < /span> <
+            p className = "text-end mx-4 mt-2" > welcome back < span className = 'bolder' > { props.name } < /span> <
             span className = " justify-content-center" > <
             span className = "px-1" > pick up where you left off < /span></span > < /p>< /
             div > <
-            img src = { Profile }
-            className = "rounded-circle mx-2 mt-3"
-            width = '10%'
-            height = '10%'
+            img src = "http://127.0.0.1:8000/static/photo.png"
+            className = "rounded-circle object-fit-cover mx-2 mt-2 img-head"
             alt = "investors" / > < /
             div >
             <
@@ -134,13 +159,16 @@ const ResHome = (props) => {
             p className = ' mx-3 mt-3 bolder' > Statistics < /p > < /div > <
             div className = 'col' >
             <
-            div className = 'd-flex justify-content-end mx-1' > < Wallet size = "medium"
+            div className = 'd-flex justify-content-end mx-1' > < TimeCircle size = "medium"
             set = 'broken'
-            className = ' mx-2 icon-padding d-none rounded-circle active light-res-home ' / > < p className = 'mt-2 icon-padding rounded-3 p-2 px-5 bk-warning '
+            onClick = {
+                () => { setGoalSetting(true) }
+            }
+            className = ' mx-2 icon-padding rounded-circle active warning light-res-home ' / > < h6 className = 'mt-2 d-none rounded-3 p-3 px-5 bk-warning '
             onClick = {
                 () => { setGoalSetting(true) }
             } >
-            Goals < /p> < /
+            Goals < /h6> < /
             div > < /
             div > < /div >  <
             div className = 'blue-dark d-flex rounded-4' >
@@ -151,12 +179,12 @@ const ResHome = (props) => {
             >
             <
             br / > Deposit <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> < h4 className = "px-1 " > { deposit - depositTotal }  < /
-            h4 > < /div > < /p > < /span > < span className = 'py-4' > < p className = 'mt-2 icon-padding rounded-3 p-2 px-4 warning '
+            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> < h2 className = "px-1 font-lighter" > { deposit - depositTotal }  < /
+            h2 > < /div > < /p > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-4 warning '
             onClick = {
-                () => { setGoalSetting(true) }
+                () => { setDepositSetting(true) }
             } >
-            Deposit < /p> </span > < /
+            Deposit < /h6> </span > < /
             div >
 
             <
@@ -177,11 +205,11 @@ const ResHome = (props) => {
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> <
-            h4 className = "px-1" > { networth } < /h4></div > < /p>  < /span > < span className = 'py-4' > < p className = 'mt-2 icon-padding rounded-3 p-2 px-3 warning '
+            h2 className = "px-1 font-lighter" > { networth } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
             onClick = {
                 () => { setGoalSetting(true) }
             } >
-            Withdraw < /p> </span > < /
+            Withdraw < /h6> </span > < /
             div >
 
             <
@@ -229,7 +257,7 @@ const ResHome = (props) => {
             div >
             <
             p className = 'mx-3 bolder my-3 d-none' > Recent Activity < /p> <
-            div className = "row mt-3 d-none px-2 bg-light rounded-3 mx-1 " > <
+            div className = "row mt-3 d-none px-2 bg-lighter rounded-3 mx-1 " > <
             div className = "col-8" >
             <
             p className = "pt-3 bolder" > Deposit Amount: < span className = "font-lighter" > UGX 10000 < /span> < div className = "active" > Personal Investment < /div > < /p > < /
