@@ -32,7 +32,9 @@ class Photo extends React.Component {
             })
             .then(function(response) {
                 console.log(response)
-                if (response.data.success === false) {
+                if (!response) {
+                    fail("Something went wrong...")
+                } else if (response.data.success === false) {
                     fail(response.data.message)
                 } else {
                     success("You have successfully edited your profile photo", "/home", "successful");
@@ -87,8 +89,7 @@ class Photo extends React.Component {
             onClick = { this.handleSubmit }
             type = "button" >
             Save Photo <
-            /Button> <
-            /
+            /Button> < /
             div > < /
             div > < /
             form > < /

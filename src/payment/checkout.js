@@ -46,7 +46,9 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                                     catch_errors(error)
                                 })
                                 .then(function(response) {
-                                    if (response.status === 200 && response.data.success === false) {
+                                    if (!response) {
+                                        fail("Something went wrong...")
+                                    } else if (response.status === 200 && response.data.success === false) {
                                         fail(response.data.message)
                                     } else {
                                         success("You have deposited successfully", "/home", "successful");

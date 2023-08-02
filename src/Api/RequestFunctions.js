@@ -52,26 +52,17 @@ export const fail = (error) => {
 export const catch_errors = (error) => {
     if (error.response) {
         if (error.response.status === 403) {
-            console.log(error.response.data.message);
-            fail(error.response.data.message)
+            fail("Server Error")
         } else if (error.response.status === 500) {
-            console.log(error.response.data.message);
-            fail(error.response.data.message)
+            fail("Your connection reset, try agin later")
         } else if (error.response.status === 404) {
-            console.log(error.response.data.message);
-            fail(error.response.data.message)
+            fail("We cant find what you are looking for")
         }
-        // The request was made and the server responded with a status code
-        console.log(error.response.data.message);
-        console.log(error.response.status);
-        console.log(error.response.headers);
     } else if (error.request) {
         // The request was made but no response was received
-        fail(error.response.data.message)
-        console.log(error.request);
+        fail("Server Error")
     } else {
         // Something happened in setting up the request that triggered an Error
-        fail(error.response.data.message)
-        console.log('Error', error.message);
+        fail("Server Error")
     }
 }

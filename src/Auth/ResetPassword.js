@@ -11,12 +11,13 @@ import { useSearchParams } from "react-router-dom";
 
 function ResetPassword(props) {
     let [searchParams] = useSearchParams();
+    let email = searchParams.get("email")
     let ref = searchParams.get("ref")
-    console.log(ref)
         //state for form data
     const [formData, setFormData] = useState({
         "password": "",
-        "confirmpassword": ""
+        "confirmpassword": "",
+        "email": email
     });
     const handleChange = (event) => {
         const name = event.target.name;
@@ -39,17 +40,22 @@ function ResetPassword(props) {
         if (check === "no") {
             fail("Passwords dont macth")
         } else {
-            axios.post(`${API_URL_RESET_PASSWORD}`, null, {
+            console.log("EMAIL: " + formData.email)
+            console.log("PASSWORD: " + formData.password)
+            axios.post(`${API_URL_RESET_PASSWORD}`, formData.password, {
                     params: {
-                        password: formData.password,
-                        ref: ref
+                        password: (formData.password).toString(),
+                        email: formData.email,
+                        ref: ref,
                     }
                 })
                 .catch(function(error) {
                     catch_errors(error)
                 })
                 .then(function(response) {
-                    if (response.status === 200 && response.data.success === false) {
+                    if (!response) {
+                        fail("Something went wrong...")
+                    } else if (response.status === 200 && response.data.success === false) {
                         fail(response.data.message)
                     } else {
                         success1("Your password has been reset.", "successful");

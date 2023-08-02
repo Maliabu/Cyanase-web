@@ -34,7 +34,9 @@ const NKin = () => {
                 catch_errors(error)
             })
             .then(function(response) {
-                if (response.status === 200 && response.data.success === false) {
+                if (!response) {
+                    fail("Something went wrong...")
+                } else if (response.status === 200 && response.data.success === false) {
                     fail(response.data.message)
                 } else {
                     success("You have successfully edited your next of kin", "/home", "successful");

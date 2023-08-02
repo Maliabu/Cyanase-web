@@ -127,7 +127,7 @@ const ADetails = (props) => {
         <
         div className = "col-6 px-5 text-center" > <
         img src = "http://127.0.0.1:8000/static/photo.png"
-        className = "mt-4 rounded-circle object-fit-cover img-back"
+        className = " rounded-circle object-fit-cover img-back"
         alt = "investors" / >
         <
         p className = "bolder bolder mt-5" > Account Type: < span className = "text-dark" > Personal < /span></p >
