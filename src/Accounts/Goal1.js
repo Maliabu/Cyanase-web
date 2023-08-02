@@ -234,10 +234,10 @@ function Step2(props) {
     if (props.currentStep !== 2) {
         return null
     }
-    return ( < div className = "text-center p-5" >
+    return ( < div className = "text-center p-3" >
         <
         h4 className = "bolder" > Add a Goal < /h4> <
-        div className = "row py-4 rounded-25 mt-5" > <
+        div className = "row py-4 rounded-4" > <
         Form.Group className = "mb-3 bg-white p-3 px-5" >
         <
         Form.Label > < h6 > What is your Goal ? < /h6> < /Form.Label > <
@@ -278,7 +278,7 @@ function Step3(props) {
         return null
     }
     return ( <
-        div className = "text-center px-5" > < h6 className = "mt-5" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
+        div className = "text-center px-3" > < h6 className = "mt-5" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
             default as monthly) < /h6> <
         div className = "row bg-light p-4 px-3 rounded-25 mt-5" >
         <

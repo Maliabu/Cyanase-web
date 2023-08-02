@@ -56,11 +56,11 @@ body::-webkit-scrollbar {
 }
 
 .modals {
-    border-top: 30px solid #ffb85c;
+    border-top: 10px solid #ffb85c;
 }
 
 .modals-left {
-    border-left: 10px solid #ffb85c;
+    border-left: 5px solid #ffb85c;
 }
 
 .scroll-y {
@@ -104,7 +104,7 @@ body::-webkit-scrollbar {
 
 .my-modal {
     margin-top: 4% !important;
-    max-width: 50% !important;
+    max-width: 40% !important;
     border-radius: 25% !important;
     padding: 0% !important;
 }

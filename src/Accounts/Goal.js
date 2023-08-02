@@ -214,7 +214,7 @@ function Goal(props) {
     return ( <
         React.Fragment >
         <
-        form className = "p-lg-5 p-4 modals rounded-2 text-center"
+        form className = " px-4 py-2 modals rounded-2 text-center"
         onSubmit = { handleSubmit } > {
             /* 
                       render the form steps and pass required props in
