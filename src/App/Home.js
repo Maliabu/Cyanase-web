@@ -164,16 +164,16 @@ const MyHome = () => {
         /div>   <
         div className = 'row my-5 py-2 mx-2 blue-dark rounded-4' >
         <
-        div className = 'col-4' >
+        div className = 'col-3' >
         <
         img src = "http://127.0.0.1:8000/static/photo.png"
-        className = "rounded-circle object-fit-cover img-head"
+        className = "mt-1 rounded-circle object-fit-cover img-head"
         width = '100%'
         height = '80%'
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-8 py-2' > < h6 className = 'lh-1' > { name } <
+        div className = 'col-9 py-2' > < h6 className = 'lh-1' > { name } <
         span className = 'bolder' > { account } < /span>  < /
         h6 > < /
         div > <
