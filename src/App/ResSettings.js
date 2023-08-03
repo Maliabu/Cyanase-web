@@ -7,7 +7,6 @@ import ResNotifications from '../Accounts/ResNotifications';
 import ResContactUs from '../Accounts/ResContactUs';
 import ResFAQs from '../Accounts/ResFAQs';
 import ResRiskProfile from '../Accounts/ResRiskProfile';
-import Pic from '../Accounts/Pic';
 import { Notification, User, Call, Chat, Chart } from 'react-iconly';
 
 const ResSettings = ({ id, activeTab, children }) => {
@@ -41,11 +40,36 @@ const ResSettings = ({ id, activeTab, children }) => {
             / >
         )
     }
-    return ( < div > < Pic / > <
-        div className = "pt-5 res-home" >
+    return ( < div > <
+        div className = "p-2 res-home" >
         <
-        h6 className = "mt-5 p-3 bolder" > Settings < /h6> <
-        div className = "row p-3 pt-5 bg-light res-home" > <
+        div className = 'row p-2 px-3' > <
+        div className = 'col-10 bg-lighter rounded-4' > <
+        h4 className = ' mx-3 bolder mt-3' > Settings < /h4 > < /div >
+        <
+        div className = 'rounded-4 d-none light-res-home wide' >
+        <
+        p className = "bolder text-end mx-4 mt-2" > welcome back user <
+        div className = " justify-content-center" > <
+        p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
+        div >
+        <
+        div className = 'col-2' > <
+        img src = "http://127.0.0.1:8000/static/photo.png"
+        className = "rounded-circle object-fit-cover mt-2 img-head"
+        alt = "investors" / > < /div> < /
+        div >
+        <
+        div className = 'd-flex mt-2 d-none' >
+        <
+        div className = 'rounded-4 light-res-home wider' >
+        <
+        p className = "bolder mx-4 mt-2" > Tips: <
+        div className = " justify-content-center" > <
+        p className = "px-1 font-lighter" > Dont save your money, invest < /p></div > < /p>< /
+        div > < /
+        div > <
+        div className = "row p-3 bg-light res-home" > <
         div className = "col-2 text-end" >
         <
         User size = "25"
@@ -57,10 +81,10 @@ const ResSettings = ({ id, activeTab, children }) => {
         <
         div className = "col-10" >
         <
-        span className = "blue-active bolder"
+        div className = "blue-active bolder"
         onClick = {
             () => { setAccountSetting(true) }
-        } > Account < /span> <
+        } > Account < /div> <
         p className = "grey-text" > Profile, Next of Kin, Security, Privacy < /p> < /
         div >
         <
@@ -79,10 +103,10 @@ const ResSettings = ({ id, activeTab, children }) => {
         <
         div className = "col-10" >
         <
-        span className = "blue-active bolder"
+        div className = "blue-active bolder"
         onClick = {
             () => { setRiskProfile(true) }
-        } > Investment < /span> <
+        } > Investment < /div> <
         p className = "grey-text" > Risk Profile < /p> < /
         div >
         <
@@ -155,7 +179,7 @@ const ResSettings = ({ id, activeTab, children }) => {
         /
         div >
         <
-        p className = "grey-text p-5 text-center" > All Rights Reserved < br / > .@CyanaseInvestors2022 < /p> < /
+        p className = "grey-text p-3 text-center" > All Rights Reserved < br / > .@CyanaseInvestors2022 < /p> < /
         div > < /div >
     );
 };

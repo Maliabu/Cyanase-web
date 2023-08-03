@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import Ask from './Ask';
-import Pic from './Pic'
 import { ArrowLeftSquare } from "react-iconly";
 
 const ResFAQs = (props) => {
@@ -9,10 +8,7 @@ const ResFAQs = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    return ( < div > < Pic / > <
-        div className = "pt-5" >
-        <
-        h6 className = "mt-5 p-3 bg-light bolder" > Settings < /h6></div > <
+    return ( < div > <
         div className = "px-5 mb-5 pb-5 res-home" >
         <
         ArrowLeftSquare size = { 30 }
@@ -78,7 +74,7 @@ const ResFAQs = (props) => {
         p onClick = {
             () => { handleShow(true) }
         }
-        className = "border rounded-4 border-warning text-warning p-2 text-center mt-3 mb-5" > Ask a Question < /p>  <
+        className = "rounded-3 warning p-2 text-center mt-3 mb-5" > Ask a Question < /p>  <
         Modal show = { show }
         onHide = { handleClose } >
         <

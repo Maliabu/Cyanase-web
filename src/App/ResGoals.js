@@ -16,13 +16,13 @@ import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
 import Saccos from '../Accounts/Saccos';
 import Clubs from '../Accounts/Clubs';
-import Profile from '../images/Ellipse 6.png';
-import ResGoal from '../Accounts/ResGoal';
+import ResWithdraws from './ResWithdraws'
 import ResHome from './ResHome';
-import { Home, Notification, Wallet, Setting, AddUser } from 'react-iconly';
+import { Home, Notification, Wallet, Setting, AddUser, Download, ArrowLeftSquare } from 'react-iconly';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
+import Goal1 from '../Accounts/Goal1'
 
 const ResGoals = () => {
     const [activeTab, setActiveTab1] = useState("tab2");
@@ -43,25 +43,56 @@ const ResGoals = () => {
     }, []);
     //  Functions to handle Tab Switching
     if (goalSetting) {
-        return ( < ResGoal changeGoalSetting = { setGoalSetting }
-            / >
+        return ( < div >
+            <
+            div className = 'row p-2 px-3' > <
+            div className = 'col-10 bg-lighter rounded-4' > <
+            h4 className = ' mx-3 bolder mt-3' > Create New Goal < /h4 > < /div >
+            <
+            div className = 'rounded-4 d-none light-res-home wide' >
+            <
+            p className = "bolder text-end mx-4 mt-2" > welcome back user <
+            div className = " justify-content-center" > <
+            p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
+            div >
+            <
+            div className = 'col-2' > <
+            img src = "http://127.0.0.1:8000/static/photo.png"
+            className = "rounded-circle object-fit-cover mt-2 img-head"
+            alt = "investors" / > < /div> < /
+            div > <
+            ArrowLeftSquare size = { 30 }
+            onClick = {
+                () => { setGoalSetting(false) }
+            }
+            className = "mt-1 mx-2" / > < Goal1 changeGoalSetting = { setGoalSetting }
+            / > < /
+            div >
         )
     }
     const handleTab1 = () => {
         // update the state to tab1
-        setActiveTab1("tab1");
-    };
+        setActiveTab1("tab1")
+    }
+    const handleTab6 = () => {
+        // update the state to tab2
+        setActiveTab1("tab6")
+    }
     const handleTab3 = () => {
         // update the state to tab2
-        setActiveTab1("tab3");
+        setActiveTab1("tab3")
+    }
+    const handleTab5 = () => {
+        // update the state to tab2
+        setActiveTab1("tab5")
     };
     const handleTab12 = () => {
         // update the state to tab2
-        setActiveTab1("tab12");
+        setActiveTab1("tab12")
     };
     const handleTab13 = () => {
         // update the state to tab2
-        setActiveTab1("tab13");
+        setActiveTab1("tab13")
     };
     const TabNavItem = ({ id, activeTab, title, setActiveTab1 }) => {
         const handleClick = () => {
@@ -84,13 +115,13 @@ const ResGoals = () => {
         setHoldCreated(created)
         handleShow3()
     }
-    const Main = () => {
+    const Main = (props) => {
         let progress
         return ( < div className = 'p-1 res-home' > < div >
             <
             div className = 'row p-2 px-3' > <
             div className = 'col-10 bg-lighter rounded-4' > <
-            p className = ' mx-3 bolder mt-3' > Your Goals < /p > < /div >
+            h4 className = ' mx-3 bolder mt-3' > Your Goals < /h4 > < /div >
             <
             div className = 'rounded-4 d-none light-res-home wide' >
             <
@@ -119,7 +150,7 @@ const ResGoals = () => {
             /
             div >
             <
-            div className = 'bg-light p-2 rounded-4' >
+            div className = 'bg-lighter p-2 rounded-4' >
             <
             div className = "scroll-y2 pb-lg-5 mb-lg-5" > {
                 span.map(goal => ( <
@@ -140,7 +171,7 @@ const ResGoals = () => {
                     p > < /
                     div >
                     <
-                    p className = 'pt-2' > Progress: {
+                    p > Progress: {
                         progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                     } %
                     <
@@ -184,7 +215,7 @@ const ResGoals = () => {
         div >
 
         <
-        div className = 'd-flex rounded-4 flex-row w-100 text-dark d-block justify-content-center shadow-sm bg-white bottom-nav' >
+        div className = 'd-flex rounded-4 flex-row w-100 text-dark d-block justify-content-center bg-lighter bottom-nav' >
         <
         div className = ' py-3 text-center' > <
         TabNavItem title = { < span > < Home size = "20"
@@ -196,19 +227,31 @@ const ResGoals = () => {
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
         />< /div > <
+        div className = ' py-3 text-center mx-3' >
+        <
+        TabNavItem title = { < span > < Download size = "20"
+            set = 'broken'
+            className = 'mt-2' / > < /span>
+        }
+        onClick = { handleTab6 }
+        id = "tab6"
+        activeTab = { activeTab }
+        setActiveTab1 = { setActiveTab1 } > < /
+        TabNavItem > < /
+        div > <
         div className = ' py-3 text-center' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
             set = 'broken'
-            className = 'mt-2 mx-4' / > < /span>
+            className = 'mt-2' / > < /span>
         }
-        onClick = { handleTab1 }
+        onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 } > < span > hi < /span> < /
         TabNavItem > < /
         div > <
-        div className = ' py-3 text-center' >
+        div className = ' py-3 text-center mx-3' >
         <
         TabNavItem title = { < span > < Notification size = "20"
             className = 'mt-2' / > < /span>
@@ -223,7 +266,7 @@ const ResGoals = () => {
         div className = ' py-3 text-center' >
         <
         TabNavItem title = { < span > < Setting size = "20"
-            className = 'mt-2 mx-4' / > < /span>
+            className = 'mt-2' / > < /span>
         }
         onClick = { handleTab3 }
         id = "tab8"
@@ -246,7 +289,9 @@ const ResGoals = () => {
         activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }
         / > < /TabContent > <
         TabContent id = "tab5"
-        activeTab = { activeTab } > < Deposit / > < /TabContent> <
+        activeTab = { activeTab } > < Deposit / > < /TabContent><
+        TabContent id = "tab6"
+        activeTab = { activeTab } > < ResWithdraws / > < /TabContent> <
         TabContent id = "tab7"
         activeTab = { activeTab } > < Notify / > < /TabContent> <
         TabContent id = "tab8"
@@ -266,5 +311,4 @@ const ResGoals = () => {
         div >
     );
 };
-
 export default ResGoals;

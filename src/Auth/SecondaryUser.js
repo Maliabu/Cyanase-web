@@ -157,7 +157,7 @@ function SecondaryUser(props) {
     const nextButton = () => {
         if (step === 1) {
             return ( <
-                h6 className = " py-3 text-center mx-lg-5 warning rounded-3"
+                h6 className = " py-3 text-center mx-5 warning rounded-3"
                 onClick = {
                     () => validate1()
                 } >
@@ -166,7 +166,7 @@ function SecondaryUser(props) {
         }
         if (step === 2) {
             return ( <
-                h6 className = " py-3 text-center mx-lg-5 warning rounded-3"
+                h6 className = " py-3 text-center mx-5 warning rounded-3"
                 onClick = {
                     () => validate2()
                 } >
@@ -178,7 +178,7 @@ function SecondaryUser(props) {
     const prevButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = " py-3 mt-2 text-center mx-lg-5 warning rounded-3"
+                h6 className = " py-3 mt-2 text-center mx-5 warning rounded-3"
                 onClick = {
                     () => { setStep(step - 1) }
                 } >
@@ -213,7 +213,7 @@ function SecondaryUser(props) {
         }
         return ( <
             React.Fragment > <
-            div className = 'row justify-content-center bg-lighter p-lg-5 p-2 rounded-4' >
+            div className = 'row justify-content-center bg-lighter p-lg-5 p-3 rounded-4' >
             <
             // col-lg-5 should do the trick for responsiveness
             form className = 'bg-white p-lg-5 rounded-4 col-lg-5'

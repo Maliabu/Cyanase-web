@@ -1,19 +1,21 @@
-import { MainRequests } from "../Api/MainRequests";
-import React, { useEffect, useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { FaLightbulb } from "react-icons/fa";
-import { Image, Filter } from "react-iconly";
+import './style.scss';
+import { PendingWithdrawRequests } from '../Api/MainRequests';
+import React, { useState, useEffect } from "react";
+import { FaLightbulb } from 'react-icons/fa';
+import { Image, Filter } from 'react-iconly';
 
-
-const Notify = () => {
-        const [deposits, setDeposits] = useState([])
+const ResWithdraws = () => {
+        const [withdraws, setWithdraw] = useState([])
         useEffect(() => {
-            MainRequests().then(res => {
-                setDeposits(res[6]);
-            });
+            PendingWithdrawRequests().then(res => {
+                setWithdraw(res)
+                console.log(res)
+            })
         }, []);
-        const myRecentActivity = () => {
-            if (deposits.length === 0) {
+        const pendingWithdraws = () => {
+            if (withdraws.length === 0) {
                 return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"
                     set = "broken"
@@ -24,30 +26,14 @@ const Notify = () => {
                     h6 > < /div > )
                 }
                 else return (
-                    deposits.map(deposit => ( <
-                        div className = "row mt-2 p-3 bg-white rounded-3"
-                        key = { deposit.deposit_id } >
+                    withdraws.map(withdraw => ( <
+                        div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
                         <
-                        div className = "col" >
-                        <
-                        h6 className = "" > < span className = "bolder" > Deposit < /span> { deposit.currency } { deposit.deposit_amount }  < /
-                        h6 > <
-                        /
+                        div className = 'col-5 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
+                        div className = 'col-2 text-start' > < h6 > { withdraw.withdraw_channel } < /h6> < /div > <
+                        div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                         div >
-                        <
-                        div className = "col-6" >
-                        <
-                        h6 className = "px-5 active text-center" > { deposit.deposit_category } < /h6> < /
-                        div >
-                        <
-                        div className = "col text-end" >
-                        <
-                        h6 className = " bolder" > {
-                            (deposit.created)
-                        } < /
-                        h6 > <
-                        /div > < /
-                        div > ))
+                    ))
                 )
 
             }
@@ -55,7 +41,7 @@ const Notify = () => {
                 <
                 div className = 'row p-2 px-3' > <
                 div className = 'col-10 bg-lighter rounded-4' > <
-                h4 className = ' mx-3 bolder mt-3' > Your Recent Activity < /h4 > < /div >
+                h4 className = ' mx-3 bolder mt-3' > Your Pending Withdraws < /h4 > < /div >
                 <
                 div className = 'rounded-4 d-none light-res-home wide' >
                 <
@@ -84,8 +70,8 @@ const Notify = () => {
                 /
                 div >
                 <
-                div className = 'bg-lighter rounded-4 p-3' > { myRecentActivity() } < /div> < /
+                div className = 'bg-lighter rounded-4 p-2' > { pendingWithdraws() } < /div> < /
                 div >
             );
         };
-        export default Notify;
+        export default ResWithdraws;

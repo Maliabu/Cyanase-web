@@ -1,14 +1,10 @@
 import React from "react";
 import { FaWhatsapp, FaTwitter } from "react-icons/fa";
-import Pic from './Pic'
 import { ArrowLeftSquare, Call, Message } from "react-iconly";
 
 const ResContactUs = (props) => {
     return ( <
-        div > < Pic / > <
-        div className = "pt-5" >
-        <
-        p className = "mt-5 p-3 bg-light bolder" > Settings < /p></div >
+        div >
         <
         div className = "px-5 res-home" >
         <

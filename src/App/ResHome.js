@@ -2,11 +2,10 @@ import { MainRequests, PersonalRequests, Networth, UserRequests } from '../Api/M
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import React, { useState, useEffect } from "react";
-import Personal from "./Personal";
 import Deposit from "./Deposit";
 import Sacco from './Sacco';
 import Club from './Club';
-import Learn1 from '../Accounts/Learn1'
+import ResWithdraw from './ResWithdraw'
 import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
 import Api from '../Accounts/primaryUser';
@@ -18,15 +17,16 @@ import Chart from 'react-apexcharts';
 import Saccos from '../Accounts/Saccos';
 import Clubs from '../Accounts/Clubs';
 import Ad from '../images/Group 212.png';
+import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
 import { FaLightbulb } from 'react-icons/fa';
-import { Home, Notification, Wallet, Setting, Work, TimeCircle } from 'react-iconly';
+import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download } from 'react-iconly';
 
 const ResHome = (props) => {
     const [activeTab, setActiveTab1] = useState("tab1");
     const [goalSetting, setGoalSetting] = useState(false);
-    const [depositSetting, setDepositSetting] = useState(false);
+    const [withdrawSetting, setWithdrawSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [deposit, setDeposit] = useState(0);
     const [dollar, setDollar] = useState(0);
@@ -105,8 +105,8 @@ const ResHome = (props) => {
             / >
         )
     }
-    if (depositSetting) {
-        return ( < Deposit changeDepositSetting = { setDepositSetting }
+    if (withdrawSetting) {
+        return ( < ResWithdraw changeWithdrawSetting = { setWithdrawSetting }
             / >
         )
     }
@@ -179,10 +179,10 @@ const ResHome = (props) => {
             >
             <
             br / > Deposit <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> < h2 className = "px-1 font-lighter" > { deposit - depositTotal }  < /
+            div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit - depositTotal }  < /
             h2 > < /div > < /p > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-4 warning '
             onClick = {
-                () => { setDepositSetting(true) }
+                handleTab5
             } >
             Deposit < /h6> </span > < /
             div >
@@ -204,10 +204,10 @@ const ResHome = (props) => {
             >
             <
             br / > Networth <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > UGX < /p> <
+            div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
             h2 className = "px-1 font-lighter" > { networth } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
             onClick = {
-                () => { setGoalSetting(true) }
+                () => { setWithdrawSetting(true) }
             } >
             Withdraw < /h6> </span > < /
             div >
@@ -243,7 +243,7 @@ const ResHome = (props) => {
             div >
             <
             div className = 'd-flex mt-2' > < FaLightbulb size = "35"
-            className = 'mt-3 mx-2 p-2 rounded-circle light-res-home text-warning' / >
+            className = 'mt-3 mx-2 p-2 rounded-circle light-res-home active' / >
             <
             div className = 'rounded-4 bg-lighter wider' >
             <
@@ -272,7 +272,7 @@ const ResHome = (props) => {
             /div > < /
             div >
             <
-            div className = 'bg-warning my-5 shadow rounded-4 mt-2 p-2 ' >
+            div className = 'bg-light my-5 shadow rounded-4 mt-2 p-2 ' >
             <
             img src = { Ad }
             className = "rounded-4 text-center"
@@ -286,7 +286,7 @@ const ResHome = (props) => {
         div >
 
         <
-        div className = 'd-flex rounded-4 flex-row w-100 text-dark d-block justify-content-center shadow-sm bg-white bottom-nav' >
+        div className = 'd-flex flex-row w-100 text-dark d-block justify-content-center bg-lighter bottom-nav' >
         <
         div className = ' py-3 text-center' > <
         TabNavItem title = { < span > < Home size = "20"
@@ -302,7 +302,19 @@ const ResHome = (props) => {
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
         />< /div > <
-        div className = ' py-3 text-center mx-4' >
+        div className = ' py-3 text-center mx-3' >
+        <
+        TabNavItem title = { < span > < Download size = "20"
+            set = 'broken'
+            className = 'mt-2' / > < /span>
+        }
+        onClick = { handleTab2 }
+        id = "tab2"
+        activeTab = { activeTab }
+        setActiveTab1 = { setActiveTab1 } > < /
+        TabNavItem > < /
+        div > <
+        div className = ' py-3 text-center' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
             set = 'broken'
@@ -314,7 +326,7 @@ const ResHome = (props) => {
         setActiveTab1 = { setActiveTab1 } > < /
         TabNavItem > < /
         div > <
-        div className = ' py-3 text-center' >
+        div className = ' py-3 text-center mx-3' >
         <
         TabNavItem title = { < span > < Notification size = "20"
             set = 'broken'
@@ -327,7 +339,7 @@ const ResHome = (props) => {
         />  < /
         div >
         <
-        div className = ' py-3 text-center mx-4' >
+        div className = ' py-3 text-center' >
         <
         TabNavItem title = { < span > < Setting size = "20"
             set = 'broken'
@@ -344,7 +356,7 @@ const ResHome = (props) => {
         activeTab = { activeTab } > < Main parentCallback2 = { handleTab2 }
         / > < /TabContent > <
         TabContent id = "tab2"
-        activeTab = { activeTab } > < Personal / > < /TabContent> <
+        activeTab = { activeTab } > < ResWithdraws / > < /TabContent> <
         TabContent id = "tab3"
         activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
         activeTab = { activeTab }
@@ -379,7 +391,7 @@ const TabNavItem = ({ id, activeTab, title, setActiveTab1 }) => {
     const handleClick = () => {
         setActiveTab1(id);
     };
-    return ( < div className = "px-3 tab-nav lighter" >
+    return ( < div className = "px-3 tab-nav" >
         <
         span onClick = { handleClick }
         className = { activeTab === id ? "activer" : "" } > { title } < /

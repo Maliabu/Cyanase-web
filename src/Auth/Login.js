@@ -47,7 +47,7 @@ class Login extends Component {
     render() {
         return ( <
             div > <
-            div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-2' >
+            div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-3' >
             <
             Form className = 'bg-white rounded-4 p-lg-5 py-3 col-lg-5 col-12'
             onSubmit = { this.handleSubmit } >
@@ -87,7 +87,7 @@ class Login extends Component {
             /Button> < /
             div >
             <
-            p className = 'mt-5 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p > <
+            p className = 'mt-5 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p > <
             h6 id = "errorMessage"
             className = 'py-2 mt-3 rounded border border-danger text-center fade-in'
             style = {

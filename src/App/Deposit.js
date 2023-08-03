@@ -4,7 +4,6 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import Learn1 from '../Accounts/Learn1';
-import ResDeposit from './ResDeposit';
 import './style.scss';
 import Depo from '../images/depo.png'
 import { Wallet } from "react-iconly";
@@ -154,7 +153,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = 'row p-2 px-3' > <
         div className = 'col-10 bg-lighter rounded-4' > <
-        p className = ' mx-3 bolder mt-3' > Deposit < /p > < /div >
+        h4 className = ' mx-3 bolder mt-3' > Deposit < /h4 > < /div >
         <
         div className = 'rounded-4 d-none light-res-home wide' >
         <
