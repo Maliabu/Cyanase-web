@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
+import ResLearn1 from '../Accounts/ResLearn1';
 import Learn1 from '../Accounts/Learn1';
 import './style.scss';
 import Depo from '../images/depo.png'
@@ -10,11 +11,11 @@ import { Wallet } from "react-iconly";
 import { GetRiskProfile, UserRequests } from "../Api/MainRequests";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
-    const [show2, setShow2] = useState(false);
     const [country, setCountry] = useState([])
     const [email, setEmail] = useState([])
     const [name, setName] = useState([])
     const [phone, setPhone] = useState([])
+    const [show2, setShow2] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     const [investmentOption, setinvestmentoption] = useState("")
@@ -166,15 +167,15 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         img src = "http://127.0.0.1:8000/static/photo.png"
         className = "rounded-circle object-fit-cover mt-2 img-head"
         alt = "investors" / > < /div> < /
-        div >
-        <
-        Learn1 tab9 = { props.handletab9 }
-        option = { investmentOption }
+        div > <
+        ResLearn1 option = { investmentOption }
         country = { country }
         lastname = { name }
         email = { email }
         phone = { phone }
-        / > < /div > < /div >
+        / >
+        <
+        /div > < /div >
     );
 };
 

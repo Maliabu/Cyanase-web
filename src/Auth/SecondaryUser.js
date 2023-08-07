@@ -205,7 +205,7 @@ function SecondaryUser(props) {
                     } else if (response.status === 200 && response.data.success === false) {
                         fail(response.data.message)
                     } else {
-                        success1("Almost there. Please check your email for a confirmation link", "", "successful");
+                        success1("Almost there. Please check your email for a confirmation link", "successful");
                         const token = response.data.token
                         localStorage.setItem('token', token)
                     }

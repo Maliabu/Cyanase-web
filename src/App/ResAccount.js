@@ -1,27 +1,38 @@
 import React, { useState, useEffect } from "react";
 import Modal from 'react-bootstrap/Modal';
-import { UserRequests } from "../Api/MainRequests";
+import { UserRequests, SubscriptionRequests } from "../Api/MainRequests";
 import Photo from '../Accounts/photo'
 import ChangeDetails from '../Accounts/ChangeDetails'
 import { ArrowLeftSquare, Call, Camera, Message, User } from "react-iconly";
+import Subscribe from '../Accounts/Subscribe'
 
 const ResAccount = (props) => {
     const [firstName, setFirstName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [email, setEmail] = useState("")
+    const [country, setCountry] = useState("")
     const [show2, setShow2] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     const [show1, setShow1] = useState(false);
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
+    const [show4, setShow4] = useState(false);
+    const handleClose4 = () => setShow4(false);
+    const [subStatus, setSubStatus] = useState()
+    const handleShow4 = () => {
+        setShow4(true)
+    };
     useEffect(() => {
         UserRequests().then(res => {
-            console.log(res)
             setFirstName(res.first_name + " " + res.last_name)
             setPhoneNumber(res.profile.phoneno)
             setEmail(res.email)
+            setCountry(res.profile.country)
         });
+        SubscriptionRequests().then(res => {
+            setSubStatus(res.status)
+        })
     }, []);
     return ( < div >
         <
@@ -119,10 +130,22 @@ const ResAccount = (props) => {
         <
         /
         div > <
+        div className = 'text-end pt-3' > < h6 className = ' p-2 mx-3' > Account Subscription: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
+        onClick = { handleShow4 } > { subStatus } < /span>  < /
+        h6 > < /div > <
         p className = "bg-danger text-white text-center rounded-3 mt-3 p-2"
         onClick = { handleShow2 } > Delete Account < /p> < /
         div >
         <
+        Modal show = { show4 }
+        onHide = { handleClose4 } > <
+        Subscribe substatus = { subStatus }
+        country = { country }
+        lastname = { firstName }
+        email = { email }
+        phone = { phoneNumber }
+        / > < /
+        Modal > <
         /
         div >
         <

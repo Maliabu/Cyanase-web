@@ -52,10 +52,25 @@ const ResHome = (props) => {
     const options = {
         options: {
             chart: {
-                id: 'apexchart-example'
+                type: "area",
+                stacked: false,
+                height: 350,
+                zoom: {
+                    type: "x",
+                    enabled: true,
+                    autoScaleYaxis: true
+                },
+                toolbar: {
+                    autoSelected: "zoom"
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            markers: {
+                size: 0
             },
             xaxis: {
-                name: '2023',
                 title: {
                     text: 'Investments for ' + thisYear
                 },
@@ -69,10 +84,19 @@ const ResHome = (props) => {
                 }
             },
             colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
-
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shadeIntensity: 1,
+                    inverseColors: false,
+                    opacityFrom: 0.5,
+                    opacityTo: 0,
+                    stops: [0, 90, 100]
+                }
+            },
         },
+        // series: result,
         series: result,
-        // series: [2, 60, 4],
         stroke: {
             curve: 'smooth',
         }
@@ -84,9 +108,9 @@ const ResHome = (props) => {
         MainRequests().then(res => {
             setDeposit(res[0]);
             setDollar(res[1]);
-            setGraph(res[4]); // array deposits
-            setDates(res[5])
+            setGraph(res[4]);
             setDollarNetworth(res[3]);
+            setDates(res[5])
         })
         Networth().then(res => {
             setDepositNetworth(res[2]);
@@ -143,7 +167,7 @@ const ResHome = (props) => {
             <
             div className = 'd-flex mt-2' >
             <
-            div className = 'rounded-4 bg-lighter wide' >
+            div className = 'rounded-4 bg-lighter wider' >
             <
             p className = "text-end mx-4 mt-2" > welcome back < span className = 'bolder' > { props.name } < /span> <
             span className = " justify-content-center" > <
@@ -171,7 +195,7 @@ const ResHome = (props) => {
             Goals < /h6> < /
             div > < /
             div > < /div >  <
-            div className = 'blue-dark d-flex rounded-4' >
+            div className = 'blue-darks d-flex rounded-4' >
             <
             span className = 'text-center rounded-4 wide-60' > <
             p className = "bolder mt-3" > < Wallet size = "medium"
@@ -192,10 +216,10 @@ const ResHome = (props) => {
             Chart options = { options.options }
             series = { options.series }
             className = "w-100 bg-white rounded-3 mt-2"
-            type = "line"
+            type = "area"
             height = { 200 }
             /></div > <
-            div className = 'blue-dark mt-2 d-flex rounded-4' >
+            div className = 'blue-darks mt-2 d-flex rounded-4' >
             <
             span className = ' rounded-4 wide-60 mx-1' > <
             p className = "bolder mt-3 text-center" > < Work size = "15"
@@ -286,7 +310,7 @@ const ResHome = (props) => {
         div >
 
         <
-        div className = 'd-flex flex-row w-100 text-dark d-block justify-content-center bg-lighter bottom-nav' >
+        div className = 'd-flex flex-row text-dark rounded-right rounded-4 d-block justify-content-center bg-lighter bottom-nav' >
         <
         div className = ' py-3 text-center' > <
         TabNavItem title = { < span > < Home size = "20"
