@@ -22,14 +22,14 @@ class Data extends Component {
         let username = this.state.username
         let password = this.state.password
         if (username === "cyanase-data-visuals" && password === "data@cyanase") {
-            success("lets check out our graphs", "/visuals@cyanase", "we are going in...")
+            success("lets check out our graphs", "/visuals@cyanase/", "we are going in...")
         } else {
             fail("something seems wrong, check your details...")
         }
     }
     render() {
         return ( <
-            div className = 'p-5' > <
+            div className = 'p-lg-5 p-3' > <
             div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-3' >
             <
             Form className = 'bg-white rounded-4 p-lg-5 py-3 col-lg-5 col-12'
