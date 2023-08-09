@@ -43,7 +43,7 @@ class Data extends Component {
             div > <
             Form.Group className = " rounded-2 px-3" >
             <
-            Form.Label > < h6 className = 'm-0' > Email < /h6> < /Form.Label > <
+            Form.Label > < h6 className = 'm-0' > Username < /h6> < /Form.Label > <
             Form.Control type = "text"
             id = 'username'
             required = "required"
