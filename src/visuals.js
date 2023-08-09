@@ -111,12 +111,12 @@ const Visuals = () => {
         }
     }
     return ( <
-        div className = 'p-5' >
+        div className = 'p-lg-5 p-3' >
         <
-        h1 className = 'p-5' > Cyanase Data Visuals
+        h1 className = 'p-lg-5 p-3' > Cyanase Data Visuals
         for deposits, withdraws and user activity < /h1><
-        h2 className = 'p-5 active bolder' > Deposit Activity < /h2><
-        div className = 'bg-lighter p-5' > <
+        h2 className = 'p-lg-5 p-2 active bolder' > Deposit Activity < /h2><
+        div className = 'bg-lighter p-2 p-lg-5' > <
         Chart options = { deposit.options }
         series = { deposit.series }
         className = "w-100"
@@ -124,7 +124,7 @@ const Visuals = () => {
         height = { 500 }
         /></div >
         <
-        div className = 'row p-4 border-top border-bottom' >
+        div className = 'row p-lg-4 p-2 border-top border-bottom' >
         <
         div className = 'col-lg-3 col-sm-8 p-3 mt-3' >
         <
@@ -137,8 +137,8 @@ const Visuals = () => {
         /div> <
         h3 className = 'bolder text-center my-5' > Total Deposit Amount in UGX: < h2 className = 'font-lighter' > { ddeposit() } < /h2>  < /
         h3 > <
-        h2 className = 'p-5 active bolder' > Withdraw Activity < /h2><
-        div className = 'bg-lighter p-5' > <
+        h2 className = 'p-lg-5 active bolder' > Withdraw Activity < /h2><
+        div className = 'bg-lighter p-lg-5' > <
         Chart options = { withdrawal.options }
         series = { withdrawal.series }
         className = "w-100"
@@ -146,7 +146,7 @@ const Visuals = () => {
         height = { 500 }
         /></div >
         <
-        div className = 'row p-4 border-top border-bottom' >
+        div className = 'row p-lg-4 p-3 border-top border-bottom' >
         <
         div className = 'col-lg-3 col-sm-8 p-3 mt-3' >
         <

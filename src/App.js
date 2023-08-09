@@ -41,7 +41,7 @@ export default function App() {
         Route path = "/data/visuals@cyanase"
         element = { < Data / > }
         /><
-        Route path = "/visuals@cyanase"
+        Route path = "/visuals@cyanase/"
         element = { < Visuals / > }
         /> < /
         Routes > <
