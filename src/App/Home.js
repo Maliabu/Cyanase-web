@@ -337,7 +337,7 @@ const MyHome = () => {
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <
-        div className = " col-lg-3 col-10 rounded bg-lighter text-center" >
+        div className = "col-lg-3 col-10 rounded bg-lighter text-center" >
         <
         div className = 'flex-row d-flex py-1 my-2 justify-content-center' > <
         TabNavItem title = "API Account"
