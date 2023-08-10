@@ -13,6 +13,7 @@ import Goal from '../Accounts/Goal'
 import Chart from 'react-apexcharts';
 import { AddUser, Image, Filter } from "react-iconly";
 import { getCurrency } from "../payment/GetCurrency";
+import ProgressBar from '@ramonak/react-progress-bar';
 
 const Personal = ({...props }) => {
         const [span, setSpan] = useState([])
@@ -114,6 +115,7 @@ const Personal = ({...props }) => {
             });
             return sum
         }
+        let progress
         let nextDeposits = deposits
         let rev = nextDeposits.reverse()
         console.log(rev)
@@ -290,23 +292,43 @@ const Personal = ({...props }) => {
                 onClick = { handleShow1 } >
                     New Goal < /h6>  <
                 div className = " p-1 pb-5 mb-5" > {
-                        span.map(goal => ( <
-                            div className = "px-4 bg-white rounded-3 modals-left shadow-sm mt-3"
-                            key = { goal.goal_id } > <
-                            div className = "d-flex flex-row flex" > <
-                            span className = "mt-2" > <
-                            AddUser className = " rounded-circle warning p-1"
-                            size = "large" / > < /span>  <
-                            p className = "mx-4" > < span className = "bolder active"
-                            onClick = {
-                                () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created)
-                            } > { goal.goal_name } < /span>< span > ...created { (goal.created).slice(0,10) } < /span > < /p >  <
-                            span className = "bolder" > Total Deposit: < span className = "active" > { goal.deposit[0] } < /span> < span className = "active d-none" > { goal.goal_amount } < /span > < /span > < /
-                            div > <
-                            /
-                            div >
-                        ))
-                    } <
+                    span.map(goal => ( <
+                        div className = "p-4 shadow-sm res-home rounded-4 mt-3"
+                        key = { goal.goal_id } > <
+                        div className = "d-flex flex-row flex" > <
+                        span className = "mt-1" > <
+                        AddUser className = " rounded-circle border border-dark p-1"
+                        size = "large" / > < /span>  <
+                        p className = "mx-4" > < span className = "active"
+                        onClick = {
+                            () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
+                        } > {
+                            (goal.goal_name).toUpperCase()
+                        } < /span><br/ > < p > created {
+                            (goal.created).slice(0, 10)
+                        } < /p >  < /
+                        p > < /
+                        div >
+                        <
+                        p > Progress: {
+                            progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
+                        } %
+                        <
+                        span >
+                        <
+                        ProgressBar completed = { progress }
+                        maxCompleted = { 100 }
+                        isLabelVisible = { false }
+                        bgColor = 'orange' /
+                        >
+                        <
+                        /span> < /
+                        p > <
+                        span className = "bolder d-none" > { goal.deposit[0] } < /span > <
+                        span className = "active d-none" > { goal.goal_amount } < /span > < /
+                        div >
+                    ))
+                } <
                     /div> <
                 Modal show = { show3 }
                 onHide = { handleClose3 }
