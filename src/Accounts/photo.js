@@ -84,7 +84,7 @@ class Photo extends React.Component {
                 { display: 'none' }
             } > hey < /h6>   <
             Button variant = "warning"
-            className = 'shadow text-center'
+            className = 'shadow d-none text-center'
             id = 'successMessage'
             onClick = { this.handleSubmit }
             type = "button" >

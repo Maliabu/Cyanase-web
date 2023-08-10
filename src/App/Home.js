@@ -321,7 +321,7 @@ const MyHome = () => {
         div className = "row pt-4 mx-3" >
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
-        h6 className = 'mt-2' > <
+        h6 className = 'mt-3' > <
         FaLightbulb size = "15"
         className = 'position-relative active' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
@@ -332,7 +332,7 @@ const MyHome = () => {
         Notification set = 'broken'
         size = "small"
         onClick = { handleShow3 }
-        className = 'active position-relative my-lg-2' / > <
+        className = 'active position-relative my-lg-3' / > <
         span className = "position-absolute top-15 start-65 translate-middle px-1 d-none blue-dark rounded-pill" > <
         h6 > { count } < /h6> < /
         span > < /span> < /
