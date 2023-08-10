@@ -142,7 +142,7 @@ const Personal = ({...props }) => {
                             (option.data).length
                         } < /h6> < /div > <
                         div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
-                            ((summ(option.data)) * 1000).toFixed(0)
+                            (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
                         } < /h6> < /div > < /
                         div > ))
                 )
@@ -166,7 +166,7 @@ const Personal = ({...props }) => {
                             <
                             div className = "col" >
                             <
-                            h6 className = "" > < span className = "bolder" > Deposit < /span> { deposit.currency } { deposit.deposit_amount }  < /
+                            h6 className = "" > < span className = "bolder" > Deposit < /span> { deposit.currency } { (deposit.deposit_amount).toLocaleString() }  < /
                             h6 > <
                             /
                             div >
@@ -189,7 +189,7 @@ const Personal = ({...props }) => {
                 }
                 return ( <
                     div > <
-                    div className = "row " > <
+                    div className = "row mx-3" > <
                     div className = "col-8 bg-lighter p-3 rounded-25" >
                     <
                     h6 className = " p-2 mt-2" > MY INVESTMENTS < /h6>  <
@@ -301,7 +301,7 @@ const Personal = ({...props }) => {
                         size = "large" / > < /span>  <
                         p className = "mx-4" > < span className = "active"
                         onClick = {
-                            () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
+                            () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created)
                         } > {
                             (goal.goal_name).toUpperCase()
                         } < /span><br/ > < p > created {

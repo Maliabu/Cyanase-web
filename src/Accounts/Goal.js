@@ -40,7 +40,7 @@ function Goal(props) {
     const getName = () => {
         let goalName = props.name
         let goalId = props.id
-        let goalNetworth = props.networth
+        let goalNetworth = parseInt(props.networth)
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
         let created = (props.created).slice(0, 10)
@@ -319,7 +319,7 @@ function Step0(props) {
         <
         h6 className = "bolder" > Goal Amount: < /h6><
         div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
-        h2 className = "px-2 font-lighter" > { props.amount } < /h2></div > < /
+        h2 className = "px-2 font-lighter" > { (props.amount).toLocaleString() } < /h2></div > < /
         div > <
         div className = "row p-3" >
         <
@@ -337,7 +337,7 @@ function Step0(props) {
         <
         h6 className = "bolder" > Total Deposit Made: < /h6> <
         div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
-        h3 className = "px-2 font-lighter" > { props.deposit } < /h3></div >
+        h3 className = "px-2 font-lighter" > { (props.deposit).toLocaleString() } < /h3></div >
         <
         /
         div > <
@@ -347,7 +347,7 @@ function Step0(props) {
         <
         h6 className = "bolder" > Networth: < /h6> <
         div className = "d-flex flex-row flex" > { props.currency } <
-        h3 className = "px-2 font-lighter" > { props.networth } < /h3></div > < /div><div className="col"> {props.next} < /
+        h3 className = "px-2 font-lighter" > { (props.networth).toLocaleString() } < /h3></div > < /div><div className="col"> {props.next} < /
         div > < /div >  <
         h6 className = "bolder py-3" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
         div > < /

@@ -316,9 +316,9 @@ const MyHome = () => {
         div > <
         /
         div > <
-        div className = 'col-lg-10 col-md-9 d-none d-lg-block px-lg-5 px-4' >
+        div className = 'col-lg-10 col-md-9 d-none d-lg-block' >
         <
-        div className = "row pt-4" >
+        div className = "row pt-4 mx-3" >
         <
         div className = 'col-lg-8 rounded shadow-sm' > <
         h6 className = 'mt-2' > <
@@ -356,7 +356,7 @@ const MyHome = () => {
         div > < /
         div >
         <
-        div className = 'text-end pt-3' > < h6 className = ' p-2 mx-3' > Account Subscription: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
+        div className = 'text-end pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bg-lighter active p-2 px-5 mx-2 rounded-2'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
         h6 > < /div > <
         TabContent id = "tab1"

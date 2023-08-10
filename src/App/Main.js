@@ -175,7 +175,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
 
         }
         return ( <
-            div className = " p-lg-2 scroll-y" >
+            div className = "p-lg-3 scroll-y" >
             <
             div className = " d-none d-lg-block" > <
             div className = "row" >
@@ -188,7 +188,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { deposit } < /h2></div >
+            h2 className = "px-2 font-lighter" > { deposit.toLocaleString() } < /h2></div >
             <
             img src = { Deposit }
             className = "pt-2 d-none"
@@ -226,7 +226,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { networth } < /h2></div >
+            h2 className = "px-2 font-lighter" > { networth.toLocaleString() } < /h2></div >
             <
             img src = { Networths }
             className = "pt-2"
@@ -261,7 +261,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h1 className = "px-2 font-lighter" > { networth } < /h1></div >
+            h1 className = "px-2 font-lighter" > { networth.toLocaleString() } < /h1></div >
             <
             /div><
             div className = 'col-3' >
@@ -343,7 +343,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()
-        } < /div><div className='blue-dark p-2 mt-3 rounded-4'> <
+        } < /div><div className='blue-dark p-2 mt-2 rounded-4'> <
         h5 className = "bolder mt-4" > Your Statistics < /h5>    <
         div className = "d-flex flex-row p-2 flex justify-content-center" >
             <
@@ -367,7 +367,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "pt-5 bolder d-none" > Total Deposits < /h6> <
         div className = "d-flex d-none flex-row flex justify-content-center" > { getCurrency(country) } <
-            h3 className = "px-2 font-lighter" > { networth } < /h3></div >
+            h3 className = "px-2 font-lighter" > { networth.toLocaleString() } < /h3></div >
             <
             img src = { Networths }
         className = "py-2 d-none mt-3"
@@ -377,7 +377,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "pt-5 bolder" > Total Deposits < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h3 className = "px-2 font-lighter" > { totalDeposit } < /h3></div >
+            h3 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h3></div >
             <
             img src = { Networths }
         className = "py-2 mt-3"
