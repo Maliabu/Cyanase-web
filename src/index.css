@@ -16,7 +16,7 @@ body {
 p,
 h5,
 h6,
-span {
+span,input {
     font-size: 12px !important;
 }
 
@@ -58,7 +58,23 @@ button {
     font-size: 12px !important;
 }
 
-
+.form-control:focus {
+    background-color: #ffb85c12 !important;
+    border-color: #ffb85cac !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ffb85c43 !important;
+}
+.form-check {
+    font-size: 12px !important;
+}
+.form-check-input:checked {
+    background-color: #fda50d !important;
+    border-color: #fda50d !important;
+    box-shadow: 0 0 0 0.25rem #ffb85c43 !important;
+}
+input:-internal-autofill-selected {
+    background-color: none !important;
+}
 /* code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 } */

@@ -56,9 +56,9 @@ class Photo extends React.Component {
             <
             FaCameraRetro size = "70"
             set = "broken"
-            className = 'm-lg-3 p-2 border rounded-circle border-warning text-warning' / >
+            className = 'm-lg-3 p-2 rounded-circle warning' / >
             <
-            h4 className = "my-3 text-center" > Change Profile Photo < /h4> <
+            h4 className = "my-3 text-center bolder" > Change Profile Photo < /h4> <
             Form.Group className = "mb-3 bg-white shadow-sm p-3" >
             <
             Form.Label > Choose Photo < /Form.Label>  <
@@ -84,7 +84,7 @@ class Photo extends React.Component {
                 { display: 'none' }
             } > hey < /h6>   <
             Button variant = "warning"
-            className = 'shadow d-none text-center'
+            className = 'shadow text-center'
             id = 'successMessage'
             onClick = { this.handleSubmit }
             type = "button" >

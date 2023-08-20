@@ -34,7 +34,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
             setEmail(res.email)
         });
     }, []);
-    return ( < div > < div className = " d-none d-sm-block" > <
+    return ( < div className="mx-3"> < div className = " d-none d-sm-block" > <
         div className = "row" > <
         div className = "col-8 dollar p-3 rounded-4 " >
         <

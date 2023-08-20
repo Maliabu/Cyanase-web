@@ -20,25 +20,25 @@ const Account = (props) => {
             return ( < ADetails changeAccountDetails = { setAccountDetails }
                 / > )
             }
-            return ( < div >
+            return ( < div className="mx-3">
                 <
-                ArrowLeftSquare size = "large"
+                ArrowLeftSquare size = "medium"
                 set = "broken"
                 onClick = {
                     () => { props.changeAccountSetting(false) }
                 }
                 className = " my-4 active" / > <
                 h3 > Account Settings < /h3>  <
-                div className = "row mt-3 p-2 px-3 border-bottom" > <
+                div className = "row p-2 px-3 border-bottom" > <
                 div className = "col-1" >
                 <
-                FaUserLock size = "50"
-                className = 'my-5 active' / >
+                FaUserLock size = "30"
+                className = 'my-3 active' / >
                 <
                 /
                 div >
                 <
-                div className = "col-11 mt-5" >
+                div className = "col-11 mt-3" >
                 <
                 h4 className = "active bolder"
                 onClick = { handleShow2 } > Password < /h4> <
@@ -48,16 +48,16 @@ const Account = (props) => {
                 /
                 div >
                 <
-                div className = "row mt-3 p-2 px-3 border-bottom" > <
+                div className = "row p-2 px-3 border-bottom" > <
                 div className = "col-1" >
                 <
-                FaUserTie size = "50"
-                className = 'my-5 active' / >
+                FaUserTie size = "30"
+                className = 'my-3 active' / >
                 <
                 /
                 div >
                 <
-                div className = "col-11 mt-5" >
+                div className = "col-11 mt-3" >
                 <
                 h4 className = "active bolder"
                 onClick = { handleShow } > Next of Kin < /h4> <
@@ -67,16 +67,16 @@ const Account = (props) => {
                 /
                 div >
                 <
-                div className = "row mt-3 p-2 px-3 border-bottom" > <
+                div className = "row p-2 px-3 border-bottom" > <
                 div className = "col-1" >
                 <
-                FaUserShield size = "50"
-                className = 'my-5 active' / >
+                FaUserShield size = "30"
+                className = 'my-3 active' / >
                 <
                 /
                 div >
                 <
-                div className = "col-11 mt-5" >
+                div className = "col-11 mt-3" >
                 <
                 h4 className = "active bolder"
                 onClick = {
@@ -85,11 +85,13 @@ const Account = (props) => {
                 h6 > Change your details < /h6> < /
                 div > <
                 Modal show = { show2 }
+                dialogClassName = "my-modal1"
                 onHide = { handleClose2 } >
                 <
                 ChangePassword / > < /
                 Modal > <
                 Modal show = { show }
+                dialogClassName = "my-modal1"
                 onHide = { handleClose } >
                 <
                 NKin / > < /

@@ -20,7 +20,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         )
     }
     return ( <
-        div className = "scroll-y" >
+        div className = "scroll-y mx-3" >
         <
         h3 > General Account Settings < /h3> <
         div className = "row mt-3 p-2 px-3 border-bottom" > <
@@ -28,12 +28,12 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         <
         User size = "medium"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-5" >
+        div className = "col-11 mt-3" >
         <
         h4 className = "active bolder"
         onClick = {
@@ -50,12 +50,12 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         <
         Notification size = "medium"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-5" >
+        div className = "col-11 mt-3" >
         <
         h4 className = "active bolder"
         onClick = {
@@ -72,12 +72,12 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         <
         Chat size = "medium"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-5" >
+        div className = "col-11 mt-3" >
         <
         h4 className = "active bolder"
         onClick = {
@@ -94,12 +94,12 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         <
         Call size = "medium"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-5" >
+        div className = "col-11 mt-3" >
         <
         h4 className = "active bolder"
         onClick = {

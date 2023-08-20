@@ -55,7 +55,7 @@ const MyHome = () => {
         });
         UserRequests().then(res => {
             setName(res.first_name + " " + res.last_name)
-            setAccount(res.profile.user_type)
+            setAccount(res.profile.user_type+" Account")
             setCountry(res.profile.country)
             setPhone(res.profile.phoneno)
             setEmail(res.email)
@@ -279,7 +279,7 @@ const MyHome = () => {
         div className = ' py-2 d-flex flex-row' >
         <
         TabNavItem title = { < span > < Activity size = "small"set = 'broken'
-            className = 'mx-2' / > Investments < /span >
+            className = 'mx-2' / > Risk Profile < /span >
         }
         onClick = { handleTab9 }
         id = "tab9"

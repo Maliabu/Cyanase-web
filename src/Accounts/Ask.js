@@ -6,9 +6,9 @@ const Ask = () => {
     return ( <
         div className = "p-5 text-center" > <
         FaQuestionCircle size = "70"
-        className = 'my-5 active rounded-circle border border-warning p-2' / >
+        className = 'my-3 active rounded-circle border border-warning p-2' / >
         <
-        h1 > Ask Us Anything < /h1>  <
+        h3 > Ask Us Anything < /h3>  <
         Form >
         <
         Form.Group className = "mb-3"

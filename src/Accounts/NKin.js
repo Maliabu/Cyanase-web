@@ -48,10 +48,10 @@ const NKin = () => {
         FaUserTie size = "60"
         className = 'my-2 active rounded-circle border border-warning p-2' / >
         <
-        h4 > Add your Next of Kin < /h4>  <
+        h4 className="bolder"> Add your Next of Kin < /h4>  <
         Form onSubmit = { handleSubmit(onSubmit) } >
         <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3" >
+        Form.Group className = " bg-white shadow-sm p-3" >
         <
         Form.Label > First Name < /Form.Label>  <
         Form.Control type = "text"

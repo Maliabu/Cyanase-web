@@ -9,15 +9,15 @@ const FAQs = (props) => {
     const handleShow = () => setShow(true);
 
     return ( <
-        div className = "scroll-y" >
+        div className = "scroll-y mx-3" >
         <
-        ArrowLeftSquare size = "large"
+        ArrowLeftSquare size = "medium"
         set = "broken"
         onClick = {
             () => { props.handletab8() }
         }
         className = "my-4 active" / > <
-        h1 > FAQs < /h1>   <
+        h3 > FAQs < /h3>   <
         h6 > Get answers to a list of typical questions that you might wish to ask Cyanase < /h6>   <
         div className = "row mt-3" >
         <
@@ -77,6 +77,7 @@ const FAQs = (props) => {
         }
         className = "rounded-3 warning p-3 w-25 text-center mt-5" > Ask a Question < /h6>  <
         Modal show = { show }
+        dialogClassName = "my-modal1"
         onHide = { handleClose } >
         <
         Ask / > < /

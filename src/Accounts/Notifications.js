@@ -4,17 +4,17 @@ import { ArrowLeftSquare } from "react-iconly";
 
 const Notifications = (props) => {
     return ( <
-        div >
+        div className="mx-3">
         <
-        ArrowLeftSquare size = "large"
+        ArrowLeftSquare size = "medium"
         set = "broken"
         onClick = {
             () => { props.changeNotificationSetting(false) }
         }
-        className = "text-warning my-4 active" / > <
-        h1 > Notification Settings < /h1>   <
+        className = "my-4 active" / > <
+        h3 > Notification Settings < /h3>   <
         h6 > Check all the notifications you would like to receive < /h6>  <
-        div className = "py-4"
+        div className = "pt-3"
         key = "default-checkbox" >
         <
         Form >

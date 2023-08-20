@@ -50,9 +50,9 @@ class ChangePassword extends Component {
         return ( <
             div className = "p-5 text-center" > <
             FaUserLock size = "70"
-            className = 'my-5 active rounded-circle border border-warning p-2' / >
+            className = 'my-3 active rounded-circle border border-warning p-2' / >
             <
-            h4 > Change Password < /h4>  <
+            h4 className="bolder"> Change Password < /h4>  <
             Form onSubmit = { this.handleSubmit } >
             <
             Form.Group className = "mb-3 bg-white shadow-sm p-3" >

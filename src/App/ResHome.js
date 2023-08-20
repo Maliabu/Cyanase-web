@@ -229,7 +229,7 @@ const ResHome = (props) => {
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networth } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
+            h2 className = "px-1 font-lighter" > { networth.toFixed(2) } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
             onClick = {
                 () => { setWithdrawSetting(true) }
             } >

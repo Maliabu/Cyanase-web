@@ -397,8 +397,7 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep === 0) {
             return ( < div className = "bg-light m-0 py-5 text-center" > <
-                Button className = "py-3 mx-5 text-center m-0 text-dark rounded-3"
-                variant = "warning"
+                Button className = "py-3 mx-5 text-center m-0 bk-warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Start taking the Risk profile <
@@ -617,7 +616,7 @@ function Step1(props) {
         h4 className = "blue-light mx-lg-5 mx-3 px-2" > What are your objectives
         for Investing ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -680,12 +679,12 @@ function Step2(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > What is your Investment Time Horizon ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -748,12 +747,12 @@ function Step3(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Where have you Invested in the Past ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -816,12 +815,12 @@ function Step4(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > What would you hold as Maximun Loss to your Portfolio ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -884,12 +883,12 @@ function Step5(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > How much Capital are you considering to Invest ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -952,12 +951,12 @@ function Step6(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > What are your Source of Funds ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1021,7 +1020,7 @@ function Step7(props) {
     }
     console.log(props)
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Tax savings, in some instances, can be obtained from investments albeit taking on more risk. < /
@@ -1029,7 +1028,7 @@ function Step7(props) {
         <
         h4 className = "blue-light mx-5 px-2" > Which of the following best describes your Goal ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1092,7 +1091,7 @@ function Step8(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > The table below shows the highest one - year gain and One - year loss on five different hypothetical Investments of $10, 000. < /
@@ -1135,7 +1134,7 @@ function Step8(props) {
         tr > <
         /tbody> < /
         Table > < /div> <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1198,12 +1197,12 @@ function Step9(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Do you feel you are appropriately covered against Personal and / or business risks, such as accidents, Illness, trauma or death ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1248,12 +1247,12 @@ function Step10(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-5 px-2" > Would you consider borrowing money to make a future Investment ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1298,7 +1297,7 @@ function Step11(props) {
         return null
     }
     return ( <
-        div className = " py-5 mt-lg-5" > { props.header } <
+        div className = " py-5" > { props.header } <
         div >
         <
         h4 className = "blue-light mx-lg-5 px-2" > Considering the negative impact of inflation on your Savings, growth investing
@@ -1307,7 +1306,7 @@ function Step11(props) {
         h4 > <
         h4 className = "blue-light mx-5 px-2" > Which of the following options best resonates you ? < /
         h4 > <
-        div className = "blue-dark py-4 px-5 mt-4" >
+        div className = "blue-dark py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1369,14 +1368,14 @@ function Step12(props) {
         /h6> <
         h6 > Your Score: < span className = "p-2 rounded-circle blue-dark" > { props.score } < /span> < /
         h6 > <
-        h6 className = "mt-5" > Based on your score, your Risk Analysis is: < span className = "p-2 active" > { props.getResult } < /span>  < /
+        h6 className = "mt-3" > Based on your score, your Risk Analysis is: < span className = "p-2 active" > { props.getResult } < /span>  < /
         h6 >
         <
-        div className = " mt-5" > < h6 > Your assets will be allocated as follows: < /h6> { props.resourceAllocation } < /div >
+        div className = " mt-3" > < h6 > Your assets will be allocated as follows: { props.resourceAllocation }</h6> < /div >
         <
-        div className = "p-lg-5 p-3 bg-light rounded-3" >
+        div className = " p-2 bg-light rounded-3" >
         <
-        h6 className = "bolder" > OR: manage your own investment by selecting an investment option: < /h6>  <
+        h6 className = "bolder" > OR: manage your own investment by selecting an investment option:</h6>  <
         Form.Select className = "my-3"
         required defaultValue = "Select an investment option"
         onChange = { props.handleChange }
@@ -1384,7 +1383,7 @@ function Step12(props) {
             options.map(option => {
                 return <
                     option value = { option.name }
-                id = "investmentOption" > { option.name } < /option>
+                id = "investmentOption" ><h6>{ option.name }</h6> < /option>
             })
         } < /
         Form.Select > < /div> < /

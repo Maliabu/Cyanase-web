@@ -37,14 +37,14 @@ const ADetails = (props) => {
             setEmailNok(res.kin_email)
         });
     }, []);
-    return ( < div >
+    return ( < div className="mx-3">
         <
-        ArrowLeftSquare size = "large"
+        ArrowLeftSquare size = "medium"
         set = "broken"
         onClick = {
             () => { props.changeAccountDetails(false) }
         }
-        className = "active mt-4" / > <
+        className = "active my-3" / > <
         h3 > Account Details < /h3>  <
         div className = "row px-3 scroll-y" > <
         div className = "col-6" >
@@ -52,7 +52,7 @@ const ADetails = (props) => {
         div className = "row p-2 px-3" > <
         div className = "col-1 px-3" >
         <
-        User size = "large"
+        User size = "medium"
         set = "broken"
         className = 'my-3 active' / >
         <
@@ -72,7 +72,7 @@ const ADetails = (props) => {
         div className = "row px-3" > <
         div className = "col-1" >
         <
-        Call size = "large"
+        Call size = "medium"
         set = "broken"
         className = 'my-3 active' / >
         <
@@ -92,7 +92,7 @@ const ADetails = (props) => {
         div className = "row px-3" > <
         div className = "col-1" >
         <
-        Message size = "large"
+        Message size = "medium"
         set = "broken"
         className = 'my-3 active' / >
         <
@@ -139,12 +139,14 @@ const ADetails = (props) => {
         div >
         <
         Modal show = { show2 }
+        dialogClassName = "my-modal1"
         onHide = { handleClose2 } >
         <
         ChangeDetails / > < /
         Modal >
         <
         Modal show = { show1 }
+        dialogClassName = "my-modal1"
         className = "p-5 text-center"
         onHide = { handleClose1 } >
         <

@@ -23,7 +23,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
         });
     }, []);
     return ( <
-        div > <
+        div className="mx-3"> <
         div className = "row py-3 bg-lighter px-2 rounded-4" >
         <
         div className = "col-6 bg-white rounded-4 p-2" >

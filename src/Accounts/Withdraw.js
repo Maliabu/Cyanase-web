@@ -300,7 +300,7 @@ function Step1(props) {
         div className = " text-start" > <
         h6 className = "mt-2 text-center" > Choose which investment you wish to withdraw from. < /h6> <
         h6 className = "bolder active text-center" > All fields are required, do select. < /h6> <
-        div className = "p-3 rounded-4 mt-5"
+        div className = "p-3 rounded-4 mt-3"
         key = "radio" >
         <
         div key = { `default-radio` }
