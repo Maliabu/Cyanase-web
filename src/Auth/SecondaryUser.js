@@ -238,7 +238,7 @@ function SecondaryUser(props) {
             / > <
             Learn3 currentStep = { step }
             change = { handleChange }
-            / > {prevButton()}{nextButton()}{submitButton()}<p className='mt-lg-5 mt-4 text-center'>Back to <span className='active bolder'>{props.button}</span > < /p>  < /
+            / > {prevButton()}{nextButton()}{submitButton()}<p className='mt-lg-5 text-center'>Back to <span className='active bolder'>{props.button}</span > < /p>  < /
             form > < /div>< /
             React.Fragment >
         );

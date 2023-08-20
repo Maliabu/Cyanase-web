@@ -16,7 +16,7 @@ const BasicExample = () => {
         setActiveTab("tab1");
     };
     return ( <
-        div className = 'row scroll-y' >
+        div className = 'row scroll-y mx-3' >
         <
         div className = 'col-lg-7 px-lg-5' >
         <
@@ -33,8 +33,8 @@ const BasicExample = () => {
         />  < /div > < /
         div >
         <
-        h1 className = 'w-100 text-center mt-5' > Welcome to the API User Portal.This Portal is
-        for API Accounts creations only. < /h1> <
+        h2 className = 'w-100 text-center mt-5' > Welcome to the API User Portal.This Portal is
+        for API Accounts creations only. < /h2> <
         h6 className = 'text-center mt-5 p-3 bg-light rounded-3' > For more information or help, contact support at:
         <
         u className = 'active ' > support @cyanase.com < /u> < /
@@ -46,7 +46,7 @@ const BasicExample = () => {
         alt = "investors"
         height = "90%"
         width = "100%"
-        className = 'mt-5 py-5' / > <
+        className = 'py-5' / > <
         /div> < /
         div > <
         div className = 'col-lg-5 ' >

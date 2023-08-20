@@ -117,37 +117,38 @@ class SignUp extends Component {
             div > <
             div className = 'row justify-content-center bg-light rounded-4 p-1' >
             <
-            Form className = 'rounded-4 shadow-sm bg-white p-lg-5'
+            Form className = 'rounded-4 shadow-sm bg-white p-lg-4'
             onSubmit = { this.handleSubmit } >
             <
             div className = 'row justify-center p-3' > <
-            h2 className = 'text-center' > API USER ACCOUNT < /h2> <
+            h4 className = 'text-center' > API USER ACCOUNT < /h4> <
             h6 > Register as an API user by filling in the following details.On submitting, details will be verified by our team and we will contact you on the way forward. < /h6><
             h6 className = 'active' > < b > All fields are Required < /b>  < /
             h6 > <
             /
             div > <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
+            Form.Group className = " px-5" >
+            <h6 className='m-0'><
+            Form.Label > Company Name < /Form.Label> </h6>
             <
-            Form.Label > Company Name < /Form.Label> <
             Form.Control type = "text"
             required = { true }
             id = 'company_name'
             onChange = { this.handleChange }
             placeholder = "Cyanase Investors Limited" / > <
             /Form.Group>  <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
-            <
-            Form.Label > Website < /Form.Label> <
+            Form.Group className = " px-5 mt-3" >
+            <h6 className='m-0'><
+            Form.Label > Website < /Form.Label> </h6> <
             Form.Control type = "text"
             required = { true }
             id = 'website'
             onChange = { this.handleChange }
             placeholder = "cyanase.com" / > <
             /Form.Group> <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
-            <
-            Form.Label > Country < /Form.Label> <
+            Form.Group className = " px-5 mt-3" >
+            <h6 className='m-0'><
+            Form.Label > Country < /Form.Label> </h6>  <
             Form.Control type = "text"
             id = 'country'
             required = { true }
@@ -161,43 +162,43 @@ class SignUp extends Component {
             option value = "Telecom" > Telecom < /option> <
             option value = "Social Media" > Social Media < /option> < /
             Form.Select > <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
-            <
-            Form.Label > Phone < /Form.Label> <
+            Form.Group className = " px-5 mt-3" >
+            <h6 className='m-0'><
+            Form.Label > Phone < /Form.Label> </h6>  <
             Form.Control type = "phone"
             id = 'phone'
             required = { true }
             onChange = { this.handleChange }
             placeholder = "+256 772971878" / > <
             /Form.Group> <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
-            <
-            Form.Label > Email address < /Form.Label> <
+            Form.Group className = " px-5 mt-3" >
+            <h6 className='m-0'><
+            Form.Label > Email Address < /Form.Label> </h6> <
             Form.Control type = "email"
             id = 'email'
             required = { true }
             onChange = { this.handleChange }
             placeholder = "support@cyanase.com" / > <
-            /Form.Group> <Form.Group  className="mb-3"  > <
-            Form.Label > Memorandum of Association < /Form.Label> <
+            /Form.Group> <Form.Group  className="mt-3"  > <h6 className='m-0'><
+            Form.Label > Memorandum of Association < /Form.Label> </h6> <
             Form.Control type = "file"
             id = 'moa'
             required = { true }
             onChange = { this.handleFileChange }
             / > < /
             Form.Group > <
-            Form.Group className = "mb-3" >
-            <
-            Form.Label > Certificate of Incorporation < /Form.Label> <
+            Form.Group className = "mt-3" >
+            <h6 className='m-0'><
+            Form.Label > Certificate of Incorporation < /Form.Label> </h6>  <
             Form.Control type = "file"
             id = 'coi'
             required = { true }
             onChange = { this.handleFileChange }
             / > < /
             Form.Group > <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
-            <
-            Form.Label > Password < /Form.Label> <
+            Form.Group className = " px-5 mt-3" >
+            <h6 className='m-0'><
+            Form.Label > Password < /Form.Label> </h6>  <
             Form.Control type = "password"
             id = 'password'
             required = { true }
@@ -205,9 +206,9 @@ class SignUp extends Component {
             placeholder = "Create a strong Password" / >
             <
             /Form.Group>  <
-            Form.Group className = "mb-3 bg-light rounded-lg p-3 px-5" >
-            <
-            Form.Label > Password < /Form.Label> <
+            Form.Group className = " px-5 mt-3" >
+            <h6 className='m-0'><
+            Form.Label > Confirm Password < /Form.Label> </h6>  <
             Form.Control type = "password"
             required = "required"
             onChange = { this.handleChange }
