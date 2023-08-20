@@ -17,6 +17,7 @@ const ADetails = (props) => {
     const [lastName, setLastName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [email, setEmail] = useState("")
+    const [profilePicture, setProfilePicture] = useState("")
     const [firstNok, setFirstNok] = useState("")
     const [lastNok, setLastNok] = useState("")
     const [phoneNok, setPhoneNok] = useState("")
@@ -28,6 +29,7 @@ const ADetails = (props) => {
             setLastName(res.last_name)
             setPhoneNumber(res.profile.phoneno)
             setEmail(res.email)
+            setProfilePicture(res.profile.profile_picture)
         });
         GetNextOfKin().then(res => {
             console.log(res)
@@ -126,7 +128,7 @@ const ADetails = (props) => {
         div >
         <
         div className = "col-6 px-5 text-center" > <
-        img src = "http://127.0.0.1:8000/static/photo.png"
+        img src = {profilePicture}
         className = " rounded-circle object-fit-cover img-back"
         alt = "investors" / >
         <

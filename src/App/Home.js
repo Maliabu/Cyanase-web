@@ -30,6 +30,7 @@ import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat
 
 const MyHome = () => {
     const [name, setName] = useState("")
+    const [profilePhoto, setProfilePhoto] = useState("")
     const [account, setAccount] = useState("")
     const [span, setSpan] = useState([])
     const [country, setCountry] = useState([])
@@ -59,6 +60,7 @@ const MyHome = () => {
             setCountry(res.profile.country)
             setPhone(res.profile.phoneno)
             setEmail(res.email)
+            setProfilePhoto(res.profile.profile_picture)
         })
         SubscriptionRequests().then(res => {
             setSubStatus(res.status)
@@ -166,7 +168,7 @@ const MyHome = () => {
         <
         div className = 'col-3' >
         <
-        img src = "http://127.0.0.1:8000/static/photo.png"
+        img src = {profilePhoto}
         className = "mt-1 rounded-circle object-fit-cover img-head"
         width = '100%'
         height = '80%'
