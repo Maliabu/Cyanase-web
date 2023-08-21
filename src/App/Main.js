@@ -182,7 +182,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = "col-lg-9 rounded-4 col-md-12" >
             <
-            div className = 'row p-3 bg-lighter rounded-4' >
+            div className = 'row p-1 bg-lighter rounded-4' >
             <
             div className = "p-lg-3 bg-white rounded-4 col text-center" >
             <
@@ -222,7 +222,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div >
 
             <
-            div className = "blue-dark p-lg-3 rounded-4 col mx-3 text-center" >
+            div className = "blue-dark p-lg-3 rounded-4 col mx-2 text-center" >
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
@@ -239,9 +239,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
             className = 'mx-5' / > Withdraw < /span></div > < /
             div > <
-            div className = 'row bg-lighter p-3' >
+            div className = 'bg-lighter' >
             <
-            div className = '' > <
+            div className = 'p-2' > <
             Chart options = { options.options }
             series = { options.series }
             className = "w-100"

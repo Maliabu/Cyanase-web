@@ -23,8 +23,8 @@ const RiskProfile = ({ id, activeTab, children }) => {
         });
     }, []);
     return ( <
-        div className="mx-3"> <
-        div className = "row py-3 bg-lighter px-2 rounded-4" >
+        div className="row mx-3"> <
+        div className = "row p-1 bg-lighter px-2 rounded-4" >
         <
         div className = "col-6 bg-white rounded-4 p-2" >
         <
@@ -36,7 +36,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
         <
         /div> <
         div className = "col-6 p-5 text-center" > <
-        div className = "row p-3 bg-white rounded-25" >
+        div className = "row p-3 bg-white rounded-4" >
         <
         h4 className = "active bolder" > Investor Risk Profile < /h4>  <
         Activity size = "xlarge"
