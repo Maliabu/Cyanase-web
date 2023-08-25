@@ -58,7 +58,7 @@ const Visuals = () => {
             }
             sum += total_withdraws[i];
         }
-        return sum
+        return sum.toLocaleString()
     }
     const groupedData = deposits.reduce((result, entry) => {
         const { date, updated, deposit_amount } = entry;
@@ -90,14 +90,15 @@ const Visuals = () => {
     }, []);
     
     groupedData.forEach(yearData => {
-        let total = 0
         yearData.data.forEach(monthData => {
-            let sum = 0
             monthData.y = monthData.y.reduce((total, value) => total + value, 0);
-            total = monthData.y + sum
         });
-        yearData.total = total
     });
+    let total = 0
+    groupedData.forEach(yearData => {
+    yearData.total = yearData.data.reduce((total, monthData) => total + monthData.y, 0);
+    total += yearData.total
+});
     
     console.log(JSON.stringify(groupedData, null, 4));
     const deposit = {
@@ -183,7 +184,7 @@ const Visuals = () => {
         <
         div className = 'row p-lg-4 p-2 border-top border-bottom' >
         <
-        div className = 'col-lg-3 col-sm-8 p-3 mt-3' >
+        div className = 'col-lg-5 col-sm-8 p-3 mt-3' >
         <
         h3 className = 'bolder' > Total Number of Deposits < /h3></div >
         <
@@ -191,8 +192,16 @@ const Visuals = () => {
         <
         h3 className = 'bolder text-center' > { howMany } < /h3></div >
         <
-        /div> <
-        h3 className = 'bolder text-center my-5' > Total Deposit Amount in UGX: < h2 className = 'font-lighter' > { ddeposit() } < /h2>  < /
+        /div> 
+        <div className='row p-3'>
+            {
+                groupedData.map(data=>(
+                    <div className='col p-2'><h4 className='bolder'>Total deposit for {data.name}</h4><h4 className='font-lighter'>UGX {(data.total).toLocaleString()}</h4></div>
+                ))
+            }
+        </div>
+        <
+        h3 className = 'bolder text-center my-5' > Total Deposit Amount in UGX: < h2 className = 'font-lighter' > { total.toLocaleString() } < /h2>  < /
         h3 > <
         h2 className = 'p-lg-5 active bolder' > Withdraw Activity < /h2><
         div className = 'bg-lighter p-lg-5' > <
