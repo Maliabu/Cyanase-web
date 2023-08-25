@@ -117,6 +117,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         return group;
     }, {});
     const result = Object.values(groupArrayObject);
+    console.log(result)
 
     // function onlyUnique(value, index, array) {
     //     return array.indexOf(value) === index;

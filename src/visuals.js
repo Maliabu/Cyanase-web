@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Chart from 'react-apexcharts';
-import { deposits } from './data/deposits';
+import { deposits,groupedData1 } from './data/deposits';
 import { withdraws } from './data/withdraw';
 
 const Visuals = () => {
@@ -16,10 +16,23 @@ const Visuals = () => {
         const year = newDate.getFullYear()
         return year
     }
+    const groupArrayObject = deposits.reduce((group, obj) => {
+        const { date,deposit_amount,updated } = obj;
+        if (!group[date]) {
+            group[date] = {
+                name: date,
+                date:updated,
+                data:[]
+            };
+        }
+        group[date].data.push(parseInt(deposit_amount))
+        return group;
+    }, {});
+    const result = Object.values(groupArrayObject);
     const howMany = deposits.length
     const howManyWithdraw = withdraws.length
     deposits.map(d => (
-        values.push(d.deposit),
+        values.push(d.deposit_amount),
         dates.push(dateConverter(d.date))
     ))
     withdraws.map(w => (
@@ -37,7 +50,7 @@ const Visuals = () => {
     }
     const ddeposit = () => {
         let total_withdraws = []
-        deposits.map(deposit => (total_withdraws.push(parseInt(deposit.deposit))))
+        deposits.map(deposit => (total_withdraws.push(parseInt(deposit.deposit_amount))))
         let sum = 0;
         for (let i = 0; i < total_withdraws.length; i++) {
             if (isNaN(total_withdraws[i])) {
@@ -47,17 +60,57 @@ const Visuals = () => {
         }
         return sum
     }
-    console.log(dates)
+    const groupedData = deposits.reduce((result, entry) => {
+        const { date, updated, deposit_amount } = entry;
+        const existingYear = result.find(item => item.name === date);
+        let sum = 0
+    
+        if (existingYear) {
+            const existingMonth = existingYear.data.find(item => item.x === updated);
+            if (existingMonth) {
+                existingMonth.y.push(Number(deposit_amount));
+            } else {
+                existingYear.data.push({
+                    x:updated,
+                    y: [Number(deposit_amount)]
+                });
+            }
+        } else {
+            result.push({
+                name:date,
+                data: [{
+                    x:updated,
+                    y: [Number(deposit_amount)]
+                }],
+                total:sum
+            });
+        }
+    
+        return result;
+    }, []);
+    
+    groupedData.forEach(yearData => {
+        let total = 0
+        yearData.data.forEach(monthData => {
+            let sum = 0
+            monthData.y = monthData.y.reduce((total, value) => total + value, 0);
+            total = monthData.y + sum
+        });
+        yearData.total = total
+    });
+    
+    console.log(JSON.stringify(groupedData, null, 4));
     const deposit = {
         options: {
             chart: {
                 id: 'apexchart-example'
             },
             xaxis: {
+                name: '2023',
                 title: {
-                    text: 'Over time'
+                    text: 'Deposits per year'
                 },
-                categories: [],
+                categories: result.map(d=>d.updated),
                 // categories: ['jun', 'jul', 'aug'],
             },
             yaxis: {
@@ -68,13 +121,17 @@ const Visuals = () => {
             colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
 
         },
-        series: [{
-            data: values
-        }],
-        xaxis: {
-            categories: dates
-        },
-        // series: [2, 60, 4],
+        series: groupedData1,
+        // series: [{
+        //     name: "testing",
+        //     data: [{
+        //         x:["a"],
+        //         y:[20]
+        //     },{
+        //         x:["b"],
+        //         y:[0]
+        //     }]
+        // }],
         stroke: {
             curve: 'smooth',
         }

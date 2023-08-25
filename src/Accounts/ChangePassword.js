@@ -84,12 +84,12 @@ class ChangePassword extends Component {
             Form.Group >
             <
             h6 id = "errorMessage"
-            className = 'py-3 mt-3 rounded border border-danger text-center'
+            className = 'py-2 mt-3 rounded border border-danger text-center'
             style = {
                 { display: 'none' }
             } > hey < /h6> <
             h6 id = "infoMessage"
-            className = 'py-3 mt-3 rounded warning text-center'
+            className = 'py-2 mt-3 rounded warning text-center'
             style = {
                 { display: 'none' }
             } > hey < /h6>  <
