@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ValidateForms } from './ValidateForms';
 import PhoneInput from 'react-phone-number-input';
-import { success1, catch_errors, fail, preloader } from '../Api/RequestFunctions'
+import { success1, catch_errors, fail, preloader,togglePasswordVisibility } from '../Api/RequestFunctions'
 
 
 function SecondaryUser(props) {
@@ -26,7 +26,6 @@ function SecondaryUser(props) {
     });
     formData2.phone_no = valuePhone
     formData2.country = countryInput
-    console.log(formData2)
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -97,7 +96,6 @@ function SecondaryUser(props) {
         if (dob.length !== 0 && phone.length >= 10) {
             setStep(step + 1)
         }
-        console.log(phone, gender)
     }
     const validate3 = () => {
         let password = ValidateForms("password")
@@ -128,7 +126,6 @@ function SecondaryUser(props) {
         const value = event.target.value;
         setFormData2({...formData2, [name]: value })
     }
-    console.log(formData)
     const submitButton = () => {
         if (step === 3) {
             return ( <
@@ -396,7 +393,10 @@ function SecondaryUser(props) {
             className = 'p-2 rounded-2 px-3 bg-red'
             style = {
                 { display: 'none' }
-            } > hey < /p> < /
+            } > hey < /p><
+            div className='my-1'
+            key = "default-checkbox" >
+                <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePasswordVisibility}/></div> < /
             Form.Group > < /
             div > )
     }

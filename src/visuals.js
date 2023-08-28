@@ -174,7 +174,7 @@ const Visuals = () => {
         h1 className = 'p-lg-5 p-3' > Cyanase Data Visuals
         for deposits, withdraws and user activity < /h1><
         h2 className = 'p-lg-5 p-2 active bolder' > Deposit Activity < /h2><
-        div className = 'bg-lighter p-2 p-lg-5' > <
+        div className = 'bg-lighter p-2 p-lg-3' > <
         Chart options = { deposit.options }
         series = { deposit.series }
         className = "w-100"
@@ -204,7 +204,7 @@ const Visuals = () => {
         h3 className = 'bolder text-center my-5' > Total Deposit Amount in UGX: < h2 className = 'font-lighter' > { total.toLocaleString() } < /h2>  < /
         h3 > <
         h2 className = 'p-lg-5 active bolder' > Withdraw Activity < /h2><
-        div className = 'bg-lighter p-lg-5' > <
+        div className = 'bg-lighter p-lg-3' > <
         Chart options = { withdrawal.options }
         series = { withdrawal.series }
         className = "w-100"

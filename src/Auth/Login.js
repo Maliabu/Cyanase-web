@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { API_URL_LOGIN } from '../apis';
 import axios from 'axios';
-import { success, preloader, fail, catch_errors } from '../Api/RequestFunctions';
+import { success, preloader, fail, catch_errors,togglePasswordVisibility } from '../Api/RequestFunctions';
 
 class Login extends Component {
     //state for form data
@@ -76,7 +76,12 @@ class Login extends Component {
             required = "required"
             value = { this.state.password }
             onChange = { this.handleChange }
-            placeholder = "password" / > < /
+            placeholder = "password" / >
+            <
+        div className='my-1'
+        key = "default-checkbox" >
+            <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePasswordVisibility}/></div>
+            < /
             Form.Group > <
             div className = 'row justify-content-center' > <
             Button variant = "warning"

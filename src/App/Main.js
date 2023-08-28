@@ -62,6 +62,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setDepositProgress(res[4]);
             setGraph(res[4]); // array deposits
             setDates(res[5])
+            setDepositNetworth(res[7])
         })
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
@@ -78,7 +79,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
         });
         Networth().then(res => {
             setDeposit(res[1])
-            setDepositNetworth(res[2])
         });
         PendingWithdrawRequests().then(res => {
             setWithdraw(res)

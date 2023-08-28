@@ -1,3 +1,5 @@
+import { get } from "lodash"
+
 export const preloader = () => {
     document.getElementById("successMessage").innerHTML = "processing..."
 }
@@ -64,5 +66,12 @@ export const catch_errors = (error) => {
     } else {
         // Something happened in setting up the request that triggered an Error
         fail("Server Error")
+    }
+}
+export const togglePasswordVisibility = ()=>{
+    if(document.getElementById('password').type === "password"){
+        document.getElementById('password').type = "text"
+    } else{
+        document.getElementById('password').type = "password"
     }
 }
