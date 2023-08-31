@@ -14,12 +14,10 @@ class Photo extends React.Component {
         this.setState({
             photo: e.target.files[0]
         })
-        console.log(this.state)
     };
     handleSubmit = () => {
         let form_data = new FormData();
         form_data.append('photo', this.state);
-        console.log(this.state)
         axios.post(`${API_URL_USER_PROFILE_PHOTO}`, this.state, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -31,7 +29,6 @@ class Photo extends React.Component {
                 catch_errors(error)
             })
             .then(function(response) {
-                console.log(response)
                 if (!response) {
                     fail("Something went wrong...")
                 } else if (response.data.success === false) {

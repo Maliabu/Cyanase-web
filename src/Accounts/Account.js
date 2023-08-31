@@ -14,7 +14,6 @@ const Account = (props) => {
         const handleShow = () => setShow(true);
         const handleClose2 = () => setShow2(false);
         const handleShow2 = () => setShow2(true);
-        console.log(props.changeAccountSetting);
 
         if (accountDetails) {
             return ( < ADetails changeAccountDetails = { setAccountDetails }

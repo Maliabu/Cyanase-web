@@ -37,12 +37,10 @@ class ResGoal extends React.Component {
             this.setState({
                 [name]: value
             })
-            console.log(this.state)
         }
 
         handleSubmit = event => {
             event.preventDefault()
-            console.log(this.state)
         }
         _next = () => {
             let currentStep = this.state.currentStep
@@ -426,7 +424,6 @@ class ResGoal extends React.Component {
             if (props.currentStep !== 7) {
                 return null
             }
-            console.log(props)
             return ( <
                 div className = "p-3 text-center" >
                 <

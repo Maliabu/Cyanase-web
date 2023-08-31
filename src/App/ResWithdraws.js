@@ -11,7 +11,6 @@ const ResWithdraws = () => {
         useEffect(() => {
             PendingWithdrawRequests().then(res => {
                 setWithdraw(res)
-                console.log(res)
             })
         }, []);
         const pendingWithdraws = () => {

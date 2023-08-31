@@ -12,12 +12,9 @@ export default function App() {
 
 
     const handleChange = e => {
-        console.log(e.target.name);
         let arrPhone = userInfo.user.phone;
         (e.target.name === 'primary' || e.target.name === 'alternate') &&
         arrPhone.map(x => (x.hasOwnProperty(e.target.name)) && (x[e.target.name] = e.target.value))
-
-        console.log(arrPhone)
         setUserInfo(prevState => {
             return {
                 user: {
@@ -33,9 +30,6 @@ export default function App() {
         email,
         phone: [{ primary }, { alternate }]
     } = userInfo.user;
-
-    console.log(userInfo);
-
     return ( <
         div className = "App" >
         Name: < input name = "name"

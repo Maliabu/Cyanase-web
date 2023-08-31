@@ -54,9 +54,7 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                                         success("You have deposited successfully", "/home", "successful");
                                     }
                                 });
-                            console.log(data)
                         }
-                        console.log(response);
                         closePaymentModal() // this will close the modal programmatically
                     },
                     onClose: () => {},

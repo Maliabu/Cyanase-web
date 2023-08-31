@@ -82,7 +82,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
         });
         PendingWithdrawRequests().then(res => {
             setWithdraw(res)
-            console.log(res)
         })
     }, []);
     let depositTotal = 0
@@ -117,7 +116,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
         return group;
     }, {});
     const result = Object.values(groupArrayObject);
-    console.log(result)
 
     // function onlyUnique(value, index, array) {
     //     return array.indexOf(value) === index;

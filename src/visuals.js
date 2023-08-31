@@ -100,7 +100,7 @@ const Visuals = () => {
     total += yearData.total
 });
     
-    console.log(JSON.stringify(groupedData, null, 4));
+    // console.log(JSON.stringify(groupedData, null, 4));
     const deposit = {
         options: {
             chart: {

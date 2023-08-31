@@ -19,10 +19,7 @@ function PDeposit() {
         const value = event.target.value;
         setFormData({...formData, [name]: value })
     }
-    console.log(formData);
-
     function onSubmit(values) {
-        console.log(values);
     }
     const Learn3 = () => {
         return ( <

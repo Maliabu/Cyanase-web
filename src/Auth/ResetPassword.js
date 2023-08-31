@@ -6,7 +6,7 @@ import '../App.css';
 import { API_URL_RESET_PASSWORD } from '../apis';
 import axios from 'axios';
 import { success1, catch_errors, preloader, fail } from '../Api/RequestFunctions';
-import Logo from '../images/CI.png'
+import Logo from '../images/CIPNG.png'
 import { useSearchParams } from "react-router-dom";
 
 function ResetPassword(props) {
@@ -40,8 +40,8 @@ function ResetPassword(props) {
         if (check === "no") {
             fail("Passwords dont macth")
         } else {
-            console.log("EMAIL: " + formData.email)
-            console.log("PASSWORD: " + formData.password)
+            // console.log("EMAIL: " + formData.email)
+            // console.log("PASSWORD: " + formData.password)
             axios.post(`${API_URL_RESET_PASSWORD}`, formData.password, {
                     params: {
                         password: (formData.password).toString(),
@@ -67,25 +67,25 @@ function ResetPassword(props) {
         div > <
         div className = 'row rounded-4 justify-content-center bg-lighter p-5 p-2' >
         <
-        Form className = 'bg-white rounded-4 p-lg-3 p-4 col-lg-5 col-12'
+        Form className = 'bg-white rounded-4 col-lg-5 pb-3 col-12'
         onSubmit = { handleSubmit } >
         <
-        div className = 'row justify-content-center' >
+        div className = 'row justify-content-center blue-dark p-4 rounded-top-4' >
         <
         img src = { Logo }
         className = ' my-3 text-center logo'
         alt = "investors" / >
         <
         h3 className = 'text-center' > Password Reset < /h3> <
-        h6 className = ' mt-3 text-center' > Provide a strong password
+        h6 className = 'text-center' > Provide a strong password
         for your account.All fields are required < /
         h6 > <
         /
         div > <
-        Form.Group className = "mb-3 px-lg-5"
+        Form.Group className = "my-1 px-lg-5"
         controlId = "formBasicPassword" >
         <
-        Form.Label > < h6 > Password < /h6> < /Form.Label > <
+        Form.Label > < h6 className='m-0'> Password < /h6> < /Form.Label > <
         Form.Control type = "password"
         name = "password"
         onChange = { handleChange }
@@ -98,7 +98,7 @@ function ResetPassword(props) {
         Form.Group > <
         Form.Group className = "mb-3 px-lg-5" >
         <
-        Form.Label > < h6 > Confirm Password < /h6> < /Form.Label > <
+        Form.Label > < h6 className='m-0'> Confirm Password < /h6> < /Form.Label > <
         Form.Control type = "password"
         name = "confirmpassword"
         onChange = { handleChange }
@@ -107,8 +107,11 @@ function ResetPassword(props) {
         className = 'p-2 rounded-2 px-3 bg-red'
         style = {
             { display: 'none' }
-        } > hey < /p> < /
-        Form.Group > <
+        } > hey < /p><
+        div className='my-1'
+        key = "default-checkbox" >
+            <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={props.togglePassword}/></div> < /
+        Form.Group ><
         div className = 'row justify-content-center' > <
         Button variant = "warning"
         className = 'shadow text-center'

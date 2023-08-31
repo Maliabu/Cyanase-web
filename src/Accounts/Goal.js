@@ -290,7 +290,6 @@ function Step0(props) {
         return null
     }
     if (props.id === "personal") {
-        console.log("risk profile")
     }
     return ( <
         div className = "py-3" > <
@@ -361,7 +360,6 @@ function Step1(props) {
         return null
     }
     if (props.id === "personal") {
-        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <

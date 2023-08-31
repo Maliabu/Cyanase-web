@@ -45,16 +45,16 @@ class PasswordReset extends Component {
             div > <
             div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-2' >
             <
-            Form className = 'bg-white rounded-4 p-lg-5 py-3 col-lg-5 col-12'
+            Form className = 'bg-white pb-3 rounded-4 col-lg-5 col-12'
             onSubmit = { this.handleSubmit } >
             <
-            div className = 'row justify-center p-3' > <
+            div className = 'row justify-center p-4 blue-dark rounded-top-4' > <
             h2 className = 'text-center' > Password Reset < /h2> <
-            h6 className = 'active mt-3 text-center' > < b > Enter your account email to receive a password reset link < /b>  < /
+            h6 className = 'active text-center' > Enter your account email to receive a password reset link < /
             h6 > <
             /
             div > <
-            Form.Group className = "mb-3 shadow-sm rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 rounded-3 p-3 px-5"
             controlId = "formBasicDate" >
             <
             Form.Label > Email < /Form.Label> <

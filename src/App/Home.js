@@ -64,7 +64,6 @@ const MyHome = () => {
         })
         SubscriptionRequests().then(res => {
             setSubStatus(res.status)
-            console.log(res.status)
         })
     }, []);
     //  Functions to handle Tab Switching
@@ -120,7 +119,6 @@ const MyHome = () => {
         // update the state to tab2
         setActiveTab("tab15");
     };
-    console.log(span)
     return ( <
         div className = 'row' > <
         div className = 'row d-none d-md-block d-lg-none d-md-none shadow-sm' > <

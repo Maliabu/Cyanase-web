@@ -24,7 +24,6 @@ const ADetails = (props) => {
     const [emailNok, setEmailNok] = useState("")
     useEffect(() => {
         UserRequests().then(res => {
-            console.log(res)
             setFirstName(res.first_name)
             setLastName(res.last_name)
             setPhoneNumber(res.profile.phoneno)
@@ -32,7 +31,6 @@ const ADetails = (props) => {
             setProfilePicture(res.profile.profile_picture)
         });
         GetNextOfKin().then(res => {
-            console.log(res)
             setFirstNok(res.kin_first_name)
             setLastNok(res.kin_last_name)
             setPhoneNok(res.kin_phone)

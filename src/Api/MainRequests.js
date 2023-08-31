@@ -26,7 +26,6 @@ export const UserRequests = async() => {
         return error ? error.response ? error.response.data : error : error.message;
     }
 };
-
 export const ProfilePhoto = async() => {
     try {
         const response = await axios.get(`${API_URL_USER_GET_PROFILE_PHOTO}`, {

@@ -33,7 +33,6 @@ function Goal1(props) {
         const value = event.target.value;
         setFormData({...formData, [name]: value });
     }
-    console.log(formData)
     const { handleSubmit } = useForm();
     const getAccountType = () => {
         let currency = formData.currency
@@ -460,7 +459,6 @@ function Step7(props) {
     if (props.currentStep !== 7) {
         return null
     }
-    console.log(props)
     return ( <
         div className = "p-5 text-center" >
         <
@@ -531,9 +529,6 @@ function Step8(props) {
 function Step9(props) {
     if (props.currentStep !== 9) {
         return null
-    }
-    if (props.id === "personal") {
-        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <

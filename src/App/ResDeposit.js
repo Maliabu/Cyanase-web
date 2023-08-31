@@ -53,12 +53,10 @@ class ResDeposit extends React.Component {
                     this.setState({
                         [name]: value
                     })
-                    console.log(this.state)
                 }
 
                 handleSubmit = event => {
                     event.preventDefault()
-                    console.log(this.state)
                 }
 
                 returnToGoals() {
@@ -265,7 +263,6 @@ class ResDeposit extends React.Component {
                                 return null
                             }
                             if (props.id === "personal") {
-                                console.log("risk profile")
                             }
                             return ( <
                                 div className = " text-start rounded-4 shadow-sm p-5 mb-3" >

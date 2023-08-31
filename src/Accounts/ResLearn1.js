@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 
 function ResLearn1(props) {
-    console.log(props)
     const globalRefId = "";
     const [step, setStep] = useState(1)
     const [formData, setFormData] = useState({
@@ -60,7 +59,6 @@ function ResLearn1(props) {
 
     function onSubmit() {
         preloader()
-        console.log(formData);
 
     }
     const _next = () => {
@@ -221,9 +219,6 @@ function Step1(props) {
     if (props.currentStep !== 1) {
         return null
     }
-    if (props.id === "personal") {
-        console.log("risk profile")
-    }
     return ( <
         div className = " text-start" > <
         h6 className = "mt-2 text-center" > Choose where you wish to make your deposit. < /h6> <
@@ -276,9 +271,6 @@ function Step1(props) {
 function Step2(props) {
     if (props.currentStep !== 2) {
         return null
-    }
-    if (props.id === "personal") {
-        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <
@@ -371,7 +363,6 @@ function Step3(props) {
 }
 
 function Step4(props) {
-    console.log(props.data)
     if (props.currentStep !== 4) {
         return null
     }

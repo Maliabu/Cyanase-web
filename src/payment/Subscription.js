@@ -54,9 +54,9 @@ export default function Subscription({ name, phone, amount, currency, email, dat
                                         success("You have subscribed successfully", "/home", "successful");
                                     }
                                 });
-                            console.log(data)
+                            // console.log(data)
                         }
-                        console.log(response);
+                        // console.log(response);
                         closePaymentModal() // this will close the modal programmatically
                     },
                     onClose: () => {},

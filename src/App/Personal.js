@@ -118,7 +118,6 @@ const Personal = ({...props }) => {
         let progress
         let nextDeposits = deposits
         let rev = nextDeposits.reverse()
-        console.log(rev)
         const myInvestments = () => {
             let nextResult = results.reverse()
             if (results.length === 0) {

@@ -47,13 +47,11 @@ class RProfile extends React.Component {
         this.setState({
             [name]: value
         })
-        console.log(this.state)
     }
     getPercent() {
         let getPercentage = 0;
         let currentStep = this.state.currentStep;
         getPercentage = currentStep / 11 * 100
-        console.log(getPercentage, currentStep)
         return getPercentage
     }
     conservativeA() {
@@ -270,7 +268,6 @@ class RProfile extends React.Component {
     }
     scoreResult() {
         this.score = parseInt(this.state.question1) + parseInt(this.state.question2) + parseInt(this.state.question3) + parseInt(this.state.question4) + parseInt(this.state.question5) + parseInt(this.state.question6) + parseInt(this.state.question7) + parseInt(this.state.question8) + parseInt(this.state.question9) + parseInt(this.state.question10) + parseInt(this.state.question11);
-        console.log(this.score)
         return this.score
     }
     range(start, end) {
@@ -447,7 +444,6 @@ class RProfile extends React.Component {
         form_data.append('risk_analysis', this.getResult()[0]);
         form_data.append('score', this.scoreResult());
         this.validate()
-        console.log(form_data)
         axios.post(`${API_URL_ADD_AUTH_USER_RISK_PROFILE}`, form_data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -1018,7 +1014,6 @@ function Step7(props) {
     if (props.currentStep !== 7) {
         return null
     }
-    console.log(props)
     return ( <
         div className = " py-5" > { props.header } <
         div >

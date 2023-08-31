@@ -54,9 +54,9 @@ export default function GoalCreate({ name, phone, amount, currency, email, data,
                                         success("You have created your goal successfully", "/home", "successful");
                                     }
                                 });
-                            console.log(data)
+                            // console.log(data)
                         }
-                        console.log(response);
+                        // console.log(response);
                         closePaymentModal() // this will close the modal programmatically
                     },
                     onClose: () => {},

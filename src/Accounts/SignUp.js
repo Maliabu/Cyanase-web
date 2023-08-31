@@ -37,14 +37,12 @@ class SignUp extends Component {
         this.setState({
             [e.target.id]: e.target.value
         });
-        console.log(this.state);
     };
     handleFileChange = (e) => {
         this.setState({
             moa: e.target.files[0],
             coi: e.target.files[0]
         })
-        console.log(this.state)
     };
 
     handleSubmit = (e) => {
@@ -59,7 +57,6 @@ class SignUp extends Component {
         form_data.append('email', this.state.email);
         form_data.append('password', this.state.password);
         form_data.append('coi', this.state.coi, this.state.coi.name);
-        console.log(this.state.moa, this.state.moa.name)
         axios.post(`${API_URL}`, form_data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -95,22 +92,16 @@ class SignUp extends Component {
                     }
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
                     errorSignUp();
                 } else if (error.request) {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
-                    console.log(error.request);
                 } else {
                     // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
                 }
             });
         this.success();
-        console.log(e);
     }
     render() {
         return ( <

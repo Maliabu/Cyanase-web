@@ -49,16 +49,16 @@ class Login extends Component {
             div > <
             div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-3' >
             <
-            Form className = 'bg-white rounded-4 p-lg-5 col-lg-5 col-12'
+            Form className = 'bg-white rounded-4 col-lg-5 col-12'
             onSubmit = { this.handleSubmit } >
             <
-            div className = 'row justify-center p-3' > <
+            div className = 'row justify-center blue-dark p-4 rounded-top-4' > <
             h2 className = 'text-center' > LOGIN < /h2> <
-            h6 className = ' mt-3 text-center' > < b > Enter your Credentials below to login to your API Account < /b>  < /
+            h6 className = ' text-center active' > Enter your Credentials below to login to your Account < /
             h6 > <
             /
             div > <
-            Form.Group className = " rounded-2 px-3" >
+            Form.Group className = " rounded-2 px-3 mt-3" >
             <
             Form.Label > < h6 className = 'm-0' > Email < /h6> < /Form.Label > <
             Form.Control type = "text"

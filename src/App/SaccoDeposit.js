@@ -21,12 +21,10 @@ class SaccoDeposit extends React.Component {
         this.setState({
             [name]: value
         })
-        console.log(this.state)
     }
 
     handleSubmit = event => {
         event.preventDefault()
-        console.log(this.state)
     }
 
     _next = () => {
@@ -147,7 +145,6 @@ function Step1(props) {
         return null
     }
     if (props.id === "personal") {
-        console.log("risk profile")
     }
     return ( <
         div className = " text-center" > <

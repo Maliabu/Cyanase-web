@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
@@ -51,11 +50,9 @@ function SecondaryUser(props) {
         const value = event.target.value;
         setFormData2({...formData2, [name]: value })
     }
-    console.log(formData)
 
     function onSubmit() {
         formData.profile = formData2
-        console.log(JSON.stringify(formData))
         axios.post(`${API_URL}`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -93,18 +90,13 @@ function SecondaryUser(props) {
                     }
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
-                    console.log(error.response.data.message);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
                     errorSignUp();
                 } else if (error.request) {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
-                    console.log(error.request);
                 } else {
                     // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
                 }
             });
         success();

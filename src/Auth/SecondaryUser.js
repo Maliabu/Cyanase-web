@@ -3,19 +3,20 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/esm/Button';
 import '../App.css';
-import { API_URL } from '../apis';
+import { API_URL,API_URL_GET_AUTH_USER_BY_EMAIL } from '../apis';
 import axios from 'axios';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ValidateForms } from './ValidateForms';
 import PhoneInput from 'react-phone-number-input';
-import { success1, catch_errors, fail, preloader,togglePasswordVisibility } from '../Api/RequestFunctions'
+import { success1, catch_errors, fail, preloader } from '../Api/RequestFunctions'
 
 
 function SecondaryUser(props) {
     const [step, setStep] = useState(1);
     const [valuePhone, setValuePhone] = useState("");
     const [countryInput, setCountryInput] = useState("");
+    const [showpassword,setShowPassword] = useState(false)
     //state for form data
     const [formData2, setFormData2] = useState({
         gender: '',
@@ -64,7 +65,21 @@ function SecondaryUser(props) {
             document.getElementById("errorEmail").style.display = "none"
         }
         if (fname.length !== 0 && lname.length !== 0 && email.length !== 0) {
-            setStep(step + 1)
+            axios.post(`${API_URL_GET_AUTH_USER_BY_EMAIL}`,email,{
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function(response){
+                if(response.data === true){
+                    document.getElementById("errorEmail").style.display = "block"
+                    document.getElementById("errorEmail").style.color = "crimson"
+                    document.getElementById("errorEmail").innerText = "This account already exists, try to login instead"
+                }
+                else{
+                    document.getElementById("errorEmail").style.display = "none"
+                    setStep(step + 1)
+                }
+            })
         }
     }
     const validate2 = () => {
@@ -125,6 +140,9 @@ function SecondaryUser(props) {
         const name = event.target.name;
         const value = event.target.value;
         setFormData2({...formData2, [name]: value })
+    }
+    const togglePassword =()=>{
+        setShowPassword(!showpassword)
     }
     const submitButton = () => {
         if (step === 3) {
@@ -213,10 +231,10 @@ function SecondaryUser(props) {
             div className = 'row justify-content-center bg-lighter p-lg-5 p-3 rounded-4' >
             <
             // col-lg-5 should do the trick for responsiveness
-            form className = 'bg-white p-lg-5 rounded-4 col-lg-5'
+            form className = 'bg-white rounded-4 col-lg-5'
             onSubmit = { handleSubmit(onSubmit) } >
             <
-            div className = 'row justify-center p-lg-3 pt-5 p-sm-12' > <
+            div className = 'row justify-center blue-dark p-4 rounded-top-4 p-sm-12' > <
             h2 className = 'text-center' > SIGNUP < /h2> <
             h6 className = 'text-center' > Register by filling in the following details. < /h6><
             h6 className = 'active text-center' > < b > All fields are Required < /b>  < /
@@ -235,7 +253,9 @@ function SecondaryUser(props) {
             / > <
             Learn3 currentStep = { step }
             change = { handleChange }
-            / > {prevButton()}{nextButton()}{submitButton()}<p className='mt-lg-5 text-center'>Back to <span className='active bolder'>{props.button}</span > < /p>  < /
+            togglePassword = {togglePassword}
+            showpassword = {showpassword}
+            / > {prevButton()}{nextButton()}{submitButton()}<p className='mt-lg-3 text-center'>Back to <span className='active bolder'>{props.button}</span > < /p>  < /
             form > < /div>< /
             React.Fragment >
         );
@@ -248,7 +268,7 @@ function SecondaryUser(props) {
         }
         return ( <
             div > <
-            Form.Group className = " rounded-3 px-3"
+            Form.Group className = " rounded-3 px-3 mt-3"
             controlId = "formBasicDate" >
             <
             Form.Label > < h6 className = 'm-0' > First Name < /h6> < /Form.Label > <
@@ -367,11 +387,11 @@ function SecondaryUser(props) {
         }
         return ( <
             div > <
-            Form.Group className = " rounded-3 px-3"
-            controlId = "formBasicDate" >
+            Form.Group className = " rounded-3 px-3" >
             <
             Form.Label > < h6 className = 'm-0' > Password < /h6> < /Form.Label > <
-            Form.Control type = "password"
+            Form.Control
+            type = {props.showpassword?"text":"password"}
             name = "password"
             onChange = { props.change }
             placeholder = "create a strong password" / > <
@@ -381,11 +401,11 @@ function SecondaryUser(props) {
                 { display: 'none' }
             } > hey < /p> < /
             Form.Group > <
-            Form.Group className = " rounded-3 px-3 my-2"
-            controlId = "formBasicText" >
+            Form.Group className = " rounded-3 px-3 my-2" >
             <
             Form.Label > < h6 className = 'm-0' > Repeat Password < /h6> < /Form.Label > <
-            Form.Control type = "password"
+            Form.Control
+            type = {props.showpassword?"text":"password"}
             name = "confirmpassword"
             onChange = { props.change }
             placeholder = "confirm password" / > <
@@ -396,7 +416,7 @@ function SecondaryUser(props) {
             } > hey < /p><
             div className='my-1'
             key = "default-checkbox" >
-                <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePasswordVisibility}/></div> < /
+                <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={props.togglePassword}/></div> < /
             Form.Group > < /
             div > )
     }

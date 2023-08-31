@@ -30,7 +30,6 @@ class Withdraw extends React.Component {
         this.setState({
             [name]: value
         })
-        console.log(this.state)
     }
     getFee() {
         this.fee = (2 / 100) * this.state.withdraw_amount
@@ -293,9 +292,6 @@ function Step1(props) {
     if (props.currentStep !== 1) {
         return null
     }
-    if (props.id === "personal") {
-        console.log("risk profile")
-    }
     return ( <
         div className = " text-start" > <
         h6 className = "mt-2 text-center" > Choose which investment you wish to withdraw from. < /h6> <
@@ -344,9 +340,6 @@ function Step1(props) {
 function Step2(props) {
     if (props.currentStep !== 2) {
         return null
-    }
-    if (props.id === "personal") {
-        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <

@@ -1,4 +1,4 @@
-import { get } from "lodash"
+
 
 export const preloader = () => {
     document.getElementById("successMessage").innerHTML = "processing..."

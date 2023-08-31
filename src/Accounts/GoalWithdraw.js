@@ -30,7 +30,6 @@ class GoalWithdraw extends React.Component {
         this.setState({
             [name]: value
         })
-        console.log(this.state)
     }
 
     getFee() {
@@ -216,7 +215,6 @@ class GoalWithdraw extends React.Component {
         if (currentStep === 3) {
             let withdrawAmount = this.state.withdraw_amount
             let networth = this.props.networth
-            console.log(networth - withdrawAmount)
             let threshold = 0
             if ((networth - withdrawAmount) < threshold) {
                 return ( <
@@ -299,9 +297,6 @@ function Step1(props) {
     if (props.currentStep !== 1) {
         return null
     }
-    if (props.id === "personal") {
-        console.log("risk profile")
-    }
     return ( <
         div className = " text-start" > <
         h6 className = "mt-2 text-center" > Choose which investment you wish to withdraw from. < /h6> <
@@ -350,9 +345,6 @@ function Step1(props) {
 function Step2(props) {
     if (props.currentStep !== 2) {
         return null
-    }
-    if (props.id === "personal") {
-        console.log("risk profile")
     }
     return ( <
         div className = " text-start" > <

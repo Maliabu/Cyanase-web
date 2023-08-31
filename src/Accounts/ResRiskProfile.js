@@ -12,7 +12,6 @@ const ResRiskProfile = (props) => {
     const handleShow2 = () => setShow2(true);
     useEffect(() => {
         GetRiskProfile().then(res => {
-            console.log(res)
             if (res.status === true) {
                 setComplete("Complete")
             }

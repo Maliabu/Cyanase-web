@@ -17,7 +17,6 @@ class ChangePassword extends Component {
         this.setState({
             [e.target.id]: e.target.value
         });
-        console.log(this.state, this.props);
     };
 
     handleSubmit = (e) => {

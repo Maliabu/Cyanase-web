@@ -41,7 +41,6 @@ class Login extends Component {
         this.setState({
             [e.target.id]: e.target.value
         });
-        console.log(this.state, this.props);
     };
     handleSubmit = (e) => {
         e.preventDefault();
@@ -84,20 +83,15 @@ class Login extends Component {
                     }
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
-                    // console.log(error.response.data);
-                    // console.log(error.response.status);
-                    // console.log(error.response.headers);
                     errorSignUp();
                 } else if (error.request) {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
-                    console.log(error.request);
                     errorDisplay(error);
                     errorSignUp();
                 } else {
                     // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
                     errorSignUp();
                     errorDisplay(error);
                 }
@@ -125,7 +119,6 @@ class Login extends Component {
                     errorDisplay(response);
                     errorSignUp()
                 }
-                console.log(response)
                     // window.location.pathname = "/"
             });
         this.success();

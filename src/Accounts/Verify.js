@@ -28,7 +28,6 @@ class VerifyEmail extends Component {
         this.setState({
             [e.target.id]: e.target.value
         });
-        console.log(this.state, this.props);
     };
 
     handleSubmit = (e) => {
@@ -80,12 +79,10 @@ class VerifyEmail extends Component {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
-                    console.log(error.request);
                     errorDisplay(error);
                     errorSignUp();
                 } else {
                     // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
                     errorSignUp();
                     errorDisplay(error);
                 }

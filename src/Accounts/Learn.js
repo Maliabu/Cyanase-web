@@ -5,7 +5,6 @@ import Logo from '../images/CI.png'
 import Home from '../App/Home'
 
 const Learn = (props) => {
-    console.log(props);
     const Learn4 = () => {
         return ( <
             div className = "mt-3 p-5 text-center" > <
