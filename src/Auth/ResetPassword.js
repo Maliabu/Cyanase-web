@@ -10,6 +10,7 @@ import Logo from '../images/CIPNG.png'
 import { useSearchParams } from "react-router-dom";
 
 function ResetPassword(props) {
+    const [showpassword,setShowPassword] = useState(false)
     let [searchParams] = useSearchParams();
     let email = searchParams.get("email")
     let ref = searchParams.get("ref")
@@ -32,6 +33,9 @@ function ResetPassword(props) {
         } else {
             return "no"
         }
+    }
+    const togglePassword =()=>{
+        setShowPassword(!showpassword)
     }
     const handleSubmit = (e) => {
         preloader()
@@ -82,11 +86,11 @@ function ResetPassword(props) {
         h6 > <
         /
         div > <
-        Form.Group className = "my-1 px-lg-5"
+        Form.Group className = "my-1 px-lg-3"
         controlId = "formBasicPassword" >
         <
         Form.Label > < h6 className='m-0'> Password < /h6> < /Form.Label > <
-        Form.Control type = "password"
+        Form.Control type = {showpassword?"text":"password"}
         name = "password"
         onChange = { handleChange }
         placeholder = "your password here" / > <
@@ -96,10 +100,10 @@ function ResetPassword(props) {
             { display: 'none' }
         } > hey < /p> < /
         Form.Group > <
-        Form.Group className = "mb-3 px-lg-5" >
+        Form.Group className = "mb-3 px-lg-3" >
         <
         Form.Label > < h6 className='m-0'> Confirm Password < /h6> < /Form.Label > <
-        Form.Control type = "password"
+        Form.Control type = {showpassword?"text":"password"}
         name = "confirmpassword"
         onChange = { handleChange }
         placeholder = "repeat your password" / > <
@@ -110,7 +114,7 @@ function ResetPassword(props) {
         } > hey < /p><
         div className='my-1'
         key = "default-checkbox" >
-            <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={props.togglePassword}/></div> < /
+            <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePassword}/></div> < /
         Form.Group ><
         div className = 'row justify-content-center' > <
         Button variant = "warning"

@@ -1,6 +1,6 @@
 import env from "react-dotenv";
-const server = process.env.SERVER_IP
-const port = process.env.SERVER_PORT
+const server = env.SERVER_IP
+const port = env.SERVER_PORT
 export const API_URL = "http://"+server+":"+port+"/api/v1/en/register/user/";
 export const API_URL_DEPOSIT = "http://"+server+":"+port+"/api/v1/en/make/deposit/";
 export const API_URL_BANK_WITHDRAW = "http://"+server+":"+port+"/api/v1/en/make/bank/withdraw/";
