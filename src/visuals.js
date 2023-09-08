@@ -2,8 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Chart from 'react-apexcharts';
-import { deposits,groupedData1 } from './data/deposits';
-import { withdraws } from './data/withdraw';
+import { deposits,groupedData1,cummulative } from './data/deposits';
+import { withdraws,groupedData3 } from './data/withdraw';
 
 const Visuals = () => {
     const values = []
@@ -85,7 +85,6 @@ const Visuals = () => {
                 total:sum
             });
         }
-    
         return result;
     }, []);
     
@@ -98,7 +97,47 @@ const Visuals = () => {
     groupedData.forEach(yearData => {
     yearData.total = yearData.data.reduce((total, monthData) => total + monthData.y, 0);
     total += yearData.total
-});
+    });
+    // for withdraws
+    const groupedData2 = withdraws.reduce((result, entry) => {
+        const { date, updated, withdraw } = entry;
+        const existingYear = result.find(item => item.name === date);
+        let sum = 0
+    
+        if (existingYear) {
+            const existingMonth = existingYear.data.find(item => item.x === updated);
+            if (existingMonth) {
+                existingMonth.y.push(Number(withdraw));
+            } else {
+                existingYear.data.push({
+                    x:updated,
+                    y: [Number(withdraw)]
+                });
+            }
+        } else {
+            result.push({
+                name:date,
+                data: [{
+                    x:updated,
+                    y: [Number(withdraw)]
+                }],
+                total:sum
+            });
+        }
+        return result;
+    }, []);
+    
+    groupedData2.forEach(yearData => {
+        yearData.data.forEach(monthData => {
+            monthData.y = monthData.y.reduce((total, value) => total + value, 0);
+        });
+    });
+    console.log(JSON.stringify(groupedData2))
+    let total1 = 0
+    groupedData2.forEach(yearData => {
+    yearData.total = yearData.data.reduce((total, monthData) => total + monthData.y, 0);
+    total1 += yearData.total
+    });
     
     // console.log(JSON.stringify(groupedData, null, 4));
     const deposit = {
@@ -137,6 +176,32 @@ const Visuals = () => {
             curve: 'smooth',
         }
     }
+    const cummulatives = {
+        options: {
+            chart: {
+                id: 'apexchart-example'
+            },
+            xaxis: {
+                name: '2023',
+                title: {
+                    text: 'Deposits per year'
+                },
+                categories: result.map(d=>d.updated),
+                // categories: ['jun', 'jul', 'aug'],
+            },
+            yaxis: {
+                title: {
+                    text: 'Deposit Amount in UGX'
+                }
+            },
+            colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
+
+        },
+        series: cummulative,
+        stroke: {
+            curve: 'smooth',
+        }
+    }
     const withdrawal = {
         options: {
             chart: {
@@ -157,23 +222,26 @@ const Visuals = () => {
             colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
 
         },
-        series: [{
-            data: valuesW
-        }],
-        xaxis: {
-            categories: datesW
-        },
-        // series: [2, 60, 4],
+        series: groupedData3,
         stroke: {
             curve: 'smooth',
         }
     }
     return ( <
-        div className = 'p-lg-5 p-3' >
+        div className = 'p-lg-4 p-3' >
         <
-        h1 className = 'p-lg-5 p-3' > Cyanase Data Visuals
+        h1 className = 'p-lg-4 p-3' > Cyanase Data Visuals
         for deposits, withdraws and user activity < /h1><
-        h2 className = 'p-lg-5 p-2 active bolder' > Deposit Activity < /h2><
+        h2 className = 'p-lg-5 p-2 active bolder' > Cummulative Investment Activity < /h2> <
+        Chart options = { cummulatives.options }
+        series = { cummulatives.series }
+        className = "w-100"
+        type = "area"
+        height = { 500 }
+        /><
+        h3 className = 'bolder text-center my-5' > Total Investments in UGX: < h2 className = 'font-lighter' > 3,579,097.5 < /h2>   < /
+        h3 ><
+        h2 className = 'p-lg-4 p-2 active bolder' > Deposit Activity < /h2><
         div className = 'bg-lighter p-2 p-lg-3' > <
         Chart options = { deposit.options }
         series = { deposit.series }
@@ -203,7 +271,7 @@ const Visuals = () => {
         <
         h3 className = 'bolder text-center my-5' > Total Deposit Amount in UGX: < h2 className = 'font-lighter' > { total.toLocaleString() } < /h2>  < /
         h3 > <
-        h2 className = 'p-lg-5 active bolder' > Withdraw Activity < /h2><
+        h2 className = 'p-lg-4 active bolder' > Withdraw Activity < /h2><
         div className = 'bg-lighter p-lg-3' > <
         Chart options = { withdrawal.options }
         series = { withdrawal.series }
@@ -223,7 +291,7 @@ const Visuals = () => {
         h3 className = 'bolder text-center' > { howManyWithdraw } < /h3></div >
         <
         /div> <
-        h3 className = 'bolder text-center my-5' > Total Withdraw Amount in UGX: < h2 className = 'font-lighter' > { wwithdraw() } < /h2>   < /
+        h3 className = 'bolder text-center my-5' > Total Withdraw Amount in UGX: < h2 className = 'font-lighter' > { wwithdraw().toLocaleString() } < /h2>   < /
         h3 > < /
         div >
     );
