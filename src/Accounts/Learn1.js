@@ -364,7 +364,7 @@ function Step3(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        Form.Group className = "mb-3 bg-white p-5" >
         <
         Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
         Form.Control type = "number"

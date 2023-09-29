@@ -232,14 +232,14 @@ const Visuals = () => {
         <
         h1 className = 'p-lg-4 p-3' > Cyanase Data Visuals
         for deposits, withdraws and user activity < /h1><
-        h2 className = 'p-lg-5 p-2 active bolder' > Cummulative Investment Activity < /h2> <
+        h2 className = 'px-lg-5 p-2 active bolder' > Cummulative Investment Activity < /h2> <
         Chart options = { cummulatives.options }
         series = { cummulatives.series }
         className = "w-100"
         type = "area"
         height = { 500 }
         /><
-        h3 className = 'bolder text-center my-5' > Total Investments in UGX: < h2 className = 'font-lighter' > 3,579,097.5 < /h2>   < /
+        h3 className = 'bolder text-center my-2' > Total Investments in UGX: < h2 className = 'font-lighter' > 3,579,097.5 < /h2>   < /
         h3 ><
         h2 className = 'p-lg-4 p-2 active bolder' > Deposit Activity < /h2><
         div className = 'bg-lighter p-2 p-lg-3' > <

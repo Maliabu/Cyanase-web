@@ -153,7 +153,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     }
     const pendingWithdraws = () => {
         if (withdraws.length === 0) {
-            return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+            return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                 Image size = "large"
                 set = "broken"
                 className = 'mx-2 grey-text' / > <

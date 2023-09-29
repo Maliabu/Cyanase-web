@@ -121,7 +121,7 @@ const Personal = ({...props }) => {
         const myInvestments = () => {
             let nextResult = results.reverse()
             if (results.length === 0) {
-                return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+                return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"
                     set = "broken"
                     className = 'mx-2 grey-text' / > <
@@ -149,7 +149,7 @@ const Personal = ({...props }) => {
             }
             const myRecentActivity = () => {
                 if (deposits.length === 0) {
-                    return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+                    return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                         Image size = "large"
                         set = "broken"
                         className = 'mx-2 grey-text' / > <
@@ -348,7 +348,7 @@ const Personal = ({...props }) => {
                     <
                     Offcanvas show = { show1 }
                 placement = "end"
-                className = "side-barsy pt-5"
+                className = "side-barsy bg-white pt-5"
                 onHide = { handleClose1 } {...props } > <
                     Goal1 close1 = { handleClose1 }
                 name = { holdName }
