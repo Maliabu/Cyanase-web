@@ -35,12 +35,12 @@ const RiskProfile = ({ id, activeTab, children }) => {
         <
         /div> <
         div className = "col-6 p-5 text-center" > <
-        div className = "row p-3 bg-white rounded-4" >
+        div className = "row p-4 bg-white rounded-4" >
         <
-        h4 className = "active bolder" > Investor Risk Profile < /h4>  <
+        h4 className = "bolder" > Investor Risk Profile < /h4>  <
         Activity size = "xlarge"
         set = "broken"
-        className = 'my-5 active' / >
+        className = 'my-3 active' / >
         <
         h6 >
         The risk profile is intended to grade and check how much you can accommodate an investment risk.The information you provide here is strictly
