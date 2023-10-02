@@ -7,9 +7,6 @@ import { getCurrency } from "../payment/GetCurrency";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import GoalCreate from "../payment/GoalCreate";
-import { API_URL_GOAL,TOKEN } from "../apis";
-import { catch_errors,fail,success,preloader } from "../Api/RequestFunctions";
-import axios from "axios";
 
 function Goal1(props) {
     const [step, setStep] = useState(1)
@@ -74,34 +71,13 @@ function Goal1(props) {
     }
     formData.account_type = getAccountType()
 
-    function onSubmit() {
-                            preloader()
-                            axios.post(`${API_URL_GOAL}`, formData, {
-                                    headers: {
-                                        "Content-Type": "multipart/form-data",
-                                        'Accept': 'application/json',
-                                        "Authorization": `Token ${ TOKEN }`
-                                    }
-                                })
-                                .catch(function(error) {
-                                    catch_errors(error)
-                                })
-                                .then(function(response) {
-                                    if (!response) {
-                                        fail("Something went wrong...")
-                                    } else if (response.status === 200 && response.data.success === false) {
-                                        fail(response.data.message)
-                                    } else {
-                                        success("You have created your goal successfully", "/home", "successful");
-                                    }
-                                });
-    }
+    function onSubmit() {}
 
     /*
      * the functions for our button
      */
     const submitButton = () => {
-        if (step === 12) {
+        if (step === 11) {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
@@ -115,7 +91,6 @@ function Goal1(props) {
                     { display: 'none' }
                 } > hey < /h6>   <
                 Button variant = "warning"
-                onClick={()=>onSubmit()}
                 className = 'shadow text-center'
                 id = 'successMessage'
                 type = "button" >
@@ -127,17 +102,7 @@ function Goal1(props) {
         return null
     }
     const nextButton = () => {
-        let payment_means = formData.payment_means;
-        if (step === 11 && payment_means === "offline") {
-            return ( <
-                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
-                type = "button"
-                onClick = { _next } >
-                Continue <
-                /h6>        
-            )
-        }
-        if (step === 12) {
+        if (step === 11) {
             return null
         }
         if (step < 13) {

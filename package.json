@@ -64,6 +64,6 @@
         "webpack-cli": "^5.1.4"
     },
     "react-dotenv": {
-        "whitelist": ["SERVER_IP","SERVER_PORT"]
+        "whitelist": ["SERVER_IP","SERVER_PORT","SERVER"]
     }
 }

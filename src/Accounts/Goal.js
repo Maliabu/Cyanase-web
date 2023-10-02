@@ -46,6 +46,9 @@ function Goal(props) {
         let created = (props.created).slice(0, 10)
         let percent = 100
         let progress = (percent - ((goalAmount - deposit) / goalAmount * percent)).toFixed(2)
+        if (goalNetworth === undefined){
+            goalNetworth = 0
+        }
         return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNetworth]
     }
     const { handleSubmit } = useForm();
@@ -340,7 +343,7 @@ function Step0(props) {
         <
         /
         div > <
-        div className = "row mt-2 p-3 border-top border-bottom" >
+        div className = "row mt-2 p-3 bg-lighter rounded-4" >
         <
         div className = "col p-2" >
         <

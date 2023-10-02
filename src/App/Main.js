@@ -85,6 +85,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         })
     }, []);
     let depositTotal = 0
+    console.log(span)
     span.map(goal => (
         depositTotal += parseInt(goal.deposit[0])
     ))

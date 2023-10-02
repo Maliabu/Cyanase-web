@@ -290,9 +290,9 @@ const Personal = ({...props }) => {
                     h6 className = "px-5 py-3 mt-3 bk-warning text-center rounded-3"
                 onClick = { handleShow1 } >
                     New Goal < /h6>  <
-                div className = " p-1 pb-5 mb-5" > {
+                div className = " p-1 pb-5 scroll-y" > {
                     span.map(goal => ( <
-                        div className = "p-4 shadow-sm res-home rounded-4 mt-3"
+                        div className = "p-3 shadow-sm res-home rounded-4 mt-3"
                         key = { goal.goal_id } > <
                         div className = "d-flex flex-row flex" > <
                         span className = "mt-1" > <
