@@ -1,5 +1,6 @@
 import { MainRequests, PersonalRequests, Networth, UserRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Carousel } from 'react-bootstrap';
 import '../App.css';
 import React, { useState, useEffect } from "react";
 import Deposit from "./Deposit";
@@ -29,6 +30,7 @@ const ResHome = (props) => {
     const [withdrawSetting, setWithdrawSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [deposit, setDeposit] = useState(0);
+    const [index, setIndex] = useState(0);
     const [dollar, setDollar] = useState(0);
     const [graph, setGraph] = useState([])
     const [country, setCountry] = useState([])
@@ -162,6 +164,32 @@ const ResHome = (props) => {
         // update the state to tab2
         setActiveTab1("tab13");
     };
+    const myInvestments = () => {
+        let nextResult = result.reverse()
+        if (result.length === 0) {
+            return(
+                <div><p>no data</p></div>
+            )
+        } else{
+            return(
+                nextResult.map(option=>(
+                    <div className="carousel-item"><p className='bolder'>Your Investment Classes</p>
+                </div>
+                ))
+            )
+        }
+    }
+    function summ(array) {
+        let sum = 0
+        array.forEach(item => {
+            sum = sum + item
+        });
+        return sum
+    }
+      
+    const handleSelect = (selectedIndex) => {
+          setIndex(selectedIndex);
+    }
     const Main = () => {
         return ( < div className = 'p-1 bg-lighter res-home' > < div className = "bg-white text-dark p-2 rounded-4" >
             <
@@ -177,11 +205,61 @@ const ResHome = (props) => {
             className = "rounded-circle object-fit-cover mx-2 mt-2 img-head"
             alt = "investors" / > < /
             div >
+            <div className='p-2 d-none'>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner bg-lighter rounded-3 p-3">
+                        {
+                            result.reverse().map((option, index)=>(
+                                <div className={index === 0 ? "carousel-item active":"carousel-item"}><
+                        div className = "row text-dark" >
+                        <
+                        div className = "col-6" > < h6 className = "bolder" > { option.name } < /h6> < /
+                        div >
+                        <
+                        div className = "col" > < h6 className = "bolder active" > Rate: {
+                            (option.data).length
+                        } < /h6> < /div > <
+                        div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
+                            (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
+                        } < /h6> < /div > < /
+                        div ></div>
+                            ))
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only d-none">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only d-none">Next</span>
+  </a>
+                </div>
+            </div>
+            <div className='p-4 mt-2 bg-light rounded-4'>
+            <Carousel touch={true} interval={null} controls={false}>
+                {
+                    result.map((option, index)=>(
+                        <Carousel.Item>
+                            <div className='row text-dark'>
+                                <div className='col-6'><p className='bolder'>{option.name}</p></div>
+                                <
+                        div className = "col" > < h6 className = "bolder active" > Rate: {
+                            (option.data).length
+                        } < /h6> < /div > <
+                        div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
+                            (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
+                        } < /h6> < /div >
+                            </div>
+                        </Carousel.Item>
+                    ))
+                }
+            </Carousel></div>
             <
-            div className = 'row mt-3' > <
+            div className = 'row' > <
             div className = 'col text-start' > <
-            p className = ' mx-3 mt-3 bolder' > Statistics < /p > < /div > <
-            div className = 'col' >
+            p className = ' mx-3 mt-2' > Your Investments < /p > < /div > <
+            div className = 'col d-none' >
             <
             div className = 'd-flex justify-content-end mx-1' > < TimeCircle size = "medium"
             set = 'broken'
@@ -229,7 +307,7 @@ const ResHome = (props) => {
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networth.toFixed(2) } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
+            h2 className = "px-1 font-lighter" > { networth } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
             onClick = {
                 () => { setWithdrawSetting(true) }
             } >

@@ -178,7 +178,7 @@ body::-webkit-scrollbar {
 }
 
 .blue-darks {
-    background: -webkit-linear-gradient(right, #161735f3, #161836f4), url("images/Group\ 3577.png");
+    background: -webkit-linear-gradient(right, #161735, #161836d9), url("images/_.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     color: whitesmoke !important;

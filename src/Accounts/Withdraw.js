@@ -214,7 +214,14 @@ class Withdraw extends React.Component {
             if ((networth - withdrawAmount) < threshold) {
                 return ( <
                     h6 className = "status p-2 rounded-3" >
-                    You cannot withdraw more than you have <
+                    You cannot withdraw more than you have. Your networth might not have matured yet. Try again later <
+                    /h6>
+                )
+            }
+            if ((networth - withdrawAmount) === threshold) {
+                return ( <
+                    h6 className = "status p-2 rounded-3" >
+                    You cannot withdraw 0 {this.state.currency} <
                     /h6>
                 )
             }

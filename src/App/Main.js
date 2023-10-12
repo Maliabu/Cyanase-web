@@ -63,6 +63,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setGraph(res[4]); // array deposits
             setDates(res[5])
             setDepositNetworth(res[7])
+            console.log(res)
         })
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
@@ -78,7 +79,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setEmail(res.email)
         });
         Networth().then(res => {
-            setDeposit(res[1])
+            setDeposit(res)
+            console.log(res)
         });
         PendingWithdrawRequests().then(res => {
             setWithdraw(res)
@@ -188,7 +190,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { deposit.toLocaleString() } < /h2></div >
+            h2 className = "px-2 font-lighter" > { totalDeposit } < /h2></div >
             <
             img src = { Deposit }
             className = "pt-2 d-none"
@@ -226,7 +228,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { networth.toLocaleString() } < /h2></div >
+            h2 className = "px-2 font-lighter" > { deposit } < /h2></div >
             <
             img src = { Networths }
             className = "pt-2"
