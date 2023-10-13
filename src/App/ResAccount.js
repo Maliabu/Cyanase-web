@@ -5,6 +5,7 @@ import Photo from '../Accounts/photo'
 import ChangeDetails from '../Accounts/ChangeDetails'
 import { ArrowLeftSquare, Call, Camera, Message, User } from "react-iconly";
 import Subscribe from '../Accounts/Subscribe'
+import { PROFILE_PHOTO } from '../apis';
 
 const ResAccount = (props) => {
     const [firstName, setFirstName] = useState("")
@@ -48,7 +49,7 @@ const ResAccount = (props) => {
         <
         div className = " px-5 text-center" > <
         // img src = "http://127.0.0.1:8000/static/photo.png"
-        img src = "https://cyanase.lol/static/photo.png"
+        img src = {PROFILE_PHOTO}
         className = "rounded-circle object-fit-cover mt-2 img-back"
         alt = "investors" / > <
         p className = " text-center rounded-3 mt-3 p-2"

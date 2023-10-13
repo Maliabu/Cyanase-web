@@ -11,6 +11,7 @@ import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
 import Api from '../Accounts/primaryUser';
 import Notify from '../Accounts/Notify';
+import { PROFILE_PHOTO } from '../apis';
 import TabContent from "../Accounts/TabContent";
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
@@ -202,7 +203,7 @@ const ResHome = (props) => {
             span className = "px-1" > pick up where you left off < /span></span > < /p>< /
             div > <
             // img src = "http://127.0.0.1:8000/static/photo.png"
-            img src = "https://cyanase.lol/static/photo.png"
+            img src = {PROFILE_PHOTO}
             className = "rounded-circle object-fit-cover mx-2 mt-2 img-head"
             alt = "investors" / > < /
             div >

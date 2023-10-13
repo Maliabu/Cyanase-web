@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import ResLearn1 from '../Accounts/ResLearn1';
 import Learn1 from '../Accounts/Learn1';
 import './style.scss';
+import { PROFILE_PHOTO } from "../apis";
 import Depo from '../images/depo.png'
 import { Wallet } from "react-iconly";
 import { GetRiskProfile, UserRequests } from "../Api/MainRequests";
@@ -165,7 +166,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = 'col-2' > <
         // img src = "http://127.0.0.1:8000/static/photo.png"
-        img src = "https://cyanase.lol/static/photo.png"
+        img src = {PROFILE_PHOTO}
         className = "rounded-circle object-fit-cover mt-2 img-head"
         alt = "investors" / > < /div> < /
         div > <

@@ -3,6 +3,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import ResAccount from './ResAccount';
+import { PROFILE_PHOTO } from '../apis';
 import ResNotifications from '../Accounts/ResNotifications';
 import ResContactUs from '../Accounts/ResContactUs';
 import ResFAQs from '../Accounts/ResFAQs';
@@ -56,7 +57,7 @@ const ResSettings = ({ id, activeTab, children }) => {
         <
         div className = 'col-2' > <
         // img src = "http://127.0.0.1:8000/static/photo.png"
-        img src = "https://cyanase.lol/static/photo.png"
+        img src = {PROFILE_PHOTO}
         className = "rounded-circle object-fit-cover mt-2 img-head"
         alt = "investors" / > < /div> < /
         div >

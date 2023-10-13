@@ -4,6 +4,7 @@ import './style.scss';
 import { PendingWithdrawRequests } from '../Api/MainRequests';
 import React, { useState, useEffect } from "react";
 import { FaLightbulb } from 'react-icons/fa';
+import { PROFILE_PHOTO } from '../apis';
 import { Image, Filter } from 'react-iconly';
 
 const ResWithdraws = () => {
@@ -51,7 +52,7 @@ const ResWithdraws = () => {
                 <
                 div className = 'col-2' > <
                 // img src = "http://127.0.0.1:8000/static/photo.png"
-                img src = "https://cyanase.lol/static/photo.png"
+                img src = {PROFILE_PHOTO}
                 className = "rounded-circle object-fit-cover mt-2 img-head"
                 alt = "investors" / > < /div> < /
                 div >

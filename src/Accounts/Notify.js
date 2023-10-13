@@ -2,6 +2,7 @@ import { MainRequests } from "../Api/MainRequests";
 import React, { useEffect, useState } from "react";
 import '../App.css';
 import { FaLightbulb } from "react-icons/fa";
+import { PROFILE_PHOTO } from "../apis";
 import { Image, Filter } from "react-iconly";
 
 
@@ -66,7 +67,7 @@ const Notify = () => {
                 <
                 div className = 'col-2' > <
                 // img src = "http://127.0.0.1:8000/static/photo.png"
-                img src = "https://cyanase.lol/static/photo.png"
+                img src = {PROFILE_PHOTO}
                 className = "rounded-circle object-fit-cover mt-2 img-head"
                 alt = "investors" / > < /div> < /
                 div >

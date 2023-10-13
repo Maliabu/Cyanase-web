@@ -15,6 +15,7 @@ import TabContent from "../Accounts/TabContent";
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
 import Saccos from '../Accounts/Saccos';
+import { PROFILE_PHOTO } from '../apis';
 import Clubs from '../Accounts/Clubs';
 import ResWithdraws from './ResWithdraws'
 import ResHome from './ResHome';
@@ -58,7 +59,7 @@ const ResGoals = () => {
             <
             div className = 'col-2' > <
             // img src = "http://127.0.0.1:8000/static/photo.png"
-            img src = "https://cyanase.lol/static/photo.png"
+            img src = {PROFILE_PHOTO}
             className = "rounded-circle object-fit-cover mt-2 img-head"
             alt = "investors" / > < /div> < /
             div > <
