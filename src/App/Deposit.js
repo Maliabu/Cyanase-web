@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import ResLearn1 from '../Accounts/ResLearn1';
 import Learn1 from '../Accounts/Learn1';
-import './style.scss';
+import './style.scss'; 
 import { PROFILE_PHOTO } from "../apis";
 import Depo from '../images/depo.png'
 import { Wallet } from "react-iconly";
