@@ -201,7 +201,8 @@ const ResHome = (props) => {
             span className = " justify-content-center" > <
             span className = "px-1" > pick up where you left off < /span></span > < /p>< /
             div > <
-            img src = "http://127.0.0.1:8000/static/photo.png"
+            // img src = "http://127.0.0.1:8000/static/photo.png"
+            img src = "https://cyanase.lol/static/photo.png"
             className = "rounded-circle object-fit-cover mx-2 mt-2 img-head"
             alt = "investors" / > < /
             div >
