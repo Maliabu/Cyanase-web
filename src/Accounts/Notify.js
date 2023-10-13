@@ -65,7 +65,8 @@ const Notify = () => {
                 div >
                 <
                 div className = 'col-2' > <
-                img src = "http://127.0.0.1:8000/static/photo.png"
+                // img src = "http://127.0.0.1:8000/static/photo.png"
+                img src = "https://cyanase.lol/static/photo.png"
                 className = "rounded-circle object-fit-cover mt-2 img-head"
                 alt = "investors" / > < /div> < /
                 div >

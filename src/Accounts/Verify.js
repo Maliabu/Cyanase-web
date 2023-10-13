@@ -115,6 +115,7 @@ class VerifyEmail extends Component {
                  */
                 document.getElementById("guest").innerHTML = response.data.user.first_name
                     // history.pushState(response.data.user, 'success', 'https://localhost/8000/api/')
+                // window.location.href = 'https://localhost/8000/api/';
                 window.location.href = 'https://localhost/8000/api/';
             });
         this.success();

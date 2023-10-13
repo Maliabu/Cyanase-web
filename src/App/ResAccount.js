@@ -47,7 +47,8 @@ const ResAccount = (props) => {
 
         <
         div className = " px-5 text-center" > <
-        img src = "http://127.0.0.1:8000/static/photo.png"
+        // img src = "http://127.0.0.1:8000/static/photo.png"
+        img src = "https://cyanase.lol/static/photo.png"
         className = "rounded-circle object-fit-cover mt-2 img-back"
         alt = "investors" / > <
         p className = " text-center rounded-3 mt-3 p-2"
