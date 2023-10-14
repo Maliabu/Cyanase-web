@@ -1,10 +1,6 @@
-import env from "react-dotenv";
-// const server = env.SERVER_IP
-// const port = env.SERVER_PORT
+
 const server = "cyanase.lol"
-// const server = "34.135.168.124"
 // const server = "127.0.0.1:8000" 
-// export const API_URL = "https://"+server+":"+port+"/api/v1/en/register/user/";
 export const API_URL = "https://"+server+"/api/v1/en/register/user/";
 export const API_URL_DEPOSIT = "https://"+server+"/api/v1/en/make/deposit/";
 export const API_URL_BANK_WITHDRAW = "https://"+server+"/api/v1/en/make/bank/withdraw/";
