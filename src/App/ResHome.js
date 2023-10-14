@@ -406,9 +406,9 @@ const ResHome = (props) => {
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
         /><h6 className='bolder'>Home</h6>< /div > <
-        div className = 'text-center mx-2' >
+        div className = 'text-center mx-3' >
         <
-        TabNavItem title = { < span > < FaFlagCheckered size = "23"
+        TabNavItem title = { < span > < FaFlagCheckered size = "24"
             set = 'broken'
             className = 'mt-2' / > < /span>
         }
@@ -493,7 +493,7 @@ const TabNavItem = ({ id, activeTab, title, setActiveTab1 }) => {
     const handleClick = () => {
         setActiveTab1(id);
     };
-    return ( < div className = "px-3 tab-nav" >
+    return ( < div className = "px-2 tab-nav" >
         <
         span onClick = { handleClick }
         className = { activeTab === id ? "activer" : "" } > { title } < /
