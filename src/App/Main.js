@@ -79,7 +79,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setEmail(res.email)
         });
         Networth().then(res => {
-            setDeposit(res)
+            setDeposit(res[1])
             console.log(res)
         });
         PendingWithdrawRequests().then(res => {

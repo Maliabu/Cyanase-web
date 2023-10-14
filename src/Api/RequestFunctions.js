@@ -37,7 +37,7 @@ export const success1 = (message, successMessage) => {
     }, 4000);
 }
 export const fail = (error) => {
-    document.getElementById("successMessage").innerHTML = "Something went wrong"
+    document.getElementById("successMessage").innerHTML = "Unsuccessful"
     document.getElementById("successMessage").style.backgroundColor = "red"
     document.getElementById("successMessage").style.color = "white"
     document.getElementById("errorMessage").innerText = error
@@ -48,8 +48,10 @@ export const fail = (error) => {
         document.getElementById("errorMessage").style.display = 'none'
     }, 6000);
     setTimeout(() => {
-        document.getElementById("successMessage").innerHTML = "Unsuccessful"
-    }, 2000);
+        document.getElementById("successMessage").innerHTML = "Submit"
+        document.getElementById("successMessage").style.backgroundColor = "orange"
+        document.getElementById("successMessage").style.color = "black"
+    }, 7000);
 }
 export const catch_errors = (error) => {
     if (error.response) {

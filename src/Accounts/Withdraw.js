@@ -11,7 +11,7 @@ class Withdraw extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentStep: 1,
+            currentStep: 2,
             withdraw_amount: 0,
             withdraw_category: "",
             currency: getCurrency(this.props.country),
@@ -212,17 +212,17 @@ class Withdraw extends React.Component {
             let networth = this.props.networth
             let threshold = 0
             if ((networth - withdrawAmount) < threshold) {
-                return ( <
+                return ( <div className="px-5"><
                     h6 className = "status p-2 rounded-3" >
                     You cannot withdraw more than you have. Your networth might not have matured yet. Try again later <
-                    /h6>
+                    /h6></div>
                 )
             }
             if ((networth - withdrawAmount) === threshold) {
-                return ( <
+                return ( <div className="px-5"><
                     h6 className = "status p-2 rounded-3" >
                     You cannot withdraw 0 {this.state.currency} <
-                    /h6>
+                    /h6></div>
                 )
             }
             return ( <
@@ -258,16 +258,16 @@ class Withdraw extends React.Component {
         return ( <
             React.Fragment >
             <
-            form className = "p-5 text-center"
+            form className = "text-center"
             onSubmit = { this.handleSubmit } > {
                 /* 
                           render the form steps and pass required props in
                         */
-            } <
-            FaHandHoldingUsd className = "rounded-circle warning p-2"
+            }<div className="blue-dark p-3 rounded-top-3"><h3 className="bolder mt-2">Withdraw</h3></div> <
+            FaHandHoldingUsd className = "rounded-circle d-none warning p-2"
             size = "40" / > < br / >
             <
-            h2 className = "bolder" > Withdraw < /h2> <
+            h2 className = "bolder d-none" > Withdraw < /h2> <
             Step1 currentStep = { this.state.currentStep }
             withdraw_category = { this.state.withdraw_category }
             handleChange = { this.handleChange }
@@ -350,8 +350,8 @@ function Step2(props) {
     }
     return ( <
         div className = " text-start" > <
-        h6 className = "mt-2 text-center" > Choose your payment means. < /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
+        h6 className = "mt-2 text-center" > Choose your withdraw means. < /h6> <
+        div className = "p-4"
         key = "radio" >
         <
         div key = { `default-radio` }
@@ -433,7 +433,7 @@ function Step3(props) {
         return null
     }
     return ( <
-        div className = "text-center" > <
+        div className = "text-center p-4" > <
         h6 className = "mt-2" > How much would you like to Withdraw from your account ? < /h6>  <
         Form.Group className = "mb-3 p-3" >
         <

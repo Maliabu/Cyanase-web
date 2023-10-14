@@ -11,6 +11,7 @@ import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
+import { options } from "./InvestmentOps";
 
 function Learn1(props) {
     const globalRefId = "";
@@ -20,7 +21,7 @@ function Learn1(props) {
         "deposit_amount": 0,
         "currency": getCurrency(props.country),
         "investment_option": props.option,
-        "deposit_category": "",
+        "deposit_category": "personal",
         "account_type": "",
         "reference": "",
         "reference_id": 0,
@@ -32,6 +33,7 @@ function Learn1(props) {
         const value = event.target.value;
         setFormData({...formData, [name]: value });
     };
+    console.log(formData)
 
     const getTotalDeposit = () => {
         let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
@@ -130,7 +132,7 @@ function Learn1(props) {
     const nextButton = () => {
         let payment_means = formData.payment_means;
         let deposit_category = formData.deposit_category
-        if (step === 1 && deposit_category === "personal investment") {
+        if (step === 1 && deposit_category === "personal") {
             return ( <
                 h6 className = "py-3 mx-5 text-center warning rounded-3"
                 type = "button"
@@ -171,17 +173,18 @@ function Learn1(props) {
     return ( <
         React.Fragment >
         <
-        form className = "p-4 text-center"
+        form className = "text-center"
         onSubmit = { handleSubmit(onSubmit) } > {
             /* 
                       render the form steps and pass required props in
                     */
-        } <
-        Wallet className = "rounded-circle warning p-2"
+        } <div className="blue-dark p-3 rounded-top-3"><h3 className="bolder mt-2">Deposit</h3></div>
+        <
+        Wallet className = "d-none rounded-circle warning p-2"
         size = "xlarge" / > < br / > <
         img src = { DepositPic }
         width = '25%'
-        className = "my-3"
+        className = "my-3 d-none"
         height = '80%'
         alt = "investors" / > <
         Step1 currentStep = { step }
@@ -239,13 +242,13 @@ function Step1(props) {
         return null
     }
     return ( <
-        div className = " text-start" > <
-        h6 className = "mt-2 text-center" > Choose where you wish to make your deposit. < /h6> <
-        div className = "p-3 rounded-4 mt-3"
+        div className = "bg-white p-3 text-dark" > <
+        h6 className = "text-center" > Choose where you wish to make your deposit (Investment Class) < /h6> <
+        div className = "p-3 rounded-4 "
         key = "radio" >
         <
         div key = { `default-radio` }
-        className = "mb-3" >
+        className = "mb-3 d-none" >
         <
         h5 className = "font-lighter" > PERSONAL INVESTMENT < /h5> <
         Form.Check label = "I wish to deposit to my Personal Account. Basic or Dollar Account"
@@ -278,11 +281,26 @@ function Step1(props) {
         <
         /
         div > < /div >  <
-        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
+        h6 className = "bolder d-none p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
         h6 > <
-        h6 className = "py-3 rounded-3 bk-warning text-center"
+        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Unit Trusts < /span> < /
+        h6 > <
+        h6 className = "py-3 d-none rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
-        Edit my Risk Profile before deposit < /h6> < /
+        Edit my Risk Profile before deposit < /h6> 
+        <
+        Form.Select className = "my-3"
+        required defaultValue = "Select an investment option"
+        onChange = { props.handleChange }
+        name = "investment_option" > {
+            options.map(option => {
+                return <
+                    option value = { option.name }
+                id = "investmentOption" ><h6>{ option.name }</h6> < /option>
+            })
+        } < /
+        Form.Select >
+        < /
         div >
     );
 }
@@ -294,7 +312,7 @@ function Step2(props) {
     return ( <
         div className = " text-start" > <
         h6 className = "mt-2 text-center" > Choose your payment means. < /h6> <
-        div className = "p-5 px-3 rounded-25 mt-3"
+        div className = "p-4 rounded-4"
         key = "radio" >
         <
         div key = { `default-radio` }
@@ -364,9 +382,9 @@ function Step3(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-        Form.Group className = "mb-3 bg-white p-5" >
+        Form.Group className = "mb-3 bg-white p-4" >
         <
-        Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
+        Form.Label >< h6 className = 'm-0' > Amount to Deposit in { props.currency } < /h6>< /Form.Label>  <
         Form.Control type = "number"
         onChange = { props.handleChange }
         name = "deposit_amount"
@@ -389,8 +407,8 @@ function Step4(props) {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > Continue to deposit < /h6>   <
-            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
-            h4 > < /
+            h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h5 > < /
             div >
         )
     }
@@ -398,8 +416,8 @@ function Step4(props) {
         return ( <
             div className = "text-center" >
             <
-            h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
-            h4 >
+            h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h5 >
             <
             Checkout phone = { props.phone } // here the checkout form is rendered after which it returns response
             country = { props.country }
@@ -431,28 +449,28 @@ function Step5(props) {
             div className = "text-center" > <
             h4 className = "bolder my-3" > Make an Offline Deposit < /h4> <
             h6 className = "mt-2" > Procedure < /h6>   <
-            h4 className = "py-5 font-lighter" > Deposit < span className = "bolder" > { props.currency } < /span>: <span className="bolder">{ props.total_deposit} </span >
+            h5 className = "p-4" > Deposit < span className = "bolder" > { props.currency } < /span>: <span className="bolder">{ props.total_deposit} </span >
             to our bank account and proceed to send us your deposit receipt < /
-            h4 >
+            h5 >
             <
-            div className = "row" >
+            div className = "row p-4" >
             <
             div className = "col-5 text-start" >
             <
-            h5 className = "bolder" > Bank name < /h5> <
-            h5 className = "bolder" > Account number < /h5> <
-            h5 className = "bolder" > SWIFT CODE < /h5>  <
-            h5 className = "bolder" > Account name < /h5>< /
+            h5 className = "bolder border-bottom" > Bank name < /h5> <
+            h5 className = "bolder border-bottom" > Account number < /h5> <
+            h5 className = "bolder border-bottom" > SWIFT CODE < /h5>  <
+            h5 className = "bolder border-bottom" > Account name < /h5>< /
             div > <
             div className = "col-7 text-start" >
             <
-            h5 className = "font-lighter" > DIAMOND TRUST BANK < /h5>  <
-            h5 className = "font-lighter" > 0190514001 < /h5> <
-            h5 className = "font-lighter" > DTKEUGKAXXX < /h5><
-            h5 className = "font-lighter" > CYANASE TECHNOLOGY AND INVESTMENT LTD < /h5> < /
+            h5 className = "font-lighter border-bottom" > DIAMOND TRUST BANK < /h5>  <
+            h5 className = "font-lighter border-bottom" > 0190514001 < /h5> <
+            h5 className = "font-lighter border-bottom" > DTKEUGKAXXX < /h5><
+            h5 className = "font-lighter border-bottom" > CYANASE TECHNOLOGY AND INVESTMENT LTD < /h5> < /
             div > <
             /div>  <
-            h6 className = "my-5" > Send your deposit receipt to our Email: <
+            h6 className = "p-4 status my-3" > Send your deposit receipt to our Email: <
             span className = "bolder active" > < u > 'deposit@cyanase.com' < /u> < /span > < /h6>  < /
             div >
         )

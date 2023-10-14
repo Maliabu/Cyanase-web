@@ -10,7 +10,7 @@ import { ArrowLeftSquare } from 'react-iconly';
 const ResWithdraw = (props) => {
     return ( < div className = 'p-1 res-home' > < div >
         <
-        div className = 'row p-2 px-3' > <
+        div className = 'row d-none p-2 px-3' > <
         div className = 'col-10 bg-lighter rounded-4' > <
         h4 className = ' mx-3 bolder mt-3' > Withdraw < /h4 > < /div >
         <
@@ -28,7 +28,7 @@ const ResWithdraw = (props) => {
         alt = "investors" / > < /div> < /
         div >
         <
-        div className = 'd-flex mt-2 d-none' > < FaLightbulb size = "35"
+        div className = 'd-flex my-2 d-none' > < FaLightbulb size = "35"
         className = 'mt-3 mx-2 p-2 rounded-circle light-res-home text-warning' / >
         <
         div className = 'rounded-4 light-res-home wider' >
@@ -45,7 +45,7 @@ const ResWithdraw = (props) => {
         onClick = {
             () => { props.changeWithdrawSetting(false) }
         }
-        className = "mt-1 mx-2" / >
+        className = "my-3 mx-2" / >
         <
         Withdraw / >
         <

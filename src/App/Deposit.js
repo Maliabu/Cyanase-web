@@ -8,7 +8,7 @@ import Learn1 from '../Accounts/Learn1';
 import './style.scss'; 
 import { PROFILE_PHOTO } from "../apis";
 import Depo from '../images/depo.png'
-import { Wallet } from "react-iconly";
+import { Wallet, ArrowLeftSquare} from "react-iconly";
 import { GetRiskProfile, UserRequests } from "../Api/MainRequests";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
@@ -151,9 +151,14 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         div > < /
         div > < /
         div > < /div> <
-        div className = "d-block d-sm-none" >
+        div className = "d-block d-sm-none py-3" ><
+        ArrowLeftSquare size = { 30 }
+        onClick = {
+            () => { props.handletab1() }
+        }
+        className = "my-3 mx-2" / >
         <
-        div className = 'row p-2 px-3' > <
+        div className = 'row d-none p-2 px-3' > <
         div className = 'col-10 bg-lighter rounded-4' > <
         h4 className = ' mx-3 bolder mt-3' > Deposit < /h4 > < /div >
         <

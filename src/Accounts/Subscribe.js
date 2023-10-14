@@ -86,13 +86,13 @@ function Subscribe(props) {
     return ( <
         React.Fragment >
         <
-        form className = "p-5 text-center" > {
+        form className = "text-center" > {
             /* 
                       render the form steps and pass required props in
                     */
-        } <
-        User className = "rounded-circle warning p-2"
-        size = "xlarge" / > < br / > < h5 className = "bolder" > Your Subscription < /h5> <
+        } <div className="blue-dark p-3 rounded-top-3"><h3 className="bolder mt-2">Your Subscription</h3></div><
+        User className = "rounded-circle d-none warning p-2"
+        size = "xlarge" / > < br / > < h5 className = "bolder d-none" > Your Subscription < /h5> <
         Step1 currentStep = { step }
         handleChange = { handleChange }
         subStatus = { props.substatus }
@@ -120,8 +120,8 @@ function Step1(props) {
     }
     return ( <
         div className = " text-start" > <
-        h6 className = "mt-5 text-center" > This is a yearly fee of $5.Your account subscription becomes overdue after 30 days from account creation afterwhich you are required to pay your subscription. < /h6>  <
-        h6 className = ' p-2 text-center my-5' > Account Status: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3' > { props.subStatus } < /span>  < /
+        h6 className = "p-5 text-center" > This is a yearly fee of $5.Your account subscription becomes overdue after 30 days from account creation afterwhich you are required to pay your subscription. < /h6>  <
+        h6 className = 'status text-center p-3 mb-5' > Account Status: < span className = 'status p-2 px-3 mx-2 rounded-3' > { props.subStatus } < /span>  < /
         h6 >
         <
         /

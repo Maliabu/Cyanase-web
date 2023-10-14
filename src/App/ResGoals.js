@@ -1,11 +1,11 @@
-import { PersonalRequests } from '../Api/MainRequests';
+import { PersonalRequests,UserRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './style.scss';
 import React, { useState, useEffect } from "react";
 import Deposit from "./Deposit";
 import Sacco from './Sacco';
-import { FaLightbulb } from 'react-icons/fa';
+import { FaFlag, FaLightbulb } from 'react-icons/fa';
 import Club from './Club';
 import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
@@ -24,11 +24,13 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import { Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
 import Goal1 from '../Accounts/Goal1'
+import ResGoals1 from './ResGoals1'
 
 const ResGoals = () => {
     const [activeTab, setActiveTab1] = useState("tab2");
     const [goalSetting, setGoalSetting] = useState(false);
     const [span, setSpan] = useState([])
+    const [country, setCountry] = useState("")
     const [holdId, setHoldId] = useState("");
     const [holdName, setHoldName] = useState("");
     const [holdAmount, setHoldAmount] = useState("");
@@ -41,6 +43,9 @@ const ResGoals = () => {
         PersonalRequests().then(res => {
             setSpan(res[2]); // array(14)
         });
+        UserRequests().then(res=>{
+            setCountry(res.profile.country)
+        })
     }, []);
     //  Functions to handle Tab Switching
     if (goalSetting) {
@@ -67,7 +72,8 @@ const ResGoals = () => {
             onClick = {
                 () => { setGoalSetting(false) }
             }
-            className = "mt-1 mx-2" / > < Goal1 changeGoalSetting = { setGoalSetting }
+            className = "mt-1 mx-2" / > < ResGoals1 changeGoalSetting = { setGoalSetting }
+            country = { country }
             / > < /
             div >
         )
@@ -117,8 +123,7 @@ const ResGoals = () => {
         setHoldCreated(created)
         handleShow3()
     }
-    const Main = (props) => {
-        let progress
+    let progress
         return ( < div className = 'p-1 res-home' > < div >
             <
             div className = 'row p-2 px-3' > <
@@ -198,6 +203,7 @@ const ResGoals = () => {
             dialogClassName = "" > <
             Goal id = { holdId }
             name = { holdName }
+            country = {country}
             amount = { holdAmount }
             deposit = { holdDeposit }
             created = { holdCreated }
@@ -212,105 +218,5 @@ const ResGoals = () => {
             /
             div >
         )
-    };
-    return ( <
-        div >
-
-        <
-        div className = 'd-flex rounded-4 flex-row w-100 text-dark d-block justify-content-center bg-lighter bottom-nav' >
-        <
-        div className = ' py-3 text-center' > <
-        TabNavItem title = { < span > < Home size = "20"
-            className = 'mt-2' / > < /span>
-        }
-        onClick = { handleTab1 }
-        id = "tab1"
-        className = "twitter"
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 }
-        />< /div > <
-        div className = ' py-3 text-center mx-3' >
-        <
-        TabNavItem title = { < span > < Download size = "20"
-            set = 'broken'
-            className = 'mt-2' / > < /span>
-        }
-        onClick = { handleTab6 }
-        id = "tab6"
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } > < /
-        TabNavItem > < /
-        div > <
-        div className = ' py-3 text-center' >
-        <
-        TabNavItem title = { < span > < Wallet size = "20"
-            set = 'broken'
-            className = 'mt-2' / > < /span>
-        }
-        onClick = { handleTab5 }
-        id = "tab5"
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } > < span > hi < /span> < /
-        TabNavItem > < /
-        div > <
-        div className = ' py-3 text-center mx-3' >
-        <
-        TabNavItem title = { < span > < Notification size = "20"
-            className = 'mt-2' / > < /span>
-        }
-        onClick = { handleTab3 }
-        id = "tab7"
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 }
-        />  < /
-        div >
-        <
-        div className = ' py-3 text-center' >
-        <
-        TabNavItem title = { < span > < Setting size = "20"
-            className = 'mt-2' / > < /span>
-        }
-        onClick = { handleTab3 }
-        id = "tab8"
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 }
-        />  < /
-        div > < /
-        div > <
-        TabContent id = "tab1"
-        activeTab = { activeTab } > < ResHome parentCallback1 = { handleTab1 }
-        / > < /TabContent > <
-        TabContent id = "tab2"
-        activeTab = { activeTab } > < Main / > < /TabContent> <
-        TabContent id = "tab3"
-        activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 }
-        / > < /TabContent > <
-        TabContent id = "tab4"
-        activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }
-        / > < /TabContent > <
-        TabContent id = "tab5"
-        activeTab = { activeTab } > < Deposit / > < /TabContent><
-        TabContent id = "tab6"
-        activeTab = { activeTab } > < ResWithdraws / > < /TabContent> <
-        TabContent id = "tab7"
-        activeTab = { activeTab } > < Notify / > < /TabContent> <
-        TabContent id = "tab8"
-        activeTab = { activeTab } > < ResSettings / > < /TabContent><
-        TabContent id = "tab9"
-        activeTab = { activeTab } > < RiskProfile / > < /TabContent> <
-        TabContent id = "tab10"
-        activeTab = { activeTab } > < FAQs / > < /TabContent><
-        TabContent id = "tab11"
-        activeTab = { activeTab } > < Api / > < /TabContent><
-        TabContent id = "tab12"
-        activeTab = { activeTab } > < Saccos / > < /TabContent> <
-        TabContent id = "tab13"
-        activeTab = { activeTab } > < Clubs / > < /TabContent><
-        TabContent id = "tab15"
-        activeTab = { activeTab } > < ContactUs / > < /TabContent> < /
-        div >
-    );
 };
 export default ResGoals;

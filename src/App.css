@@ -178,7 +178,7 @@ body::-webkit-scrollbar {
 }
 
 .blue-darks {
-    background: -webkit-linear-gradient(right, #161735, #161836d9), url("images/_.jpeg");
+    background: -webkit-linear-gradient(right, #161735, #161836be), url("images/Premium\ Photo\ _\ Businessman\ hand\ pointing\ finger\ to\ growth\ success\ finance\ business\ chart\ of\ metaverse\ technology\ financial\ graph\ investment\ diagram\ on\ analysis\ stock\ market\ background\ with\ digital\ economy\ exchange_.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     color: whitesmoke !important;
@@ -373,8 +373,10 @@ button {
 .bottom-nav {
     z-index: 1;
     bottom: 0%;
-    padding-bottom: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     position: fixed;
+    width: 100%;
 }
 
 .p-bar {

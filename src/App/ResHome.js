@@ -11,7 +11,7 @@ import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
 import Api from '../Accounts/primaryUser';
 import Notify from '../Accounts/Notify';
-import { PROFILE_PHOTO } from '../apis';
+import Goal1 from '../Accounts/Goal1'
 import TabContent from "../Accounts/TabContent";
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
@@ -22,7 +22,7 @@ import Ad from '../images/Group 212.png';
 import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
-import { FaLightbulb } from 'react-icons/fa';
+import { FaFlagCheckered, FaLightbulb } from 'react-icons/fa';
 import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download } from 'react-iconly';
 
 const ResHome = (props) => {
@@ -203,7 +203,7 @@ const ResHome = (props) => {
             span className = "px-1" > pick up where you left off < /span></span > < /p>< /
             div > <
             // img src = "http://127.0.0.1:8000/static/photo.png"
-            img src = {PROFILE_PHOTO}
+            img src = {props.profile}
             className = "rounded-circle object-fit-cover mx-2 mt-2 img-head"
             alt = "investors" / > < /
             div >
@@ -278,7 +278,7 @@ const ResHome = (props) => {
             div className = 'blue-darks d-flex rounded-4' >
             <
             span className = 'text-center rounded-4 wide-60' > <
-            p className = "bolder mt-3" > < Wallet size = "medium"
+            p className = "bolder mt-2" > < Wallet size = "medium"
             className = 'text-warning d-none' /
             >
             <
@@ -302,7 +302,7 @@ const ResHome = (props) => {
             div className = 'blue-darks mt-2 d-flex rounded-4' >
             <
             span className = ' rounded-4 wide-60 mx-1' > <
-            p className = "bolder mt-3 text-center" > < Work size = "15"
+            p className = "bolder mt-2 text-center" > < Work size = "15"
             set = 'broken'
             className = 'text-warning d-none' /
             >
@@ -390,9 +390,9 @@ const ResHome = (props) => {
         div >
 
         <
-        div className = 'd-flex flex-row text-dark rounded-right rounded-4 d-block justify-content-center bg-lighter bottom-nav' >
+        div className = 'd-flex flex-row text-dark rounded-top-4 d-block justify-content-center bg-lighter bottom-nav' >
         <
-        div className = ' py-3 text-center' > <
+        div className = ' text-center' > <
         TabNavItem title = { < span > < Home size = "20"
             set = 'broken'
             className = 'mt-2' /
@@ -405,20 +405,20 @@ const ResHome = (props) => {
         className = ""
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        />< /div > <
-        div className = ' py-3 text-center mx-3' >
+        /><h6 className='bolder'>Home</h6>< /div > <
+        div className = 'text-center mx-2' >
         <
-        TabNavItem title = { < span > < Download size = "20"
+        TabNavItem title = { < span > < FaFlagCheckered size = "23"
             set = 'broken'
             className = 'mt-2' / > < /span>
         }
-        onClick = { handleTab2 }
-        id = "tab2"
+        onClick = { handleTab3 }
+        id = "tab7"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } > < /
-        TabNavItem > < /
+        setActiveTab1 = { setActiveTab1 }
+        /> <h6 className='bolder'>Goals</h6> < /
         div > <
-        div className = ' py-3 text-center' >
+        div className = 'text-center' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
             set = 'broken'
@@ -427,23 +427,21 @@ const ResHome = (props) => {
         onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } > < /
-        TabNavItem > < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='bolder'>Deposit</h6> < /
         div > <
-        div className = ' py-3 text-center mx-3' >
+        div className = 'text-center mx-3' >
         <
-        TabNavItem title = { < span > < Notification size = "20"
+        TabNavItem title = { < span > < Download size = "20"
             set = 'broken'
             className = 'mt-2' / > < /span>
         }
-        onClick = { handleTab3 }
-        id = "tab7"
+        onClick = { handleTab2 }
+        id = "tab2"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 }
-        />  < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='bolder'>Withdraws</h6> < /
         div >
         <
-        div className = ' py-3 text-center' >
+        div className = 'text-center' >
         <
         TabNavItem title = { < span > < Setting size = "20"
             set = 'broken'
@@ -453,7 +451,7 @@ const ResHome = (props) => {
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        />  < /
+        /> <h6 className='bolder'>Settings</h6> < /
         div > < /
         div > <
         TabContent id = "tab1"
@@ -470,10 +468,10 @@ const ResHome = (props) => {
         activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }
         / > < /TabContent > <
         TabContent id = "tab5"
-        activeTab = { activeTab } > < Deposit handletab5 = { handleTab5 }
+        activeTab = { activeTab } > < Deposit handletab1 = { handleTab1 }
         / > < /TabContent > <
         TabContent id = "tab7"
-        activeTab = { activeTab } > < Notify / > < /TabContent> <
+        activeTab = { activeTab } > < ResGoals / > < /TabContent> <
         TabContent id = "tab8"
         activeTab = { activeTab } > < ResSettings / > < /TabContent><
         TabContent id = "tab9"

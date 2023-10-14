@@ -63,7 +63,7 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
         }
         className = 'bk-warning active p-3 mx-5 rounded-3 mt-3'
         id = "checkout" >
-        Checkout <
+        Make Payment <
         /h6> < /
         div >
     );

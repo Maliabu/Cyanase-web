@@ -12,12 +12,13 @@ import GoalDeposit from "../payment/GoalDeposit";
 
 function Goal(props) {
     const [step, setStep] = useState(0)
+    let currency = getCurrency(props.country)
     const [formData, setFormData] = useState({
-        "payment_means": '',
+        "payment_means": 'online',
         "deposit_amount": 0,
-        "currency": getCurrency(props.country),
+        "currency": currency,
         "investment_option": "Cash | Venture | Credit",
-        "deposit_category": "",
+        "deposit_category": "personal",
         "account_type": "",
         "goal_id": props.id,
         "reference": "",
@@ -94,7 +95,7 @@ function Goal(props) {
     }
     const submitButton = () => {
         let payment_means = formData.payment_means
-        if (step === 4 && payment_means === "online") {
+        if (step === 2 && payment_means === "online") {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
@@ -144,12 +145,12 @@ function Goal(props) {
         if (step === 0 || step === 7) {
             return null
         }
-        return ( < div > <
-            Wallet className = "rounded-circle warning p-2"
-            size = "xlarge" / > < br / > <
+        return ( < div className="blue-dark rounded-top-3 p-3"><h4 className="bolder">Deposit to: {props.name}</h4> <
+            Wallet className = "rounded-circle d-none warning p-2"
+            size = "xlarge" / ><
             img src = { DepositPic }
             width = '25%'
-            className = "my-3"
+            className = "my-3 d-none"
             height = '80%'
             alt = "investors" / > < /div>
         )
@@ -186,6 +187,9 @@ function Goal(props) {
                 /h6>        
             )
         }
+        if (step === 2) {
+            return null
+        }
         if (step === 4 && payment_means === "offline") {
             return ( <
                 h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
@@ -217,7 +221,7 @@ function Goal(props) {
     return ( <
         React.Fragment >
         <
-        form className = " px-4 py-2 modals rounded-2 text-center"
+        form className = "text-center"
         onSubmit = { handleSubmit } > {
             /* 
                       render the form steps and pass required props in
@@ -238,10 +242,25 @@ function Goal(props) {
         Step1 currentStep = { step }
         deposit_category = { formData.deposit_category }
         handleChange = { handleChange }
+        currency = { formData.currency }
         investmentoption = { props.option }
         /> <
         Step2 currentStep = { step }
         handleChange = { handleChange }
+        payment_means = { formData.payment_means }
+        phone = { props.phone }
+        email = { props.email }
+        name = { props.lastname }
+        country = { props.country }
+        data = { formData }
+        submit = { onSubmit }
+        getCurr = { getCurrency(props.country) }
+        deposit_amount = { formData.deposit_amount }
+        total_deposit = { getTotalDeposit() }
+        fee = {
+            getFee()
+        }
+        currency = { formData.currency }
         />  <
         Step3 currentStep = { step }
         handleChange = { handleChange }
@@ -295,8 +314,8 @@ function Step0(props) {
     if (props.id === "personal") {
     }
     return ( <
-        div className = "py-3" > <
-        div className = "row" >
+        div className = "" > <
+        div className = "row p-3" >
         <
         div className = "col-lg-5 d-none py-lg-5 py-lg-3" >
         <
@@ -343,7 +362,7 @@ function Step0(props) {
         <
         /
         div > <
-        div className = "row mt-2 p-3 bg-lighter rounded-4" >
+        div className = "row mt-2 p-3 bg-lighter" >
         <
         div className = "col p-2" >
         <
@@ -358,8 +377,8 @@ function Step0(props) {
     );
 }
 
-function Step1(props) {
-    if (props.currentStep !== 1) {
+function Step3(props) {
+    if (props.currentStep !== 3) {
         return null
     }
     if (props.id === "personal") {
@@ -410,8 +429,8 @@ function Step1(props) {
     );
 }
 
-function Step2(props) {
-    if (props.currentStep !== 2) {
+function Step4(props) {
+    if (props.currentStep !== 4) {
         return null
     }
     return ( <
@@ -457,8 +476,8 @@ function Step2(props) {
     );
 }
 
-function Step3(props) {
-    if (props.currentStep !== 3) {
+function Step1(props) {
+    if (props.currentStep !== 1) {
         return null
     }
     if (props.payment_means === "wallet") {
@@ -489,7 +508,7 @@ function Step3(props) {
         h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
         Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
         <
-        Form.Label > Amount to Deposit in { props.currency } < /Form.Label>  <
+        Form.Label ><h6 className="m-0">Amount to Deposit in { props.currency }</h6>  < /Form.Label>  <
         Form.Control type = "number"
         onChange = { props.handleChange }
         name = "deposit_amount"
@@ -504,8 +523,8 @@ function Step3(props) {
     );
 }
 
-function Step4(props) {
-    if (props.currentStep !== 4) {
+function Step2(props) {
+    if (props.currentStep !== 2) {
         return null
     }
     if (props.payment_means === "offline") {
@@ -520,8 +539,8 @@ function Step4(props) {
     return ( <
         div className = "text-center" >
         <
-        h4 className = "py-5 font-lighter" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
-        h4 >
+        h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+        h5 >
         <
         GoalDeposit phone = { props.phone }
         country = { props.country }

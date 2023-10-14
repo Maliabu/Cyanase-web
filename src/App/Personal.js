@@ -134,7 +134,7 @@ const Personal = ({...props }) => {
                     nextResult.map(option => ( <
                         div className = "row mt-2 py-3 bg-white rounded-3" >
                         <
-                        div className = "col-4" > < h6 className = "bolder" > { option.name } < /h6> < /
+                        div className = "col-6" > < h6 className = "bolder" > { option.name } < /h6> < /
                         div >
                         <
                         div className = "col" > < h6 className = "bolder active" > Rate: {

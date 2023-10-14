@@ -9,8 +9,10 @@ import { useForm } from "react-hook-form";
 import GoalCreate from "../payment/GoalCreate";
 import { ValidateForms } from "../Auth/ValidateForms";
 
-function Goal1(props) {
+function ResGoals1(props) {
     const [step, setStep] = useState(1)
+    let currency = getCurrency(props.country)
+    console.log(props)
     const [formData, setFormData] = useState({
         "goal_name": '',
         "goal_period": 1,
@@ -20,7 +22,7 @@ function Goal1(props) {
         "deposit_reminder_day": 'Monday',
         "payment_means": 'online',
         "deposit_amount": 0,
-        "currency": getCurrency(props.country),
+        "currency": currency,
         "investment_option": "Cash | Venture | Credit",
         "deposit_category": "personal",
         "account_type": "",
@@ -805,4 +807,4 @@ function Step12(props) {
             div >
         );
     }
-    export default Goal1;
+    export default ResGoals1;
