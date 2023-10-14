@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import React from "react";
 import { Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
@@ -10,11 +11,18 @@ import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { options } from "./InvestmentOps";
+import { UserRequests } from "../Api/MainRequests";
 
 function ResLearn1(props) {
     const globalRefId = "";
     const [step, setStep] = useState(1)
-    let currency = getCurrency(props.country)
+    const [country, setCountry] = useState("")
+    useEffect(() => {
+        UserRequests().then(res => {
+            setCountry(res.profile.country)
+        });
+    }, []);
+    let currency = getCurrency(country)
     const [formData, setFormData] = useState({
         "payment_means": '',
         "deposit_amount": 0,
@@ -27,6 +35,7 @@ function ResLearn1(props) {
         "tx_ref": "CYANASE-TEST-001"
 
     });
+    formData.currency = currency
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;

@@ -405,7 +405,7 @@ const ResHome = (props) => {
         className = ""
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /><h6 className='bolder'>Home</h6>< /div > <
+        /><h6 className='bg-lighter'>Home</h6>< /div > <
         div className = 'text-center mx-3' >
         <
         TabNavItem title = { < span > < FaFlagCheckered size = "24"
@@ -416,7 +416,7 @@ const ResHome = (props) => {
         id = "tab7"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='bolder'>Goals</h6> < /
+        /> <h6 className='bg-lighter'>Goals</h6> < /
         div > <
         div className = 'text-center' >
         <
@@ -427,7 +427,7 @@ const ResHome = (props) => {
         onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='bolder'>Deposit</h6> < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter'>Deposit</h6> < /
         div > <
         div className = 'text-center mx-3' >
         <
@@ -438,7 +438,7 @@ const ResHome = (props) => {
         onClick = { handleTab2 }
         id = "tab2"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='bolder'>Withdraws</h6> < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter'>Withdraws</h6> < /
         div >
         <
         div className = 'text-center' >
@@ -451,7 +451,7 @@ const ResHome = (props) => {
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='bolder'>Settings</h6> < /
+        /> <h6 className='bg-lighter'>Settings</h6> < /
         div > < /
         div > <
         TabContent id = "tab1"
