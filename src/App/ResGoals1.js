@@ -210,7 +210,7 @@ function ResGoals1(props) {
             /* 
                       render the form steps and pass required props in
                     */
-        } < div className = "mt-5 text-center" > <
+        } < div className = "mt-2 text-center" > <
         AddUser className = "border border-dark text-center rounded-circle p-2 mt-5"
         size = "xlarge" / > < /div> <
         Step1 currentStep = { step }

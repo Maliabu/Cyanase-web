@@ -80,7 +80,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
         });
         Networth().then(res => {
             setDeposit(res[1])
-            console.log(res)
         });
         PendingWithdrawRequests().then(res => {
             setWithdraw(res)

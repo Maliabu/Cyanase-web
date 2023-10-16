@@ -10,8 +10,7 @@ import ResWithdraw from './ResWithdraw'
 import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
 import Api from '../Accounts/primaryUser';
-import Notify from '../Accounts/Notify';
-import Goal1 from '../Accounts/Goal1'
+import CLASSES from '../images/classes.png'
 import TabContent from "../Accounts/TabContent";
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
@@ -166,17 +165,33 @@ const ResHome = (props) => {
         setActiveTab1("tab13");
     };
     const myInvestments = () => {
-        let nextResult = result.reverse()
         if (result.length === 0) {
             return(
-                <div><p>no data</p></div>
+                <div className='p-2'>
+                    <img src={CLASSES} alt='classes' width="100%"/>
+                </div>
             )
         } else{
             return(
-                nextResult.map(option=>(
-                    <div className="carousel-item"><p className='bolder'>Your Investment Classes</p>
-                </div>
-                ))
+                <div className='p-4 mt-2 bg-light rounded-4'>
+                <Carousel touch={true} interval={null} controls={false}>
+                    {
+                        result.map((option, index)=>(
+                            <Carousel.Item>
+                                <div className='row text-dark'>
+                                    <div className='col-6'><p className='bolder'>{option.name}</p></div>
+                                    <
+                            div className = "col" > < h6 className = "bolder active" > Rate: {
+                                (option.data).length
+                            } < /h6> < /div > <
+                            div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
+                                (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
+                            } < /h6> < /div >
+                                </div>
+                            </Carousel.Item>
+                        ))
+                    }
+                </Carousel></div>
             )
         }
     }
@@ -186,10 +201,6 @@ const ResHome = (props) => {
             sum = sum + item
         });
         return sum
-    }
-      
-    const handleSelect = (selectedIndex) => {
-          setIndex(selectedIndex);
     }
     const Main = () => {
         return ( < div className = 'p-1 bg-lighter res-home' > < div className = "bg-white text-dark p-2 rounded-4" >
@@ -207,56 +218,7 @@ const ResHome = (props) => {
             className = "rounded-circle object-fit-cover mx-2 mt-2 img-head"
             alt = "investors" / > < /
             div >
-            <div className='p-2 d-none'>
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner bg-lighter rounded-3 p-3">
-                        {
-                            result.reverse().map((option, index)=>(
-                                <div className={index === 0 ? "carousel-item active":"carousel-item"}><
-                        div className = "row text-dark" >
-                        <
-                        div className = "col-6" > < h6 className = "bolder" > { option.name } < /h6> < /
-                        div >
-                        <
-                        div className = "col" > < h6 className = "bolder active" > Rate: {
-                            (option.data).length
-                        } < /h6> < /div > <
-                        div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
-                            (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
-                        } < /h6> < /div > < /
-                        div ></div>
-                            ))
-                        }
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only d-none">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only d-none">Next</span>
-  </a>
-                </div>
-            </div>
-            <div className='p-4 mt-2 bg-light rounded-4'>
-            <Carousel touch={true} interval={null} controls={false}>
-                {
-                    result.map((option, index)=>(
-                        <Carousel.Item>
-                            <div className='row text-dark'>
-                                <div className='col-6'><p className='bolder'>{option.name}</p></div>
-                                <
-                        div className = "col" > < h6 className = "bolder active" > Rate: {
-                            (option.data).length
-                        } < /h6> < /div > <
-                        div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
-                            (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
-                        } < /h6> < /div >
-                            </div>
-                        </Carousel.Item>
-                    ))
-                }
-            </Carousel></div>
+            <div>{myInvestments()}</div>
             <
             div className = 'row' > <
             div className = 'col text-start' > <
