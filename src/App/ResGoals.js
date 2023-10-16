@@ -3,31 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './style.scss';
 import React, { useState, useEffect } from "react";
-import Deposit from "./Deposit";
-import Sacco from './Sacco';
-import { FaFlag, FaLightbulb } from 'react-icons/fa';
-import Club from './Club';
-import ResSettings from './ResSettings';
-import RiskProfile from './RiskProfile';
-import Api from '../Accounts/primaryUser';
-import Notify from '../Accounts/Notify';
-import TabContent from "../Accounts/TabContent";
-import ContactUs from '../Accounts/ContactUs';
-import FAQs from '../Accounts/FAQs';
-import Saccos from '../Accounts/Saccos';
 import { PROFILE_PHOTO } from '../apis';
-import Clubs from '../Accounts/Clubs';
-import ResWithdraws from './ResWithdraws'
-import ResHome from './ResHome';
-import { Home, Notification, Wallet, Setting, AddUser, Download, ArrowLeftSquare } from 'react-iconly';
+import { AddUser, ArrowLeftSquare } from 'react-iconly';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
-import Goal1 from '../Accounts/Goal1'
 import ResGoals1 from './ResGoals1'
 
 const ResGoals = () => {
-    const [activeTab, setActiveTab1] = useState("tab2");
     const [goalSetting, setGoalSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [country, setCountry] = useState("")
@@ -44,14 +27,15 @@ const ResGoals = () => {
             setSpan(res[2]); // array(14)
         });
         UserRequests().then(res=>{
+            console.log(res)
             setCountry(res.profile.country)
         })
     }, []);
     //  Functions to handle Tab Switching
     if (goalSetting) {
-        return ( < div >
+        return ( < div className=''>
             <
-            div className = 'row p-2 px-3' > <
+            div className = 'row d-none p-2 px-3' > <
             div className = 'col-10 bg-lighter rounded-4' > <
             h4 className = ' mx-3 bolder mt-3' > Create New Goal < /h4 > < /div >
             <
@@ -78,42 +62,6 @@ const ResGoals = () => {
             div >
         )
     }
-    const handleTab1 = () => {
-        // update the state to tab1
-        setActiveTab1("tab1")
-    }
-    const handleTab6 = () => {
-        // update the state to tab2
-        setActiveTab1("tab6")
-    }
-    const handleTab3 = () => {
-        // update the state to tab2
-        setActiveTab1("tab3")
-    }
-    const handleTab5 = () => {
-        // update the state to tab2
-        setActiveTab1("tab5")
-    };
-    const handleTab12 = () => {
-        // update the state to tab2
-        setActiveTab1("tab12")
-    };
-    const handleTab13 = () => {
-        // update the state to tab2
-        setActiveTab1("tab13")
-    };
-    const TabNavItem = ({ id, activeTab, title, setActiveTab1 }) => {
-        const handleClick = () => {
-            setActiveTab1(id);
-        };
-        return ( < div className = "px-3 tab-nav lighter" >
-            <
-            h6 onClick = { handleClick }
-            className = { activeTab === id ? "active" : "" } > { title } < /
-            h6 > < /
-            div >
-        )
-    };
 
     function getId(id, name, amount, deposit, created) {
         setHoldId(id)
@@ -123,42 +71,16 @@ const ResGoals = () => {
         setHoldCreated(created)
         handleShow3()
     }
-    let progress
-        return ( < div className = 'p-1 res-home' > < div >
-            <
-            div className = 'row p-2 px-3' > <
-            div className = 'col-10 bg-lighter rounded-4' > <
-            h4 className = ' mx-3 bolder mt-3' > Your Goals < /h4 > < /div >
-            <
-            div className = 'rounded-4 d-none light-res-home wide' >
-            <
-            p className = "bolder text-end mx-4 mt-2" > welcome back user <
-            div className = " justify-content-center" > <
-            p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
-            div >
-            <
-            div className = 'col-2' > <
-            img src = "http://127.0.0.1:8000/static/photo.png"
-            className = "rounded-circle object-fit-cover mt-2 img-head"
-            alt = "investors" / > < /div> < /
-            div >
-            <
-            div className = 'd-flex mt-2 d-none' > < FaLightbulb size = "35"
-            className = 'mt-3 mx-2 p-2 rounded-circle light-res-home text-warning' / >
-            <
-            div className = 'rounded-4 light-res-home wider' >
-            <
-            p className = "bolder mx-4 mt-2" > Tips: <
-            div className = " justify-content-center" > <
-            p className = "px-1 font-lighter" > Dont save your money, invest < /p></div > < /p>< /
-            div > < /
-            div >
-            <
-            /
-            div >
-            <
-            div className = 'bg-lighter p-2 rounded-4' >
-            <
+    const myGoals =()=>{
+        if(span.length === 0){
+            return (
+                <div>
+                    <p className='p-5'>You have no goals yet created</p>
+                </div>
+            )
+        } else {
+            return(
+                <
             div className = "scroll-y2 pb-lg-5 mb-lg-5" > {
                 span.map(goal => ( <
                     div className = "p-4 bg-white res-home rounded-4 mt-3"
@@ -197,7 +119,26 @@ const ResGoals = () => {
                     div >
                 ))
             } <
-            /div>  <
+            /div> 
+            )
+        }
+    }
+
+    let progress
+        return ( < div className = 'p-2' >
+            <
+            div className = 'p-1' ><
+            div className = 'row d-none p-2 px-3' > <
+            div className = 'col-10 bg-lighter rounded-4' > <
+            h4 className = ' mx-3 bolder mt-3' > Your Goals < /h4 > < /div >
+            <
+            div className = 'col-2' > <
+            img src = "http://127.0.0.1:8000/static/photo.png"
+            className = "rounded-circle object-fit-cover mt-2 img-head"
+            alt = "investors" / > < /div> < /
+            div >
+            <div><h4 className='blue-dark p-3 rounded-top-4'>{span.length} Goals</h4>{myGoals()}</div>
+             <
             Modal show = { show3 }
             onHide = { handleClose3 }
             dialogClassName = "" > <

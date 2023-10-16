@@ -296,10 +296,10 @@ body::-webkit-scrollbar {
     color: #ffffff !important;
     cursor: pointer !important;
     background-color: #ffb34f !important;
-    padding: 5px;
-    padding-bottom: 16px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 3px;
+    padding-bottom: 14px;
+    padding-left: 6px;
+    padding-right: 6px;
     border-radius: 50%;
 }
 

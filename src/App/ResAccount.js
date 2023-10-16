@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Modal from 'react-bootstrap/Modal';
-import { UserRequests, SubscriptionRequests } from "../Api/MainRequests";
+import { UserRequests, SubscriptionRequests,GetNextOfKin } from "../Api/MainRequests";
 import Photo from '../Accounts/photo'
 import ChangeDetails from '../Accounts/ChangeDetails'
 import { ArrowLeftSquare, Call, Camera, Message, User } from "react-iconly";
 import Subscribe from '../Accounts/Subscribe'
 import { PROFILE_PHOTO } from '../apis';
+import NKin from '../Accounts/NKin'
 
 const ResAccount = (props) => {
     const [firstName, setFirstName] = useState("")
@@ -13,11 +14,18 @@ const ResAccount = (props) => {
     const [email, setEmail] = useState("")
     const [country, setCountry] = useState("")
     const [show2, setShow2] = useState(false);
+    const [firstNok, setFirstNok] = useState("")
+    const [lastNok, setLastNok] = useState("")
+    const [phoneNok, setPhoneNok] = useState("")
+    const [emailNok, setEmailNok] = useState("")
+    const [show, setShow] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     const [show1, setShow1] = useState(false);
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [show4, setShow4] = useState(false);
     const handleClose4 = () => setShow4(false);
     const [subStatus, setSubStatus] = useState()
@@ -34,6 +42,12 @@ const ResAccount = (props) => {
         SubscriptionRequests().then(res => {
             setSubStatus(res.status)
         })
+        GetNextOfKin().then(res => {
+            setFirstNok(res.kin_first_name)
+            setLastNok(res.kin_last_name)
+            setPhoneNok(res.kin_phone)
+            setEmailNok(res.kin_email)
+        });
     }, []);
     return ( < div >
         <
@@ -132,9 +146,26 @@ const ResAccount = (props) => {
         <
         /
         div > <
-        div className = 'text-end pt-3' > < h6 className = ' p-2 mx-3' > Account Subscription: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
+        div className = 'text-end pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
-        h6 > < /div > <
+        h6 > < /div > 
+        <
+        div className = "p-3 mt-3 rounded-3 warning" >
+        <
+        h5 className = "bolder text-dark py-3" > Next Of Kin Details < /h5>  <
+        h6 > FirstName: < span className = "bolder text-dark" > { firstNok } < /span>  < /
+        h6 > <
+        h6 > LastName: < span className = "bolder text-dark" > { lastNok } < /span>  < /
+        h6 > <
+        h6 > Email: < span className = "bolder text-dark" > { emailNok } < /span>  < /
+        h6 > <
+        h6 > Phone: < span className = "bolder text-dark" > { phoneNok } < /span> < /
+        h6 > < /
+        div >
+        <
+        p className = "bk-warning text-white text-center rounded-3 mt-3 p-2"
+        onClick = { handleShow } > Change Next of Kin < /p>
+        <
         p className = "bg-danger text-white text-center rounded-3 mt-3 p-2"
         onClick = { handleShow2 } > Delete Account < /p> < /
         div >
@@ -148,6 +179,11 @@ const ResAccount = (props) => {
         phone = { phoneNumber }
         / > < /
         Modal > <
+        Modal show = { show }
+        onHide = { handleClose } >
+        <
+        NKin / > < /
+        Modal ><
         /
         div >
         <

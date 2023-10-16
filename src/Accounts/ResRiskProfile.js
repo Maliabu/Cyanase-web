@@ -17,7 +17,7 @@ const ResRiskProfile = (props) => {
             }
         });
     }, []);
-    return ( < div > <
+    return ( < div><div className="p-3"> <
         ArrowLeftSquare size = { 30 }
         className = " m-3 mt-3"
         onClick = {
@@ -64,7 +64,7 @@ const ResRiskProfile = (props) => {
     Modal > < /
     div >
         <
-        /div>
+        /div></div>
 )
 }
 
