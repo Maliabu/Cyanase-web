@@ -178,10 +178,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         return ( <
             div className = "p-lg-3 scroll-y" >
             <
-            div className = " d-none d-lg-block" > <
+            div className = " d-none d-md-block d-lg-block" > <
             div className = "row" >
             <
-            div className = "col-lg-9 rounded-4 col-md-12" >
+            div className = "col-9 rounded-4" >
             <
             div className = 'row p-1 bg-lighter rounded-4' >
             <
@@ -311,13 +311,13 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "row rounded-25 w-100" >
             <
-            div className = "col-lg-8 mt-5" > <
+            div className = "col-8 mt-5" > <
             h4 className = "bolder" > Welcome to Cyanase < /h4>  <
             h6 > Investments products, loans, sacco groups, investment clubs all in one package.Including our API
             for integration < /h6> <h6>What products are you looking for? < /
             h6 > < /
             div > <
-            div className = "col-lg-4 p-lg-5 text-center" >
+            div className = "col-4 p-5 text-center" >
             <
             h6 className = "px-lg-4 py-3 rounded-3 warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
@@ -338,7 +338,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             /
             div > <
-            div className = "col-lg-3 d-none d-sm-block px-2 text-center" >
+            div className = "col-3 d-none d-md-block d-sm-block px-2 text-center" >
             <
             div className = ' px-2 py-3 rounded-4 scroll-y3 bg-lighter' >
             <

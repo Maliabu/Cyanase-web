@@ -123,7 +123,7 @@ const MyHome = () => {
     console.log(profilePicture)
     return ( <
         div ><div className='row'><
-        div className = 'row d-none d-md-block d-lg-none d-md-none shadow-sm' > <
+        div className = 'row d-none shadow-sm' > <
         div className = 'row py-2' >
         <
         div className = 'col-3' > <
@@ -156,7 +156,7 @@ const MyHome = () => {
         /div>   < /
         div >
         <
-        div className = 'col-lg-2 d-none d-lg-block bg-lighter' > <
+        div className = 'col-2 d-none d-md-block d-lg-block bg-lighter' > <
         div > <
         img src = { Header }
         width = '60%'
@@ -318,28 +318,28 @@ const MyHome = () => {
         div > <
         /
         div > <
-        div className = 'col-lg-10 col-md-9 d-none d-lg-block' >
+        div className = 'col-10 d-none d-md-block d-lg-block' >
         <
         div className = "row pt-4 mx-3" >
         <
-        div className = 'col-lg-8 rounded shadow-sm' > <
+        div className = 'col-8 rounded shadow-sm' > <
         h6 className = 'mt-3' > <
         FaLightbulb size = "15"
         className = 'position-relative active' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
-        div className = 'col-lg-1 d-md-none d-lg-block text-center' >
+        div className = 'col-1 d-lg-block text-center' >
         <
         span >
         <
         Notification set = 'broken'
         size = "small"
         onClick = { handleShow3 }
-        className = 'active position-relative my-lg-3' / > <
+        className = 'active position-relative my-3' / > <
         span className = "position-absolute top-15 start-65 translate-middle px-1 d-none blue-dark rounded-pill" > <
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <
-        div className = "col-lg-3 col-10 rounded bg-lighter text-center" >
+        div className = "col-3 rounded bg-lighter text-center" >
         <
         div className = 'flex-row d-flex py-1 my-2 justify-content-center' > <
         TabNavItem title = "API Account"
@@ -426,7 +426,7 @@ const MyHome = () => {
         phone = { phone }
         / > < /
         Modal > </div><
-        div className = "d-block d-lg-none" >
+        div className = "d-block d-lg-none d-md-none" >
         <
         ResHome name = { name } profile = {profilePicture}
         / > < /div > < /
