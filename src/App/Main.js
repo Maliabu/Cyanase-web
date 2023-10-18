@@ -155,10 +155,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
     }
     const pendingWithdraws = () => {
         if (withdraws.length === 0) {
-            return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+            return ( < div className = 'p-lg-5 p-md-3 rounded-4 bg-light text-center grey-text mt-lg-5 mt-md-3' > < div className = 'd-flex flex-row justify-content-center' > <
                 Image size = "large"
                 set = "broken"
-                className = 'mx-2 grey-text' / > <
+                className = 'mx-2 d-none d-lg-block grey-text' / > <
                 Filter size = "large"
                 set = "broken"
                 className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
@@ -176,7 +176,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
 
         }
         return ( <
-            div className = "p-lg-3 scroll-y" >
+            div className = "p-3 scroll-y" >
             <
             div className = " d-none d-md-block d-lg-block" > <
             div className = "row" >
@@ -249,7 +249,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             type = "area"
             height = { 250 }
             /></div > <
-            div className = 'rounded-4 row bg-white p-4' >
+            div className = 'rounded-4 row bg-white p-lg-4 p-md-2' >
             <
             div className = 'col-3' >
             <
@@ -317,9 +317,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             for integration < /h6> <h6>What products are you looking for? < /
             h6 > < /
             div > <
-            div className = "col-4 p-5 text-center" >
+            div className = "col-4 p-lg-5 p-md-3 text-center" >
             <
-            h6 className = "px-lg-4 py-3 rounded-3 warning text-center"
+            h6 className = "px-lg-4 px-md-2 py-3 rounded-3 warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <

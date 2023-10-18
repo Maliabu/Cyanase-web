@@ -231,7 +231,7 @@ function SecondaryUser(props) {
             div className = 'row justify-content-center bg-lighter p-lg-5 p-3 rounded-4' >
             <
             // col-lg-5 should do the trick for responsiveness
-            form className = 'bg-white rounded-4 col-lg-5'
+            form className = 'bg-white rounded-4 col-lg-5 col-md-7'
             onSubmit = { handleSubmit(onSubmit) } >
             <
             div className = 'row justify-center blue-dark p-4 rounded-top-4 p-sm-12' > <

@@ -81,7 +81,7 @@ class Auth extends React.Component {
             div className = 'row py-4 justify-content-center' > < p > <
             img src = { Header }
             width = '10%'
-            className = "mx-lg-5 d-none d-lg-block"
+            className = "mx-5 d-none d-lg-block d-md-block"
             alt = "investors" / > < /p><p><
             img src = { Header }
             width = '40%'

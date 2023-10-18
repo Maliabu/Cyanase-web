@@ -71,7 +71,7 @@ function ResetPassword(props) {
         div > <
         div className = 'row rounded-4 justify-content-center bg-lighter p-5 p-2' >
         <
-        Form className = 'bg-white rounded-4 col-lg-5 pb-3 col-12'
+        Form className = 'bg-white rounded-4 col-lg-5 col-md-7 pb-3 col-12'
         onSubmit = { handleSubmit } >
         <
         div className = 'row justify-content-center blue-dark p-4 rounded-top-4' >

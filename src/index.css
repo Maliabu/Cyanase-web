@@ -92,3 +92,18 @@ input:-internal-autofill-selected {
 /* code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 } */
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 991px) {
+    p,
+h5,
+h6,
+span,input {
+    font-size: 11px !important;
+}
+h6.bg-lighter{
+    font-size: 10px !important;
+}
+h4 {
+    font-size: 15px !important;
+}
+}

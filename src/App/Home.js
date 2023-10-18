@@ -164,7 +164,7 @@ const MyHome = () => {
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-5 py-2 mx-2 blue-dark rounded-4' >
+        div className = 'row my-lg-5 my-md-3 py-2 mx-2 blue-dark rounded-4' >
         <
         div className = 'col-3' >
         <
@@ -181,7 +181,7 @@ const MyHome = () => {
         div > <
         /div> <
         // online change my-5 to my-3
-        div className = 'px-3 my-3 text-start scroll-y2' >
+        div className = 'px-lg-3 px-lg-2 my-3 text-start scroll-y2' >
         <
         h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
         div className = ' py-2 d-flex flex-row' >
@@ -327,7 +327,7 @@ const MyHome = () => {
         FaLightbulb size = "15"
         className = 'position-relative active' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
-        div className = 'col-1 d-lg-block text-center' >
+        div className = 'col-1 d-none d-lg-block text-center' >
         <
         span >
         <
@@ -339,7 +339,7 @@ const MyHome = () => {
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <
-        div className = "col-3 rounded bg-lighter text-center" >
+        div className = "col-lg-3 col-md-4 rounded bg-lighter text-center" >
         <
         div className = 'flex-row d-flex py-1 my-2 justify-content-center' > <
         TabNavItem title = "API Account"
