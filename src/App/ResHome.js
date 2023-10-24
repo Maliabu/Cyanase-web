@@ -22,7 +22,7 @@ import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
 import { FaFlagCheckered, FaHandHoldingUsd, FaLightbulb } from 'react-icons/fa';
-import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download } from 'react-iconly';
+import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download, Star } from 'react-iconly';
 
 const ResHome = (props) => {
     const [activeTab, setActiveTab1] = useState("tab1");
@@ -206,12 +206,20 @@ const ResHome = (props) => {
                     <div className='col-8 text-center'>
                         <div className='row border-0 justify-content-center'>
                             <div className='col p-2 rounded-4 bg-lighter'>
-                                <h6>Treasury Bills</h6>
-                                <h3>10%</h3>
+                            <
+            div className = "d-flex flex-row flex justify-content-center" > <Star size="small" set='bulk' className="active"/> <h6>Treasury Bills</h6></div >
+                            
+                            <
+            div className = "d-flex flex-row flex justify-content-center" >  <
+            h2 className = "px-1" > 12 < /h2>< p> % < /p></div >
                             </div>
                             <div className='col p-2 rounded-4 bg-lighter'>
-                                <h6>Unit Trusts</h6>
-                                <h3>12%</h3>
+                            <
+            div className = "d-flex flex-row flex justify-content-center" > <Star size="small" className="active" set="bulk"/> <h6>Unit Trusts</h6></div >
+                            
+                            <
+            div className = "d-flex flex-row flex justify-content-center" >  <
+            h2 className = "px-1" > 10 < /h2>< p> % < /p></div >
                             </div>
                         </div>
                     </div>
