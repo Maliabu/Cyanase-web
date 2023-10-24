@@ -201,17 +201,17 @@ const ResHome = (props) => {
                 <div className='p-2 px-3'>
                 <div className='p-2 bg-light rounded-4 row justify-content-center'>
                     <div className='col-4 p-2'>
-                        <h6 className='bolder'>Top Investment class Performance Rates</h6>
+                        <h6 className='bolder'>Top Investment classes Performance Rates</h6>
                     </div>
-                    <div className='col-8 bk-warnings text-center rounded-3 p-2'>
+                    <div className='col-8 text-center'>
                         <div className='row border-0 justify-content-center'>
-                            <div className='col'>
+                            <div className='col p-2 rounded-4 bg-lighter'>
                                 <h6>Treasury Bills</h6>
-                                <h3>35%</h3>
+                                <h3>10%</h3>
                             </div>
-                            <div className='col'>
+                            <div className='col p-2 rounded-4 bg-lighter'>
                                 <h6>Unit Trusts</h6>
-                                <h3>93%</h3>
+                                <h3>12%</h3>
                             </div>
                         </div>
                     </div>
@@ -285,7 +285,7 @@ const ResHome = (props) => {
 
             <
             div className = '' > {myInvestmentsGraph()}</div > <
-            div className = 'blue-darks mt-2 d-flex rounded-4' >
+            div className = 'blue-darks d-flex rounded-4' >
             <
             span className = ' rounded-4 wide-60 mx-1' > <
             p className = "bolder mt-2 text-center" > < Work size = "15"
