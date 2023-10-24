@@ -16,7 +16,6 @@ import Main from './Main';
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
 import Saccos from '../Accounts/Saccos';
-import { PROFILE_PHOTO } from '../apis';
 import Clubs from '../Accounts/Clubs';
 import Header from '../images/Group 3525.png';
 import Profile from '../images/Ellipse 6.png';
@@ -120,7 +119,6 @@ const MyHome = () => {
         // update the state to tab2
         setActiveTab("tab15");
     };
-    console.log(profilePicture)
     return ( <
         div ><div className='row'><
         div className = 'row d-none shadow-sm' > <

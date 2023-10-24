@@ -291,6 +291,12 @@ body::-webkit-scrollbar {
     background-color: #ffb34f !important;
     box-shadow: 2px 3px 5px #4141418e;
 }
+.bk-warnings {
+    background: -webkit-linear-gradient(right,#ffffffd7, #ffd8a6, #ffffffd7), url("images/Premium\ Photo\ _\ Businessman\ hand\ pointing\ finger\ to\ growth\ success\ finance\ business\ chart\ of\ metaverse\ technology\ financial\ graph\ investment\ diagram\ on\ analysis\ stock\ market\ background\ with\ digital\ economy\ exchange_.jpeg");
+    background-repeat: no-repeat;
+    border: none !important;
+    background-size: cover;
+}
 
 .activer {
     color: #ffffff !important;

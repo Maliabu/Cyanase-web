@@ -21,7 +21,7 @@ import Ad from '../images/Group 212.png';
 import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
-import { FaFlagCheckered, FaLightbulb } from 'react-icons/fa';
+import { FaFlagCheckered, FaHandHoldingUsd, FaLightbulb } from 'react-icons/fa';
 import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download } from 'react-iconly';
 
 const ResHome = (props) => {
@@ -166,10 +166,10 @@ const ResHome = (props) => {
     };
     const myInvestments = () => {
         if (result.length === 0) {
-            return(
-                <div className='p-2'>
-                    <img src={CLASSES} alt='classes' width="100%"/>
-                </div>
+            return(null
+                // <div className='p-2'>
+                //     <img src={CLASSES} alt='classes' width="100%"/>
+                // </div>
             )
         } else{
             return(
@@ -192,6 +192,36 @@ const ResHome = (props) => {
                         ))
                     }
                 </Carousel></div>
+            )
+        }
+    }
+    const myInvestmentsGraph = () => {
+        if (result.length === 0) {
+            return(
+                <div className='p-2 px-3'>
+                <div className='p-2 bg-light rounded-4 row justify-content-center'>
+                    <div className='col-4 p-2'>
+                        <h6 className='bolder'>Top Investment class Performance Rates</h6>
+                    </div>
+                    <div className='col-8 bk-warnings text-center rounded-3 p-2'>
+                        <div className='row border-0 justify-content-center'>
+                            <div className='col'>
+                                <h6>Treasury Bills</h6>
+                                <h3>35%</h3>
+                            </div>
+                            <div className='col'>
+                                <h6>Unit Trusts</h6>
+                                <h3>93%</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div></div>
+            )
+        } else{
+            return(
+                <div className='p-2'>
+                    <img src={CLASSES} alt='classes' width="100%"/>
+                </div>
             )
         }
     }
@@ -254,13 +284,7 @@ const ResHome = (props) => {
             div >
 
             <
-            div className = '' > <
-            Chart options = { options.options }
-            series = { options.series }
-            className = "w-100 bg-white rounded-3 mt-2"
-            type = "area"
-            height = { 200 }
-            /></div > <
+            div className = '' > {myInvestmentsGraph()}</div > <
             div className = 'blue-darks mt-2 d-flex rounded-4' >
             <
             span className = ' rounded-4 wide-60 mx-1' > <

@@ -79,6 +79,7 @@ class Withdraw extends React.Component {
     handleSubmit = () => {
         preloader()
         let form_data = new FormData();
+        form_data.state.currency = getCurrency(this.props.country)
         form_data.append('withdraw_channel', this.state.withdraw_channel);
         form_data.append('currency', this.state.currency);
         form_data.append('withdraw_category', this.state.withdraw_category);

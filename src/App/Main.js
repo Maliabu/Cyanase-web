@@ -63,7 +63,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setGraph(res[4]); // array deposits
             setDates(res[5])
             setDepositNetworth(res[7])
-            console.log(res)
         })
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
@@ -86,7 +85,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
         })
     }, []);
     let depositTotal = 0
-    console.log(span)
     span.map(goal => (
         depositTotal += parseInt(goal.deposit[0])
     ))
