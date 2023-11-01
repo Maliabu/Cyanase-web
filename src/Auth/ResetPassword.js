@@ -69,7 +69,7 @@ function ResetPassword(props) {
     }
     return ( <
         div > <
-        div className = 'row rounded-4 justify-content-center bg-lighter p-5 p-2' >
+        div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-4' >
         <
         Form className = 'bg-white rounded-4 col-lg-5 col-md-7 pb-3 col-12'
         onSubmit = { handleSubmit } >
