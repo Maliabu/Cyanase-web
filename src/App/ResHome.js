@@ -21,8 +21,8 @@ import Ad from '../images/Group 212.png';
 import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
-import { FaFlagCheckered, FaHandHoldingUsd, FaLightbulb } from 'react-icons/fa';
-import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download, Star } from 'react-iconly';
+import { FaFlagCheckered, FaHandHoldingUsd, FaLightbulb, FaUserClock } from 'react-icons/fa';
+import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download, Star, AddUser } from 'react-iconly';
 
 const ResHome = (props) => {
     const [activeTab, setActiveTab1] = useState("tab1");
@@ -386,9 +386,9 @@ const ResHome = (props) => {
         <
         div className = 'd-flex flex-row text-dark rounded-top-4 d-block justify-content-center bg-lighter bottom-nav' >
         <
-        div className = ' text-center' > <
+        div className = ' text-center grey-text' > <
         TabNavItem title = { < span > < Home size = "20"
-            set = 'broken'
+            set = 'bulk'
             className = 'mt-2' /
             >
             <
@@ -400,10 +400,10 @@ const ResHome = (props) => {
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
         /><h6 className='bg-lighter pt-1 '>Home</h6>< /div > <
-        div className = 'text-center mx-3' >
+        div className = 'text-center mx-4 grey-text' >
         <
-        TabNavItem title = { < span > < FaFlagCheckered size = "24"
-            set = 'broken'
+        TabNavItem title = { < span > < AddUser size = "24"
+            set = 'bulk'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab3 }
@@ -412,10 +412,10 @@ const ResHome = (props) => {
         setActiveTab1 = { setActiveTab1 }
         /> <h6 className='bg-lighter pt-1'>Goals</h6> < /
         div > <
-        div className = 'text-center' >
+        div className = 'text-center grey-text' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
-            set = 'broken'
+            set = 'bulk'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab5 }
@@ -423,10 +423,10 @@ const ResHome = (props) => {
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter pt-1'>Deposit</h6> < /
         div > <
-        div className = 'text-center mx-3' >
+        div className = 'text-center mx-4 grey-text' >
         <
         TabNavItem title = { < span > < Download size = "20"
-            set = 'broken'
+            set = 'bulk'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab2 }
@@ -438,7 +438,7 @@ const ResHome = (props) => {
         div className = 'text-center' >
         <
         TabNavItem title = { < span > < Setting size = "20"
-            set = 'broken'
+            set = 'bulk'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab8 }

@@ -173,7 +173,7 @@ const MyHome = () => {
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-9 py-2' > < h6 className = 'lh-1' > { name } <
+        div className = 'col-9 py-2 grey-text' > < h6 className = 'lh-1' > { name } <
         span className = 'bolder' > { account } < /span>  < /
         h6 > < /
         div > <
