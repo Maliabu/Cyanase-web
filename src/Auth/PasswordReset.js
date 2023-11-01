@@ -43,7 +43,7 @@ class PasswordReset extends Component {
     render() {
         return ( <
             div > <
-            div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-2' >
+            div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-4' >
             <
             Form className = 'bg-white pb-3 rounded-4 col-lg-5 col-md-7 col-12'
             onSubmit = { this.handleSubmit } >

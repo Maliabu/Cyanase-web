@@ -47,7 +47,7 @@ class Login extends Component {
     render() {
         return ( <
             div > <
-            div className = 'row rounded-4 justify-content-center bg-lighter p-lg-5 p-3' >
+            div className = 'row rounded-4 justify-content-center p-4 bg-lighter p-lg-5' >
             <
             Form className = 'bg-white rounded-4 col-lg-5 col-md-7 col-12'
             onSubmit = { this.handleSubmit } >
@@ -78,8 +78,64 @@ class Login extends Component {
             onChange = { this.handleChange }
             placeholder = "password" / >
             <
-        div className='my-1'
-        key = "default-checkbox" >
+            div className='my-1'
+            key = "default-checkbox" >
+            <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePasswordVisibility}/></div>
+            < /
+            Form.Group > <
+            div className = 'row justify-content-center' > <
+            Button variant = "warning"
+            className = 'shadow mt-2 text-center'
+            id = 'successMessage'
+            type = "submit" >
+            Login <
+            /Button> < /
+            div >
+            <
+            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p > <
+            h6 id = "errorMessage"
+            className = 'py-2 mt-3 rounded border border-danger text-center fade-in'
+            style = {
+                { display: 'none' }
+            } > hey < /h6><
+            h6 id = "infoMessage"
+            className = 'py-2 mt-3 rounded warning text-center fade-in'
+            style = {
+                { display: 'none' }
+            } > hey < /h6>  < /
+            Form >
+            <
+            Form className = 'd-none'
+            onSubmit = { this.handleSubmit } >
+            <
+            div className = 'row justify-center blue-dark p-4' > <
+            h2 className = 'text-center' > LOGIN < /h2> <
+            h6 className = ' text-center active' > Enter your Credentials below to login to your Account < /
+            h6 > <
+            /
+            div > <
+            Form.Group className = " rounded-2 px-3 mt-3" >
+            <
+            Form.Label > < h6 className = 'm-0' > Email < /h6> < /Form.Label > <
+            Form.Control type = "text"
+            id = 'username'
+            required = "required"
+            value = { this.state.username }
+            onChange = { this.handleChange }
+            placeholder = "support@cyanase.com" / > < /
+            Form.Group > <
+            Form.Group className = " rounded-2 px-3 my-2" >
+            <
+            Form.Label > < h6 className = 'm-0' > Password < /h6> < /Form.Label > <
+            Form.Control type = "password"
+            id = 'password'
+            required = "required"
+            value = { this.state.password }
+            onChange = { this.handleChange }
+            placeholder = "password" / >
+            <
+            div className='my-1'
+            key = "default-checkbox" >
             <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePasswordVisibility}/></div>
             < /
             Form.Group > <

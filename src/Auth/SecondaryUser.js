@@ -228,7 +228,7 @@ function SecondaryUser(props) {
         }
         return ( <
             React.Fragment > <
-            div className = 'row justify-content-center bg-lighter p-lg-5 p-3 rounded-4' >
+            div className = 'row justify-content-center bg-lighter p-lg-5 p-4 rounded-4' >
             <
             // col-lg-5 should do the trick for responsiveness
             form className = 'bg-white rounded-4 col-lg-5 col-md-7'
