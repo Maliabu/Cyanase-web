@@ -9,7 +9,6 @@ import { ArrowLeftSquare } from 'react-iconly';
 
 const ResWithdraw = (props) => {
     const [country, setCountry] = useState([])
-    const [email, setEmail] = useState([])
     const [name, setName] = useState([])
     const [phone, setPhone] = useState([])
     const [networth, setDepositNetworth] = useState(0);
@@ -18,10 +17,9 @@ const ResWithdraw = (props) => {
             setCountry(res.profile.country)
             setName(res.last_name + " " + res.first_name)
             setPhone(res.profile.phoneno)
-            setEmail(res.email)
         });
         MainRequests().then(res => {
-            setDepositNetworth(res[7])
+            setDepositNetworth(res[9])
         })
     }, []);
     return ( < div className = 'p-2' > <

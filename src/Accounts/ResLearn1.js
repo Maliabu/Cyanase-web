@@ -41,7 +41,6 @@ function ResLearn1(props) {
         const value = event.target.value;
         setFormData({...formData, [name]: value });
     };
-    console.log(formData)
     const getTotalDeposit = () => {
         let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
         return total_deposit

@@ -14,7 +14,7 @@ class Withdraw extends React.Component {
             currentStep: 2,
             withdraw_amount: 0,
             withdraw_category: "",
-            currency: getCurrency(this.props.country),
+            currency: "",
             withdraw_channel: "",
             account_type: "",
             goalid: this.props.goalid,
@@ -23,6 +23,11 @@ class Withdraw extends React.Component {
             account_number: "",
             beneficiary_name: this.props.fullname
         }
+    }
+    getCountryCurrency = () => {
+        let currency = this.state.currency
+        currency = getCurrency(this.props.country)
+        return currency
     }
 
     handleChange = event => {
@@ -279,7 +284,7 @@ class Withdraw extends React.Component {
             /><
             Step3 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
-            currency = { this.state.currency }
+            currency = { this.getCountryCurrency() }
             /> <
             Step4 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }

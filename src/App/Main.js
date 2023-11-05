@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, Networth, UserRequests, GetRiskProfile, PendingWithdrawRequests } from '../Api/MainRequests'
+import { MainRequests, PersonalRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests } from '../Api/MainRequests'
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,8 +26,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [phone, setPhone] = useState([])
     const [withdraws, setWithdraw] = useState([])
     const [dates, setDates] = useState([])
-    const [deposit, setDeposit] = useState(0);
     const [totalDeposit, setTotalDeposit] = useState(0);
+    const [totalNetworth, setTotalNetworth] = useState(0);
     const [dollar, setDollar] = useState(0);
     const [depositProgress, setDepositProgress] = useState([]);
     const [networth, setDepositNetworth] = useState(0);
@@ -63,6 +63,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setGraph(res[4]); // array deposits
             setDates(res[5])
             setDepositNetworth(res[7])
+            setTotalNetworth(res[9])
         })
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
@@ -76,9 +77,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setName(res.last_name + " " + res.first_name)
             setPhone(res.profile.phoneno)
             setEmail(res.email)
-        });
-        Networth().then(res => {
-            setDeposit(res[1])
         });
         PendingWithdrawRequests().then(res => {
             setWithdraw(res)
@@ -187,7 +185,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { totalDeposit } < /h2></div >
+            h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
             img src = { Deposit }
             className = "pt-2 d-none"
@@ -225,7 +223,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { deposit } < /h2></div >
+            h2 className = "px-2 font-lighter" > { totalNetworth.toLocaleString() } < /h2></div >
             <
             img src = { Networths }
             className = "pt-2"
@@ -260,7 +258,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h1 className = "px-2 font-lighter" > { networth.toLocaleString() } < /h1></div >
+            h1 className = "px-2 font-lighter" > { totalNetworth.toLocaleString() } < /h1></div >
             <
             /div><
             div className = 'col-3' >
@@ -276,7 +274,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             Withdraw country = { country }
             phone = { phone }
-            networth = { networth }
+            networth = { totalNetworth }
             fullname = { name }
             / > < /
             Modal > <

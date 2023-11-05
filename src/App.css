@@ -204,7 +204,9 @@ body::-webkit-scrollbar {
 .grey-back {
     background-color: #fafafa;
 }
-
+.carousel-indicators {
+    display: none !important;
+}
 .activeTab {
     color: #ff9215 !important;
 }

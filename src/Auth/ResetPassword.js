@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { API_URL_RESET_PASSWORD } from '../apis';
 import axios from 'axios';
-import { success1, catch_errors, preloader, fail } from '../Api/RequestFunctions';
+import { success, catch_errors, preloader, fail } from '../Api/RequestFunctions';
 import Logo from '../images/CIPNG.png'
 import { useSearchParams } from "react-router-dom";
 
@@ -62,7 +62,7 @@ function ResetPassword(props) {
                     } else if (response.status === 200 && response.data.success === false) {
                         fail(response.data.message)
                     } else {
-                        success1("Your password has been reset.", "successful");
+                        success("Your password has been reset. Redirecting to login, please wait...","/","successful");
                     }
                 });
         }

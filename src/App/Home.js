@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { UserRequests, PersonalRequests, SubscriptionRequests } from '../Api/MainRequests';
+import { UserRequests, SubscriptionRequests } from '../Api/MainRequests';
 import React, { useState, useEffect } from "react";
 import Personal from "./Personal";
 import Deposit from "./Deposit";
@@ -25,13 +25,13 @@ import Modal from 'react-bootstrap/Modal';
 import Alert from './Alerts'
 import Subscribe from '../Accounts/Subscribe'
 import Logout from '../Accounts/Logout';
+import { PROFILE_PHOTO } from '../apis';
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
 import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
 
 const MyHome = () => {
     const [name, setName] = useState("")
     const [account, setAccount] = useState("")
-    const [span, setSpan] = useState([])
     const [profilePicture, setProfilePicture] = useState("")
     const [country, setCountry] = useState([])
     const [email, setEmail] = useState([])
@@ -51,9 +51,6 @@ const MyHome = () => {
         setShow4(true)
     };
     useEffect(() => {
-        PersonalRequests().then(res => {
-            setSpan(res[2]);
-        });
         UserRequests().then(res => {
             setName(res.first_name + " " + res.last_name)
             setAccount(res.profile.user_type+" Account")
@@ -71,6 +68,13 @@ const MyHome = () => {
         // update the state to tab1
         setActiveTab("tab1");
     };
+    const myProfilePhoto = () => {
+        if(UserRequests().res.profile.profile_picture !== 404){
+            return {profilePicture}
+        } else {
+            return {PROFILE_PHOTO}
+        }
+    }
     const handleTab2 = () => {
         // update the state to tab2
         setActiveTab("tab2");
@@ -166,14 +170,14 @@ const MyHome = () => {
         <
         div className = 'col-3' >
         <
-        img src = {profilePicture}
+        img src = {myProfilePhoto}
         className = "mt-1 rounded-circle object-fit-cover img-head"
         width = '100%'
         height = '80%'
         alt = "investors" / >
         <
         /div> <
-        div className = 'col-9 py-2 grey-text' > < h6 className = 'lh-1' > { name } <
+        div className = 'col-9 py-2' > < h6 className = 'lh-1' > { name } <
         span className = 'bolder' > { account } < /span>  < /
         h6 > < /
         div > <
@@ -426,7 +430,7 @@ const MyHome = () => {
         Modal > </div><
         div className = "d-block d-lg-none d-md-none" >
         <
-        ResHome name = { name } profile = {profilePicture}
+        ResHome name = { name } profile = {profilePicture} handletab2 = {handleTab2}
         / > < /div > < /
         div >
     );

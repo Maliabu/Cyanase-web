@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, Networth, UserRequests } from '../Api/MainRequests';
+import { MainRequests, PersonalRequests, UserRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import '../App.css';
@@ -10,7 +10,6 @@ import ResWithdraw from './ResWithdraw'
 import ResSettings from './ResSettings';
 import RiskProfile from './RiskProfile';
 import Api from '../Accounts/primaryUser';
-import CLASSES from '../images/classes.png'
 import TabContent from "../Accounts/TabContent";
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
@@ -21,8 +20,8 @@ import Ad from '../images/Group 212.png';
 import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
-import { FaFlagCheckered, FaHandHoldingUsd, FaLightbulb, FaUserClock } from 'react-icons/fa';
-import { Home, Notification, Wallet, Setting, Work, TimeCircle, Download, Star, AddUser } from 'react-iconly';
+import { FaLightbulb} from 'react-icons/fa';
+import { Home, Wallet, Setting, Work, TimeCircle, Download, Star, AddUser } from 'react-iconly';
 
 const ResHome = (props) => {
     const [activeTab, setActiveTab1] = useState("tab1");
@@ -30,7 +29,6 @@ const ResHome = (props) => {
     const [withdrawSetting, setWithdrawSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [deposit, setDeposit] = useState(0);
-    const [index, setIndex] = useState(0);
     const [dollar, setDollar] = useState(0);
     const [graph, setGraph] = useState([])
     const [country, setCountry] = useState([])
@@ -76,6 +74,9 @@ const ResHome = (props) => {
                 title: {
                     text: 'Investments for ' + thisYear
                 },
+                labels: {
+                    show: false,
+                },
                 categories: dates,
                 // categories: ['jun', 'jul', 'aug'],
             },
@@ -113,9 +114,7 @@ const ResHome = (props) => {
             setGraph(res[4]);
             setDollarNetworth(res[3]);
             setDates(res[5])
-        })
-        Networth().then(res => {
-            setDepositNetworth(res[2]);
+            setDepositNetworth(res[9]);
         })
         UserRequests().then(res => {
             setCountry(res.profile.country)
@@ -173,7 +172,7 @@ const ResHome = (props) => {
             )
         } else{
             return(
-                <div className='p-4 mt-2 bg-light rounded-4'>
+                <div className='p-4 mt-2 bg-light rounded-4 carousel slide'>
                 <Carousel touch={true} interval={null} controls={false}>
                     {
                         result.map((option, index)=>(
@@ -192,6 +191,7 @@ const ResHome = (props) => {
                         ))
                     }
                 </Carousel></div>
+
             )
         }
     }
@@ -228,7 +228,14 @@ const ResHome = (props) => {
         } else{
             return(
                 <div className='p-2'>
-                    <img src={CLASSES} alt='classes' width="100%"/>
+                    <
+            div className = '' > <
+            Chart options = { options.options }
+            series = { options.series }
+            className = "w-100"
+            type = "area"
+            height = { 150 }
+            /></div >
                 </div>
             )
         }
@@ -247,7 +254,7 @@ const ResHome = (props) => {
             <
             div className = 'rounded-4 bg-lighter wider' >
             <
-            p className = "text-end mx-4 mt-2" > welcome back < span className = 'bolder' > { props.name } < /span> <
+            p className = "text-end mx-4 mt-2" > welcome back < span className = 'bolder grey-text' > { props.name } < /span> <
             span className = " justify-content-center" > <
             span className = "px-1" > pick up where you left off < /span></span > < /p>< /
             div > <
@@ -283,7 +290,7 @@ const ResHome = (props) => {
             >
             <
             br / > Deposit <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit - depositTotal }  < /
+            div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit.toLocaleString() }  < /
             h2 > < /div > < /p > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-4 warning '
             onClick = {
                 handleTab5
@@ -303,7 +310,7 @@ const ResHome = (props) => {
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networth } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
+            h2 className = "px-1 font-lighter" > { networth.toLocaleString() } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
             onClick = {
                 () => { setWithdrawSetting(true) }
             } >
@@ -386,7 +393,7 @@ const ResHome = (props) => {
         <
         div className = 'd-flex flex-row text-dark rounded-top-4 d-block justify-content-center bg-lighter bottom-nav' >
         <
-        div className = ' text-center grey-text' > <
+        div className = ' text-center ' > <
         TabNavItem title = { < span > < Home size = "20"
             set = 'bulk'
             className = 'mt-2' /
@@ -399,8 +406,8 @@ const ResHome = (props) => {
         className = ""
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /><h6 className='bg-lighter pt-1 '>Home</h6>< /div > <
-        div className = 'text-center mx-4 grey-text' >
+        /><h6 className='bg-lighter grey-text pt-1 '>Home</h6>< /div > <
+        div className = 'text-center mx-4 ' >
         <
         TabNavItem title = { < span > < AddUser size = "24"
             set = 'bulk'
@@ -410,9 +417,9 @@ const ResHome = (props) => {
         id = "tab7"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='bg-lighter pt-1'>Goals</h6> < /
+        /> <h6 className='bg-lighter pt-1 grey-text'>Goals</h6> < /
         div > <
-        div className = 'text-center grey-text' >
+        div className = 'text-center ' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
             set = 'bulk'
@@ -421,9 +428,9 @@ const ResHome = (props) => {
         onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter pt-1'>Deposit</h6> < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter grey-text pt-1'>Deposit</h6> < /
         div > <
-        div className = 'text-center mx-4 grey-text' >
+        div className = 'text-center mx-4 ' >
         <
         TabNavItem title = { < span > < Download size = "20"
             set = 'bulk'
@@ -432,7 +439,7 @@ const ResHome = (props) => {
         onClick = { handleTab2 }
         id = "tab2"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter pt-1'>Withdraws</h6> < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter grey-text pt-1'>Withdraws</h6> < /
         div >
         <
         div className = 'text-center' >
@@ -445,7 +452,7 @@ const ResHome = (props) => {
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='bg-lighter pt-1'>Settings</h6> < /
+        /> <h6 className='bg-lighter pt-1 grey-text'>Settings</h6> < /
         div > < /
         div > <
         TabContent id = "tab1"
@@ -467,7 +474,7 @@ const ResHome = (props) => {
         TabContent id = "tab7"
         activeTab = { activeTab } > < ResGoals / > < /TabContent> <
         TabContent id = "tab8"
-        activeTab = { activeTab } > < ResSettings / > < /TabContent><
+        activeTab = { activeTab } > < ResSettings handletab2 = {props.handletab2}/ > < /TabContent><
         TabContent id = "tab9"
         activeTab = { activeTab } > < RiskProfile / > < /TabContent> <
         TabContent id = "tab10"

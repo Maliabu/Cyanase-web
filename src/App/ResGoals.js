@@ -27,7 +27,6 @@ const ResGoals = () => {
             setSpan(res[2]); // array(14)
         });
         UserRequests().then(res=>{
-            console.log(res)
             setCountry(res.profile.country)
         })
     }, []);

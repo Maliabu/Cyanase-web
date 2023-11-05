@@ -54,10 +54,10 @@ class PasswordReset extends Component {
             h6 > <
             /
             div > <
-            Form.Group className = "mb-3 rounded-3 p-3 px-5"
+            Form.Group className = "mb-3 rounded-3 p-3"
             controlId = "formBasicDate" >
             <
-            Form.Label > Email < /Form.Label> <
+            Form.Label > < h6 className = 'm-0' > Email < /h6> < /Form.Label> <
             Form.Control type = "email"
             name = "email"
             onChange = { this.handleChange }

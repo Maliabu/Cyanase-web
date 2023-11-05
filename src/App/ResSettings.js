@@ -7,16 +7,26 @@ import ResNotifications from '../Accounts/ResNotifications';
 import ResContactUs from '../Accounts/ResContactUs';
 import ResFAQs from '../Accounts/ResFAQs';
 import ResRiskProfile from '../Accounts/ResRiskProfile';
+import Logout from '../Accounts/Logout';
 import { Notification, User, Call, Chat, Chart } from 'react-iconly';
 
-const ResSettings = ({ id, activeTab, children }) => {
+const ResSettings = (props) => {
     const [accountSetting, setAccountSetting] = useState(false);
     const [notifications, setNotifications] = useState(false);
+    const [logout, setLogout] = useState(false);
     const [contacts, setContacts] = useState(false);
     const [faqs, setFaqs] = useState(false);
     const [riskProfile, setRiskProfile] = useState(false);
+    const handleTab2 =()=>{
+        return(<Logout/>)
+    }
     if (accountSetting) {
         return ( < ResAccount changeAccountSetting = { setAccountSetting }
+            / >
+        )
+    }
+    if (logout) {
+        return ( < Logout
             / >
         )
     }
@@ -152,6 +162,7 @@ const ResSettings = ({ id, activeTab, children }) => {
         <
         /
         div >
+        <h6 className="mx-5 rounded-3 py-3 mt-3 warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
         <
         p className = "grey-text p-3 text-center" > All Rights Reserved < br / > .@CyanaseInvestors2022 < /p> < /
         div > 
