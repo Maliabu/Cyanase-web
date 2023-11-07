@@ -170,7 +170,7 @@ const Personal = ({...props }) => {
                             /
                             div >
                             <
-                            div className = "col-6" >
+                            div className = "col-4" >
                             <
                             h6 className = "px-5 active text-center" > { deposit.deposit_category } < /h6> < /
                             div >

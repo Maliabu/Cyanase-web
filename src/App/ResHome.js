@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, UserRequests } from '../Api/MainRequests';
+import { MainRequests, PersonalRequests, UserRequests, WithdrawRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import '../App.css';
@@ -33,6 +33,7 @@ const ResHome = (props) => {
     const [graph, setGraph] = useState([])
     const [country, setCountry] = useState([])
     const [dates, setDates] = useState([])
+    const [totalWithdraw, setTotalWithdraw] = useState([])
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
     let thisYear = new Date().getFullYear()
@@ -119,6 +120,9 @@ const ResHome = (props) => {
         UserRequests().then(res => {
             setCountry(res.profile.country)
         });
+        WithdrawRequests().then(res => {
+            setTotalWithdraw(res[1])
+        })
     }, []);
     let depositTotal = 0
     span.map(goal => (
@@ -194,6 +198,11 @@ const ResHome = (props) => {
 
             )
         }
+    }
+    const networthy = () => {
+        let totalNetworth = 0
+        totalNetworth = networth - totalWithdraw
+        return totalNetworth
     }
     const myInvestmentsGraph = () => {
         if (result.length === 0) {
@@ -310,7 +319,7 @@ const ResHome = (props) => {
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networth.toLocaleString() } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
+            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
             onClick = {
                 () => { setWithdrawSetting(true) }
             } >

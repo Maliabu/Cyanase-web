@@ -25,6 +25,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [name, setName] = useState([])
     const [phone, setPhone] = useState([])
     const [withdraws, setWithdraw] = useState([])
+    const [totalWithdraw, setTotalWithdraw] = useState([])
     const [pendingWithdraw, setPendingWithdraw] = useState([])
     const [dates, setDates] = useState([])
     const [totalDeposit, setTotalDeposit] = useState(0);
@@ -83,7 +84,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setPendingWithdraw(res)
         });
         WithdrawRequests().then(res => {
-            setWithdraw(res[1])
+            setWithdraw(res[0])
+            setTotalWithdraw(res[1])
         })
     }, []);
     let depositTotal = 0
@@ -101,7 +103,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     }
     const wwithdraws = () => {
         let total_withdraws = []
-        pendingWithdraw.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
+        withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
         let withdraw = total_withdraws.length
         return withdraw
     }
@@ -155,11 +157,11 @@ const Main = ({ id, activeTab, children, ...props }) => {
     }
     const networthy = () => {
         let networth = 0
-        networth = totalNetworth - withdraws
+        networth = totalNetworth - totalWithdraw
         return networth
     }
     const pendingWithdraws = () => {
-        if (withdraws.length === 0) {
+        if (pendingWithdraw.length === 0) {
             return ( < div className = 'p-lg-5 p-md-3 rounded-4 bg-light text-center grey-text mt-lg-5 mt-md-3' > < div className = 'd-flex flex-row justify-content-center' > <
                 Image size = "large"
                 set = "broken"
@@ -170,7 +172,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
                 h6 > < /div > )
             }
             else return (
-                withdraws.map(withdraw => ( <
+                pendingWithdraw.map(withdraw => ( <
                     div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
                     <
                     div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
@@ -230,9 +232,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = "blue-dark p-lg-3 rounded-4 col mx-2 text-center" >
             <
-            h5 className = "bolder mt-3" > Networth < /h5> <
+            h5 className = "bolder mt-3" > Total Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { networthy().toLocaleString() } < /h2></div >
+            h2 className = "px-2 font-lighter" > { totalNetworth.toLocaleString() } < /h2></div >
             <
             img src = { Networths }
             className = "pt-2"
@@ -267,7 +269,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h1 className = "px-2 font-lighter" > { totalNetworth.toLocaleString() } < /h1></div >
+            h1 className = "px-2 font-lighter" > { networthy().toLocaleString() } < /h1></div >
             <
             /div><
             div className = 'col-3' >
@@ -394,7 +396,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             h6 className = "pt-5 bolder" > Total Withdraws < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
             h3 className = "px-2 font-lighter" > {
-                wwithdraw()
+                totalWithdraw.toLocaleString()
             } < /h3></div >
             <
             img src = { Networths }
