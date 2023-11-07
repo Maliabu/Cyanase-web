@@ -136,9 +136,9 @@ function Step2(props) {
     return ( <
         div className = "text-center" >
         <
-        h4 className = "py-5 font-lighter" > Proceed to pay UGX 20500
+        h5 className = "py-5 special" > Proceed to pay UGX 20500
         for subscription < /
-        h4 >
+        h5 >
         <
         Subscription phone = { props.phone }
         name = { props.name }

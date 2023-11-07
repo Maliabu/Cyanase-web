@@ -6,7 +6,7 @@ import Profile1 from '../images/Ellipse 178.png';
 // import { API_URL_DEPOSIT, TOKEN } from '../apis';
 // import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
-import { preloader } from "../Api/RequestFunctions";
+import { preloader, autoClickable } from "../Api/RequestFunctions";
 import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
@@ -58,6 +58,7 @@ function Learn1(props) {
         return accountType
     }
     formData.account_type = getAccountType()
+    formData.currency = getCurrency(props.country)
 
     function onSubmit() {
         preloader()
@@ -92,7 +93,7 @@ function Learn1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-center warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -108,17 +109,18 @@ function Learn1(props) {
             return ( <
                 div className = 'row justify-content-center' > <
                 h6 id = "errorMessage"
-                className = 'py-2 mt-3 rounded border border-danger text-center'
+                className = 'py-2 mt-3 mx-5 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 rounded warning text-center'
+                className = 'py-2 mt-3 w-50 rounded warning text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <
                 Button variant = "warning"
-                className = 'shadow text-center'
+                onClick={()=> autoClickable()}
+                className = 'shadow text-center my-2'
                 id = 'successMessage'
                 type = "button" >
                 Submit <
@@ -134,7 +136,7 @@ function Learn1(props) {
         let deposit_category = formData.deposit_category
         if (step === 1 && deposit_category === "personal") {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-center warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -143,7 +145,7 @@ function Learn1(props) {
         }
         if (step === 6) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-center warning rounded-3"
                 type = "button"
                 onClick = { this._afterSacco } >
                 Next <
@@ -152,7 +154,7 @@ function Learn1(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
+                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -161,7 +163,7 @@ function Learn1(props) {
         }
         if (step < 4) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-center warning rounded-3"
                 onClick = { _next } >
                 Next <
                 /h6>        
@@ -227,7 +229,7 @@ function Learn1(props) {
         getCurr = { getCurrency(props.country) }
         />  <Step6  currentStep = { step }
         handleChange = { handleChange }
-        /> { nextButton() } { previousButton() }{submitButton()}< /
+        />  { previousButton() }{ nextButton() }{submitButton()}< /
         form > < /
         React.Fragment >
     );

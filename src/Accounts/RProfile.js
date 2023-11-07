@@ -371,7 +371,7 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep !== 0) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-start warning rounded-3"
                 type = "button"
                 onClick = { this._prev } >
                 Previous <
@@ -394,14 +394,14 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep === 0) {
             return ( < div className = "bg-light m-0 py-5 text-center" > <
-                Button className = "py-3 mx-5 text-center m-0 bk-warning rounded-3"
+                Button className = "py-3 my-2 text-center m-0 bk-warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Start taking the Risk profile <
                 /Button>  </div > )
         } else if (currentStep < 11) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -468,14 +468,14 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep === 12) {
             return ( <
-                div className = 'row justify-content-center mx-5 mb-3' > <
+                div className = 'row justify-content-center mb-3' > <
                 h6 id = "errorMessage"
-                className = 'py-2 mt-3 mx-5 rounded border border-danger text-center'
+                className = 'py-2 mt-3 mx-lg-5 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 mx-5 rounded warning text-center'
+                className = 'py-2 mt-3 mx-4 rounded warning text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <

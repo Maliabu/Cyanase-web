@@ -33,7 +33,9 @@ h4 {
 button {
     font-size: 12px !important;
 }
-
+.special{
+    font-size: 15px !important;
+}
 .img-head {
     height: 40px;
     width: 40px;

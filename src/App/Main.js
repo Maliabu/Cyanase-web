@@ -198,20 +198,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
-            img src = { Deposit }
-            className = "pt-2 d-none"
-            width = '100%'
-            height = '30%'
-            alt = "investors" / >
-            <
-            div className = ' my-3' >
-            <
-            span className = 'py-3 d-none px-5 warning active text-center rounded-3' > Withdraw < /span>  <
-            h6 className = 'p-3 px-5 mx-5 warning text-center rounded-3'
-            onClick = { handleShow3 } > <
-            Wallet size = "medium"
-            set = "broken"
-            className = 'mx-2 d-none' / > Deposit < /h6> </div >
+            div className = ' my-3 text-center' > <
+            h6 className = 'p-3 warning rounded-3'
+            onClick = { handleShow3 } > Deposit < /h6> </div >
             <
             Modal show = { show3 }
             onHide = { handleClose3 }

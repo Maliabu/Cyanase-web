@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { PROFILE_PHOTO } from '../apis';
 import { AddUser, ArrowLeftSquare } from 'react-iconly';
 import ProgressBar from '@ramonak/react-progress-bar';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
 import ResGoals1 from './ResGoals1'
 
@@ -82,11 +82,11 @@ const ResGoals = () => {
                 <
             div className = "scroll-y2" > {
                 span.map(goal => ( <
-                    div className = "p-4 shadow-sm res-home rounded-4 mt-1"
+                    div className = "p-3 shadow-sm res-home rounded-3 mt-1"
                     key = { goal.goal_id } > <
                     div className = "d-flex flex-row flex" > <
                     span className = "mt-1" > <
-                    AddUser className = " rounded-circle border border-dark p-1"
+                    AddUser className = " rounded-circle bg-light active p-2"
                     size = "large" / > < /span>  <
                     p className = "mx-4" > < span className = "active"
                     onClick = {
@@ -126,17 +126,12 @@ const ResGoals = () => {
     let progress
         return ( < div className = 'p-1' >
             <
-            div className = 'p-1' ><
-            div className = 'row d-none p-2 px-3' > <
-            div className = 'col-10 bg-lighter rounded-4' > <
-            h4 className = ' mx-3 bolder mt-3' > Your Goals < /h4 > < /div >
-            <
-            div className = 'col-2' > <
-            img src = "http://127.0.0.1:8000/static/photo.png"
-            className = "rounded-circle object-fit-cover mt-2 img-head"
-            alt = "investors" / > < /div> < /
-            div >
-            <div><h4 className='blue-dark p-3 rounded-top-3'>{span.length} Goals</h4>{myGoals()}</div>
+            div className = 'p-1' >
+            <div><h4 className='blue-dark p-3 rounded-top-3'>Goals: {span.length}</h4>{myGoals()}</div><
+            p onClick = {
+                () => { setGoalSetting(true) }
+            }
+            className = 'rounded-3 bk-warning text-center' > Add a new Goal < /p>
              <
             Modal show = { show3 }
             onHide = { handleClose3 }
@@ -151,11 +146,7 @@ const ResGoals = () => {
             created = { holdCreated }
             / > < /
             Modal >
-            <
-            p onClick = {
-                () => { setGoalSetting(true) }
-            }
-            className = 'p-2 rounded-3 bk-warning text-center mx-5 mt-3' > Add a new Goal < /p> < /
+             < /
             div > <
             /
             div >

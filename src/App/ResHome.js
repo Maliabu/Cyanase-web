@@ -300,7 +300,7 @@ const ResHome = (props) => {
             <
             br / > Deposit <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit.toLocaleString() }  < /
-            h2 > < /div > < /p > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-4 warning '
+            h2 > < /div > < /p > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
             onClick = {
                 handleTab5
             } >
@@ -319,7 +319,7 @@ const ResHome = (props) => {
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 p-3 px-3 warning '
+            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
             onClick = {
                 () => { setWithdrawSetting(true) }
             } >
@@ -402,8 +402,8 @@ const ResHome = (props) => {
         <
         div className = 'd-flex flex-row text-dark rounded-top-4 d-block justify-content-center bg-lighter bottom-nav' >
         <
-        div className = ' text-center ' > <
-        TabNavItem title = { < span > < Home size = "20"
+        div className = ' text-center grey-text' > <
+        TabNavItem title = { < span > < Home size = "18"
             set = 'bulk'
             className = 'mt-2' /
             >
@@ -415,8 +415,8 @@ const ResHome = (props) => {
         className = ""
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /><h6 className='bg-lighter grey-text pt-1 '>Home</h6>< /div > <
-        div className = 'text-center mx-4 ' >
+        /><h6 className='bg-lighter pt-1 '>Home</h6>< /div > <
+        div className = 'text-center mx-4 grey-text' >
         <
         TabNavItem title = { < span > < AddUser size = "24"
             set = 'bulk'
@@ -428,7 +428,7 @@ const ResHome = (props) => {
         setActiveTab1 = { setActiveTab1 }
         /> <h6 className='bg-lighter pt-1 grey-text'>Goals</h6> < /
         div > <
-        div className = 'text-center ' >
+        div className = 'text-center grey-text' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
             set = 'bulk'
@@ -439,7 +439,7 @@ const ResHome = (props) => {
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter grey-text pt-1'>Deposit</h6> < /
         div > <
-        div className = 'text-center mx-4 ' >
+        div className = 'text-center mx-4 grey-text' >
         <
         TabNavItem title = { < span > < Download size = "20"
             set = 'bulk'
@@ -451,7 +451,7 @@ const ResHome = (props) => {
         setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter grey-text pt-1'>Withdraws</h6> < /
         div >
         <
-        div className = 'text-center' >
+        div className = 'text-center grey-text' >
         <
         TabNavItem title = { < span > < Setting size = "20"
             set = 'bulk'

@@ -70,7 +70,7 @@ class Withdraw extends React.Component {
                     { display: 'none' }
                 } > hey < /h6>   <
                 Button variant = "warning"
-                className = 'shadow text-center'
+                className = 'shadow text-center my-2'
                 id = 'successMessage'
                 onClick = { this.handleSubmit }
                 type = "button" >
@@ -182,7 +182,7 @@ class Withdraw extends React.Component {
         let withdraw_category = this.state.withdraw_category;
         if (currentStep !== 1) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-start warning rounded-3"
                 type = "button"
                 onClick = { this._prev } >
                 Previous <
@@ -191,7 +191,7 @@ class Withdraw extends React.Component {
         }
         if (currentStep === 6 && withdraw_category === 'sacco/club') {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-start warning rounded-3"
                 type = "button"
                 onClick = { this._prevBeforeSacco } >
                 Previous <
@@ -206,7 +206,7 @@ class Withdraw extends React.Component {
         let withdraw_category = this.state.withdraw_category;
         if (currentStep === 1 && withdraw_category === "personal") {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -225,14 +225,14 @@ class Withdraw extends React.Component {
                 )
             }
             if ((networth - withdrawAmount) === threshold) {
-                return ( <div className="px-5"><
+                return ( <div className="px-5 my-2"><
                     h6 className = "status p-2 rounded-3" >
                     You cannot withdraw 0 {this.state.currency} <
                     /h6></div>
                 )
             }
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -242,7 +242,7 @@ class Withdraw extends React.Component {
 
         if (currentStep === 1 && withdraw_category === "sacco/club") {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._saccoCategory } >
                 Next <
@@ -251,7 +251,7 @@ class Withdraw extends React.Component {
         }
         if (currentStep < 4) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 onClick = { this._next } >
                 Next <
                 /h6>        
@@ -294,7 +294,7 @@ class Withdraw extends React.Component {
             Step5 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
             currency = { this.state.currency }
-            /> { this.nextButton() } { this.previousButton() } {this.submitButton()}< /
+            />  { this.previousButton() } { this.nextButton() }{this.submitButton()}< /
             form > < /
             React.Fragment >
         );

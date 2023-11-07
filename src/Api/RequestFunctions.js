@@ -77,3 +77,12 @@ export const togglePasswordVisibility = ()=>{
         document.getElementById('password').type = "password"
     }
 }
+export const autoClickable = () =>{
+    document.getElementById("errorMessage").style.display = 'block'
+    document.getElementById("errorMessage").style.color = "red"
+    document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+    document.getElementById("errorMessage").innerText = "Please make payment before submission..."
+    setTimeout(() => {
+        document.getElementById("errorMessage").style.display = 'none'
+    }, 3000);
+}

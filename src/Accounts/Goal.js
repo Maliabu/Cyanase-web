@@ -9,6 +9,7 @@ import { getCurrency } from "../payment/GetCurrency";
 import GoalWithdraw from './GoalWithdraw'
 import { useForm } from "react-hook-form";
 import GoalDeposit from "../payment/GoalDeposit";
+import { autoClickable } from "../Api/RequestFunctions";
 
 function Goal(props) {
     const [step, setStep] = useState(0)
@@ -112,9 +113,9 @@ function Goal(props) {
                     { display: 'none' }
                 } > hey < /h6>  <
                 Button variant = "warning"
-                className = 'shadow text-center'
+                className = 'shadow text-center my-2'
                 id = 'successMessage'
-                onClick = { handleSubmit }
+                onClick = { ()=>autoClickable() }
                 type = "button" >
                 Submit <
                 /Button> < /
@@ -126,7 +127,7 @@ function Goal(props) {
     const previousButton = () => {
         if (step === 7) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 warning text-start rounded-3"
                 type = "button"
                 onClick = { _prevwithdraw } >
                 Previous <
@@ -135,7 +136,7 @@ function Goal(props) {
         }
         if (step !== 0) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -167,10 +168,10 @@ function Goal(props) {
         let goalName = props.name
         if (step === 0 && goalAmount !== deposit) {
             return ( <
-                h6 className = "py-3 mx-5 warning text-center rounded-3"
+                h6 className = "py-3 my-2 warning text-center rounded-3"
                 type = "button"
                 onClick = { _next } >
-                Deposit to this goal <
+                Deposit to goal <
                 /h6>        
             )
         } else if (step === 0 && goalAmount === deposit) {
@@ -183,7 +184,7 @@ function Goal(props) {
         }
         if (step === 1 && deposit_category === "personal investment") {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -195,7 +196,7 @@ function Goal(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
+                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -204,7 +205,7 @@ function Goal(props) {
         }
         if (step === 4 && payment_means === "wallet") {
             return ( <
-                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
+                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
                 type = "button" >
                 OK <
                 /h6>        
@@ -212,7 +213,7 @@ function Goal(props) {
         }
         if (step < 4) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-end my-2 warning rounded-3"
                 onClick = { _next } >
                 Next <
                 /h6>        
@@ -301,7 +302,7 @@ function Goal(props) {
         fullname = { props.fullname }
         networth = { getName()[7] }
         country = { props.country }
-        /> { nextButton() } { previousButton() } { submitButton() } < /
+        /> { previousButton() }{ nextButton() } { submitButton() } < /
         form >
         <
         /
@@ -365,7 +366,7 @@ function Step0(props) {
         <
         /
         div > <
-        div className = "row mt-2 p-3 mx-lg-2 blue-darks rounded-3" >
+        div className = "row mt-2 p-3 mx-lg-2 blue-dark rounded-3" >
         <
         div className = "col p-2" >
         <
@@ -373,7 +374,7 @@ function Step0(props) {
         div className = "d-flex flex-row flex" > { props.currency } <
         h3 className = "px-2 font-lighter" > { (props.networth).toLocaleString() } < /h3></div > < /div><div className="col"> {props.next} < /
         div > < /div >  <
-        h6 className = "bolder py-3" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
+        h6 className = "bolder p-2 bg-lighter mt-2 rounded-3 text-center" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
         div > < /
         div > < /
         div >
@@ -509,7 +510,7 @@ function Step1(props) {
     return ( <
         div className = "text-center" > <
         h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-        Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
+        Form.Group className = "mb-3 bg-white p-5" >
         <
         Form.Label ><h6 className="m-0">Amount to Deposit in { props.currency }</h6>  < /Form.Label>  <
         Form.Control type = "number"
@@ -542,7 +543,7 @@ function Step2(props) {
     return ( <
         div className = "text-center" >
         <
-        h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+        h5 className = "p-5 special" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
         h5 >
         <
         GoalDeposit phone = { props.phone }

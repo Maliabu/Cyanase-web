@@ -50,7 +50,7 @@ const ResRiskProfile = (props) => {
         complete
     } < /span> <
     div className = "p-5" > <
-        p className = "py-2 bg-warning rounded-3"
+        p className = "p-3 bk-warning rounded-3"
     onClick = { handleShow2 } > Complete your Risk profile < /p> </div > < /
     div > < /
     div > <

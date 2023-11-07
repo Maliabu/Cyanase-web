@@ -162,7 +162,7 @@ const ResSettings = (props) => {
         <
         /
         div >
-        <h6 className="mx-5 rounded-3 py-3 mt-3 warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
+        <h6 className=" rounded-3 py-3 mt-3 warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
         <
         p className = "grey-text p-3 text-center" > All Rights Reserved < br / > .@CyanaseInvestors2022 < /p> < /
         div > 

@@ -263,7 +263,7 @@ body::-webkit-scrollbar {
 }
 
 .border-active {
-    border: 1px soild #f7a335 !important;
+    border: 1px soild rgb(255, 144, 18) !important;
 }
 
 .rounded-25 {
@@ -271,31 +271,58 @@ body::-webkit-scrollbar {
 }
 
 .active {
-    color: #ff9100 !important;
+    color: rgb(255, 144, 18) !important;
     cursor: pointer !important;
-    border-color: #ff9100 !important;
+    border-color: rgb(255, 144, 18) !important;
 }
 
 .warning {
-    color: #ff9100 !important;
+    color: rgb(255, 144, 18) !important;
     cursor: pointer !important;
-    /* online change */
-    font-size: 12px !important;
-    border: 1px solid #ff9100 !important;
-    border-color: #ff9100 !important;
+    font-size: small !important;
+    padding: 10px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border: 1px solid rgb(255, 144, 18) !important;
+    border-color: rgb(255, 144, 18) !important;
+    width: 150px !important;
+    margin: auto !important;
+}
+.warning-home {
+    color: rgb(255, 144, 18) !important;
+    cursor: pointer !important;
+    font-size: small !important;
+    padding: 10px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border: 1px solid rgb(255, 144, 18) !important;
+    border-color: rgb(255, 144, 18) !important;
+    width: 100px !important;
+    margin: auto !important;
+}
+.warning-learn-about {
+    color: rgb(255, 144, 18) !important;
+    border: 1px solid rgb(255, 144, 18) !important;
+    border-color: rgb(255, 144, 18) !important;
 }
 
 .status {
-    color: #ff9100 !important;
+    color: rgb(255, 144, 18) !important;
     background-color: #ffe3be;
 }
 
 .bk-warning {
-    color: rgb(20, 20, 20) !important;
+    color: rgb(255, 255, 255) !important;
     cursor: pointer !important;
     border: none !important;
-    background-color: #ffb34f !important;
-    box-shadow: 2px 2px 3px #4141418e;
+    background-color: rgb(255, 144, 18) !important;
+    box-shadow: 2px 2px 3px #e6e6e6;
+    width:max-content !important;
+    font-size: small !important;
+    padding: 12px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin: auto !important;
 }
 .bk-warnings {
     background: -webkit-linear-gradient(right,#ffffffd7, #ffd8a6, #ffffffd7), url("images/Premium\ Photo\ _\ Businessman\ hand\ pointing\ finger\ to\ growth\ success\ finance\ business\ chart\ of\ metaverse\ technology\ financial\ graph\ investment\ diagram\ on\ analysis\ stock\ market\ background\ with\ digital\ economy\ exchange_.jpeg");
@@ -307,7 +334,7 @@ body::-webkit-scrollbar {
 .activer {
     color: #ffffff !important;
     cursor: pointer !important;
-    background-color: #ffb34f !important;
+    background-color: rgb(255, 144, 18) !important;
     padding: 3px;
     padding-bottom: 14px;
     padding-left: 6px;

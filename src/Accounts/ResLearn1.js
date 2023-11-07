@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 import Profile1 from '../images/Ellipse 178.png';
 import Button from "react-bootstrap/esm/Button";
-import { preloader } from "../Api/RequestFunctions";
+import { preloader, autoClickable } from "../Api/RequestFunctions";
 import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
@@ -98,7 +98,7 @@ function ResLearn1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -124,8 +124,9 @@ function ResLearn1(props) {
                     { display: 'none' }
                 } > hey < /h6>   <
                 Button variant = "warning"
-                className = 'shadow text-center'
+                className = 'shadow text-center my-2'
                 id = 'successMessage'
+                onClick={()=> autoClickable()}
                 type = "button" >
                 Submit <
                 /Button> < /
@@ -140,7 +141,7 @@ function ResLearn1(props) {
         let deposit_category = formData.deposit_category
         if (step === 1 && deposit_category === "personal investment") {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -149,7 +150,7 @@ function ResLearn1(props) {
         }
         if (step === 6) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._afterSacco } >
                 Next <
@@ -158,7 +159,7 @@ function ResLearn1(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 mx-5 text-center bk-warning rounded-3"
+                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -167,7 +168,7 @@ function ResLearn1(props) {
         }
         if (step < 4) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 onClick = { _next } >
                 Next <
                 /h6>        
@@ -233,7 +234,7 @@ function ResLearn1(props) {
         getCurr = { getCurrency(props.country) }
         />  <Step6  currentStep = { step }
         handleChange = { handleChange }
-        /> { nextButton() } { previousButton() }{submitButton()}< /
+        /> { previousButton() }{ nextButton() } {submitButton()}< /
         form > < /
         React.Fragment >
     );
@@ -413,7 +414,7 @@ function Step4(props) {
         return ( <
             div className = "text-center" > <
             h6 className = "mt-2" > Continue to deposit < /h6>   <
-            h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h5 className = "p-5 special" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h5 > < /
             div >
         )
@@ -422,7 +423,7 @@ function Step4(props) {
         return ( <
             div className = "text-center" >
             <
-            h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h5 className = "p-5 special" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h5 >
             <
             Checkout phone = { props.phone } // here the checkout form is rendered after which it returns response

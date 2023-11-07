@@ -116,7 +116,7 @@ class ResDeposit extends React.Component {
                             let payment_means = this.state.payment_means;
                             if (currentStep === 0) {
                                 return ( < div > <
-                                    p className = "py-2 mx-5 my-2 text-center border text-warning border-warning rounded-3"
+                                    p className = "py-2 my-2 text-end warning rounded-3"
                                     type = "button"
                                     onClick = { this._next } >
                                     Next <
@@ -130,7 +130,7 @@ class ResDeposit extends React.Component {
                             }
                             if (currentStep < 4) {
                                 return ( <
-                                    p className = "py-2 mx-5 text-center border text-warning border-warning rounded-3"
+                                    p className = "py-2 my-2 text-end warning rounded-3"
                                     type = "button"
                                     onClick = { this._next } >
                                     Next <
@@ -139,7 +139,7 @@ class ResDeposit extends React.Component {
                             }
                             if (currentStep === 4 && payment_means === "offline") {
                                 return ( <
-                                    p className = "py-2 mx-5 text-center bg-warning rounded-3"
+                                    p className = "py-2 my-2 text-end warning rounded-3"
                                     type = "button"
                                     onClick = { this._next } >
                                     Continue <
@@ -147,7 +147,7 @@ class ResDeposit extends React.Component {
                                 )
                             }
                             if (currentStep === 4 && payment_means === "wallet") {
-                                return ( < h6 className = "bg-warning rounded-3 text-center p-2 mx-5"
+                                return ( < h6 className = "bk-warning rounded-3 text-center p-2 mx-5"
                                     id = "alert"
                                     onClick = {
                                         () => { this.returnToGoals() }

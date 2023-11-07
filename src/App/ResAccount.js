@@ -68,8 +68,8 @@ const ResAccount = (props) => {
         className = "rounded-circle object-fit-cover mt-2 img-back"
         alt = "investors" / > <
         p className = " text-center rounded-3 mt-3 p-2"
-        onClick = { handleShow1 } > < Camera set = 'broken'
-        className = "warning icon-padding rounded-circle" / > < /p>< /
+        onClick = { handleShow1 } > < Camera set = 'broken' size="small"
+        className = "warning-home icon-padding rounded-circle" / > < /p>< /
         div >
         <
         Modal show = { show2 }
@@ -147,11 +147,11 @@ const ResAccount = (props) => {
         <
         /
         div > <
-        div className = 'text-end pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
+        div className = 'text-center pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bg-lighter active p-2 px-3 mx-2 rounded-3'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
         h6 > < /div > 
         <
-        div className = "p-3 mt-3 rounded-3 warning" >
+        div className = "p-3 mt-3 rounded-3 bg-lighter" >
         <
         h5 className = "bolder text-dark py-3" > Next Of Kin Details < /h5>  <
         h6 > FirstName: < span className = "bolder text-dark" > { firstNok } < /span>  < /
@@ -164,10 +164,10 @@ const ResAccount = (props) => {
         h6 > < /
         div >
         <
-        p className = "bk-warning text-white text-center rounded-3 mt-3 p-2"
+        p className = "bk-warning text-white text-center rounded-3 mt-3 p-3"
         onClick = { handleShow } > Change Next of Kin < /p>
         <
-        p className = "bg-danger text-white text-center rounded-3 mt-3 p-2"
+        p className = "bg-danger d-none text-white text-center rounded-3 mt-3 mx-5 p-3"
         onClick = { handleShow2 } > Delete Account < /p> < /
         div >
         <

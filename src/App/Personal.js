@@ -287,16 +287,16 @@ const Personal = ({...props }) => {
                     div className = "text-start col-9 px-2 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
                     div className = "text-end col-3 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
                 div > <
-                    h6 className = "px-5 py-3 mt-3 bk-warning text-center rounded-3"
+                    div className = " mt-2 bk-warning text-center rounded-3"
                 onClick = { handleShow1 } >
-                    New Goal < /h6>  <
+                    New Goal < /div>  <
                 div className = " p-1 pb-5 scroll-y" > {
                     span.map(goal => ( <
                         div className = "p-3 shadow-sm res-home rounded-4 mt-3"
                         key = { goal.goal_id } > <
                         div className = "d-flex flex-row flex" > <
                         span className = "mt-1" > <
-                        AddUser className = " rounded-circle border border-dark p-1"
+                        AddUser className = " rounded-circle bg-lighter active p-2"
                         size = "large" / > < /span>  <
                         p className = "mx-4" > < span className = "active"
                         onClick = {

@@ -63,7 +63,7 @@ export default function GoalDeposit({ name, phone, amount, currency, email, data
                 });
             }
         }
-        className = 'bk-warning active p-3 mx-5 rounded-3 mt-3'
+        className = 'bk-warning active p-3 mb-2 rounded-3 mt-3'
         id = "checkout" >
         Make Payment <
         /h6> < /
