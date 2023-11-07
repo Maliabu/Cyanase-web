@@ -37,7 +37,7 @@ const ResWithdraws = () => {
                 )
 
             }
-            return ( < div className='p-2'><
+            return ( < div className='p-1'><
                 div className = 'row d-none p-2 px-3' > <
                 div className = 'col-10 bg-lighter rounded-4' > <
                 h4 className = ' mx-3 bolder mt-3' > Your Pending Withdraws < /h4 > < /div >
@@ -49,7 +49,7 @@ const ResWithdraws = () => {
                 alt = "investors" / > < /div> < /
                 div >
                 <
-                div ><h4 className='blue-dark p-3 rounded-top-4'>Withdraws</h4> { pendingWithdraws() } < /div> < /
+                div ><h4 className='blue-dark p-3 rounded-top-3'>Withdraws</h4> { pendingWithdraws() } < /div> < /
                 div >
             );
         };

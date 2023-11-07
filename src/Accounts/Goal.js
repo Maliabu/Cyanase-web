@@ -41,16 +41,19 @@ function Goal(props) {
     const getName = () => {
         let goalName = props.name
         let goalId = props.id
+        let goalNewNetworth = 0
         let goalNetworth = parseInt(props.networth)
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
         let created = (props.created).slice(0, 10)
         let percent = 100
         let progress = (percent - ((goalAmount - deposit) / goalAmount * percent)).toFixed(2)
-        if (goalNetworth === undefined){
-            goalNetworth = 0
+        if (isNaN(goalNetworth)){
+            goalNewNetworth = 0
+        } else{
+            goalNewNetworth = goalNetworth
         }
-        return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNetworth]
+        return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNewNetworth]
     }
     const { handleSubmit } = useForm();
     const getAccountType = () => {
@@ -329,7 +332,7 @@ function Step0(props) {
         <
         div className = " px-3 text-start" >
         <
-        div className = "flex-row p-3" >
+        div className = "flex-row d-none d-md-block d-lg-block p-3" >
         <
         h6 className = "bolder" > Goal Name: < /h6> <
         p className = "font-weight-lighter" > { props.name }...created {
@@ -362,7 +365,7 @@ function Step0(props) {
         <
         /
         div > <
-        div className = "row mt-2 p-3 bg-lighter" >
+        div className = "row mt-2 p-3 mx-lg-2 blue-darks rounded-3" >
         <
         div className = "col p-2" >
         <

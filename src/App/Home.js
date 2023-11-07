@@ -25,7 +25,7 @@ import Modal from 'react-bootstrap/Modal';
 import Alert from './Alerts'
 import Subscribe from '../Accounts/Subscribe'
 import Logout from '../Accounts/Logout';
-import { PROFILE_PHOTO } from '../apis';
+// import { PROFILE_PHOTO } from '../apis';
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
 import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
 
@@ -68,13 +68,13 @@ const MyHome = () => {
         // update the state to tab1
         setActiveTab("tab1");
     };
-    const myProfilePhoto = () => {
-        if(UserRequests().res.profile.profile_picture !== 404){
-            return {profilePicture}
-        } else {
-            return {PROFILE_PHOTO}
-        }
-    }
+    // const myProfilePhoto = () => {
+    //     if(UserRequests().res.profile.profile_picture !== 404){
+    //         return {profilePicture}
+    //     } else {
+    //         return {PROFILE_PHOTO}
+    //     }
+    // }
     const handleTab2 = () => {
         // update the state to tab2
         setActiveTab("tab2");
@@ -170,7 +170,7 @@ const MyHome = () => {
         <
         div className = 'col-3' >
         <
-        img src = {myProfilePhoto}
+        img src = {profilePicture}
         className = "mt-1 rounded-circle object-fit-cover img-head"
         width = '100%'
         height = '80%'

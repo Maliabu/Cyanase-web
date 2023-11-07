@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { ValidateForms } from "../Auth/ValidateForms";
 import { preloader,fail,catch_errors,success } from "../Api/RequestFunctions";
 import axios from "axios";
-import { API_URL_GOAL } from "../apis";
+import { API_URL_GOAL, TOKEN } from "../apis";
 
 function ResGoals1(props) {
     const [step, setStep] = useState(1)
@@ -73,20 +73,14 @@ function ResGoals1(props) {
         setStep(step - 1)
     }
 
-    function onSubmit(e) {
+    function onSubmit() {
         preloader()
-        e.preventDefault();
-        let form_data = new FormData();
-        form_data.append('goal_name', this.state.goal_name);
-        form_data.append('goal_period', this.state.goal_period);
-        form_data.append('goal_amount', this.state.goal_amount);
-        form_data.append('deposit_type', this.state.deposit_type);
-        form_data.append('deposit_rate', this.state.deposit_rate);
-        form_data.append('deposit_reminder_day', this.state.deposit_reminder_day);
-        axios.post(`${API_URL_GOAL}`, form_data, {
-                headers: {
-                    "Content-Type": "application/json"
-                }
+        axios.post(`${API_URL_GOAL}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                'Accept': 'application/json',
+                "Authorization": `Token ${ TOKEN }`
+            }
             })
             .catch(function(error) {
                 catch_errors(error)
@@ -97,9 +91,9 @@ function ResGoals1(props) {
                 } else if (response.status === 200 && response.data.success === false) {
                     fail(response.data.message)
                 } else {
-                    success("Goal to "+this.state.goal_name+" created successfully", "/home", "successful");
-                    const token = response.data.token
-                    localStorage.setItem('token', token)
+                    success("Goal to "+formData.goal_name+" created successfully", "/home", "successful");
+                    // const token = response.data.token
+                    // localStorage.setItem('token', token)
                 }
             });
     }
@@ -124,8 +118,8 @@ function ResGoals1(props) {
                 Button variant = "warning"
                 className = 'shadow text-center'
                 id = 'successMessage'
-                type = "button" >
-                Submit <
+                type = "submit" >
+                Create this goal <
                 /Button> < /
                 div >
             )

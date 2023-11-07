@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests } from '../Api/MainRequests'
+import { MainRequests, PersonalRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests } from '../Api/MainRequests'
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,6 +25,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [name, setName] = useState([])
     const [phone, setPhone] = useState([])
     const [withdraws, setWithdraw] = useState([])
+    const [pendingWithdraw, setPendingWithdraw] = useState([])
     const [dates, setDates] = useState([])
     const [totalDeposit, setTotalDeposit] = useState(0);
     const [totalNetworth, setTotalNetworth] = useState(0);
@@ -79,7 +80,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setEmail(res.email)
         });
         PendingWithdrawRequests().then(res => {
-            setWithdraw(res)
+            setPendingWithdraw(res)
+        });
+        WithdrawRequests().then(res => {
+            setWithdraw(res[1])
         })
     }, []);
     let depositTotal = 0
@@ -88,7 +92,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     ))
     const wwithdraw = () => {
         let total_withdraws = []
-        withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
+        pendingWithdraw.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
         let sum = 0;
         for (let i = 0; i < total_withdraws.length; i++) {
             sum += total_withdraws[i];
@@ -97,7 +101,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     }
     const wwithdraws = () => {
         let total_withdraws = []
-        withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
+        pendingWithdraw.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
         let withdraw = total_withdraws.length
         return withdraw
     }
@@ -148,6 +152,11 @@ const Main = ({ id, activeTab, children, ...props }) => {
         stroke: {
             curve: 'smooth',
         }
+    }
+    const networthy = () => {
+        let networth = 0
+        networth = totalNetworth - withdraws
+        return networth
     }
     const pendingWithdraws = () => {
         if (withdraws.length === 0) {
@@ -223,7 +232,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { totalNetworth.toLocaleString() } < /h2></div >
+            h2 className = "px-2 font-lighter" > { networthy().toLocaleString() } < /h2></div >
             <
             img src = { Networths }
             className = "pt-2"

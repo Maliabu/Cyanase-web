@@ -80,9 +80,9 @@ const ResGoals = () => {
         } else {
             return(
                 <
-            div className = "scroll-y2 pb-lg-5 mb-lg-5" > {
+            div className = "scroll-y2" > {
                 span.map(goal => ( <
-                    div className = "p-4 bg-white res-home rounded-4 mt-3"
+                    div className = "p-4 shadow-sm res-home rounded-4 mt-1"
                     key = { goal.goal_id } > <
                     div className = "d-flex flex-row flex" > <
                     span className = "mt-1" > <
@@ -124,7 +124,7 @@ const ResGoals = () => {
     }
 
     let progress
-        return ( < div className = 'p-2' >
+        return ( < div className = 'p-1' >
             <
             div className = 'p-1' ><
             div className = 'row d-none p-2 px-3' > <
@@ -136,11 +136,13 @@ const ResGoals = () => {
             className = "rounded-circle object-fit-cover mt-2 img-head"
             alt = "investors" / > < /div> < /
             div >
-            <div><h4 className='blue-dark p-3 rounded-top-4'>{span.length} Goals</h4>{myGoals()}</div>
+            <div><h4 className='blue-dark p-3 rounded-top-3'>{span.length} Goals</h4>{myGoals()}</div>
              <
             Modal show = { show3 }
             onHide = { handleClose3 }
-            dialogClassName = "" > <
+            dialogClassName = "" ><Modal.Header className='modaling blue-dark' closeButton closeVariant='white'>
+            <Modal.Title>{holdName}</Modal.Title>
+            </Modal.Header> <
             Goal id = { holdId }
             name = { holdName }
             country = {country}

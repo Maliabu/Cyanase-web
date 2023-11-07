@@ -108,6 +108,10 @@ body::-webkit-scrollbar {
     border-radius: 25% !important;
     padding: 0% !important;
 }
+.modaling{
+    padding-right: 0% !important;
+    margin-right: 0% !important;
+}
 
 [title="twitt"]::before {
     content: '\f099';
