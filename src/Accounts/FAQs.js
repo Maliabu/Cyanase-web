@@ -75,7 +75,7 @@ const FAQs = (props) => {
         h6 onClick = {
             () => { handleShow(true) }
         }
-        className = "rounded-3 warning p-3 w-25 text-center mt-5" > Ask a Question < /h6>  <
+        className = "rounded-3 d-none warning p-3 w-25 text-center mt-5" > Ask a Question < /h6>  <
         Modal show = { show }
         dialogClassName = "my-modal1"
         onHide = { handleClose } >
