@@ -360,7 +360,7 @@ const MyHome = () => {
         div > < /
         div >
         <
-        div className = 'text-end pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bg-lighter active p-2 px-5 mx-2 rounded-2'
+        div className = 'text-end pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bk-warning mx-2 rounded-3 p-2 px-3'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
         h6 > < /div > <
         TabContent id = "tab1"
