@@ -4,6 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 import Subscription from "../payment/Subscription";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from "react";
+import { autoClickable } from "../Api/RequestFunctions";
 
 function Subscribe(props) {
     const [step, setStep] = useState(1)
@@ -44,7 +45,7 @@ function Subscribe(props) {
     const submitButton = () => {
         if (step === 2) {
             return ( <
-                div className = 'row justify-content-center' > <
+                div className = 'justify-content-center mx-3' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
@@ -57,6 +58,7 @@ function Subscribe(props) {
                 } > hey < /h6>   <
                 Button variant = "warning"
                 className = 'shadow text-center mb-3'
+                onClick={()=> autoClickable()}
                 id = 'successMessage'
                 type = "button" >
                 Submit <

@@ -3,7 +3,6 @@ import '../App.css';
 import './style.scss';
 import { PendingWithdrawRequests } from '../Api/MainRequests';
 import React, { useState, useEffect } from "react";
-import { FaLightbulb } from 'react-icons/fa';
 import { PROFILE_PHOTO } from '../apis';
 import { Image, Filter } from 'react-iconly';
 

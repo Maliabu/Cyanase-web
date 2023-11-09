@@ -17,9 +17,6 @@ const ResSettings = (props) => {
     const [contacts, setContacts] = useState(false);
     const [faqs, setFaqs] = useState(false);
     const [riskProfile, setRiskProfile] = useState(false);
-    const handleTab2 =()=>{
-        return(<Logout/>)
-    }
     if (accountSetting) {
         return ( < ResAccount changeAccountSetting = { setAccountSetting }
             / >

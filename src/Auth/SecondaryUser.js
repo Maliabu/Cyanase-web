@@ -147,19 +147,19 @@ function SecondaryUser(props) {
     const submitButton = () => {
         if (step === 3) {
             return ( <
-                div className = 'row justify-content-center' > <
+                div className = 'mx-3 text-center' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <
                 Button variant = "warning"
-                className = 'shadow text-center'
+                className = 'shadow text-center my-2'
                 id = 'successMessage'
                 type = "submit" >
                 Submit <

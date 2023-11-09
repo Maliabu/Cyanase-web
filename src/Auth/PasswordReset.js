@@ -32,7 +32,7 @@ class PasswordReset extends Component {
             })
             .then(function(response) {
                 if (!response) {
-                    fail("Something went wrong...")
+                    fail("Something went wrong, Please check that your email is correct and try again")
                 } else if (response.status === 200 && response.data.success === false) {
                     fail(response.data.message)
                 } else {

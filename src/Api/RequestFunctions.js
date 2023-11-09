@@ -46,12 +46,12 @@ export const fail = (error) => {
     document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
     setTimeout(() => {
         document.getElementById("errorMessage").style.display = 'none'
-    }, 6000);
+    }, 5000);
     setTimeout(() => {
         document.getElementById("successMessage").innerHTML = "Submit"
         document.getElementById("successMessage").style.backgroundColor = "orange"
         document.getElementById("successMessage").style.color = "black"
-    }, 7000);
+    }, 6000);
 }
 export const catch_errors = (error) => {
     if (error.response) {
@@ -84,5 +84,5 @@ export const autoClickable = () =>{
     document.getElementById("errorMessage").innerText = "Please make payment before submission..."
     setTimeout(() => {
         document.getElementById("errorMessage").style.display = 'none'
-    }, 3000);
+    }, 2000);
 }

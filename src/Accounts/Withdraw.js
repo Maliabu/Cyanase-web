@@ -86,7 +86,7 @@ class Withdraw extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep === 4) {
             return ( <
-                div className = 'row justify-content-center' > <
+                div className = 'mx-3 justify-content-center' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {

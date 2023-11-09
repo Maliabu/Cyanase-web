@@ -2,7 +2,6 @@ import { MainRequests, PersonalRequests, UserRequests, GetRiskProfile, PendingWi
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Deposit from '../images/Path 80.png';
 import Networths from '../images/Path 3.png';
 import Chart from 'react-apexcharts';
 import './style.scss';
@@ -10,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Learn from '../Accounts/Learn';
 import Learn1 from '../Accounts/Learn1';
 import Withdraw from '../Accounts/Withdraw'
-import { Wallet, Image, Filter } from 'react-iconly';
+import { Image, Filter } from 'react-iconly';
 import { FaHandHoldingUsd } from 'react-icons/fa';
 import { getCurrency } from '../payment/GetCurrency';
 
@@ -92,15 +91,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
     span.map(goal => (
         depositTotal += parseInt(goal.deposit[0])
     ))
-    const wwithdraw = () => {
-        let total_withdraws = []
-        pendingWithdraw.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
-        let sum = 0;
-        for (let i = 0; i < total_withdraws.length; i++) {
-            sum += total_withdraws[i];
-        }
-        return sum
-    }
     const wwithdraws = () => {
         let total_withdraws = []
         withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))

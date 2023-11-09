@@ -120,14 +120,14 @@ function Learn1(props) {
         let payment_means = formData.payment_means;
         if (step === 4 && payment_means === "online") {
             return ( <
-                div className = 'row justify-content-center' > <
+                div className = 'mx-3 justify-content-center' > <
                 h6 id = "errorMessage"
-                className = 'py-2 mt-3 mx-5 rounded border border-danger text-center'
+                className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 w-50 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <

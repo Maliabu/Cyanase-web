@@ -63,18 +63,6 @@ function Goal1(props) {
             setStep(step + 1)
         }
     }
-    // const validate3 = () => {
-    //     let depositAmount = ValidateForms("deposit_amount")
-
-    //     if (depositAmount.length === 0) {
-    //         document.getElementById("errorFirst").style.display = "block"
-    //         document.getElementById("errorFirst").style.color = "crimson"
-    //         document.getElementById("errorFirst").innerText = "Deposit amount is required"
-    //     } else {
-    //         document.getElementById("errorFirst").style.display = "none"
-    //         setStep(step + 1)
-    //     }
-    // }
     const getDepositAmount = () => {
         let month = 12
         let week = 4
@@ -84,7 +72,7 @@ function Goal1(props) {
         if(depositRate === "weekly"){
             DepositAmount = DepositAmount / week
         } else {
-            DepositAmount = DepositAmount
+            DepositAmount = DepositAmount / 1
         }
         return DepositAmount
     }

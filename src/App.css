@@ -288,6 +288,11 @@ body::-webkit-scrollbar {
     width: 150px !important;
     margin: auto !important;
 }
+.warning-message {
+    color: rgb(255, 144, 18) !important;
+    border: 1px solid rgb(255, 144, 18) !important;
+    border-color: rgb(255, 144, 18) !important;
+}
 .warning-home {
     color: rgb(255, 144, 18) !important;
     cursor: pointer !important;

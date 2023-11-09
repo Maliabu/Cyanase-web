@@ -21,7 +21,7 @@ import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
 import { FaLightbulb} from 'react-icons/fa';
-import { Home, Wallet, Setting, Work, TimeCircle, Download, Star, AddUser } from 'react-iconly';
+import { Home, Wallet, Setting, TimeCircle, Download, Star, AddUser } from 'react-iconly';
 
 const ResHome = (props) => {
     const [activeTab, setActiveTab1] = useState("tab1");
@@ -29,13 +29,11 @@ const ResHome = (props) => {
     const [withdrawSetting, setWithdrawSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [deposit, setDeposit] = useState(0);
-    const [dollar, setDollar] = useState(0);
     const [graph, setGraph] = useState([])
     const [country, setCountry] = useState([])
     const [dates, setDates] = useState([])
     const [totalWithdraw, setTotalWithdraw] = useState([])
     const [networth, setDepositNetworth] = useState(0);
-    const [dollarNetworth, setDollarNetworth] = useState(0);
     let thisYear = new Date().getFullYear()
     const groupArrayObject = graph.reduce((group, obj) => {
         const { name, datas, date } = obj;
@@ -87,7 +85,7 @@ const ResHome = (props) => {
                     text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: [  '#FF9800', '#b7b7b7','#252859','#E91E63'],
+            colors: [  '#b7b7b7', '#FF9800', '#252859','#E91E63'],
             fill: {
                 type: "gradient",
                 gradient: {
@@ -111,9 +109,7 @@ const ResHome = (props) => {
         });
         MainRequests().then(res => {
             setDeposit(res[0]);
-            setDollar(res[1]);
             setGraph(res[4]);
-            setDollarNetworth(res[3]);
             setDates(res[5])
             setDepositNetworth(res[9]);
         })

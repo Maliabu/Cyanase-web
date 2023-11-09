@@ -58,7 +58,7 @@ function ResetPassword(props) {
                 })
                 .then(function(response) {
                     if (!response) {
-                        fail("Something went wrong...")
+                        fail("Something went wrong...Password not reset")
                     } else if (response.status === 200 && response.data.success === false) {
                         fail(response.data.message)
                     } else {
@@ -116,9 +116,9 @@ function ResetPassword(props) {
         key = "default-checkbox" >
             <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePassword}/></div> < /
         Form.Group ><
-        div className = 'row justify-content-center' > <
+        div className = 'text-center' > <
         Button variant = "warning"
-        className = 'shadow text-center'
+        className = 'shadow text-center my-2'
         id = 'successMessage'
         type = "submit" >
         Submit <

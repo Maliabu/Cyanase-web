@@ -83,26 +83,26 @@ class Login extends Component {
             <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePasswordVisibility}/></div>
             < /
             Form.Group > <
-            div className = 'row justify-content-center' > <
+            div className = 'mx-3 text-center' > <
             Button variant = "warning"
             className = 'shadow mt-2 text-center'
             id = 'successMessage'
             type = "submit" >
             Login <
-            /Button> < /
-            div >
-            <
-            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p > <
+            /Button><
             h6 id = "errorMessage"
             className = 'py-2 mt-3 rounded border border-danger text-center fade-in'
             style = {
                 { display: 'none' }
             } > hey < /h6><
             h6 id = "infoMessage"
-            className = 'py-2 mt-3 rounded warning text-center fade-in'
+            className = 'py-2 mt-3 rounded warning-message text-center fade-in'
             style = {
                 { display: 'none' }
             } > hey < /h6>  < /
+            div >
+            <
+            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p >  < /
             Form >
             <
             Form className = 'd-none'
@@ -139,36 +139,27 @@ class Login extends Component {
             <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={togglePasswordVisibility}/></div>
             < /
             Form.Group > <
-            div className = 'row justify-content-center' > <
+            div className = 'mx-3 justify-content-center' > <
             Button variant = "warning"
             className = 'shadow mt-2 text-center'
             id = 'successMessage'
             type = "submit" >
             Login <
-            /Button> < /
-            div >
-            <
-            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p > <
+            /Button><
             h6 id = "errorMessage"
             className = 'py-2 mt-3 rounded border border-danger text-center fade-in'
             style = {
                 { display: 'none' }
             } > hey < /h6><
             h6 id = "infoMessage"
-            className = 'py-2 mt-3 rounded warning text-center fade-in'
+            className = 'py-2 mt-3 rounded warning-message text-center fade-in'
             style = {
                 { display: 'none' }
             } > hey < /h6>  < /
-            Form >
+            div >
             <
-            div className = "mt-5 bg-light d-none rounded row justify-content-center" >
-            <
-            img className = 'rounded-circle text-center avatar border border-warning'
-            src = "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg"
-            alt = "investors" / > <
-            h4 className = 'avatar-name text-center mt-2 p-3 bg-text'
-            id = 'guest' > Guest < /h4> < /
-            div > < /div> < /
+            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p >  < /
+            Form > < /div> < /
             div >
         );
     }

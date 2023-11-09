@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -47,18 +48,6 @@ const Visuals = () => {
             sum += total_withdraws[i];
         }
         return sum
-    }
-    const ddeposit = () => {
-        let total_withdraws = []
-        deposits.map(deposit => (total_withdraws.push(parseInt(deposit.deposit_amount))))
-        let sum = 0;
-        for (let i = 0; i < total_withdraws.length; i++) {
-            if (isNaN(total_withdraws[i])) {
-                total_withdraws[i] = 0
-            }
-            sum += total_withdraws[i];
-        }
-        return sum.toLocaleString()
     }
     const groupedData = deposits.reduce((result, entry) => {
         const { date, updated, deposit_amount } = entry;
@@ -132,11 +121,10 @@ const Visuals = () => {
             monthData.y = monthData.y.reduce((total, value) => total + value, 0);
         });
     });
-    console.log(JSON.stringify(groupedData2))
     let total1 = 0
     groupedData2.forEach(yearData => {
     yearData.total = yearData.data.reduce((total, monthData) => total + monthData.y, 0);
-    total1 += yearData.total
+    total1 = total1 + yearData.total
     });
     
     // console.log(JSON.stringify(groupedData, null, 4));

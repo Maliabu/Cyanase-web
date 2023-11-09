@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { PROFILE_PHOTO } from '../apis';
 import { AddUser, ArrowLeftSquare } from 'react-iconly';
 import ProgressBar from '@ramonak/react-progress-bar';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
 import ResGoals1 from './ResGoals1'
 
