@@ -300,6 +300,19 @@ body::-webkit-scrollbar {
     width: 100px !important;
     margin: auto !important;
 }
+.warning-goals {
+    color: rgb(255, 255, 255) !important;
+    cursor: pointer !important;
+    border: none !important;
+    background-color: rgb(255, 144, 18) !important;
+    box-shadow: 2px 2px 3px #e6e6e6;
+    width:80px !important;
+    font-size: small !important;
+    padding: 10px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin: auto !important;
+}
 .warning-learn-about {
     color: rgb(255, 144, 18) !important;
     border: 1px solid rgb(255, 144, 18) !important;
@@ -337,8 +350,8 @@ body::-webkit-scrollbar {
     background-color: rgb(255, 144, 18) !important;
     padding: 3px;
     padding-bottom: 14px;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
     border-radius: 50%;
 }
 

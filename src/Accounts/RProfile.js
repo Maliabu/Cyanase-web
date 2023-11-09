@@ -34,7 +34,7 @@ class RProfile extends React.Component {
         return ( < div > < div className = "row" >
             <
             div className = "col-6" > < Activity size = "xlarge"
-            className = "active mx-5"
+            className = "active mx-3"
             set = "broken" / > < /div> <
             div className = "col-6 text-end" > <
             FaRegWindowClose className = "d-none d-xs-block text-warning p-2 mx-lg-5 mx-3 px-2 rounded-circle"
@@ -371,7 +371,7 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep !== 0) {
             return ( <
-                h6 className = "py-3 text-start warning rounded-3"
+                h6 className = " text-start warning rounded-3"
                 type = "button"
                 onClick = { this._prev } >
                 Previous <
@@ -394,14 +394,14 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep === 0) {
             return ( < div className = "bg-light m-0 py-5 text-center" > <
-                Button className = "py-3 my-2 text-center m-0 bk-warning rounded-3"
+                Button className = " my-2 text-center m-0 bk-warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Start taking the Risk profile <
                 /Button>  </div > )
         } else if (currentStep < 11) {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = " my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -577,7 +577,7 @@ class RProfile extends React.Component {
             getResult = { this.getResult() }
             score = { this.scoreResult() }
             resourceAllocation = { this.allocateResources() }
-            /> { this.nextButton() } { this.previousButton() }{this.submitButton()}< /
+            />{ this.previousButton() } { this.nextButton() } {this.submitButton()}< /
             form > < /
             React.Fragment >
         );

@@ -6,6 +6,7 @@ import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { getCurrency } from "../payment/GetCurrency";
+import { ValidateForms } from "../Auth/ValidateForms";
 
 class Withdraw extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class Withdraw extends React.Component {
             goalid: this.props.goalid,
             phone: this.props.phone,
             account_bank: "",
+            phone_number: "",
             account_number: "",
             beneficiary_name: this.props.fullname
         }
@@ -54,6 +56,32 @@ class Withdraw extends React.Component {
         return accountType
     }
 
+    validate2 = () => {
+        let withdrawChannel = this.state.withdraw_channel
+
+        if(withdrawChannel === "bank"){
+            let AccNumber = ValidateForms("account_number")
+            if (AccNumber.length === 0) {
+                document.getElementById("errorAcc").style.display = "block"
+                document.getElementById("errorAcc").style.color = "crimson"
+                document.getElementById("errorAcc").innerText = "account number is required"
+            } else {
+                document.getElementById("errorAcc").style.display = "none"
+                this.handleSubmit()
+            }
+        } else{
+            let PhoneNumber = ValidateForms("phone_number")
+            if (PhoneNumber.length === 0) {
+                document.getElementById("errorPhone").style.display = "block"
+                document.getElementById("errorPhone").style.color = "crimson"
+                document.getElementById("errorPhone").innerText = "phone number is required"
+            } else {
+                document.getElementById("errorPhone").style.display = "none"
+                this.handleSubmit()
+            }
+        }
+    }
+
     submitButton = () => {
         let currentStep = this.state.currentStep;
         if (currentStep === 4) {
@@ -72,7 +100,7 @@ class Withdraw extends React.Component {
                 Button variant = "warning"
                 className = 'shadow text-center my-2'
                 id = 'successMessage'
-                onClick = { this.handleSubmit }
+                onClick = { () => this.validate2() }
                 type = "button" >
                 Submit <
                 /Button> < /
@@ -84,9 +112,8 @@ class Withdraw extends React.Component {
     handleSubmit = () => {
         preloader()
         let form_data = new FormData();
-        form_data.state.currency = getCurrency(this.props.country)
         form_data.append('withdraw_channel', this.state.withdraw_channel);
-        form_data.append('currency', this.state.currency);
+        form_data.append('currency', getCurrency(this.props.country));
         form_data.append('withdraw_category', this.state.withdraw_category);
         form_data.append('withdraw_amount', this.state.withdraw_amount);
         form_data.append('account_type', this.getAccountType());
@@ -117,7 +144,7 @@ class Withdraw extends React.Component {
 
         if (this.state.withdraw_channel === "mobile money") {
             form_data.append('account_number', this.state.account_number)
-            form_data.append('account_bank', this.state.account_bank)
+            form_data.append('account_bank', "MPS")
             form_data.append('beneficiary_name', this.state.beneficiary_name)
             axios.post(`${API_URL_MM_WITHDRAW}`, form_data, {
                     headers: {
@@ -200,6 +227,18 @@ class Withdraw extends React.Component {
         }
         return null;
     }
+    validate1 = () => {
+        let withdrawAmount = ValidateForms("withdraw_amount")
+
+        if (withdrawAmount.length === 0) {
+            document.getElementById("errorFirst").style.display = "block"
+            document.getElementById("errorFirst").style.color = "crimson"
+            document.getElementById("errorFirst").innerText = "withdraw amount is required"
+        } else {
+            document.getElementById("errorFirst").style.display = "none"
+            this._next()
+        }
+    }
 
     nextButton() {
         let currentStep = this.state.currentStep;
@@ -220,7 +259,7 @@ class Withdraw extends React.Component {
             if ((networth - withdrawAmount) < threshold) {
                 return ( <div className="px-5"><
                     h6 className = "status p-2 rounded-3" >
-                    You cannot withdraw more than you have. Your networth might not have matured yet. Try again later <
+                    You cannot withdraw more than you have. If your networth has not yet matured, please be patient and try again later <
                     /h6></div>
                 )
             }
@@ -234,7 +273,7 @@ class Withdraw extends React.Component {
             return ( <
                 h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
-                onClick = { this._next } >
+                onClick = { ()=>this.validate1() } >
                 Next <
                 /h6>        
             )
@@ -448,7 +487,12 @@ function Step3(props) {
         onChange = { props.handleChange }
         name = "withdraw_amount"
         id = 'phone'
-        required placeholder = "0.00" / >
+        required placeholder = "0.00" / ><
+        p id = "errorFirst"
+        className = 'p-2 rounded-2 px-3 bg-red'
+        style = {
+            { display: 'none' }
+        } > hey < /p>
         <
         Form.Control.Feedback type = "invalid" >
         This field is required. <
@@ -475,13 +519,18 @@ function Step4(props) {
             onChange = { props.handleChange }
             name = "account_number"
             id = 'phone'
-            required placeholder = "0000000000" / >
+            required placeholder = "0000000000" / ><
+            p id = "errorAcc"
+            className = 'p-2 rounded-2 px-3 bg-red'
+            style = {
+                { display: 'none' }
+            } > hey < /p>
             <
             Form.Control.Feedback type = "invalid" >
             This field is required. <
             /Form.Control.Feedback> < /
             Form.Group > <
-            Form.Group className = "mb-3 p-3" >
+            Form.Group className = "mb-3 p-3 d-none" >
             <
             Form.Label > < h6 > Account Bank(Code) < /h6> < /Form.Label > <
             Form.Control type = "text"
@@ -505,15 +554,20 @@ function Step4(props) {
         Form.Label > < h6 > Confirm Phone Number < /h6> < /Form.Label > <
         Form.Control type = "number"
         onChange = { props.handleChange }
-        name = "account_number"
+        name = "phone_number"
         id = 'phone'
         required placeholder = { props.phone }
-        / > <
+        / ><
+        p id = "errorPhone"
+        className = 'p-2 rounded-2 px-3 bg-red'
+        style = {
+            { display: 'none' }
+        } > hey < /p> <
         Form.Control.Feedback type = "invalid" >
         This field is required. <
         /Form.Control.Feedback> < /
         Form.Group > <
-        Form.Group className = "mb-3 p-3" >
+        Form.Group className = "mb-3 p-3 d-none" >
         <
         Form.Label > < h6 > Account Bank(Mobile Money Option) < /h6> < /Form.Label > <
         Form.Control type = "text"

@@ -12,6 +12,7 @@ import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { options } from "./InvestmentOps";
+import { ValidateForms } from "../Auth/ValidateForms";
 
 function Learn1(props) {
     const globalRefId = "";
@@ -33,7 +34,7 @@ function Learn1(props) {
         const value = event.target.value;
         setFormData({...formData, [name]: value });
     };
-    console.log(formData)
+    console.log(document.getElementsByName("deposit_amount"))
 
     const getTotalDeposit = () => {
         let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
@@ -82,6 +83,18 @@ function Learn1(props) {
         //         }
         //     });
 
+    }
+    const validate1 = () => {
+        let depositAmount = ValidateForms("deposit_amount")
+
+        if (depositAmount.length === 0) {
+            document.getElementById("errorFirst").style.display = "block"
+            document.getElementById("errorFirst").style.color = "crimson"
+            document.getElementById("errorFirst").innerText = "deposit amount is required"
+        } else {
+            document.getElementById("errorFirst").style.display = "none"
+            setStep(step + 1)
+        }
     }
     const _next = () => {
         setStep(step + 1)
@@ -158,6 +171,14 @@ function Learn1(props) {
                 type = "button"
                 onClick = { _next } >
                 Continue <
+                /h6>        
+            )
+        }
+        if (step === 3) {
+            return ( <
+                h6 className = "py-3 my-2 text-center warning rounded-3"
+                onClick = { () => validate1() } >
+                Next <
                 /h6>        
             )
         }
@@ -372,7 +393,12 @@ function Step3(props) {
             onChange = { props.handleChange }
             name = "deposit_amount"
             id = 'phone'
-            required placeholder = "0.00" / >
+            required placeholder = "0.00" / ><
+            p id = "errorFirst"
+            className = 'p-2 rounded-2 px-3 bg-red'
+            style = {
+                { display: 'none' }
+            } > hey < /p>
             <
             Form.Control.Feedback type = "invalid" >
             This field is required. <
@@ -391,7 +417,12 @@ function Step3(props) {
         onChange = { props.handleChange }
         name = "deposit_amount"
         id = 'phone'
-        required placeholder = "0.00" / >
+        required placeholder = "0.00" / ><
+        p id = "errorFirst"
+        className = 'p-2 rounded-2 px-3 bg-red'
+        style = {
+            { display: 'none' }
+        } > hey < /p>
         <
         Form.Control.Feedback type = "invalid" >
         This field is required. <

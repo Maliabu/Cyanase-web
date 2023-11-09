@@ -17,6 +17,16 @@ const ResRiskProfile = (props) => {
             }
         });
     }, []);
+    const editOrComplete = () =>{
+        let button = ""
+        if(complete === "Complete"){
+            button = "Edit your Risk Profile"
+            return button
+        } else {
+            button = "Take your Risk Profile"
+            return button
+        }
+    }
     return ( < div><div className="p-3"> <
         ArrowLeftSquare size = { 30 }
         className = " m-3 mt-3"
@@ -50,8 +60,8 @@ const ResRiskProfile = (props) => {
         complete
     } < /span> <
     div className = "p-5" > <
-        p className = "p-3 bk-warning rounded-3"
-    onClick = { handleShow2 } > Complete your Risk profile < /p> </div > < /
+        p className = " bk-warning rounded-3"
+    onClick = { handleShow2 } > {editOrComplete()} < /p> </div > < /
     div > < /
     div > <
         Modal show = { show2 }

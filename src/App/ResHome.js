@@ -176,20 +176,22 @@ const ResHome = (props) => {
             )
         } else{
             return(
-                <div className='p-4 mt-2 bg-light rounded-4 carousel slide'>
+                <div className='p-3 mt-2 bg-light rounded-4 carousel slide'>
                 <Carousel touch={true} interval={null} controls={false}>
                     {
-                        result.map((option, index)=>(
-                            <Carousel.Item>
+                        result.map(option=>(
+                            <Carousel.Item key={1}>
                                 <div className='row text-dark'>
-                                    <div className='col-6'><p className='bolder'>{option.name}</p></div>
+                                    <div className='col-5'><p className='bolder'>{option.name}</p></div>
                                     <
-                            div className = "col" > < h6 className = "bolder active" > Rate: {
+                            div className = "col-2" > < h5 className = "bolder" > {
                                 (option.data).length
-                            } < /h6> < /div > <
-                            div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
-                                (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
-                            } < /h6> < /div >
+                            }<Star size="small" className="active" set="bulk"/> < /h5> < /div > <
+                            div className = "col text-center" ><h6 className='bolder'>Total Investment:<
+            div className = "d-flex flex-row flex justify-content-center m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
+            h4 className = "px-1 font-lighter" > {
+                                ((summ(option.data)) * 1000).toLocaleString()
+                            } < /h4></div ></h6> < /div >
                                 </div>
                             </Carousel.Item>
                         ))
@@ -208,7 +210,7 @@ const ResHome = (props) => {
         if (result.length === 0) {
             return(
                 <div className='p-2 px-3'>
-                <div className='p-2 bg-light rounded-4 row justify-content-center'>
+                <div className='p-2 bg-lighter rounded-4 row justify-content-center'>
                     <div className='col-4 p-2'>
                         <h6 className='bolder'>Top Investment classes Performance Rates</h6>
                     </div>
@@ -222,7 +224,7 @@ const ResHome = (props) => {
             div className = "d-flex flex-row flex justify-content-center" >  <
             h2 className = "px-1" > 12 < /h2>< p> % < /p></div >
                             </div>
-                            <div className='col p-2 rounded-4 bg-lighter'>
+                            <div className='col p-2 rounded-4 bg-light'>
                             <
             div className = "d-flex flex-row flex justify-content-center" > <Star size="small" className="active" set="bulk"/> <h6>Unit Trusts</h6></div >
                             
@@ -257,7 +259,7 @@ const ResHome = (props) => {
         return sum
     }
     const Main = () => {
-        return ( < div className = 'p-1 bg-lighter res-home' > < div className = "bg-white text-dark p-2 rounded-4" >
+        return ( < div className = 'p-1 bg-lighter res-home' > < div className = "bg-white text-dark px-2 py-1 rounded-4" >
             <
             div className = 'd-flex mt-2' >
             <
@@ -294,13 +296,11 @@ const ResHome = (props) => {
             div className = 'blue-darks d-flex rounded-4' >
             <
             span className = 'text-center rounded-4 wide-60' > <
-            p className = "bolder mt-2" > < Wallet size = "medium"
-            className = 'text-warning d-none' /
-            >
+            span className = "bolder mt-2" > 
             <
             br / > Deposit <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit.toLocaleString() }  < /
-            h2 > < /div > < /p > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
+            h2 > < /div > < /span > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
             onClick = {
                 handleTab5
             } >
@@ -311,15 +311,12 @@ const ResHome = (props) => {
             div className = '' > {myInvestmentsGraph()}</div > <
             div className = 'blue-darks d-flex rounded-4' >
             <
-            span className = ' rounded-4 wide-60 mx-1' > <
-            p className = "bolder mt-2 text-center" > < Work size = "15"
-            set = 'broken'
-            className = 'text-warning d-none' /
-            >
+            span className = ' rounded-4 wide-60 mx-1 text-center' > <
+            span className = "bolder m-2" > 
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /p>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
+            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
             onClick = {
                 () => { setWithdrawSetting(true) }
             } >
@@ -333,57 +330,19 @@ const ResHome = (props) => {
             className = "w-100 d-none"
             type = "area"
             height = { 400 }
-            /></div >
-            <
-            p className = 'my-3 d-none bolder mx-2' > Dollar Account < /p> <
-            div className = 'd-flex d-none' >
-            <
-            span className = 'shadow-lg rounded-4 wide-40' > <
-            p className = "bolder text-center mt-2" > < Wallet size = "15"
-            className = 'text-warning d-none' /
-            >
-            <
-            br / > Deposit <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > USD < /p> <
-            h5 className = "px-1" > { dollar } < /h5></div > < /p> < /span > <
-            span className = 'shadow-lg rounded-4 wide-60 mx-1' > <
-            p className = "bolder text-center mt-2" > < Work size = "15"
-            className = 'text-warning d-none' /
-            >
-            <
-            br / > Networth <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'text-warning' > USD < /p> <
-            h5 className = "px-1" > { dollarNetworth } < /h5></div > < /p>  < /span > < /
-            div >
+            /></div > 
             <
             div className = 'd-flex mt-2' > < FaLightbulb size = "35"
             className = 'mt-3 mx-2 p-2 rounded-circle light-res-home active' / >
             <
             div className = 'rounded-4 bg-lighter wider' >
             <
-            p className = "mx-4 mt-2" > Tips: <
-            div className = " justify-content-center" > <
-            span className = "px-1" > Dont save your money, invest < /span></div > < /p>< /
+            h6 className = "mx-4 mt-2" > Tips: <
+            p className='bolder' > Dont save your money, invest < /p></h6>< /
             div > < /
             div >
             <
             /
-            div >
-            <
-            p className = 'mx-3 bolder my-3 d-none' > Recent Activity < /p> <
-            div className = "row mt-3 d-none px-2 bg-lighter rounded-3 mx-1 " > <
-            div className = "col-8" >
-            <
-            p className = "pt-3 bolder" > Deposit Amount: < span className = "font-lighter" > UGX 10000 < /span> < div className = "active" > Personal Investment < /div > < /p > < /
-            div >
-            <
-            div className = "col-4 text-end" >
-            <
-            p className = "pt-3" > < span className = "bolder" > 21 Jan < /span> <
-            p > 3: 30 EAT <
-            /p>   < /
-            p > <
-            /div > < /
             div >
             <
             div className = 'bg-light my-5 shadow rounded-4 mt-2 p-2 ' >
@@ -395,7 +354,7 @@ const ResHome = (props) => {
             alt = "investors" / > < /div> < /
             div >
         )
-    };
+    }
     return ( <
         div >
 
@@ -404,7 +363,7 @@ const ResHome = (props) => {
         <
         div className = ' text-center grey-text' > <
         TabNavItem title = { < span > < Home size = "18"
-            set = 'bulk'
+            set = 'broken'
             className = 'mt-2' /
             >
             <
@@ -419,7 +378,7 @@ const ResHome = (props) => {
         div className = 'text-center mx-4 grey-text' >
         <
         TabNavItem title = { < span > < AddUser size = "24"
-            set = 'bulk'
+            set = 'broken'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab3 }
@@ -431,7 +390,7 @@ const ResHome = (props) => {
         div className = 'text-center grey-text' >
         <
         TabNavItem title = { < span > < Wallet size = "20"
-            set = 'bulk'
+            set = 'broken'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab5 }
@@ -442,7 +401,7 @@ const ResHome = (props) => {
         div className = 'text-center mx-4 grey-text' >
         <
         TabNavItem title = { < span > < Download size = "20"
-            set = 'bulk'
+            set = 'broken'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab2 }
@@ -454,7 +413,7 @@ const ResHome = (props) => {
         div className = 'text-center grey-text' >
         <
         TabNavItem title = { < span > < Setting size = "20"
-            set = 'bulk'
+            set = 'broken'
             className = 'mt-2' / > < /span>
         }
         onClick = { handleTab8 }

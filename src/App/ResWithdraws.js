@@ -49,7 +49,7 @@ const ResWithdraws = () => {
                 alt = "investors" / > < /div> < /
                 div >
                 <
-                div ><h4 className='blue-dark p-3 rounded-top-3'>Withdraws</h4> { pendingWithdraws() } < /div> < /
+                div ><h4 className='blue-darks p-3 rounded-top-3'>Pending Withdraws</h4> { pendingWithdraws() } < /div> < /
                 div >
             );
         };

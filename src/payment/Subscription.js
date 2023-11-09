@@ -63,7 +63,7 @@ export default function Subscription({ name, phone, amount, currency, email, dat
                 });
             }
         }
-        className = 'bk-warning active p-3 mx-5 rounded-3 mt-3'
+        className = 'bk-warning rounded-3 mt-3'
         id = "checkouts" >
         Checkout <
         /h6> < /

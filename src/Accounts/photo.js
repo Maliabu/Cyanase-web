@@ -51,9 +51,9 @@ class Photo extends React.Component {
             } <
             div className = "text-center" >
             <
-            FaCameraRetro size = "70"
+            FaCameraRetro size = "50"
             set = "broken"
-            className = 'm-lg-3 p-2 rounded-circle warning' / >
+            className = 'm-lg-3 p-2 active border rounded-circle border-warning' / >
             <
             h4 className = "my-3 text-center bolder" > Change Profile Photo < /h4> <
             Form.Group className = "mb-3 bg-white shadow-sm p-3" >

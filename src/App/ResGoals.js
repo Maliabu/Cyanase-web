@@ -80,23 +80,23 @@ const ResGoals = () => {
         } else {
             return(
                 <
-            div className = "scroll-y2" > {
+            div className = "scroll-y2 bg-lighter p-2" > {
                 span.map(goal => ( <
-                    div className = "p-3 shadow-sm res-home rounded-3 mt-1"
+                    div className = "p-3 bg-white res-home rounded-4 mt-1"
                     key = { goal.goal_id } > <
                     div className = "d-flex flex-row flex" > <
                     span className = "mt-1" > <
                     AddUser className = " rounded-circle bg-light active p-2"
                     size = "large" / > < /span>  <
-                    p className = "mx-4" > < span className = "active"
-                    onClick = {
-                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
-                    } > {
+                    p className = "mx-5 mt-1" > < span className = "active"
+                     > {
                         (goal.goal_name).toUpperCase()
                     } < /span><br/ > < p > created {
                         (goal.created).slice(0, 10)
                     } < /p >  < /
-                    p > < /
+                    p ><p className = 'rounded-3 warning-goals mt-0 text-center' onClick = {
+                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
+                    }>Deposit</p> < /
                     div >
                     <
                     p > Progress: {
@@ -124,18 +124,18 @@ const ResGoals = () => {
     }
 
     let progress
-        return ( < div className = 'p-1' >
+        return ( < div className = '' >
             <
             div className = 'p-1' >
-            <div><h4 className='blue-dark p-3 rounded-top-3'>Goals: {span.length}</h4>{myGoals()}</div><
+            <div><h4 className='blue-darks p-3 rounded-top-3'>Goals: {span.length}</h4><
             p onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = 'rounded-3 bk-warning text-center' > Add a new Goal < /p>
+            className = 'rounded-3 warning text-center' > Add a new Goal </p></div>{myGoals()}
              <
             Modal show = { show3 }
             onHide = { handleClose3 }
-            dialogClassName = "" ><Modal.Header className='modaling blue-dark' closeButton closeVariant='white'>
+            dialogClassName = "" ><Modal.Header className='modaling' closeButton>
             <Modal.Title>{holdName}</Modal.Title>
             </Modal.Header> <
             Goal id = { holdId }

@@ -156,7 +156,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         onClick = {
             () => { props.handletab1() }
         }
-        className = "my-3 mx-2" / >
+        className = "my-1 mx-2" / >
         <
         div className = 'row d-none p-2 px-3' > <
         div className = 'col-10 bg-lighter rounded-4' > <

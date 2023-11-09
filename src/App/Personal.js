@@ -289,7 +289,7 @@ const Personal = ({...props }) => {
                 div > <
                     div className = " mt-2 bk-warning text-center rounded-3"
                 onClick = { handleShow1 } >
-                    New Goal < /div>  <
+                    Add a Goal < /div>  <
                 div className = " p-1 pb-5 scroll-y" > {
                     span.map(goal => ( <
                         div className = "p-3 shadow-sm res-home rounded-4 mt-3"
