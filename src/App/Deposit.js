@@ -52,7 +52,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         Wallet size = "xlarge"
         set = "broken"
-        className = 'mx-2 rounded-circle warning p-2' / > <
+        className = 'mx-2 rounded-circle active border border-warning p-2' / > <
         h1 className = " p-3" > Deposit < /h1>  <
         div className = "" >
         <
@@ -60,7 +60,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         for you here.Make your deposit here. < /h6> < /
         div > <
         div className = "d-flex flex-row flex justify-content-center" > <
-        h6 className = "px-5 py-3 mt-3 mx-2 bk-warning rounded-3"
+        h6 className = " mt-3 warning rounded-3"
         onClick = { handleShow2 } >
         Make a Deposit < /h6> </div >
         <
@@ -98,7 +98,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 px-3 mt-3 rounded-circle text-center bg-lighter" > 1 < /
+        p className = "py-2 px-3 mt-3 rounded-circle text-center bg-lighter" > 1 < /
         p >
         <
         /
@@ -112,7 +112,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 px-3 mt-3 rounded-circle text-center bg-lighter" > 2 < /
+        p className = "py-2 px-3 mt-3 rounded-circle text-center bg-lighter" > 2 < /
         p >
         <
         /
@@ -127,7 +127,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         div className = "col-2" >
         <
-        p className = "p-2 mt-3 px-3 rounded-circle text-center bg-lighter" > 3 < /
+        p className = "py-2 mt-3 px-3 rounded-circle text-center bg-lighter" > 3 < /
         p >
         <
         /
@@ -143,7 +143,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         h6 className = "text-center" > Your risk profile helps us invest your money accordingly,
         let us know what type of investor you are.Complete your profile and
         let us do the rest < /h6> <
-        h6 className = "text-center p-3 mt-3 rounded-3 bk-warning"
+        h6 className = "text-center mt-3 rounded-3 bk-warning"
         onClick = { props.handletab9 } > Complete your Risk Profile < /h6> < /
         div >
         <

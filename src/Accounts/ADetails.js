@@ -109,20 +109,18 @@ const ADetails = (props) => {
         /
         div >
         <
-        div className = "p-3 mt-3 px-5 rounded-3 warning" >
+        div className = " mt-3 bg-white" >
         <
-        h5 className = "bolder text-dark py-3" > Next Of Kin Details < /h5>  <
-        h6 > FirstName: < span className = "bolder text-dark" > { firstNok } < /span>  < /
+        h5 className = "bg-lighter rounded-3 text-dark p-3 my-3" > Next Of Kin Details < /h5>  <
+        h6 className="mx-3"> FirstName: < span className = "bolder text-dark mx-3" > { firstNok } < /span>  < /
         h6 > <
-        h6 > LastName: < span className = "bolder text-dark" > { lastNok } < /span>  < /
+        h6 className="mx-3"> LastName: < span className = "bolder text-dark mx-3" > { lastNok } < /span>  < /
         h6 > <
-        h6 > Email: < span className = "bolder text-dark" > { emailNok } < /span>  < /
+        h6 className="mx-3"> Email: < span className = "bolder text-dark mx-3" > { emailNok } < /span>  < /
         h6 > <
-        h6 > Phone: < span className = "bolder text-dark" > { phoneNok } < /span> < /
+        h6 className="mx-3"> Phone: < span className = "bolder text-dark mx-3" > { phoneNok } < /span> < /
         h6 > < /
-        div > <
-        p className = "bolder bolder mt-3" > Account Details: < span className = "text-danger" > Your account details are not changeable, contact support
-        for more information < /span></p > < /
+        div >  < /
         div >
         <
         div className = "col-6 px-5 text-center" > <
@@ -132,10 +130,12 @@ const ADetails = (props) => {
         <
         p className = "bolder bolder mt-5" > Account Type: < span className = "text-dark" > Personal < /span></p >
         <
-        h6 className = "warning text-center rounded-3 mt-3 mx-5 p-3"
+        h6 className = "warning text-center rounded-3 mt-3 p-3"
         onClick = { handleShow1 } > Change Photo < /h6> <
-        h6 className = "bg-danger text-white text-center rounded-3 mt-3 mx-5 active p-3"
-        onClick = { handleShow2 } > Delete Account < /h6> < /
+        h6 className = "bg-danger text-white d-none text-center rounded-3 mt-3 mx-5 active p-3"
+        onClick = { handleShow2 } > Delete Account < /h6><
+        p className = "bolder bolder mt-3" > Account Details: < span className = "text-danger" > Your account details are not changeable, contact support
+        for more information < /span></p > < /
         div >
         <
         Modal show = { show2 }

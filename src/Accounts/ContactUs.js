@@ -66,7 +66,7 @@ const ContactUs = (props) => {
         div className = "col-11 mt-3" >
         <
         h4 > Email Us < /h4> <
-        h6 > < p className = "grey-text" > support @cyanase.com < /p>  < /
+        h6 > < p className = "grey-text" > 'support@cyanase.com' < /p>  < /
         h6 > < /
         div >
         <

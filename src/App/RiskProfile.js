@@ -21,6 +21,16 @@ const RiskProfile = ({ id, activeTab, children }) => {
             }
         });
     }, []);
+    const editOrComplete = () =>{
+        let button = ""
+        if(complete === "Complete"){
+            button = "Edit your Risk Profile"
+            return button
+        } else {
+            button = "Take your Risk Profile"
+            return button
+        }
+    }
     return ( <
         div className="row mx-3"> <
         div className = "row p-1 bg-lighter px-2 rounded-4" >
@@ -51,8 +61,8 @@ const RiskProfile = ({ id, activeTab, children }) => {
             complete
         } < /span> < /
         h6 > <
-        h6 className = "py-3 px-5 mt-3 mx-5 bk-warning rounded-3"
-        onClick = { handleShow2 } > Complete Your Risk profile < /h6> < /
+        h6 className = " mt-3 bk-warning rounded-3"
+        onClick = { handleShow2 } > {editOrComplete()} < /h6> < /
         div > <
         Modal show = { show2 }
         onHide = { handleClose2 }

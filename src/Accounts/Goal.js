@@ -177,7 +177,6 @@ function Goal(props) {
 
     const nextButton = () => {
         let payment_means = formData.payment_means;
-        let deposit_category = formData.deposit_category;
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
         let goalName = props.name

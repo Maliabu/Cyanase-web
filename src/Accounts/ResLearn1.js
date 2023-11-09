@@ -68,25 +68,6 @@ function ResLearn1(props) {
 
     function onSubmit() {
         preloader()
-        // axios.post(`${API_URL_DEPOSIT}`, formData, {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data",
-        //             'Accept': 'application/json',
-        //             "Authorization": `Token ${ TOKEN }`
-        //         }
-        //     })
-        //     .catch(function(error) {
-        //         catch_errors(error)
-        //     })
-        //     .then(function(response) {
-        //         if (response.status === 200 && response.data.success === false) {
-        //             fail(response.data.message)
-        //         } else {
-        //             success("You have deposited successfully", "/home", "successful");
-        //             // localStorage.removeItem("ref_id")
-        //             // localStorage.removeItem("ref")
-        //         }
-        //     });
 
     }
     const _next = () => {

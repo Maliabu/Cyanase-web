@@ -61,7 +61,7 @@ function ResGoals1(props) {
         if(depositRate === "weekly"){
             DepositAmount = DepositAmount / week
         } else {
-            DepositAmount = DepositAmount
+            DepositAmount = DepositAmount / 1
         }
         return DepositAmount
     }
