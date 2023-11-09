@@ -139,7 +139,7 @@ function Goal1(props) {
                     { display: 'none' }
                 } > hey < /h6>   <
                 Button variant = "warning"
-                className = 'shadow text-center'
+                className = 'shadow text-center my-2'
                 id = 'successMessage'
                 type = "submit" >
                 Create this goal <
@@ -152,7 +152,7 @@ function Goal1(props) {
     const nextButton = () => {
         if (step === 1 || step === 4 || step === 5 || step === 6) {
             return ( <
-                h6 className = " py-3 text-center mx-5 warning rounded-3"
+                h6 className = " py-3 text-end my-2 warning rounded-3"
                 onClick = {
                    ()=> _next()
                 } >
@@ -161,7 +161,7 @@ function Goal1(props) {
         }
         if (step === 2) {
             return ( <
-                h6 className = " py-3 text-center mx-5 warning rounded-3"
+                h6 className = " py-3 text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate1()
                 } >
@@ -170,7 +170,7 @@ function Goal1(props) {
         }
         if (step === 3) {
             return ( <
-                h6 className = " py-3 text-center mx-5 warning rounded-3"
+                h6 className = " py-3 text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate2()
                 } >
@@ -182,7 +182,7 @@ function Goal1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 mx-5 text-center warning rounded-3"
+                h6 className = "py-3 text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <

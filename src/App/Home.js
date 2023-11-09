@@ -25,6 +25,7 @@ import Modal from 'react-bootstrap/Modal';
 import Alert from './Alerts'
 import Subscribe from '../Accounts/Subscribe'
 import Logout from '../Accounts/Logout';
+import { apiDocs } from '../apis';
 // import { PROFILE_PHOTO } from '../apis';
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
 import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
@@ -53,7 +54,7 @@ const MyHome = () => {
     useEffect(() => {
         UserRequests().then(res => {
             setName(res.first_name + " " + res.last_name)
-            setAccount(res.profile.user_type+" Account")
+            setAccount(res.profile.user_type)
             setCountry(res.profile.country)
             setPhone(res.profile.phoneno)
             setEmail(res.email)
@@ -63,6 +64,16 @@ const MyHome = () => {
             setSubStatus(res.status)
         })
     }, []);
+    const apiDocumentation = () =>{
+        if(account.toUpperCase() !== "PERSONAL"){
+            return(
+                <
+        div className = ' pt-3' ><a href={apiDocs}>< span className = 'warning rounded-3 p-2'> Api Documentation < /span> </a> < /div >
+            )
+        } else {
+            return null
+        }
+    }
     //  Functions to handle Tab Switching
     const handleTab1 = () => {
         // update the state to tab1
@@ -123,6 +134,16 @@ const MyHome = () => {
         // update the state to tab2
         setActiveTab("tab15");
     };
+    const whichAccount = () =>{
+        let api = ""
+        if(account.toUpperCase() !== "PERSONAL"){
+            api = " - Api Account"
+            return api
+        } else{
+            api = " - Personal Account"
+            return api
+        }
+    }
     return ( <
         div ><div className='row'><
         div className = 'row d-none shadow-sm' > <
@@ -178,12 +199,12 @@ const MyHome = () => {
         <
         /div> <
         div className = 'col-9 py-2' > < h6 className = 'lh-1' > { name } <
-        span className = 'bolder' > { account } < /span>  < /
+        span className = 'bolder' > { whichAccount() } < /span>  < /
         h6 > < /
         div > <
         /div> <
         // online change my-5 to my-3
-        div className = 'px-lg-3 px-lg-2 my-3 text-start scroll-y2' >
+        div className = ' px-lg-2 my-3 text-start scroll-y2' >
         <
         h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
         div className = ' py-2 d-flex flex-row' >
@@ -341,7 +362,7 @@ const MyHome = () => {
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <
-        div className = "col-lg-3 col-md-4 rounded bg-lighter text-center" >
+        div className = "col-lg-3 col-md-4 rounded bg-light text-center" >
         <
         div className = 'flex-row d-flex py-1 my-2 justify-content-center' > <
         TabNavItem title = "API Account"
@@ -359,10 +380,14 @@ const MyHome = () => {
         div > < /
         div > < /
         div >
-        <
-        div className = 'text-end pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bk-warning mx-2 rounded-3 p-2 px-3'
+        <div className='d-flex flex-row justify-content-end px-3'>
+            <
+        div className = ' pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bk-warning mx-2 rounded-3 p-2 px-4'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
-        h6 > < /div > <
+        h6 > < /div >
+        {apiDocumentation()}
+        </div>
+         <
         TabContent id = "tab1"
         activeTab = { activeTab } > < Main handletab2 = { handleTab2 }
         handletab9 = { handleTab9 }

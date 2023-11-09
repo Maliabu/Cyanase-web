@@ -31,12 +31,13 @@ function SecondaryUser(props) {
         first_name: '',
         last_name: '',
         password: '',
-        username: 'forget',
+        username: 'cyanaseUser',
         confirmpassword: '',
         email: '',
         profile: ''
     });
     formData.profile = formData2
+    formData.username = "cyanaseUser"
     const { handleSubmit } = useForm();
     const validate1 = () => {
         let fname = ValidateForms("first_name")

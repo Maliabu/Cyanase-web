@@ -134,10 +134,10 @@ const Personal = ({...props }) => {
                     nextResult.map(option => ( <
                         div className = "row mt-2 py-3 bg-white rounded-3" >
                         <
-                        div className = "col-6" > < h6 className = "bolder" > { option.name } < /h6> < /
+                        div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6> < /
                         div >
                         <
-                        div className = "col" > < h6 className = "bolder active" > Rate: {
+                        div className = "col-3" > < h6 className = "bolder active" > Rate: {
                             (option.data).length
                         } < /h6> < /div > <
                         div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
@@ -191,7 +191,7 @@ const Personal = ({...props }) => {
                     div className = "row mx-3" > <
                     div className = "col-8 bg-lighter p-3 rounded-25" >
                     <
-                    h6 className = " p-2 mt-2" > MY INVESTMENTS < /h6>  <
+                    h6 className = " p-2" > MY INVESTMENTS < /h6>  <
                     div className = "row justify-content-center rounded-4 p-3" >
                     <
                     div className = "row" > <
@@ -276,27 +276,27 @@ const Personal = ({...props }) => {
                     <
                     div className = "row p-3 scroll-y3" >
                     <
-                    h6 className = "pt-3" > RECENT ACTIVITY < /h6> {myRecentActivity()} < /div > < /
+                    h6 className = "pt-1" > RECENT ACTIVITY < /h6> {myRecentActivity()} < /div > < /
                 div >
                     <
                     /
                 div > <
                     div className = "col-4 px-3 " > <
-                    div className = "row p-2 bg-lighter rounded-3" >
+                    div className = "row p-2 bg-light rounded-3" >
                     <
-                    div className = "text-start col-9 px-2 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
-                    div className = "text-end col-3 p-2" > < span className = " px-2 py-1 blue-dark rounded-circle" > { span.length } < /span> < /div > < /
+                    div className = "text-start col-9 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
+                    div className = "text-end col-3 p-2" > < span className = " px-2 py-1 warning rounded-4" > { span.length } < /span> < /div > < /
                 div > <
-                    div className = " mt-2 bk-warning text-center rounded-3"
+                    div className = " mt-2 px-5 bk-warning p-2 text-center rounded-3"
                 onClick = { handleShow1 } >
                     Add a Goal < /div>  <
-                div className = " p-1 pb-5 scroll-y" > {
+                div className = " pb-5 px-1 mt-2 scroll-y rounded-4" ><div className="row bg-lighter"> {
                     span.map(goal => ( <
-                        div className = "p-3 shadow-sm res-home rounded-4 mt-3"
+                        div className = "py-2 px-3 bg-white res-home rounded-4 mt-1"
                         key = { goal.goal_id } > <
-                        div className = "d-flex flex-row flex" > <
+                        div className = "d-flex flex-row" > <
                         span className = "mt-1" > <
-                        AddUser className = " rounded-circle bg-lighter active p-2"
+                        AddUser className = " rounded-circle bg-light active p-2"
                         size = "large" / > < /span>  <
                         p className = "mx-4" > < span className = "active"
                         onClick = {
@@ -328,7 +328,7 @@ const Personal = ({...props }) => {
                         div >
                     ))
                 } <
-                    /div> <
+                    /div></div> <
                 Modal show = { show3 }
                 onHide = { handleClose3 }
                 dialogClassName = "" > <

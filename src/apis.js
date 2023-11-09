@@ -1,5 +1,5 @@
 
-const server = "cyanase.lol"
+const server = "server.cyanase.lol"
 // const server = "127.0.0.1:8000"
 export const API_URL = "https://"+server+"/api/v1/en/register/user/";
 export const API_URL_DEPOSIT = "https://"+server+"/api/v1/en/make/deposit/";
@@ -27,6 +27,7 @@ export const API_URL_USER_NEXTOFKIN = "https://"+server+"/api/v1/en/user/nextOfK
 export const API_URL_GET_NEXTOFKIN = "https://"+server+"/api/v1/en/get/nextOfKin/";
 export const API_URL_GET_TOKEN = "https://"+server+"/api/v1/en/auth/token/";
 export const API_URL_GET_AUTH_USER = "https://"+server+"/api/v1/en/auth/user/";
+export const API_URL_REGISTER_API_USER = "https://"+server+"/api/v1/en/register/api/user/";
 export const API_URL_GET_AUTH_USER_BY_EMAIL = "https://"+server+"/api/v1/en/auth/user/email/";
 export const API_URL_ADD_AUTH_USER_RISK_PROFILE = "https://"+server+"/api/v1/en/auth/user/riskprofile/";
 export const API_URL_GET_RISK_PROFILE = "https://"+server+"/api/v1/en/auth/get/riskprofile/";
@@ -35,3 +36,4 @@ export const API_URL_PASSWORD_RESET = "https://"+server+"/api/v1/en/password/res
 export const API_URL_RESET_PASSWORD = "https://"+server+"/reset/password/"
 export const PROFILE_PHOTO = "https://"+server+"/media/profile/default_picture.jpg"
 export const TOKEN = localStorage.getItem('token');
+export const apiDocs = "https://developers.cyanase.lol"

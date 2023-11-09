@@ -150,6 +150,22 @@ const Main = ({ id, activeTab, children, ...props }) => {
         networth = totalNetworth - totalWithdraw
         return networth
     }
+    const myGraphs = () =>{
+        if(graph.length === 0){
+            return null
+        } else {
+            return(
+                <
+            div className = 'p-2' > <
+            Chart options = { options.options }
+            series = { options.series }
+            className = "w-100"
+            type = "area"
+            height = { 200 }
+            /></div >
+            )
+        }
+    }
     const pendingWithdraws = () => {
         if (pendingWithdraw.length === 0) {
             return ( < div className = 'p-lg-5 p-md-3 rounded-4 bg-light text-center grey-text mt-lg-5 mt-md-3' > < div className = 'd-flex flex-row justify-content-center' > <
@@ -227,15 +243,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             className = 'mx-5' / > Withdraw < /span></div > < /
             div > <
             div className = 'bg-lighter' >
-            <
-            div className = 'p-2' > <
-            Chart options = { options.options }
-            series = { options.series }
-            className = "w-100"
-            type = "area"
-            height = { 250 }
-            /></div > <
-            div className = 'rounded-4 row bg-white p-lg-4 p-md-2' >
+            {myGraphs()} <
+            div className = 'rounded-4 mt-2 row bg-white p-lg-4 p-md-2' >
             <
             div className = 'col-3' >
             <

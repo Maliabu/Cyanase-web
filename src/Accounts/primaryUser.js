@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import React, { useState } from "react";
 import Login from "./Login";
-import SignUp from './SignUp';
+import ApiUser from './ApiUser'
 import SecondaryUser from './SecondaryUser';
 import TabNavItem from "./TabNavItem";
 import TabContent from "./TabContent";
@@ -53,7 +53,7 @@ const BasicExample = () => {
 
         <
         TabContent id = "tab1"
-        activeTab = { activeTab } > < SignUp / > < /TabContent> <
+        activeTab = { activeTab } > < ApiUser / > < /TabContent> <
         TabContent id = "tab2"
         activeTab = { activeTab } > < Login / > < /TabContent> <
         TabContent id = "tab3"
