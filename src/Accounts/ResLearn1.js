@@ -324,7 +324,7 @@ function Step1(props) {
         name = "investment_option" > {
             options.map(option => {
                 return <
-                    option value = { option.name }
+                    option value = { option.name } key = {option.class_id}
                 id = "investmentOption" ><span>{ option.name }</span> < /option>
             })
         } < /

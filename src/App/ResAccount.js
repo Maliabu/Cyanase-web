@@ -148,7 +148,7 @@ const ResAccount = (props) => {
         /
         div > <
         div className = 'row p-2 rounded-3 bg-lighter' > <div className="col-8">< h5 className = ' p-2' > Account Subscription: < /
-        h5 ></div><div className="col-4 py-1">< span className = 'bk-warning p-2 px-3 mx-2 rounded-3'
+        h5 ></div><div className="col-4 py-1">< span className = 'bk-warning p-2 rounded-3'
         onClick = { handleShow4 } > { subStatus } < /span> </div> < /div > 
         <
         h5 className = "bolder text-dark mt-4" > Next Of Kin Details < /h5>

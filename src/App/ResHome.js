@@ -87,7 +87,7 @@ const ResHome = (props) => {
                     text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
+            colors: [  '#FF9800', '#b7b7b7','#252859','#E91E63'],
             fill: {
                 type: "gradient",
                 gradient: {
@@ -189,7 +189,7 @@ const ResHome = (props) => {
                             }<Star size="small" className="active" set="bulk"/> < /h5> < /div > <
                             div className = "col text-center" ><h6 className='bolder'>Total Investment:<
             div className = "d-flex flex-row flex justify-content-center m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
-            h4 className = "px-1 font-lighter" > {
+            h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
                             } < /h4></div ></h6> < /div >
                                 </div>
@@ -293,14 +293,14 @@ const ResHome = (props) => {
             Goals < /h6> < /
             div > < /
             div > < /div >  <
-            div className = 'blue-darks d-flex rounded-4' >
+            div className = 'blue-darks d-flex py-2 rounded-4' >
             <
             span className = 'text-center rounded-4 wide-60' > <
-            span className = "bolder mt-2" > 
+            span className = "bolder" > 
             <
             br / > Deposit <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit.toLocaleString() }  < /
-            h2 > < /div > < /span > < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
+            h2 > < /div > < /span > < /span > < span className = 'py-4' > < h6 className = ' rounded-3 text-center p-3 warning-home '
             onClick = {
                 handleTab5
             } >
@@ -309,14 +309,14 @@ const ResHome = (props) => {
 
             <
             div className = '' > {myInvestmentsGraph()}</div > <
-            div className = 'blue-darks d-flex rounded-4' >
+            div className = 'blue-darks py-2 d-flex rounded-4' >
             <
-            span className = ' rounded-4 wide-60 mx-1 text-center' > <
-            span className = "bolder m-2" > 
+            span className = ' rounded-4 wide-60 text-center' > <
+            span className = "bolder" > 
             <
             br / > Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span>  < /span > < span className = 'py-4' > < h6 className = 'mt-2 rounded-3 text-center p-3 warning-home '
+            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span>  < /span > < span className = 'py-4' > < h6 className = ' rounded-3 text-center p-3 warning-home '
             onClick = {
                 () => { setWithdrawSetting(true) }
             } >
