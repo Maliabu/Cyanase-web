@@ -88,9 +88,9 @@ const ResGoals = () => {
                     span className = "mt-1" > <
                     AddUser className = " rounded-circle bg-light active p-2"
                     size = "large" / > < /span>  <
-                    p className = "mx-5 mt-1" > < span className = "active"
+                    p className = "mx-5 mt-1" > < span className = "bolder"
                      > {
-                        (goal.goal_name).toUpperCase()
+                        (goal.goal_name)
                     } < /span><br/ > < p > created {
                         (goal.created).slice(0, 10)
                     } < /p >  < /
@@ -99,7 +99,7 @@ const ResGoals = () => {
                     }>Deposit</p> < /
                     div >
                     <
-                    p > Progress: {
+                    span > Progress: {
                         progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                     } %
                     <
@@ -112,7 +112,7 @@ const ResGoals = () => {
                     >
                     <
                     /span> < /
-                    p > <
+                    span > <
                     span className = "bolder d-none" > { goal.deposit[0] } < /span > <
                     span className = "active d-none" > { goal.goal_amount } < /span > < /
                     div >

@@ -360,11 +360,11 @@ function Step0(props) {
         div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
         h2 className = "px-2 font-lighter" > { (props.amount).toLocaleString() } < /h2></div > < /
         div > <
-        div className = "row p-3" >
+        div className = "row px-3" >
         <
-        p className = "bolder" > Progress: < span className = "active" > {
+        span className = "bolder" > Progress: < span className = "active" > {
             props.progress
-        } % < /span> < /p > <
+        } % < /span> < /span > <
         ProgressBar completed = { props.progress }
         isLabelVisible = { false }
         maxCompleted = { props.percent }
@@ -380,7 +380,7 @@ function Step0(props) {
         <
         /
         div > <
-        div className = "row mt-2 p-3 mx-lg-2 blue-darks rounded-3" >
+        div className = "row px-3 mx-lg-2" >
         <
         div className = "col p-2" >
         <
@@ -388,7 +388,7 @@ function Step0(props) {
         div className = "d-flex flex-row flex" > { props.currency } <
         h3 className = "px-2 font-lighter" > { (props.networth).toLocaleString() } < /h3></div > < /div><div className="col"> {props.next} < /
         div > < /div >  <
-        h6 className = "bolder p-2 bg-lighter mt-2 rounded-3 text-center" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
+        h6 className = "bolder p-2 bg-lighter rounded-3 text-center" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
         div > < /
         div > < /
         div >

@@ -126,7 +126,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             xaxis: {
                 name: '2023',
                 title: {
-                    text: 'Investments for ' + thisYear
+                    text: 'Your Investment Activity for ' + thisYear
                 },
                 categories: dates,
                 // categories: ['jun', 'jul', 'aug'],
@@ -323,6 +323,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             dialogClassName = "my-modal1" >
             <
             Learn close = { handleClose1 }
+            name = {name}
             tab2 = { props.handletab2 }
             / > < /
             Modal > < /
@@ -335,7 +336,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-3 d-none d-md-block d-sm-block px-2 text-center" >
             <
-            div className = ' px-2 py-3 rounded-4 scroll-y3 bg-lighter' >
+            div className = ' px-2 py-3 rounded-4 scroll-y3 bg-lighter d-none' >
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()

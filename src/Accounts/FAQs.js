@@ -21,7 +21,7 @@ const FAQs = (props) => {
         h6 > Get answers to a list of typical questions that you might wish to ask Cyanase < /h6>   <
         div className = "row mt-3" >
         <
-        div className = "mt-5 border-bottom col-8" >
+        div className = "mt-3 border-bottom col-8" >
         <
         h4 className = "bolder" > What is Cyanase < /h4> <
         h6 > < p className = "grey-text" > Cyanase is a technology company that partners with licensed financial firms including banks, investment companies and money lenders to offer investment services, business loans and saving groups to world’ s internet users.

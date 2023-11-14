@@ -69,6 +69,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         dialogClassName = "my-modal1" >
         <
         Learn1 tab9 = { props.handletab9 }
+        country = {country}
         option = { investmentOption }
         / > < /
         Modal > < /

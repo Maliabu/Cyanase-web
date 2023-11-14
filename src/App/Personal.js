@@ -1,4 +1,4 @@
-import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile } from "../Api/MainRequests";
+import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests } from "../Api/MainRequests";
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,6 +29,7 @@ const Personal = ({...props }) => {
         const [holdNetworth, setHoldNetworth] = useState("");
         const [holdAmount, setHoldAmount] = useState("");
         let [holdDeposit, setHoldDeposit] = useState("");
+        const [pendingWithdraw, setPendingWithdraw] = useState([])
         const [holdCreated, setHoldCreated] = useState("");
         const [show3, setShow3] = useState(false);
         const handleClose3 = () => setShow3(false);
@@ -52,6 +53,9 @@ const Personal = ({...props }) => {
             });
             GetRiskProfile().then(res => {
                 setinvestmentoption(res.investment_option)
+            });
+            PendingWithdrawRequests().then(res => {
+                setPendingWithdraw(res)
             });
             UserRequests().then(res => {
                 setCountry(res.profile.country)
@@ -147,6 +151,28 @@ const Personal = ({...props }) => {
                 )
 
             }
+            const pendingWithdraws = () => {
+                if (pendingWithdraw.length === 0) {
+                    return ( < div className = 'p-lg-5 p-md-3 rounded-4 bg-light text-center grey-text mt-lg-5 mt-md-3' > < div className = 'd-flex flex-row justify-content-center' > <
+                        Image size = "large"
+                        set = "broken"
+                        className = 'mx-2 d-none d-lg-block grey-text' / > <
+                        Filter size = "large"
+                        set = "broken"
+                        className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
+                        h6 > < /div > )
+                    }
+                    else return (
+                        pendingWithdraw.map(withdraw => ( <
+                            div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
+                            <
+                            div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
+                            div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
+                            div >
+                        ))
+                    )
+        
+                }
             const myRecentActivity = () => {
                 if (deposits.length === 0) {
                     return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
@@ -276,16 +302,16 @@ const Personal = ({...props }) => {
                     <
                     div className = "row p-3 scroll-y3" >
                     <
-                    h6 className = "pt-1" > RECENT ACTIVITY < /h6> {myRecentActivity()} < /div > < /
+                    h6 className = "pt-1" > RPENDING WITHDRAWS < /h6> {pendingWithdraws()}<span className="d-none">{myRecentActivity()}</span> < /div > < /
                 div >
                     <
                     /
                 div > <
                     div className = "col-4 px-3 " > <
-                    div className = "row p-2 bg-light rounded-3" >
+                    div className = "row p-2 bg-lighter rounded-3" >
                     <
                     div className = "text-start col-9 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
-                    div className = "text-end col-3 p-2" > < span className = " px-2 py-1 warning rounded-4" > { span.length } < /span> < /div > < /
+                    div className = "text-end col-3 p-2" > < span className = " px-2 py-1 bg-white rounded-4" > { span.length } < /span> < /div > < /
                 div > <
                     div className = " mt-2 px-5 bk-warning p-2 text-center rounded-3"
                 onClick = { handleShow1 } >

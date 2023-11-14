@@ -3,6 +3,7 @@ const server = "server.cyanase.lol"
 // const server = "127.0.0.1:8000"
 export const API_URL = "https://"+server+"/api/v1/en/register/user/";
 export const API_URL_DEPOSIT = "https://"+server+"/api/v1/en/make/deposit/";
+export const API_URL_GET_INVESTMENT_OPTIONS = "https://"+server+"/api/v1/en/auth/get/investment/options/";
 export const API_URL_BANK_WITHDRAW = "https://"+server+"/api/v1/en/make/bank/withdraw/";
 export const API_URL_MM_WITHDRAW = "https://"+server+"/api/v1/en/make/mm/withdraw/";
 export const API_URL_GOAL_BANK_WITHDRAW = "https://"+server+"/api/v1/en/make/goal/bank/withdraw/";

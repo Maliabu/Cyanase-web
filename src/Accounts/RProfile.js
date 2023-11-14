@@ -393,7 +393,7 @@ class RProfile extends React.Component {
     nextButton() {
         let currentStep = this.state.currentStep;
         if (currentStep === 0) {
-            return ( < div className = "bg-light m-0 py-5 text-center" > <
+            return ( < div className = "bg-light m-0 py-3 text-center" > <
                 Button className = " my-2 text-center m-0 bk-warning rounded-3"
                 type = "button"
                 onClick = { this._next } >

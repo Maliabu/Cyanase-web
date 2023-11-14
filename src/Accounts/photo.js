@@ -4,7 +4,7 @@ import { API_URL_USER_PROFILE_PHOTO, TOKEN } from '../apis';
 import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import { FaCameraRetro } from "react-icons/fa";
-import { success, fail, catch_errors } from "../Api/RequestFunctions";
+import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 
 class Photo extends React.Component {
     state = {
@@ -16,6 +16,7 @@ class Photo extends React.Component {
         })
     };
     handleSubmit = () => {
+        preloader()
         let form_data = new FormData();
         form_data.append('photo', this.state);
         axios.post(`${API_URL_USER_PROFILE_PHOTO}`, this.state, {

@@ -106,7 +106,7 @@ function Learn1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 text-center warning rounded-3"
+                h6 className = "py-3 text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -149,7 +149,7 @@ function Learn1(props) {
         let deposit_category = formData.deposit_category
         if (step === 1 && deposit_category === "personal") {
             return ( <
-                h6 className = "py-3 my-2 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -158,7 +158,7 @@ function Learn1(props) {
         }
         if (step === 6) {
             return ( <
-                h6 className = "py-3 my-2 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._afterSacco } >
                 Next <
@@ -167,7 +167,7 @@ function Learn1(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
+                h6 className = "py-3 my-2 text-end bk-warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -176,7 +176,7 @@ function Learn1(props) {
         }
         if (step === 3) {
             return ( <
-                h6 className = "py-3 my-2 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 onClick = { () => validate1() } >
                 Next <
                 /h6>        
@@ -184,7 +184,7 @@ function Learn1(props) {
         }
         if (step < 4) {
             return ( <
-                h6 className = "py-3 my-2 text-center warning rounded-3"
+                h6 className = "py-3 my-2 text-end warning rounded-3"
                 onClick = { _next } >
                 Next <
                 /h6>        

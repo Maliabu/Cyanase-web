@@ -19,16 +19,15 @@ const ContactUs = (props) => {
         <
         Call size = "medium"
         set = "broken"
-        className = 'my-3 active' / >
+        className = 'my-3' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-3" >
-        <
-        h4 > Call Us < /h4> <
-        h6 > < p className = "grey-text" > +256705640852 < /p>  < /
-        h6 > < /
+        div className = "col-11 mt-3" ><
+        h6 >Call Us<
+        p className='bolder' > +256705640852 < /p></h6>
+        < /
         div >
         <
         /
@@ -37,17 +36,16 @@ const ContactUs = (props) => {
         div className = "row" > <
         div className = "col-1 text-center" >
         <
-        FaWhatsapp size = "30"
-        className = 'my-3 active' / >
+        FaWhatsapp size = "25"
+        className = 'my-3' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-3" >
-        <
-        h4 > Whatsapp Us < /h4> <
-        h6 > < p className = "grey-text" > +256705640852 < /p>  < /
-        h6 > < /
+        div className = "col-11 mt-3" ><
+        h6 >Whatsapp Us<
+        p className='bolder' > +256705640852 < /p></h6>
+         < /
         div >
         <
         /
@@ -58,16 +56,15 @@ const ContactUs = (props) => {
         <
         Message size = "medium"
         set = "broken"
-        className = 'my-3 active' / >
+        className = 'my-3' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-3" >
-        <
-        h4 > Email Us < /h4> <
-        h6 > < p className = "grey-text" > 'support@cyanase.com' < /p>  < /
-        h6 > < /
+        div className = "col-11 mt-3" ><
+        h6 >Email Us<
+        p className='bolder' > 'support@cyanase.com' < /p></h6>
+         < /
         div >
         <
         /
@@ -76,17 +73,15 @@ const ContactUs = (props) => {
         div className = "row" > <
         div className = "col-1 text-center" >
         <
-        FaTwitter size = "30"
-        className = 'my-3 active' / >
+        FaTwitter size = "23"
+        className = 'my-3' / >
         <
         /
         div >
         <
-        div className = "col-11 mt-3" >
-        <
-        h4 > DM Us on Social Media < /h4> <
-        h6 > < p className = "grey-text" > Cyanase(facebook, Twitter, Linkedin) < /p>  < /
-        h6 > < /
+        div className = "col-11 mt-3" ><
+        h6 >DM us on social media<
+        p className='bolder' > Cyanase(facebook, Twitter, Linkedin) < /p></h6> < /
         div >
         <
         /
