@@ -31,7 +31,8 @@ const ResWithdraw = (props) => {
         <
         Withdraw country = { country }
         phone = { phone }
-        networth = { networth }
+        networth = { props.networth }
+        option_name = {props.option_name}
         fullname = { name }/ >
         <
         /

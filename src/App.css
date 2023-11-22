@@ -220,12 +220,12 @@ body::-webkit-scrollbar {
 }
 
 
-/* .theForm {
-    background-image: url("https://img.freepik.com/free-vector/strategic-consulting-concept-illustration_114360-8994.jpg?w=740&t=st=1678295724~exp=1678296324~hmac=d43819b5a3fbe5776cd679d2f5d57cde36a046d1ee3ec3decf5cd0f54370c9b9");
-    background-position: bottom;
+.investment {
+    background: -webkit-linear-gradient(left, rgba(240, 240, 240, 0.769),rgba(240, 240, 240, 0)), url("images/white-grey\ hills.png");
     background-repeat: no-repeat;
-    background-size: 50%;
-} */
+    background-size: contain;
+    background-position: right;
+}
 
 .sacco {
     background-image: url("images/_.jpeg");

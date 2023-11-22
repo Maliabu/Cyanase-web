@@ -143,7 +143,6 @@ const Personal = ({...props }) => {
         let rev = nextDeposits.reverse()
         const myInvestments = () => {
             let nextResult = results.reverse()
-            console.log(nextResult)
             if (results.length === 0) {
                 return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"

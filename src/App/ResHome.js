@@ -35,16 +35,19 @@ const ResHome = (props) => {
     const [totalWithdraw, setTotalWithdraw] = useState([])
     const [networth, setDepositNetworth] = useState(0);
     let thisYear = new Date().getFullYear()
+    const [option_name, setOptionName] = useState("")
+    const [groups, setGroups] = useState(0)
     const groupArrayObject = graph.reduce((group, obj) => {
-        const { name, datas, date } = obj;
+        const { name, datas, networths } = obj;
         if (!group[name]) {
             group[name] = {
-                date: date,
                 name: name,
-                data: []
+                data: [],
+                networth: []
             };
         }
         group[name].data.push(datas);
+        group[name].networth.push(networths)
         return group;
     }, {});
     const result = Object.values(groupArrayObject);
@@ -132,6 +135,8 @@ const ResHome = (props) => {
     }
     if (withdrawSetting) {
         return ( < ResWithdraw changeWithdrawSetting = { setWithdrawSetting }
+            option_name = {option_name}
+            networth = { groups }
             / >
         )
     }
@@ -163,6 +168,18 @@ const ResHome = (props) => {
         // update the state to tab2
         setActiveTab1("tab13");
     };
+    function getNetworths(arr){
+        let sum = 0
+        for(var i=0;i<arr.length;i++){
+            sum += parseInt(arr[i])
+        }
+        return sum
+    }
+    function getWithdraws(name,networth){
+        setOptionName(name)
+        setGroups(networth)
+        setWithdrawSetting(true)
+    }
     const myInvestments = () => {
         if (result.length === 0) {
             return(null
@@ -172,19 +189,21 @@ const ResHome = (props) => {
             )
         } else{
             return(
-                <div className='p-3 mt-2 bg-light rounded-4 carousel slide'>
+                <div className='p-3 mt-2 investment rounded-4 carousel slide'>
                 <Carousel touch={true} interval={null} controls={false}>
                     {
                         result.map(option=>(
                             <Carousel.Item key={1}>
-                                <div className='row text-dark'>
-                                    <div className='col-5'><p className='bolder'>{option.name}</p></div>
+                                <div className='row text-dark p-2'>
+                                    <div className='col-5'><h5 className='bolder'>{option.name}</h5><span className="bk-warning p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,getNetworths(option.networth))}>Withdraw</span> </div>
                                     <
-                            div className = "col-2" > < h5 className = "bolder" > {
-                                (option.data).length
-                            }<Star size="small" className="active" set="bulk"/> < /h5> < /div > <
-                            div className = "col text-center" ><h6 className='bolder'>Total Investment:<
+                            div className = "col-2" > < h6 className = "bolder" > Networth: <
             div className = "d-flex flex-row flex justify-content-center m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
+            h4 className = "px-1 font-weight-light" > {
+                                (getNetworths(option.networth)).toLocaleString()
+                            } < /h4></div > < /h6> < /div > <
+                            div className = "col text-end" ><h6 className='bolder'>Total:<
+            div className = "d-flex flex-row flex justify-content-end m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
             h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
                             } < /h4></div ></h6> < /div >
@@ -274,7 +293,7 @@ const ResHome = (props) => {
             <
             div className = 'row' > <
             div className = 'col text-start' > <
-            p className = ' mx-3 mt-2' > Your Investments < /p > < /div > <
+            p className = ' mx-3 mt-3' > Your Investments - {result.length} < /p > < /div > <
             div className = 'col d-none' >
             <
             div className = 'd-flex justify-content-end mx-1' > < TimeCircle size = "medium"
@@ -305,18 +324,11 @@ const ResHome = (props) => {
 
             <
             div className = '' > {myInvestmentsGraph()}</div > <
-            div className = 'blue-darks py-2 d-flex rounded-4' >
+            div className = 'blue-darks text-center rounded-4 py-3' >
             <
-            span className = ' rounded-4 wide-60 text-center' > <
-            span className = "bolder" > 
-            <
-            br / > Networth <
+            span className = ' rounded-4 text-center bolder' > Total Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span>  < /span > < span className = 'py-4' > < h6 className = ' rounded-3 text-center p-3 warning-home '
-            onClick = {
-                () => { setWithdrawSetting(true) }
-            } >
-            Withdraw < /h6> </span > < /
+            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span>  < /
             div >
 
             <

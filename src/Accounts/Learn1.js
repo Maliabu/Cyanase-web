@@ -100,7 +100,6 @@ function Learn1(props) {
         }
         return null;
     }
-    console.log(formData)
     const submitButton = () => {
         let payment_means = formData.payment_means;
         if (step === 4 && payment_means === "online") {

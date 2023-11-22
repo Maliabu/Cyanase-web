@@ -24,7 +24,7 @@ function ResLearn1(props) {
     }, []);
     let currency = getCurrency(country)
     const [formData, setFormData] = useState({
-        "payment_means": '',
+        "payment_means": 'online',
         "deposit_amount": 0,
         "currency": currency,
         "investment_option": props.option,
@@ -187,7 +187,7 @@ function ResLearn1(props) {
             /* 
                       render the form steps and pass required props in
                     */
-        } <div className="blue-dark p-3 rounded-top-3"><h3 className="bolder mt-2">Deposit</h3></div>
+        } <div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Deposit <span className="row justify-content-center shadow-sm p-2 light-res-home">{formData.investment_option}</span></h3></div>
         <
         Wallet className = "d-none rounded-circle warning p-2"
         size = "xlarge" / > < br / > <

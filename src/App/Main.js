@@ -34,7 +34,6 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [depositProgress, setDepositProgress] = useState([]);
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
-    const [deposits2, setDeposits2] = useState([])
     const [investmentOption, setinvestmentoption] = useState("Cash | Venture | Credit")
     let thisYear = new Date().getFullYear()
     let depos = []
@@ -63,8 +62,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setTotalDeposit(res[2]);
             setDollarNetworth(res[3]);
             setDepositProgress(res[4]);
-            setGraph(res[4]); 
-            setDeposits2(res[6])
+            setGraph(res[4]);
             setDates(res[5])
             setDepositNetworth(res[7])
             setTotalNetworth(res[9])
