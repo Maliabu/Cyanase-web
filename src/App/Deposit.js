@@ -181,11 +181,12 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         className = "rounded-circle object-fit-cover mt-2 img-head"
         alt = "investors" / > < /div> < /
         div > <
-        ResLearn1 option = { investmentOption }
+        ResLearn1
         country = { country }
         lastname = { name }
         email = { email }
         phone = { phone }
+        option = { investmentOption }
         options = {investment_options}
         / >
         <

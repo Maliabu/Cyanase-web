@@ -12,9 +12,12 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { UserRequests } from "../Api/MainRequests";
 import { ValidateForms } from "../Auth/ValidateForms";
+import axios from "axios";
+import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
 
 function ResLearn1(props) {
     const globalRefId = "";
+    let minimum = 0, id = ''
     const [step, setStep] = useState(1)
     const [country, setCountry] = useState("")
     useEffect(() => {
@@ -88,19 +91,24 @@ function ResLearn1(props) {
         }
         return null;
     }
-    const validate1 = () => {
+    const validate1 = (minimum, id) => {
         let depositAmount = ValidateForms("deposit_amount")
+        let deposit_amount = formData.deposit_amount
+        formData.investment_id = id
 
         if (depositAmount.length === 0) {
             document.getElementById("errorFirst").style.display = "block"
             document.getElementById("errorFirst").style.color = "crimson"
             document.getElementById("errorFirst").innerText = "deposit amount is required"
-        } else {
+        } else if (deposit_amount < minimum) {
+            document.getElementById("errorFirst").style.display = "block"
+            document.getElementById("errorFirst").style.color = "crimson"
+            document.getElementById("errorFirst").innerText = "minimum deposit required for this investment class is "+minimum
+        }else{
             document.getElementById("errorFirst").style.display = "none"
             setStep(step + 1)
         }
     }
-
     const submitButton = () => {
         let payment_means = formData.payment_means;
         if (step === 4 && payment_means === "online") {
@@ -160,10 +168,22 @@ function ResLearn1(props) {
             )
         }
         if (step === 3) {
+            let option = formData.investment_option
+            axios.post(API_URL_GET_INVESTMENT_OPTION, option, {headers: {
+                "Authorization": `Token ${TOKEN}`,
+                "Content-Type": "application/json"
+            }}).then(function(res)
+                {
+                    if(res){
+                        console.log(res)
+                        minimum = res.data[0].minimum_deposit;
+                        id = res.data[0].investment_option_id
+                    }
+                }
+            )
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
-                type = "button"
-                onClick = { ()=>validate1() } >
+                h6 className = " my-2 text-end warning rounded-4"
+                onClick = { () => validate1(minimum, id) } >
                 Next <
                 /h6>        
             )
@@ -303,10 +323,10 @@ function Step1(props) {
         required defaultValue = "Select an investment option"
         onChange = { props.handleChange }
         name = "investment_option" > {
-            props.options.map(option => {
+            props.options.map(options => {
                 return <
-                    option value = { option.name } key = {option.class_id}
-                id = "investmentOption" ><span>{ option.name }</span> < /option>
+                    option value = { options.investment_option } key = {options.class_id}
+                id = "investmentOption" ><span>{ options.investment_option }</span> < /option>
             })
         } < /
         Form.Select >

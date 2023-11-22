@@ -202,7 +202,7 @@ const ResHome = (props) => {
             h4 className = "px-1 font-weight-light" > {
                                 (getNetworths(option.networth)).toLocaleString()
                             } < /h4></div > < /h6> < /div > <
-                            div className = "col text-end" ><h6 className='bolder'>Total:<
+                            div className = "col text-end" ><h6 className='bolder'>Deposit:<
             div className = "d-flex flex-row flex justify-content-end m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
             h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
