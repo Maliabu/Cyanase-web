@@ -10,7 +10,6 @@ import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { options } from "./InvestmentOps";
 import { UserRequests } from "../Api/MainRequests";
 import { ValidateForms } from "../Auth/ValidateForms";
 
@@ -202,6 +201,7 @@ function ResLearn1(props) {
         handleChange = { handleChange }
         getTab9 = { getTab9() }
         investmentOption = { props.option }
+        options = {props.options}
         /> <
         Step2 currentStep = { step }
         handleChange = { handleChange }
@@ -303,7 +303,7 @@ function Step1(props) {
         required defaultValue = "Select an investment option"
         onChange = { props.handleChange }
         name = "investment_option" > {
-            options.map(option => {
+            props.options.map(option => {
                 return <
                     option value = { option.name } key = {option.class_id}
                 id = "investmentOption" ><span>{ option.name }</span> < /option>

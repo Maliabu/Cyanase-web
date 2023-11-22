@@ -10,6 +10,7 @@ import Goal1 from '../Accounts/Goal1';
 import Modal from 'react-bootstrap/Modal';
 import Learn1 from '../Accounts/Learn1';
 import Goal from '../Accounts/Goal'
+import Withdraw from '../Accounts/Withdraw'
 import Chart from 'react-apexcharts';
 import { AddUser, Image, Filter } from "react-iconly";
 import { getCurrency } from "../payment/GetCurrency";
@@ -29,6 +30,7 @@ const Personal = ({...props }) => {
         const [holdNetworth, setHoldNetworth] = useState("");
         const [holdAmount, setHoldAmount] = useState("");
         let [holdDeposit, setHoldDeposit] = useState("");
+        const [groups, setGroups] = useState(0)
         const [pendingWithdraw, setPendingWithdraw] = useState([])
         const [holdCreated, setHoldCreated] = useState("");
         const [show3, setShow3] = useState(false);
@@ -42,7 +44,11 @@ const Personal = ({...props }) => {
         const [show2, setShow2] = useState(false);
         const handleClose2 = () => setShow2(false);
         const handleShow2 = () => setShow2(true);
+        const [show4, setShow4] = useState(false);
+        const handleClose4 = () => setShow4(false);
+        const handleShow4 = () => setShow4(true);
         const [investmentOption, setinvestmentoption] = useState("")
+        const [option_name, setOptionName] = useState("")
         useEffect(() => {
             PersonalRequests().then(res => {
                 setSpan(res[2]); // array(14)
@@ -64,15 +70,18 @@ const Personal = ({...props }) => {
                 setName(res.first_name + " " + res.last_name)
             })
         }, []);
+        console.log(groups)
         const groupArrayObjects = mine.reduce((group, obj) => {
-            const { name, datas } = obj;
+            const { name, datas, networths } = obj;
             if (!group[name]) {
                 group[name] = {
                     name: name,
-                    data: []
+                    data: [],
+                    networth: []
                 };
             }
             group[name].data.push(datas);
+            group[name].networth.push(networths)
             return group;
         }, {});
         const results = Object.values(groupArrayObjects);
@@ -101,7 +110,13 @@ const Personal = ({...props }) => {
                 }
             }
         }
-
+        function getNetworths(arr){
+            let sum = 0
+            for(var i=0;i<arr.length;i++){
+                sum += parseInt(arr[i])
+            }
+            return sum
+        }
         function getId(id, name, amount, deposit, networth, created) {
             setHoldId(id)
             setHoldName(name)
@@ -111,7 +126,11 @@ const Personal = ({...props }) => {
             setHoldNetworth(networth)
             handleShow3()
         }
-
+        function getWithdraws(name,networth){
+            setOptionName(name)
+            setGroups(networth)
+            handleShow4()
+        }
         function summ(array) {
             let sum = 0
             array.forEach(item => {
@@ -124,6 +143,7 @@ const Personal = ({...props }) => {
         let rev = nextDeposits.reverse()
         const myInvestments = () => {
             let nextResult = results.reverse()
+            console.log(nextResult)
             if (results.length === 0) {
                 return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"
@@ -138,11 +158,11 @@ const Personal = ({...props }) => {
                     nextResult.map(option => ( <
                         div className = "row mt-2 py-3 bg-white rounded-3" >
                         <
-                        div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6> < /
+                        div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6><span className="bk-warning p-2 rounded-4 px-3" onClick={() => getWithdraws(option.name,getNetworths(option.networth))}>Withdraw</span> < /
                         div >
                         <
-                        div className = "col-3" > < h6 className = "bolder active" > Rate: {
-                            (option.data).length
+                        div className = "col-3" > < h6 className = "bolder" > Networth: {
+                            getNetworths(option.networth)
                         } < /h6> < /div > <
                         div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
                             (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
@@ -153,29 +173,29 @@ const Personal = ({...props }) => {
             }
             const pendingWithdraws = () => {
                 if (pendingWithdraw.length === 0) {
-                    return ( < div className = 'p-lg-5 p-md-3 rounded-4 bg-light text-center grey-text mt-lg-5 mt-md-3' > < div className = 'd-flex flex-row justify-content-center' > <
-                        Image size = "large"
-                        set = "broken"
-                        className = 'mx-2 d-none d-lg-block grey-text' / > <
-                        Filter size = "large"
-                        set = "broken"
-                        className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
-                        h6 > < /div > )
+                    return ( < div className = 'p-5 rounded-4 bg-lighter text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
+                    Image size = "large"
+                    set = "broken"
+                    className = 'mx-2 grey-text' / > <
+                    Filter size = "large"
+                    set = "broken"
+                    className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
+                    h6 > < /div > )
                     }
                     else return (
-                        pendingWithdraw.map(withdraw => ( <
+                        pendingWithdraw.map(withdraw => ( <div className="scroll-y3"><
                             div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
                             <
                             div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
                             div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
-                            div >
+                            div ></div>
                         ))
                     )
         
                 }
             const myRecentActivity = () => {
                 if (deposits.length === 0) {
-                    return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+                    return ( < div className = 'p-5 rounded-4 bg-lighter text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
                         Image size = "large"
                         set = "broken"
                         className = 'mx-2 grey-text' / > <
@@ -215,10 +235,10 @@ const Personal = ({...props }) => {
                 return ( <
                     div > <
                     div className = "row mx-3" > <
-                    div className = "col-8 bg-lighter p-3 rounded-25" >
+                    div className = "col-8 px-3 rounded-4" >
                     <
-                    h6 className = " p-2" > MY INVESTMENTS < /h6>  <
-                    div className = "row justify-content-center rounded-4 p-3" >
+                    h6 className = "py-2" > MY INVESTMENTS < /h6>  <
+                    div className = "row justify-content-center rounded-4 bg-lighter p-3" >
                     <
                     div className = "row" > <
                     div className = "col" >
@@ -300,42 +320,42 @@ const Personal = ({...props }) => {
                     /div>  <
                 div >
                     <
-                    div className = "row p-3 scroll-y3" >
+                    div className = "row" >
                     <
-                    h6 className = "pt-1" > RPENDING WITHDRAWS < /h6> {pendingWithdraws()}<span className="d-none">{myRecentActivity()}</span> < /div > < /
+                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < /h6> {pendingWithdraws()}<span className="d-none">{myRecentActivity()}</span> < /div > < /
                 div >
                     <
                     /
                 div > <
                     div className = "col-4 px-3 " > <
-                    div className = "row p-2 bg-lighter rounded-3" >
+                    div className = "row p-1 bg-lighter rounded-3" >
                     <
                     div className = "text-start col-9 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
                     div className = "text-end col-3 p-2" > < span className = " px-2 py-1 bg-white rounded-4" > { span.length } < /span> < /div > < /
                 div > <
-                    div className = " mt-2 px-5 bk-warning p-2 text-center rounded-3"
+                    div className = " mt-2 px-5 bk-warning p-2 text-center rounded-4"
                 onClick = { handleShow1 } >
                     Add a Goal < /div>  <
-                div className = " pb-5 px-1 mt-2 scroll-y rounded-4" ><div className="row bg-lighter"> {
+                div className = " pb-5 px-1 mt-2 scroll-y rounded-4" ><div className="row px-3 bg-lighter"> {
                     span.map(goal => ( <
-                        div className = "py-2 px-3 bg-white res-home rounded-4 mt-1"
+                        div className = "py-2 px-3 bg-white res-home rounded-4 mt-2"
                         key = { goal.goal_id } > <
                         div className = "d-flex flex-row" > <
-                        span className = "mt-1" > <
-                        AddUser className = " rounded-circle bg-light active p-2"
+                        span className = "mt-2" > <
+                        AddUser className = "p-2 border rounded-circle"
                         size = "large" / > < /span>  <
-                        p className = "mx-4" > < span className = "active"
+                        h6 className = "mx-4 mt-2" > < span className = "active bolder"
                         onClick = {
                             () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created)
                         } > {
-                            (goal.goal_name).toUpperCase()
+                            (goal.goal_name)
                         } < /span><br/ > < p > created {
                             (goal.created).slice(0, 10)
                         } < /p >  < /
-                        p > < /
+                        h6 > < /
                         div >
                         <
-                        p > Progress: {
+                        p className="bolder"> Progress: {
                             progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                         } %
                         <
@@ -369,6 +389,17 @@ const Personal = ({...props }) => {
                 networth = { holdNetworth }
                 phone = { phone }
                 option = { investmentOption }
+                / > < /
+                Modal ><
+                Modal show = { show4 }
+                onHide = { handleClose4 }
+                dialogClassName = "my-modal1" >
+                <
+                Withdraw country = { country }
+                phone = { phone }
+                fullname = { name }
+                option_name = {option_name}
+                networth = { groups }
                 / > < /
                 Modal >
                     <

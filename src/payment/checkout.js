@@ -47,9 +47,9 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                                 })
                                 .then(function(response) {
                                     if (!response) {
-                                        fail("Something went wrong...")
+                                        fail("Something went wrong...", "Error")
                                     } else if (response.status === 200 && response.data.success === false) {
-                                        fail(response.data.message)
+                                        fail(response.data.message, response.data.type)
                                     } else {
                                         success("You have deposited successfully", "/home", "successful");
                                     }
@@ -61,7 +61,7 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                 });
             }
         }
-        className = 'bk-warning active p-3 mb-2 rounded-3'
+        className = 'bk-warning active px-3 mb-2 rounded-4'
         id = "checkout" >
         Make Payment <
         /h6> < /

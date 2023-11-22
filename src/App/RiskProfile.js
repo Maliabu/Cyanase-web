@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GetRiskProfile } from "../Api/MainRequests";
+import { GetRiskProfile, GetInvestmentOptionsRequests } from "../Api/MainRequests";
 import React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +12,7 @@ import { Activity } from "react-iconly";
 const RiskProfile = ({ id, activeTab, children }) => {
     const [show2, setShow2] = useState(false);
     const [complete, setComplete] = useState("Incomplete");
+    const [investment_options, setOptions] = useState([])
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     useEffect(() => {
@@ -19,6 +20,9 @@ const RiskProfile = ({ id, activeTab, children }) => {
             if (res.status === true) {
                 setComplete("Complete")
             }
+        });
+        GetInvestmentOptionsRequests().then(res => {
+            setOptions(res)
         });
     }, []);
     const editOrComplete = () =>{
@@ -61,7 +65,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
             complete
         } < /span> < /
         h6 > <
-        h6 className = " mt-3 bk-warning rounded-3"
+        h6 className = " mt-3 bk-warning rounded-4"
         onClick = { handleShow2 } > {editOrComplete()} < /h6> < /
         div > <
         Modal show = { show2 }
@@ -69,7 +73,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
         dialogClassName = "my-modal" >
 
         <
-        RProfile /
+        RProfile options = {investment_options} /
         >
         <
         /

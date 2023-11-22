@@ -3,23 +3,24 @@ import { Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 import Profile1 from '../images/Ellipse 178.png';
-// import { API_URL_DEPOSIT, TOKEN } from '../apis';
-// import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import { preloader, autoClickable } from "../Api/RequestFunctions";
 import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { options } from "./InvestmentOps";
 import { ValidateForms } from "../Auth/ValidateForms";
+import axios from "axios";
+import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
 
 function Learn1(props) {
     const globalRefId = "";
     const [step, setStep] = useState(1)
+    let minimum = 0, id = ''
     const [formData, setFormData] = useState({
-        "payment_means": '',
+        "payment_means": 'online',
         "deposit_amount": 0,
+        "investment_id": '',
         "currency": getCurrency(props.country),
         "investment_option": props.option,
         "deposit_category": "personal",
@@ -34,8 +35,6 @@ function Learn1(props) {
         const value = event.target.value;
         setFormData({...formData, [name]: value });
     };
-    console.log(document.getElementsByName("deposit_amount"))
-
     const getTotalDeposit = () => {
         let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
         return total_deposit
@@ -63,35 +62,21 @@ function Learn1(props) {
 
     function onSubmit() {
         preloader()
-        // axios.post(`${API_URL_DEPOSIT}`, formData, {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data",
-        //             'Accept': 'application/json',
-        //             "Authorization": `Token ${ TOKEN }`
-        //         }
-        //     })
-        //     .catch(function(error) {
-        //         catch_errors(error)
-        //     })
-        //     .then(function(response) {
-        //         if (response.status === 200 && response.data.success === false) {
-        //             fail(response.data.message)
-        //         } else {
-        //             success("You have deposited successfully", "/home", "successful");
-        //             // localStorage.removeItem("ref_id")
-        //             // localStorage.removeItem("ref")
-        //         }
-        //     });
-
     }
-    const validate1 = () => {
+    const validate1 = (minimum, id) => {
         let depositAmount = ValidateForms("deposit_amount")
+        let deposit_amount = formData.deposit_amount
+        formData.investment_id = id
 
         if (depositAmount.length === 0) {
             document.getElementById("errorFirst").style.display = "block"
             document.getElementById("errorFirst").style.color = "crimson"
             document.getElementById("errorFirst").innerText = "deposit amount is required"
-        } else {
+        } else if (deposit_amount < minimum) {
+            document.getElementById("errorFirst").style.display = "block"
+            document.getElementById("errorFirst").style.color = "crimson"
+            document.getElementById("errorFirst").innerText = "minimum deposit required for this investment class is "+minimum
+        }else{
             document.getElementById("errorFirst").style.display = "none"
             setStep(step + 1)
         }
@@ -106,7 +91,7 @@ function Learn1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 text-start warning rounded-3"
+                h6 className = " text-start warning rounded-4"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -115,19 +100,19 @@ function Learn1(props) {
         }
         return null;
     }
-
+    console.log(formData)
     const submitButton = () => {
         let payment_means = formData.payment_means;
         if (step === 4 && payment_means === "online") {
             return ( <
-                div className = 'mx-3 justify-content-center' > <
+                div className = 'mx-3 justify-content-center rounded-4' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <
@@ -149,7 +134,7 @@ function Learn1(props) {
         let deposit_category = formData.deposit_category
         if (step === 1 && deposit_category === "personal") {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = " my-2 text-end warning rounded-4"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -158,7 +143,7 @@ function Learn1(props) {
         }
         if (step === 6) {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = " my-2 text-end warning rounded-4"
                 type = "button"
                 onClick = { this._afterSacco } >
                 Next <
@@ -167,7 +152,7 @@ function Learn1(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 my-2 text-end bk-warning rounded-3"
+                h6 className = " my-2 text-end bk-warning rounded-4"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -175,16 +160,29 @@ function Learn1(props) {
             )
         }
         if (step === 3) {
+            let option = formData.investment_option
+            axios.post(API_URL_GET_INVESTMENT_OPTION, option, {headers: {
+                "Authorization": `Token ${TOKEN}`,
+                "Content-Type": "application/json"
+            }}).then(function(res)
+                {
+                    if(res){
+                        console.log(res)
+                        minimum = res.data[0].minimum_deposit;
+                        id = res.data[0].investment_option_id
+                    }
+                }
+            )
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
-                onClick = { () => validate1() } >
+                h6 className = " my-2 text-end warning rounded-4"
+                onClick = { () => validate1(minimum, id) } >
                 Next <
                 /h6>        
             )
         }
         if (step < 4) {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = " my-2 text-end warning rounded-4"
                 onClick = { _next } >
                 Next <
                 /h6>        
@@ -201,7 +199,7 @@ function Learn1(props) {
             /* 
                       render the form steps and pass required props in
                     */
-        } <div className="blue-dark p-3 rounded-top-3"><h3 className="bolder mt-2">Deposit</h3></div>
+        } <div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Deposit <span className="row justify-content-center shadow-sm p-2 light-res-home">{formData.investment_option}</span></h3></div>
         <
         Wallet className = "d-none rounded-circle warning p-2"
         size = "xlarge" / > < br / > <
@@ -215,6 +213,7 @@ function Learn1(props) {
         handleChange = { handleChange }
         getTab9 = { getTab9() }
         investmentOption = { props.option }
+        options = {props.options}
         /> <
         Step2 currentStep = { step }
         handleChange = { handleChange }
@@ -306,9 +305,9 @@ function Step1(props) {
         div > < /div >  <
         h6 className = "bolder d-none p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
         h6 > <
-        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Unit Trusts < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Credit | Cash | Venture | Absolute Return < /span> < /
         h6 > <
-        h6 className = "py-3 d-none rounded-3 bk-warning text-center"
+        h6 className = " d-none rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> 
         <
@@ -316,10 +315,10 @@ function Step1(props) {
         required defaultValue = "Select an investment option"
         onChange = { props.handleChange }
         name = "investment_option" > {
-            options.map(option => {
+            props.options.map(options => {
                 return <
-                    option value = { option.name }
-                id = "investmentOption" ><h6>{ option.name }</h6> < /option>
+                    option value = { options.investment_option }
+                id = "investmentOption" ><h6>{ options.investment_option }</h6> < /option>
             })
         } < /
         Form.Select >
@@ -338,7 +337,7 @@ function Step2(props) {
         div className = "p-4 rounded-4"
         key = "radio" >
         <
-        div key = { `default-radio` }
+        div key = { `radio` }
         className = "mb-3" >
         <
         h5 className = "font-lighter d-none" > WALLET < /h5> <
@@ -348,7 +347,7 @@ function Step2(props) {
         onChange = { props.handleChange }
         value = "wallet"
         className = "d-none"
-        required id = "default-radio" /
+        required id = "radio" /
         >
         <
         h5 className = "font-lighter" > OFFLINE < /h5> <
@@ -357,7 +356,7 @@ function Step2(props) {
         onChange = { props.handleChange }
         type = "radio"
         value = "offline"
-        required id = "default-radio" /
+        required id = "radio" /
         >
         <
         h5 className = "font-lighter mt-5" > ONLINE < /h5> <
@@ -366,7 +365,7 @@ function Step2(props) {
         onChange = { props.handleChange }
         type = "radio"
         value = "online"
-        required id = "default-radio" /
+        required id = "radio"/
         >
         <
         /

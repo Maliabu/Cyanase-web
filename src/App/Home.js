@@ -348,7 +348,7 @@ const MyHome = () => {
         div className = 'col-8 rounded shadow-sm' > <
         h6 className = 'mt-3' > <
         FaLightbulb size = "15"
-        className = 'position-relative active' / > < span className = 'active' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
+        className = 'position-relative active' / > < span className = 'bolder' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
         div className = 'col-1 d-none d-lg-block text-center' >
         <
@@ -382,7 +382,7 @@ const MyHome = () => {
         div >
         <div className='d-flex flex-row justify-content-end px-3'>
             <
-        div className = ' pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bk-warning mx-2 rounded-3 p-2 px-4'
+        div className = ' pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bk-warning mx-2 rounded-4 p-2 px-4'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
         h6 > < /div >
         {apiDocumentation()}

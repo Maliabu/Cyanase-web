@@ -9,7 +9,7 @@ import './style.scss';
 import { PROFILE_PHOTO } from "../apis";
 import Depo from '../images/depo.png'
 import { Wallet, ArrowLeftSquare} from "react-iconly";
-import { GetRiskProfile, UserRequests } from "../Api/MainRequests";
+import { GetRiskProfile, UserRequests, GetInvestmentOptionsRequests } from "../Api/MainRequests";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
     const [country, setCountry] = useState([])
@@ -20,6 +20,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     const [investmentOption, setinvestmentoption] = useState("")
+    const [investment_options, setOptions] = useState([])
     useEffect(() => {
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
@@ -33,6 +34,9 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
             setName(res.last_name + " " + res.first_name)
             setPhone(res.profile.phoneno)
             setEmail(res.email)
+        });
+        GetInvestmentOptionsRequests().then(res => {
+            setOptions(res)
         });
     }, []);
     return ( < div className="mx-3"> < div className = " d-none d-sm-block" > <
@@ -60,7 +64,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         for you here.Make your deposit here. < /h6> < /
         div > <
         div className = "d-flex flex-row flex justify-content-center" > <
-        h6 className = " mt-3 warning rounded-3"
+        h6 className = " mt-3 warning rounded-4"
         onClick = { handleShow2 } >
         Make a Deposit < /h6> </div >
         <
@@ -71,6 +75,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         Learn1 tab9 = { props.handletab9 }
         country = {country}
         option = { investmentOption }
+        options = {investment_options}
         / > < /
         Modal > < /
         div >
@@ -144,7 +149,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         h6 className = "text-center" > Your risk profile helps us invest your money accordingly,
         let us know what type of investor you are.Complete your profile and
         let us do the rest < /h6> <
-        h6 className = "text-center mt-3 rounded-3 bk-warning"
+        h6 className = "text-center mt-3 rounded-4 bk-warning"
         onClick = { props.handletab9 } > Complete your Risk Profile < /h6> < /
         div >
         <
@@ -181,6 +186,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         lastname = { name }
         email = { email }
         phone = { phone }
+        options = {investment_options}
         / >
         <
         /div > < /div >

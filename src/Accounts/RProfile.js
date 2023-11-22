@@ -9,7 +9,7 @@ import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import axios from "axios";
 import { API_URL_ADD_AUTH_USER_RISK_PROFILE, TOKEN } from "../apis";
-import { options } from "./InvestmentOps";
+import { Options } from "./InvestmentOps";
 
 class RProfile extends React.Component {
     constructor(props) {
@@ -203,7 +203,7 @@ class RProfile extends React.Component {
             /thead> <
             tbody > <
             tr > <
-            td > B(45– 50 pts) < /td> <
+            td > B(46– 50 pts) < /td> <
             td > 10 % < /td> <
             td > 35 % < /td><
             td > 35 % < /td><
@@ -408,7 +408,7 @@ class RProfile extends React.Component {
                 /h6>        
             )
         } else if (currentStep === 11) {
-            return ( < div className = "text-center mb-3" > <
+            return ( < div className = "text-center my-2" > <
                 Button className = "text-center rounded-3"
                 type = "button"
                 variant = "warning"
@@ -468,14 +468,14 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep === 12) {
             return ( <
-                div className = 'row justify-content-center mb-3' > <
+                div className = 'text-center my-2 mx-3' > <
                 h6 id = "errorMessage"
-                className = 'py-2 mt-3 mx-lg-5 rounded border border-danger text-center'
+                className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 mx-4 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <
@@ -576,6 +576,7 @@ class RProfile extends React.Component {
             handleChange = { this.handleChange }
             getResult = { this.getResult() }
             score = { this.scoreResult() }
+            options = {this.props.options}
             resourceAllocation = { this.allocateResources() }
             />{ this.previousButton() } { this.nextButton() } {this.submitButton()}< /
             form > < /
@@ -1375,7 +1376,7 @@ function Step12(props) {
         required defaultValue = "Select an investment option"
         onChange = { props.handleChange }
         name = "investment_option" > {
-            options.map(option => {
+            props.options.map(option => {
                 return <
                     option value = { option.name }
                 id = "investmentOption" ><h6>{ option.name }</h6> < /option>

@@ -63,7 +63,7 @@ export default function GoalCreate({ name, phone, amount, currency, email, data,
                 });
             }
         }
-        className = 'bk-warning active p-3 mx-5 rounded-3 mt-3'
+        className = 'bk-warning active px-3 rounded-4 mt-3'
         id = "checkout" >
         Make Payment <
         /h6> < /

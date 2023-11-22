@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests } from '../Api/MainRequests'
+import { MainRequests, PersonalRequests, GetInvestmentOptionsRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests } from '../Api/MainRequests'
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,6 +23,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [email, setEmail] = useState([])
     const [name, setName] = useState([])
     const [phone, setPhone] = useState([])
+    const [investment_options, setOptions] = useState([])
     const [withdraws, setWithdraw] = useState([])
     const [totalWithdraw, setTotalWithdraw] = useState([])
     const [pendingWithdraw, setPendingWithdraw] = useState([])
@@ -33,6 +34,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [depositProgress, setDepositProgress] = useState([]);
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
+    const [deposits2, setDeposits2] = useState([])
     const [investmentOption, setinvestmentoption] = useState("Cash | Venture | Credit")
     let thisYear = new Date().getFullYear()
     let depos = []
@@ -61,7 +63,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             setTotalDeposit(res[2]);
             setDollarNetworth(res[3]);
             setDepositProgress(res[4]);
-            setGraph(res[4]); // array deposits
+            setGraph(res[4]); 
+            setDeposits2(res[6])
             setDates(res[5])
             setDepositNetworth(res[7])
             setTotalNetworth(res[9])
@@ -85,7 +88,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         WithdrawRequests().then(res => {
             setWithdraw(res[0])
             setTotalWithdraw(res[1])
-        })
+        });
+        GetInvestmentOptionsRequests().then(res => {
+            setOptions(res)
+        });
     }, []);
     let depositTotal = 0
     span.map(goal => (
@@ -205,8 +211,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
             div className = ' my-3 text-center' > <
-            h6 className = 'p-3 warning rounded-3'
-            onClick = { handleShow3 } > Deposit < /h6> </div >
+            span className = 'bk-warning rounded-4 px-5'
+            onClick = { handleShow3 } > Deposit < /span> </div >
             <
             Modal show = { show3 }
             onHide = { handleClose3 }
@@ -218,6 +224,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             lastname = { name }
             email = { email }
             phone = { phone }
+            options = {investment_options}
             / > < /
             Modal >
             <
@@ -244,18 +251,18 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = 'bg-lighter' >
             {myGraphs()} <
-            div className = 'rounded-4 mt-2 row bg-white p-lg-4 p-md-2' >
+            div className = 'rounded-4 mt-2 row d-none bg-white p-lg-4 p-md-2' >
             <
-            div className = 'col-3' >
+            div className = 'col-4' >
             <
             h4 className = 'bolder' > Investment Details < /h4> <
-            h6 > Your current Investment Option as per your risk profile: < span className = 'bolder active' > T.bonds < /span> < /
+            h6 > Your current Investment Option as per your risk profile: < span className = 'bolder' > Cash | Credit | Venture | Absolute Return < /span> < /
             h6 >
             <
             /div> <
-            div className = 'col-6 text-center' >
+            div className = 'col-5 text-center' >
             <
-            h5 className = "bolder mt-3" > Networth < /h5> <
+            h5 className = "bolder mt-1" > Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
             h1 className = "px-2 font-lighter" > { networthy().toLocaleString() } < /h1></div >
             <
@@ -264,7 +271,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'my-3' >
             <
-            h6 className = 'py-3 warning text-center rounded-3'
+            h6 className = ' warning text-center rounded-4'
             onClick = { handleShow2 } > Withdraw < /h6></div >
             <
             Modal show = { show2 }
@@ -314,7 +321,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-4 p-lg-5 p-md-3 text-center" >
             <
-            h6 className = "px-lg-4 px-md-2 py-3 rounded-3 warning text-center"
+            h6 className = "px-lg-4 px-md-2 rounded-4 warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <

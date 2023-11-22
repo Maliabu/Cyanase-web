@@ -123,7 +123,7 @@ function Goal(props) {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>  <
@@ -142,7 +142,7 @@ function Goal(props) {
     const previousButton = () => {
         if (step === 7) {
             return ( <
-                h6 className = "py-3 warning text-start rounded-3"
+                h6 className = " warning text-start rounded-4"
                 type = "button"
                 onClick = { _prevwithdraw } >
                 Previous <
@@ -151,7 +151,7 @@ function Goal(props) {
         }
         if (step !== 0) {
             return ( <
-                h6 className = "py-3 text-start warning rounded-3"
+                h6 className = " text-start warning rounded-4"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -164,7 +164,7 @@ function Goal(props) {
         if (step === 0 || step === 7) {
             return null
         }
-        return ( < div className="blue-dark rounded-top-3 p-3"><h4 className="bolder">Deposit to: {props.name}</h4> <
+        return ( < div className="blue-darks rounded-top-3 p-3"><h4 className="bolder">Deposit to: <span className="row light-res-home p-2 mt-1 justify-content-center">{props.name}</span></h4> <
             Wallet className = "rounded-circle d-none warning p-2"
             size = "xlarge" / ><
             img src = { DepositPic }
@@ -182,7 +182,7 @@ function Goal(props) {
         let goalName = props.name
         if (step === 0 && goalAmount !== deposit) {
             return ( <
-                h6 className = "py-3 my-2 warning text-center rounded-3"
+                h6 className = " my-2 warning text-center rounded-4"
                 type = "button"
                 onClick = { _next } >
                 Deposit to goal <
@@ -190,7 +190,7 @@ function Goal(props) {
             )
         } else if (step === 0 && goalAmount === deposit) {
             return ( <
-                h6 className = "p-2 bg-lighter grey-text text-center rounded-3"
+                h6 className = "p-2 bg-lighter grey-text text-center rounded-4"
                 type = "button" >
                 Congrats!!...You can now: { goalName } <
                 /h6>        
@@ -198,7 +198,7 @@ function Goal(props) {
         }
         if (step === 1) {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = " my-2 text-end warning rounded-4"
                 type = "button"
                 onClick = { ()=>validate1() } >
                 Next <
@@ -210,7 +210,7 @@ function Goal(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
+                h6 className = " my-2 text-center bk-warning rounded-4"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -219,7 +219,7 @@ function Goal(props) {
         }
         if (step === 4 && payment_means === "wallet") {
             return ( <
-                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
+                h6 className = " my-2 text-center bk-warning rounded-4"
                 type = "button" >
                 OK <
                 /h6>        
@@ -227,7 +227,7 @@ function Goal(props) {
         }
         if (step < 4) {
             return ( <
-                h6 className = "py-3 text-end my-2 warning rounded-3"
+                h6 className = " text-end my-2 warning rounded-4"
                 onClick = { _next } >
                 Next <
                 /h6>        

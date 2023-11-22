@@ -127,14 +127,14 @@ function Goal1(props) {
     const submitButton = () => {
         if (step === 7) {
             return ( <
-                div className = 'row justify-content-center' > <
+                div className = 'mx-3 justify-content-center rounded-4' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <
@@ -152,7 +152,7 @@ function Goal1(props) {
     const nextButton = () => {
         if (step === 1 || step === 4 || step === 5 || step === 6) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = "text-end my-2 warning rounded-4"
                 onClick = {
                    ()=> _next()
                 } >
@@ -161,7 +161,7 @@ function Goal1(props) {
         }
         if (step === 2) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = "text-end my-2 warning rounded-4"
                 onClick = {
                     () => validate1()
                 } >
@@ -170,7 +170,7 @@ function Goal1(props) {
         }
         if (step === 3) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = " text-end my-2 warning rounded-4"
                 onClick = {
                     () => validate2()
                 } >
@@ -182,7 +182,7 @@ function Goal1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 text-start warning rounded-3"
+                h6 className = " text-start warning rounded-4"
                 type = "button"
                 onClick = { _prev } >
                 Previous <

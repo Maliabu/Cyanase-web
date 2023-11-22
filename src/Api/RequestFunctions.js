@@ -36,11 +36,11 @@ export const success1 = (message, successMessage) => {
         document.getElementById("infoMessage").style.display = 'none'
     }, 4000);
 }
-export const fail = (error) => {
+export const fail = (error, type) => {
     document.getElementById("successMessage").innerHTML = "Unsuccessful"
     document.getElementById("successMessage").style.backgroundColor = "red"
     document.getElementById("successMessage").style.color = "white"
-    document.getElementById("errorMessage").innerText = error
+    document.getElementById("errorMessage").innerText = error+": "+type
     document.getElementById("errorMessage").style.display = 'block'
     document.getElementById("errorMessage").style.color = "red"
     document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
