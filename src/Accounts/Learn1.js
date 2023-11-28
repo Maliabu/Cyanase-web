@@ -14,6 +14,7 @@ import axios from "axios";
 import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
 
 function Learn1(props) {
+    console.log(props)
     const globalRefId = "";
     const [step, setStep] = useState(1)
     let minimum = 0, id = ''
@@ -131,12 +132,20 @@ function Learn1(props) {
     const nextButton = () => {
         let payment_means = formData.payment_means;
         let deposit_category = formData.deposit_category
-        if (step === 1 && deposit_category === "personal") {
+        let verification = props.verification
+        if (step === 1 && deposit_category === "personal" && verification === true) {
             return ( <
                 h6 className = " my-2 text-end warning rounded-4"
                 type = "button"
                 onClick = { _next } >
                 Next <
+                /h6>        
+            )
+        }
+        if (step === 1 && verification === false) {
+            return ( <
+                h6 className = " my-2 mx-3 p-2 text-center border red-status border-danger rounded-3 text-danger bolder" id="errorMessage">
+                Please check your email and verify your account to proceed <
                 /h6>        
             )
         }
@@ -166,7 +175,6 @@ function Learn1(props) {
             }}).then(function(res)
                 {
                     if(res){
-                        console.log(res)
                         minimum = res.data[0].minimum_deposit;
                         id = res.data[0].investment_option_id
                     }
@@ -239,6 +247,7 @@ function Learn1(props) {
         data = { formData }
         getCurr = { getCurrency(props.country) }
         currency = { formData.currency }
+        riskAnalysisPercentages = {props.riskAnalysisPercentages}
         /> <
         Step5 currentStep = { step }
         handleChange = { handleChange }
@@ -304,7 +313,7 @@ function Step1(props) {
         div > < /div >  <
         h6 className = "bolder d-none p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
         h6 > <
-        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Credit | Cash | Venture | Absolute Return < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Automatic Asset Allocation < /span> < /
         h6 > <
         h6 className = " d-none rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
@@ -458,6 +467,7 @@ function Step4(props) {
             currency = { props.getCurr }
             data = { props.data }
             submit = { props.submit }
+            riskAnalysisPercentages = {props.riskAnalysisPercentages}
             / > < /
             div >
         );

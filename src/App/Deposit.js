@@ -19,12 +19,12 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
     const [show2, setShow2] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
-    const [investmentOption, setinvestmentoption] = useState("")
+    const [investmentOption, setinvestmentoption] = useState("Automatic Asset Allocation")
     const [investment_options, setOptions] = useState([])
     useEffect(() => {
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
-                setinvestmentoption("Cash | Venture | Credit")
+                setinvestmentoption("Automatic Asset Allocation")
             } else {
                 setinvestmentoption(res.investment_option)
             }
@@ -39,7 +39,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
             setOptions(res)
         });
     }, []);
-    return ( < div className="mx-3"> < div className = " d-none d-sm-block" > <
+    return ( < div className="mx-2"> < div className = " d-none d-sm-block" > <
         div className = "row" > <
         div className = "col-8 dollar p-3 rounded-4 " >
         <

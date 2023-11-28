@@ -173,7 +173,7 @@ function SecondaryUser(props) {
     const nextButton = () => {
         if (step === 1) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = " text-end my-2 warning rounded-4"
                 onClick = {
                     () => validate1()
                 } >
@@ -182,7 +182,7 @@ function SecondaryUser(props) {
         }
         if (step === 2) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = " text-end my-2 warning rounded-4"
                 onClick = {
                     () => validate2()
                 } >
@@ -194,7 +194,7 @@ function SecondaryUser(props) {
     const prevButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = " py-3 mt-2 text-start warning rounded-3"
+                h6 className = " mt-2 text-start warning rounded-4"
                 onClick = {
                     () => { setStep(step - 1) }
                 } >

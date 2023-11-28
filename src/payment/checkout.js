@@ -29,6 +29,7 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                 preloaderCheckout()
                 handleFlutterPayment({
                     callback: (response) => {
+                        console.log(response)
                         if (response.status === "successful") {
                             data.reference = response.flw_ref
                             data.reference_id = response.transaction_id
@@ -63,7 +64,7 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
         }
         className = 'bk-warning active px-3 mb-2 rounded-4'
         id = "checkout" >
-        Make Payment <
+        Make Deposit <
         /h6> < /
         div >
     );

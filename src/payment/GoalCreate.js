@@ -65,7 +65,7 @@ export default function GoalCreate({ name, phone, amount, currency, email, data,
         }
         className = 'bk-warning active px-3 rounded-4 mt-3'
         id = "checkout" >
-        Make Payment <
+        Make Deposit to Goal <
         /h6> < /
         div >
     );

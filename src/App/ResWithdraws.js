@@ -26,10 +26,10 @@ const ResWithdraws = () => {
                 }
                 else return (
                     withdraws.map(withdraw => ( <
-                        div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
+                        div className = 'row p-2 mx-2 mt-2 bg-white border-bottom' >
                         <
                         div className = 'col-5 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
-                        div className = 'col-2 text-start' > < h6 > { withdraw.status } < /h6> < /div > <
+                        div className = 'col-2 text-center' > <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span>{withdraw.status}</h6> < /div > <
                         div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                         div >
                     ))

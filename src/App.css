@@ -201,7 +201,7 @@ body::-webkit-scrollbar {
 }
 
 .grey-text {
-    color: #646464;
+    color: #a5a5a5;
 }
 
 .grey-back {
@@ -221,12 +221,23 @@ body::-webkit-scrollbar {
 
 
 .investment {
-    background: -webkit-linear-gradient(left, rgba(233, 233, 233, 0.769),rgba(240, 240, 240, 0.09)), url("images/white-grey\ hills.png");
+    background: -webkit-linear-gradient(left, rgba(233, 233, 233, 0.769),rgba(240, 240, 240, 0.324)), url("images/white-grey\ hills.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
 }
-
+.investments {
+    background: -webkit-linear-gradient(right, rgba(233, 233, 233, 0.769),rgba(240, 240, 240, 0.09)), url("images/white-grey\ hills.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
+.investment1 {
+    background: -webkit-linear-gradient(left, rgb(255, 255, 255),rgba(255, 255, 255, 0)), url("images/white-grey\ hills.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
 .sacco {
     background-image: url("images/_.jpeg");
     background-position: right;
@@ -248,7 +259,6 @@ body::-webkit-scrollbar {
 .light-res-home {
     background-color: #fafafa1f;
 }
-
 
 /* .lighter {
     background-image: -webkit-linear-gradient(top, #1d2565ae, #ff353535);
@@ -328,12 +338,28 @@ body::-webkit-scrollbar {
     background-color: #ffe3be;
 }
 
+.red-status {
+    background-color: #ffd7d7;
+}
+
 .bk-warning {
     color: rgb(255, 255, 255) !important;
     cursor: pointer !important;
     border: none !important;
     background-color: rgb(255, 144, 18) !important;
     box-shadow: 2px 2px 3px #e6e6e6;
+    width:max-content !important;
+    font-size: small !important;
+    padding: 12px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin: auto !important;
+}
+.bk-warning2 {
+    color: rgb(255, 255, 255) !important;
+    cursor: pointer !important;
+    border: none !important;
+    background-color: rgb(255, 144, 18) !important;
     width:max-content !important;
     font-size: small !important;
     padding: 12px !important;
@@ -410,6 +436,10 @@ button {
 
 .font-lighter {
     font-weight: 150 !important;
+}
+
+.font-light {
+    font-weight: 400 !important;
 }
 
 .TabContent {

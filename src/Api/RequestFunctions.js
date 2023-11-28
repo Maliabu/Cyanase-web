@@ -4,10 +4,13 @@ export const preloader = () => {
     document.getElementById("successMessage").innerHTML = "processing..."
 }
 export const preloaderCheckout = () => {
-    document.getElementById("checkout").innerHTML = "Checkout..."
+    document.getElementById("checkout").innerHTML = "Redirecting please wait..."
 }
 export const preloaderCheckouts = () => {
-    document.getElementById("checkouts").innerHTML = "Checkout..."
+    document.getElementById("checkouts").innerHTML = "Redirecting please wait..."
+    setTimeout(() => {
+        document.getElementById("checkouts").style.display = 'none'
+    }, 3000);
 }
 export const success = (message, redirect, successMessage) => {
     document.getElementById("successMessage").innerHTML = successMessage

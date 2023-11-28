@@ -83,7 +83,7 @@ class PasswordReset extends Component {
                 { display: 'none' }
             } > hey < /h6> <
             h6 id = "infoMessage"
-            className = 'py-2 mt-3 rounded warning text-center'
+            className = 'py-2 mt-3 rounded warning-message text-center'
             style = {
                 { display: 'none' }
             } > hey < /h6>  < /

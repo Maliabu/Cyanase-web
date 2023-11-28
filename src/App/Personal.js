@@ -1,4 +1,4 @@
-import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests } from "../Api/MainRequests";
+import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile, UserVerificationRequests, PendingWithdrawRequests, InvestmentWithdrawRequests, UserBanks } from "../Api/MainRequests";
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,7 +31,10 @@ const Personal = ({...props }) => {
         const [holdAmount, setHoldAmount] = useState("");
         let [holdDeposit, setHoldDeposit] = useState("");
         const [groups, setGroups] = useState(0)
+        const [banks, setBanks] = useState("")
+        const [verification, setVerification] = useState("")
         const [pendingWithdraw, setPendingWithdraw] = useState([])
+        const [investmentWithdraw, setInvestmentWithdraw] = useState([])
         const [holdCreated, setHoldCreated] = useState("");
         const [show3, setShow3] = useState(false);
         const handleClose3 = () => setShow3(false);
@@ -49,6 +52,7 @@ const Personal = ({...props }) => {
         const handleShow4 = () => setShow4(true);
         const [investmentOption, setinvestmentoption] = useState("")
         const [option_name, setOptionName] = useState("")
+        const [investment_id, setInvestmentId] = useState("")
         useEffect(() => {
             PersonalRequests().then(res => {
                 setSpan(res[2]); // array(14)
@@ -63,21 +67,32 @@ const Personal = ({...props }) => {
             PendingWithdrawRequests().then(res => {
                 setPendingWithdraw(res)
             });
+            InvestmentWithdrawRequests().then(res => {
+                setInvestmentWithdraw(res)
+            });
+            UserVerificationRequests().then(res => {
+                setVerification(res.success)
+            });
             UserRequests().then(res => {
                 setCountry(res.profile.country)
                 setPhone(res.profile.phoneno)
                 setEmail(res.email)
                 setName(res.first_name + " " + res.last_name)
+            });
+            UserBanks().then(res => {
+                setBanks(res.data)
             })
         }, []);
-        console.log(groups)
         const groupArrayObjects = mine.reduce((group, obj) => {
-            const { name, datas, networths } = obj;
+            let sum = 0
+            const { name, datas, networths, id } = obj;
             if (!group[name]) {
                 group[name] = {
                     name: name,
                     data: [],
-                    networth: []
+                    networth: [],
+                    investment_id: id,
+                    total: sum
                 };
             }
             group[name].data.push(datas);
@@ -85,6 +100,27 @@ const Personal = ({...props }) => {
             return group;
         }, {});
         const results = Object.values(groupArrayObjects);
+        const groupArrayObject = investmentWithdraw.reduce((group, obj) => {
+            let sum = 0
+            const { name, datas, date } = obj;
+            if (!group[name]) {
+                group[name] = {
+                    name: name,
+                    amount: [],
+                    date: date,
+                    total: sum
+                };
+            }
+            group[name].amount.push(datas);
+            return group;
+        }, {});
+        const result = Object.values(groupArrayObject);
+        results.forEach(data => {
+            data.total = data.networth.reduce((total, value) => total + parseInt(value), 0);
+        });
+        result.forEach(data => {
+            data.total = data.amount.reduce((total, value) => total + parseInt(value), 0);
+        });
         const options = {
             seriesDonut: results.map(option => summ(option.data)),
             optionsDonut: {
@@ -92,7 +128,7 @@ const Personal = ({...props }) => {
                 chart: {
                     type: 'donut',
                 },
-                colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
+                colors: ['#E91E63', '#FF9800', '#b7b7b7', '#252859'],
                 responsive: [{
                     breakpoint: 480,
                     options: {
@@ -117,18 +153,55 @@ const Personal = ({...props }) => {
             }
             return sum
         }
-        function getId(id, name, amount, deposit, networth, created) {
+        function getDiff(big, small){
+            let result = 0
+            let name1 = big.map(data=>data.name)
+            let total1 = big.map(data=>data.total)
+            let name2 = small.map(data=>data.name)
+            let total2 = small.map(data=>data.total)
+            for(var i=0;i<small.length;i++){
+                if((name1[i]).toString() === (name2[i]).toString()){
+                    result = parseInt(total1[i]) - parseInt(total2[i])
+                } else {
+                    result = parseInt(total1[i])
+                }
+            }
+            return result
+        }
+        function getId(id, name, amount, deposit, networth, created, investment_id) {
             setHoldId(id)
             setHoldName(name)
             setHoldAmount(amount)
             setHoldDeposit(deposit)
             setHoldCreated(created)
             setHoldNetworth(networth)
+            setInvestmentId(investment_id)
             handleShow3()
         }
-        function getWithdraws(name,networth){
+        // let list1 = [{"name":"a", "total":3000, "data": [1,2]},{"name":"b", "total":1500, "data": [2,3,5]},{"name":"c", "total":5600, "data":[]}]
+        // let list2 = [{"name":"a", "total":500},{"name":"b", "total":300}]
+        function subtractTwoLists(listA, listB) {
+            const mapA = new Map(listA.map(item => [item.name, { total: parseInt(item.total), data: item.data, investment_id: item.investment_id }])); // convert listA to map as { 'a' => { value: 2000, data: 'first' } }
+          //console.log(mapA)
+            // Subtract values from List B from List A
+            listB.forEach(itemB => {
+              const nameInB = itemB.name; //get name in B
+              const valueInB = parseInt(itemB.total);//get value in B and parse to Int
+              if (mapA.has(nameInB)) {
+                  
+                  const oldValue = mapA.get(nameInB).total;
+                  mapA.set(nameInB, { total: oldValue - valueInB, data: mapA.get(nameInB).data, investment_id: mapA.get(nameInB).investment_id });
+                 //Updates the value associated with the "name" attribute in List A to the result of the subtraction
+              }
+            });
+           const resultList = Array.from(mapA, ([name, { total, data, investment_id }]) => ({ name, total, data, investment_id }));
+            return resultList;  // convert map to list, i.e { 'a' => { value: 2000, data: 'first' } } to [ { name: 'a', value: 1200 }]
+        }
+        let final_data = subtractTwoLists(results, result)
+        function getWithdraws(name,networth,investment_id){
             setOptionName(name)
             setGroups(networth)
+            setInvestmentId(investment_id)
             handleShow4()
         }
         function summ(array) {
@@ -142,7 +215,7 @@ const Personal = ({...props }) => {
         let nextDeposits = deposits
         let rev = nextDeposits.reverse()
         const myInvestments = () => {
-            let nextResult = results.reverse()
+            let nextResult = final_data.reverse()
             if (results.length === 0) {
                 return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"
@@ -157,13 +230,14 @@ const Personal = ({...props }) => {
                     nextResult.map(option => ( <
                         div className = "row mt-2 py-3 bg-white rounded-3" >
                         <
-                        div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6><span className="bk-warning p-2 rounded-4 px-3" onClick={() => getWithdraws(option.name,getNetworths(option.networth))}>Withdraw</span> < /
+                        div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6>
+                        <span className="bk-warning p-2 rounded-4 px-3" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> < /
                         div >
                         <
-                        div className = "col-3" > < h6 className = "bolder" > Networth: {
-                            getNetworths(option.networth)
+                        div className = "col-4" > < h6 className = "bolder" ><span className="grey-text font-light">Networth:</span> { getCurrency(country) } {
+                            option.total
                         } < /h6> < /div > <
-                        div className = "col" > < h6 className = "bolder" > Total: { getCurrency(country) } {
+                        div className = "col" > < h6 className = "bolder" ><span className="grey-text font-light">Total:</span> { getCurrency(country) } {
                             (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
                         } < /h6> < /div > < /
                         div > ))
@@ -182,11 +256,13 @@ const Personal = ({...props }) => {
                     h6 > < /div > )
                     }
                     else return (
-                        pendingWithdraw.map(withdraw => ( <div className="scroll-y3"><
+                        pendingWithdraw.map(withdraw => ( <div className=""><
                             div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
                             <
-                            div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
-                            div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
+                            div className = 'col-5 text-start' > < h6 className="bolder"> { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div ><div className="col-5 text-center">
+                                <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span> {withdraw.status}</h6>
+                            </div> <
+                            div className = 'col-2 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                             div ></div>
                         ))
                     )
@@ -236,17 +312,11 @@ const Personal = ({...props }) => {
                     div className = "row mx-3" > <
                     div className = "col-8 px-3 rounded-4" >
                     <
-                    h6 className = "py-2" > MY INVESTMENTS < /h6>  <
-                    div className = "row justify-content-center rounded-4 bg-lighter p-3" >
+                    h6 className = "py-2" > MY INVESTMENTS< span className = "mx-3 px-2 py-1 border rounded-4" > { results.length } < /span>  < /h6>  <
+                    div className = "row justify-content-center rounded-4 investments p-2" >
+                     
                     <
-                    div className = "row" > <
-                    div className = "col" >
-                    <
-                    /
-                    div > < /div>  <
-                    div className = "row" >
-                    <
-                    div className = "col-5 text-center" > <
+                    div className = "col-4 text-center" > <
                     Chart options = { options.optionsDonut }
                     series = { options.seriesDonut }
                     height = { 300 }
@@ -255,11 +325,11 @@ const Personal = ({...props }) => {
                     >
                     <
                     /div > <
-                    div className = "col-7 text-center" >
+                    div className = "col-8 text-center scroll-y3" >
                     <
                     h6 className = "grey-text d-none py-2" > Summary Data of all your investments < /h6> {
                     myInvestments()
-                } < /div > < /
+                } < /
                 div > <
                     div className = "px-3 d-none text-center " >
                     <
@@ -321,7 +391,8 @@ const Personal = ({...props }) => {
                     <
                     div className = "row" >
                     <
-                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < /h6> {pendingWithdraws()}<span className="d-none">{myRecentActivity()}</span> < /div > < /
+                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < span className = "mx-3 px-2 py-1 border rounded-4" > { pendingWithdraw.length } < /span>  < /h6><div className="scroll-y3 investment rounded-4"> {pendingWithdraws()}</div>
+                    <span className="d-none">{myRecentActivity()}</span> < /div > < /
                 div >
                     <
                     /
@@ -335,7 +406,7 @@ const Personal = ({...props }) => {
                     div className = " mt-2 px-5 bk-warning p-2 text-center rounded-4"
                 onClick = { handleShow1 } >
                     Add a Goal < /div>  <
-                div className = " pb-5 px-1 mt-2 scroll-y rounded-4" ><div className="row px-3 bg-lighter"> {
+                div className = " pb-5 px-1 mt-2 scroll-y rounded-4" ><div className="row px-3 investment"> {
                     span.map(goal => ( <
                         div className = "py-2 px-3 bg-white res-home rounded-4 mt-2"
                         key = { goal.goal_id } > <
@@ -399,6 +470,9 @@ const Personal = ({...props }) => {
                 fullname = { name }
                 option_name = {option_name}
                 networth = { groups }
+                investmentId = {investment_id}
+                verification = {verification}
+                banks = {banks}
                 / > < /
                 Modal >
                     <

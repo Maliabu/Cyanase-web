@@ -82,7 +82,7 @@ function ResLearn1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 text-start warning rounded-3"
+                h6 className = "text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -142,7 +142,7 @@ function ResLearn1(props) {
         let deposit_category = formData.deposit_category
         if (step === 1 && deposit_category === "personal investment") {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = "my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -151,7 +151,7 @@ function ResLearn1(props) {
         }
         if (step === 6) {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = "my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._afterSacco } >
                 Next <
@@ -160,7 +160,7 @@ function ResLearn1(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = "py-3 my-2 text-center bk-warning rounded-3"
+                h6 className = "my-2 text-center bk-warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -182,7 +182,7 @@ function ResLearn1(props) {
                 }
             )
             return ( <
-                h6 className = " my-2 text-end warning rounded-4"
+                h6 className = " my-2 text-end warning rounded-3"
                 onClick = { () => validate1(minimum, id) } >
                 Next <
                 /h6>        
@@ -190,7 +190,7 @@ function ResLearn1(props) {
         }
         if (step < 4) {
             return ( <
-                h6 className = "py-3 my-2 text-end warning rounded-3"
+                h6 className = " my-2 text-end warning rounded-3"
                 onClick = { _next } >
                 Next <
                 /h6>        
@@ -202,7 +202,7 @@ function ResLearn1(props) {
     return ( <
         React.Fragment >
         <
-        form className = "text-center"
+        form className = "text-center bg-light rounded-4 pb-3"
         onSubmit = { handleSubmit(onSubmit) } > {
             /* 
                       render the form steps and pass required props in

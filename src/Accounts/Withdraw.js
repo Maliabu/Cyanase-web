@@ -1,12 +1,12 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import { API_URL_MM_WITHDRAW, API_URL_BANK_WITHDRAW, TOKEN } from '../apis';
-import axios from 'axios';
 import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { getCurrency } from "../payment/GetCurrency";
 import { ValidateForms } from "../Auth/ValidateForms";
+import axios from "axios";
 
 class Withdraw extends React.Component {
     constructor(props) {
@@ -20,10 +20,11 @@ class Withdraw extends React.Component {
             account_type: "",
             goalid: this.props.goalid,
             phone: this.props.phone,
-            account_bank: "",
-            phone_number: "",
+            phone_number: '',
+            account_bank: "MPS",
             account_number: "",
-            beneficiary_name: this.props.fullname
+            beneficiary_name: this.props.fullname,
+            investment_id: this.props.investmentId
         }
     }
     getCountryCurrency = () => {
@@ -31,12 +32,12 @@ class Withdraw extends React.Component {
         currency = getCurrency(this.props.country)
         return currency
     }
-
     handleChange = event => {
         const { name, value } = event.target
         this.setState({
             [name]: value
         })
+        console.log(this.state)
     }
     getFee() {
         this.fee = (2 / 100) * this.state.withdraw_amount
@@ -93,7 +94,7 @@ class Withdraw extends React.Component {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <
@@ -117,6 +118,7 @@ class Withdraw extends React.Component {
         form_data.append('withdraw_category', this.state.withdraw_category);
         form_data.append('withdraw_amount', this.state.withdraw_amount);
         form_data.append('account_type', this.getAccountType());
+        form_data.append('investment_id', this.state.investment_id);
         if (this.state.withdraw_channel === "bank") {
             form_data.append('account_number', this.state.account_number)
             form_data.append('account_bank', this.state.account_bank)
@@ -133,9 +135,9 @@ class Withdraw extends React.Component {
                 })
                 .then(function(response) {
                     if (!response) {
-                        fail("Something went wrong...")
+                        fail("Something went wrong...", "Error")
                     } else if (response.status === 200 && response.data.success === false) {
-                        fail(response.data.message)
+                        fail(response.data.message, response.data.type)
                     } else {
                         success("Your withdraw is now pending approval", "/home", "successful");
                     }
@@ -143,7 +145,7 @@ class Withdraw extends React.Component {
         }
 
         if (this.state.withdraw_channel === "mobile money") {
-            form_data.append('account_number', this.state.account_number)
+            form_data.append('phone_number', this.state.phone_number)
             form_data.append('account_bank', "MPS")
             form_data.append('beneficiary_name', this.state.beneficiary_name)
             axios.post(`${API_URL_MM_WITHDRAW}`, form_data, {
@@ -158,7 +160,7 @@ class Withdraw extends React.Component {
                 })
                 .then(function(response) {
                     if (response.status === 200 && response.data.success === false) {
-                        fail(response.data.message)
+                        fail(response.data.message, response.data.type)
                     } else {
                         success("Your withdraw is now pending approval", "/home", "successful");
                     }
@@ -207,7 +209,7 @@ class Withdraw extends React.Component {
     previousButton() {
         let currentStep = this.state.currentStep;
         let withdraw_category = this.state.withdraw_category;
-        if (currentStep !== 1) {
+        if (currentStep !== 2) {
             return ( <
                 h6 className = "text-start warning rounded-4"
                 type = "button"
@@ -239,11 +241,11 @@ class Withdraw extends React.Component {
             this._next()
         }
     }
-
     nextButton() {
         let currentStep = this.state.currentStep;
         let withdraw_category = this.state.withdraw_category;
-        if (currentStep === 1 && withdraw_category === "personal") {
+        let verification = this.props.verification
+        if (currentStep === 2 && verification === true) {
             return ( <
                 h6 className = "my-2 text-end warning rounded-4"
                 type = "button"
@@ -252,7 +254,16 @@ class Withdraw extends React.Component {
                 /h6>        
             )
         }
+        if (currentStep === 2 && verification === false) {
+            return ( <
+                h6 className = " my-2 mx-3 p-2 text-center border red-status border-danger rounded-3 text-danger bolder" id="errorMessage">
+                Please check your email and verify your account to proceed <
+                /h6>        
+            )
+        }
+        // eslint-disable-next-line no-unreachable
         if (currentStep === 3) {
+            console.log(this.props)
             let withdrawAmount = this.state.withdraw_amount
             let networth = this.props.networth
             let threshold = 0
@@ -278,7 +289,6 @@ class Withdraw extends React.Component {
                 /h6>        
             )
         }
-
         if (currentStep === 1 && withdraw_category === "sacco/club") {
             return ( <
                 h6 className = "my-2 text-end warning rounded-4"
@@ -329,6 +339,7 @@ class Withdraw extends React.Component {
             handleChange = { this.handleChange }
             withdraw_channel = { this.state.withdraw_channel }
             phone = { this.state.phone }
+            options = {this.props.banks}
             /> <
             Step5 currentStep = { this.state.currentStep }
             handleChange = { this.handleChange }
@@ -510,34 +521,32 @@ function Step4(props) {
     }
     if (props.withdraw_channel === "bank") {
         return ( <
-            div className = "text-center" > <
-            h6 className = "mt-2" > Enter your bank details to proceed < /h6>   <
+            div className = "text-center mx-3" > <
+            h6 className = "mt-2" > Enter your bank details to proceed < /h6>  <
+            Form.Select className = "my-3"
+            required defaultValue = "Select your preferred bank"
+            onChange = { props.handleChange }
+            name = "account_bank" > {
+                props.options.map(options => {
+                    return <
+                        option value = { options.code }
+                    id = "account_bank" ><h6>{ options.name }</h6> < /option>
+                })
+            } < /
+            Form.Select > <
             Form.Group className = " p-3" >
             <
             Form.Label > < h6 > Account Number < /h6> < /Form.Label > <
             Form.Control type = "number"
             onChange = { props.handleChange }
             name = "account_number"
-            id = 'phone'
+            id = 'account_number'
             required placeholder = "0000000000" / ><
             p id = "errorAcc"
             className = 'p-2 rounded-2 px-3 bg-red'
             style = {
                 { display: 'none' }
             } > hey < /p>
-            <
-            Form.Control.Feedback type = "invalid" >
-            This field is required. <
-            /Form.Control.Feedback> < /
-            Form.Group > <
-            Form.Group className = "mb-3 p-3 d-none" >
-            <
-            Form.Label > < h6 > Account Bank(Code) < /h6> < /Form.Label > <
-            Form.Control type = "text"
-            onChange = { props.handleChange }
-            name = "account_bank"
-            id = 'phone'
-            required placeholder = "code" / >
             <
             Form.Control.Feedback type = "invalid" >
             This field is required. <
@@ -552,10 +561,10 @@ function Step4(props) {
         Form.Group className = " p-3" >
         <
         Form.Label > < h6 > Confirm Phone Number < /h6> < /Form.Label > <
-        Form.Control type = "number"
+        Form.Control type = "phone"
         onChange = { props.handleChange }
         name = "phone_number"
-        id = 'phone'
+        id = 'phone_number'
         required placeholder = { props.phone }
         / ><
         p id = "errorPhone"
@@ -573,7 +582,7 @@ function Step4(props) {
         Form.Control type = "text"
         onChange = { props.handleChange }
         name = "account_bank"
-        id = 'phone'
+        id = 'account_bank'
         required placeholder = "code" / >
         <
         Form.Control.Feedback type = "invalid" >

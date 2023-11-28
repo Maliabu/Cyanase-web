@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, GetInvestmentOptionsRequests, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests } from '../Api/MainRequests'
+import { MainRequests, PersonalRequests, GetInvestmentOptionsRequests, RequestRiskAnalysisPercentages, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests, UserVerificationRequests } from '../Api/MainRequests'
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,13 +28,15 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [totalWithdraw, setTotalWithdraw] = useState([])
     const [pendingWithdraw, setPendingWithdraw] = useState([])
     const [dates, setDates] = useState([])
+    const [riskAnalysisPercentages, setRiskAnalysisPecentages] = useState([])
+    const [verification, setVerification] = useState("")
     const [totalDeposit, setTotalDeposit] = useState(0);
     const [totalNetworth, setTotalNetworth] = useState(0);
     const [dollar, setDollar] = useState(0);
     const [depositProgress, setDepositProgress] = useState([]);
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
-    const [investmentOption, setinvestmentoption] = useState("Cash | Venture | Credit")
+    const [investmentOption, setinvestmentoption] = useState("Automatic Asset Allocation")
     let thisYear = new Date().getFullYear()
     let depos = []
     let cart = []
@@ -69,7 +71,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         })
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
-                setinvestmentoption("Cash | Venture | Credit")
+                setinvestmentoption("Automatic Asset Allocation")
             } else {
                 setinvestmentoption(res.investment_option)
             }
@@ -83,10 +85,16 @@ const Main = ({ id, activeTab, children, ...props }) => {
         PendingWithdrawRequests().then(res => {
             setPendingWithdraw(res)
         });
+        UserVerificationRequests().then(res => {
+            setVerification(res.success)
+        });
         WithdrawRequests().then(res => {
             setWithdraw(res[0])
             setTotalWithdraw(res[1])
         });
+        RequestRiskAnalysisPercentages().then(res=>{
+            setRiskAnalysisPecentages(res)
+        })
         GetInvestmentOptionsRequests().then(res => {
             setOptions(res)
         });
@@ -140,7 +148,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
                     text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: ['#252859', '#E91E63', '#FF9800', '#b7b7b7'],
+            colors: ['#E91E63', '#FF9800', '#b7b7b7', '#252859'],
 
         },
         series: result,
@@ -200,11 +208,11 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = "col-9 rounded-4" >
             <
-            div className = 'row p-1 bg-lighter rounded-4' >
+            div className = 'row p-1 bg-light rounded-4' >
             <
-            div className = "p-lg-3 bg-white rounded-4 col text-center" >
+            div className = "p-lg-3 investment1 rounded-4 col text-center" >
             <
-            h5 className = "bolder mt-3" > Deposit < /h5> <
+            h5 className = "bolder mt-3" > Total Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
@@ -222,7 +230,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             lastname = { name }
             email = { email }
             phone = { phone }
+            verification = {verification}
             options = {investment_options}
+            riskAnalysisPercentages = {riskAnalysisPercentages}
             / > < /
             Modal >
             <
@@ -247,7 +257,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
             className = 'mx-5' / > Withdraw < /span></div > < /
             div > <
-            div className = 'bg-lighter' >
+            div className = 'bg-light' >
             {myGraphs()} <
             div className = 'rounded-4 mt-2 row d-none bg-white p-lg-4 p-md-2' >
             <
@@ -311,7 +321,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "row rounded-25 w-100" >
             <
-            div className = "col-8 mt-5" > <
+            div className = "col-8 mt-4" > <
             h4 className = "bolder" > Welcome to Cyanase < /h4>  <
             h6 > Investments products, loans, sacco groups, investment clubs all in one package.Including our API
             for integration < /h6> <h6>What products are you looking for? < /

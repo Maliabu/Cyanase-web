@@ -179,7 +179,7 @@ const MyHome = () => {
         /div>   < /
         div >
         <
-        div className = 'col-2 d-none d-md-block d-lg-block bg-lighter' > <
+        div className = 'col-2 d-none d-md-block d-lg-block bg-light' > <
         div > <
         img src = { Header }
         width = '60%'

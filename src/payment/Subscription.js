@@ -65,7 +65,7 @@ export default function Subscription({ name, phone, amount, currency, email, dat
         }
         className = 'bk-warning rounded-3 mt-3'
         id = "checkouts" >
-        Checkout <
+        Make subscription <
         /h6> < /
         div >
     );

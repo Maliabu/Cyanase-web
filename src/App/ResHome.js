@@ -197,12 +197,12 @@ const ResHome = (props) => {
                                 <div className='row text-dark p-2'>
                                     <div className='col-5'><h5 className='bolder'>{option.name}</h5><span className="bk-warning p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,getNetworths(option.networth))}>Withdraw</span> </div>
                                     <
-                            div className = "col-2" > < h6 className = "bolder" > Networth: <
-            div className = "d-flex flex-row flex justify-content-center m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
-            h4 className = "px-1 font-weight-light" > {
-                                (getNetworths(option.networth)).toLocaleString()
-                            } < /h4></div > < /h6> < /div > <
-                            div className = "col text-end" ><h6 className='bolder'>Deposit:<
+                            div className = "col-1" > < h6 className = "bolder" ><
+            div className = "d-flex flex-row flex justify-content-center mt-3" >< h6 className='bolder'> <Star size="small" set='bulk' className="active" /> < /h6>  <
+            h6 className = "px-1 font-weight-light" > {
+                                (option.networth).length
+                            } < /h6></div > < /h6> < /div > <
+                            div className = "col-6 text-end investments px-3 pt-3 rounded-4" ><h6 className='bolder'>Deposit:<
             div className = "d-flex flex-row flex justify-content-end m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
             h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
@@ -313,9 +313,9 @@ const ResHome = (props) => {
             span className = 'text-center rounded-4 wide-60' > <
             span className = "bolder" > 
             <
-            br / > Deposit <
+            br / > Total Deposit <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit.toLocaleString() }  < /
-            h2 > < /div > < /span > < /span > < span className = 'py-4' > < h6 className = ' rounded-3 text-center p-3 warning-home '
+            h2 > < /div > < /span > < /span > < span className = 'py-4' > < h6 className = ' rounded-3 text-center px-3 warning-home'
             onClick = {
                 handleTab5
             } >
@@ -340,8 +340,8 @@ const ResHome = (props) => {
             height = { 400 }
             /></div > 
             <
-            div className = 'd-flex mt-2' > < FaLightbulb size = "35"
-            className = 'mt-3 mx-2 p-2 rounded-circle light-res-home active' / >
+            div className = 'd-flex mt-2' > < FaLightbulb size = "20"
+            className = 'mt-2 mx-2 active' / >
             <
             div className = 'rounded-4 bg-lighter wider' >
             <

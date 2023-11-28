@@ -19,7 +19,7 @@ function Goal(props) {
         "payment_means": 'online',
         "deposit_amount": 0,
         "currency": currency,
-        "investment_option": "Cash | Venture | Credit",
+        "investment_option": "Automatic Asset Allocation",
         "deposit_category": "personal",
         "account_type": "",
         "goal_id": props.id,
