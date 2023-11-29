@@ -26,11 +26,11 @@ const ResWithdraws = () => {
                 }
                 else return (
                     withdraws.map(withdraw => ( <
-                        div className = 'row p-2 mx-2 mt-2 bg-white border-bottom' >
+                        div className = 'row p-1 mx-2 mt-2 bg-white border-bottom' >
                         <
-                        div className = 'col-5 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
-                        div className = 'col-2 text-center' > <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span>{withdraw.status}</h6> < /div > <
-                        div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
+                        div className = 'col-5 text-start' > < h6 className='bolder'> { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
+                        div className = 'col-4 text-center' > <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span>{withdraw.status}</h6> < /div > <
+                        div className = 'col-3 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                         div >
                     ))
                 )
@@ -48,7 +48,7 @@ const ResWithdraws = () => {
                 alt = "investors" / > < /div> < /
                 div >
                 <
-                div ><h4 className='blue-darks p-3 rounded-top-3'>Pending Withdraws</h4> { pendingWithdraws() } < /div> < /
+                div ><h4 className='blue-darks p-3 rounded-top-3'>Pending Withdraws</h4> <div className="scroll-y2">{ pendingWithdraws() }</div>  < /div> < /
                 div >
             );
         };
