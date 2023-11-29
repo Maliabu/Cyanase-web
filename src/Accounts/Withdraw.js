@@ -37,7 +37,6 @@ class Withdraw extends React.Component {
         this.setState({
             [name]: value
         })
-        console.log(this.state)
     }
     getFee() {
         this.fee = (2 / 100) * this.state.withdraw_amount
@@ -263,7 +262,6 @@ class Withdraw extends React.Component {
         }
         // eslint-disable-next-line no-unreachable
         if (currentStep === 3) {
-            console.log(this.props)
             let withdrawAmount = this.state.withdraw_amount
             let networth = this.props.networth
             let threshold = 0

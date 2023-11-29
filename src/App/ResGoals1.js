@@ -19,8 +19,6 @@ function ResGoals1(props) {
         "deposit_type": 'manual',
         "deposit_rate": '',
         "deposit_reminder_day": 'Monday',
-
-
     })
     const handleChange = (event) => {
         const name = event.target.name;
@@ -127,6 +125,24 @@ function ResGoals1(props) {
         return null
     }
     const nextButton = () => {
+        let riskProfileStatus = props.complete
+        let verification = props.verification
+        if (step === 1 && verification === false) {
+            // simple - only verified users can interact with this feature
+            return ( <
+                h6 className = "m-3 p-2 status rounded-3">
+                Please check your email and verify your account to proceed <
+                /h6>        
+            )
+        }
+        if (step === 1 && riskProfileStatus === "InComplete") {
+            // simple - only verified users can interact with this feature
+            return ( <
+                h6 className = " m-3 p-2 status rounded-3" >
+                Please complete your risk profile to continue to create a goal <
+                /h6>       
+            )
+        }
         if (step === 1 || step === 6) {
             return ( <
                 h6 className = " py-3 text-end my-2 warning rounded-3"

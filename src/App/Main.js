@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, GetInvestmentOptionsRequests, RequestRiskAnalysisPercentages, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests, UserVerificationRequests } from '../Api/MainRequests'
+import { MainRequests, PersonalRequests, GetInvestmentOptionsRequests, RequestRiskAnalysisPercentages, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests, UserVerificationRequests} from '../Api/MainRequests'
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -37,6 +37,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
     const [investmentOption, setinvestmentoption] = useState("Automatic Asset Allocation")
+    const [complete, setComplete] = useState("Incomplete");
     let thisYear = new Date().getFullYear()
     let depos = []
     let cart = []
@@ -97,6 +98,11 @@ const Main = ({ id, activeTab, children, ...props }) => {
         })
         GetInvestmentOptionsRequests().then(res => {
             setOptions(res)
+        });
+        GetRiskProfile().then(res => {
+            if (res.status === true) {
+                setComplete("Complete")
+            }
         });
     }, []);
     let depositTotal = 0
@@ -221,7 +227,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
             div className = ' my-3 text-center' > <
-            span className = 'bk-warning rounded-4 px-5'
+            span className = 'bk-warning rounded-3 px-5'
             onClick = { handleShow3 } > Deposit < /span> </div >
             <
             Modal show = { show3 }
@@ -237,6 +243,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             verification = {verification}
             options = {investment_options}
             riskAnalysisPercentages = {riskAnalysisPercentages}
+            complete = {complete}
             / > < /
             Modal >
             <

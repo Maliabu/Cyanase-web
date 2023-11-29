@@ -382,7 +382,7 @@ const MyHome = () => {
         div >
         <div className='d-flex flex-row justify-content-end px-3'>
             <
-        div className = ' pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'bk-warning mx-2 rounded-4 p-2 px-4'
+        div className = ' pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'status mx-2 rounded-3 p-2 px-4'
         onClick = { handleShow4 } > { subStatus } < /span>  < /
         h6 > < /div >
         {apiDocumentation()}

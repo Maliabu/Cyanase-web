@@ -210,6 +210,7 @@ body::-webkit-scrollbar {
 .carousel-indicators {
     display: none !important;
 }
+
 .activeTab {
     color: #ff9215 !important;
 }
@@ -348,6 +349,7 @@ body::-webkit-scrollbar {
 .status {
     color: rgb(255, 144, 18) !important;
     background-color: #ffe3be;
+    cursor: pointer;
 }
 
 .red-status {

@@ -92,7 +92,7 @@ function Subscribe(props) {
             /* 
                       render the form steps and pass required props in
                     */
-        } <div className="blue-dark p-3 rounded-top-3"><h3 className="bolder mt-2">Your Subscription</h3></div><
+        } <div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Your Subscription</h3></div><
         User className = "rounded-circle d-none warning p-2"
         size = "xlarge" / > < br / > < h5 className = "bolder d-none" > Your Subscription < /h5> <
         Step1 currentStep = { step }

@@ -9,7 +9,7 @@ import './style.scss';
 import { PROFILE_PHOTO } from "../apis";
 import Depo from '../images/depo.png'
 import { Wallet, ArrowLeftSquare} from "react-iconly";
-import { GetRiskProfile, UserRequests, GetInvestmentOptionsRequests } from "../Api/MainRequests";
+import { GetRiskProfile, UserRequests, GetInvestmentOptionsRequests, RequestRiskAnalysisPercentages, UserVerificationRequests } from "../Api/MainRequests";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
     const [country, setCountry] = useState([])
@@ -21,6 +21,9 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
     const handleShow2 = () => setShow2(true);
     const [investmentOption, setinvestmentoption] = useState("Automatic Asset Allocation")
     const [investment_options, setOptions] = useState([])
+    const [riskAnalysisPercentages, setRiskAnalysisPecentages] = useState([])
+    const [verification, setVerification] = useState("")
+    const [complete, setComplete] = useState("Incomplete");
     useEffect(() => {
         GetRiskProfile().then(res => {
             if (res.investment_option === undefined) {
@@ -37,6 +40,17 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         });
         GetInvestmentOptionsRequests().then(res => {
             setOptions(res)
+        });
+        RequestRiskAnalysisPercentages().then(res=>{
+            setRiskAnalysisPecentages(res)
+        });
+        UserVerificationRequests().then(res => {
+            setVerification(res.success)
+        });
+        GetRiskProfile().then(res => {
+            if (res.status === true) {
+                setComplete("Complete")
+            }
         });
     }, []);
     return ( < div className="mx-2"> < div className = " d-none d-sm-block" > <
@@ -73,9 +87,14 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         dialogClassName = "my-modal1" >
         <
         Learn1 tab9 = { props.handletab9 }
-        country = {country}
+        country = { country }
+        lastname = { name }
+        email = { email }
+        phone = { phone }
         option = { investmentOption }
         options = {investment_options}
+        riskAnalysisPercentages = {riskAnalysisPercentages}
+        verification = {verification}
         / > < /
         Modal > < /
         div >
@@ -188,6 +207,9 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         phone = { phone }
         option = { investmentOption }
         options = {investment_options}
+        riskAnalysisPercentages = {riskAnalysisPercentages}
+        verification = {verification}
+        complete = {complete}
         / >
         <
         /div > < /div >

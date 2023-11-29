@@ -120,7 +120,7 @@ function ResLearn1(props) {
                     { display: 'none' }
                 } > hey < /h6> <
                 h6 id = "infoMessage"
-                className = 'py-2 mt-3 rounded warning text-center'
+                className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
                 } > hey < /h6>   <
@@ -140,6 +140,9 @@ function ResLearn1(props) {
     const nextButton = () => {
         let payment_means = formData.payment_means;
         let deposit_category = formData.deposit_category
+        let verification = props.verification
+        let investmentOption = formData.investment_option
+        let riskProfileStatus = props.complete
         if (step === 1 && deposit_category === "personal investment") {
             return ( <
                 h6 className = "my-2 text-end warning rounded-3"
@@ -148,6 +151,33 @@ function ResLearn1(props) {
                 Next <
                 /h6>        
             )
+        }
+        if (step === 1 && verification === false) {
+            return ( <
+                h6 className = " m-3 p-2 status rounded-3">
+                Please check your email and verify your account to proceed <
+                /h6>        
+            )
+        }
+        if (step === 2 && investmentOption === "Automatic Asset Allocation"){
+            // verify risk profile option was selected or not and check risk profile status
+            if (riskProfileStatus === "Complete"){
+                return (
+                    <
+                h6 className = " my-2 text-end warning rounded-4"
+                type = "button"
+                onClick = { _next } >
+                Next <
+                /h6> 
+                )
+            } else {
+                return (
+                    <
+                h6 className = " m-3 p-2 status rounded-3" >
+                Please complete your risk profile to have your assets allocated automatically. <
+                /h6> 
+                )
+            }
         }
         if (step === 6) {
             return ( <
@@ -175,7 +205,6 @@ function ResLearn1(props) {
             }}).then(function(res)
                 {
                     if(res){
-                        console.log(res)
                         minimum = res.data[0].minimum_deposit;
                         id = res.data[0].investment_option_id
                     }
@@ -315,7 +344,7 @@ function Step1(props) {
         h6 > <
         h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Unit Trusts < /span> < /
         h6 > <
-        h6 className = "py-3 d-none rounded-3 bk-warning text-center"
+        h6 className = "py-3 rounded-3 bk-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> 
         <

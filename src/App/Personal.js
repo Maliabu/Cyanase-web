@@ -32,7 +32,6 @@ const Personal = ({...props }) => {
         let [holdDeposit, setHoldDeposit] = useState("");
         const [groups, setGroups] = useState(0)
         const [banks, setBanks] = useState("")
-        const [verification, setVerification] = useState("")
         const [pendingWithdraw, setPendingWithdraw] = useState([])
         const [investmentWithdraw, setInvestmentWithdraw] = useState([])
         const [holdCreated, setHoldCreated] = useState("");
@@ -53,6 +52,8 @@ const Personal = ({...props }) => {
         const [investmentOption, setinvestmentoption] = useState("")
         const [option_name, setOptionName] = useState("")
         const [investment_id, setInvestmentId] = useState("")
+        const [complete, setComplete] = useState("Incomplete");
+        const [verification, setVerification] = useState("")
         useEffect(() => {
             PersonalRequests().then(res => {
                 setSpan(res[2]); // array(14)
@@ -81,7 +82,12 @@ const Personal = ({...props }) => {
             });
             UserBanks().then(res => {
                 setBanks(res.data)
-            })
+            });
+            GetRiskProfile().then(res => {
+                if (res.status === true) {
+                    setComplete("Complete")
+                }
+            });
         }, []);
         const groupArrayObjects = mine.reduce((group, obj) => {
             let sum = 0
@@ -209,7 +215,7 @@ const Personal = ({...props }) => {
                         div className = "row mt-2 py-3 bg-white rounded-3" >
                         <
                         div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6>
-                        <span className="bk-warning p-2 rounded-4 px-3" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> < /
+                        <span className="bk-warning p-2 rounded-3 px-3" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> < /
                         div >
                         <
                         div className = "col-4" > < h6 className = "bolder" ><span className="grey-text font-light">Networth:</span> { getCurrency(country) } {
@@ -381,7 +387,7 @@ const Personal = ({...props }) => {
                     div className = "text-start col-9 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
                     div className = "text-end col-3 p-2" > < span className = " px-2 py-1 bg-white rounded-4" > { span.length } < /span> < /div > < /
                 div > <
-                    div className = " mt-2 px-5 bk-warning p-2 text-center rounded-4"
+                    div className = " mt-2 px-5 bk-warning p-2 text-center rounded-3"
                 onClick = { handleShow1 } >
                     Add a Goal < /div>  <
                 div className = " pb-5 px-1 mt-2 scroll-y rounded-4" ><div className="row px-3 investment"> {
@@ -470,6 +476,8 @@ const Personal = ({...props }) => {
                 option = { investmentOption }
                 fullname = { name }
                 tab9 = { props.handletab9 }
+                complete = {complete}
+                verification = {verification}
                 / > < /
                 Offcanvas > < /
                 div > < /

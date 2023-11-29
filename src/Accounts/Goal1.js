@@ -150,6 +150,24 @@ function Goal1(props) {
         return null
     }
     const nextButton = () => {
+        let riskProfileStatus = props.complete
+        let verification = props.verification
+        if (step === 1 && verification === false) {
+            // simple - only verified users can interact with this feature
+            return ( <
+                h6 className = "m-3 p-2 status rounded-3">
+                Please check your email and verify your account to proceed <
+                /h6>        
+            )
+        }
+        if (step === 1 && riskProfileStatus === "InComplete") {
+            // simple - only verified users can interact with this feature
+            return ( <
+                h6 className = " m-3 p-2 status rounded-3" >
+                Please complete your risk profile to continue to create a goal <
+                /h6>       
+            )
+        }
         if (step === 1 || step === 4 || step === 5 || step === 6) {
             return ( <
                 h6 className = "text-end my-2 warning rounded-4"

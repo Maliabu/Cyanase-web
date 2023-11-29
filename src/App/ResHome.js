@@ -38,6 +38,7 @@ const ResHome = (props) => {
     const [investmentWithdraw, setInvestmentWithdraw] = useState([])
     const [option_name, setOptionName] = useState("")
     const [groups, setGroups] = useState(0)
+    const [investment_id, setInvestmentId] = useState("")
     useEffect(() => {
         PersonalRequests().then(res => {
             setSpan(res[2]); // array(14)
@@ -59,12 +60,15 @@ const ResHome = (props) => {
         });
     }, []);
     const groupArrayObjects = graph.reduce((group, obj) => {
-        const { name, datas, networths } = obj;
+        let sum = 0
+        const { name, datas, networths, id } = obj;
         if (!group[name]) {
             group[name] = {
                 name: name,
                 data: [],
-                networth: []
+                networth: [],
+                investment_id: id,
+                total: sum
             };
         }
         group[name].data.push(datas);
@@ -72,6 +76,9 @@ const ResHome = (props) => {
         return group;
     }, {});
     const results = Object.values(groupArrayObjects);
+    results.forEach(data => {
+        data.total = data.networth.reduce((total, value) => total + parseInt(value), 0);
+    });
     const groupArrayObject = investmentWithdraw.reduce((group, obj) => {
         let sum = 0
         const { name, datas, date } = obj;
@@ -159,6 +166,7 @@ const ResHome = (props) => {
         return ( < ResWithdraw changeWithdrawSetting = { setWithdrawSetting }
             option_name = {option_name}
             networth = { groups }
+            investmentId = {investment_id}
             / >
         )
     }
@@ -208,9 +216,10 @@ const ResHome = (props) => {
         // update the state to tab2
         setActiveTab1("tab13");
     };
-    function getWithdraws(name,networth){
+    function getWithdraws(name,networth,investment_id){
         setOptionName(name)
         setGroups(networth)
+        setInvestmentId(investment_id)
         setWithdrawSetting(true)
     }
     const myInvestments = () => {
@@ -226,7 +235,7 @@ const ResHome = (props) => {
                 <Carousel touch={true} interval={null} controls={false}>
                     {
                         final_data.map(option=>(
-                            <Carousel.Item key={1}>
+                            <Carousel.Item >
                                 <div className='row text-dark p-2'>
                                     <div className='col-5'><h5 className='bolder'>{option.name}</h5><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> </div>
                                     <
@@ -313,7 +322,7 @@ const ResHome = (props) => {
             <
             div className = 'rounded-4 bg-lighter wider' >
             <
-            p className = "text-end mx-4 mt-2" > welcome back < span className = 'bolder grey-text' > { props.name } < /span> <
+            p className = "text-end mx-4 mt-2" > welcome < span className = 'bolder grey-text' > { props.name } < /span> <
             span className = " justify-content-center" > <
             span className = "px-1" > pick up where you left off < /span></span > < /p>< /
             div > <
