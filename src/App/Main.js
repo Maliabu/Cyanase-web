@@ -104,10 +104,14 @@ const Main = ({ id, activeTab, children, ...props }) => {
         depositTotal += parseInt(goal.deposit[0])
     ))
     const wwithdraws = () => {
-        let total_withdraws = []
-        withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
-        let withdraw = total_withdraws.length
-        return withdraw
+        if(withdraws.length === 0){
+            return 0
+        } else {
+            let total_withdraws = []
+            withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
+            let withdraw = total_withdraws.length
+            return withdraw 
+        }
     }
     const groupArrayObject = graph.reduce((group, obj) => {
         const { name, datas, date } = obj;
@@ -244,7 +248,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h5 className = "bolder mt-3" > Total Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
-            h2 className = "px-2 font-lighter" > { totalNetworth.toLocaleString() } < /h2></div >
+            h2 className = "px-2 font-lighter" > { networthy().toLocaleString() } < /h2></div >
             <
             img src = { Networths }
             className = "pt-2"

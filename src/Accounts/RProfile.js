@@ -9,7 +9,6 @@ import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
 import axios from "axios";
 import { API_URL_ADD_AUTH_USER_RISK_PROFILE, TOKEN } from "../apis";
-import { Options } from "./InvestmentOps";
 
 class RProfile extends React.Component {
     constructor(props) {

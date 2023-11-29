@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, UserRequests, WithdrawRequests } from '../Api/MainRequests';
+import { MainRequests, PersonalRequests, UserRequests, WithdrawRequests, InvestmentWithdrawRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import '../App.css';
@@ -35,9 +35,30 @@ const ResHome = (props) => {
     const [totalWithdraw, setTotalWithdraw] = useState([])
     const [networth, setDepositNetworth] = useState(0);
     let thisYear = new Date().getFullYear()
+    const [investmentWithdraw, setInvestmentWithdraw] = useState([])
     const [option_name, setOptionName] = useState("")
     const [groups, setGroups] = useState(0)
-    const groupArrayObject = graph.reduce((group, obj) => {
+    useEffect(() => {
+        PersonalRequests().then(res => {
+            setSpan(res[2]); // array(14)
+        });
+        MainRequests().then(res => {
+            setDeposit(res[0]);
+            setGraph(res[4]);
+            setDates(res[5])
+            setDepositNetworth(res[9]);
+        })
+        UserRequests().then(res => {
+            setCountry(res.profile.country)
+        });
+        WithdrawRequests().then(res => {
+            setTotalWithdraw(res[1])
+        })
+        InvestmentWithdrawRequests().then(res => {
+            setInvestmentWithdraw(res)
+        });
+    }, []);
+    const groupArrayObjects = graph.reduce((group, obj) => {
         const { name, datas, networths } = obj;
         if (!group[name]) {
             group[name] = {
@@ -50,7 +71,25 @@ const ResHome = (props) => {
         group[name].networth.push(networths)
         return group;
     }, {});
+    const results = Object.values(groupArrayObjects);
+    const groupArrayObject = investmentWithdraw.reduce((group, obj) => {
+        let sum = 0
+        const { name, datas, date } = obj;
+        if (!group[name]) {
+            group[name] = {
+                name: name,
+                amount: [],
+                date: date,
+                total: sum
+            };
+        }
+        group[name].amount.push(datas);
+        return group;
+    }, {});
     const result = Object.values(groupArrayObject);
+    result.forEach(data => {
+        data.total = data.amount.reduce((total, value) => total + parseInt(value), 0);
+    });
     const options = {
         options: {
             chart: {
@@ -101,28 +140,11 @@ const ResHome = (props) => {
             },
         },
         // series: result,
-        series: result,
+        series: results,
         stroke: {
             curve: 'smooth',
         }
     }
-    useEffect(() => {
-        PersonalRequests().then(res => {
-            setSpan(res[2]); // array(14)
-        });
-        MainRequests().then(res => {
-            setDeposit(res[0]);
-            setGraph(res[4]);
-            setDates(res[5])
-            setDepositNetworth(res[9]);
-        })
-        UserRequests().then(res => {
-            setCountry(res.profile.country)
-        });
-        WithdrawRequests().then(res => {
-            setTotalWithdraw(res[1])
-        })
-    }, []);
     let depositTotal = 0
     span.map(goal => (
             depositTotal += parseInt(goal.deposit[0])
@@ -140,6 +162,24 @@ const ResHome = (props) => {
             / >
         )
     }
+    function subtractTwoLists(listA, listB) {
+        const mapA = new Map(listA.map(item => [item.name, { total: parseInt(item.total), data: item.data, investment_id: item.investment_id }])); // convert listA to map as { 'a' => { value: 2000, data: 'first' } }
+      //console.log(mapA)
+        // Subtract values from List B from List A
+        listB.forEach(itemB => {
+          const nameInB = itemB.name; //get name in B
+          const valueInB = parseInt(itemB.total);//get value in B and parse to Int
+          if (mapA.has(nameInB)) {
+              
+              const oldValue = mapA.get(nameInB).total;
+              mapA.set(nameInB, { total: oldValue - valueInB, data: mapA.get(nameInB).data, investment_id: mapA.get(nameInB).investment_id });
+             //Updates the value associated with the "name" attribute in List A to the result of the subtraction
+          }
+        });
+       const resultList = Array.from(mapA, ([name, { total, data, investment_id }]) => ({ name, total, data, investment_id }));
+        return resultList;  // convert map to list, i.e { 'a' => { value: 2000, data: 'first' } } to [ { name: 'a', value: 1200 }]
+    }
+    let final_data = subtractTwoLists(results, result)
     const handleTab1 = () => {
         // update the state to tab1
         setActiveTab1("tab1");
@@ -168,13 +208,6 @@ const ResHome = (props) => {
         // update the state to tab2
         setActiveTab1("tab13");
     };
-    function getNetworths(arr){
-        let sum = 0
-        for(var i=0;i<arr.length;i++){
-            sum += parseInt(arr[i])
-        }
-        return sum
-    }
     function getWithdraws(name,networth){
         setOptionName(name)
         setGroups(networth)
@@ -192,17 +225,17 @@ const ResHome = (props) => {
                 <div className='p-3 mt-2 investment rounded-4 carousel slide'>
                 <Carousel touch={true} interval={null} controls={false}>
                     {
-                        result.map(option=>(
+                        final_data.map(option=>(
                             <Carousel.Item key={1}>
                                 <div className='row text-dark p-2'>
-                                    <div className='col-5'><h5 className='bolder'>{option.name}</h5><span className="bk-warning p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,getNetworths(option.networth))}>Withdraw</span> </div>
+                                    <div className='col-5'><h5 className='bolder'>{option.name}</h5><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> </div>
                                     <
                             div className = "col-1" > < h6 className = "bolder" ><
             div className = "d-flex flex-row flex justify-content-center mt-3" >< h6 className='bolder'> <Star size="small" set='bulk' className="active" /> < /h6>  <
             h6 className = "px-1 font-weight-light" > {
-                                (option.networth).length
+                                (option.data).length
                             } < /h6></div > < /h6> < /div > <
-                            div className = "col-6 text-end investments px-3 pt-3 rounded-4" ><h6 className='bolder'>Deposit:<
+                            div className = "col-6 text-end investments2 px-3 pt-3 rounded-4" ><h6 className='bolder'>Deposit:<
             div className = "d-flex flex-row flex justify-content-end m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
             h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
@@ -293,7 +326,7 @@ const ResHome = (props) => {
             <
             div className = 'row' > <
             div className = 'col text-start' > <
-            p className = ' mx-3 mt-3' > Your Investments - {result.length} < /p > < /div > <
+            p className = ' mx-3 mt-3' > Your Investments - {results.length} < /p > < /div > <
             div className = 'col d-none' >
             <
             div className = 'd-flex justify-content-end mx-1' > < TimeCircle size = "medium"

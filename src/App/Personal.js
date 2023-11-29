@@ -115,11 +115,11 @@ const Personal = ({...props }) => {
             return group;
         }, {});
         const result = Object.values(groupArrayObject);
-        results.forEach(data => {
-            data.total = data.networth.reduce((total, value) => total + parseInt(value), 0);
-        });
         result.forEach(data => {
             data.total = data.amount.reduce((total, value) => total + parseInt(value), 0);
+        });
+        results.forEach(data => {
+            data.total = data.networth.reduce((total, value) => total + parseInt(value), 0);
         });
         const options = {
             seriesDonut: results.map(option => summ(option.data)),
@@ -145,28 +145,6 @@ const Personal = ({...props }) => {
                     position: 'bottom'
                 }
             }
-        }
-        function getNetworths(arr){
-            let sum = 0
-            for(var i=0;i<arr.length;i++){
-                sum += parseInt(arr[i])
-            }
-            return sum
-        }
-        function getDiff(big, small){
-            let result = 0
-            let name1 = big.map(data=>data.name)
-            let total1 = big.map(data=>data.total)
-            let name2 = small.map(data=>data.name)
-            let total2 = small.map(data=>data.total)
-            for(var i=0;i<small.length;i++){
-                if((name1[i]).toString() === (name2[i]).toString()){
-                    result = parseInt(total1[i]) - parseInt(total2[i])
-                } else {
-                    result = parseInt(total1[i])
-                }
-            }
-            return result
         }
         function getId(id, name, amount, deposit, networth, created, investment_id) {
             setHoldId(id)

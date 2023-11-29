@@ -226,6 +226,12 @@ body::-webkit-scrollbar {
     background-size: contain;
     background-position: right;
 }
+.investment-res {
+    background: -webkit-linear-gradient(left, #ff8c10c2,#ff8c1032), url("images/white-grey\ hills.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
 .investments {
     background: -webkit-linear-gradient(right, rgba(233, 233, 233, 0.769),rgba(240, 240, 240, 0.09)), url("images/white-grey\ hills.png");
     background-repeat: no-repeat;
@@ -234,6 +240,12 @@ body::-webkit-scrollbar {
 }
 .investment1 {
     background: -webkit-linear-gradient(left, rgb(255, 255, 255),rgba(255, 255, 255, 0)), url("images/white-grey\ hills.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
+.investments2 {
+    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.769),rgba(255, 255, 255, 0.09));
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;

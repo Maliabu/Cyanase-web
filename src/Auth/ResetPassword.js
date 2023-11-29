@@ -58,11 +58,14 @@ function ResetPassword(props) {
                 })
                 .then(function(response) {
                     if (!response) {
-                        fail("Something went wrong...Password not reset")
+                        fail("Something went wrong...")
+                        fail("password not reset")
+                        fail("please try again")
                     } else if (response.status === 200 && response.data.success === false) {
                         fail(response.data.message)
                     } else {
-                        success("Your password has been reset. Redirecting to login, please wait...","/","successful");
+                        success("Your password has been reset successfully","","successful");
+                        success("You can now login with yoour updated credentails")
                     }
                 });
         }
