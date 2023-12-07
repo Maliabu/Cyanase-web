@@ -14,7 +14,6 @@ import axios from "axios";
 import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
 
 function Learn1(props) {
-    console.log(props)
     const globalRefId = "";
     const [step, setStep] = useState(1)
     let minimum = 0, id = ''

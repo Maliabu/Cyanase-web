@@ -342,9 +342,9 @@ function Step1(props) {
         div > < /div >  <
         h6 className = "bolder d-none p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
         h6 > <
-        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Unit Trusts < /span> < /
+        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Automatic Asset Allocation < /span> < /
         h6 > <
-        h6 className = "py-3 rounded-3 bk-warning text-center"
+        h6 className = "py-3 rounded-3 d-none bk-warning text-center"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit < /h6> 
         <

@@ -168,7 +168,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         h6 className = "text-center" > Your risk profile helps us invest your money accordingly,
         let us know what type of investor you are.Complete your profile and
         let us do the rest < /h6> <
-        h6 className = "text-center mt-3 rounded-4 bk-warning"
+        h6 className = "text-center mt-3 rounded-3 bk-warning"
         onClick = { props.handletab9 } > Complete your Risk Profile < /h6> < /
         div >
         <

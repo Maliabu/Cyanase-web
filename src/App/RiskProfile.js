@@ -65,7 +65,7 @@ const RiskProfile = ({ id, activeTab, children }) => {
             complete
         } < /span> < /
         h6 > <
-        h6 className = " mt-3 bk-warning rounded-4"
+        h6 className = " mt-3 bk-warning rounded-3"
         onClick = { handleShow2 } > {editOrComplete()} < /h6> < /
         div > <
         Modal show = { show2 }

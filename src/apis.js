@@ -42,4 +42,5 @@ export const PROFILE_PHOTO = "http://"+server+"/media/profile/default_picture.jp
 export const API_URL_GET_INVESTMENT_WITHDRAWS = " http://"+server+"/api/v1/en/get/investment/withdraws/";
 export const API_URL_GET_USER_BANKS = " http://"+server+"/api/v1/en/auth/user/banks/";
 export const TOKEN = localStorage.getItem('token');
+export const LOGIN_STATUS = localStorage.getItem('login-status');
 export const apiDocs = "http://developers.cyanase.lol";

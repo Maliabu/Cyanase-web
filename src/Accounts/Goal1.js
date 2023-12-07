@@ -155,7 +155,7 @@ function Goal1(props) {
         if (step === 1 && verification === false) {
             // simple - only verified users can interact with this feature
             return ( <
-                h6 className = "m-3 p-2 status rounded-3">
+                h6 className = "m-3 p-2 status rounded-3 text-center">
                 Please check your email and verify your account to proceed <
                 /h6>        
             )

@@ -89,3 +89,10 @@ export const autoClickable = () =>{
         document.getElementById("errorMessage").style.display = 'none'
     }, 2000);
 }
+
+// subscription modal popup on login success
+export const subscriptionPopup = () => {
+    setTimeout(() => {
+        document.getElementById("subscription-popup").style.display = 'block'
+    }, 7000);
+}

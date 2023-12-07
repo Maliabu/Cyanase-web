@@ -1,4 +1,4 @@
-import { PersonalRequests,UserRequests } from '../Api/MainRequests';
+import { PersonalRequests, UserRequests, GetRiskProfile, UserVerificationRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './style.scss';
@@ -19,6 +19,8 @@ const ResGoals = () => {
     const [holdAmount, setHoldAmount] = useState("");
     let [holdDeposit, setHoldDeposit] = useState("");
     const [holdCreated, setHoldCreated] = useState("");
+    const [complete, setComplete] = useState("Incomplete");
+    const [verification, setVerification] = useState("")
     const [show3, setShow3] = useState(false);
     const handleClose3 = () => setShow3(false);
     const handleShow3 = () => setShow3(true);
@@ -28,7 +30,15 @@ const ResGoals = () => {
         });
         UserRequests().then(res=>{
             setCountry(res.profile.country)
-        })
+        });
+        GetRiskProfile().then(res => {
+            if (res.status === true) {
+                setComplete("Complete")
+            }
+        });
+        UserVerificationRequests().then(res => {
+            setVerification(res.success)
+        });
     }, []);
     //  Functions to handle Tab Switching
     if (goalSetting) {
@@ -56,7 +66,7 @@ const ResGoals = () => {
                 () => { setGoalSetting(false) }
             }
             className = "mt-1 mx-2" / > < ResGoals1 changeGoalSetting = { setGoalSetting }
-            country = { country }
+            country = { country } complete = {complete} verification = {verification}
             / > < /
             div >
         )

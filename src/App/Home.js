@@ -26,7 +26,6 @@ import Alert from './Alerts'
 import Subscribe from '../Accounts/Subscribe'
 import Logout from '../Accounts/Logout';
 import { apiDocs } from '../apis';
-// import { PROFILE_PHOTO } from '../apis';
 import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
 import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
 
@@ -41,7 +40,9 @@ const MyHome = () => {
     const [show3, setShow3] = useState(false);
     const handleClose3 = () => setShow3(false);
     const [show4, setShow4] = useState(false);
-    const handleClose4 = () => setShow4(false);
+    const handleClose4 = () => {
+        setShow4(false);
+    };
     const [count, setCount] = useState("1")
     const [subStatus, setSubStatus] = useState()
     const handleShow3 = () => {
@@ -79,13 +80,6 @@ const MyHome = () => {
         // update the state to tab1
         setActiveTab("tab1");
     };
-    // const myProfilePhoto = () => {
-    //     if(UserRequests().res.profile.profile_picture !== 404){
-    //         return {profilePicture}
-    //     } else {
-    //         return {PROFILE_PHOTO}
-    //     }
-    // }
     const handleTab2 = () => {
         // update the state to tab2
         setActiveTab("tab2");

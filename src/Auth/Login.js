@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,24 +7,26 @@ import { API_URL_LOGIN } from '../apis';
 import axios from 'axios';
 import { success, preloader, fail, catch_errors,togglePasswordVisibility } from '../Api/RequestFunctions';
 
-class Login extends Component {
+const Login = (props) => {
     //state for form data
-    state = {
+    const [formData, setFormData] = useState({
         username: '',
         password: ''
+    });
+    // const handleChange = (e) => {
+    //     setFormData({
+    //         [e.target.id]: e.target.value
+    //     });
+    // };
+    const handleChange = (event) => {
+        const name = event.target.id;
+        const value = event.target.value;
+        setFormData({...formData, [name]: value });
     };
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        });
-    };
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         preloader()
         e.preventDefault();
-        let form_data = new FormData();
-        form_data.append('password', this.state.password);
-        form_data.append('username', this.state.username);
-        axios.post(`${API_URL_LOGIN}`, form_data, {
+        axios.post(`${API_URL_LOGIN}`, formData, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -41,16 +43,16 @@ class Login extends Component {
                     success("Login successful", "/home", "successful");
                     const token = response.data.token
                     localStorage.setItem('token', token)
+                    localStorage.setItem('login-status', "true")
                 }
             });
     }
-    render() {
         return ( <
             div > <
             div className = 'row rounded-4 justify-content-center p-4 bg-lighter p-lg-5' >
             <
             Form className = 'bg-white rounded-4 col-lg-5 col-md-7 col-12'
-            onSubmit = { this.handleSubmit } >
+            onSubmit = { handleSubmit } >
             <
             div className = 'row justify-center blue-dark p-4 rounded-top-4' > <
             h2 className = 'text-center' > LOGIN < /h2> <
@@ -64,8 +66,7 @@ class Login extends Component {
             Form.Control type = "text"
             id = 'username'
             required = "required"
-            value = { this.state.username }
-            onChange = { this.handleChange }
+            onChange = { handleChange }
             placeholder = "support@cyanase.com" / > < /
             Form.Group > <
             Form.Group className = " rounded-2 px-3 my-2" >
@@ -74,8 +75,7 @@ class Login extends Component {
             Form.Control type = "password"
             id = 'password'
             required = "required"
-            value = { this.state.password }
-            onChange = { this.handleChange }
+            onChange = { handleChange }
             placeholder = "password" / >
             <
             div className='my-1'
@@ -102,11 +102,11 @@ class Login extends Component {
             } > hey < /h6>  < /
             div >
             <
-            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p >  < /
+            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { props.button } < /span>or < span className = 'active bolder' > {props.passwordReset} < /span > < /p >  < /
             Form >
             <
             Form className = 'd-none'
-            onSubmit = { this.handleSubmit } >
+            onSubmit = { handleSubmit } >
             <
             div className = 'row justify-center blue-dark p-4' > <
             h2 className = 'text-center' > LOGIN < /h2> <
@@ -120,8 +120,7 @@ class Login extends Component {
             Form.Control type = "text"
             id = 'username'
             required = "required"
-            value = { this.state.username }
-            onChange = { this.handleChange }
+            onChange = { handleChange }
             placeholder = "support@cyanase.com" / > < /
             Form.Group > <
             Form.Group className = " rounded-2 px-3 my-2" >
@@ -130,8 +129,7 @@ class Login extends Component {
             Form.Control type = "password"
             id = 'password'
             required = "required"
-            value = { this.state.password }
-            onChange = { this.handleChange }
+            onChange = { handleChange }
             placeholder = "password" / >
             <
             div className='my-1'
@@ -158,10 +156,10 @@ class Login extends Component {
             } > hey < /h6>  < /
             div >
             <
-            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { this.props.button } < /span>or < span className = 'active bolder' > {this.props.passwordReset} < /span > < /p >  < /
-            Form > < /div> < /
+            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { props.button } < /span>or < span className = 'active bolder' > {props.passwordReset} < /span > < /p >  < /
+            Form > < /div>< /
             div >
         );
-    }
+    
 }
 export default Login;

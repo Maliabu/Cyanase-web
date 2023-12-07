@@ -7,11 +7,14 @@ import { API_URL_REGISTER_API_USER } from '../apis';
 import axios from 'axios';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import PhoneInput from 'react-phone-number-input';
 import { success1,catch_errors,fail,preloader } from '../Api/RequestFunctions';
 
 
 function ApiUser(props) {
     const [showpassword,setShowPassword] = useState(false)
+    const [valuePhone, setValuePhone] = useState("");
+    const [countryInput, setCountryInput] = useState("");
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -20,12 +23,13 @@ function ApiUser(props) {
         confirmpassword: '',
         email: '',
         moa: '',
-        country: '',
-        phone: '',
+        country: countryInput,
+        phone: valuePhone,
         user_type: 'business',
         company_category: ''
     });
-    formData.username = "cyanaseApiUser"
+    formData.phone = valuePhone
+    formData.country = countryInput
     const { handleSubmit } = useForm();
     const handleFileChange = (event) => {
         // formData2.moa = event.target.files[0]
@@ -97,15 +101,18 @@ function ApiUser(props) {
             onChange = { handleChange }
             placeholder = "cyanase.com" / > <
             /Form.Group> <
-            Form.Group className = " px-5 mt-3" >
-            <h6 className='m-0'><
-            Form.Label > Country < /Form.Label> </h6>  <
-            Form.Control type = "text"
-            id = 'country'
-            required = { true }
-            onChange = { handleChange }
-            placeholder = "Uganda" / > <
-            /Form.Group> <Form.Select className = "my-3" required  defaultValue="FinTech" id='company_category' onChange = { handleChange }> <
+            Form.Group className = "mb-3 shadow-sm rounded-3 p-3" >
+            <
+            Form.Label > < h6 className = 'm-0' > Country and Phone < /h6> < /Form.Label > <
+            PhoneInput international placeholder = "Enter phone number"
+            name = "phone_no"
+            country = { countryInput }
+            onCountryChange = { setCountryInput }
+            value = { valuePhone }
+            onChange = {
+                setValuePhone
+            }
+            /></Form.Group > <Form.Select className = "my-3" required  defaultValue="FinTech" id='company_category' onChange = { handleChange }> <
             option value = "FinTech" > FinTech < /option> <
             option value = "FinTech" > FinTech < /option> <
             option value = "EduTech" > EduTech < /option> <
@@ -114,15 +121,6 @@ function ApiUser(props) {
             option value = "Social Media" > Social Media < /option><
             option value = "Social Media" > Other < /option> < /
             Form.Select > <
-            Form.Group className = " px-5 mt-3" >
-            <h6 className='m-0'><
-            Form.Label > Phone < /Form.Label> </h6>  <
-            Form.Control type = "phone"
-            id = 'phone'
-            required = { true }
-            onChange = { handleChange }
-            placeholder = "+256 772971878" / > <
-            /Form.Group> <
             Form.Group className = " px-5 mt-3" >
             <h6 className='m-0'><
             Form.Label > Email Address < /Form.Label> </h6> <
@@ -171,12 +169,6 @@ function ApiUser(props) {
                 <Form.Check type='checkbox' id = "default-checkbox" label='Show Password' onClick={()=>togglePassword()}/></div>
             <
             /Form.Group> <div className='row justify-content-center'><
-            Button variant = "warning"
-            className = 'shadow text-center my-2'
-            id = 'successMessage'
-            type = "submit" >
-            Submit <
-            /Button> <
             p id = "errorMessage"
             className = 'py-2 mt-3 rounded border border-danger text-center fade-in'
             style = {
@@ -186,7 +178,13 @@ function ApiUser(props) {
             className = 'py-2 mt-3 rounded warning-message text-center fade-in'
             style = {
                 { display: 'none' }
-            } > hey < /p>< /
+            } > hey < /p><
+            Button variant = "warning"
+            className = 'shadow text-center my-2'
+            id = 'successMessage'
+            type = "submit" >
+            Submit <
+            /Button> < /
             div > < /
             Form > < /div > < /
             div >
