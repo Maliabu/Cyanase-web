@@ -118,7 +118,7 @@ const Learn = (props) => {
         p className = "my-3" > Hello < span className = " bolder" > {props.name} < /span></p >
         <
         h6 > Learn more about our products and services. < /h6> <
-        h6 className = "px-5 py-3 mt-5 warning rounded-3"
+        h6 className = "p-3 mt-5 warning rounded-3"
         onClick = {
             () => { setStep(step + 1) }
         } >

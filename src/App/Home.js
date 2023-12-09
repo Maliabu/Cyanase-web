@@ -181,7 +181,7 @@ const MyHome = () => {
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-lg-5 my-md-3 py-2 mx-2 blue-dark rounded-4' >
+        div className = 'row my-lg-5 my-md-3 py-2 mx-2 blue-darks rounded-4' >
         <
         div className = 'col-3' >
         <
@@ -339,7 +339,7 @@ const MyHome = () => {
         <
         div className = "row pt-4 mx-3" >
         <
-        div className = 'col-8 rounded shadow-sm' > <
+        div className = 'col-8 rounded-3 bg-light' > <
         h6 className = 'mt-3' > <
         FaLightbulb size = "15"
         className = 'position-relative active' / > < span className = 'bolder' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /

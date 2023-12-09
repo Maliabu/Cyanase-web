@@ -235,7 +235,7 @@ function SecondaryUser(props) {
             form className = 'bg-white rounded-4 col-lg-5 col-md-7'
             onSubmit = { handleSubmit(onSubmit) } >
             <
-            div className = 'row justify-center blue-dark p-4 rounded-top-4 p-sm-12' > <
+            div className = 'row justify-center blue-darks p-4 rounded-top-4 p-sm-12' > <
             h2 className = 'text-center' > SIGNUP < /h2> <
             h6 className = 'text-center' > Register by filling in the following details. < /h6><
             h6 className = 'active text-center' > < b > All fields are Required < /b>  < /

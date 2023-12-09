@@ -227,7 +227,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
             div className = ' my-3 text-center' > <
-            span className = 'bk-warning rounded-3 px-5'
+            span className = 'bk-warning rounded-3 px-3'
             onClick = { handleShow3 } > Deposit < /span> </div >
             <
             Modal show = { show3 }
@@ -251,7 +251,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div >
 
             <
-            div className = "blue-dark p-lg-3 rounded-4 col mx-2 text-center" >
+            div className = "blue-darks p-lg-3 rounded-4 col mx-2 text-center" >
             <
             h5 className = "bolder mt-3" > Total Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
@@ -340,7 +340,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-4 p-lg-5 p-md-3 text-center" >
             <
-            h6 className = "px-lg-4 px-md-2 rounded-4 warning text-center"
+            h6 className = "p-3 rounded-3 warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <
@@ -366,7 +366,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()
-        } < /div><div className='blue-dark p-2 mt-2 rounded-4'> <
+        } < /div><div className='blue-darks p-2 mt-2 rounded-4'> <
         h5 className = "bolder mt-4" > Your Statistics < /h5>    <
         div className = "d-flex flex-row p-2 flex justify-content-center" >
             <

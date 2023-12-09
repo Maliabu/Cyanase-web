@@ -77,7 +77,7 @@ function ResetPassword(props) {
         Form className = 'bg-white rounded-4 col-lg-5 col-md-7 pb-3 col-12'
         onSubmit = { handleSubmit } >
         <
-        div className = 'row justify-content-center blue-dark p-4 rounded-top-4' >
+        div className = 'row justify-content-center blue-darks p-4 rounded-top-4' >
         <
         img src = { Logo }
         className = ' my-3 text-center logo'

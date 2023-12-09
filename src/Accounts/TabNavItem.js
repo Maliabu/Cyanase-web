@@ -8,7 +8,7 @@ const TabNavItem = ({ id, title, activeTab, setActiveTab }) => {
     return ( < div className = "px-2 tab-nav lighter" >
         <
         h6 onClick = { handleClick }
-        className = { activeTab === id ? "bolder active p-1" : "" } > { title } <
+        className = { activeTab === id ? "status p-2 rounded-3" : "" } > { title } <
         /h6> < /
         div >
     );

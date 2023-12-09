@@ -52,8 +52,11 @@ body::-webkit-scrollbar {
 
 .bg-lighter {
     background-color: #efefef !important;
-    /* background: -webkit-linear-gradient(right, #f2f3f4, rgba(255, 255, 255, 0.626), #f2f3f4); */
 }
+
+/* .bg-lighter {
+    background-color: rgb(242, 244, 250) !important;
+} */
 
 .modals {
     border-top: 10px solid #ffb85c;
@@ -348,7 +351,7 @@ body::-webkit-scrollbar {
 
 .status {
     color: rgb(255, 144, 18) !important;
-    background-color: #ffe3be;
+    background-color: rgba(255, 213, 165, 0.448);
     cursor: pointer;
 }
 

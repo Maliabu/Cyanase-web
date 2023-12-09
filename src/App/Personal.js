@@ -201,7 +201,7 @@ const Personal = ({...props }) => {
         const myInvestments = () => {
             let nextResult = final_data.reverse()
             if (results.length === 0) {
-                return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+                return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"
                     set = "broken"
                     className = 'mx-2 grey-text' / > <
@@ -212,7 +212,7 @@ const Personal = ({...props }) => {
                 }
                 else return (
                     nextResult.map(option => ( <
-                        div className = "row mt-2 py-3 bg-white rounded-3" >
+                        div className = "row mt-2 p-3 bg-white rounded-3" >
                         <
                         div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6>
                         <span className="bk-warning p-2 rounded-3 px-3" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> < /
@@ -230,7 +230,7 @@ const Personal = ({...props }) => {
             }
             const pendingWithdraws = () => {
                 if (pendingWithdraw.length === 0) {
-                    return ( < div className = 'p-5 rounded-4 bg-lighter text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
+                    return ( < div className = 'p-5 rounded-4 mt-2 text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"
                     set = "broken"
                     className = 'mx-2 grey-text' / > <
@@ -296,8 +296,8 @@ const Personal = ({...props }) => {
                     div className = "row mx-3" > <
                     div className = "col-8 px-3 rounded-4" >
                     <
-                    h6 className = "py-2" > MY INVESTMENTS< span className = "mx-3 px-2 py-1 border rounded-4" > { results.length } < /span>  < /h6>  <
-                    div className = "row justify-content-center rounded-4 investments p-2" >
+                    h6 className = "py-2" > MY INVESTMENTS < span className = "mx-3 px-2 py-1 status rounded-4" > { results.length } < /span>  < /h6>  <
+                    div className = "row justify-content-center rounded-4 p-2" >
                      
                     <
                     div className = "col-4 text-center" > <
@@ -309,9 +309,7 @@ const Personal = ({...props }) => {
                     >
                     <
                     /div > <
-                    div className = "col-8 text-center scroll-y3" >
-                    <
-                    h6 className = "grey-text d-none py-2" > Summary Data of all your investments < /h6> {
+                    div className = "col-8 text-center scroll-y3 bg-lighter px-3 rounded-3" > {
                     myInvestments()
                 } < /
                 div > <
@@ -375,22 +373,22 @@ const Personal = ({...props }) => {
                     <
                     div className = "row" >
                     <
-                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < span className = "mx-3 px-2 py-1 border rounded-4" > { pendingWithdraw.length } < /span>  < /h6><div className="scroll-y3 investment rounded-4"> {pendingWithdraws()}</div>
+                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < span className = "mx-3 px-2 py-1 status rounded-4" > { pendingWithdraw.length } < /span>  < /h6><div className="scroll-y3 bg-lighter rounded-4"> {pendingWithdraws()}</div>
                     <span className="d-none">{myRecentActivity()}</span> < /div > < /
                 div >
                     <
                     /
                 div > <
-                    div className = "col-4 px-3 " > <
-                    div className = "row p-1 bg-lighter rounded-3" >
+                    div className = "col-4 px-3 bg-lighter rounded-3" >  <
+                    div className = "row p-1 rounded-3 bg-white my-1" >
                     <
                     div className = "text-start col-9 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
-                    div className = "text-end col-3 p-2" > < span className = " px-2 py-1 bg-white rounded-4" > { span.length } < /span> < /div > < /
+                    div className = "text-end col-3 p-2" > < span className = "px-2 py-1 status rounded-4" > { span.length } < /span> < /div > < /
                 div > <
-                    div className = " mt-2 px-5 bk-warning p-2 text-center rounded-3"
-                onClick = { handleShow1 } >
-                    Add a Goal < /div>  <
-                div className = " pb-5 px-1 mt-2 scroll-y rounded-4" ><div className="row px-3 investment"> {
+                div className = " bk-warning text-center rounded-3 p-2 px-3"
+            onClick = { handleShow1 } >
+                Add New Goal < /div> <
+                div className = " pb-5 px-1 scroll-y rounded-4" > {
                     span.map(goal => ( <
                         div className = "py-2 px-3 bg-white res-home rounded-4 mt-2"
                         key = { goal.goal_id } > <
@@ -398,12 +396,12 @@ const Personal = ({...props }) => {
                         span className = "mt-2" > <
                         AddUser className = "p-2 border rounded-circle"
                         size = "large" / > < /span>  <
-                        h6 className = "mx-4 mt-2" > < span className = "active bolder"
+                        h6 className = "mx-4 mt-3" > < span className = "active p-2 rounded bolder"
                         onClick = {
                             () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created)
                         } > {
                             (goal.goal_name)
-                        } < /span><br/ > < p > created {
+                        } < /span><br/ > < p> created {
                             (goal.created).slice(0, 10)
                         } < /p >  < /
                         h6 > < /
@@ -428,7 +426,7 @@ const Personal = ({...props }) => {
                         div >
                     ))
                 } <
-                    /div></div> <
+                    /div> <
                 Modal show = { show3 }
                 onHide = { handleClose3 }
                 dialogClassName = "" > <

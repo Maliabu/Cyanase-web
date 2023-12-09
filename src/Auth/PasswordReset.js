@@ -48,7 +48,7 @@ class PasswordReset extends Component {
             Form className = 'bg-white pb-3 rounded-4 col-lg-5 col-md-7 col-12'
             onSubmit = { this.handleSubmit } >
             <
-            div className = 'row justify-center p-4 blue-dark rounded-top-4' > <
+            div className = 'row justify-center p-4 blue-darks rounded-top-4' > <
             h2 className = 'text-center' > Password Reset < /h2> <
             h6 className = 'active text-center' > Enter your account email to receive a password reset link < /
             h6 > <

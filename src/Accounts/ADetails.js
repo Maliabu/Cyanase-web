@@ -130,7 +130,7 @@ const ADetails = (props) => {
         <
         p className = "bolder bolder mt-5" > Account Type: < span className = "text-dark" > Personal < /span></p >
         <
-        h6 className = "warning text-center rounded-4 mt-3"
+        h6 className = "warning text-center rounded-3 mt-3"
         onClick = { handleShow1 } > Change Photo < /h6> <
         h6 className = "bg-danger text-white d-none text-center rounded-3 mt-3 mx-5 active p-3"
         onClick = { handleShow2 } > Delete Account < /h6><

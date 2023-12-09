@@ -58,7 +58,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         div className = "col-8 dollar p-3 rounded-4 " >
         <
         h6 > DEPOSIT < /h6>  <
-        div className = "row blue-dark rounded-4 py-5" >
+        div className = "row blue-darks rounded-4 py-5" >
         <
         div className = " text-center" >
         <
@@ -70,7 +70,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         Wallet size = "xlarge"
         set = "broken"
-        className = 'mx-2 rounded-circle active border border-warning p-2' / > <
+        className = 'mx-2 rounded-circle border p-2' / > <
         h1 className = " p-3" > Deposit < /h1>  <
         div className = "" >
         <
@@ -78,7 +78,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         for you here.Make your deposit here. < /h6> < /
         div > <
         div className = "d-flex flex-row flex justify-content-center" > <
-        h6 className = " mt-3 warning rounded-4"
+        h6 className = " mt-3 warning rounded-3"
         onClick = { handleShow2 } >
         Make a Deposit < /h6> </div >
         <
