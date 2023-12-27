@@ -134,7 +134,7 @@ const Personal = ({...props }) => {
                 chart: {
                     type: 'donut',
                 },
-                colors: ['#E91E63', '#FF9800', '#b7b7b7', '#252859'],
+                colors: ['#E91E63', '#252859', '#FF9800', '#b7b7b7'],
                 responsive: [{
                     breakpoint: 480,
                     options: {
@@ -218,10 +218,10 @@ const Personal = ({...props }) => {
                         <span className="bk-warning p-2 rounded-3 px-3" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> < /
                         div >
                         <
-                        div className = "col-4" > < h6 className = "bolder" ><span className="grey-text font-light">Networth:</span> { getCurrency(country) } {
+                        div className = "col-3" > < h6 className = "bolder" ><span className="grey-text font-light">Networth:</span> { getCurrency(country) } {
                             option.total
                         } < /h6> < /div > <
-                        div className = "col" > < h6 className = "bolder" ><span className="grey-text font-light">Total:</span> { getCurrency(country) } {
+                        div className = "col-4" > < h6 className = "bolder" ><span className="grey-text font-light">Total:</span> { getCurrency(country) } {
                             (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
                         } < /h6> < /div > < /
                         div > ))

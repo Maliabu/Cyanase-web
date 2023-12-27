@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ValidateForms } from './ValidateForms';
 import PhoneInput from 'react-phone-number-input';
-import { success1, catch_errors, fail, preloader } from '../Api/RequestFunctions'
+import { success1, catch_errors, fail, preloader, dismissPreloader } from '../Api/RequestFunctions'
 
 
 function SecondaryUser(props) {
@@ -40,6 +40,7 @@ function SecondaryUser(props) {
     formData.username = "cyanaseUser"
     const { handleSubmit } = useForm();
     const validate1 = () => {
+        preloader()
         let fname = ValidateForms("first_name")
         let lname = ValidateForms("last_name")
         let email = ValidateForms("email")
@@ -78,6 +79,7 @@ function SecondaryUser(props) {
                 }
                 else{
                     document.getElementById("errorEmail").style.display = "none"
+                    dismissPreloader()
                     setStep(step + 1)
                 }
             })
@@ -173,7 +175,7 @@ function SecondaryUser(props) {
     const nextButton = () => {
         if (step === 1) {
             return ( <
-                h6 className = " text-end my-2 warning rounded-4"
+                h6 className = " text-end my-2 warning rounded-4" id='successMessage'
                 onClick = {
                     () => validate1()
                 } >

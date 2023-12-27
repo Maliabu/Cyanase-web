@@ -113,7 +113,7 @@ function ResLearn1(props) {
         let payment_means = formData.payment_means;
         if (step === 4 && payment_means === "online") {
             return ( <
-                div className = 'row justify-content-center' > <
+                div className = 'row justify-content-center mx-3' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {

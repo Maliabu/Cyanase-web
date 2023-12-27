@@ -29,7 +29,6 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                 preloaderCheckout()
                 handleFlutterPayment({
                     callback: (response) => {
-                        console.log(response)
                         if (response.status === "successful") {
                             data.reference = response.flw_ref
                             data.reference_id = response.transaction_id

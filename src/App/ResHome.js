@@ -39,6 +39,7 @@ const ResHome = (props) => {
     const [option_name, setOptionName] = useState("")
     const [groups, setGroups] = useState(0)
     const [investment_id, setInvestmentId] = useState("")
+    const [withdraws, setWithdraw] = useState([])
     useEffect(() => {
         PersonalRequests().then(res => {
             setSpan(res[2]); // array(14)
@@ -53,12 +54,23 @@ const ResHome = (props) => {
             setCountry(res.profile.country)
         });
         WithdrawRequests().then(res => {
+            setWithdraw(res[0])
             setTotalWithdraw(res[1])
         })
         InvestmentWithdrawRequests().then(res => {
             setInvestmentWithdraw(res)
         });
     }, []);
+    const wwithdraws = () => {
+        if(withdraws.length === 0){
+            return 0
+        } else {
+            let total_withdraws = []
+            withdraws.map(withdraw => (total_withdraws.push(parseInt(withdraw.withdraw_amount))))
+            let withdraw = total_withdraws.length
+            return withdraw 
+        }
+    }
     const groupArrayObjects = graph.reduce((group, obj) => {
         let sum = 0
         const { name, datas, networths, id } = obj;
@@ -134,7 +146,7 @@ const ResHome = (props) => {
                     text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: [  '#b7b7b7', '#FF9800', '#252859','#E91E63'],
+            colors: [  '#E91E63', '#FF9800', '#252859', '#b7b7b7'],
             fill: {
                 type: "gradient",
                 gradient: {
@@ -223,7 +235,7 @@ const ResHome = (props) => {
         setWithdrawSetting(true)
     }
     const myInvestments = () => {
-        if (result.length === 0) {
+        if (results.length === 0) {
             return(null
                 // <div className='p-2'>
                 //     <img src={CLASSES} alt='classes' width="100%"/>
@@ -264,7 +276,7 @@ const ResHome = (props) => {
         return totalNetworth
     }
     const myInvestmentsGraph = () => {
-        if (result.length === 0) {
+        if (results.length === 0) {
             return(
                 <div className='p-2 px-3'>
                 <div className='p-2 bg-lighter rounded-4 row justify-content-center'>
@@ -335,7 +347,7 @@ const ResHome = (props) => {
             <
             div className = 'row' > <
             div className = 'col text-start' > <
-            p className = ' mx-3 mt-3' > Your Investments - {results.length} < /p > < /div > <
+            p className = ' mx-3 mt-3 bolder' > Your Investments < /p > < /div > <
             div className = 'col d-none' >
             <
             div className = 'd-flex justify-content-end mx-1' > < TimeCircle size = "medium"
@@ -349,8 +361,8 @@ const ResHome = (props) => {
             } >
             Goals < /h6> < /
             div > < /
-            div > < /div >  <
-            div className = 'blue-darks d-flex py-2 rounded-4' >
+            div > < /div > <div className='blue-darks rounded-4'> <
+            div className = 'd-flex py-2' >
             <
             span className = 'text-center rounded-4 wide-60' > <
             span className = "bolder" > 
@@ -361,16 +373,17 @@ const ResHome = (props) => {
             onClick = {
                 handleTab5
             } >
-            Deposit < /h6> </span > < /
+            Deposit < /h6> </span ></div><div className="d-felx flex-row justify-content-center shadow-sm p-2 light-res-home"><span className="mx-2">deposits: {graph.length}</span> | <span className='mx-2'>Your Investment classes: {results.length}</span> </div> < /
             div >
 
             <
             div className = '' > {myInvestmentsGraph()}</div > <
-            div className = 'blue-darks text-center rounded-4 py-3' >
+            div className = 'blue-darks text-center rounded-4 pt-3' >
             <
             span className = ' rounded-4 text-center bolder' > Total Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span>  < /
+            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span> 
+            <div className="d-felx flex-row text-start shadow-sm p-2 light-res-home"><span className='mx-2'>Withdraws: {wwithdraws()}</span> | <span className='mx-2'>Total Withdraw: {totalWithdraw}</span> </div> < /
             div >
 
             <

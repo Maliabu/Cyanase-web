@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { API_URL_RESET_PASSWORD } from '../apis';
 import axios from 'axios';
-import { success, catch_errors, preloader, fail } from '../Api/RequestFunctions';
+import { success1, catch_errors, preloader, fail } from '../Api/RequestFunctions';
 import Logo from '../images/CIPNG.png'
 import { useSearchParams } from "react-router-dom";
 
@@ -64,8 +64,7 @@ function ResetPassword(props) {
                     } else if (response.status === 200 && response.data.success === false) {
                         fail(response.data.message)
                     } else {
-                        success("Your password has been reset successfully","","successful");
-                        success("You can now login with yoour updated credentails")
+                        success1("Password reset. You can go back and login with your updated credentails", "Successful")
                     }
                 });
         }

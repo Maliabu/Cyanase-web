@@ -55,7 +55,7 @@ class RProfile extends React.Component {
     }
     conservativeA() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -82,7 +82,7 @@ class RProfile extends React.Component {
     }
     conservativeB() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -108,7 +108,7 @@ class RProfile extends React.Component {
     }
     moderateA() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -135,7 +135,7 @@ class RProfile extends React.Component {
     }
     moderateB() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -161,7 +161,7 @@ class RProfile extends React.Component {
     }
     assertiveA() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -188,7 +188,7 @@ class RProfile extends React.Component {
     }
     assertiveB() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -214,7 +214,7 @@ class RProfile extends React.Component {
     }
     aggressiveA() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -241,7 +241,7 @@ class RProfile extends React.Component {
     }
     aggressiveB() {
         return ( <
-            Table className = "text-center blue-dark" >
+            Table className = "text-center blue-darks" >
             <
             thead >
             <
@@ -454,6 +454,7 @@ class RProfile extends React.Component {
                 catch_errors(error)
             })
             .then(function(response) {
+                console.log(response)
                 if (!response) {
                     fail("Something went wrong...")
                 } else if (response.status === 200 && response.data.success === false) {
@@ -589,7 +590,7 @@ function Step0(props) {
         return null
     }
     return ( <
-        div className = " p-lg-5 p-3 text-center blue-dark" > < Activity size = "xlarge"
+        div className = " p-lg-5 p-3 text-center blue-darks" > < Activity size = "xlarge"
         className = "active"
         set = "broken" / > <
         h4 className = "bolder my-3" > RISK PROFILE < /h4> <
@@ -612,7 +613,7 @@ function Step1(props) {
         h4 className = "blue-light mx-lg-5 mx-3 px-2" > What are your objectives
         for Investing ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -680,7 +681,7 @@ function Step2(props) {
         <
         h4 className = "blue-light mx-5 px-2" > What is your Investment Time Horizon ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -748,7 +749,7 @@ function Step3(props) {
         <
         h4 className = "blue-light mx-5 px-2" > Where have you Invested in the Past ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -816,7 +817,7 @@ function Step4(props) {
         <
         h4 className = "blue-light mx-5 px-2" > What would you hold as Maximun Loss to your Portfolio ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -884,7 +885,7 @@ function Step5(props) {
         <
         h4 className = "blue-light mx-5 px-2" > How much Capital are you considering to Invest ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -952,7 +953,7 @@ function Step6(props) {
         <
         h4 className = "blue-light mx-5 px-2" > What are your Source of Funds ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1023,7 +1024,7 @@ function Step7(props) {
         <
         h4 className = "blue-light mx-5 px-2" > Which of the following best describes your Goal ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1129,7 +1130,7 @@ function Step8(props) {
         tr > <
         /tbody> < /
         Table > < /div> <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1197,7 +1198,7 @@ function Step9(props) {
         <
         h4 className = "blue-light mx-5 px-2" > Do you feel you are appropriately covered against Personal and / or business risks, such as accidents, Illness, trauma or death ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1247,7 +1248,7 @@ function Step10(props) {
         <
         h4 className = "blue-light mx-5 px-2" > Would you consider borrowing money to make a future Investment ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1301,7 +1302,7 @@ function Step11(props) {
         h4 > <
         h4 className = "blue-light mx-5 px-2" > Which of the following options best resonates you ? < /
         h4 > <
-        div className = "blue-dark py-2 px-5 mt-4" >
+        div className = "blue-darks py-2 px-5 mt-4" >
         <
         div className = "py-4"
         key = "default-checkbox" >
@@ -1361,14 +1362,14 @@ function Step12(props) {
         h4 className = "bolder active my-3" > Risk profile < /h4>  <
         h6 className = "my-3" > You have successfully submitted your Risk Profile, you can now proceed as a more professional investor <
         /h6> <
-        h6 > Your Score: < span className = "p-2 rounded-circle blue-dark" > { props.score } < /span> < /
+        h6 > Your Score: < span className = "p-2 rounded-circle blue-darks" > { props.score } < /span> < /
         h6 > <
         h6 className = "mt-3" > Based on your score, your Risk Analysis is: < span className = "p-2 active" > { props.getResult } < /span>  < /
         h6 >
         <
         div className = " mt-3" > < h6 > Your assets will be allocated as follows: { props.resourceAllocation }</h6> < /div >
         <
-        div className = " p-2 bg-light rounded-3" >
+        div className = " p-2 bg-light rounded-3 d-none" >
         <
         h6 className = "bolder" > OR: manage your own investment by selecting an investment option:</h6>  <
         Form.Select className = "my-3"

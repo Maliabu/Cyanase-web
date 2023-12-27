@@ -151,6 +151,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
                     text: 'Your Investment Activity for ' + thisYear
                 },
                 categories: dates,
+                labels: {
+                    show: false,
+                }
                 // categories: ['jun', 'jul', 'aug'],
             },
             yaxis: {
@@ -158,7 +161,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
                     text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: ['#E91E63', '#FF9800', '#b7b7b7', '#252859'],
+            colors: ['#E91E63', '#252859', '#FF9800', '#b7b7b7'],
 
         },
         series: result,

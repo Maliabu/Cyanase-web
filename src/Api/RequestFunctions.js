@@ -3,8 +3,14 @@
 export const preloader = () => {
     document.getElementById("successMessage").innerHTML = "processing..."
 }
+export const dismissPreloader = () => {
+    document.getElementById("successMessage").innerHTML = "Next"
+}
 export const preloaderCheckout = () => {
     document.getElementById("checkout").innerHTML = "Redirecting please wait..."
+    setTimeout(() => {
+        document.getElementById("checkout").style.display = 'none'
+    }, 3000);
 }
 export const preloaderCheckouts = () => {
     document.getElementById("checkouts").innerHTML = "Redirecting please wait..."
@@ -37,7 +43,7 @@ export const success1 = (message, successMessage) => {
     document.getElementById("infoMessage").innerText = message
     setTimeout(() => {
         document.getElementById("infoMessage").style.display = 'none'
-    }, 4000);
+    }, 5000);
 }
 export const fail = (error, type) => {
     document.getElementById("successMessage").innerHTML = "Unsuccessful"
