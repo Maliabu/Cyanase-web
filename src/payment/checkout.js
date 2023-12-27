@@ -61,7 +61,7 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                 });
             }
         }
-        className = 'bk-warning active px-3 mb-2 rounded-4'
+        className = 'bk-warning active px-3 mb-2 rounded-3'
         id = "checkout" >
         Make Deposit <
         /h6> < /

@@ -127,7 +127,7 @@ function Goal1(props) {
     const submitButton = () => {
         if (step === 7) {
             return ( <
-                div className = 'mx-3 justify-content-center rounded-4' > <
+                div className = 'mx-3 text-center rounded-4' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
