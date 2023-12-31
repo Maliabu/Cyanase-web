@@ -15,13 +15,17 @@ import { ValidateForms } from "../Auth/ValidateForms";
 import axios from "axios";
 import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
 import ResRiskProfile from './ResRiskProfile'
+import Conversion from "../payment/conversion";
 
 function ResLearn1(props) {
     const globalRefId = "";
-    let minimum = 0, id = ''
     const [step, setStep] = useState(1)
     const [country, setCountry] = useState("")
     const [riskProfile, setRiskProfile] = useState(false);
+    const [minimum, setMinimum] = useState(0)
+    const [convertedAmount, setConvertedAmount] = useState(0)
+    const [id, setId] = useState()
+    const [fundManagerCountry, setFundManagerCountry] = useState('')
     useEffect(() => {
         UserRequests().then(res => {
             setCountry(res.profile.country)
@@ -69,7 +73,22 @@ function ResLearn1(props) {
         return accountType
     }
     formData.account_type = getAccountType()
-
+    function convert(){
+        let option = formData.investment_option
+            axios.post(API_URL_GET_INVESTMENT_OPTION, option, {headers: {
+                "Authorization": `Token ${TOKEN}`,
+                "Content-Type": "application/json"
+            }}).then(function(res)
+                {
+                    if(res){
+                        setMinimum(res.data[0].minimum_deposit);
+                        setId(res.data[0].investment_option_id);
+                        setFundManagerCountry(res.data[0].fund_manager_country);
+                    }
+                }
+            )
+    }
+    convert()
     function onSubmit() {
         preloader()
 
@@ -93,19 +112,20 @@ function ResLearn1(props) {
         }
         return null;
     }
-    const validate1 = (minimum, id) => {
+    function validate1(minimum, id, fundManagerCountry) {
         let depositAmount = ValidateForms("deposit_amount")
         let deposit_amount = formData.deposit_amount
+        let currency = formData.currency
         formData.investment_id = id
 
         if (depositAmount.length === 0) {
             document.getElementById("errorFirst").style.display = "block"
             document.getElementById("errorFirst").style.color = "crimson"
             document.getElementById("errorFirst").innerText = "deposit amount is required"
-        } else if (deposit_amount < minimum) {
+        } else if (deposit_amount < parseInt(convertedAmount)) {
             document.getElementById("errorFirst").style.display = "block"
             document.getElementById("errorFirst").style.color = "crimson"
-            document.getElementById("errorFirst").innerText = "minimum deposit required for this investment class is "+minimum
+            document.getElementById("errorFirst").innerText = "minimum deposit required for this investment class is "+currency+" "+parseInt(convertedAmount).toLocaleString()
         }else{
             document.getElementById("errorFirst").style.display = "none"
             setStep(step + 1)
@@ -199,21 +219,9 @@ function ResLearn1(props) {
             )
         }
         if (step === 3) {
-            let option = formData.investment_option
-            axios.post(API_URL_GET_INVESTMENT_OPTION, option, {headers: {
-                "Authorization": `Token ${TOKEN}`,
-                "Content-Type": "application/json"
-            }}).then(function(res)
-                {
-                    if(res){
-                        minimum = res.data[0].minimum_deposit;
-                        id = res.data[0].investment_option_id
-                    }
-                }
-            )
             return ( <
                 h6 className = " my-2 text-end warning rounded-3"
-                onClick = { () => validate1(minimum, id) } >
+                onClick = { () => validate1(minimum, id, fundManagerCountry) } >
                 Next <
                 /h6>        
             )
@@ -265,6 +273,9 @@ function ResLearn1(props) {
         handleChange = { handleChange }
         currency = { formData.currency }
         payment_means = { formData.payment_means }
+        minimum = { minimum }
+        fundManagerCountry = { fundManagerCountry }
+        setConvertedAmount = { setConvertedAmount }
         /> <
         Step4 currentStep = { step }
         handleChange = { handleChange }
@@ -418,9 +429,13 @@ function Step2(props) {
 }
 
 function Step3(props) {
+    let min = props.minimum
+    let fund = getCurrency((props.fundManagerCountry).toUpperCase()).toLowerCase()
+    let curr = (props.currency).toLowerCase()
     if (props.currentStep !== 3) {
         return null
     }
+    props.setConvertedAmount(Conversion(fund,min,curr))
     if (props.payment_means === "wallet") {
         return ( <
             div className = "text-center" > <
@@ -464,7 +479,12 @@ function Step3(props) {
         className = 'p-2 rounded-2 px-3 bg-red'
         style = {
             { display: 'none' }
-        } > hey < /p>
+        } > hey < /p><
+        p id = "convertedAmount"
+        className = 'p-2 rounded-2 px-3 bg-red'
+        style = {
+            { display: 'none' }
+        } > {Conversion(fund,min,curr)} < /p>
         <
         Form.Control.Feedback type = "invalid" >
         This field is required. <

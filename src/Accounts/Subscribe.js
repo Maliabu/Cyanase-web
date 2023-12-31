@@ -140,9 +140,9 @@ function Step2(props) {
     return ( <
         div className = "text-center" >
         <
-        h5 className = "py-5 special" > Proceed to pay {props.getCurr} {converted_amount}
+        h5 className = "py-5 special" > Proceed to pay {props.getCurr} {converted_amount} 
         for subscription < /
-        h5 >{converted_amount}
+        h5 >
         <
         Subscription phone = { props.phone }
         name = { props.name }
