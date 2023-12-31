@@ -54,6 +54,14 @@ body::-webkit-scrollbar {
     background-color: #efefef !important;
 }
 
+.bg-back {
+    background-image: url("images/back.png");
+    background-size: cover;
+}
+.progress-sm{
+    height: 0.5rem !important;
+  }
+
 /* .bg-lighter {
     background-color: rgb(242, 244, 250) !important;
 } */
@@ -350,8 +358,8 @@ body::-webkit-scrollbar {
 }
 
 .status {
-    color: rgb(255, 144, 18) !important;
-    background-color: rgba(255, 213, 165, 0.448);
+    color: #ff8a00 !important;
+    background-color: rgba(255, 208, 165, 0.448);
     cursor: pointer;
 }
 

@@ -15,7 +15,6 @@ const ResAccount = (props) => {
     const [profilePicture, setProfilePicture] = useState("")
     const [show2, setShow2] = useState(false);
     const [firstNok, setFirstNok] = useState("")
-    const [lastNok, setLastNok] = useState("")
     const [phoneNok, setPhoneNok] = useState("")
     const [emailNok, setEmailNok] = useState("")
     const [show, setShow] = useState(false);
@@ -44,22 +43,20 @@ const ResAccount = (props) => {
             setSubStatus(res.status)
         })
         GetNextOfKin().then(res => {
-            setFirstNok(res.kin_first_name)
-            setLastNok(res.kin_last_name)
+            setFirstNok(res.kin_first_name + " " + res.kin_last_name)
             setPhoneNok(res.kin_phone)
             setEmailNok(res.kin_email)
         });
     }, []);
     return ( < div >
         <
-        div className = "px-3 res-home pb-5 mb-5" >
-        <
+        div className = "px-3 res-home pb-5 mb-5" > <
+        h4 className = "mt-2 bolder" ><
         ArrowLeftSquare size = { 30 }
         onClick = {
             () => { props.changeAccountSetting(false) }
         }
-        className = " m-3 " / > <
-        span className = "mt-2 bolder" > Account Details < /span>  
+        className = " m-3 " / > Account Details < /h4>  
 
         <
         div className = " px-5 text-center" > <
@@ -147,21 +144,69 @@ const ResAccount = (props) => {
         <
         /
         div > <
-        div className = 'row p-2 rounded-3 bg-lighter' > <div className="col-8">< h5 className = ' p-2' > Account Subscription: < /
-        h5 ></div><div className="col-4 py-1">< span className = 'bk-warning p-2 rounded-3'
+        div className = 'row p-2 rounded-3 investment' > <div className="col-8">< h5 className = 'bolder p-2' > Account Subscription: < /
+        h5 ></div><div className="col-3 py-1">< span className = 'bk-warning p-2 rounded-3'
         onClick = { handleShow4 } > { subStatus } < /span> </div> < /div > 
         <
-        h5 className = "bolder text-dark mt-4" > Next Of Kin Details < /h5>
+        h4 className = "bolder text-dark mt-4" > Next Of Kin Details < /h4>
         <
-        div className = "p-3 rounded-3 mt-2 bg-lighter" >  <
-        h6 > FirstName: < span className = "bolder text-dark" > { firstNok } < /span>  < /
-        h6 > <
-        h6 > LastName: < span className = "bolder text-dark" > { lastNok } < /span>  < /
-        h6 > <
-        h6 > Email: < span className = "bolder text-dark" > { emailNok } < /span>  < /
-        h6 > <
-        h6 > Phone: < span className = "bolder text-dark" > { phoneNok } < /span> < /
+        div className = "row p-2 px-3 " > <
+        div className = "col-1 px-2" >
+        <
+        User size = "25"
+        set = 'broken'
+        className = ' ' / >
+        <
+        /
+        div >
+        <
+        div className = "col-11 " >
+        <
+        h6 > Name <
+        div > < p className = "bolder" > { firstNok } < /p>  < /
+        div > < /h6>  < /
+        div >
+        <
+        /
+        div >
+        <
+        div className = "row p-2 px-3 " > <
+        div className = "col-1 px-2" >
+        <
+        Call size = "25"
+        set = 'broken'
+        className = ' ' / >
+        <
+        /
+        div >
+        <
+        div className = "col-11" >
+        <
+        h6 > Phone <
+        div > < p className = "bolder" > { phoneNok } < /p>  < /
+        div > < /h6> < /
+        div >
+        <
+        /
+        div >
+        <
+        div className = "row p-2 px-3 " > <
+        div className = "col-1 px-2" >
+        <
+        Message size = "25"
+        set = 'broken'
+        className = '' / >
+        <
+        /
+        div >
+        <
+        div className = "col-11" >
+        <
+        h6 > Email < div > < p className = "bolder" > { emailNok } < /p > < /div > < /
         h6 > < /
+        div >
+        <
+        /
         div >
         <
         p className = "bk-warning text-center rounded-3 mt-3"

@@ -15,7 +15,7 @@ class Withdraw extends React.Component {
             currentStep: 2,
             withdraw_amount: 0,
             withdraw_category: "",
-            currency: "",
+            currency: this.props.currency,
             withdraw_channel: "",
             account_type: "",
             goalid: this.props.goalid,
@@ -113,7 +113,7 @@ class Withdraw extends React.Component {
         preloader()
         let form_data = new FormData();
         form_data.append('withdraw_channel', this.state.withdraw_channel);
-        form_data.append('currency', getCurrency(this.props.country));
+        form_data.append('currency', this.props.currency);
         form_data.append('withdraw_category', this.state.withdraw_category);
         form_data.append('withdraw_amount', this.state.withdraw_amount);
         form_data.append('account_type', this.getAccountType());
@@ -146,7 +146,7 @@ class Withdraw extends React.Component {
         if (this.state.withdraw_channel === "mobile money") {
             form_data.append('phone_number', this.state.phone_number)
             form_data.append('account_bank', "MPS")
-            form_data.append('beneficiary_name', this.state.beneficiary_name)
+            form_data.append('beneficiary_name', this.props.fullname)
             axios.post(`${API_URL_MM_WITHDRAW}`, form_data, {
                     headers: {
                         "Content-Type": "multipart/form-data",

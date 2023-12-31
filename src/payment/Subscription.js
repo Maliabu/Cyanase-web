@@ -4,11 +4,12 @@ import { catch_errors, success, fail, preloader, preloaderCheckouts } from '../A
 import { API_URL_SUBSCRIBE, TOKEN } from '../apis';
 
 export default function Subscription({ name, phone, amount, currency, email, data, submit }) {
+    console.log(amount)
     const config = {
         public_key: 'FLWPUBK_TEST-99f83b787d32f5195dcf295dce44c3ab-X',
-        tx_ref: Date.now(),
+        tx_ref: "CYANASESUB01-v1",
         amount: amount,
-        currency: "UGX",
+        currency: currency,
         payment_options: 'card,mobilemoney,ussd',
         customer: {
             email: email,
@@ -16,8 +17,8 @@ export default function Subscription({ name, phone, amount, currency, email, dat
             name: name,
         },
         customizations: {
-            title: 'deposit',
-            description: 'Make a deposit',
+            title: 'subscription',
+            description: 'Make a subscription',
             logo: '../images/CI.png',
         },
     };

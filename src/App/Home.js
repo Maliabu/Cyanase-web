@@ -45,7 +45,6 @@ const MyHome = () => {
     };
     const [count, setCount] = useState("1")
     const [subStatus, setSubStatus] = useState()
-    const [subDisplayStatus, setSubDisplayStatus] = useState()
     const handleShow3 = () => {
         setCount("No Alerts")
         setShow3(true)
@@ -64,7 +63,6 @@ const MyHome = () => {
         })
         SubscriptionRequests().then(res => {
             setSubStatus(res.status)
-            setSubDisplayStatus(res.displayed) // sterile
         })
     }, []);
     const apiDocumentation = () =>{

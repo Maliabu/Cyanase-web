@@ -20,8 +20,8 @@ export const preloaderCheckouts = () => {
 }
 export const success = (message, redirect, successMessage) => {
     document.getElementById("successMessage").innerHTML = successMessage
-    document.getElementById("successMessage").style.backgroundColor = "orange"
-    document.getElementById("successMessage").style.color = "black"
+    document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
+    document.getElementById("successMessage").style.color = "white"
     document.getElementById("infoMessage").style.display = 'block'
     document.getElementById("infoMessage").style.color = "#ff8a00"
     document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
@@ -35,8 +35,8 @@ export const success = (message, redirect, successMessage) => {
 }
 export const success1 = (message, successMessage) => {
     document.getElementById("successMessage").innerHTML = successMessage
-    document.getElementById("successMessage").style.backgroundColor = "orange"
-    document.getElementById("successMessage").style.color = "black"
+    document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
+    document.getElementById("successMessage").style.color = "white"
     document.getElementById("infoMessage").style.display = 'block'
     document.getElementById("infoMessage").style.color = "#ff8a00"
     document.getElementById("infoMessage").style.backgroundColor = '#ffb85c3c'
@@ -58,8 +58,8 @@ export const fail = (error, type) => {
     }, 5000);
     setTimeout(() => {
         document.getElementById("successMessage").innerHTML = "Submit"
-        document.getElementById("successMessage").style.backgroundColor = "orange"
-        document.getElementById("successMessage").style.color = "black"
+        document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
+        document.getElementById("successMessage").style.color = "white"
     }, 6000);
 }
 export const catch_errors = (error) => {

@@ -47,10 +47,10 @@ const ResSettings = (props) => {
             / >
         )
     }
-    return ( < div className="p-3"> 
+    return ( < div className="p-4"> 
     <h4 className="bolder p-2">Settings</h4>
     <
-        div className = "row p-2 py-3 bg-light" > <
+        div className = "row p-2 pt-3 border-top" > <
         div className = "col-2 text-end" >
         <
         User size = "25"
@@ -61,19 +61,18 @@ const ResSettings = (props) => {
         div >
         <
         div className = "col-10" >
-        <h6>
         <
-        div
+        h4 className="bolder"
         onClick = {
             () => { setAccountSetting(true) }
-        } ><h4 className="bolder">Account</h4> < /div> <
-        span className = "grey-text" > Profile, Next of Kin < /span></h6> < /
+        } >Account<
+        p className = "font-light" > Profile, Next of Kin < /p>  < /h4> < /
         div >
         <
         /
         div >
         <
-        div className = "row p-2 bg-light res-home" > <
+        div className = "row p-2 border-top pt-3" > <
         div className = "col-2 text-end" >
         <
         Chart size = "25"
@@ -84,19 +83,18 @@ const ResSettings = (props) => {
         div >
         <
         div className = "col-10" >
-        <h6>
         <
-        div
+        h4 className="bolder"
         onClick = {
             () => { setRiskProfile(true) }
-        } > <h4 className="bolder">Investment</h4>  < /div> <
-        span className = "grey-text" > Risk Profile < /span></h6> < /
+        } >Investment <
+        p className = "font-light" > Risk Profile </p></h4> < /
         div >
         <
         /
         div >
         <
-        div className = "row p-2 bg-light res-home" > <
+        div className = "row p-2 border-top pt-3" > <
         div className = "col-2 text-end" >
         <
         Notification size = "25"
@@ -107,19 +105,18 @@ const ResSettings = (props) => {
         div >
         <
         div className = "col-10" >
-        <h6>
         <
-        div
+        h4 className="bolder"
         onClick = {
             () => { setNotifications(true) }
-        } > <h4 className="bolder">Notifications</h4>  < /div> <
-        span className = "grey-text" > On Goals, Deposits < /span></h6> < /
+        } >Notifications<
+        p className = "font-light" > On Goals, Deposits < /p></h4>  < /
         div >
         <
         /
         div >
         <
-        div className = "row p-2 bg-light res-home" > <
+        div className = "row p-2 border-top pt-3" > <
         div className = "col-2 text-end" >
         <
         Chat size = "25"
@@ -130,19 +127,18 @@ const ResSettings = (props) => {
         div >
         <
         div className = "col-10" >
-        <h6>
         <
-        div
+        h4 className="bolder"
         onClick = {
             () => { setFaqs(true) }
-        } > <h4 className="bolder">FAQs</h4>  < /div> <
-        span className = "grey-text" > Learn More About Cyanase < /span></h6> < /
+        } >FAQs<
+        p className = "font-light" > Learn More About Cyanase </p> < /h4>  < /
         div >
         <
         /
         div >
         <
-        div className = "row p-2 bg-light res-home" > <
+        div className = "row p-2 border-top pt-3" > <
         div className = "col-2 text-end" >
         <
         Call size = "25"
@@ -153,20 +149,19 @@ const ResSettings = (props) => {
         div >
         <
         div className = "col-10" >
-        <h6>
         <
-        div
+        h4 className="bolder"
         onClick = {
             () => { setContacts(true) }
-        } > <h4 className="bolder">Help</h4>  < /div> <
-        span className = "grey-text" > Call, Whatsapp, Emails < /span></h6> < /
+        } >Help<
+        p className = "font-light" > Call, Whatsapp, Emails </p></h4> < /
         div >
         <
         /
         div >
-        <h6 className=" rounded-3 mt-3 bk-warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
+        <h6 className=" rounded-3 mt-2 px-5 bk-warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
         <
-        p className = "grey-text p-3 text-center" > All Rights Reserved < br / > .@CyanaseInvestors2022 < /p> < /
+        p className = "font-light p-3 text-center" > All Rights Reserved < br / > .@CyanaseInvestors2022 < /p> < /
         div > 
     );
 };

@@ -5,10 +5,11 @@ import './style.scss';
 import React, { useState, useEffect } from "react";
 import { PROFILE_PHOTO } from '../apis';
 import { AddUser, ArrowLeftSquare } from 'react-iconly';
-import ProgressBar from '@ramonak/react-progress-bar';
+// import ProgressBar from '@ramonak/react-progress-bar';
 import { Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
 import ResGoals1 from './ResGoals1'
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const ResGoals = () => {
     const [goalSetting, setGoalSetting] = useState(false);
@@ -92,39 +93,38 @@ const ResGoals = () => {
                 <
             div className = "scroll-y2 bg-lighter p-2" > {
                 span.map(goal => ( <
-                    div className = "p-3 bg-white res-home rounded-4 mt-1"
+                    div className = "p-3 bg-white rounded-4 mt-1"
                     key = { goal.goal_id } > <
-                    div className = "d-flex flex-row flex" > <
-                    span className = "mt-1" > <
+                    div className = "row" > <
+                    div className = "col-1" > <
                     AddUser className = " rounded-circle bg-light active p-2"
-                    size = "large" / > < /span>  <
-                    p className = "mx-5 mt-1" > < span className = "bolder"
+                    size = "large" / > < /div>  <
+                    div className = "col-7 px-4" > < h6 className = "bolder"
                      > {
                         (goal.goal_name)
-                    } < /span><br/ > < p > created {
+                    }< p className='font-light'> created {
                         (goal.created).slice(0, 10)
-                    } < /p >  < /
-                    p ><p className = 'rounded-3 warning-goals mt-0 text-center' onClick = {
+                    } < /p >  < /h6>  < /
+                    div ><div className='col-3 text-start'><span className = 'rounded-3 warning-goals' onClick = {
                         () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
-                    }>Deposit</p> < /
+                    }>Deposit</span></div> < /
                     div >
                     <
-                    span > Progress: {
+                    span><span className='bolder mx-2'>Progress:</span>  {
                         progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                     } %
                     <
                     span >
                     <
-                    ProgressBar completed = { progress }
-                    maxCompleted = { 100 }
-                    isLabelVisible = { false }
-                    bgColor = 'orange' /
-                    >
+                        ProgressBar now = { progress }
+                        className="progress-sm mx-2"
+                        variant = "#ff8b10" /
+                        >
                     <
                     /span> < /
                     span > <
-                    span className = "bolder d-none" > { goal.deposit[0] } < /span > <
-                    span className = "active d-none" > { goal.goal_amount } < /span > < /
+                    span className = "bolder mx-2" >Total Deposit: <span className='font-light'>{ (goal.deposit[0]).toLocaleString() }</span> < /span > <span>|</span> <
+                    span className = "bolder mx-2" >Goal Amount: <span className='font-light'>{ (goal.goal_amount).toLocaleString() }</span> < /span > < /
                     div >
                 ))
             } <
@@ -141,7 +141,7 @@ const ResGoals = () => {
             p onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = 'rounded-3 warning text-center' > Add a new Goal </p></div>{myGoals()}
+            className = 'rounded-3 bk-warning px-5 text-center mb-2' > Add a new Goal </p></div>{myGoals()}
              <
             Modal show = { show3 }
             onHide = { handleClose3 }

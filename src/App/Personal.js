@@ -14,12 +14,13 @@ import Withdraw from '../Accounts/Withdraw'
 import Chart from 'react-apexcharts';
 import { AddUser, Image, Filter } from "react-iconly";
 import { getCurrency } from "../payment/GetCurrency";
-import ProgressBar from '@ramonak/react-progress-bar';
+// import ProgressBar from '@ramonak/react-progress-bar';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const Personal = ({...props }) => {
         const [span, setSpan] = useState([])
         const [mine, setMine] = useState([])
-        const [name, setName] = useState()
+        const [name, setName] = useState("")
         const [deposits, setDeposits] = useState([])
         const [show, setShow] = useState(false);
         const [holdId, setHoldId] = useState("");
@@ -218,11 +219,11 @@ const Personal = ({...props }) => {
                         <span className="bk-warning p-2 rounded-3 px-3" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> < /
                         div >
                         <
-                        div className = "col-3" > < h6 className = "bolder" ><span className="grey-text font-light">Networth:</span> { getCurrency(country) } {
+                        div className = "col-3" > < h6 className = "bolder" ><span className="small font-light">Networth:</span> { getCurrency(country) } {
                             option.total
                         } < /h6> < /div > <
-                        div className = "col-4" > < h6 className = "bolder" ><span className="grey-text font-light">Total:</span> { getCurrency(country) } {
-                            (((summ(option.data)) * 1000).toFixed(0)).toLocaleString()
+                        div className = "col-4" > < h6 className = "bolder" ><span className="small font-light">Total Deposit:</span> { getCurrency(country) } {
+                            (((summ(option.data)) * 1000).toFixed(2)).toLocaleString()
                         } < /h6> < /div > < /
                         div > ))
                 )
@@ -243,10 +244,10 @@ const Personal = ({...props }) => {
                         pendingWithdraw.map(withdraw => ( <div className=""><
                             div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
                             <
-                            div className = 'col-5 text-start' > < h6 className="bolder"> { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div ><div className="col-5 text-center">
-                                <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span> {withdraw.status}</h6>
+                            div className = 'col-4 text-start' >< h6 className="bolder"><span className="small"> { withdraw.currency }</span> { withdraw.withdraw_amount } < /h6> < /div ><div className="col-5 text-center">
+                                <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span><span className="small text-dark d-none">{withdraw.status}</span></h6>
                             </div> <
-                            div className = 'col-2 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
+                            div className = 'col-3 text-end bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                             div ></div>
                         ))
                     )
@@ -309,7 +310,7 @@ const Personal = ({...props }) => {
                     >
                     <
                     /div > <
-                    div className = "col-8 text-center scroll-y3 bg-lighter px-3 rounded-3" > {
+                    div className = "col-8 text-center scroll-y3 bg-light px-3 rounded-3" > {
                     myInvestments()
                 } < /
                 div > <
@@ -373,13 +374,13 @@ const Personal = ({...props }) => {
                     <
                     div className = "row" >
                     <
-                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < span className = "mx-3 px-2 py-1 status rounded-4" > { pendingWithdraw.length } < /span>  < /h6><div className="scroll-y3 bg-lighter rounded-4"> {pendingWithdraws()}</div>
+                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < span className = "mx-3 px-2 py-1 status rounded-4" > { pendingWithdraw.length } < /span>  < /h6><div className="scroll-y3 bg-light rounded-4"> {pendingWithdraws()}</div>
                     <span className="d-none">{myRecentActivity()}</span> < /div > < /
                 div >
                     <
                     /
                 div > <
-                    div className = "col-4 px-3 bg-lighter rounded-3" >  <
+                    div className = "col-4 px-3 bg-light rounded-3" >  <
                     div className = "row p-1 rounded-3 bg-white my-1" >
                     <
                     div className = "text-start col-9 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
@@ -396,7 +397,7 @@ const Personal = ({...props }) => {
                         span className = "mt-2" > <
                         AddUser className = "p-2 border rounded-circle"
                         size = "large" / > < /span>  <
-                        h6 className = "mx-4 mt-3" > < span className = "active p-2 rounded bolder"
+                        h6 className = "mx-4 mt-2" > < span className = "active py-2 rounded bolder"
                         onClick = {
                             () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created)
                         } > {
@@ -407,22 +408,21 @@ const Personal = ({...props }) => {
                         h6 > < /
                         div >
                         <
-                        p className="bolder"> Progress: {
+                        p className="small"> Progress: {
                             progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                         } %
                         <
                         span >
                         <
-                        ProgressBar completed = { progress }
-                        maxCompleted = { 100 }
-                        isLabelVisible = { false }
-                        bgColor = 'orange' /
+                        ProgressBar now = { progress }
+                        className="progress-sm"
+                        variant = "#ff8b10" /
                         >
                         <
                         /span> < /
                         p > <
-                        span className = "bolder d-none" > { goal.deposit[0] } < /span > <
-                        span className = "active d-none" > { goal.goal_amount } < /span > < /
+                        span className = "bolder d-none" > { (goal.deposit[0]).toLocaleString() } < /span > <
+                        span className = "active d-none" > { (goal.goal_amount).toLocaleString() } < /span > < /
                         div >
                     ))
                 } <
@@ -455,6 +455,7 @@ const Personal = ({...props }) => {
                 investmentId = {investment_id}
                 verification = {verification}
                 banks = {banks}
+                currency = {getCurrency(country)}
                 / > < /
                 Modal >
                     <

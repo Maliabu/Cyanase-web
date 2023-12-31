@@ -5,6 +5,7 @@ import Subscription from "../payment/Subscription";
 import { getCurrency } from "../payment/GetCurrency";
 import { useState } from "react";
 import { autoClickable } from "../Api/RequestFunctions";
+import Conversion from '../payment/conversion'
 
 function Subscribe(props) {
     const [step, setStep] = useState(1)
@@ -123,7 +124,7 @@ function Step1(props) {
     return ( <
         div className = " text-start" > <
         h6 className = "p-5 text-center" > This is a yearly fee of $5.Your account subscription becomes overdue after 30 days from account creation afterwhich you are required to pay your subscription. < /h6>  <
-        h6 className = 'status text-center p-3 mb-5' > Account Status: < span className = 'status p-2 px-3 mx-2 rounded-3' > { props.subStatus } < /span>  < /
+        h6 className = 'status text-center p-3 mb-5' > Account Status: < span className = 'bolder p-2 px-3 mx-2 rounded-3' > { props.subStatus } < /span>  < /
         h6 >
         <
         /
@@ -135,18 +136,19 @@ function Step2(props) {
     if (props.currentStep !== 2) {
         return null
     }
+    let converted_amount = Conversion("usd",5,(props.getCurr).toLowerCase())
     return ( <
         div className = "text-center" >
         <
-        h5 className = "py-5 special" > Proceed to pay UGX 20500
+        h5 className = "py-5 special" > Proceed to pay {props.getCurr} {converted_amount}
         for subscription < /
-        h5 >
+        h5 >{converted_amount}
         <
         Subscription phone = { props.phone }
         name = { props.name }
         country = { props.country }
         email = { props.email }
-        amount = { props.amount }
+        amount = { converted_amount }
         currency = { props.getCurr }
         submit = { props.submit }
         data = { props.data }

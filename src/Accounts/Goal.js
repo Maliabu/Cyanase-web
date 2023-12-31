@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 import Profile1 from '../images/Ellipse 178.png';
 import Button from "react-bootstrap/esm/Button";
-import ProgressBar from "@ramonak/react-progress-bar";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import { getCurrency } from "../payment/GetCurrency";
 import GoalWithdraw from './GoalWithdraw'
 import { useForm } from "react-hook-form";
@@ -104,7 +104,7 @@ function Goal(props) {
         let networth = parseInt(props.networth)
         if (networth === 0) { return null } else if (goalAmount === deposit) {
             return ( <
-                h6 className = "py-3 px-4 bk-warning text-center rounded-3"
+                h6 className = " bk-warning px-5 mt-3 text-center rounded-3"
                 type = "button"
                 onClick = { _withdraw } >
                 withdraw <
@@ -182,7 +182,7 @@ function Goal(props) {
         let goalName = props.name
         if (step === 0 && goalAmount !== deposit) {
             return ( <
-                h6 className = " my-2 warning text-center rounded-4"
+                h6 className = " my-2 bk-warning px-5 text-center rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Deposit to goal <
@@ -332,29 +332,25 @@ function Step0(props) {
     if (props.id === "personal") {
     }
     return ( <
-        div className = "" > <
-        div className = "row p-3" >
+        div className = "res-home" > <
+        div className = "row px-3" >
         <
-        div className = "col-lg-5 d-none py-lg-5 py-lg-3" >
-        <
-        div className = "d-none d-lg-block py-lg-5 my-lg-5 mx-lg-5 bg-light rounded-circle" > < AddUser set = "two-tone"
-        className = "my-lg-5"
+        div className = "blue-darks rounded-4 d-none" > < AddUser set = "bulk"
+        className = "my-lg-5 active"
         size = "xlarge" /
-        >
-        <
-        /div> < /
+        > < /
         div >
         <
         div className = " px-3 text-start" >
         <
         div className = "flex-row d-none d-md-block d-lg-block p-3" >
         <
-        h6 className = "bolder" > Goal Name: < /h6> <
-        p className = "font-weight-lighter" > { props.name }...created {
+        h6 className = "bolder" > Goal Name: <
+        p className = "font-weight-lighter" > { props.name }... created {
             props.created
-        } < /p> < /
+        } </p>< /h6>  < /
         div > <
-        div className = "flex-row p-3" >
+        div className = "flex-row p-3 border-top" >
         <
         h6 className = "bolder" > Goal Amount: < /h6><
         div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
@@ -362,13 +358,13 @@ function Step0(props) {
         div > <
         div className = "row px-3" >
         <
-        span className = "bolder" > Progress: < span className = "active" > {
+        span className="bolder mb-1"> Progress: < span className = "font-light" > {
             props.progress
-        } % < /span> < /span > <
-        ProgressBar completed = { props.progress }
-        isLabelVisible = { false }
-        maxCompleted = { props.percent }
-        bgColor = "orange" /
+        } % < /span> < /span ><
+        ProgressBar now = { props.progress }
+        className="progress-sm mx-2"
+        max={props.percent}
+        variant = "#ff8a00" /
         >
         <
         /div> <

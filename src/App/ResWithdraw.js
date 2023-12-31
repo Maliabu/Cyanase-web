@@ -6,13 +6,15 @@ import './style.scss';
 import React from "react";
 import Withdraw from '../Accounts/Withdraw'
 import { ArrowLeftSquare } from 'react-iconly';
+import { getCurrency } from '../payment/GetCurrency';
 
 const ResWithdraw = (props) => {
-    const [country, setCountry] = useState([])
-    const [name, setName] = useState([])
-    const [phone, setPhone] = useState([])
+    const [country, setCountry] = useState("")
+    const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
     const [banks, setBanks] = useState("")
     const [verification, setVerification] = useState("")
+    const currency = getCurrency(country)
     useEffect(() => {
         UserRequests().then(res => {
             setCountry(res.profile.country)
@@ -40,6 +42,7 @@ const ResWithdraw = (props) => {
         option_name = {props.option_name}
         verification = {verification}
         banks = {banks}
+        currency = {currency}
         fullname = { name }/ >
         <
         /

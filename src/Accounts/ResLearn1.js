@@ -14,12 +14,14 @@ import { UserRequests } from "../Api/MainRequests";
 import { ValidateForms } from "../Auth/ValidateForms";
 import axios from "axios";
 import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
+import ResRiskProfile from './ResRiskProfile'
 
 function ResLearn1(props) {
     const globalRefId = "";
     let minimum = 0, id = ''
     const [step, setStep] = useState(1)
     const [country, setCountry] = useState("")
+    const [riskProfile, setRiskProfile] = useState(false);
     useEffect(() => {
         UserRequests().then(res => {
             setCountry(res.profile.country)
@@ -136,7 +138,6 @@ function ResLearn1(props) {
         }
         return null
     }
-
     const nextButton = () => {
         let payment_means = formData.payment_means;
         let deposit_category = formData.deposit_category
@@ -227,7 +228,11 @@ function ResLearn1(props) {
         }
         return null
     }
-
+    if (riskProfile === true) {
+        return ( < ResRiskProfile changeRiskProfileSetting = { setRiskProfile }
+            / >
+        )
+    }
     return ( <
         React.Fragment >
         <
@@ -251,6 +256,7 @@ function ResLearn1(props) {
         getTab9 = { getTab9() }
         investmentOption = { props.option }
         options = {props.options}
+        setRiskProfile = {setRiskProfile}
         /> <
         Step2 currentStep = { step }
         handleChange = { handleChange }
@@ -344,8 +350,8 @@ function Step1(props) {
         h6 > <
         h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Automatic Asset Allocation < /span> < /
         h6 > <
-        h6 className = "py-3 rounded-3 d-none bk-warning text-center"
-        onClick = { props.getTab9 } >
+        h6 className = "rounded-3 bk-warning text-center"
+        onClick = { () => {props.setRiskProfile(true)} } >
         Edit my Risk Profile before deposit < /h6> 
         <
         Form.Select className = "my-3"

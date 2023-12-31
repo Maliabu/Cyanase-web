@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { API_URL_LOGIN, API_EMAIL_VERIFY, API_RESEND_VERIFICATION_EMAIL } from '../apis';
 import axios from 'axios';
-import { success, preloader, fail, catch_errors,togglePasswordVisibility, success1 } from '../Api/RequestFunctions';
+import { success, preloader, fail, catch_errors,togglePasswordVisibility } from '../Api/RequestFunctions';
 
 const Login = (props) => {
     //state for form data

@@ -6,14 +6,14 @@ const ResNotifications = (props) => {
     return ( < div > <
         div >
         <
-        div className = "px-5 res-home rounded-4" >
-        <
+        div className = "px-4 res-home rounded-4" >
+         <
+        h4 className = "bolder" ><
         ArrowLeftSquare size = { 30 }
         onClick = {
             () => { props.changeNotificationSetting(false) }
         }
-        className = "my-4 mx-2" / > <
-        span className = "bolder" > Notification Settings < /span>   <
+        className = "my-4 mx-2" / > Notification Settings < /h4>   <
         p > Check all the notifications you would like to receive < /p>  <
         div className = ""
         key = "default-checkbox" >

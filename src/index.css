@@ -14,7 +14,6 @@ body {
 /* online change */
 
 p,
-h5,
 h6,
 span,input {
     font-size: small !important;
@@ -22,10 +21,18 @@ span,input {
 h6.bg-lighter{
     font-size: small !important;
 }
+.small{
+    font-size: x-small !important;
+}
 h4 {
     font-size: 16px !important;
 }
-
+h5 {
+    font-size: 14px !important;
+}
+.mobile{
+    font-size: 12px !important;
+}
 ::-webkit-input-placeholder {
     font-size: 12px !important;
 }
@@ -99,7 +106,6 @@ input:-internal-autofill-selected {
 /* Medium devices (tablets, 768px and up) */
 @media (max-width: 991px) {
     p,
-h5,
 h6,
 span,input {
     font-size: 11px !important;
@@ -109,5 +115,8 @@ h6.bg-lighter{
 }
 h4 {
     font-size: 15px !important;
+}
+h5 {
+    font-size: 13px !important;
 }
 }

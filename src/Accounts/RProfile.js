@@ -381,8 +381,8 @@ class RProfile extends React.Component {
     }
     result = () => {
         setTimeout(() => {
-            document.getElementById("alert").style.backgroundColor = "#ffb34f";
-            document.getElementById("alert").style.color = "black";
+            document.getElementById("alert").style.backgroundColor = "#ff8a00";
+            document.getElementById("alert").style.color = "white";
             document.getElementById("alert").innerHTML = "Reviewing your score..."
         }, 0)
         return (setTimeout(() => {
@@ -662,7 +662,8 @@ function Step1(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -730,7 +731,8 @@ function Step2(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -798,7 +800,8 @@ function Step3(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -866,7 +869,8 @@ function Step4(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -934,7 +938,8 @@ function Step5(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -1002,7 +1007,8 @@ function Step6(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -1073,7 +1079,8 @@ function Step7(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -1179,7 +1186,8 @@ function Step8(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -1229,7 +1237,8 @@ function Step9(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -1279,7 +1288,8 @@ function Step10(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -1342,7 +1352,8 @@ function Step11(props) {
         /11</p >
         <
         ProgressBar now = { props.percentage }
-        variant = "warning" /
+        className="progress-sm"
+        variant = "#ff8a00" /
         >
         <
         /
@@ -1362,7 +1373,7 @@ function Step12(props) {
         h4 className = "bolder active my-3" > Risk profile < /h4>  <
         h6 className = "my-3" > You have successfully submitted your Risk Profile, you can now proceed as a more professional investor <
         /h6> <
-        h6 > Your Score: < span className = "p-2 rounded-circle blue-darks" > { props.score } < /span> < /
+        h6 > Your Score: < span className = "p-2 rounded-4 status" > { props.score } < /span> < /
         h6 > <
         h6 className = "mt-3" > Based on your score, your Risk Analysis is: < span className = "p-2 active" > { props.getResult } < /span>  < /
         h6 >

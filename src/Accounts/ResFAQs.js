@@ -9,14 +9,14 @@ const ResFAQs = (props) => {
     const handleShow = () => setShow(true);
 
     return ( < div > <
-        div className = "px-5 mb-5 pb-5 res-home" >
-        <
+        div className = "px-4 mb-5 pb-5 res-home" >
+         <
+        h4 className = "bolder" ><
         ArrowLeftSquare size = { 30 }
         onClick = {
             () => { props.changeFaqsSetting(false) }
         }
-        className = "my-3" / > <
-        span className = "bolder" > FAQs < /span>   <
+        className = "my-3" / > FAQs < /h4>   <
         p > Get answers to a list of typical questions that you might wish to ask Cyanase < /p>   <
         div className = "row mt-3" >
         <

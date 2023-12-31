@@ -12,11 +12,12 @@ import { useForm } from "react-hook-form";
 import { ValidateForms } from "../Auth/ValidateForms";
 import axios from "axios";
 import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
+import Conversion from "../payment/conversion";
 
 function Learn1(props) {
     const globalRefId = "";
     const [step, setStep] = useState(1)
-    let minimum = 0, id = ''
+    let minimum = 0, id = '', fundManagerCountry = "UG"
     const [formData, setFormData] = useState({
         "payment_means": 'online',
         "deposit_amount": 0,
@@ -63,10 +64,13 @@ function Learn1(props) {
     function onSubmit() {
         preloader()
     }
-    const validate1 = (minimum, id) => {
+    const validate1 = (minimum, id, fundManagerCountry) => {
         let depositAmount = ValidateForms("deposit_amount")
         let deposit_amount = formData.deposit_amount
         formData.investment_id = id
+        let fundManagerCurrency = getCurrency(fundManagerCountry)
+        // convert minimum value from fund manager currency to user currency
+        let converted_amount = Conversion((fundManagerCurrency).toLowerCase(),(minimum).toLocaleString(),(formData.currency).toLowerCase())
 
         if (depositAmount.length === 0) {
             document.getElementById("errorFirst").style.display = "block"
@@ -75,7 +79,7 @@ function Learn1(props) {
         } else if (deposit_amount < minimum) {
             document.getElementById("errorFirst").style.display = "block"
             document.getElementById("errorFirst").style.color = "crimson"
-            document.getElementById("errorFirst").innerText = "minimum deposit required for this investment class is "+minimum
+            document.getElementById("errorFirst").innerText = "minimum deposit required for this investment class is "+formData.currency+" "+(converted_amount).toLocaleString()
         }else{
             document.getElementById("errorFirst").style.display = "none"
             setStep(step + 1)
@@ -198,13 +202,14 @@ function Learn1(props) {
                 {
                     if(res){
                         minimum = res.data[0].minimum_deposit;
-                        id = res.data[0].investment_option_id
+                        id = res.data[0].investment_option_id;
+                        fundManagerCountry = res.data[0].fund_manager_country
                     }
                 }
             )
             return ( <
                 h6 className = " my-2 text-end warning rounded-4"
-                onClick = { () => validate1(minimum, id) } >
+                onClick = { () => validate1(minimum, id, fundManagerCountry) } >
                 Next <
                 /h6>        
             )
@@ -456,7 +461,7 @@ function Step3(props) {
         Form.Control.Feedback type = "invalid" >
         This field is required. <
         /Form.Control.Feedback> < /
-        Form.Group > < /
+        Form.Group >< /
         div >
     );
 }
@@ -478,7 +483,7 @@ function Step4(props) {
         return ( <
             div className = "text-center" >
             <
-            h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
+            h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span > { props.currency } < /span > < span className = "bolder" > { props.total_deposit} < /span > < /
             h5 >
             <
             Checkout phone = { props.phone } // here the checkout form is rendered after which it returns response

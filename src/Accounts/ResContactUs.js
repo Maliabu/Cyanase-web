@@ -6,14 +6,14 @@ const ResContactUs = (props) => {
     return ( <
         div >
         <
-        div className = "px-5 res-home" >
-        <
+        div className = "px-4 res-home" >
+         <
+        h4 className = "bolder" ><
         ArrowLeftSquare size = { 30 }
         onClick = {
             () => { props.changeContactSetting(false) }
         }
-        className = "my-4" / > <
-        span className = "bolder" > Contact Us < /span>   <
+        className = "my-4" / > Contact Us < /h4>   <
         p className = "bolder" > For more information or inquiries, please reach us.We are available 24 / 7 < /p>   <
         div className = "row mt-3" > <
         div className = "col-2 text-center" >

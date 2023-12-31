@@ -15,7 +15,7 @@ const ResWithdraws = () => {
         }, []);
         const pendingWithdraws = () => {
             if (withdraws.length === 0) {
-                return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
+                return ( < div className = 'p-5 rounded-4 bg-light text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
                     Image size = "large"
                     set = "broken"
                     className = 'mx-2 grey-text' / > <
@@ -26,17 +26,17 @@ const ResWithdraws = () => {
                 }
                 else return (
                     withdraws.map(withdraw => ( <
-                        div className = 'row p-1 mx-2 mt-2 bg-white border-bottom' >
+                        div className = 'row p-2 mx-2 mt-1 bg-white rounded-2' >
                         <
-                        div className = 'col-5 text-start' > < h6 className='bolder'> { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
-                        div className = 'col-4 text-center' > <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span>{withdraw.status}</h6> < /div > <
-                        div className = 'col-3 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
+                        div className = 'col-5 text-start' > < h6 className='bolder'><span className='font-light'>{ withdraw.currency }</span>  { (withdraw.withdraw_amount).toLocaleString() } < /h6> < /div > <
+                        div className = 'col-5 text-center' > <h6 className=""><span className="text-dark bolder">{withdraw.investment_option} </span>{withdraw.status}</h6> < /div > <
+                        div className = 'col-2 text-end bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                         div >
                     ))
                 )
 
             }
-            return ( < div className='p-1'><
+            return ( < div className='p-1 bg-lighter'><
                 div className = 'row d-none p-2 px-3' > <
                 div className = 'col-10 bg-lighter rounded-4' > <
                 h4 className = ' mx-3 bolder mt-3' > Your Pending Withdraws < /h4 > < /div >

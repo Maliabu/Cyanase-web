@@ -256,7 +256,7 @@ const ResHome = (props) => {
             h6 className = "px-1 font-weight-light" > {
                                 (option.data).length
                             } < /h6></div > < /h6> < /div > <
-                            div className = "col-6 text-end investments2 px-3 pt-3 rounded-4" ><h6 className='bolder'>Deposit:<
+                            div className = "col-6 text-end px-3 pt-3 rounded-4" ><h6>Total Deposit:<
             div className = "d-flex flex-row flex justify-content-end m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
             h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
@@ -307,7 +307,7 @@ const ResHome = (props) => {
             )
         } else{
             return(
-                <div className='p-2'>
+                <div className='py-2'>
                     <
             div className = '' > <
             Chart options = { options.options }
@@ -328,11 +328,11 @@ const ResHome = (props) => {
         return sum
     }
     const Main = () => {
-        return ( < div className = 'p-1 bg-lighter res-home' > < div className = "bg-white text-dark px-2 py-1 rounded-4" >
+        return ( < div className = 'p-1 bg-lighter mobile' > < div className = "bg-white text-dark px-2 py-1 rounded-4" >
             <
             div className = 'd-flex mt-2' >
             <
-            div className = 'rounded-4 bg-lighter wider' >
+            div className = 'rounded-4 blue-darks wider' >
             <
             p className = "text-end mx-4 mt-2" > welcome < span className = 'bolder grey-text' > { props.name } < /span> <
             span className = " justify-content-center" > <
@@ -345,9 +345,9 @@ const ResHome = (props) => {
             div >
             <div>{myInvestments()}</div>
             <
-            div className = 'row' > <
+            div className = 'row mt-2' > <
             div className = 'col text-start' > <
-            p className = ' mx-3 mt-3 bolder' > Your Investments < /p > < /div > <
+            p className = ' mx-3 mt-3 bolder d-none' > Your Investments < /p > < /div > <
             div className = 'col d-none' >
             <
             div className = 'd-flex justify-content-end mx-1' > < TimeCircle size = "medium"
@@ -373,7 +373,7 @@ const ResHome = (props) => {
             onClick = {
                 handleTab5
             } >
-            Deposit < /h6> </span ></div><div className="d-felx flex-row justify-content-center shadow-sm p-2 light-res-home"><span className="mx-2">deposits: {graph.length}</span> | <span className='mx-2'>Your Investment classes: {results.length}</span> </div> < /
+            Deposit < /h6> </span ></div><div className="d-felx flex-row justify-content-center p-2 light-res-home"><span className="mx-2">deposits: {graph.length}</span> | <span className='mx-2'>Your Investment classes: {results.length}</span> </div> < /
             div >
 
             <
@@ -383,9 +383,8 @@ const ResHome = (props) => {
             span className = ' rounded-4 text-center bolder' > Total Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
             h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span> 
-            <div className="d-felx flex-row text-start shadow-sm p-2 light-res-home"><span className='mx-2'>Withdraws: {wwithdraws()}</span> | <span className='mx-2'>Total Withdraw: {totalWithdraw}</span> </div> < /
+            <div className="d-felx flex-row text-start p-2 light-res-home"><span className='mx-2'>Withdraws: {wwithdraws()}</span> | <span className='mx-2'>Total Withdraw: {(totalWithdraw).toLocaleString()}</span> </div> < /
             div >
-
             <
             div className = '' > <
             Chart options = { options.options }
@@ -398,7 +397,7 @@ const ResHome = (props) => {
             div className = 'd-flex mt-2' > < FaLightbulb size = "20"
             className = 'mt-2 mx-2 active' / >
             <
-            div className = 'rounded-4 bg-lighter wider' >
+            div className = 'rounded-4 investment wider' >
             <
             h6 className = "mx-4 mt-2" > Tips: <
             p className='bolder' > Dont save your money, invest < /p></h6>< /
@@ -408,7 +407,7 @@ const ResHome = (props) => {
             /
             div >
             <
-            div className = 'bg-light my-5 shadow rounded-4 mt-2 p-2 ' >
+            div className = 'bg-white my-5 rounded-4 mt-2 p-2 ' >
             <
             img src = { Ad }
             className = "rounded-4 text-center"
@@ -422,7 +421,7 @@ const ResHome = (props) => {
         div >
 
         <
-        div className = 'd-flex flex-row text-dark rounded-top-4 d-block justify-content-center bg-lighter bottom-nav' >
+        div className = 'd-flex flex-row text-dark rounded-top-4 d-block justify-content-center bg-white shadow bottom-nav' >
         <
         div className = ' text-center grey-text' > <
         TabNavItem title = { < span > < Home size = "18"
@@ -437,7 +436,7 @@ const ResHome = (props) => {
         className = ""
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /><h6 className='bg-lighter pt-1 '>Home</h6>< /div > <
+        /><h6 className='pt-1 '>Home</h6>< /div > <
         div className = 'text-center mx-4 grey-text' >
         <
         TabNavItem title = { < span > < AddUser size = "24"
@@ -448,7 +447,7 @@ const ResHome = (props) => {
         id = "tab7"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='bg-lighter pt-1 grey-text'>Goals</h6> < /
+        /> <h6 className='pt-1 grey-text'>Goals</h6> < /
         div > <
         div className = 'text-center grey-text' >
         <
@@ -459,7 +458,7 @@ const ResHome = (props) => {
         onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter grey-text pt-1'>Deposit</h6> < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='grey-text pt-1'>Deposit</h6> < /
         div > <
         div className = 'text-center mx-4 grey-text' >
         <
@@ -470,7 +469,7 @@ const ResHome = (props) => {
         onClick = { handleTab2 }
         id = "tab2"
         activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='bg-lighter grey-text pt-1'>Withdraws</h6> < /
+        setActiveTab1 = { setActiveTab1 } /><h6 className='grey-text pt-1'>Withdraws</h6> < /
         div >
         <
         div className = 'text-center grey-text' >
@@ -483,7 +482,7 @@ const ResHome = (props) => {
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='bg-lighter pt-1 grey-text'>Settings</h6> < /
+        /> <h6 className='pt-1 grey-text'>Settings</h6> < /
         div > < /
         div > <
         TabContent id = "tab1"

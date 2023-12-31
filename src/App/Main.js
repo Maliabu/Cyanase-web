@@ -230,7 +230,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
             div className = ' my-3 text-center' > <
-            span className = 'bk-warning rounded-3 px-3'
+            span className = 'bk-warning rounded-3 px-5'
             onClick = { handleShow3 } > Deposit < /span> </div >
             <
             Modal show = { show3 }
