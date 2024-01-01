@@ -1,4 +1,4 @@
-import { PersonalRequests, UserRequests, GetRiskProfile, UserVerificationRequests } from '../Api/MainRequests';
+import { PersonalRequests, UserRequests, GetRiskProfile, UserVerificationRequests, UserBanks } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './style.scss';
@@ -22,6 +22,13 @@ const ResGoals = () => {
     const [holdCreated, setHoldCreated] = useState("");
     const [complete, setComplete] = useState("Incomplete");
     const [verification, setVerification] = useState("")
+    const [banks, setBanks] = useState("")
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [holdNetworth, setHoldNetworth] = useState("");
+    const [investmentOption, setinvestmentoption] = useState("")
+    const [name, setName] = useState("")
+    const [goalStatus, setGoalStatus] = useState();
     const [show3, setShow3] = useState(false);
     const handleClose3 = () => setShow3(false);
     const handleShow3 = () => setShow3(true);
@@ -31,16 +38,33 @@ const ResGoals = () => {
         });
         UserRequests().then(res=>{
             setCountry(res.profile.country)
+            setPhone(res.profile.phoneno)
+            setEmail(res.email)
+            setName(res.first_name + " " + res.last_name)
         });
         GetRiskProfile().then(res => {
             if (res.status === true) {
                 setComplete("Complete")
             }
+            setinvestmentoption(res.investment_option)
+        });
+        UserBanks().then(res => {
+            setBanks(res.data)
         });
         UserVerificationRequests().then(res => {
             setVerification(res.success)
         });
     }, []);
+    function getId(id, name, amount, deposit, networth, created, status) {
+        setHoldId(id)
+        setHoldName(name)
+        setHoldAmount(amount)
+        setHoldDeposit(deposit)
+        setHoldCreated(created)
+        setHoldNetworth(networth)
+        setGoalStatus(status)
+        handleShow3()
+    }
     //  Functions to handle Tab Switching
     if (goalSetting) {
         return ( < div className=''>
@@ -73,14 +97,6 @@ const ResGoals = () => {
         )
     }
 
-    function getId(id, name, amount, deposit, created) {
-        setHoldId(id)
-        setHoldName(name)
-        setHoldAmount(amount)
-        setHoldDeposit(deposit)
-        setHoldCreated(created)
-        handleShow3()
-    }
     const myGoals =()=>{
         if(span.length === 0){
             return (
@@ -106,7 +122,7 @@ const ResGoals = () => {
                         (goal.created).slice(0, 10)
                     } < /p >  < /h6>  < /
                     div ><div className='col-3 text-start'><span className = 'rounded-3 warning-goals' onClick = {
-                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.created)
+                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created, goal.goal_status)
                     }>Deposit</span></div> < /
                     div >
                     <
@@ -154,6 +170,13 @@ const ResGoals = () => {
             amount = { holdAmount }
             deposit = { holdDeposit }
             created = { holdCreated }
+            option = { investmentOption }
+            banks = {banks}
+            networth = { holdNetworth }
+            phone = { phone }
+            fullname = { name }
+            email = { email }
+            status = { goalStatus }
             / > < /
             Modal >
              < /

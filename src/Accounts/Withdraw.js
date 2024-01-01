@@ -16,7 +16,7 @@ class Withdraw extends React.Component {
             withdraw_amount: 0,
             withdraw_category: "",
             currency: this.props.currency,
-            withdraw_channel: "",
+            withdraw_channel: "bank",
             account_type: "",
             goalid: this.props.goalid,
             phone: this.props.phone,
@@ -338,11 +338,7 @@ class Withdraw extends React.Component {
             withdraw_channel = { this.state.withdraw_channel }
             phone = { this.state.phone }
             options = {this.props.banks}
-            /> <
-            Step5 currentStep = { this.state.currentStep }
-            handleChange = { this.handleChange }
-            currency = { this.state.currency }
-            />  { this.previousButton() } { this.nextButton() }{this.submitButton()}< /
+            />   { this.previousButton() } { this.nextButton() }{this.submitButton()}< /
             form > < /
             React.Fragment >
         );
@@ -444,43 +440,6 @@ function Step2(props) {
         div >
     );
 }
-
-// function Step3(props) {
-//     if (props.currentStep !== 3) {
-//         return null
-//     }
-//     return ( <
-//         div className = "text-start" > <
-//         h6 className = "mt-2 text-center" > Choose the currency in which you would like to invest your money <
-//         /h6> <
-//         div className = "p-5 px-3 rounded-25 mt-3"
-//         key = "radio" >
-//         <
-//         div key = { `default-radio` }
-//         className = "mb-3" >
-//         <
-//         h4 className = "font-lighter" > BASIC ACCOUNT < /h4> <
-//         Form.Check label = "Withdraw from your account in your local currency.(Transaction charges apply)"
-//         name = "currency"
-//         type = "radio"
-//         onChange = { props.handleChange }
-//         value = "UGX"
-//         required id = "default-radio" /
-//         >
-//         <
-//         h4 className = "font-lighter mt-5" > DOLLAR ACCOUNT < /h4> <
-//         Form.Check label = "Withdraw from your local currency and we shall change it to USD(Standard charges apply)"
-//         name = "currency"
-//         onChange = { props.handleChange }
-//         type = "radio"
-//         value = "USD"
-//         required id = "default-radio" /
-//         >
-//         <
-//         /
-//         div > < /div ></div >
-//     );
-// }
 
 function Step3(props) {
     if (props.currentStep !== 3) {
@@ -590,60 +549,4 @@ function Step4(props) {
         div >
     )
 }
-
-function Step5(props) {
-    if (props.currentStep !== 5) {
-        return null
-    } else if (props.payment_means === "offline") {
-        return ( <
-            div className = "text-center" > <
-            h4 className = "bolder my-3" > Make an Offline Deposit < /h4> <
-            h6 className = "mt-2" > Procedure < /h6>   <
-            h4 className = "py-5 font-lighter" > Deposit < span className = "bolder" > { props.currency } < /span>: <span className="bolder">{ props.total_deposit} </span >
-            to our bank account and proceed to send us your deposit receipt < /
-            h4 >
-            <
-            div className = "row" >
-            <
-            div className = "col-5 text-start" >
-            <
-            h5 className = "bolder" > Bank name < /h5> <
-            h5 className = "bolder" > Account number < /h5> <
-            h5 className = "bolder" > SWIFT CODE < /h5>  <
-            h5 className = "bolder" > Account name < /h5>< /
-            div > <
-            div className = "col-7 text-start" >
-            <
-            h5 className = "font-lighter" > DIAMOND TRUST BANK < /h5>  <
-            h5 className = "font-lighter" > 0190514001 < /h5> <
-            h5 className = "font-lighter" > DTKEUGKAXXX < /h5><
-            h5 className = "font-lighter" > CYANASE TECHNOLOGY AND INVESTMENT LTD < /h5> < /
-            div > <
-            /div>  <
-            h6 className = "my-5" > Send your deposit receipt to our Email: <
-            span className = "bolder active" > < u > 'deposit@cyanase.com' < /u> < /span > < /h6>  < /
-            div >
-        )
-    } else if (props.payment_means === "online") {
-        return ( < h1 className = "py-5" > FlutterWave < /h1>)
-        }
-        return ( <
-            div className = "text-center" > <
-            h6 className = "mt-2" > How much would you like to Withdraw from your account ? < /h6>  <
-            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
-            <
-            Form.Label > Amount to Deposit < /Form.Label>  <
-            Form.Control type = "number"
-            onChange = { props.handleChange }
-            name = "withdraw_amount"
-            id = 'phone'
-            required placeholder = "UGX 10,000" / >
-            <
-            Form.Control.Feedback type = "invalid" >
-            This field is required. <
-            /Form.Control.Feedback> < /
-            Form.Group > < /
-            div >
-        );
-    }
     export default Withdraw;

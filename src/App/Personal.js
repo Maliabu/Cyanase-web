@@ -54,6 +54,7 @@ const Personal = ({...props }) => {
         const [option_name, setOptionName] = useState("")
         const [investment_id, setInvestmentId] = useState("")
         const [complete, setComplete] = useState("Incomplete");
+        const [goalStatus, setGoalStatus] = useState();
         const [verification, setVerification] = useState("")
         useEffect(() => {
             PersonalRequests().then(res => {
@@ -153,14 +154,14 @@ const Personal = ({...props }) => {
                 }
             }
         }
-        function getId(id, name, amount, deposit, networth, created, investment_id) {
+        function getId(id, name, amount, deposit, networth, created, status) {
             setHoldId(id)
             setHoldName(name)
             setHoldAmount(amount)
             setHoldDeposit(deposit)
             setHoldCreated(created)
             setHoldNetworth(networth)
-            setInvestmentId(investment_id)
+            setGoalStatus(status)
             handleShow3()
         }
         // let list1 = [{"name":"a", "total":3000, "data": [1,2]},{"name":"b", "total":1500, "data": [2,3,5]},{"name":"c", "total":5600, "data":[]}]
@@ -399,7 +400,7 @@ const Personal = ({...props }) => {
                         size = "large" / > < /span>  <
                         h6 className = "mx-4 mt-2" > < span className = "active py-2 rounded bolder"
                         onClick = {
-                            () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created)
+                            () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created, goal.goal_status)
                         } > {
                             (goal.goal_name)
                         } < /span><br/ > < p> created {
@@ -441,6 +442,8 @@ const Personal = ({...props }) => {
                 networth = { holdNetworth }
                 phone = { phone }
                 option = { investmentOption }
+                banks = {banks}
+                status = { goalStatus }
                 / > < /
                 Modal ><
                 Modal show = { show4 }

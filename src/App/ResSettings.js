@@ -159,9 +159,9 @@ const ResSettings = (props) => {
         <
         /
         div >
-        <h6 className=" rounded-3 mt-2 px-5 bk-warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
+        <h6 className=" rounded-3 mt-1 px-5 bk-warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
         <
-        p className = "font-light p-3 text-center" > All Rights Reserved < br / > .@CyanaseInvestors2022 < /p> < /
+        p className = "font-light p-3 text-center" > All Rights Reserved < br / > @CyanaseInvestors{new Date().getFullYear()} < /p> < /
         div > 
     );
 };

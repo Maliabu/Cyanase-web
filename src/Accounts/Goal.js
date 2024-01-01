@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { AddUser, Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
-import Profile1 from '../images/Ellipse 178.png';
 import Button from "react-bootstrap/esm/Button";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { getCurrency } from "../payment/GetCurrency";
-import GoalWithdraw from './GoalWithdraw'
 import { useForm } from "react-hook-form";
 import GoalDeposit from "../payment/GoalDeposit";
 import { autoClickable } from "../Api/RequestFunctions";
 import { ValidateForms } from "../Auth/ValidateForms";
+import { API_URL_GOAL_BANK_WITHDRAW, API_URL_GOAL_MM_WITHDRAW, TOKEN } from "../apis";
+import axios from "axios";
+import { preloader, fail, catch_errors, success } from "../Api/RequestFunctions";
 
 function Goal(props) {
     const [step, setStep] = useState(0)
@@ -25,7 +26,13 @@ function Goal(props) {
         "goal_id": props.id,
         "reference": "",
         "reference_id": 0,
-        "tx_ref": "CYANASE-TEST-001"
+        "tx_ref": "CYANASE-TEST-001",
+        "withdraw_amount": 0,
+        "withdraw_channel": "bank",
+        "phone_number": "",
+        "account_number": "",
+        beneficiary_name: props.fullname,
+        "account_bank": "MPS"
     })
     const handleChange = (event) => {
         const name = event.target.name;
@@ -84,14 +91,126 @@ function Goal(props) {
     formData.account_type = getAccountType()
     formData.currency = getCurrency(props.country)
 
-    function onSubmit() {}
+    const validate2 = () => {
+        let withdrawAmount = ValidateForms("withdraw_amount")
+        let networth = parseInt(getName()[7])
+        let currency = formData.currency
+        let withdraw_amount = formData.withdraw_amount
+
+        if (withdrawAmount.length === 0) {
+            document.getElementById("errorFirst").style.display = "block"
+            document.getElementById("errorFirst").style.color = "crimson"
+            document.getElementById("errorFirst").innerText = "withdraw amount is required"
+        }
+        else {
+            document.getElementById("errorFirst").style.display = "block"
+            document.getElementById("errorFirst").style.color = "crimson"
+            document.getElementById("errorFirst").innerText = "Please withdraw "+currency+" "+networth.toLocaleString()
+        }
+        if (withdraw_amount == networth){
+            document.getElementById("errorFirst").style.display = "none"
+            _next()
+        }
+    }
+    const validate3 = () => {
+        let withdrawChannel = formData.withdraw_channel
+
+        if(withdrawChannel === "bank"){
+            let AccNumber = ValidateForms("account_number")
+            if (AccNumber.length === 0) {
+                document.getElementById("errorAcc").style.display = "block"
+                document.getElementById("errorAcc").style.color = "crimson"
+                document.getElementById("errorAcc").innerText = "account number is required"
+            } else {
+                document.getElementById("errorAcc").style.display = "none"
+                onSubmit1()
+            }
+        } else{
+            let PhoneNumber = ValidateForms("phone_number")
+            if (PhoneNumber.length === 0) {
+                document.getElementById("errorPhone").style.display = "block"
+                document.getElementById("errorPhone").style.color = "crimson"
+                document.getElementById("errorPhone").innerText = "phone number is required"
+            } else {
+                document.getElementById("errorPhone").style.display = "none"
+                onSubmit1()
+            }
+        }
+    }
+    function onSubmit(){}
+    function onSubmit1() {
+        preloader()
+        let form_data = new FormData();
+        form_data.append('withdraw_channel', formData.withdraw_channel);
+        form_data.append('currency', formData.currency);
+        form_data.append('withdraw_category', formData.deposit_category);
+        form_data.append('withdraw_amount', formData.withdraw_amount);
+        form_data.append('account_type', getAccountType());
+        form_data.append('investment_id', formData.investment_id);
+        form_data.append('goal_id', props.id)
+        if (formData.withdraw_channel === "bank") {
+            form_data.append('account_number', formData.account_number)
+            form_data.append('account_bank', formData.account_bank)
+            form_data.append('beneficiary_name', formData.beneficiary_name)
+            axios.post(`${API_URL_GOAL_BANK_WITHDRAW}`, form_data, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Accept': 'application/json',
+                        "Authorization": `Token ${ TOKEN }`
+                    }
+                })
+                .catch(function(error) {
+                    catch_errors(error)
+                })
+                .then(function(response) {
+                    if (!response) {
+                        fail("Something went wrong...", "Error")
+                    } else if (response.status === 200 && response.data.success === false) {
+                        fail(response.data.message, response.data.type)
+                    } else {
+                        success("Your withdraw is now pending approval", "/home", "successful");
+                    }
+                });
+        }
+
+        if (formData.withdraw_channel === "mobile money") {
+            form_data.append('phone_number', formData.phone_number)
+            form_data.append('account_bank', "MPS")
+            form_data.append('beneficiary_name', props.fullname)
+            axios.post(`${API_URL_GOAL_MM_WITHDRAW}`, form_data, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Accept': 'application/json',
+                        "Authorization": `Token ${ TOKEN }`
+                    }
+                })
+                .catch(function(error) {
+                    catch_errors(error)
+                })
+                .then(function(response) {
+                    if (response.status === 200 && response.data.success === false) {
+                        fail(response.data.message, response.data.type)
+                    } else {
+                        success("Your withdraw is now pending approval", "/home", "successful");
+                    }
+                });
+        }
+    }
     const _next = () => {
         setStep(step + 1)
     }
     const _withdraw = () => {
-        setStep(step + 7)
+        setStep(step + 5)
     }
-
+    const withdrawMessage = () => {
+        let progress = getName()[4]
+        let percentage = getName()[5]
+        if (progress === percentage){
+            return ( <
+                h6 className = "p-2 status rounded-3 text-center" > You can withdraw once you have achieved your goal at 100 % < /h6>
+            )
+        } else return null
+    }
     const _prev = () => {
         setStep(step - 1)
     }
@@ -102,7 +221,7 @@ function Goal(props) {
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
         let networth = parseInt(props.networth)
-        if (networth === 0) { return null } else if (goalAmount === deposit) {
+        if (networth === 0 || props.status === false) { return null } else if (goalAmount === deposit && props.status === true && networth > 0) {
             return ( <
                 h6 className = " bk-warning px-5 mt-3 text-center rounded-3"
                 type = "button"
@@ -116,7 +235,7 @@ function Goal(props) {
         let payment_means = formData.payment_means
         if (step === 2 && payment_means === "online") {
             return ( <
-                div className = 'row justify-content-center' > <
+                div className = 'mx-3 text-center rounded-4' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
@@ -137,12 +256,35 @@ function Goal(props) {
                 div >
             )
         }
+        if (step === 7) {
+            return ( <
+                div className = 'mx-3 text-center rounded-4' > <
+                h6 id = "errorMessage"
+                className = 'py-2 mt-3 rounded border border-danger text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6> <
+                h6 id = "infoMessage"
+                className = 'py-2 mt-3 rounded warning-message text-center'
+                style = {
+                    { display: 'none' }
+                } > hey < /h6>  <
+                Button variant = "warning"
+                className = 'shadow text-center my-2'
+                id = 'successMessage'
+                onClick = { ()=>validate3() }
+                type = "button" >
+                Submit <
+                /Button> < /
+                div >
+            )
+        }
         return null
     }
     const previousButton = () => {
         if (step === 7) {
             return ( <
-                h6 className = " warning text-start rounded-4"
+                h6 className = " warning text-start rounded-3"
                 type = "button"
                 onClick = { _prevwithdraw } >
                 Previous <
@@ -151,7 +293,7 @@ function Goal(props) {
         }
         if (step !== 0) {
             return ( <
-                h6 className = " text-start warning rounded-4"
+                h6 className = " text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -161,8 +303,11 @@ function Goal(props) {
         return null;
     }
     const heading = () => {
-        if (step === 0 || step === 7) {
+        if (step === 0) {
             return null
+        }
+        if (step === 5 || step === 6 || step === 7) {
+            return (<div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Withdraw<span className="light-res-home p-2 row justify-content-center">{props.name} - Networth: {formData.currency} {(props.networth).toLocaleString()}</span></h3></div> )
         }
         return ( < div className="blue-darks rounded-top-3 p-3"><h4 className="bolder">Deposit to: <span className="row light-res-home p-2 mt-1 justify-content-center">{props.name}</span></h4> <
             Wallet className = "rounded-circle d-none warning p-2"
@@ -180,7 +325,15 @@ function Goal(props) {
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
         let goalName = props.name
-        if (step === 0 && goalAmount !== deposit) {
+        let networth = props.networth
+        if (step === 0 && props.status === false) {
+            return ( <
+                h6 className = " text-end my-1 mx-5 p-2 text-center bg-lighter text-grey rounded-3">
+                This goal is inactive <
+                /h6>        
+            )
+        }
+        if (step === 0 && goalAmount !== deposit && props.status !== false) {
             return ( <
                 h6 className = " my-2 bk-warning px-5 text-center rounded-3"
                 type = "button"
@@ -188,17 +341,24 @@ function Goal(props) {
                 Deposit to goal <
                 /h6>        
             )
-        } else if (step === 0 && goalAmount === deposit) {
+        } else if (step === 0 && goalAmount === deposit && networth <= 0) {
             return ( <
-                h6 className = "p-2 bg-lighter grey-text text-center rounded-4"
+                h6 className = "p-2 bg-lighter grey-text text-center rounded-3 mx-5"
                 type = "button" >
-                Congrats!!...You can now: { goalName } <
+                Goal Done: Your networth needs to mature before withdraw <
+                /h6>        
+            )
+        } else if (step === 0 && goalAmount === deposit && networth > 0) {
+            return ( <
+                h6 className = "p-2 bg-lighter grey-text text-center rounded-3 mx-5"
+                type = "button" >
+                Congrats!!...You can now { goalName } <
                 /h6>        
             )
         }
         if (step === 1) {
             return ( <
-                h6 className = " my-2 text-end warning rounded-4"
+                h6 className = " my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { ()=>validate1() } >
                 Next <
@@ -210,24 +370,42 @@ function Goal(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = " my-2 text-center bk-warning rounded-4"
+                h6 className = " my-2 text-center bk-warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Continue <
                 /h6>        
             )
         }
+        if (step === 5) {
+            return ( <
+                h6 className = " my-2 text-center warning rounded-3"
+                type = "button"
+                onClick = { _next } >
+                Next <
+                /h6>        
+            )
+        }
+        if (step === 6) {
+            return ( <
+                h6 className = " my-2 text-center warning rounded-3"
+                type = "button"
+                onClick = { () => validate2() } >
+                Next <
+                /h6>        
+            )
+        }
         if (step === 4 && payment_means === "wallet") {
             return ( <
-                h6 className = " my-2 text-center bk-warning rounded-4"
+                h6 className = " my-2 text-center bk-warning rounded-3"
                 type = "button" >
                 OK <
                 /h6>        
             )
         }
-        if (step < 4) {
+        if (step < 4 && props.status !== false) {
             return ( <
-                h6 className = " text-end my-2 warning rounded-4"
+                h6 className = " text-end my-2 warning rounded-3"
                 onClick = { _next } >
                 Next <
                 /h6>        
@@ -256,6 +434,7 @@ function Goal(props) {
         networth = { getName()[7] }
         currency = { formData.currency }
         next = { checkWithdrawStatus() }
+        withdrawMessage = { withdrawMessage}
         /> <
         Step1 currentStep = { step }
         deposit_category = { formData.deposit_category }
@@ -307,8 +486,10 @@ function Goal(props) {
         payment_means = { formData.payment_means }
         total_deposit = { getTotalDeposit() }
         currency = { formData.currency }
+        networth = { getName()[7] }
         />  <Step6  currentStep = { step }
         handleChange = { handleChange }
+        currency = { formData.currency }
         /> <Step7  currentStep = { step }
         handleChange = { handleChange }
         goalid = { formData.goal_id }
@@ -316,6 +497,8 @@ function Goal(props) {
         fullname = { props.fullname }
         networth = { getName()[7] }
         country = { props.country }
+        withdraw_channel = {formData.withdraw_channel}
+        options = {props.banks}
         /> { previousButton() }{ nextButton() } { submitButton() } < /
         form >
         <
@@ -350,13 +533,13 @@ function Step0(props) {
             props.created
         } </p>< /h6>  < /
         div > <
-        div className = "flex-row p-3 border-top" >
+        div className = "flex-row p-3 border-top d-none d-md-block d-lg-block" >
         <
         h6 className = "bolder" > Goal Amount: < /h6><
         div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
         h2 className = "px-2 font-lighter" > { (props.amount).toLocaleString() } < /h2></div > < /
         div > <
-        div className = "row px-3" >
+        div className = "row px-3 d-none d-md-block d-lg-block" >
         <
         span className="bolder mb-1"> Progress: < span className = "font-light" > {
             props.progress
@@ -368,7 +551,7 @@ function Step0(props) {
         >
         <
         /div> <
-        div className = "flex-row mt-2 p-3" >
+        div className = "flex-row mt-2 p-3 d-none d-md-block d-lg-block" >
         <
         h6 className = "bolder" > Total Deposit Made: < /h6> <
         div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
@@ -383,8 +566,7 @@ function Step0(props) {
         h6 className = "bolder" > Networth: < /h6> <
         div className = "d-flex flex-row flex" > { props.currency } <
         h3 className = "px-2 font-lighter" > { (props.networth).toLocaleString() } < /h3></div > < /div><div className="col"> {props.next} < /
-        div > < /div >  <
-        h6 className = "p-2 status rounded-3 text-center" > You can withdraw once you have achieved your goal at 100 % < /h6> < /
+        div > < /div > {props.withdrawMessage} < /
         div > < /
         div > < /
         div >
@@ -513,11 +695,7 @@ function Step1(props) {
             className = 'p-2 rounded-2 px-3 bg-red'
             style = {
                 { display: 'none' }
-            } > hey < /p>
-            <
-            Form.Control.Feedback type = "invalid" >
-            This field is required. <
-            /Form.Control.Feedback> < /
+            } > hey < /p> < /
             Form.Group > < /
             div >
         )
@@ -537,11 +715,7 @@ function Step1(props) {
         className = 'p-2 rounded-2 px-3 bg-red'
         style = {
             { display: 'none' }
-        } > hey < /p>
-        <
-        Form.Control.Feedback type = "invalid" >
-        This field is required. <
-        /Form.Control.Feedback> < /
+        } > hey < /p> < /
         Form.Group > < /
         div >
     );
@@ -578,107 +752,143 @@ function Step2(props) {
         div >
     )
 }
-
 function Step5(props) {
     if (props.currentStep !== 5) {
         return null
-    } else if (props.payment_means === "offline") {
+    }
+    return ( <
+        div className = " text-start" > <
+        h6 className = "mt-2 text-center" > Choose your withdraw means. < /h6> <
+        div className = "p-4"
+        key = "radio" >
+        <
+        div key = { `default-radio` }
+        className = "mb-3" >
+        <
+        h5 className = "font-lighter d-none" > WALLET < /h5> <
+        Form.Check label = "I want to withdraw from my wallet to make this withdraw from my personal investment account"
+        name = "withdraw_channel"
+        type = "radio"
+        onChange = { props.handleChange }
+        value = "wallet"
+        className = "d-none"
+        required id = "default-radio" /
+        >
+        <
+        h5 className = "font-lighter" > BANK < /h5> <
+        Form.Check label = "Your withdraw amount is reconciled to your Bank, Account Number"
+        name = "withdraw_channel"
+        onChange = { props.handleChange }
+        type = "radio"
+        value = "bank"
+        required id = "default-radio" /
+        >
+        <
+        h5 className = "font-lighter mt-5" > MOBILE MONEY < /h5> <
+        Form.Check label = "Your withdraw will be made available via Mobile Money"
+        name = "withdraw_channel"
+        onChange = { props.handleChange }
+        type = "radio"
+        value = "mobile money"
+        required id = "default-radio" /
+        >
+        <
+        /
+        div > < /div > < /
+        div >
+    );
+}
+function Step6(props) {
+    if (props.currentStep !== 6) {
+        return null
+    }
+    return ( <
+        div className = "text-center p-4" > <
+        h6 className = "mt-2" > How much would you like to Withdraw from your account ? < /h6>  <
+        Form.Group className = "mb-3 p-3" >
+        <
+        Form.Label > < h6 > Amount to Withdraw in { props.currency } < /h6> < /Form.Label > <
+        Form.Control type = "number"
+        onChange = { props.handleChange }
+        name = "withdraw_amount"
+        id = 'phone'
+        required placeholder = "0.00" / ><
+        p id = "errorFirst"
+        className = 'p-2 rounded-2 px-3 bg-red'
+        style = {
+            { display: 'none' }
+        } > hey < /p> < /
+        Form.Group >
+        <
+        h6 className = "bg-lighter p-2 rounded-3" > withdraw charges apply < /h6> < /
+        div >
+    );
+}
+
+function Step7(props) {
+    if (props.currentStep !== 7) {
+        return null
+    }
+    if (props.withdraw_channel === "bank") {
         return ( <
-            div className = "text-center" > <
-            h4 className = "bolder my-3" > Make an Offline Deposit < /h4> <
-            h6 className = "mt-2" > Procedure < /h6>   <
-            h4 className = "py-5 font-lighter" > Deposit < span className = "bolder" > { props.currency } < /span>: <span className="bolder">{ props.total_deposit} </span >
-            to our bank account and proceed to send us your deposit receipt < /
-            h4 >
+            div className = "text-center mx-3" > <
+            h6 className = "mt-2" > Enter your bank details to proceed < /h6>  <
+            Form.Select className = "my-3"
+            required defaultValue = "Select your preferred bank"
+            onChange = { props.handleChange }
+            name = "account_bank" > {
+                props.options.map(options => {
+                    return <
+                        option value = { options.code }
+                    id = "account_bank" ><h6>{ options.name }</h6> < /option>
+                })
+            } < /
+            Form.Select > <
+            Form.Group className = " p-3" >
             <
-            div className = "row" >
-            <
-            div className = "col-5 text-start" >
-            <
-            h5 className = "bolder" > Bank name < /h5> <
-            h5 className = "bolder" > Account number < /h5> <
-            h5 className = "bolder" > SWIFT CODE < /h5>  <
-            h5 className = "bolder" > Account name < /h5>< /
-            div > <
-            div className = "col-7 text-start" >
-            <
-            h5 className = "font-lighter" > DIAMOND TRUST BANK < /h5>  <
-            h5 className = "font-lighter" > 0190514001 < /h5> <
-            h5 className = "font-lighter" > DTKEUGKAXXX < /h5><
-            h5 className = "font-lighter" > CYANASE TECHNOLOGY AND INVESTMENT LTD < /h5> < /
-            div > <
-            /div>  <
-            h6 className = "my-5" > Send your deposit receipt to our Email: <
-            span className = "bolder active" > < u > 'deposit@cyanase.com' < /u> < /span > < /h6>  < /
-            div >
-        )
-    } else if (props.payment_means === "online") {
-        return ( < h1 className = "py-5" > FlutterWave < /h1>)
-        }
-        return ( <
-            div className = "text-center" > <
-            h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-            Form.Group className = "mb-3 bg-white shadow-sm p-3 p-5" >
-            <
-            Form.Label > Amount to Deposit < /Form.Label>  <
+            Form.Label > < h6 > Account Number < /h6> < /Form.Label > <
             Form.Control type = "number"
             onChange = { props.handleChange }
-            name = "deposit_amount"
-            id = 'phone'
-            required placeholder = " 10,000" / >
-            <
-            Form.Control.Feedback type = "invalid" >
-            This field is required. <
-            /Form.Control.Feedback> < /
+            name = "account_number"
+            id = 'account_number'
+            required placeholder = "0000000000" / ><
+            p id = "errorAcc"
+            className = 'p-2 rounded-2 px-3 bg-red'
+            style = {
+                { display: 'none' }
+            } > hey < /p>< /
             Form.Group > < /
             div >
-        );
+        )
     }
-
-    function Step6(props) {
-        if (props.currentStep !== 6) {
-            return null
-        }
-        return ( < div >
-            <
-            h6 className = "text-center my-3" > Select the Sacco Group / Investment Club you wish to deposit to: Only groups and clubs you belong to are listed here. < /h6> <
-            div className = "row text-start px-3 my-3" >
-            <
-            div className = "col-1" >
-            <
-            Form.Check onChange = { props.handleChange }
-            type = "radio"
-            name = "category_name"
-            className = "mt-4"
-            required id = "default-radio" /
-            >
-            <
-            /div> <
-            div className = "col-11 py-3" >
-            <
-            div className = "row" >
-            <
-            div className = "col-3" > <
-            img src = { Profile1 }
-            width = '90%'
-            height = '90%'
-            alt = "investors" / > < /div> <
-            div className = "col-9" > < h6 className = "mt-3" > MUBS SACCO < /h6> < /div > < /
-            div > <
-            /div> < /
-            div > <
-            /div>)
-        }
-
-        function Step7(props) {
-            if (props.currentStep !== 7) {
-                return null
-            }
-            return ( < GoalWithdraw goalid = { props.goalid }
-                phone = { props.phone }
-                fullname = { props.fullname }
-                country = { props.country }
-                networth = { props.networth }
-                / > )
-            }
-            export default Goal;
+    return ( <
+        div className = "text-center" > <
+        h6 className = "mt-2" > Confirm your phone number < /h6>   <
+        Form.Group className = " p-3" >
+        <
+        Form.Label > < h6 > Confirm Phone Number < /h6> < /Form.Label > <
+        Form.Control type = "phone"
+        onChange = { props.handleChange }
+        name = "phone_number"
+        id = 'phone_number'
+        required placeholder = { props.phone }
+        / ><
+        p id = "errorPhone"
+        className = 'p-2 rounded-2 px-3 bg-red'
+        style = {
+            { display: 'none' }
+        } > hey < /p> < /
+        Form.Group > <
+        Form.Group className = "mb-3 p-3 d-none" >
+        <
+        Form.Label > < h6 > Account Bank(Mobile Money Option) < /h6> < /Form.Label > <
+        Form.Control type = "text"
+        onChange = { props.handleChange }
+        name = "account_bank"
+        id = 'account_bank'
+        required placeholder = "code" / > < /
+        Form.Group > < /
+        div >
+    )
+}
+export default Goal;

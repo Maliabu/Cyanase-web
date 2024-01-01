@@ -243,24 +243,24 @@ const ResHome = (props) => {
             )
         } else{
             return(
-                <div className='p-3 mt-2 investment rounded-4 carousel slide'>
+                <div className='p-3 mt-2 investment rounded-4 border carousel slide'>
                 <Carousel touch={true} interval={null} controls={false}>
                     {
                         final_data.map(option=>(
                             <Carousel.Item >
-                                <div className='row text-dark p-2'>
-                                    <div className='col-5'><h5 className='bolder'>{option.name}</h5><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> </div>
+                                <div className='row text-dark'>
+                                    <div className='col-5'><h5 className='bolder py-1'>{option.name}</h5><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> </div>
+                                    <div className='col-2 pt-4'><h5><Star size={16} set="bulk" className="active"/>{(option.data).length}</h5></div>
                                     <
-                            div className = "col-1" > < h6 className = "bolder" ><
-            div className = "d-flex flex-row flex justify-content-center mt-3" >< h6 className='bolder'> <Star size="small" set='bulk' className="active" /> < /h6>  <
-            h6 className = "px-1 font-weight-light" > {
-                                (option.data).length
-                            } < /h6></div > < /h6> < /div > <
-                            div className = "col-6 text-end px-3 pt-3 rounded-4" ><h6>Total Deposit:<
-            div className = "d-flex flex-row flex justify-content-end m-0" >< p className='bolder'> { getCurrency(country) } < /p>  <
+                            div className = "col-5 text-end" ><div className='row'> <h6 className='m-0'>Total Deposit:<
+            div className = "d-flex flex-row flex m-0 justify-content-end" >< span className='bolder'> { getCurrency(country) } < /span>  <
             h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
-                            } < /h4></div ></h6> < /div >
+                            } < /h4></div ></h6></div><div className='row'><h6 className='m-0'>Networth:<
+            div className = "d-flex flex-row flex m-0 justify-content-end" >< span className='bolder'> { getCurrency(country) } < /span>  <
+            h4 className = "px-1 font-weight-light m-0" > {
+                                option.total.toLocaleString()
+                            } < /h4></div ></h6></div> < /div >
                                 </div>
                             </Carousel.Item>
                         ))
@@ -373,7 +373,7 @@ const ResHome = (props) => {
             onClick = {
                 handleTab5
             } >
-            Deposit < /h6> </span ></div><div className="d-felx flex-row justify-content-center p-2 light-res-home"><span className="mx-2">deposits: {graph.length}</span> | <span className='mx-2'>Your Investment classes: {results.length}</span> </div> < /
+            Deposit < /h6> </span ></div><div className="d-felx flex-row justify-content-center p-2 light-res-home"><span className="mx-2">deposits: <Star size={10} set="bulk" className="active"/>{graph.length}</span> | <span className='mx-2'>Your Investment classes: {results.length}</span> </div> < /
             div >
 
             <
@@ -383,7 +383,7 @@ const ResHome = (props) => {
             span className = ' rounded-4 text-center bolder' > Total Networth <
             div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
             h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span> 
-            <div className="d-felx flex-row text-start p-2 light-res-home"><span className='mx-2'>Withdraws: {wwithdraws()}</span> | <span className='mx-2'>Total Withdraw: {(totalWithdraw).toLocaleString()}</span> </div> < /
+            <div className="d-felx flex-row text-start p-2 light-res-home"><span className='mx-2'>Withdraws: <Star size={10} set="bulk" className="active"/>{wwithdraws()}</span> | <span className='mx-2'>Total Withdraw: { getCurrency(country) } {(totalWithdraw).toLocaleString()}</span> </div> < /
             div >
             <
             div className = '' > <
