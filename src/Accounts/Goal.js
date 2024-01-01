@@ -223,7 +223,7 @@ function Goal(props) {
         let networth = parseInt(props.networth)
         if (networth === 0 || props.status === false) { return null } else if (goalAmount === deposit && props.status === true && networth > 0) {
             return ( <
-                h6 className = " bk-warning px-5 mt-3 text-center rounded-3"
+                h6 className = " bk-warning px-3 mt-3 text-center rounded-3"
                 type = "button"
                 onClick = { _withdraw } >
                 withdraw <

@@ -46,21 +46,39 @@ export const success1 = (message, successMessage) => {
     }, 5000);
 }
 export const fail = (error, type) => {
-    document.getElementById("successMessage").innerHTML = "Unsuccessful"
-    document.getElementById("successMessage").style.backgroundColor = "red"
-    document.getElementById("successMessage").style.color = "white"
-    document.getElementById("errorMessage").innerText = error+": "+type
-    document.getElementById("errorMessage").style.display = 'block'
-    document.getElementById("errorMessage").style.color = "red"
-    document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
-    setTimeout(() => {
-        document.getElementById("errorMessage").style.display = 'none'
-    }, 5000);
-    setTimeout(() => {
-        document.getElementById("successMessage").innerHTML = "Submit"
-        document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
+    if(type){
+        document.getElementById("successMessage").innerHTML = "Unsuccessful"
+        document.getElementById("successMessage").style.backgroundColor = "red"
         document.getElementById("successMessage").style.color = "white"
-    }, 6000);
+        document.getElementById("errorMessage").innerText = error+": "+type
+        document.getElementById("errorMessage").style.display = 'block'
+        document.getElementById("errorMessage").style.color = "red"
+        document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+        setTimeout(() => {
+            document.getElementById("errorMessage").style.display = 'none'
+        }, 5000);
+        setTimeout(() => {
+            document.getElementById("successMessage").innerHTML = "Submit"
+            document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
+            document.getElementById("successMessage").style.color = "white"
+        }, 6000);
+    } else{
+        document.getElementById("successMessage").innerHTML = "Unsuccessful"
+        document.getElementById("successMessage").style.backgroundColor = "red"
+        document.getElementById("successMessage").style.color = "white"
+        document.getElementById("errorMessage").innerText = error
+        document.getElementById("errorMessage").style.display = 'block'
+        document.getElementById("errorMessage").style.color = "red"
+        document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+        setTimeout(() => {
+            document.getElementById("errorMessage").style.display = 'none'
+        }, 5000);
+        setTimeout(() => {
+            document.getElementById("successMessage").innerHTML = "Submit"
+            document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
+            document.getElementById("successMessage").style.color = "white"
+        }, 6000);
+    }
 }
 export const catch_errors = (error) => {
     if (error.response) {

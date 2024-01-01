@@ -65,6 +65,28 @@ const ResGoals = () => {
         setGoalStatus(status)
         handleShow3()
     }
+    function checkWithdraw(amount, deposit, status){
+        let classname = ""
+        let innertext = ""
+        if(amount !== deposit && status !==true){
+            innertext = "Inactive"
+            classname = "rounded-3 dark-goals"
+            return [innertext, classname]
+        } else if(amount === deposit && status !==true){
+            innertext = "Complete"
+            classname = "rounded-3 dark-goals"
+            return [innertext, classname]
+        } else 
+        if (amount !== deposit){
+            innertext = "deposit"
+            classname = "rounded-3 warning-goals"
+            return [innertext, classname]
+        } else {
+            innertext = "withdraw"
+            classname = "rounded-3 warning-goals"
+            return [innertext, classname]
+        }
+    }
     //  Functions to handle Tab Switching
     if (goalSetting) {
         return ( < div className=''>
@@ -121,9 +143,9 @@ const ResGoals = () => {
                     }< p className='font-light'> created {
                         (goal.created).slice(0, 10)
                     } < /p >  < /h6>  < /
-                    div ><div className='col-3 text-start'><span className = 'rounded-3 warning-goals' onClick = {
+                    div ><div className='col-3 text-start'><span className = {checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[1]} onClick = {
                         () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created, goal.goal_status)
-                    }>Deposit</span></div> < /
+                    }>{checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[0]}</span></div> < /
                     div >
                     <
                     span><span className='bolder mx-2'>Progress:</span>  {
@@ -148,7 +170,6 @@ const ResGoals = () => {
             )
         }
     }
-
     let progress
         return ( < div className = '' >
             <
