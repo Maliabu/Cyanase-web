@@ -29,7 +29,7 @@ const ResWithdraws = () => {
                         div className = 'row p-2 mx-2 mt-1 bg-white rounded-2' >
                         <
                         div className = 'col-5 text-start' > < h6 className='bolder'><span className='font-light'>{ withdraw.currency }</span>  { (withdraw.withdraw_amount).toLocaleString() } < /h6> < /div > <
-                        div className = 'col-5 text-center' > <h6 className=""><span className="text-dark bolder">{withdraw.investment_option} </span>{withdraw.status}</h6> < /div > <
+                        div className = 'col-5 text-center' > <h6 className=""><span className="text-dark bolder">{withdraw.investment_option} </span> {withdraw.handler}</h6> < /div > <
                         div className = 'col-2 text-end bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                         div >
                     ))

@@ -33,7 +33,7 @@ function Subscribe(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 my-2 text-center warning rounded-3"
+                h6 className = "text-center warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -77,7 +77,7 @@ function Subscribe(props) {
                 return null
             }
             return ( <
-                h6 className = "py-3 my-2 text-center warning rounded-3"
+                h6 className = "text-center warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Subscribe <

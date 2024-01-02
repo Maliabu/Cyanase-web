@@ -73,7 +73,7 @@ const ResGoals = () => {
             classname = "rounded-3 dark-goals"
             return [innertext, classname]
         } else if(amount === deposit && status !==true){
-            innertext = "Complete"
+            innertext = "Done"
             classname = "rounded-3 dark-goals"
             return [innertext, classname]
         } else 
@@ -132,7 +132,7 @@ const ResGoals = () => {
             div className = "scroll-y2 bg-lighter p-2" > {
                 span.map(goal => ( <
                     div className = "p-3 bg-white rounded-4 mt-1"
-                    key = { goal.goal_id } > <
+                    key = { goal.goal_id } ><
                     div className = "row" > <
                     div className = "col-1" > <
                     AddUser className = " rounded-circle bg-light active p-2"
@@ -143,7 +143,7 @@ const ResGoals = () => {
                     }< p className='font-light'> created {
                         (goal.created).slice(0, 10)
                     } < /p >  < /h6>  < /
-                    div ><div className='col-3 text-start'><span className = {checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[1]} onClick = {
+                    div ><div className='col-3 text-end'><span className = {checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[1]} onClick = {
                         () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created, goal.goal_status)
                     }>{checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[0]}</span></div> < /
                     div >

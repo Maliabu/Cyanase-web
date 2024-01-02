@@ -13,14 +13,14 @@ const Learn = (props) => {
             <
             h4 className = "bolder mt-3" > Students < /h4>  <
             h6 > Our platform is simplified to support students investments < /h6> <
-            h6 className = "px-5 py-3 mt-5 bk-warning rounded-3"
+            h6 className = "bk-warning rounded-3 my-2"
             onClick = {
                 () => {
                     props.tab2()
                 }
             } >
             Get Started < /h6> <
-            h6 className = "px-5 py-3 my-2 warning rounded-3"
+            h6 className = "warning rounded-3"
             onClick = {
                 () => { setStep(step - 1) }
             } >
@@ -37,12 +37,12 @@ const Learn = (props) => {
             h4 className = "bolder mt-3" > SACCO & Investment Clubs < /h4> <
             p className = "my-3" > Investment Products < /p > <
             h6 > Grow together with your friends and family. < /h6> <
-            h6 className = "px-5 py-3 mt-5 warning rounded-3"
+            h6 className = "warning rounded-3 my-2"
             onClick = {
                 () => { setStep(step + 1) }
             } >
             Next < /h6> <
-            h6 className = "px-5 py-3 my-2 warning rounded-3"
+            h6 className = "warning rounded-3"
             onClick = {
                 () => { setStep(step - 1) }
             } >
@@ -59,12 +59,12 @@ const Learn = (props) => {
             h4 className = "bolder mt-3" > Goal Investing < /h4> <
             p className = "my-3" > Investment Products < /p > <
             h6 > We help you make investments to help you reach your financial goals < /h6> <
-            h6 className = "px-5 py-3 mt-5 warning rounded-3"
+            h6 className = "warning rounded-3 my-2"
             onClick = {
                 () => { setStep(step + 1) }
             } >
             Next < /h6> <
-            h6 className = "px-5 py-3 my-2 warning rounded-3"
+            h6 className = "warning rounded-3"
             onClick = {
                 () => { setStep(step - 1) }
             } >
@@ -81,12 +81,12 @@ const Learn = (props) => {
             h4 className = "bolder mt-3" > Our API < /h4> <
             p className = "my-3" > Investment Products < /p > <
             h6 > We provide a wide range of Investment products and API to integrate them into your systems < /h6> <
-            h6 className = "px-5 py-3 mt-5 warning rounded-3"
+            h6 className = "warning rounded-3 my-2"
             onClick = {
                 () => { setStep(step + 1) }
             } >
             Next < /h6> <
-            h6 className = "px-5 py-3 my-2 warning rounded-3"
+            h6 className = "warning rounded-3"
             onClick = {
                 () => { setStep(step - 1) }
             } >
@@ -118,7 +118,7 @@ const Learn = (props) => {
         p className = "my-3" > Hello < span className = " bolder" > {props.name} < /span></p >
         <
         h6 > Learn more about our products and services. < /h6> <
-        h6 className = "p-3 mt-5 warning rounded-3"
+        h6 className = "mt-5 warning rounded-3"
         onClick = {
             () => { setStep(step + 1) }
         } >

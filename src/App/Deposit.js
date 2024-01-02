@@ -55,9 +55,8 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
     }, []);
     return ( < div className="mx-2"> < div className = " d-none d-sm-block" > <
         div className = "row" > <
-        div className = "col-8 dollar p-3 rounded-4 " >
-        <
-        h6 > DEPOSIT < /h6>  <
+        div className = "col-8 dollar px-4 rounded-4 " >
+         <
         div className = "row blue-darks rounded-4 py-5" >
         <
         div className = " text-center" >

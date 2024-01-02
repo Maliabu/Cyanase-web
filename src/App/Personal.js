@@ -93,13 +93,14 @@ const Personal = ({...props }) => {
         }, []);
         const groupArrayObjects = mine.reduce((group, obj) => {
             let sum = 0
-            const { name, datas, networths, id } = obj;
+            const { name, datas, networths, id, handler } = obj;
             if (!group[name]) {
                 group[name] = {
                     name: name,
                     data: [],
                     networth: [],
                     investment_id: id,
+                    handler: handler,
                     total: sum
                 };
             }
@@ -136,7 +137,8 @@ const Personal = ({...props }) => {
                 chart: {
                     type: 'donut',
                 },
-                colors: ['#E91E63', '#252859', '#FF9800', '#b7b7b7'],
+                // colors: ['#E91E63', '#252859', '#FF9800', '#b7b7b7'],
+                colors: ['#000', '#252859', '#FF9800', '#b7b7b7'],
                 responsive: [{
                     breakpoint: 480,
                     options: {
@@ -167,7 +169,7 @@ const Personal = ({...props }) => {
         // let list1 = [{"name":"a", "total":3000, "data": [1,2]},{"name":"b", "total":1500, "data": [2,3,5]},{"name":"c", "total":5600, "data":[]}]
         // let list2 = [{"name":"a", "total":500},{"name":"b", "total":300}]
         function subtractTwoLists(listA, listB) {
-            const mapA = new Map(listA.map(item => [item.name, { total: parseInt(item.total), data: item.data, investment_id: item.investment_id }])); // convert listA to map as { 'a' => { value: 2000, data: 'first' } }
+            const mapA = new Map(listA.map(item => [item.name, { total: parseInt(item.total), data: item.data, investment_id: item.investment_id, handler: item.handler }])); // convert listA to map as { 'a' => { value: 2000, data: 'first' } }
           //console.log(mapA)
             // Subtract values from List B from List A
             listB.forEach(itemB => {
@@ -176,11 +178,11 @@ const Personal = ({...props }) => {
               if (mapA.has(nameInB)) {
                   
                   const oldValue = mapA.get(nameInB).total;
-                  mapA.set(nameInB, { total: oldValue - valueInB, data: mapA.get(nameInB).data, investment_id: mapA.get(nameInB).investment_id });
+                  mapA.set(nameInB, { total: oldValue - valueInB, data: mapA.get(nameInB).data, investment_id: mapA.get(nameInB).investment_id, handler: mapA.get(nameInB).handler });
                  //Updates the value associated with the "name" attribute in List A to the result of the subtraction
               }
             });
-           const resultList = Array.from(mapA, ([name, { total, data, investment_id }]) => ({ name, total, data, investment_id }));
+           const resultList = Array.from(mapA, ([name, { total, data, investment_id, handler }]) => ({ name, total, data, investment_id, handler }));
             return resultList;  // convert map to list, i.e { 'a' => { value: 2000, data: 'first' } } to [ { name: 'a', value: 1200 }]
         }
         let final_data = subtractTwoLists(results, result)
@@ -214,17 +216,19 @@ const Personal = ({...props }) => {
                 }
                 else return (
                     nextResult.map(option => ( <
-                        div className = "row mt-2 p-3 bg-white rounded-3" >
+                        div className = "row mt-1 py-3 bg-white rounded-3" >
                         <
-                        div className = "col-5" > < h6 className = "bolder" > { option.name } < /h6>
+                        div className = "col-4" > < h6 className = "" > { option.name } < /h6>
                         <span className="bk-warning p-2 rounded-3 px-3" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> < /
                         div >
                         <
-                        div className = "col-3" > < h6 className = "bolder" ><span className="small font-light">Networth:</span> { getCurrency(country) } {
-                            option.total
+                        div className = "col-3" > < h6 className = "" ><span className="small bolder">Handler:</span> {
+                            option.handler
                         } < /h6> < /div > <
-                        div className = "col-4" > < h6 className = "bolder" ><span className="small font-light">Total Deposit:</span> { getCurrency(country) } {
-                            (((summ(option.data)) * 1000).toFixed(2)).toLocaleString()
+                        div className = "col-5" > < h6 className = "m-0" ><span className="small bolder">Total Networth:</span> { getCurrency(country) } {
+                            (option.total).toLocaleString()
+                        } < /h6> < h6 className = "m-0" ><span className="small bolder">Total Deposit:</span> { getCurrency(country) } {
+                            ((summ(option.data)) * 1000).toLocaleString()
                         } < /h6> < /div > < /
                         div > ))
                 )
@@ -243,12 +247,14 @@ const Personal = ({...props }) => {
                     }
                     else return (
                         pendingWithdraw.map(withdraw => ( <div className=""><
-                            div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
+                            div className = 'row p-2 mx-3 mt-1 bg-white rounded-3' >
                             <
-                            div className = 'col-4 text-start' >< h6 className="bolder"><span className="small"> { withdraw.currency }</span> { withdraw.withdraw_amount } < /h6> < /div ><div className="col-5 text-center">
-                                <h6 className="grey-text"><span className="text-dark bolder">{withdraw.investment_option} </span><span className="small text-dark d-none">{withdraw.status}</span></h6>
+                            div className = 'col-5 text-start' >< h6><span className="small bolder"> { withdraw.currency }</span> { (withdraw.withdraw_amount).toLocaleString() } < /h6> < /div ><div className="col-3 text-center">
+                                <h6><span className="small bolder">option </span><span>{withdraw.investment_option} </span></h6>
+                            </div><div className="col-3 text-center">
+                                <h6><span className="small bolder">handler </span><span>{withdraw.handler} </span></h6>
                             </div> <
-                            div className = 'col-3 text-end bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
+                            div className = 'col-1 text-end bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
                             div ></div>
                         ))
                     )
@@ -295,10 +301,10 @@ const Personal = ({...props }) => {
                 }
                 return ( <
                     div > <
-                    div className = "row mx-3" > <
-                    div className = "col-8 px-3 rounded-4" >
-                    <
-                    h6 className = "py-2" > MY INVESTMENTS < span className = "mx-3 px-2 py-1 status rounded-4" > { results.length } < /span>  < /h6>  <
+                    div className = "row mx-3" ><
+                    div className = "col-8 px-3 rounded-4" > <
+                    h6 className="text-end"> < span className = "mx-3 px-2 py-1 status rounded-4" > { results.length } < /span> PERSONAL INVESTMENTS < /h6> 
+                     <
                     div className = "row justify-content-center rounded-4 p-2" >
                      
                     <
@@ -311,7 +317,7 @@ const Personal = ({...props }) => {
                     >
                     <
                     /div > <
-                    div className = "col-8 text-center scroll-y3 bg-light px-3 rounded-3" > {
+                    div className = "col-8 text-center scroll-y3 bg-lighter px-5 rounded-3" > {
                     myInvestments()
                 } < /
                 div > <
@@ -375,41 +381,41 @@ const Personal = ({...props }) => {
                     <
                     div className = "row" >
                     <
-                    h6 className = "py-2 mt-2" > RPENDING WITHDRAWS < span className = "mx-3 px-2 py-1 status rounded-4" > { pendingWithdraw.length } < /span>  < /h6><div className="scroll-y3 bg-light rounded-4"> {pendingWithdraws()}</div>
+                    h6 className = "py-2 mt-2 text-end" > < span className = " px-2 py-1 status rounded-4 mx-3" > { pendingWithdraw.length } < /span>  PENDING WITHDRAWS < /h6><div className="scroll-y3 bg-lighter rounded-3"> {pendingWithdraws()}</div>
                     <span className="d-none">{myRecentActivity()}</span> < /div > < /
                 div >
                     <
                     /
                 div > <
-                    div className = "col-4 px-3 bg-light rounded-3" >  <
-                    div className = "row p-1 rounded-3 bg-white my-1" >
-                    <
-                    div className = "text-start col-9 p-2" > < h6 > YOUR PERSONAL GOALS < /h6> < /div > <
-                    div className = "text-end col-3 p-2" > < span className = "px-2 py-1 status rounded-4" > { span.length } < /span> < /div > < /
+                    div className = "col-4 rounded-3 pt-2" >  <
+                    div className = "row" >
+                     <
+                    div className = "text-end col-5 text-end" > <
+                    h6 className = " bk-warning rounded-3 px-3"
+                onClick = { handleShow1 } >
+                    Add New Goal < /h6>< /div ><
+                    div className = "text-end col-7 p-2" > < h6 >< span className = "px-2 mx-2 py-1 status rounded-4" > { span.length } < /span> GOALS < /h6> < /div > < /
                 div > <
-                div className = " bk-warning text-center rounded-3 p-2 px-3"
-            onClick = { handleShow1 } >
-                Add New Goal < /div> <
-                div className = " pb-5 px-1 scroll-y rounded-4" > {
+                div className = " pb-5 px-2 mt-2 scroll-y bg-lighter rounded-3" > {
                     span.map(goal => ( <
-                        div className = "py-2 px-3 bg-white res-home rounded-4 mt-2"
+                        div className = "py-2 px-3 bg-white rounded-4 mt-1"
                         key = { goal.goal_id } > <
                         div className = "d-flex flex-row" > <
                         span className = "mt-2" > <
                         AddUser className = "p-2 border rounded-circle"
                         size = "large" / > < /span>  <
-                        h6 className = "mx-4 mt-2" > < span className = "active py-2 rounded bolder"
+                        h6 className = "mx-4 mt-2" > < span
                         onClick = {
                             () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created, goal.goal_status)
                         } > {
                             (goal.goal_name)
-                        } < /span><br/ > < p> created {
+                        } < /span><br/ > < p className="small"> created {
                             (goal.created).slice(0, 10)
                         } < /p >  < /
                         h6 > < /
                         div >
                         <
-                        p className="small"> Progress: {
+                        p className="small m-0"> Progress: {
                             progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                         } %
                         <
@@ -417,13 +423,13 @@ const Personal = ({...props }) => {
                         <
                         ProgressBar now = { progress }
                         className="progress-sm"
-                        variant = "#ff8b10" /
+                        variant = "#ff8800" /
                         >
                         <
                         /span> < /
-                        p > <
-                        span className = "bolder d-none" > { (goal.deposit[0]).toLocaleString() } < /span > <
-                        span className = "active d-none" > { (goal.goal_amount).toLocaleString() } < /span > < /
+                        p >  <
+                        span className = "bolder mx-2 small" >Deposit: <span className='font-light'>{ (goal.deposit[0]).toLocaleString() }</span> < /span > <span>|</span> <
+                        span className = "bolder mx-2 small" >Goal: <span className='font-light'>{ (goal.goal_amount).toLocaleString() }</span> < /span > < /
                         div >
                     ))
                 } <

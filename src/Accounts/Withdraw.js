@@ -210,7 +210,7 @@ class Withdraw extends React.Component {
         let withdraw_category = this.state.withdraw_category;
         if (currentStep !== 2) {
             return ( <
-                h6 className = "text-start warning rounded-4"
+                h6 className = "text-start warning rounded-3"
                 type = "button"
                 onClick = { this._prev } >
                 Previous <
@@ -219,7 +219,7 @@ class Withdraw extends React.Component {
         }
         if (currentStep === 6 && withdraw_category === 'sacco/club') {
             return ( <
-                h6 className = "text-start warning rounded-4"
+                h6 className = "text-start warning rounded-3"
                 type = "button"
                 onClick = { this._prevBeforeSacco } >
                 Previous <
@@ -246,7 +246,7 @@ class Withdraw extends React.Component {
         let verification = this.props.verification
         if (currentStep === 2 && verification === true) {
             return ( <
-                h6 className = "my-2 text-end warning rounded-4"
+                h6 className = "my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._next } >
                 Next <
@@ -280,7 +280,7 @@ class Withdraw extends React.Component {
                 )
             }
             return ( <
-                h6 className = "my-2 text-end warning rounded-4"
+                h6 className = "my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { ()=>this.validate1() } >
                 Next <
@@ -289,7 +289,7 @@ class Withdraw extends React.Component {
         }
         if (currentStep === 1 && withdraw_category === "sacco/club") {
             return ( <
-                h6 className = "my-2 text-end warning rounded-4"
+                h6 className = "my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._saccoCategory } >
                 Next <
@@ -298,7 +298,7 @@ class Withdraw extends React.Component {
         }
         if (currentStep < 4) {
             return ( <
-                h6 className = "my-2 text-end warning rounded-4"
+                h6 className = "my-2 text-end warning rounded-3"
                 onClick = { this._next } >
                 Next <
                 /h6>        

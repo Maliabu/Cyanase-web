@@ -6,7 +6,7 @@ import ApiUser from './ApiUser'
 import SecondaryUser from './SecondaryUser';
 import TabNavItem from "./TabNavItem";
 import TabContent from "./TabContent";
-
+import Depo from '../images/Group 130.png'
 
 const BasicExample = () => {
     const [activeTab, setActiveTab] = useState("tab1");
@@ -40,12 +40,12 @@ const BasicExample = () => {
         u className = 'active ' > support @cyanase.com < /u> < /
         h6 >
         <
-        div >
+        div className='text-center'>
         <
-        img src = "https://img.freepik.com/free-vector/strategic-consulting-concept-illustration_114360-8994.jpg?w=740&t=st=1678295724~exp=1678296324~hmac=d43819b5a3fbe5776cd679d2f5d57cde36a046d1ee3ec3decf5cd0f54370c9b9"
+        img src = {Depo}
         alt = "investors"
-        height = "90%"
-        width = "100%"
+        height = "60%"
+        width = "60%"
         className = 'py-5' / > <
         /div> < /
         div > <

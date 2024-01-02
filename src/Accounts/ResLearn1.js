@@ -26,6 +26,9 @@ function ResLearn1(props) {
     const [convertedAmount, setConvertedAmount] = useState(0)
     const [id, setId] = useState()
     const [fundManagerCountry, setFundManagerCountry] = useState('')
+    const [interest, setInterest] = useState()
+    const [handler, setHandler] = useState()
+    const [description, setDescription] = useState()
     useEffect(() => {
         UserRequests().then(res => {
             setCountry(res.profile.country)
@@ -50,6 +53,20 @@ function ResLearn1(props) {
         const value = event.target.value;
         setFormData({...formData, [name]: value });
     };
+    function getOptionDetails(option){
+        axios.post(API_URL_GET_INVESTMENT_OPTION, option, {headers: {
+            "Authorization": `Token ${TOKEN}`,
+            "Content-Type": "application/json"
+        }}).then(function(res)
+            {
+                if(res){
+                    setInterest(res.data[0].interest);
+                    setHandler(res.data[0].handler);
+                    setDescription(res.data[0].description);
+                }
+            }
+        )
+    }
     const getTotalDeposit = () => {
         let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
         return total_deposit
@@ -164,6 +181,9 @@ function ResLearn1(props) {
         let verification = props.verification
         let investmentOption = formData.investment_option
         let riskProfileStatus = props.complete
+        if (step === 1){
+            getOptionDetails(investmentOption)
+        }
         if (step === 1 && deposit_category === "personal investment") {
             return ( <
                 h6 className = "my-2 text-end warning rounded-3"
@@ -263,8 +283,12 @@ function ResLearn1(props) {
         handleChange = { handleChange }
         getTab9 = { getTab9() }
         investmentOption = { props.option }
+        investment_option = {formData.investment_option}
         options = {props.options}
         setRiskProfile = {setRiskProfile}
+        interest = { interest }
+        description = { description }
+        handler = { handler }
         /> <
         Step2 currentStep = { step }
         handleChange = { handleChange }
@@ -376,6 +400,8 @@ function Step1(props) {
             })
         } < /
         Form.Select >
+        <span className="bolder">{props.investment_option} </span>
+        <h6><span className="bolder">Interest rate per year:</span> {props.interest}% <span className="mx-2"> | </span> <span className="bolder">Handler:</span> {props.handler}<span className="mx-2"> | </span> <span className="bolder">Description:</span> {props.description} </h6>
         < /
         div >
     );

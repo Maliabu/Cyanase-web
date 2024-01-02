@@ -161,7 +161,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
                     text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: ['#E91E63', '#252859', '#FF9800', '#b7b7b7'],
+            colors: ['#000', '#252859', '#ff8810', '#b7b7b7'],
 
         },
         series: result,
@@ -193,7 +193,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
     }
     const pendingWithdraws = () => {
         if (pendingWithdraw.length === 0) {
-            return ( < div className = 'p-lg-5 p-md-3 rounded-4 bg-light text-center grey-text mt-lg-5 mt-md-3' > < div className = 'd-flex flex-row justify-content-center' > <
+            return ( < div className = 'p-lg-5 p-md-3 rounded-4 bg-lighter text-center grey-text mt-lg-5 mt-md-3' > < div className = 'd-flex flex-row justify-content-center' > <
                 Image size = "large"
                 set = "broken"
                 className = 'mx-2 d-none d-lg-block grey-text' / > <
@@ -204,7 +204,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             }
             else return (
                 pendingWithdraw.map(withdraw => ( <
-                    div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' >
+                    div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' key={withdraw.id} >
                     <
                     div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
                     div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
@@ -221,9 +221,9 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = "col-9 rounded-4" >
             <
-            div className = 'row p-1 bg-light rounded-4' >
+            div className = 'row p-1 investments rounded-4' >
             <
-            div className = "p-lg-3 investment1 rounded-4 col text-center" >
+            div className = "p-lg-3 mx-2 rounded-4 col text-center" >
             <
             h5 className = "bolder mt-3" > Total Deposit < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
@@ -254,7 +254,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div >
 
             <
-            div className = "blue-darks p-lg-3 rounded-4 col mx-2 text-center" >
+            div className = "blue-darks p-lg-3 rounded-4 col text-center" >
             <
             h5 className = "bolder mt-3" > Total Networth < /h5> <
             div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
@@ -271,7 +271,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
             className = 'mx-5' / > Withdraw < /span></div > < /
             div > <
-            div className = 'bg-light' >
+            div className = 'bg-lighter' >
             {myGraphs()} <
             div className = 'rounded-4 mt-2 row d-none bg-white p-lg-4 p-md-2' >
             <
@@ -343,7 +343,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-4 p-lg-5 p-md-3 text-center" >
             <
-            h6 className = "p-3 rounded-3 warning text-center"
+            h6 className = "rounded-3 warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <

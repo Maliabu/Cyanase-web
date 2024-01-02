@@ -73,13 +73,14 @@ const ResHome = (props) => {
     }
     const groupArrayObjects = graph.reduce((group, obj) => {
         let sum = 0
-        const { name, datas, networths, id } = obj;
+        const { name, datas, networths, id, handler } = obj;
         if (!group[name]) {
             group[name] = {
                 name: name,
                 data: [],
                 networth: [],
                 investment_id: id,
+                handler: handler,
                 total: sum
             };
         }
@@ -183,7 +184,7 @@ const ResHome = (props) => {
         )
     }
     function subtractTwoLists(listA, listB) {
-        const mapA = new Map(listA.map(item => [item.name, { total: parseInt(item.total), data: item.data, investment_id: item.investment_id }])); // convert listA to map as { 'a' => { value: 2000, data: 'first' } }
+        const mapA = new Map(listA.map(item => [item.name, { total: parseInt(item.total), data: item.data, investment_id: item.investment_id, handler: item.handler }])); // convert listA to map as { 'a' => { value: 2000, data: 'first' } }
       //console.log(mapA)
         // Subtract values from List B from List A
         listB.forEach(itemB => {
@@ -192,11 +193,11 @@ const ResHome = (props) => {
           if (mapA.has(nameInB)) {
               
               const oldValue = mapA.get(nameInB).total;
-              mapA.set(nameInB, { total: oldValue - valueInB, data: mapA.get(nameInB).data, investment_id: mapA.get(nameInB).investment_id });
+              mapA.set(nameInB, { total: oldValue - valueInB, data: mapA.get(nameInB).data, investment_id: mapA.get(nameInB).investment_id, handler: mapA.get(nameInB).handler });
              //Updates the value associated with the "name" attribute in List A to the result of the subtraction
           }
         });
-       const resultList = Array.from(mapA, ([name, { total, data, investment_id }]) => ({ name, total, data, investment_id }));
+       const resultList = Array.from(mapA, ([name, { total, data, investment_id, handler }]) => ({ name, total, data, investment_id, handler }));
         return resultList;  // convert map to list, i.e { 'a' => { value: 2000, data: 'first' } } to [ { name: 'a', value: 1200 }]
     }
     let final_data = subtractTwoLists(results, result)
@@ -243,16 +244,16 @@ const ResHome = (props) => {
             )
         } else{
             return(
-                <div className='p-3 mt-2 investment rounded-4 border carousel slide'>
+                <div className='p-3 mt-2 investment rounded-4 shadow-sm carousel slide'>
                 <Carousel touch={true} interval={null} controls={false}>
                     {
                         final_data.map(option=>(
                             <Carousel.Item >
                                 <div className='row text-dark'>
-                                    <div className='col-5'><h5 className='bolder py-1'>{option.name}</h5><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> </div>
-                                    <div className='col-2 pt-4'><h5><Star size={16} set="bulk" className="active"/>{(option.data).length}</h5></div>
+                                    <div className='col-4'><h5 className='bolder pb-1'>{option.name}</h5><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> </div>
+                                    <div className='col-4 pt-2 text-center'><h5 className='m-0'><Star size={16} set="bulk" className="active m-0"/>{(option.data).length}</h5><h6>{option.handler}</h6></div>
                                     <
-                            div className = "col-5 text-end" ><div className='row'> <h6 className='m-0'>Total Deposit:<
+                            div className = "col-4 text-end" ><div className='row'> <h6 className='m-0'>Total Deposit:<
             div className = "d-flex flex-row flex m-0 justify-content-end" >< span className='bolder'> { getCurrency(country) } < /span>  <
             h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()

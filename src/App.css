@@ -51,21 +51,22 @@ body::-webkit-scrollbar {
 }
 
 .bg-lighter {
-    background-color: #efefef !important;
+    background-color: rgb(242, 242, 242) !important;
 }
 
 .bg-back {
     background-image: url("images/back.png");
     background-size: cover;
 }
+.back-drop{
+    background-color: rgba(255,255,255,0.4);
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+}
 .progress-sm{
     height: 0.5rem !important;
+    color: #282c34 !important;
   }
-
-/* .bg-lighter {
-    background-color: rgb(242, 244, 250) !important;
-} */
-
 .modals {
     border-top: 10px solid #ffb85c;
 }
@@ -118,6 +119,7 @@ body::-webkit-scrollbar {
     max-width: 40% !important;
     border-radius: 25% !important;
     padding: 0% !important;
+    background: none !important;
 }
 .modaling{
     padding-right: 0% !important;
@@ -187,19 +189,19 @@ body::-webkit-scrollbar {
 }
 
 .blue-dark {
-    background-color: #252859 !important;
+    background-color: #17193a !important;
     color: whitesmoke !important;
 }
 
 .blue-darks {
-    background: -webkit-linear-gradient(right, #161735, #161836be), url("images/Premium\ Photo\ _\ Businessman\ hand\ pointing\ finger\ to\ growth\ success\ finance\ business\ chart\ of\ metaverse\ technology\ financial\ graph\ investment\ diagram\ on\ analysis\ stock\ market\ background\ with\ digital\ economy\ exchange_.jpeg");
+    background: -webkit-linear-gradient(right, #161735, #1618368f), url("images/Premium\ Photo\ _\ Businessman\ hand\ pointing\ finger\ to\ growth\ success\ finance\ business\ chart\ of\ metaverse\ technology\ financial\ graph\ investment\ diagram\ on\ analysis\ stock\ market\ background\ with\ digital\ economy\ exchange_.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     color: whitesmoke !important;
 }
 
 .peach {
-    background-color: #ffefdb !important;
+    background-color: #dddbff !important;
     color: #282c34 !important;
 }
 
@@ -263,10 +265,10 @@ body::-webkit-scrollbar {
     background-position: right;
 }
 .sacco {
-    background-image: url("images/_.jpeg");
+    background-image: url("images/white-grey\ hills.png");
     background-position: right;
     background-repeat: no-repeat;
-    background-size: 30%;
+    background-size: cover;
 }
 
 .dollar {
@@ -365,9 +367,9 @@ body::-webkit-scrollbar {
     margin: auto !important;
 }
 .warning-learn-about {
-    color: rgb(255, 144, 18) !important;
-    border: 1px solid rgb(255, 144, 18) !important;
-    border-color: rgb(255, 144, 18) !important;
+    color: #ff8a00 !important;
+    border: 1px solid #ff8a00 !important;
+    border-color: #ff8a00 !important;
 }
 
 .status {
@@ -384,7 +386,7 @@ body::-webkit-scrollbar {
     color: rgb(255, 255, 255) !important;
     cursor: pointer !important;
     border: none !important;
-    background-color: rgb(255, 144, 18) !important;
+    background-color: #ff8a00 !important;
     box-shadow: 2px 2px 3px #e6e6e6;
     width:max-content !important;
     font-size: small !important;
@@ -397,7 +399,7 @@ body::-webkit-scrollbar {
     color: rgb(255, 255, 255) !important;
     cursor: pointer !important;
     border: none !important;
-    background-color: rgb(255, 144, 18) !important;
+    background-color: #ff8a00 !important;
     width:max-content !important;
     font-size: small !important;
     padding: 12px !important;
@@ -415,7 +417,7 @@ body::-webkit-scrollbar {
 .activer {
     color: #ffffff !important;
     cursor: pointer !important;
-    background-color: rgb(255, 144, 18) !important;
+    background-color: #ff8a00 !important;
     padding: 3px;
     padding-bottom: 14px;
     padding-left: 5px;
@@ -457,7 +459,6 @@ button {
     background-color: rgb(255, 255, 255) !important;
     /* box-shadow: 1px 2px 8px rgb(191, 191, 191); */
 }
-
 .bg-red {
     background-color: rgba(221, 153, 153, 0.153);
 }

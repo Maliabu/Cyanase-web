@@ -21,6 +21,9 @@ function Learn1(props) {
     const [convertedAmount, setConvertedAmount] = useState(0)
     const [id, setId] = useState()
     const [fundManagerCountry, setFundManagerCountry] = useState('')
+    const [interest, setInterest] = useState()
+    const [handler, setHandler] = useState()
+    const [description, setDescription] = useState()
     const [formData, setFormData] = useState({
         "payment_means": 'online',
         "deposit_amount": 0,
@@ -39,6 +42,20 @@ function Learn1(props) {
         const value = event.target.value;
         setFormData({...formData, [name]: value });
     };
+    function getOptionDetails(option){
+        axios.post(API_URL_GET_INVESTMENT_OPTION, option, {headers: {
+            "Authorization": `Token ${TOKEN}`,
+            "Content-Type": "application/json"
+        }}).then(function(res)
+            {
+                if(res){
+                    setInterest(res.data[0].interest);
+                    setHandler(res.data[0].handler);
+                    setDescription(res.data[0].description);
+                }
+            }
+        )
+    }
     const getTotalDeposit = () => {
         let total_deposit = parseFloat(getFee()) + parseFloat(formData.deposit_amount)
         return total_deposit
@@ -112,7 +129,7 @@ function Learn1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = " text-start warning rounded-4"
+                h6 className = " text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -155,9 +172,12 @@ function Learn1(props) {
         let verification = props.verification
         let investmentOption = formData.investment_option
         let riskProfileStatus = props.complete
+        if (step === 1){
+            getOptionDetails(investmentOption)
+        }
         if (step === 1 && deposit_category === "personal" && verification === true) {
             return ( <
-                h6 className = " my-2 text-end warning rounded-4"
+                h6 className = " my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -177,7 +197,7 @@ function Learn1(props) {
             if (riskProfileStatus === "Complete"){
                 return (
                     <
-                h6 className = " my-2 text-end warning rounded-4"
+                h6 className = " my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Next <
@@ -194,7 +214,7 @@ function Learn1(props) {
         }
         if (step === 6) {
             return ( <
-                h6 className = " my-2 text-end warning rounded-4"
+                h6 className = " my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { this._afterSacco } >
                 Next <
@@ -203,7 +223,7 @@ function Learn1(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = " my-2 text-end bk-warning rounded-4"
+                h6 className = " my-2 text-end bk-warning rounded-3"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -212,7 +232,7 @@ function Learn1(props) {
         }
         if (step === 3) {
             return ( <
-                h6 className = " my-2 text-end warning rounded-4"
+                h6 className = " my-2 text-end warning rounded-3"
                 onClick = { () => validate1(minimum, id, fundManagerCountry) } >
                 Next <
                 /h6>        
@@ -220,7 +240,7 @@ function Learn1(props) {
         }
         if (step < 4) {
             return ( <
-                h6 className = " my-2 text-end warning rounded-4"
+                h6 className = " my-2 text-end warning rounded-3"
                 onClick = { _next } >
                 Next <
                 /h6>        
@@ -252,6 +272,10 @@ function Learn1(props) {
         getTab9 = { getTab9() }
         investmentOption = { props.option }
         options = {props.options}
+        interest = { interest }
+        description = { description }
+        handler = { handler }
+        investment_option = {formData.investment_option}
         /> <
         Step2 currentStep = { step }
         handleChange = { handleChange }
@@ -361,6 +385,8 @@ function Step1(props) {
             })
         } < /
         Form.Select >
+        <span className="bolder">{props.investment_option} </span>
+        <h6><span className="bolder">Interest rate per year:</span> {props.interest}% <span className="mx-2"> | </span> <span className="bolder">Handler:</span> {props.handler}<span className="mx-2"> | </span> <span className="bolder">Description:</span> {props.description} </h6>
         < /
         div >
     );

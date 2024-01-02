@@ -173,7 +173,7 @@ const MyHome = () => {
         /div>   < /
         div >
         <
-        div className = 'col-2 d-none d-md-block d-lg-block bg-light' > <
+        div className = 'col-2 d-none d-md-block d-lg-block bg-lighter' > <
         div > <
         img src = { Header }
         width = '60%'
@@ -339,7 +339,7 @@ const MyHome = () => {
         <
         div className = "row pt-4 mx-3" >
         <
-        div className = 'col-8 rounded-3 bg-light' > <
+        div className = 'col-8 rounded-3 bg-lighter' > <
         h6 className = 'mt-3' > <
         FaLightbulb size = "15"
         className = 'position-relative active' / > < span className = 'bolder' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
@@ -356,7 +356,7 @@ const MyHome = () => {
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <
-        div className = "col-lg-3 col-md-4 rounded bg-light text-center" >
+        div className = "col-lg-3 col-md-4 rounded bg-lighter text-center" >
         <
         div className = 'flex-row d-flex py-1 my-2 justify-content-center' > <
         TabNavItem title = "API Account"
