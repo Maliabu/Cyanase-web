@@ -261,7 +261,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div >
 
             <
-            div className = "blue-darks p-lg-3 rounded-4 col text-center" >
+            div className = "card p-lg-3 rounded-4 col text-center" >
             <
             h6 className = "small text-start" > Total <br/> Networth < /h6> <
             div className = "d-flex flex-row flex justify-content-center my-3" > { getCurrency(country) } <
@@ -376,7 +376,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()
-        } < /div><div className='blue-darks p-2 rounded-4'> <
+        } < /div><div className='card p-2 rounded-4'> <
         h5 className = " mt-4" > Your Statistics < /h5>    <
         div className = "row px-2 justify-content-center" >
             <

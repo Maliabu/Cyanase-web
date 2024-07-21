@@ -40,6 +40,7 @@ const Personal = ({...props }) => {
         const [pendingWithdraw, setPendingWithdraw] = useState([])
         const [investmentWithdraw, setInvestmentWithdraw] = useState([])
         const [holdCreated, setHoldCreated] = useState("");
+        const [goalPicture, setPicture] = useState("")
         const [show3, setShow3] = useState(false);
         const handleClose3 = () => setShow3(false);
         const handleShow3 = () => setShow3(true);
@@ -165,7 +166,7 @@ const Personal = ({...props }) => {
                 }
             }
         }
-        function getId(id, name, amount, deposit, networth, created, status) {
+        function getId(id, name, amount, deposit, networth, created, status, picture) {
             setHoldId(id)
             setHoldName(name)
             setHoldAmount(amount)
@@ -173,7 +174,12 @@ const Personal = ({...props }) => {
             setHoldCreated(created)
             setHoldNetworth(networth)
             setGoalStatus(status)
+            setPicture(picture)
             handleShow3()
+        }
+        function onlyId(id) {
+            setHoldId(id)
+            handleShow()
         }
         // let list1 = [{"name":"a", "total":3000, "data": [1,2]},{"name":"b", "total":1500, "data": [2,3,5]},{"name":"c", "total":5600, "data":[]}]
         // let list2 = [{"name":"a", "total":500},{"name":"b", "total":300}]
@@ -229,15 +235,16 @@ const Personal = ({...props }) => {
                     h6 > < /div > )
                 }
                 else return (
-                    nextResult.map(option => ( <
-                        div className = "row mt-2 p-3 shadow-sm bg-white rounded-4" >
+                    nextResult.map(option => (
+                        <div className="rounded-4 card mt-2">
+                        <div className = "row p-3" >
                         <div className="col-2"><img src={option.logo} width={30} height={40} alt="logo"/></div>
-                        <div className="col-6 text-start">< h6 className="bolder mt-2"> { option.name }<p>{option.handler}</p> < /h6>< h6 className="small"><span className="small">Networth:</span><br/><
-        div className = "d-flex flex-row flex" > { getCurrency(country) } <
-        h5 className = "px-2 font-lighter" > { (option.total).toLocaleString() } < /h5></div > < /h6></div>
+                        <div className="col-6 text-end"><h6 className="bolder"> { option.name }<p>{option.handler}</p> </h6><h6 className="small py-3"><span className="small">Networth:</span><br/>
+                        <div className = "d-flex flex-row flex justify-content-end" > { getCurrency(country) } 
+                        <h3 className = "font-lighter" > { (option.total).toLocaleString() } </h3></div> </h6></div>
                         <div className="col-4 text-end">
-                        <h6 className=" bk-warning2 rounded-3 small" onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}><Download className="mx-2 d-none"/>Withdraw</h6></div>
-                        </div> ))
+                        <h6 className=" bk-warning2 rounded-3 small" onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>Withdraw</h6></div>
+                        </div></div> ))
                 )
 
             }
@@ -253,16 +260,14 @@ const Personal = ({...props }) => {
                     h6 > < /div > )
                     }
                     else return (
-                        pendingWithdraw.map(withdraw => ( <div className=""><
-                            div className = 'row p-2 mx-3 mt-1 bg-white rounded-3' >
-                            <
-                            div className = 'col-4 text-start' >< h6><span className="small"> { withdraw.currency }</span> { (withdraw.withdraw_amount).toLocaleString() } < /h6> < /div ><div className="col-3 text-center">
+                        pendingWithdraw.map(withdraw => ( <div className="">
+                        <div className = 'row p-2 mx-3 mt-1 card rounded-3' >
+                            <div className = 'col-4 text-start' ><h6><span className="small"> { withdraw.currency }</span> { (withdraw.withdraw_amount).toLocaleString() } </h6> </div><div className="col-3 text-center">
                                 <h6 className="text-start"><span className="small bolder">option </span><br/><span>{withdraw.investment_option} </span></h6>
                             </div><div className="col-4 text-center">
                                 <h6 className="text-start"><span className="small bolder">handler </span><br/><span>{withdraw.handler} </span></h6>
-                            </div> <
-                            div className = 'col-1 text-end bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
-                            div ></div>
+                            </div> 
+                            <div className = 'col-1 text-end bolder' > <h6> { withdraw.created } </h6></div> </div ></div>
                         ))
                     )
         
@@ -270,7 +275,7 @@ const Personal = ({...props }) => {
             const myGoals = () => {
                 if(span.length === 0){
                     return(
-                        <div className='rounded-4 shadow-sm light-res-homey'>
+                        <div className='rounded-4 bg-white'>
                         <img src={Goals} width="100%" height="100%" alt="goals"/>
                         <div className = " py-5 text-center" >
                         <h4 className = "bolder" > Goal Investing </h4>  
@@ -281,23 +286,24 @@ const Personal = ({...props }) => {
                     )
                 } else {return (
                 span.map(goal => ( <
-                    div className = "py-2 px-3 shadow-sm light-res-homey rounded-4 mt-2"
+                    div className = "py-2 px-3 bg-white rounded-4 mt-2"
                     key = { goal.goal_id } > <
                     div className = "d-flex flex-row" > <
                     span className = "mt-2" > <
                     AddUser className = "p-2 border rounded-circle"
                     size = "large" / > < /span>  <
                     h6 className = "mx-4 mt-2 hover-goal-name" onClick = {
-                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created, goal.goal_status)
+                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created, goal.goal_status, goal.goal_picture)
                     }> < span className="bolder"> {
                         (goal.goal_name)
                     } < /span><br/ > < p className="small"> created {
                         (goal.created).slice(0, 10)
                     } < /p >  < /
                     h6 > < /
-                    div >
+                    div ><div className = "goal-image" onClick={() => onlyId(goal.goal_id)}>
+                    <img src = {goal.goal_picture} width="100%" height="100%" className = "object-fit-cover rounded-4" alt = "goal" /> </div> 
                     <
-                    p className="small m-0"><span className="d-none">Progress: {
+                    p className="small mt-2"><span>Progress: {
                         progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                     } %</span>
                     <
@@ -449,7 +455,7 @@ const Personal = ({...props }) => {
                 div > 
                 
                 <
-                    div className = "col-4 blue-darks rounded-4 pt-3" >  <
+                    div className = "col-4 bg-light rounded-4 pt-3" >  <
                     div className = "row mx-1" >
                      <
                     div className = "text-end col-5 text-end" > <
@@ -472,6 +478,7 @@ const Personal = ({...props }) => {
                 created = { holdCreated }
                 country = { country }
                 networth = { holdNetworth }
+                goalPicture = {goalPicture}
                 phone = { phone }
                 option = { investmentOption }
                 banks = {banks}

@@ -23,6 +23,7 @@ import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
 import MultiCarousel from '../MultiCarousel';
 import MultiCarousel2 from '../MultiCarousel2';
+import CIPING from '../images/CIPNG.png'
 import { FaChartLine, FaCheckDouble, FaChevronCircleRight, FaGoogleWallet, FaRegLightbulb, FaSearch, FaWallet} from 'react-icons/fa';
 import Portfolio from '../Accounts/Portfolio'
 import { Home, Wallet, Setting, Download, AddUser, Chart} from 'react-iconly';
@@ -335,29 +336,30 @@ const ResHome = (props) => {
             alt = "investors"/> </div> 
             </div>
             <div className='mx-2 p-3 rounded-4 card' onClick = { handleTab5}>
-            <h4 className = 'bolder text-white' > Invest <p>Deposit Wallet</p> </h4>
-            <div className = 'row' > 
-            <div className = 'col-3 text-start' > <div className='mb-3 bolder d-none'><Wallet/></div>
+            <div className='row mx-1'>
+                <div className='col-11 p-0'>
+                <h4 className = 'bolder text-white' > Invest <p>Deposit Wallet</p> </h4>
+                <h6 className='small text-end mt-3 mb-0'>Total Networth 
+            <div className = "d-flex flex-row flex justify-content-end" > <p className='mx-3'> { getCurrency(country) } </p> 
+            <h4 className = "text-white" > { networthy().toLocaleString() } </h4></div ></h6>
+                </div>
+                <div className='col-1'>
+                <img src = {CIPING} width={15} height={15}
+            alt = "investors"/>
+                </div>
+            </div>
+            <div className = 'row' >
+            <div className = 'col-3' >
+            <div className=' text-center rounded-4 p-2'>
             <span>
-            <FaGoogleWallet/> <FaWallet/></span></div> 
-            <div className = 'col-9 px-2 rounded-4' >
+            <FaGoogleWallet/> <FaWallet/></span></div></div>
+            <div className = 'col-9 rounded-4' >
+            <div className=' px-2 mt-2'>
             <div className = 'd-flex justify-content-end mx-1' >
             <div className = ' text-end pt-2' > 
             <h6 className='small m-0'>Total Deposit 
-            <div className = "d-flex flex-row flex justify-content-end" > <p> { getCurrency(country) } </p> <h3 className = "px-1 bolder" > { deposit.toLocaleString() }  
-            </h3 > </div ></h6> <h6 className='small mt-2 mb-0'>Total Networth 
-            <div className = "d-flex flex-row flex justify-content-end" > <p > { getCurrency(country) } </p> 
-            <h3 className = "px-1 bolder" > { networthy().toLocaleString() } </h3></div ></h6> </div > 
-            <img src={Grph} alt='graph' width="150" height="100" className='d-none'/> 
-            <Chart size = "15" set = 'broken'
-            onClick = {
-                () => { setGoalSetting(true) }
-            }
-            className = ' mx-2 icon-padding active warning1 d-none' / > 
-            <h6 className = 'mt-2 d-none rounded-3 p-3 px-5 bk-warning '
-            onClick = {
-                () => { setGoalSetting(true) }
-            } > Goals </h6> </div> </div > </div ></div>
+            <div className = "d-flex flex-row flex justify-content-end" > <p className='mx-3'> { getCurrency(country) } </p> <h1 > { deposit.toLocaleString() }  
+            </h1 > </div ></h6>  </div > </div> </div > </div ></div></div>
             <div className = "bg-lighter my-2 py-2 rounded-4">
             <div className='row m-1'>
             <div className='col-8'></div>
@@ -367,25 +369,25 @@ const ResHome = (props) => {
             <div>
                 <div className='row justify-content-center m-2 g-2'>
                     <div className='col'>
-                    <div className=' text-center p-2 bg-white shadow-sm rounded-3'>
+                    <div className=' text-center p-2 bg-white rounded-3'>
                         <span className='small'>deposits</span>
                         <h4 className='bolder'>{ depositProgress.length }</h4>
                     </div>
                     </div>
                     <div className='col'>
-                    <div className=' text-center p-2 bg-white shadow-sm rounded-3'>
+                    <div className=' text-center p-2 bg-white rounded-3'>
                     <span className='small'>withdraws</span>
                     <h4 className='bolder'>{ wwithdraws() }</h4>
                     </div></div>
                     <div className='col'>
-                    <div className=' text-center p-2 bg-white shadow-sm rounded-3'>
+                    <div className=' text-center p-2 bg-white rounded-3'>
                     <span className='small'>investments</span>
                     <h4 className='bolder'>{ results.length }</h4>
                     </div></div>
                 </div>
             </div>
             <div className = 'd-flex mx-1' > <FaRegLightbulb size = "15" className = 'mt-2 mx-2' / >
-            <div className = 'rounded-3 mb-2 wider shadow-sm bg-white light-res-homey' >
+            <div className = 'rounded-3 mb-2 wider bg-white light-res-homey' >
             <h6 className = "mx-4 mt-2" > Tips: <p className='bolder' > Dont save your money, invest with Cyanase </p></h6></div > 
             </div ></div>
             <div className=' m-2'>
