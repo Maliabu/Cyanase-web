@@ -145,7 +145,7 @@ function ResGoals1(props) {
         }
         if (step === 1 || step === 6) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => _next()
                 } >
@@ -154,7 +154,7 @@ function ResGoals1(props) {
         }
         if (step === 3) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate2()
                 } >
@@ -163,7 +163,7 @@ function ResGoals1(props) {
         }
         if (step === 2) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate1()
                 } >
@@ -172,7 +172,7 @@ function ResGoals1(props) {
         }
         if (step === 4) {
             return ( <
-                h6 className = " py-3 text-end my-2 warning rounded-3"
+                h6 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => _next()
                 } >
@@ -181,7 +181,7 @@ function ResGoals1(props) {
         }
         if (step === 5) {
             return ( <
-                h6 className = " py-3 my-2 text-end warning rounded-3"
+                h6 className = " my-2 text-end warning rounded-3"
                 onClick = {
                     () => _next()
                 } >
@@ -193,7 +193,7 @@ function ResGoals1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "py-3 text-start warning rounded-3"
+                h6 className = " text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <

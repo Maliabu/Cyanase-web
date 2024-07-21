@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, GetInvestmentOptionsRequests, RequestRiskAnalysisPercentages, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests, UserVerificationRequests} from '../Api/MainRequests'
+import { MainRequests, PersonalRequests, GetInvestmentClassesRequests, RequestRiskAnalysisPercentages, UserRequests, GetRiskProfile, PendingWithdrawRequests, WithdrawRequests, UserVerificationRequests} from '../Api/MainRequests'
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Learn from '../Accounts/Learn';
 import Learn1 from '../Accounts/Learn1';
 import Withdraw from '../Accounts/Withdraw'
-import { Image, Filter } from 'react-iconly';
+import { Image, Filter, Wallet } from 'react-iconly';
 import { FaHandHoldingUsd } from 'react-icons/fa';
 import { getCurrency } from '../payment/GetCurrency';
 
@@ -36,20 +36,21 @@ const Main = ({ id, activeTab, children, ...props }) => {
     const [depositProgress, setDepositProgress] = useState([]);
     const [networth, setDepositNetworth] = useState(0);
     const [dollarNetworth, setDollarNetworth] = useState(0);
-    const [investmentOption, setinvestmentoption] = useState("Automatic Asset Allocation")
+    const [investmentOption, setinvestmentoption] = useState("Automatic")
     const [complete, setComplete] = useState("Incomplete");
-    let thisYear = new Date().getFullYear()
+    // let thisYear = new Date().getFullYear()
     let depos = []
     let cart = []
     let categories
     let amount
+    if(graph.length > 0){
     graph.map(depo => {
         amount = depo.deposit_amount / 1000
         categories = depo.investment_option
         cart.push(categories)
         depos.push(amount)
         return graph
-    })
+    })}
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
     const handleClose2 = () => setShow2(false);
@@ -96,7 +97,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         RequestRiskAnalysisPercentages().then(res=>{
             setRiskAnalysisPecentages(res)
         })
-        GetInvestmentOptionsRequests().then(res => {
+        GetInvestmentClassesRequests().then(res => {
             setOptions(res)
         });
         GetRiskProfile().then(res => {
@@ -106,9 +107,10 @@ const Main = ({ id, activeTab, children, ...props }) => {
         });
     }, []);
     let depositTotal = 0
+    if(span.length > 0){
     span.map(goal => (
         depositTotal += parseInt(goal.deposit[0])
-    ))
+    ))}
     const wwithdraws = () => {
         if(withdraws.length === 0){
             return 0
@@ -145,10 +147,13 @@ const Main = ({ id, activeTab, children, ...props }) => {
             chart: {
                 id: 'apexchart-example'
             },
+            dataLabels: {
+                enabled: false
+            },
             xaxis: {
                 name: '2023',
                 title: {
-                    text: 'Your Investment Activity for ' + thisYear
+                    text: 'Your Investment Activity'
                 },
                 categories: dates,
                 labels: {
@@ -157,11 +162,13 @@ const Main = ({ id, activeTab, children, ...props }) => {
                 // categories: ['jun', 'jul', 'aug'],
             },
             yaxis: {
+                show: false,
                 title: {
                     text: 'In Thousands(000) of ' + getCurrency(country)
                 }
             },
-            colors: ['#000', '#252859', '#ff8810', '#b7b7b7'],
+            // colors: ['#000', '#252859', '#ff8810', '#b7b7b7'],
+            colors: ['#E91E63', '#252859', '#FF9800', '#b7b7b7'],
 
         },
         series: result,
@@ -203,8 +210,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
                 h6 > < /div > )
             }
             else return (
-                pendingWithdraw.map(withdraw => ( <
-                    div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' key={withdraw.id} >
+                pendingWithdraw.map((withdraw, id) => ( <
+                    div className = 'row p-2 mx-2 mt-2 bg-white rounded-2' key={id} >
                     <
                     div className = 'col-7 text-start' > < h6 > { withdraw.currency } { withdraw.withdraw_amount } < /h6> < /div > <
                     div className = 'col-5 text-end grey-text bolder' > < h6 > { withdraw.created } < /h6>< /div > < /
@@ -214,24 +221,24 @@ const Main = ({ id, activeTab, children, ...props }) => {
 
         }
         return ( <
-            div className = "p-3 scroll-y" >
+            div className = "p-3 mt-3 scroll-y" >
             <
             div className = " d-none d-md-block d-lg-block" > <
             div className = "row" >
             <
             div className = "col-9 rounded-4" >
             <
-            div className = 'row p-1 investments rounded-4' >
+            div className = 'row rounded-4' >
             <
-            div className = "p-lg-3 mx-2 rounded-4 col text-center" >
+            div className = "p-lg-3 mx-2 rounded-4 bg-white shadow-sm col text-center" >
             <
-            h5 className = "bolder mt-3" > Total Deposit < /h5> <
-            div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+            h6 className = "text-start small" >Total <br/> Deposit < /h6> <
+            div className = "d-flex flex-row my-3 flex justify-content-center" > { getCurrency(country) } <
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
             div className = ' my-3 text-center' > <
-            span className = 'bk-warning rounded-3 px-5'
-            onClick = { handleShow3 } > Deposit < /span> </div >
+            span className = 'bk-warning2 rounded-3 px-5'
+            onClick = { handleShow3 } ><Wallet className="mx-2 d-none"/> Deposit < /span> </div >
             <
             Modal show = { show3 }
             onHide = { handleClose3 }
@@ -256,8 +263,8 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = "blue-darks p-lg-3 rounded-4 col text-center" >
             <
-            h5 className = "bolder mt-3" > Total Networth < /h5> <
-            div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
+            h6 className = "small text-start" > Total <br/> Networth < /h6> <
+            div className = "d-flex flex-row flex justify-content-center my-3" > { getCurrency(country) } <
             h2 className = "px-2 font-lighter" > { networthy().toLocaleString() } < /h2></div >
             <
             img src = { Networths }
@@ -271,7 +278,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
             className = 'mx-5' / > Withdraw < /span></div > < /
             div > <
-            div className = 'bg-lighter' >
+            div >
             {myGraphs()} <
             div className = 'rounded-4 mt-2 row d-none bg-white p-lg-4 p-md-2' >
             <
@@ -333,17 +340,17 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             /div>  < /
             div > <
-            div className = "row rounded-25 w-100" >
+            div className = "row rounded-4 bg-light w-100" >
             <
-            div className = "col-8 mt-4" > <
-            h4 className = "bolder" > Welcome to Cyanase < /h4>  <
-            h6 > Investments products, loans, sacco groups, investment clubs all in one package.Including our API
-            for integration < /h6> <h6>What products are you looking for? < /
-            h6 > < /
+            div className = "col-8 p-5" > <
+            h4 > Welcome to Cyanase  <
+            p className='small'> Investments products, loans, sacco groups, investment clubs all in one package.Including our API
+            for integration < /p> <p>What products are you looking for? < /
+            p >< /h4>  < /
             div > <
-            div className = "col-4 p-lg-5 p-md-3 text-center" >
+            div className = "col-4 text-center py-3" >
             <
-            h6 className = "rounded-3 warning text-center"
+            h6 className = "rounded-3 bk-warning text-center px-5"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <
@@ -369,20 +376,12 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()
-        } < /div><div className='blue-darks p-2 mt-2 rounded-4'> <
-        h5 className = "bolder mt-4" > Your Statistics < /h5>    <
-        div className = "d-flex flex-row p-2 flex justify-content-center" >
+        } < /div><div className='blue-darks p-2 rounded-4'> <
+        h5 className = " mt-4" > Your Statistics < /h5>    <
+        div className = "row px-2 justify-content-center" >
             <
-            div className = "w-25" > < h6 > { depositProgress.length } < /h6>< /div > <
-            div className = "w-25 d-none" > < h6 > 0 < /h6> < /div > <
-            div className = "w-25" > < h6 > { wwithdraws() } < /h6> < /div > < /
-        div >
-            <
-            div className = "d-flex flex-row flex justify-content-center" >
-            <
-            div className = "w-25 mx-2" > < h6 > Deposits < /h6> < /div > <
-            div className = "w-25 d-none" > < h6 > Loans < /h6> < /div > <
-            div className = "w-25" > < h6 > Withdraws < /h6> < /div > < /
+            div className = "col" > < h6> { depositProgress.length } <p className='small'>Deposits</p> < /h6>< /div > <
+            div className = "col" > < h6> { wwithdraws() } <p className='small'>Withdraws</p>< /h6> < /div > < /
         div >
             <
             img src = { Networths }
@@ -391,7 +390,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         height = '10%'
         alt = "investors" / >
             <
-            h6 className = "pt-5 bolder d-none" > Total Deposits < /h6> <
+            h6 className = "pt-5 d-none" > Total Deposits < /h6> <
         div className = "d-flex d-none flex-row flex justify-content-center" > { getCurrency(country) } <
             h3 className = "px-2 font-lighter" > { networth.toLocaleString() } < /h3></div >
             <
@@ -401,7 +400,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         height = '10%'
         alt = "investors" / >
             <
-            h6 className = "pt-5 bolder" > Total Deposits < /h6>  <
+            h6 className = "pt-5 small" > Total Deposits < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
             h3 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h3></div >
             <
@@ -411,7 +410,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
         height = '10%'
         alt = "investors" / >
             <
-            h6 className = "pt-5 bolder" > Total Withdraws < /h6>  <
+            h6 className = "pt-5 small" > Total Withdraws < /h6>  <
         div className = "d-flex flex-row flex justify-content-center" > { getCurrency(country) } <
             h3 className = "px-2 font-lighter" > {
                 totalWithdraw.toLocaleString()

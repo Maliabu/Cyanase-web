@@ -5,10 +5,10 @@ const TabNavItem = ({ id, title, activeTab, setActiveTab }) => {
     const handleClick = () => {
         setActiveTab(id);
     };
-    return ( < div className = "px-2 tab-nav lighter" >
+    return ( < div className = "tab-nav" >
         <
         h6 onClick = { handleClick }
-        className = { activeTab === id ? "status p-2 rounded-3" : "" } > { title } <
+        className = { activeTab === id ? "active bolder" : "bolder" } > { title } <
         /h6> < /
         div >
     );

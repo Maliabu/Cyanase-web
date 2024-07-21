@@ -8,7 +8,7 @@ import ResContactUs from '../Accounts/ResContactUs';
 import ResFAQs from '../Accounts/ResFAQs';
 import ResRiskProfile from '../Accounts/ResRiskProfile';
 import Logout from '../Accounts/Logout';
-import { Notification, User, Call, Chat, Chart } from 'react-iconly';
+import { Notification, User, Call, Chat, Chart, Lock } from 'react-iconly';
 
 const ResSettings = (props) => {
     const [accountSetting, setAccountSetting] = useState(false);
@@ -159,7 +159,7 @@ const ResSettings = (props) => {
         <
         /
         div >
-        <h6 className=" rounded-3 mt-1 px-5 bk-warning text-center" onClick={()=>{setLogout(true)}}>Logout</h6>
+        <h6 className=" rounded-3 mt-1 p-3 bg-lighter mx-5 text-center hover-goal-name" onClick={()=>{setLogout(true)}}><Lock/><h6>Logout</h6></h6>
         <
         p className = "font-light p-3 text-center" > All Rights Reserved < br / > @CyanaseInvestors{new Date().getFullYear()} < /p> < /
         div > 

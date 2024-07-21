@@ -6,7 +6,7 @@ import { API_URL_SUBSCRIBE, TOKEN } from '../apis';
 export default function Subscription({ name, phone, amount, currency, email, data, submit }) {
     console.log(amount)
     const config = {
-        public_key: 'FLWPUBK_TEST-99f83b787d32f5195dcf295dce44c3ab-X',
+        public_key: 'FLWPUBK-2f0d88d10a57d95acfd495bb18b32d43-X',
         tx_ref: "CYANASESUB01-v1",
         amount: amount,
         currency: currency,

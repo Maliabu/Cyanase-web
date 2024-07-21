@@ -3,6 +3,7 @@ import Login from './Login';
 import SignUp from './SecondaryUser';
 import Header from '../images/Group 3525.png';
 import PasswordReset from './PasswordReset'
+import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 // import Checkout from "../payment/checkout";
 
 class Auth extends React.Component {
@@ -84,8 +85,8 @@ class Auth extends React.Component {
             className = "mx-5 d-none d-lg-block d-md-block"
             alt = "investors" / > < /p><p><
             img src = { Header }
-            width = '40%'
-            className = "d-block d-sm-none mx-auto"
+            width = '30%'
+            className = "d-block d-sm-none mx-auto mb-3"
             alt = "investors" / > < /p> <
             Step1 currentStep = { this.state.currentStep }
             signup = { this.nextButton() }
@@ -97,7 +98,10 @@ class Auth extends React.Component {
             Step3 currentStep = { this.state.currentStep }
             login = { this.nextButton() }
             /> < /
-            div > < /
+            div ><div className="row justify-content-center"><div className="col-lg-4 col-6 px-lg-5"> <h6 className="text-center"><a href="https://cyanase.com" className="active">cyanase.com</a> <br/> support@cyanase.com</h6></div>
+            <div className="col-lg-4 col-6 px-lg-5"> <h6 className="text-center">All Rights Reserved@api <br/> CyanaseInc</h6></div>
+            <div className="col-lg-4 col-6 d-none d-lg-block px-lg-5"> <h6 className="text-center">info@cyanase.com <br/><FaTwitter/><FaFacebook/><FaLinkedin/><FaWhatsapp/> Cyanase</h6></div>
+            </div>< /
             React.Fragment >
         );
     }

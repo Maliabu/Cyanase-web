@@ -127,7 +127,7 @@ function Goal1(props) {
     const submitButton = () => {
         if (step === 7) {
             return ( <
-                div className = 'mx-3 text-center rounded-4' > <
+                div className = 'mx-3 text-center rounded-3' > <
                 h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
@@ -170,7 +170,7 @@ function Goal1(props) {
         }
         if (step === 1 || step === 4 || step === 5 || step === 6) {
             return ( <
-                h6 className = "text-end my-2 warning rounded-4"
+                h6 className = "text-end my-2 warning rounded-3"
                 onClick = {
                    ()=> _next()
                 } >
@@ -179,7 +179,7 @@ function Goal1(props) {
         }
         if (step === 2) {
             return ( <
-                h6 className = "text-end my-2 warning rounded-4"
+                h6 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate1()
                 } >
@@ -188,7 +188,7 @@ function Goal1(props) {
         }
         if (step === 3) {
             return ( <
-                h6 className = " text-end my-2 warning rounded-4"
+                h6 className = " text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate2()
                 } >
@@ -200,7 +200,7 @@ function Goal1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = " text-start warning rounded-4"
+                h6 className = " text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -279,7 +279,7 @@ function Step2(props) {
     return ( < div className = "text-center p-3" >
         <
         h4 className = "bolder" > Add a Goal < /h4> <
-        div className = "row p-1 my-3 bg-lighter rounded-4" > <
+        div className = "row p-1 my-3 rounded-4" > <
         Form.Group className = "mb-3 bg-white rounded-4 p-3 px-5" >
         <
         Form.Label > < h6 > What is your Goal ? < /h6> < /Form.Label > <
@@ -327,7 +327,7 @@ function Step3(props) {
     return ( <
         div className = "text-center p-3" > < h6 className = "" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
             default as monthly) < /h6> <
-        div className = "row bg-lighter p-1 px-3 rounded-25 my-5" >
+        div className = "row bg-light p-1 px-3 rounded-25 my-5" >
         <
         Form.Group className = "mb-5 bg-white rounded-4 p-3 px-5" >
         <
@@ -369,7 +369,7 @@ function Step6(props) {
         key = "radio" >
         <
         div key = { `default-radio` }
-        className = "bg-lighter p-1 rounded-4" >
+        className = " p-1 rounded-4" >
         <div className="bg-white p-3 rounded-4">
         <
         h5 className = "font-lighter text-start" > AUTO DEPOSIT < /h5>  <
@@ -406,7 +406,7 @@ function Step4(props) {
         div className = "text-center pt-3" > <
         h4 className = "bolder" > Deposit Rate < /h4> <
         h6 className = "mt-2" > How often do you want to deposit to this goal < /h6> <
-        div className = " my-3 bg-lighter p-1 rounded-4"
+        div className = " my-1 p-1 rounded-4"
         key = "radio" >
         <
         div key = { `default-radio` }
@@ -421,7 +421,7 @@ function Step4(props) {
         value = "weekly"
         required id = "default-radio" /
         ></div>
-        <div className="bg-white p-3 mt-3 rounded-4">
+        <div className="bg-white p-3 rounded-4">
         <
         Form.Check label = "MONTHLY"
         name = "deposit_rate"

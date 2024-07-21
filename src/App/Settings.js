@@ -20,7 +20,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         )
     }
     return ( <
-        div className = "scroll-y mx-3" >
+        div className = "scroll-y m-3" >
         <
         h3 > General Account Settings < /h3> <
         div className = "row mt-3 p-2 px-3 border-bottom" > <

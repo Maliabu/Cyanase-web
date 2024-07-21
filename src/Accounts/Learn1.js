@@ -1,7 +1,6 @@
 import React from "react";
-import { Wallet } from 'react-iconly';
+import { ArrowRight, InfoCircle } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
-import DepositPic from '../images/deposit.png';
 import Profile1 from '../images/Ellipse 178.png';
 import Button from "react-bootstrap/esm/Button";
 import { preloader, autoClickable } from "../Api/RequestFunctions";
@@ -11,25 +10,36 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { ValidateForms } from "../Auth/ValidateForms";
 import axios from "axios";
-import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
+import { API_URL_GET_INVESTMENT_OPTION, TOKEN, API_URL_GET_INVESTMENT_CLASS_OPTIONS } from "../apis";
 import Conversion from "../payment/conversion";
+import ResRiskProfile from './ResRiskProfile'
+import { Consumer } from "../MyContext";
+import { FaArrowAltCircleDown, FaArrowAltCircleRight, FaArrowDown, FaArrowRight } from "react-icons/fa";
 
 function Learn1(props) {
     const globalRefId = "";
     const [step, setStep] = useState(1)
     const [minimum, setMinimum] = useState(0)
     const [convertedAmount, setConvertedAmount] = useState(0)
+    const [riskProfile, setRiskProfile] = useState(false);
     const [id, setId] = useState()
     const [fundManagerCountry, setFundManagerCountry] = useState('')
     const [interest, setInterest] = useState()
     const [handler, setHandler] = useState()
     const [description, setDescription] = useState()
+    const [optionName, setOptionName] = useState()
+    const [classLogo, setClassLogo] = useState()
+    const [className, setClassName] = useState()
+    const [classId, setClassId] = useState()
+    const [classOptions, setClassOptions] = useState()
+    const [classDescription, setClassDescription] = useState()
     const [formData, setFormData] = useState({
         "payment_means": 'online',
         "deposit_amount": 0,
-        "investment_id": '',
+        "investment_id": 0,
         "currency": getCurrency(props.country),
-        "investment_option": props.option,
+        "investment_option": '',
+        "investment_class": "",
         "deposit_category": "personal",
         "account_type": "",
         "reference": "",
@@ -37,6 +47,7 @@ function Learn1(props) {
         "tx_ref": "CYANASE-TEST-001",
 
     });
+
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -49,9 +60,28 @@ function Learn1(props) {
         }}).then(function(res)
             {
                 if(res){
+                    setOptionName(res.data[0].investment_option)
                     setInterest(res.data[0].interest);
                     setHandler(res.data[0].handler);
                     setDescription(res.data[0].description);
+                    _next()
+                }
+            }
+        )
+    }
+    function getClassOptions(option, description, id, logo){
+        axios.post(API_URL_GET_INVESTMENT_CLASS_OPTIONS, option, {headers: {
+            "Authorization": `Token ${TOKEN}`,
+            "Content-Type": "application/json"
+        }}).then(function(res)
+            {
+                if(res){
+                    setClassOptions(res.data)
+                    setClassName(option)
+                    setClassDescription(description)
+                    setClassLogo(logo)
+                    setClassId(id)
+                    _next()
                 }
             }
         )
@@ -83,7 +113,9 @@ function Learn1(props) {
                 }
             )
     }
-    convert()
+    if(formData.investment_option != ""){
+        convert()
+    }
     const getAccountType = () => {
         let currency = formData.currency
         let accountType = formData.account_type
@@ -122,14 +154,30 @@ function Learn1(props) {
     const _next = () => {
         setStep(step + 1)
     }
-
+    const chunkArray = (arr, n) =>{
+        let chunkLength = Math.max(arr.length/n, 1)
+        let chunks = [];
+        for(let i =0;i<n;i++){
+            if(chunkLength*(i+1)<=arr.length)chunks.push(arr.slice(chunkLength*i, chunkLength*(i+1)));
+        }
+        return chunks;
+    }
     const _prev = () => {
         setStep(step - 1)
     }
     const previousButton = () => {
+        if (step === 2) {
+            return ( <
+                h6 className = " text-start warning rounded-3 my-3"
+                type = "button"
+                onClick = { _prev } >
+                Previous <
+                /h6>
+            )
+        }
         if (step !== 1) {
             return ( <
-                h6 className = " text-start warning rounded-3"
+                h6 className = " text-start warning rounded-3 mt-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -139,8 +187,8 @@ function Learn1(props) {
         return null;
     }
     const submitButton = () => {
-        let payment_means = formData.payment_means;
-        if (step === 4 && payment_means === "online") {
+        // let payment_means = formData.payment_means;
+        if (step === 7) {
             return ( <
                 div className = 'mx-3 justify-content-center rounded-4' > <
                 h6 id = "errorMessage"
@@ -172,14 +220,12 @@ function Learn1(props) {
         let verification = props.verification
         let investmentOption = formData.investment_option
         let riskProfileStatus = props.complete
-        if (step === 1){
-            getOptionDetails(investmentOption)
-        }
+        
         if (step === 1 && deposit_category === "personal" && verification === true) {
             return ( <
-                h6 className = " my-2 text-end warning rounded-3"
+                h6 className = " mt-2 mb-4 text-end warning rounded-3"
                 type = "button"
-                onClick = { _next } >
+                onClick = { () => getClassOptions("Automatic", "Risk Profile", 0, "https://server.cyanase.app/media/investmentClasses/auto.jpeg" ) } >
                 Next <
                 /h6>        
             )
@@ -192,17 +238,13 @@ function Learn1(props) {
                 /h6>        
             )
         }
-        if (step === 2 && investmentOption === "Automatic Asset Allocation"){
+        if (step === 2 && investmentOption !== "Automatic"){
+            return null
+        }
+        if (step === 2 && investmentOption === "Automatic"){
             // verify risk profile option was selected or not and check risk profile status
             if (riskProfileStatus === "Complete"){
-                return (
-                    <
-                h6 className = " my-2 text-end warning rounded-3"
-                type = "button"
-                onClick = { _next } >
-                Next <
-                /h6> 
-                )
+                return null
             } else {
                 return (
                     <
@@ -212,12 +254,17 @@ function Learn1(props) {
                 )
             }
         }
-        if (step === 6) {
+        if (step === 3) {
+            function setOptionFormData (){
+                formData.investment_option = optionName
+                formData.investment_class = className
+                formData.investment_id = classId
+                _next()
+            }
             return ( <
-                h6 className = " my-2 text-end warning rounded-3"
-                type = "button"
-                onClick = { this._afterSacco } >
-                Next <
+                h6 className = " my-2 mb-4 text-end bk-warning rounded-3"
+                onClick = { () => setOptionFormData() } >
+                Invest with this option <
                 /h6>        
             )
         }
@@ -230,7 +277,7 @@ function Learn1(props) {
                 /h6>        
             )
         }
-        if (step === 3) {
+        if (step === 5) {
             return ( <
                 h6 className = " my-2 text-end warning rounded-3"
                 onClick = { () => validate1(minimum, id, fundManagerCountry) } >
@@ -238,7 +285,7 @@ function Learn1(props) {
                 /h6>        
             )
         }
-        if (step < 4) {
+        if (step < 6) {
             return ( <
                 h6 className = " my-2 text-end warning rounded-3"
                 onClick = { _next } >
@@ -248,39 +295,54 @@ function Learn1(props) {
         }
         return null
     }
-
+    if (riskProfile === true) {
+        return ( < ResRiskProfile changeRiskProfileSetting = { setRiskProfile }
+            / >
+        )
+    }
     return ( <
         React.Fragment >
         <
-        form className = "text-center"
+        form className = "text-center pb-5"
         onSubmit = { handleSubmit(onSubmit) } > {
             /* 
                       render the form steps and pass required props in
                     */
-        } <div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Deposit <span className="row justify-content-center shadow-sm p-2 light-res-home">{formData.investment_option}</span></h3></div>
-        <
-        Wallet className = "d-none rounded-circle warning p-2"
-        size = "xlarge" / > < br / > <
-        img src = { DepositPic }
-        width = '25%'
-        className = "my-3 d-none"
-        height = '80%'
-        alt = "investors" / > <
+        } <div className="d-none d-md-block d-lg-block px-3 rounded-top-3"><h3 className=" py-4">Deposit</h3></div> <
         Step1 currentStep = { step }
         deposit_category = { formData.deposit_category }
         handleChange = { handleChange }
         getTab9 = { getTab9() }
-        investmentOption = { props.option }
+        investmentClass = { props.option }
         options = {props.options}
+        investment_class = { formData.investment_class }
+        investment_option = {formData.investment_option}
+        chunks = {chunkArray}
+        getClass = {getClassOptions}
+        setRiskProfile = {setRiskProfile}
+        /> <
+        Step2 currentStep = { step }
+        className = {className}
+        classDescription = {classDescription}
+        classOptions = {classOptions}
+        classLogo = {classLogo}
+        getOptionDetails = {getOptionDetails}
+        /><
+        Step3 currentStep = { step }
+        setStep = {setStep}
+        className = {className}
+        classDescription = {classDescription}
         interest = { interest }
         description = { description }
         handler = { handler }
-        investment_option = {formData.investment_option}
+        classLogo = {classLogo}
+        handleChange = { handleChange }
+        optionName = {optionName}
         /> <
-        Step2 currentStep = { step }
+        Step4 currentStep = { step }
         handleChange = { handleChange }
         /><
-        Step3 currentStep = { step }
+        Step5 currentStep = { step }
         handleChange = { handleChange }
         currency = { formData.currency }
         payment_means = { formData.payment_means }
@@ -288,7 +350,7 @@ function Learn1(props) {
         fundManagerCountry = { fundManagerCountry }
         setConvertedAmount = { setConvertedAmount }
         /> <
-        Step4 currentStep = { step }
+        Step6 currentStep = { step }
         handleChange = { handleChange }
         phone = { props.phone }
         email = { props.email }
@@ -307,13 +369,13 @@ function Learn1(props) {
         currency = { formData.currency }
         riskAnalysisPercentages = {props.riskAnalysisPercentages}
         /> <
-        Step5 currentStep = { step }
+        Step7 currentStep = { step }
         handleChange = { handleChange }
         payment_means = { formData.payment_means }
         total_deposit = { getTotalDeposit() }
         currency = { formData.currency }
         getCurr = { getCurrency(props.country) }
-        />  <Step6  currentStep = { step }
+        />  <Step8  currentStep = { step }
         handleChange = { handleChange }
         />  { previousButton() }{ nextButton() }{submitButton()}< /
         form > < /
@@ -327,78 +389,114 @@ function Step1(props) {
     }
     // console.log(convertedAmount("usd",5,"ugx"))
     return ( <
-        div className = "bg-white p-3 text-dark" > <
-        h6 className = "text-center" > Choose where you wish to make your deposit (Investment Class) < /h6> <
-        div className = "p-3 rounded-4 "
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "mb-3 d-none" >
-        <
-        h5 className = "font-lighter" > PERSONAL INVESTMENT < /h5> <
-        Form.Check label = "I wish to deposit to my Personal Account. Basic or Dollar Account"
-        name = "deposit_category"
-        type = "radio"
-        onChange = { props.handleChange }
-        value = "personal"
-        required id = "default-radio" /
-        >
-        <
-        h5 className = "font-lighter d-none mt-5" > SACCO GROUP / INVESTMENT CLUB < /h5> <
-        Form.Check label = "I want to deposit to my Sacco Group or Investment Club"
-        name = "deposit_category"
-        onChange = { props.handleChange }
-        type = "radio"
-        className = "d-none"
-        value = "sacco/club"
-        required id = "default-radio" /
-        >
-        <
-        h5 className = "font-lighter d-none mt-5" > INSTITUTION / ORGANIZATION < /h5>  <
-        Form.Check label = "I am making this deposit towards my API Account as an API User"
-        name = "deposit_category"
-        onChange = { props.handleChange }
-        type = "radio"
-        className = "d-none"
-        value = "institution"
-        required id = "default-radio" /
-        >
-        <
-        /
-        div > < /div >  <
-        h6 className = "bolder d-none p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > { props.investmentOption } < /span> < /
-        h6 > <
-        h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > By default(if no investment class is selected) your deposit will go to: < span className = "active" > Automatic Asset Allocation < /span> < /
-        h6 > <
-        h6 className = "rounded-3 bk-warning text-center"
+        div className = "bg-white px-lg-3 text-dark" > <
+        h6 className = "my-3 d-none d-md-block d-lg-block" > Select an Investment Class < /h6> <
+        h6 className = "text-start m-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Select an Investment Class </h6> <
+        h6 className = "rounded-3 bk-warning my-3 text-center d-none d-lg-block"
         onClick = { props.getTab9 } >
-        Edit my Risk Profile before deposit < /h6> 
-        <
-        Form.Select className = "my-3"
-        required defaultValue = "Select an investment option"
-        onChange = { props.handleChange }
-        name = "investment_option" > {
-            props.options.map(options => {
-                return <
-                    option value = { options.investment_option }
-                id = "investmentOption" ><h6>{ options.investment_option }</h6> < /option>
+        Edit my Risk Profile before deposit < /h6><
+        h6 className = "rounded-3 bk-warning my-3 text-center d-lg-none d-md-none d-sm-block"
+        onClick = { () => {props.setRiskProfile(true)} } >
+        Edit my Risk Profile before deposit < /h6>
+        <div className="scroll-y5 px-3">
+        <div>
+        {
+            props.options?.map(options => {
+                return <div onClick={()=> props.getClass(options.investment_class, options.description,options.id,options.logo)}><div className="row bg-light mx-1 rounded-3 mb-2">
+                <div className="col-2 text-center p-2"><img src={options.logo} width={30} height={40} alt="logo" className="mt-2"/></div>
+                <div className="col-10 p-3 text-start">
+                <h6><span className="bolder">{options.investment_class}</span>
+                <p className="small lh-1">{options.description}</p></h6></div></div>
+                </div>
             })
-        } < /
-        Form.Select >
-        <span className="bolder">{props.investment_option} </span>
-        <h6><span className="bolder">Interest rate per year:</span> {props.interest}% <span className="mx-2"> | </span> <span className="bolder">Handler:</span> {props.handler}<span className="mx-2"> | </span> <span className="bolder">Description:</span> {props.description} </h6>
+        }
+        </div>
+        </div>
         < /
         div >
     );
 }
-
 function Step2(props) {
     if (props.currentStep !== 2) {
         return null
     }
+    if(props.classOptions.length !== 0){
+    return ( <
+        div className = "bg-white px-3 text-dark" > <
+        h6 className = "my-3 d-none d-md-block d-lg-block" > Select an Investment Option < /h6> <
+        h6 className = "text-start my-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Select an Investment Option < /h6> 
+        <div className="shadow-sm row m-2 px-3 rounded-3">
+            <div className="col-2 my-3"><img src={props.classLogo} width={30} height={40} alt="logo"/></div>
+            <div className="col-10 mt-3 text-start">
+                <h6><span className="bolder pt-2">{props.className}</span><p className="small">{props.classDescription}</p></h6>
+            </div>
+        </div>
+        
+        {
+            props.classOptions.map(options => {
+                return <div className="row py-3 mx-1 mb-1 bg-light rounded-3"><div className="col-11 text-start"><h5>{options.investment_option}</h5></div><div className="col-1 black-hover" onClick={()=> props.getOptionDetails(options.investment_option) }><FaArrowAltCircleRight set="broken"/></div></div>
+                        
+            })
+        }
+        < /
+        div >
+    );}
+    else {
+        return(
+            <
+        div className = "bg-white px-3 text-dark text-start" > <
+        h6 className = " my-3 d-none d-md-block d-lg-block" > Select an Investment Option < /h6> <
+        h6 className = "text-start my-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Select an Investment Option < /h6> 
+        <div className="bg-light row m-2 px-3 rounded-3">
+            <div className="col-2 my-3"><img src={props.classLogo} width={30} height={40} alt="logo"/></div>
+            <div className="col-10 mt-3 text-start">
+                <h6><span className="bolder">{props.className}</span><p className="small">{props.classDescription}</p></h6>
+            </div>
+        </div>
+        <div className="mt-2 py-3 text-start row">
+        <div className="col-2"><InfoCircle/></div>
+        <div className="col-10">
+            <h6 className="bolder">Unfortunately we dont have any investment options under {props.className} at the moment. Please try our other classes for more options. <br/><br/> Thank you</h6></div>
+        </div>
+        </div>
+        )
+    }
+}
+function Step3(props) {
+    if (props.currentStep !== 3) {
+        return null
+    }
+    return ( <
+        div className = "bg-white px-3 text-dark" > <
+        h6 className = " my-3 d-none d-md-block d-lg-block" > Select an Investment Option < /h6> <
+        h6 className = "text-start my-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Select an Investment Option < /h6> 
+        <div className="bg-light row m-2 px-3 rounded-3">
+            <div className="col-2 my-3"><img src={props.classLogo} width={30} height={40} alt="logo"/></div>
+            <div className="col-10 mt-3 text-start">
+                <h6><span className="bolder">{props.className}</span><p className="small">{props.classDescription}</p></h6>
+            </div>
+        </div>
+        <div className="row py-3 mx-1"><div className="col-11 text-start"><h5>{props.optionName}</h5></div><div className="col-1"><FaArrowAltCircleDown onClick={()=> props.setStep(2)}/></div></div>
+        <div className="border-top row py-3 m-2 text-start">
+            <h6 className="bolder mt-2">Description:
+            <p className="">{props.description}</p></h6>
+            <h6 className="bolder">Handler:
+            <p className="">{props.handler}</p></h6>
+            <h6 className="bolder">Annual Return:
+            <p className="">{props.interest}%</p></h6>
+        </div>
+        < /
+        div >
+    );
+}
+function Step4(props) {
+    if (props.currentStep !== 4) {
+        return null
+    }
     return ( <
         div className = " text-start" > <
-        h6 className = "mt-2 text-center" > Choose your payment means. < /h6> <
+        h6 className = "text-center my-3 d-none d-md-block d-lg-block" > Choose your payment means < /h6> <
+        h6 className = "text-center my-2 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Choose your payment means < /h6>  <
         div className = "p-4 rounded-4"
         key = "radio" >
         <
@@ -439,11 +537,11 @@ function Step2(props) {
     );
 }
 
-function Step3(props) {
+function Step5(props) {
     let min = props.minimum
     let fund = getCurrency((props.fundManagerCountry).toUpperCase()).toLowerCase()
     let curr = (props.currency).toLowerCase()
-    if (props.currentStep !== 3) {
+    if (props.currentStep !== 5) {
         return null
     }
     props.setConvertedAmount(Conversion(fund,min,curr))
@@ -477,7 +575,8 @@ function Step3(props) {
     }
     return ( <
         div className = "text-center" > <
-        h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
+        h6 className = "text-center my-3 d-none d-md-block d-lg-block" > How much would you like to deposit? < /h6> <
+        h6 className = "text-center my-2 d-lg-none d-md-none d-sm-block mt-5 pt-4" > How much would you like to deposit? < /h6>   <
         Form.Group className = "mb-3 bg-white p-4" >
         <
         Form.Label >< h6 className = 'm-0' > Amount to Deposit in { props.currency } < /h6>< /Form.Label>  <
@@ -505,14 +604,15 @@ function Step3(props) {
     );
 }
 
-function Step4(props) {
-    if (props.currentStep !== 4) {
+function Step6(props) {
+    if (props.currentStep !== 6) {
         return null
     }
     if (props.payment_means === "offline") {
         return ( <
             div className = "text-center" > <
-            h6 className = "mt-2" > Continue to deposit < /h6>   <
+            h6 className = "text-center my-3 d-none d-md-block d-lg-block" > Deposit Offline < /h6> <
+            h6 className = "text-center my-2 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Deposit Offline < /h6>   <
             h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span className = "bolder" > { props.currency } < /span > < span className = "bolder active" > { props.total_deposit} < /span > < /
             h5 > < /
             div >
@@ -520,7 +620,9 @@ function Step4(props) {
     }
     if (props.payment_means === "online") {
         return ( <
-            div className = "text-center" >
+            div className = "text-center" ><
+            h6 className = "text-center my-3 d-none d-md-block d-lg-block" > Deposit Online < /h6> <
+            h6 className = "text-center my-2 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Deposit Online < /h6> 
             <
             h5 className = "p-5" > Proceed to deposit < span className = "bolder" > { props.currency } < /span> < span className = "bolder" > { props.deposit_amount } < /span > plus a flat fee of < span className = "bolder" > { props.currency } < /span> <span className = "bolder">{props.fee} < /span > .Your Total deposit amount is < span > { props.currency } < /span > < span className = "bolder" > { props.total_deposit} < /span > < /
             h5 >
@@ -548,8 +650,8 @@ function Step4(props) {
     )
 }
 
-function Step5(props) {
-    if (props.currentStep !== 5) {
+function Step7(props) {
+    if (props.currentStep !== 7) {
         return null
     } else if (props.payment_means === "offline") {
         return ( <
@@ -605,8 +707,8 @@ function Step5(props) {
         );
     }
 
-    function Step6(props) {
-        if (props.step !== 6) {
+    function Step8(props) {
+        if (props.step !== 8) {
             return null
         }
         return ( < div >

@@ -76,7 +76,6 @@ const Visuals = () => {
         }
         return result;
     }, []);
-    
     groupedData.forEach(yearData => {
         yearData.data.forEach(monthData => {
             monthData.y = monthData.y.reduce((total, value) => total + value, 0);
@@ -87,6 +86,7 @@ const Visuals = () => {
     yearData.total = yearData.data.reduce((total, monthData) => total + monthData.y, 0);
     total += yearData.total
     });
+    console.log(groupedData)
     // for withdraws
     const groupedData2 = withdraws.reduce((result, entry) => {
         const { date, updated, withdraw } = entry;

@@ -28,16 +28,18 @@ const ResWithdraw = (props) => {
             setVerification(res.success)
         });
     }, []);
-    return ( < div className = 'p-2' > <
-        ArrowLeftSquare size = { 30 }
+    return ( < div className = 'px-2' ><h4 className='bolder my-3'> <
+        ArrowLeftSquare size = { 25 }
         onClick = {
             () => { props.changeWithdrawSetting(false) }
         }
-        className = "my-3 mx-2" / >
+        className = "mx-2" / > Withdraw</h4>
         <
         Withdraw country = { country }
         phone = { phone }
         networth = { props.networth }
+        deposit = {props.deposit}
+        handler = {props.handler}
         investmentId = {props.investmentId}
         option_name = {props.option_name}
         verification = {verification}
@@ -49,5 +51,4 @@ const ResWithdraw = (props) => {
         div >
     );
 };
-
 export default ResWithdraw;

@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from 'react-iconly';
+import { Bookmark, User } from 'react-iconly';
 import Button from "react-bootstrap/esm/Button";
 import Subscription from "../payment/Subscription";
 import { getCurrency } from "../payment/GetCurrency";
@@ -33,7 +33,7 @@ function Subscribe(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = "text-center warning rounded-3"
+                h6 className = "text-center warning rounded-3 my-2"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
@@ -76,12 +76,12 @@ function Subscribe(props) {
             if (subscriptionStatus === "subscribed") {
                 return null
             }
-            return ( <
-                h6 className = "text-center warning rounded-3"
+            return ( <div className="blue-dark p-3"><
+                h6 className = "text-center light-res-home rounded-3 p-3 mx-5"
                 type = "button"
-                onClick = { _next } >
+                onClick = { _next } ><Bookmark className="mx-2 d-none"/>
                 Subscribe <
-                /h6>        
+                /h6></div>     
             )
         }
         return null;
@@ -93,7 +93,7 @@ function Subscribe(props) {
             /* 
                       render the form steps and pass required props in
                     */
-        } <div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Your Subscription</h3></div><
+        } <div className=" px-3 rounded-top-3"><h3 className=" py-4 border-bottom">Subscription</h3></div><
         User className = "rounded-circle d-none warning p-2"
         size = "xlarge" / > < br / > < h5 className = "bolder d-none" > Your Subscription < /h5> <
         Step1 currentStep = { step }
@@ -123,8 +123,8 @@ function Step1(props) {
     }
     return ( <
         div className = " text-start" > <
-        h6 className = "p-5 text-center" > This is a yearly fee of $5.Your account subscription becomes overdue after 30 days from account creation afterwhich you are required to pay your subscription. < /h6>  <
-        h6 className = 'status text-center p-3 mb-5' > Account Status: < span className = 'bolder p-2 px-3 mx-2 rounded-3' > { props.subStatus } < /span>  < /
+        h6 className = "px-5 py-3 text-center" > This is a yearly fee of UGX 20500.Your account subscription becomes overdue after 30 days from account creation afterwhich you are required to pay your subscription. < /h6>  <
+        h6 className = 'blue-darks text-center p-3 m-0 pt-4' > Account Status: < span className = 'bolder p-2 px-3 mx-2 rounded-3' > { props.subStatus } < /span>  < /
         h6 >
         <
         /
@@ -136,12 +136,11 @@ function Step2(props) {
     if (props.currentStep !== 2) {
         return null
     }
-    let converted_amount = Conversion("usd",5,(props.getCurr).toLowerCase())
+    let converted_amount = Conversion("ugx",20500,(props.getCurr).toLowerCase())
     return ( <
         div className = "text-center" >
         <
-        h5 className = "py-5 special" > Proceed to pay {props.getCurr} {converted_amount} 
-        for subscription < /
+        h5 className = "py-3 special" > Proceed to pay {props.getCurr} {converted_amount} for subscription < /
         h5 >
         <
         Subscription phone = { props.phone }

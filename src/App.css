@@ -45,23 +45,51 @@
 body::-webkit-scrollbar {
     display: none;
 }
-
+.font{
+    font-weight: 100px !important;
+}
 .bg-wallet {
     background-color: #FCFCFC!important;
 }
-
-.bg-lighter {
-    background-color: rgb(242, 242, 242) !important;
+.col-map{
+    display: grid;
+    grid-template-columns: 40% 70%;
 }
-
+.bg-lighter {
+    /* background-color: rgb(242, 242, 242) !important; */
+    /* background-color: #f8f8f8 !important; */
+    background-color: #ededed !important;
+}
+.bg-light {
+    /* background-color: rgb(242, 242, 242) !important; */
+    /* background-color: #f8f8f8 !important; */
+    background-color: rgb(250, 250, 250) !important;
+}
+.card{
+    background-image: url("images/card.jpeg");
+    background-size: cover !important;
+    color: #d5d4d4 !important;
+}
+.hover-goal-name:hover{
+    color: #f08101 !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+}
 .bg-back {
     background-image: url("images/back.png");
     background-size: cover;
 }
 .back-drop{
     background-color: rgba(255,255,255,0.4);
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+.apexcharts-legend.apexcharts-align-left.apx-legend-position-right{
+    padding: 0% !important;
+}
+.apexcharts-legend-series{
+    margin-bottom: 0% !important;
+    margin-top: 0% !important;
 }
 .progress-sm{
     height: 0.5rem !important;
@@ -79,16 +107,40 @@ body::-webkit-scrollbar {
     overflow-y: auto !important;
     scroll-behavior: smooth !important;
     position: relative !important;
-    height: 80vh !important;
+    height: 90vh !important;
 }
-
+.scroll-x {
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    position: relative !important;
+    width: 100vw !important;
+}
+.container {
+    scroll-snap-type: x mandatory;
+    scroll-padding: 50%;
+  }
+.child {
+    scroll-snap-align: center;
+  }
+.apexcharts-tooltip span {
+    color: #050505 !important;
+}
 .scroll-y2 {
     overflow-y: auto !important;
     scroll-behavior: smooth !important;
     position: relative !important;
     height: 70vh !important;
 }
-
+.scroll-y5 {
+    overflow-y: auto !important;
+    scroll-behavior: smooth !important;
+    position: relative !important;
+    height: 57vh !important; /* because 60vh overlaps with bottom nav for mobile view*/
+}
+.margin-goals{
+    margin-left: -7px !important;
+    /* background-color: #252859 !important; */
+}
 .scroll-y3 {
     overflow-y: auto !important;
     scroll-behavior: smooth !important;
@@ -138,7 +190,12 @@ body::-webkit-scrollbar {
     border-radius: 25% !important;
     padding: 0% !important;
 }
-
+.my-modal-pending-withdraws {
+    margin-top: 4% !important;
+    max-width: 60% !important;
+    border-radius: 25% !important;
+    padding: 0% !important;
+}
 .tab-nav {
     cursor: pointer;
 }
@@ -155,7 +212,9 @@ body::-webkit-scrollbar {
     cursor: pointer;
     border: 1px #ffb85c !important;
 }
-
+.bg-lighty{
+    background: -webkit-linear-gradient(top, rgb(245, 245, 245),rgba(128, 128, 128, 0));
+}
 .res-home p {
     font-size: small;
 }
@@ -189,17 +248,76 @@ body::-webkit-scrollbar {
 }
 
 .blue-dark {
-    background-color: #17193a !important;
+    background-color: rgb(19, 25, 50) !important;
     color: whitesmoke !important;
+    color: #10122d;
 }
+/* .blue-darks {
+    background-color: rgb(19, 25, 50) !important;
+    color: whitesmoke !important;
+} */
 
 .blue-darks {
-    background: -webkit-linear-gradient(right, #161735, #1618368f), url("images/Premium\ Photo\ _\ Businessman\ hand\ pointing\ finger\ to\ growth\ success\ finance\ business\ chart\ of\ metaverse\ technology\ financial\ graph\ investment\ diagram\ on\ analysis\ stock\ market\ background\ with\ digital\ economy\ exchange_.jpeg");
+    background: -webkit-linear-gradient(right, #161735,#161735ed, #16183670), url("images/Premium\ Photo\ _\ Businessman\ hand\ pointing\ finger\ to\ growth\ success\ finance\ business\ chart\ of\ metaverse\ technology\ financial\ graph\ investment\ diagram\ on\ analysis\ stock\ market\ background\ with\ digital\ economy\ exchange_.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     color: whitesmoke !important;
 }
-
+.Credit{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffb8), url("images/cover_21.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}
+.Venture{
+    background: -webkit-linear-gradient(right, #ffffff00, #ffffff00), url("images/card.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(242, 241, 241) !important;
+}
+.Hellena{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffb8), url("images/cover_22.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}
+.Absolute{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffa7), url("images/cover_19.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}.Cash{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffb8), url("images/cover_21.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}
+.Company{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffb8), url("images/cover_21.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}.Real{
+    background: -webkit-linear-gradient(right, #ffffff01, #ffffff00), url("images/card.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(239, 237, 237) !important;
+}.Private{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffb8), url("images/cover_21.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}.Agriculture{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffb8), url("images/cover_24.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}.Commodities{
+    background: -webkit-linear-gradient(right, #fffffff4, #ffffffb8), url("images/cover_15.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(2, 2, 2) !important;
+}
 .peach {
     background-color: #dddbff !important;
     color: #282c34 !important;
@@ -209,12 +327,12 @@ body::-webkit-scrollbar {
     margin-top: 8px;
 }
 
-.bg-text {
+.bg-orange {
     background-color: #f7a335 !important;
 }
 
 .grey-text {
-    color: #a5a5a5;
+    color: #949393;
 }
 
 .grey-back {
@@ -225,17 +343,17 @@ body::-webkit-scrollbar {
 }
 
 .activeTab {
-    color: #ff9215 !important;
+    color: #dc7500 !important;
 }
 
 .activeTab1 {
-    background-color: #ff8b10 !important;
+    background-color: #d17001 !important;
     color: #252859;
 }
 
 
 .investment {
-    background: -webkit-linear-gradient(left, rgba(233, 233, 233, 0.769),rgba(240, 240, 240, 0.324)), url("images/white-grey\ hills.png");
+    background: -webkit-linear-gradient(top, rgba(223, 223, 223, 0),rgba(240, 240, 240, 0)), url("images/white-grey\ hills.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
@@ -247,7 +365,7 @@ body::-webkit-scrollbar {
     background-position: right;
 }
 .investments {
-    background: -webkit-linear-gradient(right, rgba(233, 233, 233, 0.769),rgba(240, 240, 240, 0.09)), url("images/white-grey\ hills.png");
+    background: -webkit-linear-gradient(right, rgba(233, 233, 233, 0.971),rgba(240, 240, 240, 0.09)), url("images/white-grey\ hills.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
@@ -265,7 +383,7 @@ body::-webkit-scrollbar {
     background-position: right;
 }
 .sacco {
-    background-image: url("images/white-grey\ hills.png");
+    background-image: url("images/Path\ 80.png");
     background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
@@ -284,6 +402,24 @@ body::-webkit-scrollbar {
 
 .light-res-home {
     background-color: #fafafa1f;
+    cursor: pointer;
+}
+.light-res-homes {
+    background: -webkit-linear-gradient(left,rgba(51, 48, 4, 0.189),rgba(251, 249, 249, 0.605),rgba(46, 37, 2, 0.117));
+    cursor: pointer;
+}
+.light-res-homey {
+    background-color: #fafafa12;
+    cursor: pointer;
+}
+
+.light-res-home:hover {
+    background-color: #fafafa0a;
+    cursor: pointer;
+}
+
+.trans-text {
+    color: #fafafa3c;
 }
 
 /* .lighter {
@@ -306,7 +442,13 @@ body::-webkit-scrollbar {
 }
 
 .active {
-    color: rgb(255, 144, 18) !important;
+    color: #f88400 !important;
+    cursor: pointer !important;
+    border-color: rgb(255, 144, 18) !important;
+}
+
+.active:hover {
+    color: rgb(0, 0, 0) !important;
     cursor: pointer !important;
     border-color: rgb(255, 144, 18) !important;
 }
@@ -320,6 +462,16 @@ body::-webkit-scrollbar {
     padding-right: 15px !important;
     border: 1px solid rgb(255, 144, 18) !important;
     border-color: rgb(255, 144, 18) !important;
+    width: 150px !important;
+    margin: auto !important;
+}
+.warning1 {
+    color: rgb(255, 144, 18) !important;
+    cursor: pointer !important;
+    font-size: small !important;
+    padding: 10px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
     width: 150px !important;
     margin: auto !important;
 }
@@ -377,9 +529,22 @@ body::-webkit-scrollbar {
     background-color: rgba(255, 208, 165, 0.448);
     cursor: pointer;
 }
+.status:hover {
+    color: #ff8a00 !important;
+    background-color: rgba(255, 208, 165, 0.774);
+    cursor: pointer;
+}
 
 .red-status {
     background-color: #ffd7d7;
+}
+.black-hover{
+    color: #000000;
+    cursor: pointer;
+}
+.black-hover:hover{
+    color: #9e9d9d;
+    cursor: pointer;
 }
 
 .bk-warning {
@@ -394,6 +559,11 @@ body::-webkit-scrollbar {
     padding-left: 15px !important;
     padding-right: 15px !important;
     margin: auto !important;
+}
+.bk-warning:hover {
+    color: rgb(255, 255, 255) !important;
+    cursor: pointer !important;
+    background-color: #da7400  !important;
 }
 .bk-warning2 {
     color: rgb(255, 255, 255) !important;
@@ -415,14 +585,10 @@ body::-webkit-scrollbar {
 }
 
 .activer {
-    color: #ffffff !important;
     cursor: pointer !important;
-    background-color: #ff8a00 !important;
-    padding: 3px;
-    padding-bottom: 14px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 50%;
+    color: #ff8a00 !important;
+    font-weight: 600 !important;
+    text-align: center !important;
 }
 
 .blue-active {
@@ -456,8 +622,11 @@ button {
 }
 
 .bg-whiter {
-    background-color: rgb(255, 255, 255) !important;
+    background-color: aliceblue !important;
     /* box-shadow: 1px 2px 8px rgb(191, 191, 191); */
+}
+span.apexcharts-legend-text{
+    color: #000000 !important;
 }
 .bg-red {
     background-color: rgba(221, 153, 153, 0.153);
@@ -468,22 +637,26 @@ button {
     height: 12%;
     padding: 2%;
 }
-
+.apexcharts-legend.apexcharts-align-left.apx-legend-position-right{
+    text-align: left !important;
+}
 .bolder {
-    font-weight: 700 !important;
+    font-weight: 800 !important;
 }
-
-.font-lighter {
-    font-weight: 150 !important;
+.col-2.grey-text.bolder{
+    text-align: center !important;
 }
+/* .font-lighter {
+    font-weight: 300 !important;
+} */
 
 .font-light {
     font-weight: 400 !important;
 }
 
-.TabContent {
+/* .TabContent {
     background-color: rgba(255, 255, 255, 0.85);
-}
+} */
 
 .wheat {
     background-color: wheat !important;
@@ -494,16 +667,34 @@ button {
     margin-bottom: 0 !important;
     margin-top: 5px !important;
 }
-
+svg#SvgjsSvg41050.apexcharts-svg.apexcharts-zoomable.hovering-zoom{
+    color: #000000 !important;
+}
+.mx-mc{
+    margin-right: 5px !important;
+}
+.top{
+    padding-top: 1px !important;
+}
 .bottom-nav {
     z-index: 1;
     bottom: 0%;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 5px; 
+    padding-bottom: 5px;
     position: fixed;
     width: 100%;
+    background-color: rgb(255, 255, 255) !important;
+    margin-right: 0 !important;
 }
+.fix-top{
+    z-index: 1;
+    top: 0%;
+    padding-top: 8px;
+    padding-left: 8px;
+    position: fixed;
+    width: 100%;
 
+}
 .p-bar {
     padding: 0% !important;
 }
@@ -537,7 +728,15 @@ input[type='radio']:checked:after {
     top: 10%;
 }
 
-
+.bg-orang{
+    background-color: #ff8a00 !important;
+    color: white;
+    font-size: 14px !important;
+    padding: 12px 8px !important;
+}
+.wheat{
+    background-color: #da7400;
+}
 /* .form-check-input:checked {
     background-color: #ff8c00 !important;
     border-color: #ff9d00dd !important;
@@ -566,3 +765,7 @@ input[type='radio']:checked:after {
     color: fieldtext !important;
     font-size: medium !important;
 } */
+
+.goal-image{
+    height: 250px;
+}

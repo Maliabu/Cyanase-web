@@ -144,8 +144,8 @@ const ResAccount = (props) => {
         <
         /
         div > <
-        div className = 'row p-2 rounded-3 investment' > <div className="col-8">< h5 className = 'bolder p-2' > Account Subscription: < /
-        h5 ></div><div className="col-3 py-1">< span className = 'bk-warning p-2 rounded-3'
+        div className = 'row p-2 border-top border-bottom' > <div className="col-8">< h5 className = 'bolder p-2' > Account Subscription: < /
+        h5 ></div><div className="col-4 text-start py-1">< span className = 'active bolder'
         onClick = { handleShow4 } > { subStatus } < /span> </div> < /div > 
         <
         h4 className = "bolder text-dark mt-4" > Next Of Kin Details < /h4>
@@ -209,7 +209,7 @@ const ResAccount = (props) => {
         /
         div >
         <
-        p className = "bk-warning text-center rounded-3 mt-3"
+        p className = "bk-warning text-center rounded-3 mt-3 px-5"
         onClick = { handleShow } > Change Next of Kin < /p>
         <
         p className = "bg-danger d-none text-white text-center rounded-3 mt-3 mx-5 p-3"

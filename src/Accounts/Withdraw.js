@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import { API_URL_MM_WITHDRAW, API_URL_BANK_WITHDRAW, TOKEN } from '../apis';
 import Button from "react-bootstrap/esm/Button";
 import { success, fail, catch_errors, preloader } from "../Api/RequestFunctions";
-import { FaHandHoldingUsd } from "react-icons/fa";
+import { FaDonate, FaHandHoldingUsd } from "react-icons/fa";
 import { getCurrency } from "../payment/GetCurrency";
 import { ValidateForms } from "../Auth/ValidateForms";
 import axios from "axios";
@@ -55,7 +55,6 @@ class Withdraw extends React.Component {
         }
         return accountType
     }
-
     validate2 = () => {
         let withdrawChannel = this.state.withdraw_channel
 
@@ -267,12 +266,12 @@ class Withdraw extends React.Component {
             let threshold = 0
             if ((networth - withdrawAmount) < threshold) {
                 return ( <div className="px-5"><
-                    h6 className = "status p-2 rounded-3" >
+                    h6 className = "status p-2 my-2 rounded-3" >
                     You cannot withdraw more than you have. If your networth has not yet matured, please be patient and try again later <
                     /h6></div>
                 )
             }
-            if ((networth - withdrawAmount) === threshold) {
+            if ((networth - withdrawAmount) === networth) {
                 return ( <div className="px-5 my-2"><
                     h6 className = "status p-2 rounded-3" >
                     You cannot withdraw 0 {this.state.currency} <
@@ -316,7 +315,22 @@ class Withdraw extends React.Component {
                 /* 
                           render the form steps and pass required props in
                         */
-            }<div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Withdraw<span className="light-res-home p-2 row justify-content-center">{this.props.option_name} - Networth: {getCurrency(this.props.country)} {(this.props.networth).toLocaleString()}</span></h3></div> <
+            }<div className=" p-lg-3"><h3 className=" mt-2 d-none d-lg-block d-md-block">Withdraw</h3></div>
+            <div className={"card p-3 p-lg-4 mx-2 mx-lg-3 tet-start rounded-4"}>
+            <h4 className="text-start bolder text-white">{this.props.option_name}
+            <p className="text-start m-0 text-white p-0">{this.props.handler}</p></h4>
+            <div className="row mt-3">
+            <div className="col-3 text-start "><FaDonate/></div>
+            <div className="col text-end">
+            <h6>Total Deposit: <
+        div className = "d-flex flex-row flex justify-content-end" > { getCurrency(this.props.country) } <
+        h3 > {(this.props.deposit*1000).toLocaleString()} < /h3></div ></h6>
+            <h6>Total Networth: <
+        div className = "d-flex flex-row flex rounded light-res-homey pt-1 justify-content-center" > { getCurrency(this.props.country) } <
+        h3 > {this.props.networth.toLocaleString()} < /h3></div ></h6>
+        </div>
+            </div></div>
+            <
             FaHandHoldingUsd className = "rounded-circle d-none warning p-2"
             size = "40" / > < br / >
             <
@@ -400,7 +414,7 @@ function Step2(props) {
     }
     return ( <
         div className = " text-start" > <
-        h6 className = "mt-2 text-center" > Choose your withdraw means. < /h6> <
+        h6 className = " text-center" > Choose your withdraw means. < /h6> <
         div className = "p-4"
         key = "radio" >
         <
@@ -446,7 +460,7 @@ function Step3(props) {
         return null
     }
     return ( <
-        div className = "text-center p-4" > <
+        div className = "text-center px-4" > <
         h6 className = "mt-2" > How much would you like to Withdraw from your account ? < /h6>  <
         Form.Group className = "mb-3 p-3" >
         <

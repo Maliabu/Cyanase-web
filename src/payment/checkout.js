@@ -5,7 +5,7 @@ import { API_URL_DEPOSIT, TOKEN } from '../apis';
 
 export default function Checkout({ name, phone, amount, currency, email, data, submit }) {
     const config = {
-        public_key: 'FLWPUBK_TEST-955232eaa38c733225e42cee9597d1ca-X',
+        public_key: 'FLWPUBK-b248048d7e363a0497a7bf525c43d822-X',
         tx_ref: "CYANASEDEP01-v1",
         amount: amount,
         currency: currency,

@@ -11,7 +11,9 @@ export default function Conversion(from, input, to) {
     // Calling the api whenever the dependency changes
     useEffect(() => {
         Axios.get(
-`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`)
+            `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${from}.json`
+// `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+)
             .then((res) => {
                 setInfo(res.data[from]);
             })

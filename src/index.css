@@ -8,6 +8,8 @@ body {
     -moz-osx-font-smoothing: grayscale; */
     font-family: 'Poppins', sans-serif !important;
     /* overflow: hidden !important; */
+    font-weight: 500 !important;
+    scroll-behavior: smooth !important;
 }
 
 
@@ -16,16 +18,20 @@ body {
 p,
 h6,
 span,input {
-    font-size: small !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
 }
 h6.bg-lighter{
     font-size: small !important;
+    font-weight: 300 !important;
 }
 .small{
     font-size: x-small !important;
 }
 h4 {
-    font-size: 16px !important;
+    font-size: 15px !important;
+    font-weight: 800px !important;
+    color: rgb(29, 29, 29) !important;
 }
 h5 {
     font-size: 14px !important;
@@ -48,6 +54,10 @@ button {
 .img-head {
     height: 40px;
     width: 40px;
+}
+.img-head-goal {
+    height: 60px;
+    width: 60px;
 }
 
 .img-back {
@@ -112,9 +122,6 @@ span,input {
 }
 h6.bg-lighter{
     font-size: 10px !important;
-}
-h4 {
-    font-size: 15px !important;
 }
 h5 {
     font-size: 13px !important;

@@ -14,7 +14,9 @@ export const
         }
         return currency
     }
-
+export const invOption = (option) =>{
+    return option
+}
 // export const
 //     callBack = (status) => {
 //         return status

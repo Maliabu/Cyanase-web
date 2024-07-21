@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { UserRequests, SubscriptionRequests } from '../Api/MainRequests';
+import { UserRequests, SubscriptionRequests, GetInvestmentClassesRequests } from '../Api/MainRequests';
 import React, { useState, useEffect } from "react";
 import Personal from "./Personal";
 import Deposit from "./Deposit";
@@ -36,12 +36,15 @@ const MyHome = () => {
     const [country, setCountry] = useState([])
     const [email, setEmail] = useState([])
     const [phone, setPhone] = useState([])
+    const [investment_options, setOptions] = useState([])
     const [activeTab, setActiveTab] = useState("tab1");
     const [show3, setShow3] = useState(false);
     const handleClose3 = () => setShow3(false);
     const [show4, setShow4] = useState(false);
+    const [countSub, setCountSub] = useState(0)
     const handleClose4 = () => {
         setShow4(false);
+        setCountSub(1)
     };
     const [count, setCount] = useState("1")
     const [subStatus, setSubStatus] = useState()
@@ -64,6 +67,9 @@ const MyHome = () => {
         SubscriptionRequests().then(res => {
             setSubStatus(res.status)
         })
+        GetInvestmentClassesRequests().then(res => {
+            setOptions(res)
+        });
     }, []);
     const apiDocumentation = () =>{
         if(account.toUpperCase() !== "PERSONAL"){
@@ -138,12 +144,32 @@ const MyHome = () => {
             return api
         }
     }
+    const paySubscription = () => {
+        if (countSub === 1){
+            return null
+        }
+        else if (countSub === 0 && subStatus !== "subscribed"){
+            return (<div><
+                Modal show = { handleShow4 }
+                onHide = { handleClose4 } > <
+                Subscribe substatus = { subStatus }
+                country = { country }
+                lastname = { name }
+                email = { email }
+                phone = { phone }
+                / > < /
+                Modal ></div>)
+        } else {
+            return null
+        }
+    }
     return ( <
-        div ><div className='row'><
+        div ><div className='row font'>
+        {paySubscription()}<
         div className = 'row d-none shadow-sm' > <
         div className = 'row py-2' >
         <
-        div className = 'col-3' > <
+        div className = 'col-3 bg-lighter' > <
         img src = { Header }
         width = '75%'
         // online change
@@ -173,15 +199,15 @@ const MyHome = () => {
         /div>   < /
         div >
         <
-        div className = 'col-2 d-none d-md-block d-lg-block bg-lighter' > <
-        div > <
+        div className = 'col-2 d-none d-md-block d-lg-block bg-light' > <
+        div ><
         img src = { Header }
         width = '60%'
-        className = 'mx-4 mt-5 '
+        className = 'mx-4 mt-4 '
         height = '80%'
         alt = "investors" / > <
         /div>   <
-        div className = 'row my-lg-5 my-md-3 py-2 mx-2 blue-darks rounded-4' >
+        div className = 'row my-5 py-2 mx-2 blue-darks rounded-4' >
         <
         div className = 'col-3' >
         <
@@ -198,14 +224,14 @@ const MyHome = () => {
         div > <
         /div> <
         // online change my-5 to my-3
-        div className = ' px-lg-2 my-3 text-start scroll-y2' >
+        div className = ' px-lg-2 my-2 text-start scroll-y2' >
         <
-        h6 className = 'p-2 grey-text' > DASHBOARD < /h6>  <
-        div className = ' py-2 d-flex flex-row' >
+        h6 className = 'p-2 grey-text small' > DASHBOARD < /h6>  <
+        div className = ' d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Home size = "small"
-            set = 'broken'
-            className = 'mx-2' / > Home < /span >
+        TabNavItem title = { < span > < Home
+            size = "small"set = 'broken'
+            className = 'mx-3' / > Home < /span >
         }
         onClick = { handleTab1 }
         id = "tab1"
@@ -213,12 +239,11 @@ const MyHome = () => {
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row ' >
+        div className = ' d-flex flex-row ' >
         <
         TabNavItem title = { < span > < User
-            set = 'broken'
-            size = "small"
-            className = 'mx-2' / > My Investments < /span >
+            size = "small"set = 'broken'
+            className = 'mx-3' / > Portfolio < /span >
         }
         onClick = { handleTab2 }
         id = "tab2"
@@ -227,9 +252,9 @@ const MyHome = () => {
         />< /div > <
         div className = ' py-2 d-flex flex-row d-none' >
         <
-        TabNavItem title = { < span > < People size = "small"
-            set = 'broken'
-            className = 'mx-2' / > SACCO Groups < /span >
+        TabNavItem title = { < span > < People 
+            size = "small"set = 'broken'
+            className = 'mx-3' / > SACCO Groups < /span >
         }
         onClick = { handleTab3 }
         id = "tab3"
@@ -240,8 +265,8 @@ const MyHome = () => {
         <
         div className = ' py-2 d-flex flex-row d-none' >
         <
-        TabNavItem title = { < span > < FaUniversity size = "small"
-            className = 'mx-2' / > Investment Clubs < /span >
+        TabNavItem title = { < span > < FaUniversity 
+            className = 'mx-3' / > Investment Clubs < /span >
         }
         onClick = { handleTab4 }
         id = "tab4"
@@ -250,32 +275,32 @@ const MyHome = () => {
         />  < /
         div >
         <
-        h6 className = 'p-2 pt-4 grey-text' > ACTIVITY < /h6>   <
-        div className = ' py-2 d-flex flex-row' >
+        h6 className = 'p-2 pt-5 grey-text small d-none' > ACTIVITY < /h6>   <
+        div className = ' d-flex flex-row' >
         <
-        TabNavItem title = { < span > < Wallet size = "small"
-            set = 'broken'
-            className = 'mx-2' / > Deposits < /span >
+        TabNavItem title = { < span > < Wallet 
+            size = "small"set = 'broken'
+            className = 'mx-3' / > Deposits < /span >
         }
         onClick = { handleTab5 }
         id = "tab5"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row d-none' >
+        div className = ' d-flex flex-row d-none' >
         <
-        TabNavItem title = { < span > < FaHandHoldingUsd size = "small"
-            className = 'mx-2' / > Loans < /span >
+        TabNavItem title = { < span > < FaHandHoldingUsd 
+            className = 'mx-3' / > Loans < /span >
         }
         onClick = { handleTab6 }
         id = "tab6"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row d-none' >
+        div className = 'd-none d-flex flex-row' >
         <
-        TabNavItem title = { < span > < FaDonate size = "small"
-            className = 'mx-2' / > Withdraws < /span >
+        TabNavItem title = { < span > < FaDonate 
+            className = 'mx-3' / > Withdraws < /span >
         }
         onClick = { handleTab7 }
         id = "tab7"
@@ -284,31 +309,31 @@ const MyHome = () => {
         />  < /
         div >
         <
-        h6 className = 'p-2 pt-4 grey-text' > SETTINGS < /h6>   <
-        div className = ' py-2 d-flex flex-row' >
+        h6 className = 'p-2 pt-5 grey-text small' > SETTINGS < /h6>   <
+        div className = ' d-flex flex-row' >
         <
         TabNavItem title = { < span > < Setting size = "small"set = 'broken'
-            className = 'mx-2' / > Account < /span >
+            className = 'mx-3' / > Account < /span >
         }
         onClick = { handleTab8 }
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = ' py-2 d-flex flex-row' >
+        div className = 'd-flex flex-row' >
         <
         TabNavItem title = { < span > < Activity size = "small"set = 'broken'
-            className = 'mx-2' / > Risk Profile < /span >
+            className = 'mx-3' / > Risk Profile < /span >
         }
         onClick = { handleTab9 }
         id = "tab9"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
         />  < /div > <
-        div className = 'py-2 d-flex flex-row' >
+        div className = ' d-flex flex-row' >
         <
         TabNavItem title = { < span > < Chat size = "small"set = 'broken'
-            className = 'mx-2' / > FAQs < /span >
+            className = 'mx-3' / > FAQs < /span >
         }
         id = "tab10"
         onClick = { handleTab10 }
@@ -318,11 +343,11 @@ const MyHome = () => {
         div >
         <
         //online change from py-3, my-5
-        div className = 'py-2 d-flex flex-row' >
+        div className = ' d-flex flex-row' >
         <
         TabNavItem title = { < span > < Call size = "small"
             set = 'broken'
-            className = 'mx-2' / > Contact Us < /span >
+            className = 'mx-3' / > Contact Us < /span >
         }
         onClick = { handleTab3 }
         id = "tab15"
@@ -331,20 +356,41 @@ const MyHome = () => {
         />  < /
         div >
         <
+        div className = ' mt-5 px-3' > 
+        <div className='text-start'>
+        <div className='mt-2'>
+        <
+        TabNavItem title = "API Account"
+        onClick = { handleTab2 }
+        id = "tab11"
+        activeTab = { activeTab }
+        setActiveTab = { setActiveTab }
+        /></div></div>
+        <div className=' text-start'>
+        <div className=''> <
+        TabNavItem title = "Logout"
+        onClick = { handleTab2 }
+        id = "tab14"
+        activeTab = { activeTab }
+        setActiveTab = { setActiveTab }
+        /> </div> </div>< /
+        div >
+        <p className='text-center small mt-5 lh-1'>Management@api <br/> CyanaseInc</p>
+        <
         /
         div > <
         /
         div > <
         div className = 'col-10 d-none d-md-block d-lg-block' >
         <
-        div className = "row pt-4 mx-3" >
+        div className = "row bg-light rounded-3 mt-3 mx-3" >
         <
-        div className = 'col-8 rounded-3 bg-lighter' > <
+        div className = 'col-8' > <
         h6 className = 'mt-3' > <
         FaLightbulb size = "15"
-        className = 'position-relative active' / > < span className = 'bolder' > Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
+        className = 'position-relative active' / > < span className='small'> Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
         div > <
-        div className = 'col-1 d-none d-lg-block text-center' >
+        div className = 'col-1 d-none text-center' >
         <
         span >
         <
@@ -356,31 +402,37 @@ const MyHome = () => {
         h6 > { count } < /h6> < /
         span > < /span> < /
         div > <
-        div className = "col-lg-3 col-md-4 rounded bg-lighter text-center" >
+        div className = "col-lg-4 col-md-4 rounded-4 text-end" >
         <
-        div className = 'flex-row d-flex py-1 my-2 justify-content-center' > <
+        div className = 'row justify-content-center' > 
+        <div>
+
+<div className='d-flex flex-row justify-content-center p-1 rounded-3 mt-2'>
+            <
+        div className = '' > < h6 className = ' p-2' > Subscription <User size={15} className="mx-3"/>: < span className = 'bolder active rounded-3 p-2 '
+        onClick = { handleShow4 } > { subStatus } < /span>  < /
+        h6 > < /div >
+        {apiDocumentation()}
+        </div>
+        <div className='text-center d-none mt-3 border-end border-start'>
+        <
         TabNavItem title = "API Account"
         onClick = { handleTab2 }
         id = "tab11"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
-        /> | <
+        /></div></div>
+        <div className='col-5 d-none'>
+        <div className='text-center mt-3'> <
         TabNavItem title = "Logout"
         onClick = { handleTab2 }
         id = "tab14"
         activeTab = { activeTab }
         setActiveTab = { setActiveTab }
-        />  < /
+        /> </div> </div>< /
         div > < /
         div > < /
         div >
-        <div className='d-flex flex-row justify-content-end px-3'>
-            <
-        div className = ' pt-3' > < h6 className = ' p-2' > Account Subscription: < span className = 'status mx-2 rounded-3 p-2 px-4'
-        onClick = { handleShow4 } > { subStatus } < /span>  < /
-        h6 > < /div >
-        {apiDocumentation()}
-        </div>
          <
         TabContent id = "tab1"
         activeTab = { activeTab } > < Main handletab2 = { handleTab2 }
@@ -400,6 +452,7 @@ const MyHome = () => {
         / > < /TabContent > <
         TabContent id = "tab5"
         activeTab = { activeTab } > < Deposit handletab9 = { handleTab9 }
+        options = {investment_options}
         / > < /TabContent > <
         TabContent id = "tab6"
         activeTab = { activeTab } > < Loans / > < /TabContent> <
@@ -420,7 +473,7 @@ const MyHome = () => {
         TabContent id = "tab16"
         activeTab = { activeTab } > < Alert / > < /TabContent><
         TabContent id = "tab14"
-        activeTab = { activeTab } > < Logout / > < /TabContent><
+        activeTab = { activeTab } > < Logout countSub = {setCountSub} / > < /TabContent><
         TabContent id = "tab12"
         activeTab = { activeTab } > < Saccos / > < /TabContent> <
         TabContent id = "tab13"

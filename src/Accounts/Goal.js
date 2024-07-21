@@ -15,6 +15,7 @@ import { preloader, fail, catch_errors, success } from "../Api/RequestFunctions"
 
 function Goal(props) {
     const [step, setStep] = useState(0)
+    const [message, setMessage] = useState("deposit")
     let currency = getCurrency(props.country)
     const [formData, setFormData] = useState({
         "payment_means": 'online',
@@ -55,6 +56,7 @@ function Goal(props) {
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
         let created = (props.created).slice(0, 10)
+        let picture = props.goalPicture
         let percent = 100
         let progress = (percent - ((goalAmount - deposit) / goalAmount * percent)).toFixed(2)
         if (isNaN(goalNetworth)){
@@ -62,7 +64,7 @@ function Goal(props) {
         } else{
             goalNewNetworth = goalNetworth
         }
-        return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNewNetworth]
+        return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNewNetworth, picture]
     }
     const { handleSubmit } = useForm();
     const getAccountType = () => {
@@ -107,7 +109,7 @@ function Goal(props) {
             document.getElementById("errorFirst").style.color = "crimson"
             document.getElementById("errorFirst").innerText = "Please withdraw "+currency+" "+networth.toLocaleString()
         }
-        if (withdraw_amount == networth){
+        if (withdraw_amount === networth){
             document.getElementById("errorFirst").style.display = "none"
             _next()
         }
@@ -201,6 +203,7 @@ function Goal(props) {
     }
     const _withdraw = () => {
         setStep(step + 5)
+        setMessage("withdraw")
     }
     const withdrawMessage = () => {
         let progress = getName()[4]
@@ -282,6 +285,15 @@ function Goal(props) {
         return null
     }
     const previousButton = () => {
+        if (step === 5 && message === "withdraw"){
+            return ( <
+                h6 className = " warning text-start rounded-3"
+                type = "button"
+                onClick = { () => {setStep(0)} } >
+                Previous <
+                /h6>
+            )
+        }
         if (step === 7) {
             return ( <
                 h6 className = " warning text-start rounded-3"
@@ -307,9 +319,9 @@ function Goal(props) {
             return null
         }
         if (step === 5 || step === 6 || step === 7) {
-            return (<div className="blue-darks p-3 rounded-top-3"><h3 className="bolder mt-2">Withdraw<span className="light-res-home p-2 row justify-content-center">{props.name} - Networth: {formData.currency} {(props.networth).toLocaleString()}</span></h3></div> )
+            return (<div className="p-3"><h3 className=" mt-2">Withdraw<span className="bg-lighter p-2 row justify-content-center">{props.name} - Networth: {formData.currency} {(props.networth).toLocaleString()}</span></h3></div> )
         }
-        return ( < div className="blue-darks rounded-top-3 p-3"><h4 className="bolder">Deposit to: <span className="row light-res-home p-2 mt-1 justify-content-center">{props.name}</span></h4> <
+        return ( < div className="p-3"><h4 className="mt-2">Deposit to: <span className="row bg-lighter p-2 mt-1 justify-content-center">{props.name}</span></h4> <
             Wallet className = "rounded-circle d-none warning p-2"
             size = "xlarge" / ><
             img src = { DepositPic }
@@ -328,7 +340,7 @@ function Goal(props) {
         let networth = props.networth
         if (step === 0 && props.status === false) {
             return ( <
-                h6 className = " text-end my-1 mx-5 p-2 text-center bg-lighter text-grey rounded-3">
+                h6 className = " text-end my-1 mx-5 p-2 text-center status rounded-3">
                 This goal is inactive <
                 /h6>        
             )
@@ -343,14 +355,14 @@ function Goal(props) {
             )
         } else if (step === 0 && goalAmount === deposit && networth <= 0) {
             return ( <
-                h6 className = "p-2 bg-lighter grey-text text-center rounded-3 mx-5"
+                h6 className = "p-2 my-1 bg-lighter grey-text text-center rounded-3 mx-5"
                 type = "button" >
                 Goal Done: Your networth needs to mature before withdraw <
                 /h6>        
             )
         } else if (step === 0 && goalAmount === deposit && networth > 0) {
             return ( <
-                h6 className = "p-2 bg-lighter grey-text text-center rounded-3 mx-5"
+                h6 className = "p-2 my-1 status text-center rounded-3 mx-5"
                 type = "button" >
                 Congrats!!...You can now { goalName } <
                 /h6>        
@@ -432,6 +444,7 @@ function Goal(props) {
         progress = { getName()[4] }
         percent = { getName()[5] }
         networth = { getName()[7] }
+        goalPicture = {getName()[8]}
         currency = { formData.currency }
         next = { checkWithdrawStatus() }
         withdrawMessage = { withdrawMessage}
@@ -514,62 +527,49 @@ function Step0(props) {
     }
     if (props.id === "personal") {
     }
-    return ( <
-        div className = "res-home" > <
-        div className = "row px-3" >
-        <
-        div className = "blue-darks rounded-4 d-none" > < AddUser set = "bulk"
+    return ( 
+        <div className = "bg-light p-3 rounded-4" > 
+        <div className = "row px-1" >
+        <div className = "blue-darks rounded-4 d-none" > <AddUser set = "bulk"
         className = "my-lg-5 active"
-        size = "xlarge" /
-        > < /
-        div >
-        <
-        div className = " px-3 text-start" >
-        <
-        div className = "flex-row d-none d-md-block d-lg-block p-3" >
-        <
-        h6 className = "bolder" > Goal Name: <
-        p className = "font-weight-lighter" > { props.name }... created {
-            props.created
-        } </p>< /h6>  < /
-        div > <
-        div className = "flex-row p-3 border-top d-none d-md-block d-lg-block" >
-        <
-        h6 className = "bolder" > Goal Amount: < /h6><
-        div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
-        h2 className = "px-2 font-lighter" > { (props.amount).toLocaleString() } < /h2></div > < /
-        div > <
-        div className = "row px-3 d-none d-md-block d-lg-block" >
-        <
-        span className="bolder mb-1"> Progress: < span className = "font-light" > {
+        size = "xlarge" /> </div >
+        <div className = " px-1 text-start" >
+        <div className = "row p-3" >
+        <div className="col-3">
+        <img src = {props.goalPicture}
+            className = "rounded-circle object-fit-cover img-head-goal"
+            alt = "goal"/>
+        </div>
+        <div className="col-9">
+        <h3 className="bolder"> {props.name} 
+        <p> created {props.created} </p></h3> </div> </div>
+        <div className="rounded-4 p-3 bg-white">
+        <div className = "flex-row " >
+        <h6 > Goal Amount: </h6>
+        <div className = "d-flex flex-row flex justify-content-center" > { props.currency } 
+        <h3 className = "px-2 font-lighter" > { (props.amount).toLocaleString() } </h3></div> 
+        </div> 
+        <div className = "row px-3" >
+        <span className=" mb-1 mt-3"> Progress: < span className = "font-light" > {
             props.progress
-        } % < /span> < /span ><
-        ProgressBar now = { props.progress }
+        } % </span> </span >
+        <ProgressBar now = { props.progress }
         className="progress-sm mx-2"
         max={props.percent}
-        variant = "#ff8a00" /
-        >
-        <
-        /div> <
-        div className = "flex-row mt-2 p-3 d-none d-md-block d-lg-block" >
-        <
-        h6 className = "bolder" > Total Deposit Made: < /h6> <
-        div className = "d-flex flex-row flex justify-content-center" > { props.currency } <
-        h3 className = "px-2 font-lighter" > { (props.deposit).toLocaleString() } < /h3></div >
-        <
-        /
-        div > <
-        div className = "row px-3 mx-lg-2" >
-        <
-        div className = "col p-2" >
-        <
-        h6 className = "bolder" > Networth: < /h6> <
-        div className = "d-flex flex-row flex" > { props.currency } <
-        h3 className = "px-2 font-lighter" > { (props.networth).toLocaleString() } < /h3></div > < /div><div className="col"> {props.next} < /
-        div > < /div > {props.withdrawMessage} < /
-        div > < /
-        div > < /
-        div >
+        variant = "#ff8a00" />
+        </div> 
+        <div className = "flex-row bg-white rounded-4 mt-3" >
+        <h6> Total Deposit Made: </h6> 
+        <div className = "d-flex flex-row flex justify-content-center" > { props.currency } 
+        <h3 className = "px-2 font-lighter" > { (props.deposit).toLocaleString() } </h3></div>
+        </div></div>
+        <div className = "row mx-2" >
+        <div className = "col p-2 mt-2" >
+        <h6> Networth: </h6> 
+        <div className = "d-flex flex-row flex" > { props.currency } 
+        <h3 className = "px-2 font-lighter" > { (props.networth).toLocaleString() } </h3></div > </div><div className="col-4"> {props.next} 
+        </div > </div > {props.withdrawMessage} 
+        </div > </div > </div >
     );
 }
 

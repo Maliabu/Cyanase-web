@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { API_URL_LOGIN, API_EMAIL_VERIFY, API_RESEND_VERIFICATION_EMAIL } from '../apis';
+import { API_URL_LOGIN, API_EMAIL_VERIFY, API_RESEND_VERIFICATION_EMAIL, API_URL_GET_AUTH_USER_BY_EMAIL } from '../apis';
 import axios from 'axios';
 import { success, preloader, fail, catch_errors,togglePasswordVisibility } from '../Api/RequestFunctions';
 
@@ -51,42 +51,57 @@ const Login = (props) => {
     const handleSubmit = (e) => {
         preloader()
         e.preventDefault();
-        // does this user need verification?
-        axios.post(`${API_EMAIL_VERIFY}`,formData.username,{
+        // does the account exist?
+        axios.post(`${API_URL_GET_AUTH_USER_BY_EMAIL}`,formData.username,{
             headers: {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            if(response.data.success === false){
+            if(response.data === false){
                 document.getElementById("errorMessage").style.display = "block"
                 document.getElementById("errorMessage").style.color = "crimson"
                 document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
-                document.getElementById("errorMessage").innerText = "Looks like your account is not verified. Click below to get a verification link"
-                document.getElementById("infoMess").style.display = "block"
+                document.getElementById("errorMessage").innerText = "This account is not registered please sign up"
             }
-            else{
+            else if(response.data === true){
                 document.getElementById("errorMessage").style.display = "none"
-                document.getElementById("infoMess").style.display = "none"
-                axios.post(`${API_URL_LOGIN}`, formData, {
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    })
-                    .catch(function(error) {
-                        catch_errors(error)
-                    })
-                    .then(function(response) {
-                        if (!response) {
-                            fail("Something went wrong...")
-                        } else if (response.status === 200 && response.data.success === false) {
-                            fail(response.data.message)
-                        } else {
-                            success("Login successful", "/home", "successful");
-                            const token = response.data.token
-                            localStorage.setItem('token', token)
-                            localStorage.setItem('login-status', "true")
-                        }
-                    });
+                // does this user need verification?
+                axios.post(`${API_EMAIL_VERIFY}`,formData.username,{
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(function(response){
+                    if(response.data.success === false){
+                        document.getElementById("errorMessage").style.display = "block"
+                        document.getElementById("errorMessage").style.color = "crimson"
+                        document.getElementById("errorMessage").style.backgroundColor = '#ff353535'
+                        document.getElementById("errorMessage").innerText = "Looks like your account is not verified. Click below to get a verification link"
+                        document.getElementById("infoMess").style.display = "block"
+                    }
+                    else{
+                        document.getElementById("errorMessage").style.display = "none"
+                        document.getElementById("infoMess").style.display = "none"
+                        axios.post(`${API_URL_LOGIN}`, formData, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            })
+                            .catch(function(error) {
+                                catch_errors(error)
+                            })
+                            .then(function(response) {
+                                if (!response) {
+                                    fail("Something went wrong...")
+                                } else if (response.status === 200 && response.data.success === false) {
+                                    fail(response.data.message)
+                                } else {
+                                    success("Login successful", "/home", "successful");
+                                    const token = response.data.token
+                                    localStorage.setItem('token', token)
+                                }
+                            });
+                    }
+                })
             }
         })
     }
@@ -145,8 +160,8 @@ const Login = (props) => {
             } > hey < /h6>  < /
             div >
             <
-            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { props.button } < /span>or < span className = 'active bolder' > {props.passwordReset} < /span><span id = "infoMess"
-            className = 'active bolder'
+            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { props.button } < /span>or < span className = 'active bolder ' > {props.passwordReset} < /span><span id = "infoMess"
+            className = 'active bolder status rounded p-2 mt-1'
             style = {
                 { display: 'none' }
             } onClick={resendEmail}> Resend email verification link < /span> < /p >  < /
@@ -203,8 +218,8 @@ const Login = (props) => {
             } > hey < /h6> < /
             div >
             <
-            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { props.button } < /span>ors < span className = 'active bolder' > {props.passwordReset} < /span > <
-            span
+            p className = 'mt-3 p-2 text-center' > Have no account ? Please < span className = 'active bolder' > { props.button } < /span>< span className = 'active bolder' > {props.passwordReset} < /span > <
+            span className='active bolder status rounded p-2 mt-1'
              > Resend email verification link < /span>< /p > < /
             Form > < /div>< /
             div >

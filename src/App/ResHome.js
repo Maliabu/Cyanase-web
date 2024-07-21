@@ -1,4 +1,4 @@
-import { MainRequests, PersonalRequests, UserRequests, WithdrawRequests, InvestmentWithdrawRequests } from '../Api/MainRequests';
+import { MainRequests, PersonalRequests, UserRequests, WithdrawRequests, InvestmentWithdrawRequests, SubscriptionRequests, GetInvestmentClassesRequests } from '../Api/MainRequests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import '../App.css';
@@ -13,15 +13,19 @@ import Api from '../Accounts/primaryUser';
 import TabContent from "../Accounts/TabContent";
 import ContactUs from '../Accounts/ContactUs';
 import FAQs from '../Accounts/FAQs';
-import Chart from 'react-apexcharts';
+import Grph from '../images/10 Top Reasons Why Vendor Engagement Fails - 31West.jpeg'
 import Saccos from '../Accounts/Saccos';
 import Clubs from '../Accounts/Clubs';
 import Ad from '../images/Group 212.png';
+import House from '../images/house.png'
 import ResWithdraws from './ResWithdraws'
 import ResGoals from './ResGoals'
 import { getCurrency } from '../payment/GetCurrency';
-import { FaLightbulb} from 'react-icons/fa';
-import { Home, Wallet, Setting, TimeCircle, Download, Star, AddUser } from 'react-iconly';
+import MultiCarousel from '../MultiCarousel';
+import MultiCarousel2 from '../MultiCarousel2';
+import { FaChartLine, FaCheckDouble, FaChevronCircleRight, FaGoogleWallet, FaRegLightbulb, FaSearch, FaWallet} from 'react-icons/fa';
+import Portfolio from '../Accounts/Portfolio'
+import { Home, Wallet, Setting, Download, AddUser, Chart} from 'react-iconly';
 
 const ResHome = (props) => {
     const [activeTab, setActiveTab1] = useState("tab1");
@@ -31,15 +35,19 @@ const ResHome = (props) => {
     const [deposit, setDeposit] = useState(0);
     const [graph, setGraph] = useState([])
     const [country, setCountry] = useState([])
-    const [dates, setDates] = useState([])
+    const [investmentDeposit, setInvestmentDeposit] = useState("");
+    const [handler, setHandler] = useState("");
     const [totalWithdraw, setTotalWithdraw] = useState([])
     const [networth, setDepositNetworth] = useState(0);
-    let thisYear = new Date().getFullYear()
+    // let thisYear = new Date().getFullYear()
     const [investmentWithdraw, setInvestmentWithdraw] = useState([])
     const [option_name, setOptionName] = useState("")
     const [groups, setGroups] = useState(0)
     const [investment_id, setInvestmentId] = useState("")
     const [withdraws, setWithdraw] = useState([])
+    const [investment_options, setOptions] = useState([])
+    const [portfolioSetting, setPortfolioSetting] = useState(false)
+    const [depositProgress, setDepositProgress] = useState([]);
     useEffect(() => {
         PersonalRequests().then(res => {
             setSpan(res[2]); // array(14)
@@ -47,8 +55,8 @@ const ResHome = (props) => {
         MainRequests().then(res => {
             setDeposit(res[0]);
             setGraph(res[4]);
-            setDates(res[5])
             setDepositNetworth(res[9]);
+            setDepositProgress(res[4])
         })
         UserRequests().then(res => {
             setCountry(res.profile.country)
@@ -60,6 +68,12 @@ const ResHome = (props) => {
         InvestmentWithdrawRequests().then(res => {
             setInvestmentWithdraw(res)
         });
+        GetInvestmentClassesRequests().then(res => {
+            setOptions(res)
+        });
+        SubscriptionRequests().then(res=>{
+            // setSubscription(res.status)
+        })
     }, []);
     const wwithdraws = () => {
         if(withdraws.length === 0){
@@ -110,61 +124,6 @@ const ResHome = (props) => {
     result.forEach(data => {
         data.total = data.amount.reduce((total, value) => total + parseInt(value), 0);
     });
-    const options = {
-        options: {
-            chart: {
-                type: "area",
-                stacked: false,
-                height: 350,
-                zoom: {
-                    type: "x",
-                    enabled: true,
-                    autoScaleYaxis: true
-                },
-                toolbar: {
-                    autoSelected: "zoom"
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            markers: {
-                size: 0
-            },
-            xaxis: {
-                title: {
-                    text: 'Investments for ' + thisYear
-                },
-                labels: {
-                    show: false,
-                },
-                categories: dates,
-                // categories: ['jun', 'jul', 'aug'],
-            },
-            yaxis: {
-                show: false,
-                title: {
-                    text: 'In Thousands(000) of ' + getCurrency(country)
-                }
-            },
-            colors: [  '#E91E63', '#FF9800', '#252859', '#b7b7b7'],
-            fill: {
-                type: "gradient",
-                gradient: {
-                    shadeIntensity: 1,
-                    inverseColors: false,
-                    opacityFrom: 0.5,
-                    opacityTo: 0,
-                    stops: [0, 90, 100]
-                }
-            },
-        },
-        // series: result,
-        series: results,
-        stroke: {
-            curve: 'smooth',
-        }
-    }
     let depositTotal = 0
     span.map(goal => (
             depositTotal += parseInt(goal.deposit[0])
@@ -179,6 +138,8 @@ const ResHome = (props) => {
         return ( < ResWithdraw changeWithdrawSetting = { setWithdrawSetting }
             option_name = {option_name}
             networth = { groups }
+            deposit = {investmentDeposit}
+            handler = {handler}
             investmentId = {investment_id}
             / >
         )
@@ -217,6 +178,10 @@ const ResHome = (props) => {
         // update the state to tab2
         setActiveTab1("tab5");
     };
+    const handleTab7 = () => {
+        // update the state to tab2
+        setActiveTab1("tab7");
+    };
     const handleTab8 = () => {
         // update the state to tab2
         setActiveTab1("tab8");
@@ -229,11 +194,75 @@ const ResHome = (props) => {
         // update the state to tab2
         setActiveTab1("tab13");
     };
-    function getWithdraws(name,networth,investment_id){
+    function getWithdraws(name,networth,investment_id, deposit, handler){
         setOptionName(name)
         setGroups(networth)
         setInvestmentId(investment_id)
+        setInvestmentDeposit(deposit)
+        setHandler(handler)
         setWithdrawSetting(true)
+    }
+    function setAccountSettings(){
+        handleTab8()
+    }
+    const forif = () => {
+        let goalInits = []
+        // function onlyUnique(value, index, array){
+        //     return array.indexOf(value) === index
+        // }
+        if(span.length !== 0){
+        for(var i=0; i<=4 || i>=2; i++){ // so even if i have 1 goal, i wont get errors
+            if(span[i] === undefined){
+                // console.log("undefined",i) -- first set the breaks before the loop starts
+                break
+            }
+            goalInits.push(
+                <img src = {span[i].goal_picture}
+            className = "rounded-circle object-fit-cover img-head-goal border border-white border-3"
+            alt = "goal"/>
+            ) 
+            // console.log(i) -- now loop controllably
+        }
+        // goalInits.push(span[i].goal_name[0]) 
+        // console.log(goalInits.filter(onlyUnique))
+        return(
+            <div className='row m-1'>
+            {goalInits?.map((goal,id)=>(
+                <div className='col-3 margin-goals text-center' key={id}>
+                <div className='mt-1'>
+                {goal}</div>
+                </div>
+            ))}</div>
+        )}
+    }
+    let myGoalsMsg = ""
+    const myGoals =()=>{
+        if(span.length < 1){
+            myGoalsMsg = "Add Goal"
+            return null // no goals
+        } else {
+            myGoalsMsg = "More Goals"
+            return(
+                <div className='row'>
+                <div className='col-8'>
+                <div className='row justify-content-center rounded-3' > {
+                    <div className = "col-1 d-none p-2 rounded-start-2">
+                    <div className = "text-center mt-2" ><FaCheckDouble size={20}/></div> 
+                    </div>
+                    } 
+                    {
+                    <div className = "col-11 p-0">
+                    {forif()}
+                    </div>
+                    } 
+            </div> 
+            </div>
+                <div className='col-4'>
+                    <h6 className=' mt-3 bk-warning2 rounded-3' onClick = { handleTab7 } id = "tab7"> {myGoalsMsg} </h6>
+                </div>
+            </div>
+            )
+        }
     }
     const myInvestments = () => {
         if (results.length === 0) {
@@ -244,24 +273,22 @@ const ResHome = (props) => {
             )
         } else{
             return(
-                <div className='p-3 mt-2 investment rounded-4 shadow-sm carousel slide'>
+                <div className='p-3 mt-2 blue-darks rounded-4'>
                 <Carousel touch={true} interval={null} controls={false}>
                     {
-                        final_data.map(option=>(
+                        final_data.map((option, id)=>(
                             <Carousel.Item >
-                                <div className='row text-dark'>
-                                    <div className='col-4'><h5 className='bolder pb-1'>{option.name}</h5><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id)}>Withdraw</span> </div>
-                                    <div className='col-4 pt-2 text-center'><h5 className='m-0'><Star size={16} set="bulk" className="active m-0"/>{(option.data).length}</h5><h6>{option.handler}</h6></div>
-                                    <
-                            div className = "col-4 text-end" ><div className='row'> <h6 className='m-0'>Total Deposit:<
-            div className = "d-flex flex-row flex m-0 justify-content-end" >< span className='bolder'> { getCurrency(country) } < /span>  <
-            h4 className = "px-1 font-weight-light" > {
+                                <div className='row text-white' key={id}>
+                                    <div className=''><h5 className='bolder pb-1'>{option.name}<h6>{option.handler}</h6></h5> </div>
+                                    <div className = "row justify-content-end" ><div className='col text-start pt-3'><span className="bk-warning2 p-2 rounded-3 px-2" onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>Withdraw</span></div><div className='col text-end'> <h6 className='m-0'>Total Deposit:
+                                    <div className = "d-flex flex-row flex m-0 justify-content-end" >< span className='bolder'> { getCurrency(country) } </span>  
+                                    <h4 className = "px-1 font-weight-light" > {
                                 ((summ(option.data)) * 1000).toLocaleString()
-                            } < /h4></div ></h6></div><div className='row'><h6 className='m-0'>Networth:<
-            div className = "d-flex flex-row flex m-0 justify-content-end" >< span className='bolder'> { getCurrency(country) } < /span>  <
-            h4 className = "px-1 font-weight-light m-0" > {
+                            } </h4></div ></h6></div><div className='text-end'><h6 className='m-0'>Networth:
+                            <div className = "d-flex flex-row flex m-0 justify-content-end" ><span className='bolder'> { getCurrency(country) } </span>  
+                            <h4 className = "px-1 font-weight-light m-0" > {
                                 option.total.toLocaleString()
-                            } < /h4></div ></h6></div> < /div >
+                            } </h4></div ></h6></div> </div >
                                 </div>
                             </Carousel.Item>
                         ))
@@ -276,51 +303,6 @@ const ResHome = (props) => {
         totalNetworth = networth - totalWithdraw
         return totalNetworth
     }
-    const myInvestmentsGraph = () => {
-        if (results.length === 0) {
-            return(
-                <div className='p-2 px-3'>
-                <div className='p-2 bg-lighter rounded-4 row justify-content-center'>
-                    <div className='col-4 p-2'>
-                        <h6 className='bolder'>Top Investment classes Performance Rates</h6>
-                    </div>
-                    <div className='col-8 text-center'>
-                        <div className='row border-0 justify-content-center'>
-                            <div className='col p-2 rounded-4 bg-lighter'>
-                            <
-            div className = "d-flex flex-row flex justify-content-center" > <Star size="small" set='bulk' className="active"/> <h6>Treasury Bills</h6></div >
-                            
-                            <
-            div className = "d-flex flex-row flex justify-content-center" >  <
-            h2 className = "px-1" > 12 < /h2>< p> % < /p></div >
-                            </div>
-                            <div className='col p-2 rounded-4 bg-light'>
-                            <
-            div className = "d-flex flex-row flex justify-content-center" > <Star size="small" className="active" set="bulk"/> <h6>Unit Trusts</h6></div >
-                            
-                            <
-            div className = "d-flex flex-row flex justify-content-center" >  <
-            h2 className = "px-1" > 10 < /h2>< p> % < /p></div >
-                            </div>
-                        </div>
-                    </div>
-                </div></div>
-            )
-        } else{
-            return(
-                <div className='py-2'>
-                    <
-            div className = '' > <
-            Chart options = { options.options }
-            series = { options.series }
-            className = "w-100"
-            type = "area"
-            height = { 150 }
-            /></div >
-                </div>
-            )
-        }
-    }
     function summ(array) {
         let sum = 0
         array.forEach(item => {
@@ -328,209 +310,207 @@ const ResHome = (props) => {
         });
         return sum
     }
+    if (portfolioSetting) {
+        return (
+            <Portfolio changePortfolioSetting = {setPortfolioSetting}
+                changeAccountSetting = {setAccountSettings}
+                name = {props.name}
+                profile = {props.profile}
+                handletab5 = {handleTab5}
+            />
+        )
+    }
     const Main = () => {
-        return ( < div className = 'p-1 bg-lighter mobile' > < div className = "bg-white text-dark px-2 py-1 rounded-4" >
-            <
-            div className = 'd-flex mt-2' >
-            <
-            div className = 'rounded-4 blue-darks wider' >
-            <
-            p className = "text-end mx-4 mt-2" > welcome < span className = 'bolder grey-text' > { props.name } < /span> <
-            span className = " justify-content-center" > <
-            span className = "px-1" > pick up where you left off < /span></span > < /p>< /
-            div > <
-            // img src = "http://127.0.0.1:8000/static/photo.png"
-            img src = {props.profile}
-            className = "rounded-circle object-fit-cover mx-2 mt-2 img-head"
-            alt = "investors" / > < /
-            div >
-            <div>{myInvestments()}</div>
-            <
-            div className = 'row mt-2' > <
-            div className = 'col text-start' > <
-            p className = ' mx-3 mt-3 bolder d-none' > Your Investments < /p > < /div > <
-            div className = 'col d-none' >
-            <
-            div className = 'd-flex justify-content-end mx-1' > < TimeCircle size = "medium"
-            set = 'broken'
+        return ( 
+            <div className = 'px-2'> 
+            <div className = 'row bg-white justify-content-center mx-1 py-2 rounded-4'>
+            <div className='col-8 p-0'>
+            <h6 className = " my-3 lh-1" > Hi there, <br/> <span className = 'bolder' > <h5>{ props.name }</h5> </span>  </h6></div>
+            <div className='col-2 text-end p-0' onClick={() => setPortfolioSetting(true)}>
+            <FaChartLine className="p-0 mt-2" set='broken' size={20}/><h6 className='small bolder mt-0'>Portfolio</h6></div>
+            <div className='col-2 text-end p-0'>
+            <img src = {props.profile}
+            className = "rounded-circle object-fit-cover mt-2 img-head"
+            onClick={() => setAccountSettings()}
+            alt = "investors"/> </div> 
+            </div>
+            <div className='mx-2 p-3 rounded-4 card' onClick = { handleTab5}>
+            <h4 className = 'bolder text-white' > Invest <p>Deposit Wallet</p> </h4>
+            <div className = 'row' > 
+            <div className = 'col-3 text-start' > <div className='mb-3 bolder d-none'><Wallet/></div>
+            <span>
+            <FaGoogleWallet/> <FaWallet/></span></div> 
+            <div className = 'col-9 px-2 rounded-4' >
+            <div className = 'd-flex justify-content-end mx-1' >
+            <div className = ' text-end pt-2' > 
+            <h6 className='small m-0'>Total Deposit 
+            <div className = "d-flex flex-row flex justify-content-end" > <p> { getCurrency(country) } </p> <h3 className = "px-1 bolder" > { deposit.toLocaleString() }  
+            </h3 > </div ></h6> <h6 className='small mt-2 mb-0'>Total Networth 
+            <div className = "d-flex flex-row flex justify-content-end" > <p > { getCurrency(country) } </p> 
+            <h3 className = "px-1 bolder" > { networthy().toLocaleString() } </h3></div ></h6> </div > 
+            <img src={Grph} alt='graph' width="150" height="100" className='d-none'/> 
+            <Chart size = "15" set = 'broken'
             onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = ' mx-2 icon-padding rounded-circle active warning light-res-home ' / > < h6 className = 'mt-2 d-none rounded-3 p-3 px-5 bk-warning '
+            className = ' mx-2 icon-padding active warning1 d-none' / > 
+            <h6 className = 'mt-2 d-none rounded-3 p-3 px-5 bk-warning '
             onClick = {
                 () => { setGoalSetting(true) }
-            } >
-            Goals < /h6> < /
-            div > < /
-            div > < /div > <div className='blue-darks rounded-4'> <
-            div className = 'd-flex py-2' >
-            <
-            span className = 'text-center rounded-4 wide-60' > <
-            span className = "bolder" > 
-            <
-            br / > Total Deposit <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> < h2 className = "px-1 font-lighter" > { deposit.toLocaleString() }  < /
-            h2 > < /div > < /span > < /span > < span className = 'py-4' > < h6 className = ' rounded-3 text-center px-3 warning-home'
-            onClick = {
-                handleTab5
-            } >
-            Deposit < /h6> </span ></div><div className="d-felx flex-row justify-content-center p-2 light-res-home"><span className="mx-2">deposits: <Star size={10} set="bulk" className="active"/>{graph.length}</span> | <span className='mx-2'>Your Investment classes: {results.length}</span> </div> < /
-            div >
-
-            <
-            div className = '' > {myInvestmentsGraph()}</div > <
-            div className = 'blue-darks text-center rounded-4 pt-3' >
-            <
-            span className = ' rounded-4 text-center bolder' > Total Networth <
-            div className = "d-flex flex-row flex justify-content-center" > < p className = 'active' > { getCurrency(country) } < /p> <
-            h2 className = "px-1 font-lighter" > { networthy().toLocaleString() } < /h2></div > < /span> 
-            <div className="d-felx flex-row text-start p-2 light-res-home"><span className='mx-2'>Withdraws: <Star size={10} set="bulk" className="active"/>{wwithdraws()}</span> | <span className='mx-2'>Total Withdraw: { getCurrency(country) } {(totalWithdraw).toLocaleString()}</span> </div> < /
-            div >
-            <
-            div className = '' > <
-            Chart options = { options.options }
-            series = { options.series }
-            className = "w-100 d-none"
-            type = "area"
-            height = { 400 }
-            /></div > 
-            <
-            div className = 'd-flex mt-2' > < FaLightbulb size = "20"
-            className = 'mt-2 mx-2 active' / >
-            <
-            div className = 'rounded-4 investment wider' >
-            <
-            h6 className = "mx-4 mt-2" > Tips: <
-            p className='bolder' > Dont save your money, invest < /p></h6>< /
-            div > < /
-            div >
-            <
-            /
-            div >
-            <
-            div className = 'bg-white my-5 rounded-4 mt-2 p-2 ' >
-            <
-            img src = { Ad }
+            } > Goals </h6> </div> </div > </div ></div>
+            <div className = "bg-lighter my-2 py-2 rounded-4">
+            <div className='row m-1'>
+            <div className='col-8'></div>
+                <div className='col-4'>
+                <h6 className='bk-warning rounded-3 px-4' onClick={handleTab5}> Deposit </h6></div>
+            </div>
+            <div>
+                <div className='row justify-content-center m-2 g-2'>
+                    <div className='col'>
+                    <div className=' text-center p-2 bg-white shadow-sm rounded-3'>
+                        <span className='small'>deposits</span>
+                        <h4 className='bolder'>{ depositProgress.length }</h4>
+                    </div>
+                    </div>
+                    <div className='col'>
+                    <div className=' text-center p-2 bg-white shadow-sm rounded-3'>
+                    <span className='small'>withdraws</span>
+                    <h4 className='bolder'>{ wwithdraws() }</h4>
+                    </div></div>
+                    <div className='col'>
+                    <div className=' text-center p-2 bg-white shadow-sm rounded-3'>
+                    <span className='small'>investments</span>
+                    <h4 className='bolder'>{ results.length }</h4>
+                    </div></div>
+                </div>
+            </div>
+            <div className = 'd-flex mx-1' > <FaRegLightbulb size = "15" className = 'mt-2 mx-2' / >
+            <div className = 'rounded-3 mb-2 wider shadow-sm bg-white light-res-homey' >
+            <h6 className = "mx-4 mt-2" > Tips: <p className='bolder' > Dont save your money, invest with Cyanase </p></h6></div > 
+            </div ></div>
+            <div className=' m-2'>
+                {myGoals()}
+            </div>
+            <div className='d-none rounded-4 m-1 p-1'>
+            <h4 className = 'm-3 bolder lh-1' > Investment Classes </h4>
+            <MultiCarousel investmentClasses={investment_options} handletab5 = {handleTab5}/></div>
+            <div className = 'mt-3 mb-5 mx-2' >
+            <Carousel touch={true} interval={4000} controls={false}>
+                <Carousel.Item >
+                <img src = { Ad }
             className = "rounded-4 text-center"
             width = '100%'
             height = '50%'
-            alt = "investors" / > < /div> < /
-            div >
+            alt = "investors" / >
+                </Carousel.Item>
+                <Carousel.Item ><img src = { House }
+            className = "text-center"
+            width = '100%'
+            height = '50%'
+            alt = "investors" / >
+                </Carousel.Item>
+            </Carousel>
+             </div>
+            </div>
         )
     }
-    return ( <
-        div >
-
-        <
-        div className = 'd-flex flex-row text-dark rounded-top-4 d-block justify-content-center bg-white shadow bottom-nav' >
-        <
-        div className = ' text-center grey-text' > <
-        TabNavItem title = { < span > < Home size = "18"
+    return ( 
+        <div className='pb-5'>
+        <div className=' bottom-nav py-2'>
+        <div className = 'row justify-content-center' >
+        <div className = 'col-2 text-center bolder p-0' > 
+        <TabNavItem title = { <span className='text-center' > <Home size = {20}
             set = 'broken'
-            className = 'mt-2' /
-            >
-            <
-            /span >
+            className = 'mt-2' /><div className='bolder'>Home</div>
+            </span >
         }
         onClick = { handleTab1 }
         id = "tab1"
         className = ""
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /><h6 className='pt-1 '>Home</h6>< /div > <
-        div className = 'text-center mx-4 grey-text' >
-        <
-        TabNavItem title = { < span > < AddUser size = "24"
+        /></div > 
+        <div className = 'col-2 text-center p-0' >
+        <TabNavItem title = { <span className='text-center'> <Download size = {20}
             set = 'broken'
-            className = 'mt-2' / > < /span>
+            className = 'mt-2' /><div className='bolder'>Withdra..</div> 
+            </span>
+        }
+        onClick = { handleTab2 }
+        id = "tab2"
+        activeTab = { activeTab }
+        setActiveTab1 = { setActiveTab1 } /> </div > 
+        <div className = 'col-3 text-center' >
+        <div className='bg-lighter py-3 mx-2 rounded-circle'>
+        <TabNavItem title = { <span > <Wallet size = {20}
+            set = 'broken' /><div className='bolder d-none'>Deposit</div> </span>
+        }
+        onClick = { handleTab5 }
+        id = "tab5"
+        activeTab = { activeTab }
+        setActiveTab1 = { setActiveTab1 } /></div > </div>
+        <div className = 'col-2 text-center p-0' >
+        <TabNavItem title = { <span > <AddUser size = {20}
+            set = 'broken'
+            className = 'mt-2' /><div className='bolder'>Goals</div> </span>
         }
         onClick = { handleTab3 }
         id = "tab7"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='pt-1 grey-text'>Goals</h6> < /
-        div > <
-        div className = 'text-center grey-text' >
-        <
-        TabNavItem title = { < span > < Wallet size = "20"
+        /> </div >
+        <div className = 'col-2 text-center p-0' >
+        <TabNavItem title = { <span > <Setting size = {20}
             set = 'broken'
-            className = 'mt-2' / > < /span>
-        }
-        onClick = { handleTab5 }
-        id = "tab5"
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='grey-text pt-1'>Deposit</h6> < /
-        div > <
-        div className = 'text-center mx-4 grey-text' >
-        <
-        TabNavItem title = { < span > < Download size = "20"
-            set = 'broken'
-            className = 'mt-2' / > < /span>
-        }
-        onClick = { handleTab2 }
-        id = "tab2"
-        activeTab = { activeTab }
-        setActiveTab1 = { setActiveTab1 } /><h6 className='grey-text pt-1'>Withdraws</h6> < /
-        div >
-        <
-        div className = 'text-center grey-text' >
-        <
-        TabNavItem title = { < span > < Setting size = "20"
-            set = 'broken'
-            className = 'mt-2' / > < /span>
+            className = 'mt-2' /><div className='bolder'>Settings</div> </span>
         }
         onClick = { handleTab8 }
         id = "tab8"
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        /> <h6 className='pt-1 grey-text'>Settings</h6> < /
-        div > < /
-        div > <
-        TabContent id = "tab1"
-        activeTab = { activeTab } > < Main parentCallback2 = { handleTab2 }
-        / > < /TabContent > <
-        TabContent id = "tab2"
-        activeTab = { activeTab } > < ResWithdraws / > < /TabContent> <
-        TabContent id = "tab3"
-        activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
+        /></div > </div ></div> 
+        <TabContent id = "tab1"
+        activeTab = { activeTab } > <Main parentCallback2 = { handleTab2 }
+        / > </TabContent > 
+        <TabContent id = "tab2"
+        activeTab = { activeTab } > <ResWithdraws handletab5 = {handleTab5} / > </TabContent> 
+        <TabContent id = "tab3"
+        activeTab = { activeTab } > <Sacco parentCallback = { handleTab12 }
         activeTab = { activeTab }
         setActiveTab1 = { setActiveTab1 }
-        / > < /TabContent > <
-        TabContent id = "tab4"
-        activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }
-        / > < /TabContent > <
-        TabContent id = "tab5"
-        activeTab = { activeTab } > < Deposit handletab1 = { handleTab1 }
-        / > < /TabContent > <
-        TabContent id = "tab7"
-        activeTab = { activeTab } > < ResGoals / > < /TabContent> <
-        TabContent id = "tab8"
-        activeTab = { activeTab } > < ResSettings handletab2 = {props.handletab2}/ > < /TabContent><
-        TabContent id = "tab9"
-        activeTab = { activeTab } > < RiskProfile / > < /TabContent> <
-        TabContent id = "tab10"
-        activeTab = { activeTab } > < FAQs / > < /TabContent><
-        TabContent id = "tab11"
-        activeTab = { activeTab } > < Api / > < /TabContent><
-        TabContent id = "tab12"
-        activeTab = { activeTab } > < Saccos / > < /TabContent> <
-        TabContent id = "tab13"
-        activeTab = { activeTab } > < Clubs / > < /TabContent><
-        TabContent id = "tab15"
-        activeTab = { activeTab } > < ContactUs / > < /TabContent> < /
-        div >
+        / > </TabContent > 
+        <TabContent id = "tab4"
+        activeTab = { activeTab } > <Club parentCallback1 = { handleTab13 }
+        / > </TabContent > 
+        <TabContent id = "tab5"
+        activeTab = { activeTab } > <Deposit handletab1 = { handleTab1 }
+        / > </TabContent > 
+        <TabContent id = "tab7"
+        activeTab = { activeTab } > <ResGoals profile = {props.profile} / > </TabContent> 
+        <TabContent id = "tab8"
+        activeTab = { activeTab } > <ResSettings handletab2 = {props.handletab2}/ > </TabContent>
+        <TabContent id = "tab9"
+        activeTab = { activeTab } > <RiskProfile / > </TabContent> 
+        <TabContent id = "tab10"
+        activeTab = { activeTab } > <FAQs / > </TabContent>
+        <TabContent id = "tab11"
+        activeTab = { activeTab } > <Api / > </TabContent>
+        <TabContent id = "tab12"
+        activeTab = { activeTab } > <Saccos / > </TabContent> 
+        <TabContent id = "tab13"
+        activeTab = { activeTab } > <Clubs / > </TabContent>
+        <TabContent id = "tab15"
+        activeTab = { activeTab } > <ContactUs / > </TabContent> 
+        </div >
     );
 };
 const TabNavItem = ({ id, activeTab, title, setActiveTab1 }) => {
     const handleClick = () => {
         setActiveTab1(id);
     };
-    return ( < div className = "px-2 tab-nav" >
-        <
-        span onClick = { handleClick }
-        className = { activeTab === id ? "activer" : "" } > { title } < /
-        span > < /
-        div >
+    return ( <div className = "tab-nav" >
+        <span onClick = { handleClick }
+        className = { activeTab === id ? "activer" : "" } > { title } </span > </div >
     )
 };
 

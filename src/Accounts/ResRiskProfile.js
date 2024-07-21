@@ -32,13 +32,13 @@ const ResRiskProfile = (props) => {
         }
     }
     return ( < div><div className="p-3">   <
-        h4 className = "mt-2 bolder" ><
+        h4 className = "mt-3 bolder" ><
         ArrowLeftSquare size = { 30 }
         className = " m-3 mt-3"
         onClick = {
             () => { props.changeRiskProfileSetting(false) }
         }
-        /> Investor Risk Profiler < /h4> <
+        /> Investor Risk Profile < /h4> <
         div className = "row p-2 rounded-4" >
         <
         div className = "bg-white rounded-4 p-3" >
@@ -51,20 +51,11 @@ const ResRiskProfile = (props) => {
         <
         /div> <
         div className = " res-home" > <
-        div className = "row bg-white p-3 rounded-4" >
-        <
-        p >
-        This is a questionnaire to be filled by the intending Investor(you).This will help us, help you keep track Of your investments and help you every step of the way. <
-        /p> <
-        p > This document is a mandatory part of each investor’ s Esteemed investing lifespan. <
-        /p> <
-        p > It is mandatory
-        for the good of every investor Please complete the questionnaire to fully complete Your Profile as desired. <
-        /p>< h5 className = "rounded-2 px-3 py-2 text-center bolder investment" >Status: {
+        div className = "row bg-white p-3 rounded-4" >< h5 className = " px-3 py-2 text-center border-top border-bottom" >Status: {
         complete
     } < /h5> <
-    div className = "p-5" > <
-        p className = " bk-warning rounded-3"
+    div className = "p-4" > <
+        p className = " bk-warning rounded-3 px-5"
     onClick = { handleShow2 } > {editOrComplete()} < /p> </div > < /
     div > < /
     div > <

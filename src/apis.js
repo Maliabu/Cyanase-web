@@ -1,9 +1,12 @@
-
-const server = "server.cyanase.lol"
+// 
+// const server = "server.cyanase.lol"
+const server = "server.cyanase.app"
 // const server = "127.0.0.1:8000"
 export const API_URL = "https://"+server+"/api/v1/en/register/user/";
 export const API_URL_DEPOSIT = "https://"+server+"/api/v1/en/make/deposit/";
+export const API_URL_GET_INVESTMENT_CLASSES = "https://"+server+"/api/v1/en/auth/get/investment/classes/";
 export const API_URL_GET_INVESTMENT_OPTIONS = "https://"+server+"/api/v1/en/auth/get/investment/options/";
+export const API_URL_GET_INVESTMENT_CLASS_OPTIONS = "https://"+server+"/api/v1/en/auth/get/investment/class/options/";
 export const API_URL_GET_INVESTMENT_OPTION = "https://"+server+"/api/v1/en/auth/get/investment/option/";
 export const API_URL_BANK_WITHDRAW = "https://"+server+"/api/v1/en/make/bank/withdraw/";
 export const API_URL_MM_WITHDRAW = "https://"+server+"/api/v1/en/make/mm/withdraw/";
@@ -23,6 +26,7 @@ export const API_URL_GET_GOAL = "https://"+server+"/api/v1/en/get/user/goal/";
 export const API_EMAIL_VERIFY = "https://"+server+"/api/v1/en/get/user/verification/";
 export const API_RESEND_VERIFICATION_EMAIL = "https://"+server+"/api/v1/en/resend/verification/email/";
 export const API_URL_USER_PROFILE_PHOTO = "https://"+server+"/api/v1/en/auth/user/upload/profile/photo/";
+export const API_URL_GOAL_PHOTO = "https://"+server+"/api/v1/en/auth/upload/goal/photo/";
 export const API_URL_USER_GET_PROFILE_PHOTO = "https://"+server+"/static/photo.png";
 export const API_URL_USER_NETWORTH = "https://"+server+"/api/v1/en/auth/user/networth/";
 export const API_URL_LOGIN = "https://"+server+"/api/v1/en/auth/user/login/";
@@ -40,8 +44,9 @@ export const API_URL_GET_USER_VERIFICATION = "https://"+server+"/api/v1/en/get/v
 export const API_URL_GET_RISK_ANALYSIS_PERCENTAGES = "https://"+server+"/api/v1/en/get/risk/analysis/percentages/";
 export const API_URL_RESET_PASSWORD = "https://"+server+"/reset/password/";
 export const PROFILE_PHOTO = "https://"+server+"/media/profile/default_picture.jpg";
+export const GOAL_PHOTO = "https://"+server+"/media/goal/default_picture.jpg";
 export const API_URL_GET_INVESTMENT_WITHDRAWS = " https://"+server+"/api/v1/en/get/investment/withdraws/";
 export const API_URL_GET_USER_BANKS = " https://"+server+"/api/v1/en/auth/user/banks/";
 export const TOKEN = localStorage.getItem('token');
 export const LOGIN_STATUS = localStorage.getItem('login-status');
-export const apiDocs = "https://developers.cyanase.lol";
+export const apiDocs = "https://developers.cyanase.app";

@@ -3,15 +3,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './style.scss';
 import React, { useState, useEffect } from "react";
-import { PROFILE_PHOTO } from '../apis';
-import { AddUser, ArrowLeftSquare } from 'react-iconly';
+import { PROFILE_PHOTO, GOAL_PHOTO } from '../apis';
+import { AddUser, ArrowLeftSquare} from 'react-iconly';
 // import ProgressBar from '@ramonak/react-progress-bar';
-import { Modal } from 'react-bootstrap';
 import Goal from '../Accounts/Goal'
 import ResGoals1 from './ResGoals1'
+import Goals from '../images/house.png'
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Modal from 'react-bootstrap/Modal';
+import GoalPhoto from '../Accounts/goalPhoto';
 
-const ResGoals = () => {
+const ResGoals = (props) => {
     const [goalSetting, setGoalSetting] = useState(false);
     const [span, setSpan] = useState([])
     const [country, setCountry] = useState("")
@@ -28,13 +30,19 @@ const ResGoals = () => {
     const [holdNetworth, setHoldNetworth] = useState("");
     const [investmentOption, setinvestmentoption] = useState("")
     const [name, setName] = useState("")
-    const [goalStatus, setGoalStatus] = useState();
-    const [show3, setShow3] = useState(false);
-    const handleClose3 = () => setShow3(false);
-    const handleShow3 = () => setShow3(true);
+    const [goalDeposit, setGoalDeposit] = useState(false)
+    const [goalStatus, setGoalStatus] = useState("");
+    const [goalPicture, setPicture] = useState("")
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(true)
+    }
+    const handleClose = () => {
+        setShow(false)
+    }
     useEffect(() => {
         PersonalRequests().then(res => {
-            setSpan(res[2]); // array(14)
+            setSpan(res[2]);
         });
         UserRequests().then(res=>{
             setCountry(res.profile.country)
@@ -55,7 +63,7 @@ const ResGoals = () => {
             setVerification(res.success)
         });
     }, []);
-    function getId(id, name, amount, deposit, networth, created, status) {
+    function getId(id, name, amount, deposit, networth, created, status, picture) {
         setHoldId(id)
         setHoldName(name)
         setHoldAmount(amount)
@@ -63,129 +71,79 @@ const ResGoals = () => {
         setHoldCreated(created)
         setHoldNetworth(networth)
         setGoalStatus(status)
-        handleShow3()
+        setPicture(picture)
+        setGoalDeposit(true)
+    }
+    function onlyId(id) {
+        setHoldId(id)
+        handleShow()
     }
     function checkWithdraw(amount, deposit, status){
         let classname = ""
         let innertext = ""
         if(amount !== deposit && status !==true){
             innertext = "Inactive"
-            classname = "rounded-3 dark-goals"
+            classname = "hover-goal-name"
             return [innertext, classname]
         } else if(amount === deposit && status !==true){
             innertext = "Done"
-            classname = "rounded-3 dark-goals"
+            classname = "hover-goal-name"
             return [innertext, classname]
         } else 
         if (amount !== deposit){
             innertext = "deposit"
-            classname = "rounded-3 warning-goals"
+            classname = "hover-goal-name"
             return [innertext, classname]
         } else {
             innertext = "withdraw"
-            classname = "rounded-3 warning-goals"
+            classname = "hover-goal-name"
             return [innertext, classname]
         }
     }
     //  Functions to handle Tab Switching
     if (goalSetting) {
         return ( < div className=''>
-            <
-            div className = 'row d-none p-2 px-3' > <
-            div className = 'col-10 bg-lighter rounded-4' > <
-            h4 className = ' mx-3 bolder mt-3' > Create New Goal < /h4 > < /div >
-            <
-            div className = 'rounded-4 d-none light-res-home wide' >
-            <
-            p className = "bolder text-end mx-4 mt-2" > welcome back user <
-            div className = " justify-content-center" > <
-            p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
-            div >
-            <
-            div className = 'col-2' > <
-            // img src = "http://127.0.0.1:8000/static/photo.png"
-            img src = {PROFILE_PHOTO}
+            <div className = 'row d-none p-2 px-3' > 
+            <div className = 'col-10 bg-lighter rounded-4' > 
+            <h4 className = ' mx-3 bolder mt-3' > Create New Goal </h4> </div>
+            <div className = 'rounded-4 d-none light-res-home wide' >
+            <p className = "bolder text-end mx-4 mt-2" > welcome back user 
+            <div className = " justify-content-center" > 
+            <p className = "px-1 font-lighter" > pick up where we left off </p></div> </p>
+            </div>
+            <div className = 'col-2' > 
+            <img src = {PROFILE_PHOTO}
             className = "rounded-circle object-fit-cover mt-2 img-head"
-            alt = "investors" / > < /div> < /
-            div > <
-            ArrowLeftSquare size = { 30 }
+            alt = "investors" /> </div> </div> 
+            <ArrowLeftSquare size = { 30 }
             onClick = {
                 () => { setGoalSetting(false) }
             }
             className = "mt-1 mx-2" / > < ResGoals1 changeGoalSetting = { setGoalSetting }
             country = { country } complete = {complete} verification = {verification}
-            / > < /
-            div >
+            /> 
+            </div>
         )
     }
-
-    const myGoals =()=>{
-        if(span.length === 0){
-            return (
-                <div>
-                    <p className='p-5'>You have no goals yet created</p>
-                </div>
-            )
-        } else {
-            return(
-                <
-            div className = "scroll-y2 bg-lighter p-2" > {
-                span.map(goal => ( <
-                    div className = "p-3 bg-white rounded-4 mt-1"
-                    key = { goal.goal_id } ><
-                    div className = "row" > <
-                    div className = "col-1" > <
-                    AddUser className = " rounded-circle bg-light active p-2"
-                    size = "large" / > < /div>  <
-                    div className = "col-7 px-4" > < h6 className = "bolder"
-                     > {
-                        (goal.goal_name)
-                    }< p className='font-light'> created {
-                        (goal.created).slice(0, 10)
-                    } < /p >  < /h6>  < /
-                    div ><div className='col-3 text-end'><span className = {checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[1]} onClick = {
-                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created, goal.goal_status)
-                    }>{checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[0]}</span></div> < /
-                    div >
-                    <
-                    span><span className='bolder mx-2'>Progress:</span>  {
-                        progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
-                    } %
-                    <
-                    span >
-                    <
-                        ProgressBar now = { progress }
-                        className="progress-sm mx-2"
-                        variant = "#ff8b10" /
-                        >
-                    <
-                    /span> < /
-                    span > <
-                    span className = "bolder mx-2" >Total Deposit: <span className='font-light'>{ (goal.deposit[0]).toLocaleString() }</span> < /span > <span>|</span> <
-                    span className = "bolder mx-2" >Goal Amount: <span className='font-light'>{ (goal.goal_amount).toLocaleString() }</span> < /span > < /
-                    div >
-                ))
-            } <
-            /div> 
-            )
-        }
-    }
-    let progress
-        return ( < div className = '' >
-            <
-            div className = 'p-1' >
-            <div><h4 className='blue-darks p-3 rounded-top-3'>Goals: {span.length}</h4><
-            p onClick = {
-                () => { setGoalSetting(true) }
+    if (goalDeposit) {
+        return ( 
+            <div className='px-3'>
+            <div className = 'row d-none p-2 px-3' > 
+            <div className = 'col-10 bg-lighter rounded-4' > 
+            <h4 className = ' mx-3 bolder mt-3' > Create New Goal </h4 > </div>
+            <div className = 'rounded-4 d-none light-res-home wide' >
+            <p className = "bolder text-end mx-4 mt-2" > welcome back user 
+            <div className = " justify-content-center" > 
+            <p className = "px-1 font-lighter" > pick up where we left off </p></div > </p>
+            </div> 
+            </div>
+            <h4 className='bolder my-3'>
+            <ArrowLeftSquare size = { 25 }
+            onClick = {
+                () => { setGoalDeposit(false) }
             }
-            className = 'rounded-3 bk-warning px-5 text-center mb-2' > Add a new Goal </p></div>{myGoals()}
-             <
-            Modal show = { show3 }
-            onHide = { handleClose3 }
-            dialogClassName = "" ><Modal.Header className='modaling' closeButton>
-            <Modal.Title>{holdName}</Modal.Title>
-            </Modal.Header> <
-            Goal id = { holdId }
+            className = "mx-2" />Goals</h4>
+            <Goal id = { holdId }
             name = { holdName }
             country = {country}
             amount = { holdAmount }
@@ -198,12 +156,86 @@ const ResGoals = () => {
             fullname = { name }
             email = { email }
             status = { goalStatus }
-            / > < /
-            Modal >
-             < /
-            div > <
-            /
-            div >
+            goalPicture = {goalPicture}
+            /> 
+            </div>
         )
+    }
+    const myGoals =()=>{
+        if(span.length === 0){
+            return (
+            <div className='rounded-4 pb-5 blue-darks'>
+            <img src={Goals} width="100%" height="100%" alt="goals"/>
+            <div className = " py-5 text-center" >
+                <h4 className = "bolder text-white" > Goal Investing </h4>  
+                <h6 className = "mx-5" > Let your dreams come true by investing
+                for them, <p className = "mx-5" > create your goals here </p>  </h6> 
+            </div>
+            <h6 onClick = {
+                () => { setGoalSetting(true) }
+            }
+            className = 'rounded-3 bk-warning2 px-5 text-center mb-2' > Add a new Goal </h6>
+            </div>
+            )
+        } else {
+            return(
+                <div className = "scroll-y bg-lighter pb-5 p-2" > {
+                span.map(goal => ( 
+                    <div className = "p-3 bg-white rounded-4 mt-1"
+                    key = { goal.goal_id } >
+                    <div className = "row" >  
+                    <div className = "col-8 px-4" > < h6 className = "bolder"> 
+                    {
+                        (goal.goal_name)
+                    }
+                    <p className='font-light'> created {
+                        (goal.created).slice(0, 10)
+                    } </p>  </h6>  </div>
+                    <div className='col-4 text-end'><h6 className = {checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[1]} onClick = {
+                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created, goal.goal_status, goal.goal_picture)
+                    }>{checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[0]}</h6></div> 
+                    </div>
+                    <div className = "goal-image" onClick={() => onlyId(goal.goal_id)}>
+                    <img src = {goal.goal_picture} width="100%" height="100%" className = "object-fit-cover" alt = "goal" /> </div> 
+                    <span className='mt-3'><span className='bolder m-2'>Progress:</span>  {
+                        progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
+                    } %
+                    <span>
+                    <ProgressBar now = { progress }
+                        className="progress-sm mx-2"
+                        variant = "#ff8b10" />
+                    </span> 
+                    </span> 
+                    <span className = "bolder mx-2" >Total Deposit: <span className='font-light'>{ (goal.deposit[0]).toLocaleString() }</span> </span> <span>|</span> 
+                    <span className = "bolder mx-2" >Goal Amount: <span className='font-light'>{ (goal.goal_amount).toLocaleString() }</span> </span> 
+                    </div>
+                ))
+            }
+            <Modal show={show} onHide={handleClose} className = "p-3 text-center">
+            <GoalPhoto goal_id={holdId}/>
+            </Modal>
+            </div>
+            )
+        }
+    }
+    let progress
+    return ( 
+        <div className = 'bg-lighter'>
+            <div className = 'p-1' >
+            <div className='row m-0 bg-lighter rounded-4 py-2'><div className='col-7'><h4 className='py-2'>Goals: {span.length}</h4></div>
+            <div className='col-5 text-end'>
+            <h6 onClick = {
+                () => { setGoalSetting(true) }
+            }
+            className = 'rounded-3 bk-warning2 m-0' > Add a new Goal </h6></div>
+            <div className='col-2 d-none'>
+            <img src = {props.profile}
+            className = "rounded-circle object-fit-cover img-head"
+            alt = "investors" /> </div>
+            </div>
+            {myGoals()}
+            </div>
+        </div>
+    )
 };
 export default ResGoals;

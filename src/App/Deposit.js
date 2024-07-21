@@ -1,15 +1,14 @@
+
+import { GetRiskProfile, UserRequests, GetInvestmentClassesRequests, RequestRiskAnalysisPercentages, UserVerificationRequests } from "../Api/MainRequests";
 import { useEffect } from "react";
 import React, { useState } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
-import ResLearn1 from '../Accounts/ResLearn1';
 import Learn1 from '../Accounts/Learn1';
 import './style.scss'; 
-import { PROFILE_PHOTO } from "../apis";
 import Depo from '../images/depo.png'
 import { Wallet, ArrowLeftSquare} from "react-iconly";
-import { GetRiskProfile, UserRequests, GetInvestmentOptionsRequests, RequestRiskAnalysisPercentages, UserVerificationRequests } from "../Api/MainRequests";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
     const [country, setCountry] = useState([])
@@ -24,42 +23,52 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
     const [riskAnalysisPercentages, setRiskAnalysisPecentages] = useState([])
     const [verification, setVerification] = useState("")
     const [complete, setComplete] = useState("Incomplete");
+
     useEffect(() => {
+
         GetRiskProfile().then(res => {
+        
             if (res.investment_option === undefined) {
                 setinvestmentoption("Automatic Asset Allocation")
             } else {
                 setinvestmentoption(res.investment_option)
             }
-        });
+        })
+
         UserRequests().then(res => {
             setCountry(res.profile.country)
             setName(res.last_name + " " + res.first_name)
             setPhone(res.profile.phoneno)
             setEmail(res.email)
         });
-        GetInvestmentOptionsRequests().then(res => {
+
+        GetInvestmentClassesRequests().then(res => {
             setOptions(res)
         });
+
         RequestRiskAnalysisPercentages().then(res=>{
             setRiskAnalysisPecentages(res)
         });
+
         UserVerificationRequests().then(res => {
             setVerification(res.success)
         });
+
         GetRiskProfile().then(res => {
             if (res.status === true) {
                 setComplete("Complete")
             }
         });
+
     }, []);
+
     return ( < div className="mx-2"> < div className = " d-none d-sm-block" > <
-        div className = "row" > <
+        div className = "row mx-3 mt-2" > <
         div className = "col-8 dollar px-4 rounded-4 " >
          <
-        div className = "row blue-darks rounded-4 py-5" >
+        div className = "row blue-darks rounded-4 px-3 py-4" >
         <
-        div className = " text-center" >
+        div className = "col text-center" >
         <
         img src = { Depo }
         className = "pt-2 d-none"
@@ -69,17 +78,14 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         Wallet size = "xlarge"
         set = "broken"
-        className = 'mx-2 rounded-circle border p-2' / > <
-        h1 className = " p-3" > Deposit < /h1>  <
+        className = 'mx-2 mt-4' / > <
+        h3 className = " p-3" > Deposit < /h3>  <
         div className = "" >
         <
-        h6 className = "px-5" > Make Deposists of any amount towards any market, you can on the other hand make goal based deposits to any goal, we shall keep track
-        for you here.Make your deposit here. < /h6> < /
+        h6 className = "mx-3 py-2 rounded light-res-homey" > Make Personal Deposits < /h6> <
+        h6 className = "mx-3 py-2 rounded light-res-homey" > Make Deposits to Goals < /h6> < /
         div > <
-        div className = "d-flex flex-row flex justify-content-center" > <
-        h6 className = " mt-3 warning rounded-3"
-        onClick = { handleShow2 } >
-        Make a Deposit < /h6> </div >
+        div className = "d-flex flex-row flex justify-content-center" >  </div >
         <
         Modal show = { show2 }
         onHide = { handleClose2 }
@@ -94,31 +100,36 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         options = {investment_options}
         riskAnalysisPercentages = {riskAnalysisPercentages}
         verification = {verification}
+        complete = {complete}
+        getSth = {props.getSth}
         / > < /
         Modal > < /
+        div ><
+        div className = "col justify-content-center border-start p-5 mt-3" >
+        <
+        h6 className = "" > Make Deposists of any amount towards any market, you can on the other hand make goal based deposits to any goal, we shall keep track
+        for you here.Make your deposit here. < /h6><
+        h6 className = " light-res-home border p-3 rounded-3 mt-4 text-center"
+        onClick = { handleShow2 } > <Wallet className="mx-2"/>
+        Make Deposit < /h6> < /
         div >
         <
         /div>  <
-        div > <
-        div className = "col-5 d-none justify-content-center lightest shadow-sm p-5 mt-3 rounded-4" >
-        <
-        h6 className = "px-5" > Make Deposists of any amount towards any market, you can on the other hand make goal based deposits to any goal, we shall keep track
-        for you here.Make your deposit here. < /h6> < /
-        div >
+        div > 
         <
         /
         div >
         <
         /
         div > <
-        div className = "col-4 rounded-4 px-4" > <
-        div className = "row p-2 bg-lighter rounded-3" >
+        div className = "col-4 bg-lighter rounded-4 px-4" > <
+        div className = "row p-2 rounded-3" >
         <
-        div className = "text-start col-6 p-2" > < h6 > PROCEDURE < /h6> < /div > < /
+        div className = "text-start col-6 mt-3" > < h6 > PROCEDURE < /h6> < /div > < /
         div >
         <
-        div className = "p-2 mt-3 bg-white rounded-4" > <
-        div className = "row px-3 bg-white shadow-sm rounded-4" >
+        div className = "p-2" > <
+        div className = "row px-3 bg-white rounded-4" >
         <
         div className = "col-2" >
         <
@@ -132,7 +143,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         h6 className = " pt-4" > Fill in your Risk Profile < /h6>< /
         div > < /div >  <
-        div className = "row px-3 bg-white mt-2 shadow-sm rounded-4" >
+        div className = "row px-3 bg-white mt-2 rounded-4" >
         <
         div className = "col-2" >
         <
@@ -147,7 +158,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         h6 className = " pt-3" > Choose where to make your Deposit
         for example Treasury Bills < /h6>< /
         div > < /div > <
-        div className = "row px-3 bg-white mt-2 shadow-sm rounded-4" >
+        div className = "row px-3 bg-white mt-2 rounded-4" >
         <
         div className = "col-2" >
         <
@@ -161,10 +172,10 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <
         h6 className = " pt-4" > Make the Deposit < /h6>< /
         div > < /div > <
-        div className = "row justify-content-center bg-white shadow-sm p-4 mt-3 rounded-4" >
+        div className = "row justify-content-center bg-white p-4 mt-3 rounded-4" >
         <
-        h4 className = "bolder text-center p-3" > Investor Risk profile < /h4> <
-        h6 className = "text-center" > Your risk profile helps us invest your money accordingly,
+        h4 className = " text-center p-3" > Investor Risk profile < /h4> <
+        h6 className = "text-center small" > Your risk profile helps us invest your money accordingly,
         let us know what type of investor you are.Complete your profile and
         let us do the rest < /h6> <
         h6 className = "text-center mt-3 rounded-3 bk-warning"
@@ -174,32 +185,15 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         /
         div > < /
         div > < /
-        div > < /div> <
-        div className = "d-block d-sm-none py-3" ><
-        ArrowLeftSquare size = { 30 }
+        div > < /div>
+        <div className="fix-top bg-white d-lg-none d-md-none d-sm-block mx-2"><h4 className="bolder my-2">
+        <
+        ArrowLeftSquare size = { 25 }
         onClick = {
             () => { props.handletab1() }
-        }
-        className = "my-1 mx-2" / >
-        <
-        div className = 'row d-none p-2 px-3' > <
-        div className = 'col-10 bg-lighter rounded-4' > <
-        h4 className = ' mx-3 bolder mt-3' > Deposit < /h4 > < /div >
-        <
-        div className = 'rounded-4 d-none light-res-home wide' >
-        <
-        p className = "bolder text-end mx-4 mt-2" > welcome back user <
-        div className = " justify-content-center" > <
-        p className = "px-1 font-lighter" > pick up where we left off < /p></div > < /p>< /
-        div >
-        <
-        div className = 'col-2' > <
-        // img src = "http://127.0.0.1:8000/static/photo.png"
-        img src = {PROFILE_PHOTO}
-        className = "rounded-circle object-fit-cover mt-2 img-head"
-        alt = "investors" / > < /div> < /
-        div > <
-        ResLearn1
+        } / ><span className="mx-2 bolder">Deposit</span></h4></div>
+        <div className="d-lg-none d-md-none d-sm-block "><
+        Learn1 tab9 = { props.handletab9 }
         country = { country }
         lastname = { name }
         email = { email }
@@ -209,9 +203,8 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         riskAnalysisPercentages = {riskAnalysisPercentages}
         verification = {verification}
         complete = {complete}
-        / >
-        <
-        /div > < /div >
+        / ></div>
+        < /div >
     );
 };
 

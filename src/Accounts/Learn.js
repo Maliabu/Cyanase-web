@@ -3,6 +3,7 @@ import '../App.css';
 import { FaUserClock, FaUserGraduate, FaUsers, FaUserSecret } from 'react-icons/fa';
 import Logo from '../images/CI.png'
 import Home from '../App/Home'
+import { Activity } from "react-iconly";
 
 const Learn = (props) => {
     const Learn4 = () => {
@@ -107,22 +108,23 @@ const Learn = (props) => {
         return ( < Home / > );
     }
     return ( <
-        div className = "mt-3 p-5 text-center" > <
+        div className = "mt-3 text-center" > <
         img src = { Logo }
-        className = "pt-2 text-center"
-        width = '80'
-        height = '80'
-        alt = "investors" / >
+        className = " text-center my-5"
+        width = '50'
+        height = '50'
+        alt = "investors" / > <
+        p className = " py-3 d-none" > Hello < span className = " bolder" > {props.name} < /span></p >
+        <div className="blue-darks p-5 rounded-bottom">
         <
-        h4 className = "bolder mt-3" > Welcome to Cyanase Investors < /h4> <
-        p className = "my-3" > Hello < span className = " bolder" > {props.name} < /span></p >
+        h4 className = " mt-3" > Welcome to <br/> Cyanase Investors < /h4>
         <
         h6 > Learn more about our products and services. < /h6> <
-        h6 className = "mt-5 warning rounded-3"
+        h6 className = "mt-5 light-res-home p-3 rounded-3"
         onClick = {
             () => { setStep(step + 1) }
-        } >
-        Proceed < /h6></div >
+        } > <Activity className="mx-2"/>
+        Here's what we offer < /h6></div></div >
     );
 }
 

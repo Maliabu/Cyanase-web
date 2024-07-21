@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TOKEN, API_URL_GET_DEPOSIT, API_URL_USER_GET_PROFILE_PHOTO, API_URL_GET_USER_BANKS, API_URL_GET_RISK_ANALYSIS_PERCENTAGES, API_URL_GET_USER_VERIFICATION, API_URL_GET_INVESTMENT_WITHDRAWS, API_URL_GET_INVESTMENT_OPTIONS, API_URL_GET_INVESTMENT_OPTION, API_URL_GET_GOAL, API_URL_GET_WITHDRAW_FEE, API_URL_GET_SUB_STATUS, API_URL_GET_GOAL_DEPOSIT, API_URL_USER_NETWORTH, API_URL_GET_RISK_PROFILE, API_URL_GET_AUTH_USER, API_URL_GET_NEXTOFKIN, API_URL_GET_WITHDRAW, API_URL_GET_GOAL_WITHDRAW, API_URL_GET_PENDING_WITHDRAW } from "../apis";
+import { TOKEN, API_URL_GET_DEPOSIT, API_URL_USER_GET_PROFILE_PHOTO, API_URL_GET_INVESTMENT_CLASSES, API_URL_GET_INVESTMENT_CLASS_OPTIONS, API_URL_GET_USER_BANKS, API_URL_GET_RISK_ANALYSIS_PERCENTAGES, API_URL_GET_USER_VERIFICATION, API_URL_GET_INVESTMENT_WITHDRAWS, API_URL_GET_INVESTMENT_OPTIONS, API_URL_GET_INVESTMENT_OPTION, API_URL_GET_GOAL, API_URL_GET_WITHDRAW_FEE, API_URL_GET_SUB_STATUS, API_URL_GET_GOAL_DEPOSIT, API_URL_USER_NETWORTH, API_URL_GET_RISK_PROFILE, API_URL_GET_AUTH_USER, API_URL_GET_NEXTOFKIN, API_URL_GET_WITHDRAW, API_URL_GET_GOAL_WITHDRAW, API_URL_GET_PENDING_WITHDRAW } from "../apis";
 
 export const MainRequests = async() => {
     try {
@@ -170,6 +170,32 @@ export const GetInvestmentOptionsRequests = async() => {
     }
 };
 
+export const GetInvestmentClassesRequests = async() => {
+    try {
+        const response = await axios.get(`${API_URL_GET_INVESTMENT_CLASSES}`, {
+            headers: {
+                "Authorization": `Token ${TOKEN}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return error ? error.response ? error.response.data : error : error.message;
+    }
+};
+
+export const GetInvestmentClassOptionsRequests = async(option) => {
+    try {
+        const response = await axios.post(`${API_URL_GET_INVESTMENT_CLASS_OPTIONS}`, option, {
+            headers: {
+                "Authorization": `Token ${TOKEN}`
+            }
+        });
+        return response;
+    } catch (error) {
+        return error ? error.response ? error.response.data : error : error.message;
+    }
+};
+
 export const GetInvestmentOptionRequest = async() => {
     try {
         const response = await axios.get(`${API_URL_GET_INVESTMENT_OPTION}`, {
@@ -247,3 +273,17 @@ export const GoalWithdraws = async() => {
         return error ? error.response ? error.response.data : error : error.message;
     }
 };
+
+export const getClassOptions = async(option, description, id, logo) => {
+    try {
+        const response = await axios.post(`${API_URL_GET_INVESTMENT_CLASS_OPTIONS}`, option, {
+            headers: {
+                "Authorization": `Token ${TOKEN}`,
+                "Content-Type": "application/json"
+            }
+        });
+        return [response.data, option, description, id, logo];
+    } catch (error) {
+        return error ? error.response ? error.response.data : error : error.message;
+    }
+}
