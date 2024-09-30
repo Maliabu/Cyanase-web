@@ -45,49 +45,72 @@ const ADetails = (props) => {
         }
         className = "active my-3" / > 
         <h3> Account Details </h3>  
-        <div className = "row px-3 scroll-y" > 
+        <div className = "row px-3" > 
         <div className = "col-6" >
-        <div className = "row p-2 px-3" > <div className = "col-1 px-3" >
+        <div className = "row px-3" > <div className = "col-1" >
         <User size = "medium"
-        set = "broken"
-        className = 'my-3 active' />
+        set = "bold"
+        className = 'my-3 grey-text' />
         </div>
         <div className = "col-11 mt-3" >
-        <h5> Name </h5> 
-        <h6>
-        <div className = 'flexName d-flex bolder' > <p> { firstName } </p> &nbsp; <p>{ lastName }</p > </div>  </h6> </div>
+        <h5> Name
+        <h6 className="bolder">
+        <div className = 'flexName d-flex' > <h6> { firstName } </h6> &nbsp; <h6>{ lastName }</h6 > </div>  </h6> </h5> </div>
         </div>
         <div className = "row px-3" > 
         <div className = "col-1" >
         <Call size = "medium"
-        set = "broken"
-        className = 'my-3 active' / >
+        set = "bold"
+        className = 'my-3 grey-text' / >
         </div>
         <div className = "col-11 mt-3" >
-        <h5> Phone </h5> <h6> <p className = "bolder" > { phoneNumber } </p>  </h6> </div>
+        <h5> Phone <h6 className = "bolder" > { phoneNumber }  </h6> </h5>  </div>
         </div>
         <div className = "row px-3" > 
         <div className = "col-1" >
         <Message size = "medium"
-        set = "broken"
-        className = 'my-3 active' / >
+        set = "bold"
+        className = 'my-3 grey-text' / >
         </div>
         <div className = "col-11 mt-3" >
-        <h5> Email </h5> <h6> <p className = "bolder" > { email } </p> </h6> </div>
+        <h5> Email <h6 className = "bolder" > { email } </h6></h5>  </div>
         </div>
         <div className = " mt-3 bg-white rounded-4 p-2" >
-        <h5 className = "rounded-3 text-dark m-3" > Next Of Kin Details </h5>  
-        <h6 className="mx-3"> FirstName: <span className = "bolder text-dark mx-3" > { firstNok } </span>  
-        </h6> 
-        <h6 className="mx-3"> LastName: < span className = "bolder text-dark mx-3" > { lastNok } </span>  </h6> 
-        <h6 className="mx-3"> Email: < span className = "bolder text-dark mx-3" > { emailNok } </span>  </h6> 
-        <h6 className="mx-3"> Phone: < span className = "bolder text-dark mx-3" > { phoneNok } </span> </h6> </div>  </div>
-        <div className = "col-6 px-5 text-center" > 
+        <h4 className = "rounded-3 text-dark m-3 bolder" > Next Of Kin Details </h4>
+        <div className = "row px-3" > <div className = "col-1" >
+        <User size = "medium"
+        set = "bold"
+        className = 'my-3 grey-text' />
+        </div>
+        <div className = "col-11 mt-3" >
+        <h5> Name
+        <h6>
+        <div className = 'flexName d-flex bolder' > <h6> { firstNok } </h6> &nbsp; <h6>{ lastNok }</h6 > </div>  </h6> </h5> </div>
+        </div>
+        <div className = "row px-3" > 
+        <div className = "col-1" >
+        <Call size = "medium"
+        set = "bold"
+        className = 'my-3 grey-text' / >
+        </div>
+        <div className = "col-11 mt-3" >
+        <h5> Phone <h6 className = "bolder" > { phoneNok }  </h6> </h5>  </div>
+        </div>
+        <div className = "row px-3" > 
+        <div className = "col-1" >
+        <Message size = "medium"
+        set = "bold"
+        className = 'my-3 grey-text' / >
+        </div>
+        <div className = "col-11 mt-3" >
+        <h5> Email <h6 className = "bolder" > { emailNok } </h6></h5>  </div>
+        </div></div>  </div>
+        <div className = "col-6 px-5 pt-3 cards rounded-4 text-center" > 
         <img src = {profilePicture}
         className = " rounded-circle object-fit-cover img-back"
         alt = "investors" />
-        <p className = "bolder bolder mt-5" > Account Type: <span className = "text-dark" > Personal </span></p>
-        <h6 className = "warning text-center rounded-3 mt-3"
+        <p className = "bolder bolder mt-5" > Account Type: <span className = "active" > Personal </span></p>
+        <h6 className = "btn btn-warning text-center mt-3"
         onClick = { handleShow1 } > Change Photo </h6> 
         <h6 className = "bg-danger text-white d-none text-center rounded-3 mt-3 mx-5 active p-3"
         onClick = { handleShow2 } > Delete Account </h6>

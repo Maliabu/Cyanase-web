@@ -27,7 +27,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         div className = "col-1" >
         <
         User size = "medium"
-        set = "broken"
+        set = "bold"
         className = 'my-3 active' / >
         <
         /
@@ -49,7 +49,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         div className = "col-1" >
         <
         Notification size = "medium"
-        set = "broken"
+        set = "bold"
         className = 'my-3 active' / >
         <
         /
@@ -71,7 +71,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         div className = "col-1" >
         <
         Chat size = "medium"
-        set = "broken"
+        set = "bold"
         className = 'my-3 active' / >
         <
         /
@@ -93,7 +93,7 @@ const Settings = ({ id, activeTab, children, ...props }) => {
         div className = "col-1" >
         <
         Call size = "medium"
-        set = "broken"
+        set = "bold"
         className = 'my-3 active' / >
         <
         /

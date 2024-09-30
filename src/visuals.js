@@ -230,13 +230,12 @@ const Visuals = () => {
         h3 className = 'bolder text-center my-2' > Total Investments in UGX: < h2 className = 'font-lighter' > 3,579,097.5 < /h2>   < /
         h3 ><
         h2 className = 'p-lg-4 p-2 active bolder' > Deposit Activity < /h2><
-        div className = 'bg-lighter p-2 p-lg-3' > <
-        Chart options = { deposit.options }
+        div className = 'bg-lighter p-2 p-lg-3' > 
+        <Chart options = { deposit.options }
         series = { deposit.series }
         className = "w-100"
         type = "area"
-        height = { 500 }
-        /></div >
+        height = { 500 }/></div >
         <
         div className = 'row p-lg-4 p-2 border-top border-bottom' >
         <

@@ -1,13 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import './style.scss';
-import { PendingWithdrawRequests, UserRequests, MainRequests, InvestmentWithdrawRequests } from '../Api/MainRequests';
+import { PendingWithdrawRequests, UserRequests, MainRequests, InvestmentWithdrawRequests, GetUserTrackRequests } from '../Api/MainRequests';
 import React, { useState, useEffect } from "react";
 import { getCurrency } from '../payment/GetCurrency';
 import { FaDonate } from 'react-icons/fa';
 import ResWithdraw from './ResWithdraw'
 import PendingWithdraws from '../Accounts/PendingWithdraws'
 import Modal from 'react-bootstrap/Modal';
+import { sum } from 'lodash';
 
 const ResWithdraws = (props) => {
     const [option_name, setOptionName] = useState("")
@@ -20,6 +21,7 @@ const ResWithdraws = (props) => {
     const [graph, setGraph] = useState([])
     const [investmentWithdraw, setInvestmentWithdraw] = useState([])
     const [withdraws, setWithdraw] = useState([])
+    const [userTrack, setUserTrack] = useState([])
     const [show5, setShow5] = useState(false);
     const handleClose5 = () => setShow5(false);
     const handleShow5 = () => setShow5(true);
@@ -36,6 +38,9 @@ const ResWithdraws = (props) => {
             InvestmentWithdrawRequests().then(res => {
                 setInvestmentWithdraw(res)
             });
+            GetUserTrackRequests().then(res => {
+                setUserTrack(res)
+            });
         }, []);
         function summ(array) {
             let sum = 0
@@ -44,6 +49,7 @@ const ResWithdraws = (props) => {
             });
             return sum
         }
+        console.log(userTrack)
         function getWithdraws(name,networth,investment_id, deposit, handler){
             setOptionName(name)
             setGroups(networth)
@@ -109,6 +115,7 @@ const ResWithdraws = (props) => {
             return resultList;  // convert map to list, i.e { 'a' => { value: 2000, data: 'first' } } to [ { name: 'a', value: 1200 }]
         }
         let final_data = subtractTwoLists(results, result)
+        console.log(final_data)
         if (withdrawSetting) {
             return ( < ResWithdraw changeWithdrawSetting = { setWithdrawSetting }
                 option_name = {option_name}
@@ -123,8 +130,8 @@ const ResWithdraws = (props) => {
             // if (withdraws.length === 0) {
                 if(final_data.length !== 0){
                 return ( 
-                    <div className="scroll-y pb-5 rounded-4 px-3">
-                    {
+                    <div className="scroll-y pb-5 pt-3 rounded-4 px-3">
+                    {/* {
                         final_data.map((option, id) => (
                         <div className={"Venture p-3 mt-1 row rounded-4"} key={id} onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>
                             <div className=''><h5 className='bolder pb-1'>{option.name}<h6>{option.handler}</h6></h5> </div>
@@ -146,51 +153,43 @@ const ResWithdraws = (props) => {
                             </div>
                         </div>
                         ))
+                    } */}
+                    {
+                        userTrack.map((option, id) => (
+                        <div className={"Venture p-3 mt-1 row rounded-4"} key={id} onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>
+                            <div className=''><h5 className='bolder pb-1'>{option.investment_option}<h6>{option.fund_manager}</h6></h5> </div>
+                                    <div className = "row" >
+                                    <div className='col text-start pt-4 px-0'>
+                                    <span className="light-res-home p-2 rounded-3"><FaDonate/></span>
+                                    </div>
+                                    <div className='col text-end px-0'> 
+                                    <h6 className='m-0'>Deposit:
+                                    <div className = "d-flex flex-row flex m-0 justify-content-end" >
+                                    <span className='bolder'> { getCurrency(country) } </span>  
+                                    <h4 className = "bolder text-white" > {
+                                (option.opening_balance + option.deposit_amount).toLocaleString()
+                            } </h4></div ></h6></div><div className='text-end p-0'><h6 className='m-0'>Networth:
+                            <div className = "d-flex flex-row flex m-0 justify-content-end" ><span className='bolder'> { getCurrency(country) } </span>  
+                            <h4 className = "px-1 bolder text-white m-0" > {
+                                option.closing_balance.toLocaleString()
+                            } </h4></div ></h6></div> 
+                            </div>
+                        </div>
+                        ))
                     }
                     </div>
                  )}
-                // else {
-                //     return(
-                //         <div>
-                //         <div className="p-2 m-2 rounded-4 bg-white">
-                //         <img src={RiskProfile} alt="invest today" width="100%" height="100%"/>
-                //         </div>
-                //         <div className="p-5 text-center rounded-4 bg-white mt-2">
-                //         <h6 className='bolder'>Pending Withdraws</h6>
-                //         <h6>All your pending withdraws will appear here but first...</h6>
-                //         <h6 className='bolder mt-3'>Make Deposit</h6>
-                //         <h6>Make your first deposit today and kickstart your investment journey. Get started with your risk Profile and let us know how best we can invest your deposit.</h6>
-                //         <div className="d-flex">
-                //             <h6 className="bk-warning rounded-3" onClick={props.handletab5}>Deposit</h6>
-                //             <h6 className="bk-warning rounded-3" onClick={props.handletab5}>Complete Risk Profile</h6>
-                //         </div>
-                //         </div>
-                //         </div>
-                //     )
-                // }
-            // }
-            // else {
-            //     return (
-            //         withdraws.map(withdraw => ( 
-            //             <div className = 'row p-2 mx-2 mt-1 bg-white rounded-3'>
-            //             <div className = 'col-4 text-start' > <h6 className='bolder'><span className='font-light'>{ withdraw.currency }</span>  { (withdraw.withdraw_amount).toLocaleString() } </h6> </div> 
-            //             <div className = 'col-6 text-start' > <h6 className=""><span className="text-dark bolder">{withdraw.investment_option} </span> {withdraw.handler}</h6> </div> 
-            //             <div className = 'col-2 text-end bolder' > <h6> { withdraw.created } </h6></div> 
-            //             </div>
-            //         ))
-            //     )
-            // }
             }
             function getPendingWithdraws(){
                 handleShow5()
             }
             return ( 
-                <div className='bg-lighter p-1'>
-                <div className='row rounded-3 m-0 py-2'>
+                <div className='bg-lighter'>
+                <div className='row bg-white fix-top m-0 py-2'>
                 <div className='col-5'><h4 className='mt-2'>Withdraw</h4></div>
                 <div className='col-7'>
-                <h6 className='bk-warning2 m-0 rounded-3 px-4' onClick={() => {getPendingWithdraws()}}>Pending Withdraws: {withdraws.length} </h6></div></div> 
-                <div className=" p-1 mt-1">{ pendingWithdraws() }</div>  
+                <h6 className='btn btn-warning px-3' onClick={() => {getPendingWithdraws()}}>Pending Withdraws: {withdraws.length} </h6></div></div> 
+                <div className="py-4 px-2 mt-4">{ pendingWithdraws() }</div>  
                 <Modal show = { show5 }
                 onHide = { handleClose5 }
                 dialogClassName = "">

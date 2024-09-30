@@ -3,7 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Risk from '../images/Group 130.png'
 import RProfile from './RProfile';
 import { GetRiskProfile, GetInvestmentOptionsRequests } from "../Api/MainRequests";
-import { ArrowLeftSquare } from "react-iconly";
+import { ArrowLeft, ArrowLeftSquare } from "react-iconly";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ResRiskProfile = (props) => {
     const [complete, setComplete] = useState("Incomplete");
@@ -31,46 +32,37 @@ const ResRiskProfile = (props) => {
             return button
         }
     }
-    return ( < div><div className="p-3">   <
-        h4 className = "mt-3 bolder" ><
-        ArrowLeftSquare size = { 30 }
-        className = " m-3 mt-3"
+    return ( <div>
+        <div className="p-3">
+        <h4 className="text-center">Investor Risk Profile</h4> 
+        <h4 className = "bolder" >
+        <FaArrowLeft size = { 18 }
+        className = "m-3 mt-3"
         onClick = {
             () => { props.changeRiskProfileSetting(false) }
-        }
-        /> Investor Risk Profile < /h4> <
-        div className = "row p-2 rounded-4" >
-        <
-        div className = "bg-white rounded-4 p-3" >
-        <
-        img src = { Risk }
+        }/> Risk Profile </h4> 
+        <div className = "row p-2 rounded-4" >
+        <div className = "bg-white rounded-4 p-3" >
+        <img src = { Risk }
         width = '70%'
         className = "mx-5"
         height = '100%'
-        alt = "investors" / >
-        <
-        /div> <
-        div className = " res-home" > <
-        div className = "row bg-white p-3 rounded-4" >< h5 className = " px-3 py-2 text-center border-top border-bottom" >Status: {
-        complete
-    } < /h5> <
-    div className = "p-4" > <
-        p className = " bk-warning rounded-3 px-5"
-    onClick = { handleShow2 } > {editOrComplete()} < /p> </div > < /
-    div > < /
-    div > <
-        Modal show = { show2 }
+        alt = "investors" />
+        </div> 
+        <div className = " res-home" > 
+        <div className = "row bg-white p-3 rounded-4" >
+        <h5 className = " p-3 text-center bg-lighter rounded-3" >Status: <span className="active mx-3">{ complete }</span></h5>
+        <div className="text-center">
+        <h6 className = "btn btn-warning mt-3 px-5"
+        onClick = { handleShow2 } > {editOrComplete()} </h6></div> 
+     </div> </div> 
+     <Modal show = { show2 }
     onHide = { handleClose2 }
     dialogClassName = "" >
-
-        <
-        RProfile status = { complete }
-        options = {investment_options}
-    / > < /
-    Modal > < /
-    div >
-        <
-        /div></div>
+    <RProfile status = { complete }
+        options = {investment_options}/> </Modal> 
+        </div>
+        </div></div>
 )
 }
 

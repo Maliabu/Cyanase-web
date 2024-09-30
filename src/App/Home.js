@@ -26,7 +26,7 @@ import Alert from './Alerts'
 import Subscribe from '../Accounts/Subscribe'
 import Logout from '../Accounts/Logout';
 import { apiDocs } from '../apis';
-import { FaUniversity, FaHandHoldingUsd, FaDonate, FaLightbulb } from 'react-icons/fa';
+import { FaUniversity, FaHandHoldingUsd, FaDonate, FaRegLightbulb } from 'react-icons/fa';
 import { Notification, Home, Wallet, User, People, Call, Activity, Setting, Chat } from 'react-iconly';
 
 const MyHome = () => {
@@ -57,7 +57,7 @@ const MyHome = () => {
     };
     useEffect(() => {
         UserRequests().then(res => {
-            setName(res.first_name + " " + res.last_name)
+            setName(res.first_name)
             setAccount(res.profile.user_type)
             setCountry(res.profile.country)
             setPhone(res.profile.phoneno)
@@ -74,8 +74,11 @@ const MyHome = () => {
     const apiDocumentation = () =>{
         if(account.toUpperCase() !== "PERSONAL"){
             return(
-                <
-        div className = ' pt-3' ><a href={apiDocs}>< span className = 'warning rounded-3 p-2'> Api Documentation < /span> </a> < /div >
+                <div className = ' pt-3' >
+                <a href={apiDocs}>
+                <span className = 'warning rounded-2 p-2'> Api Documentation </span> 
+                </a> 
+                </div>
             )
         } else {
             return null
@@ -137,10 +140,10 @@ const MyHome = () => {
     const whichAccount = () =>{
         let api = ""
         if(account.toUpperCase() !== "PERSONAL"){
-            api = " - Api Account"
+            api = " Api Account"
             return api
         } else{
-            api = " - Personal Account"
+            api = " Personal Account"
             return api
         }
     }
@@ -149,362 +152,261 @@ const MyHome = () => {
             return null
         }
         else if (countSub === 0 && subStatus !== "subscribed"){
-            return (<div><
-                Modal show = { handleShow4 }
-                onHide = { handleClose4 } > <
-                Subscribe substatus = { subStatus }
+            return (
+            <div>
+            <Modal show = { handleShow4 }
+                onHide = { handleClose4 } > 
+                <Subscribe substatus = { subStatus }
                 country = { country }
                 lastname = { name }
                 email = { email }
                 phone = { phone }
-                / > < /
-                Modal ></div>)
+                />
+                </Modal>
+                </div>)
         } else {
             return null
         }
     }
-    return ( <
-        div ><div className='row font'>
-        {paySubscription()}<
-        div className = 'row d-none shadow-sm' > <
-        div className = 'row py-2' >
-        <
-        div className = 'col-3 bg-lighter' > <
-        img src = { Header }
-        width = '75%'
-        // online change
-        className = 'mx-3 mt-3 '
-        height = '35%'
-        alt = "investors" / > < /div> <
-        div className = 'col-6' > < /div> <
-        div className = 'col-3' > <
-        div className = 'row m-3 p-3 blue-dark rounded-3' >
-        <
-        div className = 'col-5' >
-        <
-        img src = { Profile }
-        className = "rounded-circle"
-        width = '100%'
-        height = '80%'
-        alt = "investors" / >
-        <
-        /div> <
-        div className = 'col-6' >
-        <
-        h6 > { name } < /h6> <
-        h6 > personal Account < /h6> < /
-        div > <
-        /div></div >
-        <
-        /div>   < /
-        div >
-        <
-        div className = 'col-2 d-none d-md-block d-lg-block bg-light' > <
-        div ><
-        img src = { Header }
-        width = '60%'
-        className = 'mx-4 mt-4 '
-        height = '80%'
-        alt = "investors" / > <
-        /div>   <
-        div className = 'row my-5 py-2 mx-2 blue-darks rounded-4' >
-        <
-        div className = 'col-3' >
-        <
-        img src = {profilePicture}
-        className = "mt-1 rounded-circle object-fit-cover img-head"
-        width = '100%'
-        height = '80%'
-        alt = "investors" / >
-        <
-        /div> <
-        div className = 'col-9 py-2' > < h6 className = 'lh-1' > { name } <
-        span className = 'bolder' > { whichAccount() } < /span>  < /
-        h6 > < /
-        div > <
-        /div> <
-        // online change my-5 to my-3
-        div className = ' px-lg-2 my-2 text-start scroll-y2' >
-        <
-        h6 className = 'p-2 grey-text small' > DASHBOARD < /h6>  <
-        div className = ' d-flex flex-row' >
-        <
-        TabNavItem title = { < span > < Home
-            size = "small"set = 'broken'
-            className = 'mx-3' / > Home < /span >
-        }
-        onClick = { handleTab1 }
-        id = "tab1"
-        className = "home"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /div > <
-        div className = ' d-flex flex-row ' >
-        <
-        TabNavItem title = { < span > < User
-            size = "small"set = 'broken'
-            className = 'mx-3' / > Portfolio < /span >
-        }
-        onClick = { handleTab2 }
-        id = "tab2"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />< /div > <
-        div className = ' py-2 d-flex flex-row d-none' >
-        <
-        TabNavItem title = { < span > < People 
-            size = "small"set = 'broken'
-            className = 'mx-3' / > SACCO Groups < /span >
-        }
-        onClick = { handleTab3 }
-        id = "tab3"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /
-        div >
-        <
-        div className = ' py-2 d-flex flex-row d-none' >
-        <
-        TabNavItem title = { < span > < FaUniversity 
-            className = 'mx-3' / > Investment Clubs < /span >
-        }
-        onClick = { handleTab4 }
-        id = "tab4"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /
-        div >
-        <
-        h6 className = 'p-2 pt-5 grey-text small d-none' > ACTIVITY < /h6>   <
-        div className = ' d-flex flex-row' >
-        <
-        TabNavItem title = { < span > < Wallet 
-            size = "small"set = 'broken'
-            className = 'mx-3' / > Deposits < /span >
-        }
-        onClick = { handleTab5 }
-        id = "tab5"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /div > <
-        div className = ' d-flex flex-row d-none' >
-        <
-        TabNavItem title = { < span > < FaHandHoldingUsd 
-            className = 'mx-3' / > Loans < /span >
-        }
-        onClick = { handleTab6 }
-        id = "tab6"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /div > <
-        div className = 'd-none d-flex flex-row' >
-        <
-        TabNavItem title = { < span > < FaDonate 
-            className = 'mx-3' / > Withdraws < /span >
-        }
-        onClick = { handleTab7 }
-        id = "tab7"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /
-        div >
-        <
-        h6 className = 'p-2 pt-5 grey-text small' > SETTINGS < /h6>   <
-        div className = ' d-flex flex-row' >
-        <
-        TabNavItem title = { < span > < Setting size = "small"set = 'broken'
-            className = 'mx-3' / > Account < /span >
-        }
-        onClick = { handleTab8 }
-        id = "tab8"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /div > <
-        div className = 'd-flex flex-row' >
-        <
-        TabNavItem title = { < span > < Activity size = "small"set = 'broken'
-            className = 'mx-3' / > Risk Profile < /span >
-        }
-        onClick = { handleTab9 }
-        id = "tab9"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /div > <
-        div className = ' d-flex flex-row' >
-        <
-        TabNavItem title = { < span > < Chat size = "small"set = 'broken'
-            className = 'mx-3' / > FAQs < /span >
-        }
-        id = "tab10"
-        onClick = { handleTab10 }
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /
-        div >
-        <
-        //online change from py-3, my-5
-        div className = ' d-flex flex-row' >
-        <
-        TabNavItem title = { < span > < Call size = "small"
-            set = 'broken'
-            className = 'mx-3' / > Contact Us < /span >
-        }
-        onClick = { handleTab3 }
-        id = "tab15"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        />  < /
-        div >
-        <
-        div className = ' mt-5 px-3' > 
-        <div className='text-start'>
-        <div className='mt-2'>
-        <
-        TabNavItem title = "API Account"
-        onClick = { handleTab2 }
-        id = "tab11"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        /></div></div>
-        <div className=' text-start'>
-        <div className=''> <
-        TabNavItem title = "Logout"
-        onClick = { handleTab2 }
-        id = "tab14"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        /> </div> </div>< /
-        div >
-        <p className='text-center small mt-5 lh-1'>Management@api <br/> CyanaseInc</p>
-        <
-        /
-        div > <
-        /
-        div > <
-        div className = 'col-10 d-none d-md-block d-lg-block' >
-        <
-        div className = "row bg-light rounded-3 mt-3 mx-3" >
-        <
-        div className = 'col-8' > <
-        h6 className = 'mt-3' > <
-        FaLightbulb size = "15"
-        className = 'position-relative active' / > < span className='small'> Tips: < /span> <span className='mx-3'>Make tiny daily investments instead of saving your money</span > < /h6 > < /
-        div > <
-        div className = 'col-1 d-none text-center' >
-        <
-        span >
-        <
-        Notification set = 'broken'
-        size = "small"
-        onClick = { handleShow3 }
-        className = 'active position-relative my-3' / > <
-        span className = "position-absolute top-15 start-65 translate-middle px-1 d-none blue-dark rounded-pill" > <
-        h6 > { count } < /h6> < /
-        span > < /span> < /
-        div > <
-        div className = "col-lg-4 col-md-4 rounded-4 text-end" >
-        <
-        div className = 'row justify-content-center' > 
+    return ( 
         <div>
-
-<div className='d-flex flex-row justify-content-center p-1 rounded-3 mt-2'>
-            <
-        div className = '' > < h6 className = ' p-2' > Subscription <User size={15} className="mx-3"/>: < span className = 'bolder active rounded-3 p-2 '
-        onClick = { handleShow4 } > { subStatus } < /span>  < /
-        h6 > < /div >
-        {apiDocumentation()}
+            <div className='d-none d-md-block d-lg-block'>
+                {paySubscription()}
+                <div className='row'>
+                    <div className = 'col-2 cards'>
+                        <div>
+                            <img src = { Header }
+                            width = '60%'
+                            className = 'mx-4 mt-4 '
+                            height = '80%'
+                            alt = "investors" />
+                        </div>   
+                        <div className = 'row my-5 py-2 mx-2 blue-darks rounded-4' >
+                            <div className = 'col-3'>
+                                <img src = {profilePicture}
+                                className = "mt-1 rounded-circle object-fit-cover img-head"
+                                width = '100%'
+                                height = '80%'
+                                alt = "investors" />
+                            </div> 
+                            <div className = 'col-9 px-3 py-1'> <h6 className = 'lh-1 small' > { name } 
+                                <span className = 'bolder' > { whichAccount() } </span>  
+                                </h6> 
+                            </div> 
+                        </div> 
+                        <div className = ' px-lg-2 my-2 text-start scroll-y2' >
+                            <h6 className = 'p-2 grey-text small' > DASHBOARD </h6>  
+                            <div className = ' d-flex flex-row' >
+                                <TabNavItem title = { 
+                                    <span> <Home size = "small" set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
+                                    Home 
+                                    </span> }
+                                    onClick = { handleTab1 }
+                                    id = "tab1"
+                                    className = "home"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/> 
+                            </div> 
+                            <div className = ' d-flex flex-row ' >
+                                <TabNavItem title = { 
+                                    <span> <User size = "small"set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
+                                    Portfolio 
+                                    </span> }
+                                    onClick = { handleTab2 }
+                                    id = "tab2"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>
+                            </div> 
+                            <div className = ' py-2 d-flex flex-row d-none' >
+                                <TabNavItem title = { 
+                                    <span> <People size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    SACCO Groups 
+                                    </span> }
+                                    onClick = { handleTab3 }
+                                    id = "tab3"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>
+                            </div>
+                            <div className = ' py-2 d-flex flex-row d-none' >
+                                <TabNavItem title = { 
+                                    <span> <FaUniversity className = 'mx-3' />
+                                    Investment Clubs 
+                                    </span> }
+                                    onClick = { handleTab4 }
+                                    id = "tab4"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>  
+                            </div>
+                            <h6 className = 'p-2 pt-5 grey-text small d-none' > ACTIVITY </h6>   
+                            <div className = ' d-flex flex-row' >
+                                <TabNavItem title = { 
+                                    <span> <Wallet size = "small"set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
+                                    Deposits
+                                    </span> }
+                                    onClick = { handleTab5 }
+                                    id = "tab5"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>  
+                            </div> 
+                            <div className = ' d-flex flex-row d-none' >
+                                <TabNavItem title = { 
+                                    <span> <FaHandHoldingUsd className = 'mx-3' /> 
+                                    Loans 
+                                    </span> }
+                                    onClick = { handleTab6 }
+                                    id = "tab6"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>  
+                            </div> 
+                            <div className = 'd-none d-flex flex-row' >
+                                <TabNavItem title = { 
+                                    <span> <FaDonate className = 'mx-3 bolder' /> 
+                                    Withdraws 
+                                    </span> }
+                                    onClick = { handleTab7 }
+                                    id = "tab7"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>
+                            </div>
+                            <h6 className = 'p-2 pt-5 grey-text small' > SETTINGS </h6>   
+                            <div className = ' d-flex flex-row' >
+                                <TabNavItem title = { 
+                                    <span> <Setting size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    Account 
+                                    </span> }
+                                    onClick = { handleTab8 }
+                                    id = "tab8"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>  
+                            </div> 
+                            <div className = 'd-flex flex-row' >
+                                <TabNavItem title = { 
+                                    <span> <Activity size = "small"set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    Risk Profile 
+                                    </span> }
+                                    onClick = { handleTab9 }
+                                    id = "tab9"
+                                    activeTab = { activeTab }
+                                    setActiveTab = { setActiveTab }/>  
+                            </div> 
+                            <div className = ' d-flex flex-row' >
+                                <TabNavItem title = { 
+                                    <span> <Chat size = "small"set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    FAQs 
+                                    </span> }
+                                id = "tab10"
+                                onClick = { handleTab10 }
+                                activeTab = { activeTab }
+                                setActiveTab = { setActiveTab }/>  
+                            </div>
+                            <div className = ' d-flex flex-row' >
+                                <TabNavItem title = { 
+                                    <span > <Call size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    Contact Us 
+                                    </span>
+                                }
+                                onClick = { handleTab3 }
+                                id = "tab15"
+                                activeTab = { activeTab }
+                                setActiveTab = { setActiveTab }/>  
+                            </div>
+                            <div className = ' mt-5 px-3' > 
+                                <div className='text-start'>
+                                    <div className='mt-2'>
+                                        <TabNavItem title = "API Account"
+                                        onClick = { handleTab2 }
+                                        id = "tab11"
+                                        activeTab = { activeTab }
+                                        setActiveTab = { setActiveTab }/>
+                                    </div>
+                                </div>
+                                <div className=' text-start'>
+                                    <div className=''> 
+                                        <TabNavItem title = "Logout"
+                                        onClick = { handleTab2 }
+                                        id = "tab14"
+                                        activeTab = { activeTab }
+                                        setActiveTab = { setActiveTab }/> 
+                                    </div> 
+                                </div>
+                            </div>
+                            <p className='text-center small mt-5 lh-1'>Management@api <br/> CyanaseInc</p>
+                        </div> 
+                    </div> 
+                    <div className = 'col-10' >
+                        <div className = "row bg-light" >
+                            <div className = 'col-7' > 
+                                <h6 className = 'mt-2 p-2' > 
+                                <FaRegLightbulb size = "15" className = 'position-relative' /> 
+                                <span className='bolder'> Tips: </span> 
+                                <span className='mx-3 p-2 rounded'>Make tiny daily investments instead of saving your money </span> 
+                                </h6> 
+                            </div>
+                            <div className = "col-lg-5" >
+                                <div className='d-flex flex-row justify-content-end p-1 rounded-2'>
+                                    <div> 
+                                        <h6 className = ' px-2' >
+                                        <span className='mx-3'>Subscription</span> 
+                                        <span className = 'btn btn-warning' onClick = { handleShow4 } > { subStatus } </span> 
+                                        </h6> 
+                                    </div>
+                                    {apiDocumentation()}
+                                </div>
+                            </div>
+                        </div>
+                        <TabContent id = "tab1" activeTab = { activeTab } > 
+                        <Main handletab2 = { handleTab2 } handletab9 = { handleTab9 }/> </TabContent> 
+                        <TabContent id = "tab2"
+                        activeTab = { activeTab } > <Personal handletab9 = { handleTab9 }/> </TabContent> 
+                        <TabContent id = "tab3"
+                        activeTab = { activeTab } > <Sacco parentCallback = { handleTab12 }
+                        activeTab = { activeTab }
+                        setActiveTab = { setActiveTab }/> </TabContent> 
+                        <TabContent id = "tab4"
+                        activeTab = { activeTab } > <Club parentCallback1 = { handleTab13 }/> </TabContent> 
+                        <TabContent id = "tab5"
+                        activeTab = { activeTab } > <Deposit handletab9 = { handleTab9 }
+                        options = {investment_options}/> </TabContent> 
+                        <TabContent id = "tab6"
+                        activeTab = { activeTab }> <Loans /> </TabContent> 
+                        <TabContent id = "tab7"
+                        activeTab = { activeTab }> <Withdraw /> </TabContent> 
+                        <TabContent id = "tab8"
+                        activeTab = { activeTab }> <Settings handletab8 = { handleTab8 }
+                        handletab10 = { handleTab10 }
+                        handletab15 = { handleTab15 }/> </TabContent> 
+                        <TabContent id = "tab9"
+                        activeTab = { activeTab }> <RiskProfile /> </TabContent> 
+                        <TabContent id = "tab10"
+                        activeTab = { activeTab } > <FAQs handletab8 = { handleTab8 }/> </TabContent> 
+                        <TabContent id = "tab11"
+                        activeTab = { activeTab }> <Api /> </TabContent>
+                        <TabContent id = "tab16"
+                        activeTab = { activeTab }> <Alert /> </TabContent>
+                        <TabContent id = "tab14"
+                        activeTab = { activeTab }> <Logout countSub = {setCountSub} /> </TabContent>
+                        <TabContent id = "tab12"
+                        activeTab = { activeTab }> <Saccos /> </TabContent> 
+                        <TabContent id = "tab13"
+                        activeTab = { activeTab }> <Clubs /> </TabContent>
+                        <TabContent id = "tab15"
+                        activeTab = { activeTab } > < ContactUs handletab8 = { handleTab8 }/> </TabContent> 
+                    </div>
+                </div>
+                <Modal show = { show3 } onHide = { handleClose3 } dialogClassName = "my-modal" > <Alert /></Modal> 
+                <Modal show = { show4 } onHide = { handleClose4 } dialogClassName = "my-modal1" > 
+                <Subscribe 
+                substatus = { subStatus }
+                country = { country }
+                lastname = { name }
+                email = { email }
+                phone = { phone }/> 
+                </Modal> 
+            </div>
+            <div className = "d-block d-lg-none d-md-none" >
+                <ResHome name = { name } profile = {profilePicture} handletab2 = {handleTab2}/>
+            </div> 
         </div>
-        <div className='text-center d-none mt-3 border-end border-start'>
-        <
-        TabNavItem title = "API Account"
-        onClick = { handleTab2 }
-        id = "tab11"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        /></div></div>
-        <div className='col-5 d-none'>
-        <div className='text-center mt-3'> <
-        TabNavItem title = "Logout"
-        onClick = { handleTab2 }
-        id = "tab14"
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        /> </div> </div>< /
-        div > < /
-        div > < /
-        div >
-         <
-        TabContent id = "tab1"
-        activeTab = { activeTab } > < Main handletab2 = { handleTab2 }
-        handletab9 = { handleTab9 }
-        / > < /TabContent > <
-        TabContent id = "tab2"
-        activeTab = { activeTab } > < Personal handletab9 = { handleTab9 }
-        / > < /
-        TabContent > <
-        TabContent id = "tab3"
-        activeTab = { activeTab } > < Sacco parentCallback = { handleTab12 }
-        activeTab = { activeTab }
-        setActiveTab = { setActiveTab }
-        / > < /TabContent > <
-        TabContent id = "tab4"
-        activeTab = { activeTab } > < Club parentCallback1 = { handleTab13 }
-        / > < /TabContent > <
-        TabContent id = "tab5"
-        activeTab = { activeTab } > < Deposit handletab9 = { handleTab9 }
-        options = {investment_options}
-        / > < /TabContent > <
-        TabContent id = "tab6"
-        activeTab = { activeTab } > < Loans / > < /TabContent> <
-        TabContent id = "tab7"
-        activeTab = { activeTab } > < Withdraw / > < /TabContent> <
-        TabContent id = "tab8"
-        activeTab = { activeTab } > < Settings handletab8 = { handleTab8 }
-        handletab10 = { handleTab10 }
-        handletab15 = { handleTab15 }
-        / > < /TabContent > <
-        TabContent id = "tab9"
-        activeTab = { activeTab } > < RiskProfile / > < /TabContent> <
-        TabContent id = "tab10"
-        activeTab = { activeTab } > < FAQs handletab8 = { handleTab8 }
-        / > < /TabContent > <
-        TabContent id = "tab11"
-        activeTab = { activeTab } > < Api / > < /TabContent><
-        TabContent id = "tab16"
-        activeTab = { activeTab } > < Alert / > < /TabContent><
-        TabContent id = "tab14"
-        activeTab = { activeTab } > < Logout countSub = {setCountSub} / > < /TabContent><
-        TabContent id = "tab12"
-        activeTab = { activeTab } > < Saccos / > < /TabContent> <
-        TabContent id = "tab13"
-        activeTab = { activeTab } > < Clubs / > < /TabContent><
-        TabContent id = "tab15"
-        activeTab = { activeTab } > < ContactUs handletab8 = { handleTab8 }
-        / > < /TabContent > < /
-        div >
-        <
-        Modal show = { show3 }
-        onHide = { handleClose3 }
-        dialogClassName = "my-modal" > <
-        Alert /
-        >
-        <
-        /Modal> <
-        Modal show = { show4 }
-        onHide = { handleClose4 }
-        dialogClassName = "my-modal1" > <
-        Subscribe substatus = { subStatus }
-        country = { country }
-        lastname = { name }
-        email = { email }
-        phone = { phone }
-        / > < /
-        Modal > </div><
-        div className = "d-block d-lg-none d-md-none" >
-        <
-        ResHome name = { name } profile = {profilePicture} handletab2 = {handleTab2}
-        / > < /div > < /
-        div >
     );
 }
 

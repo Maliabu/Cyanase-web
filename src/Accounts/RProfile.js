@@ -70,7 +70,7 @@ class RProfile extends React.Component {
             tbody >
             <
             tr > <
-            td > A(18– 23 pts) < /td> <
+            td > A < /td> <
             td > 40 % < /td> <
             td > 45 % < /td><
             td > 10 % < /td><
@@ -96,7 +96,7 @@ class RProfile extends React.Component {
             /thead> <
             tbody > <
             tr > <
-            td > B(24– 28 pts) < /td> <
+            td > B < /td> <
             td > 30 % < /td> <
             td > 50 % < /td><
             td > 15 % < /td><
@@ -113,7 +113,7 @@ class RProfile extends React.Component {
             thead >
             <
             tr > <
-            th > Conservative < /th> <
+            th > Moderate < /th> <
             th > Cash < /th> <
             th > Credit < /th> <
             th > Venture < /th><
@@ -123,7 +123,7 @@ class RProfile extends React.Component {
             tbody >
             <
             tr > <
-            td > A(29– 34 pts) < /td> <
+            td > A < /td> <
             td > 25 % < /td> <
             td > 50 % < /td><
             td > 17.5 % < /td><
@@ -140,7 +140,7 @@ class RProfile extends React.Component {
             thead >
             <
             tr > <
-            th > Conservative < /th> <
+            th > Moderate < /th> <
             th > Cash < /th> <
             th > Credit < /th> <
             th > Venture < /th><
@@ -149,7 +149,7 @@ class RProfile extends React.Component {
             /thead> <
             tbody > <
             tr > <
-            td > B(35– 40 pts) < /td> <
+            td > B < /td> <
             td > 15 % < /td> <
             td > 55 % < /td><
             td > 20 % < /td><
@@ -166,7 +166,7 @@ class RProfile extends React.Component {
             thead >
             <
             tr > <
-            th > Conservative < /th> <
+            th > Assertive < /th> <
             th > Cash < /th> <
             th > Credit < /th> <
             th > Venture < /th><
@@ -176,7 +176,7 @@ class RProfile extends React.Component {
             tbody >
             <
             tr > <
-            td > A(41– 45 pts) < /td> <
+            td > A < /td> <
             td > 15 % < /td> <
             td > 40 % < /td><
             td > 30 % < /td><
@@ -193,7 +193,7 @@ class RProfile extends React.Component {
             thead >
             <
             tr > <
-            th > Conservative < /th> <
+            th > Assertive < /th> <
             th > Cash < /th> <
             th > Credit < /th> <
             th > Venture < /th><
@@ -202,7 +202,7 @@ class RProfile extends React.Component {
             /thead> <
             tbody > <
             tr > <
-            td > B(46– 50 pts) < /td> <
+            td > B < /td> <
             td > 10 % < /td> <
             td > 35 % < /td><
             td > 35 % < /td><
@@ -219,7 +219,7 @@ class RProfile extends React.Component {
             thead >
             <
             tr > <
-            th > Conservative < /th> <
+            th > Agressive < /th> <
             th > Cash < /th> <
             th > Credit < /th> <
             th > Venture < /th><
@@ -229,7 +229,7 @@ class RProfile extends React.Component {
             tbody >
             <
             tr > <
-            td > A(51– 55 pts) < /td> <
+            td > A < /td> <
             td > 10 % < /td> <
             td > 20 % < /td><
             td > 40 % < /td><
@@ -246,7 +246,7 @@ class RProfile extends React.Component {
             thead >
             <
             tr > <
-            th > Conservative < /th> <
+            th > Agressive < /th> <
             th > Cash < /th> <
             th > Credit < /th> <
             th > Venture < /th><
@@ -255,7 +255,7 @@ class RProfile extends React.Component {
             /thead> <
             tbody > <
             tr > <
-            td > B(56– 60 pts) < /td> <
+            td > B < /td> <
             td > 5 % < /td> <
             td > 15 % < /td><
             td > 35 % < /td><
@@ -393,7 +393,7 @@ class RProfile extends React.Component {
         let currentStep = this.state.currentStep;
         if (currentStep === 0) {
             return ( < div className = "bg-light m-0 py-3 text-center" > <
-                Button className = " my-2 text-center m-0 bk-warning rounded-3"
+                Button className = " my-2 text-center m-0 btn btn-warning"
                 type = "button"
                 onClick = { this._next } >
                 Start taking the Risk profile <
@@ -632,7 +632,7 @@ function Step1(props) {
         name = "question1"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "Capital Preservation"
@@ -641,7 +641,7 @@ function Step1(props) {
         name = "question1"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         Form.Check label = "Profit Generation"
@@ -650,7 +650,7 @@ function Step1(props) {
         name = "question1"
         value = "7"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox4" /
         >
         <
         /
@@ -701,7 +701,7 @@ function Step2(props) {
         name = "question2"
         value = "2"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "2 - 5 years"
@@ -710,7 +710,7 @@ function Step2(props) {
         name = "question2"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "> 5 years"
@@ -719,7 +719,7 @@ function Step2(props) {
         name = "question2"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         /
@@ -770,7 +770,7 @@ function Step3(props) {
         name = "question3"
         value = "2"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "Alternatives"
@@ -779,7 +779,7 @@ function Step3(props) {
         name = "question3"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "Listed Equities"
@@ -788,7 +788,7 @@ function Step3(props) {
         name = "question3"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         /
@@ -839,7 +839,7 @@ function Step4(props) {
         name = "question4"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "15 - 20%"
@@ -848,7 +848,7 @@ function Step4(props) {
         name = "question4"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "Up to 25%"
@@ -857,7 +857,7 @@ function Step4(props) {
         name = "question4"
         value = "7"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         /
@@ -908,7 +908,7 @@ function Step5(props) {
         name = "question5"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "$5k - $10k"
@@ -917,7 +917,7 @@ function Step5(props) {
         name = "question5"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "> $10k"
@@ -926,7 +926,7 @@ function Step5(props) {
         name = "question5"
         value = "7"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         /
@@ -977,7 +977,7 @@ function Step6(props) {
         name = "question6"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "Savings/Superannuation"
@@ -986,7 +986,7 @@ function Step6(props) {
         name = "question6"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "Other"
@@ -995,7 +995,7 @@ function Step6(props) {
         name = "question6"
         value = "0"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         /
@@ -1049,7 +1049,7 @@ function Step7(props) {
         name = "question7"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "Moderate Variability in returns, Reasonable Tax Savings"
@@ -1058,7 +1058,7 @@ function Step7(props) {
         name = "question7"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "Unstable but potentially high returns, Maximize Tax Savings"
@@ -1067,7 +1067,7 @@ function Step7(props) {
         name = "question7"
         value = "7"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         /
@@ -1147,7 +1147,7 @@ function Step8(props) {
         name = "question8"
         value = "2"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "B"
@@ -1156,7 +1156,7 @@ function Step8(props) {
         name = "question8"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         Form.Check label = "C"
@@ -1165,7 +1165,7 @@ function Step8(props) {
         name = "question8"
         value = "5"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox3" /
         >
         <
         Form.Check label = "D"
@@ -1174,7 +1174,7 @@ function Step8(props) {
         name = "question8"
         value = "7"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox4" /
         >
         <
         /
@@ -1225,7 +1225,7 @@ function Step9(props) {
         name = "question9"
         value = "1"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         /
@@ -1276,7 +1276,7 @@ function Step10(props) {
         name = "question10"
         value = "1"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         /
@@ -1331,7 +1331,7 @@ function Step11(props) {
         name = "question11"
         value = "3"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox1" /
         >
         <
         Form.Check label = "It could reduce my savings but I have no tolerance for Loss"
@@ -1340,7 +1340,7 @@ function Step11(props) {
         name = "question11"
         value = "2"
         onChange = { props.handleChange }
-        required id = "default-checkbox" /
+        required id = "default-checkbox2" /
         >
         <
         /

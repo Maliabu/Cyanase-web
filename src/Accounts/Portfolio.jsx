@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import { Home} from "react-iconly";
 import MultiCarousel2 from "../MultiCarousel2";
 import { getCurrency } from "../payment/GetCurrency";
 import { UserRequests, MainRequests, InvestmentWithdrawRequests } from "../Api/MainRequests";
 import ResWithdraw from '../App/ResWithdraw.js'
 import Chart from "react-apexcharts";
 import RiskProfile from '../images/Group 212.png'
-import { FaSearch } from "react-icons/fa";
+import { FaArrowLeft, FaChartBar } from "react-icons/fa";
+import { Download, Wallet } from "react-iconly";
 
 export default function Portfolio(props){
     const [option_name, setOptionName] = useState("")
@@ -188,6 +188,12 @@ export default function Portfolio(props){
             markers: {
                 size: 0
             },
+            grid: {
+                show: false
+            },
+            toolbar:{
+                show: false
+            },
             xaxis: {
                 title: {
                     text: 'Your Investments Activity'
@@ -225,12 +231,12 @@ export default function Portfolio(props){
     }
     const myInvestmentsGraph = () => {
         return(
-                <div className='px-1'>
+                <div className='px-1 rounded-4 m-2 bluey'>
                     <div className = '' > <Chart options = { options.options }
             series = { options.series }
             className = "w-100"
             type = "area"
-            height = { 150 }
+            height = { 200 }
             /></div></div>
         )
     }
@@ -250,10 +256,10 @@ export default function Portfolio(props){
         // )}
         // else {
             return (
-                <div className = " text-center my-1 mx-0 bg-white rounded-4 py-3" > 
+                <div className = " text-center m-1 bg-lighter rounded-4 py-3" > 
                 <div className="text-start mx-4">
                     <h4 className="bolder">Summary</h4>
-                    <h6 className="lh-1">Your investments activities as tracked by Cyanase Investors. Here find your goals and investment class options</h6>
+                    <h6 className="lh-1 bluey d-none">Your investments activities as tracked by Cyanase Investors. Here find your goals and investment class options</h6>
                 </div>
                 <Chart options = { optionsDoughnut.options }
                     series = { optionsDoughnut.series }
@@ -262,6 +268,7 @@ export default function Portfolio(props){
             )
         // }
     }
+    console.log(props)
     const checkPortfolio = () =>{
         if(graph.length === 0){
             return(<div>
@@ -281,12 +288,40 @@ export default function Portfolio(props){
         } else {
             return(
                 <div className="p-1">
-                <div className="p-2 rounded-4 m-0 bg-white">
-            <h4 className="px-3 my-3 bolder lh-1">Investments Portfolio
-            <h6 className="small">Investments Activities</h6></h4>
-            <div>{myInvestmentsGraph()}</div></div>
-            <div className="my-3">
+            <FaArrowLeft className="mx-3 text-white" onClick={props.handletab1}/>
+                <div className=" rounded-4 m-0">
+                <div className="d-flex flex-row mx-2">
+                <h4 className="p-2 bluey d-none bolder">My Portfolio</h4><div className="p-2 text-center"><Wallet size={40} set="broken" className="p-2 mx-2 bluey bg-lighter rounded-3"/><Download size={40} set="broken" className="p-2 bg-lighter bluey rounded-3"/></div></div>
+            <div className="mt-2">
             <MultiCarousel2 data={final_data} country={country} getWithdraws={getWithdraws} getCurrency={getCurrency} summ={summ}/></div>
+            <div>{myInvestmentsGraph()}</div></div>
+            <div className = "m-2 bg-back p-3 rounded-4">
+            <div>
+            <h4 className='mx-2 mt-3 bolder text-white'>Activity</h4>
+                <div className='row justify-content-center bluey g-2'>
+                    <div className='col'>
+                    <div className=' text-center rounded-3'>
+                        <span className='small text-white'>deposits</span>
+                        <h4 className='bolder text-white'>{ props.depositProgress.length }</h4>
+                    </div>
+                    </div>
+                    <div className='col'>
+                    <div className=' text-center rounded-3'>
+                    <span className='small text-white'>withdraws</span>
+                    <h4 className='bolder text-white'>{ props.wwithdraws() }</h4>
+                    </div></div>
+                    <div className='col'>
+                    <div className=' text-center rounded-3'>
+                    <span className='small text-white'>goals</span>
+                    <h4 className='bolder text-white'>{ props.span.length }</h4>
+                    </div></div>
+                    <div className='col'>
+                    <div className=' text-center rounded-3'>
+                    <span className='small text-white'>investments</span>
+                    <h4 className='bolder text-white'>{ results.length }</h4>
+                    </div></div>
+                </div>
+            </div></div>
             <div className="m-0">{myWithdraws()}</div>
         </div>
             )
@@ -294,20 +329,17 @@ export default function Portfolio(props){
     }
     return(
         <div className="rounded-4">
-        <div className = 'row bg-white justify-content-center py-2 mx-1 rounded-4'>
-            <div className='col-1'>
-            <FaSearch className='mt-3' size={15}/></div>
-            <div className='col-7'>
-            <p className = " my-3 lh-1" > Hi there, <br/> <span className = 'bolder' > { props.name } </span>  </p></div>
-            <div className='col-2 text-center' onClick={() => props.changePortfolioSetting(false)}>
-            <Home className="p-0 mt-2" set='broken' size={20}/><h6 className="bolder small">home</h6></div>
-            <div className='col-2'>
+<div className='py-2 fix-top bg-white'>
+            <div className = 'row mx-2 justify-content-center'>
+            <div className='col-8 p-0'>
+            <div className='d-flex'>
             <img src = {props.profile}
-            className = "rounded-circle object-fit-cover mt-2 img-head"
-            onClick={() => props.changeAccountSetting()}
-            alt = "investors"/> </div> 
-            </div>
-        <div className="bg-lighter">{checkPortfolio()}</div>
+            className = "rounded-circle object-fit-cover img-head mt-1"
+            onClick={() => props.changeAccountSetting(true)}
+            alt = "investors"/><h5 className='m-2 mx-3 bluey d-none'>Hi {props.name}</h5></div></div>
+            <div className='col-4 text-end p-0 bluey'><FaChartBar className="p-0 mt-2" set='broken' size={20}/><h6 className=' bolder'>My Portfolio</h6> </div> 
+            </div></div>
+        <div className=" scroll-y py-5">{checkPortfolio()}</div>
         </div>
     )
 }

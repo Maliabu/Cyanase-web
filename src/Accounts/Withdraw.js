@@ -316,7 +316,7 @@ class Withdraw extends React.Component {
                           render the form steps and pass required props in
                         */
             }<div className=" p-lg-3"><h3 className=" mt-2 d-none d-lg-block d-md-block">Withdraw</h3></div>
-            <div className={"card p-3 p-lg-4 mx-2 mx-lg-3 tet-start rounded-4"}>
+            <div className={"cards p-3 p-lg-4 mx-2 mx-lg-3 tet-start rounded-4"}>
             <h4 className="text-start bolder text-white">{this.props.option_name}
             <p className="text-start m-0 text-white p-0">{this.props.handler}</p></h4>
             <div className="row mt-3">
@@ -414,8 +414,8 @@ function Step2(props) {
     }
     return ( <
         div className = " text-start" > <
-        h6 className = " text-center" > Choose your withdraw means. < /h6> <
-        div className = "p-4"
+        h5 className = " text-center" > Choose your withdraw means. < /h5> <
+        div className = "px-4"
         key = "radio" >
         <
         div key = { `default-radio` }
@@ -437,7 +437,7 @@ function Step2(props) {
         onChange = { props.handleChange }
         type = "radio"
         value = "bank"
-        required id = "default-radio" /
+        required id = "default-radio1" /
         >
         <
         h5 className = "font-lighter mt-5" > MOBILE MONEY < /h5> <
@@ -446,7 +446,7 @@ function Step2(props) {
         onChange = { props.handleChange }
         type = "radio"
         value = "mobile money"
-        required id = "default-radio" /
+        required id = "default-radio2" /
         >
         <
         /
@@ -461,10 +461,10 @@ function Step3(props) {
     }
     return ( <
         div className = "text-center px-4" > <
-        h6 className = "mt-2" > How much would you like to Withdraw from your account ? < /h6>  <
+        h5 className = "mt-2" > How much would you like to Withdraw from your account ? < /h5>  <
         Form.Group className = "mb-3 p-3" >
         <
-        Form.Label > < h6 > Amount to Withdraw in { props.currency } < /h6> < /Form.Label > <
+        Form.Label > < h5 > Amount to Withdraw in { props.currency } < /h5> < /Form.Label > <
         Form.Control type = "number"
         onChange = { props.handleChange }
         name = "withdraw_amount"
@@ -493,7 +493,7 @@ function Step4(props) {
     if (props.withdraw_channel === "bank") {
         return ( <
             div className = "text-center mx-3" > <
-            h6 className = "mt-2" > Enter your bank details to proceed < /h6>  <
+            h5 className = "mt-2" > Enter your bank details to proceed < /h5>  <
             Form.Select className = "my-3"
             required defaultValue = "Select your preferred bank"
             onChange = { props.handleChange }
@@ -507,7 +507,7 @@ function Step4(props) {
             Form.Select > <
             Form.Group className = " p-3" >
             <
-            Form.Label > < h6 > Account Number < /h6> < /Form.Label > <
+            Form.Label > < h5 > Account Number < /h5> < /Form.Label > <
             Form.Control type = "number"
             onChange = { props.handleChange }
             name = "account_number"

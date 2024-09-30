@@ -9,6 +9,7 @@ import { ValidateForms } from "../Auth/ValidateForms";
 import { preloader,fail,catch_errors,success } from "../Api/RequestFunctions";
 import axios from "axios";
 import { API_URL_GOAL, TOKEN } from "../apis";
+import { FaBuilding, FaCar, FaGraduationCap, FaHospital, FaPlaneDeparture, FaSchool, FaShower } from "react-icons/fa";
 
 function ResGoals1(props) {
     const [step, setStep] = useState(1)
@@ -53,7 +54,7 @@ function ResGoals1(props) {
     const getDepositAmount = () => {
         let month = 12
         let week = 4
-        let period = parseInt(formData.goal_period) * month
+        let period = parseFloat(formData.goal_period) * month
         let depositRate = formData.deposit_rate
         let DepositAmount = parseInt(formData.goal_amount) / period
         if(depositRate === "weekly"){
@@ -103,16 +104,16 @@ function ResGoals1(props) {
         if (step === 7) {
             return ( <
                 div className = 'row justify-content-center' > <
-                h6 id = "errorMessage"
+                h5 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /h6> <
-                h6 id = "infoMessage"
+                } > hey < /h5> <
+                h5 id = "infoMessage"
                 className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /h6>   <
+                } > hey < /h5>   <
                 Button variant = "warning"
                 className = 'shadow text-center my-2'
                 id = 'successMessage'
@@ -130,62 +131,62 @@ function ResGoals1(props) {
         if (step === 1 && verification === false) {
             // simple - only verified users can interact with this feature
             return ( <
-                h6 className = "m-3 p-2 status rounded-3 text-center">
+                h5 className = "m-3 p-2 status rounded-3 text-center">
                 Please check your email and verify your account to proceed <
-                /h6>        
+                /h5>        
             )
         }
         if (step === 1 && riskProfileStatus === "InComplete") {
             // simple - only verified users can interact with this feature
             return ( <
-                h6 className = " m-3 p-2 status rounded-3" >
+                h5 className = " m-3 p-2 status rounded-3" >
                 Please complete your risk profile to continue to create a goal <
-                /h6>       
+                /h5>       
             )
         }
         if (step === 1 || step === 6) {
             return ( <
-                h6 className = "text-end my-2 warning rounded-3"
+                h5 className = " my-2 btn btn-warning p-2 px-5"
                 onClick = {
                     () => _next()
                 } >
-                Next < /h6>
+                Create goal < /h5>
             )
         }
         if (step === 3) {
             return ( <
-                h6 className = "text-end my-2 warning rounded-3"
+                h5 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate2()
                 } >
-                Next < /h6>
+                Next < /h5>
             )
         }
         if (step === 2) {
             return ( <
-                h6 className = "text-end my-2 warning rounded-3"
+                h5 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => validate1()
                 } >
-                Next < /h6>
+                Next < /h5>
             )
         }
         if (step === 4) {
             return ( <
-                h6 className = "text-end my-2 warning rounded-3"
+                h5 className = "text-end my-2 warning rounded-3"
                 onClick = {
                     () => _next()
                 } >
-                Next < /h6>
+                Next < /h5>
             )
         }
         if (step === 5) {
             return ( <
-                h6 className = " my-2 text-end warning rounded-3"
+                h5 className = " my-2 text-end warning rounded-3"
                 onClick = {
                     () => _next()
                 } >
-                Next < /h6>
+                Next < /h5>
             )
         }
         return null;
@@ -193,11 +194,11 @@ function ResGoals1(props) {
     const previousButton = () => {
         if (step !== 1) {
             return ( <
-                h6 className = " text-start warning rounded-3"
+                h5 className = " text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
                 Previous <
-                /h6>
+                /h5>
             )
         }
         return null;
@@ -206,14 +207,14 @@ function ResGoals1(props) {
     return ( <
         React.Fragment >
         <
-        form className = "px-4 scroll-y"
+        form className = "px-2 scroll-y"
         onSubmit = { handleSubmit(onSubmit) } > {
             /* 
                       render the form steps and pass required props in
                     */
-        } < div className = "mt-2 text-center" > <
-        AddUser className = "border border-dark text-center rounded-circle p-2 mt-3"
-        size = "xlarge" / > < /div> <
+        } < div className = "mt-2 d-none text-center" > 
+        <h3>Create New Goal</h3>
+         < /div> <
         Step1 currentStep = { step }
         handleChange = { handleChange }
         /> <
@@ -234,9 +235,6 @@ function ResGoals1(props) {
         /> <
         Step6 currentStep = { step }
         handleChange = { handleChange }
-        /> <
-        Step7 currentStep = { step }
-        handleChange = { handleChange }
         goal = { formData.goal_name }
         goal_period = { formData.goal_period }
         goal_amount = { formData.goal_amount }
@@ -245,7 +243,11 @@ function ResGoals1(props) {
         deposit_reminder_day = { formData.deposit_reminder_day }
         deposit_amount = { getDepositAmount() }
         currency = { formData.currency }
-        /> { previousButton() } { nextButton() } {submitButton()}< /
+        />  <
+        Step7 currentStep = { step }
+        handleChange = { handleChange }
+        />
+        <div className="text-center">{ previousButton() } { nextButton() } {submitButton()}</div>< /
         form > < /
         React.Fragment >
     );
@@ -256,12 +258,34 @@ function Step1(props) {
         return null
     }
     return ( <
-        div className = "my-5 py-5 rounded-4 bg-light text-center" >
-        <
-        h4 className = "bolder" > Goal Investing < /h4>  <
-        h6 className = "mx-5" > Let your dreams come true by investing
-        for them, < p className = "mx-5" > create your goals here < /p>  < /
-        h6 > < /div >
+        div className = "my-2 py-5 rounded-4 bg-back text-white" >
+        <h3 className="px-5 bolder">Create a new goal today!</h3>
+        <div className="row bluey mt-5">
+            <div className="col-4 text-center">
+                <FaCar size={60} className="rounded-circle p-2 "/>
+            </div>
+            <div className="col-4 text-center">
+                <FaBuilding size={60} className="rounded-circle border border-light p-2"/>
+            </div>
+            <div className="col-4 text-center">
+                <FaSchool size={60} className="rounded-circle p-2"/>
+            </div>
+        </div>
+        <div className="row mt-3 bluey">
+            <div className="col-4 text-center">
+                <FaHospital size={60} className="rounded-circle border border-light p-2"/>
+            </div>
+            <div className="col-4 text-center">
+                <FaPlaneDeparture size={60} className="rounded-circle p-2"/>
+            </div>
+            <div className="col-4 text-center">
+                <FaGraduationCap size={60} className="rounded-circle border border-light p-2"/>
+            </div>
+        </div>
+        <h4 className = "bolder mt-5 bluey px-5" > Goal Investing </h4>  
+        <h5 className = "px-5" > Let your dreams come true by investing
+        for them, create your goals here today 
+        </h5> </div>
     );
 }
 
@@ -272,10 +296,10 @@ function Step2(props) {
     return ( < div className = "text-center p-3" >
         <
         h4 className = "bolder" > Add a Goal < /h4> <
-        div className = "row p-1 my-3 bg-lighter rounded-4" > <
+        div className = "row p-1 my-3" > <
         Form.Group className = "mb-3 bg-white rounded-4 p-3 px-5" >
         <
-        Form.Label > < h6 > What is your Goal ? < /h6> < /Form.Label > <
+        Form.Label > < h5 > What is your Goal ? < /h5> < /Form.Label > <
         Form.Control type = "text"
         id = 'text'
         name = "goal_name"
@@ -294,7 +318,7 @@ function Step2(props) {
         <
         Form.Group className = "bg-white rounded-4 p-3 px-5" >
         <
-        Form.Label > < h6 > How long do you wish to accomplish this Goal ? (years) < /h6> < /Form.Label > <
+        Form.Label > < h5 > How long do you wish to accomplish this Goal ? (years) < /h5> < /Form.Label > <
             Form.Control type = "number"
         id = 'number'
         name = "goal_period"
@@ -318,13 +342,13 @@ function Step3(props) {
         return null
     }
     return ( <
-        div className = "text-center p-3" > < h6 className = "" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
-            default as monthly) < /h6> <
-        div className = "row bg-lighter p-1 px-3 rounded-25 my-3" >
+        div className = "text-center p-4" > < h5 className = "" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
+            default as monthly) < /h5> <
+        div className = "row p-1 px-3 rounded-25 my-3" >
         <
         Form.Group className = "mb-3 bg-white rounded-4 p-3 px-5" >
         <
-        Form.Label > < h6 > My Goal Amount is : < /h6> < /Form.Label > <
+        Form.Label > < h5 > My Goal Amount is : < /h5> < /Form.Label > <
         Form.Control type = "number"
         name = "goal_amount"
         id = 'phone'
@@ -341,165 +365,12 @@ function Step3(props) {
         /Form.Control.Feedback> < /
         Form.Group >
         <
-        h6 > You will have to make monthly deposists of: {
+        h5 className="p-2 status rounded-3"> You will have to make monthly deposists of: {
             (props.deposit_amount).toFixed(2)
-        } < /h6> < /
+        } < /h5> < /
         div >
         <
         /div>
-    );
-}
-
-function Step6(props) {
-    if (props.currentStep !== 6) {
-        return null
-    }
-    return ( <
-        div className = "text-center" > <
-        h4 className = "bolder my-3" > Deposit Type < /h4> <
-        h6 className = "mt-2" > How do you want to handle your investments < /h6> <
-        div className = "my-3"
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "bg-lighter p-1 rounded-4" >
-        <div className="bg-white p-3 rounded-4">
-        <
-        h5 className = "font-lighter text-start" > AUTO DEPOSIT < /h5>  <
-        Form.Check label = "Make your deposits automatic such that you do not miss out a single day"
-        name = "deposit_type"
-        type = "radio"
-        onChange = { props.handleChange }
-        className = "text-start"
-        value = "auto"
-        required id = "default-radio" /
-        ></div>
-        <div className="bg-white p-3 mt-3 rounded-4">
-        <
-        h5 className = "font-lighter text-start" > I WILL DEPOSIT BY MYSELF < /h5>  <
-        Form.Check label = "Let me make my own deposits"
-        name = "deposit_type"
-        onChange = { props.handleChange }
-        type = "radio"
-        className = "text-start"
-        value = "manual"
-        required id = "default-radio" /
-        ></div>
-        <
-        /
-        div > < /div ></div >
-    );
-}
-
-function Step4(props) {
-    if (props.currentStep !== 4) {
-        return null
-    }
-    return ( <
-        div className = "text-center pt-3" > <
-        h4 className = "bolder" > Deposit Rate < /h4> <
-        h6 className = "mt-2" > How often do you want to deposit to this goal < /h6> <
-        div className = " my-3 bg-lighter p-1 rounded-4"
-        key = "radio" >
-        <
-        div key = { `default-radio` }
-        className = "" >
-        <div className="bg-white p-3 rounded-4">
-        <
-        Form.Check label = "WEEKLY"
-        name = "deposit_rate"
-        type = "radio"
-        onChange = { props.handleChange }
-        className = "text-start"
-        value = "weekly"
-        required id = "default-radio" /
-        ></div>
-        <div className="bg-white p-3 mt-3 rounded-4">
-        <
-        Form.Check label = "MONTHLY"
-        name = "deposit_rate"
-        onChange = { props.handleChange }
-        type = "radio"
-        className = "text-start "
-        value = "monthly"
-        required id = "default-radio" /
-        ></div>
-        <
-        /
-        div > < /div ></div >
-    );
-}
-
-function Step5(props) {
-    if (props.currentStep !== 5) {
-        return null
-    }
-    return ( <
-        div className = "p-3" > <
-        h4 className = "bolder text-center" > Set A Reminder < /h4> <
-        h6 className = "mt-2" > Let us remind you when you forget to deposit < /h6>  <
-        div key = { `default-radio` }
-        className = "mb-3" >
-        <
-        Form.Check label = "Monday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Monday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Tuesday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Tuesday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Wednesday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Wdnesday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Thursday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Thursday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Friday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Friday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Saturday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Saturday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        Form.Check label = "Sunday"
-        name = "deposit_reminder_day"
-        type = "radio"
-        value = "Sunday"
-        onChange = { props.handleChange }
-        id = "default-radio" /
-        >
-        <
-        /
-        div > < /
-        div >
     );
 }
 
@@ -507,22 +378,125 @@ function Step7(props) {
     if (props.currentStep !== 7) {
         return null
     }
-    return ( <
-        div className = "text-center" >
-        <
-        h4 className = "bolder my-3" > Goal Ready < /h4> <
-        h6 className = "mt-2" > Click submit to continue < /h6> <
-        div className = "py-5 px-3 rounded-25" >
-        <
-        h5 className = "" > Your Goal is to: < span className = "bolder" > { props.goal } < /span> at {props.currency}< span className = "bolder" > { props.goal_amount } < /span >
-        within a period of < span className = "bolder" > { props.goal_period } < /span> years, while making {props.deposit_rate} deposits of {props.currency} < span className = "bolder" > { (props.deposit_amount).toFixed(2) } < /span > < /h5 > <
-        h6 > Reminder day: < span className = "bolder" > { props.deposit_reminder_day } < /span> < /
-        h6 > <
-        /
-        div > < /
-        div >
+    return ( 
+        <div className = "text-center" > 
+        <h4 className = "bolder my-3" > Deposit Type </h4> 
+        <h5 className = "mt-2" > How do you want to handle your investments </h5> 
+        <div className = "my-3"
+        key = "radio" >
+        <div key = { `default-radio` }
+        className = " p-1 rounded-4" >
+        <div className="radio-warning p-3 rounded-4">
+        <h5 className = "font-lighter text-start" > AUTO DEPOSIT </h5>  
+        <Form.Check label = "Make your deposits automatic such that you do not miss out a single day"
+        name = "deposit_type"
+        type = "radio"
+        onChange = { props.handleChange }
+        className = "text-start"
+        value = "auto"
+        required id = "default-radio" />
+        </div>
+        <div className="radio-warning p-3 mt-3 rounded-4">
+        <h5 className = "font-lighter text-start" > I WILL DEPOSIT BY MYSELF </h5>  
+        <Form.Check label = "Let me make my own deposits"
+        name = "deposit_type"
+        onChange = { props.handleChange }
+        type = "radio"
+        className = "text-start"
+        value = "manual"
+        required id = "default-radio1" />
+        </div>
+        </div> </div></div>
     );
 }
 
+function Step4(props) {
+    if (props.currentStep !== 4) {
+        return null
+    }
+    return ( 
+        <div className = "text-center pt-3" > 
+        <h4 className = "bolder" > Deposit Rate </h4> 
+        <h5 className = "mt-2" > How often do you want to deposit to this goal </h5> 
+        <div className = " my-3 p-1 rounded-4"
+        key = "radio" >
+        <
+        div key = { `default-radio` }
+        className = "p-3" >
+        <div className="radio-warning p-3 rounded-4">
+        <Form.Check label = "WEEKLY"
+        name = "deposit_rate"
+        type = "radio"
+        onChange = { props.handleChange }
+        className = "text-start"
+        value = "weekly"
+        required id = "default-radio" /
+        ></div>
+        <div className="radio-warning p-3 mt-2 rounded-4">
+        <Form.Check label = "MONTHLY"
+        name = "deposit_rate"
+        onChange = { props.handleChange }
+        type = "radio"
+        className = "text-start "
+        value = "monthly"
+        required id = "default-radio1" /
+        ></div>
+        </div > </div></div>
+    );
+}
 
-    export default ResGoals1;
+function Step5(props) {
+    if (props.currentStep !== 5) {
+        return null
+    }
+    return ( 
+        <div className = "p-5" > 
+        <h4 className = "bolder text-center" > Set A Reminder </h4> 
+        <h5 className = "mt-2" > Let us remind you when you forget to deposit </h5>  
+        <Form.Group>
+            <Form.Select
+        onChange = { props.handleChange }
+        name = "deposit_reminder_day"
+            >
+                <option value="Monday">Select A Day</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thurdsay</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </Form.Select>
+        </Form.Group> 
+        </div>
+    );
+}
+
+function Step6(props) {
+    if (props.currentStep !== 6) {
+        return null
+    }
+    return ( 
+        <div className = "rounded-4 bg-back text-white p-5 mb-2" >
+        <h3 className = "bolder text-white" > Goal Ready! </h3>  
+        <div className = "py-3" >
+        <div className="row">
+            <div className="col-6"><h5>Goal:</h5></div>
+            <div className="col-6"> <h5>{ props.goal }</h5></div>
+            <div className="col-6"><h5>Goal Amount:</h5></div>
+            <div className="col-6"> <h5>{props.goal_amount}</h5></div>
+            <div className="col-6"><h5>Time to Achive Goal(years):</h5></div>
+            <div className="col-6"><h5>{ props.goal_period }</h5> </div>
+            <div className="col-6"><h5>Deposit Rate:</h5></div>
+            <div className="col-6"> <h5>{ props.deposit_rate }</h5></div>
+        </div>
+        <h5 className = "bluey mt-3" > Your Goal is to: <span className = "bolder" > { props.goal } </span> at {props.currency}<span className = "bolder" > { props.goal_amount } </span>
+        within a period of < span className = "bolder" > { props.goal_period } </span> years, while making {props.deposit_rate} deposits of {props.currency} <span className = "bolder" > { (props.deposit_amount).toFixed(2) } </span> </h5> 
+        <h5> Reminder day: < span className = "bolder" > { props.deposit_reminder_day } </span> 
+        </h5> 
+        </div> 
+        </div>
+    );
+}
+
+export default ResGoals1;

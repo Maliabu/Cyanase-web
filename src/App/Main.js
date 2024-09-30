@@ -230,15 +230,15 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'row rounded-4' >
             <
-            div className = "p-lg-3 mx-2 rounded-4 bg-white shadow-sm col text-center" >
+            div className = "p-lg-3 mx-2 rounded-4 cards col text-center" >
             <
             h6 className = "text-start small" >Total <br/> Deposit < /h6> <
             div className = "d-flex flex-row my-3 flex justify-content-center" > { getCurrency(country) } <
             h2 className = "px-2 font-lighter" > { totalDeposit.toLocaleString() } < /h2></div >
             <
             div className = ' my-3 text-center' > <
-            span className = 'bk-warning2 rounded-3 px-5'
-            onClick = { handleShow3 } ><Wallet className="mx-2 d-none"/> Deposit < /span> </div >
+            h6 className = 'btn btn-warning rounded-2'
+            onClick = { handleShow3 } ><Wallet className="mx-2 d-none"/> Deposit < /h6> </div >
             <
             Modal show = { show3 }
             onHide = { handleClose3 }
@@ -261,7 +261,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div >
 
             <
-            div className = "card p-lg-3 rounded-4 col text-center" >
+            div className = "cards p-lg-3 rounded-4 col text-center" >
             <
             h6 className = "small text-start" > Total <br/> Networth < /h6> <
             div className = "d-flex flex-row flex justify-content-center my-3" > { getCurrency(country) } <
@@ -275,7 +275,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             div className = 'my-3 d-none' >
             <
-            span className = 'py-3 px-3 border text-center rounded-3' > < FaHandHoldingUsd size = "20"
+            span className = 'py-3 px-3 border text-center rounded-2' > < FaHandHoldingUsd size = "20"
             className = 'mx-5' / > Withdraw < /span></div > < /
             div > <
             div >
@@ -350,7 +350,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             div > <
             div className = "col-4 text-center py-3" >
             <
-            h6 className = "rounded-3 bk-warning text-center px-5"
+            h6 className = "rounded-2 btn btn-warning text-center"
             onClick = { handleShow1 } > Learn More < /h6> < /
             div >
             <
@@ -376,7 +376,7 @@ const Main = ({ id, activeTab, children, ...props }) => {
             <
             h6 className = "bolder py-2" > Your Pending Withdraws < /h6> {
             pendingWithdraws()
-        } < /div><div className='card p-2 rounded-4'> <
+        } < /div><div className='cards p-2 rounded-4'> <
         h5 className = " mt-4" > Your Statistics < /h5>    <
         div className = "row px-2 justify-content-center" >
             <

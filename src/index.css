@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
 body {
     margin: 0;
-    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    /* font-family:  'Oxygen', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
     /* -webkit-font-smoothing: antialiased;
@@ -18,12 +18,12 @@ body {
 p,
 h6,
 span,input {
-    font-size: 12px !important;
-    font-weight: 400 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 h6.bg-lighter{
     font-size: small !important;
-    font-weight: 300 !important;
+    font-weight: 500 !important;
 }
 .small{
     font-size: x-small !important;
@@ -34,7 +34,7 @@ h4 {
     color: rgb(29, 29, 29) !important;
 }
 h5 {
-    font-size: 14px !important;
+    font-size: 13px !important;
 }
 .mobile{
     font-size: 12px !important;
@@ -52,8 +52,8 @@ button {
     font-size: 15px !important;
 }
 .img-head {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
 }
 .img-head-goal {
     height: 60px;
@@ -120,10 +120,8 @@ h6,
 span,input {
     font-size: 11px !important;
 }
-h6.bg-lighter{
-    font-size: 10px !important;
-}
-h5 {
-    font-size: 13px !important;
+.bluey{
+    color: rgb(15, 15, 32) !important;
+    font-weight: 500 !important;
 }
 }

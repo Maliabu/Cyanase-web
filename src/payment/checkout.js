@@ -5,7 +5,9 @@ import { API_URL_DEPOSIT, TOKEN } from '../apis';
 
 export default function Checkout({ name, phone, amount, currency, email, data, submit }) {
     const config = {
-        public_key: 'FLWPUBK-b248048d7e363a0497a7bf525c43d822-X',
+        // FLWPUBK_TEST-955232eaa38c733225e42cee9597d1ca-X
+        // FLWPUBK-b248048d7e363a0497a7bf525c43d822-X
+        public_key: 'FLWPUBK_TEST-955232eaa38c733225e42cee9597d1ca-X',
         tx_ref: "CYANASEDEP01-v1",
         amount: amount,
         currency: currency,
@@ -61,9 +63,9 @@ export default function Checkout({ name, phone, amount, currency, email, data, s
                 });
             }
         }
-        className = 'bk-warning active px-3 mb-2 rounded-3'
+        className = 'btn btn-warning'
         id = "checkout" >
-        Make Deposit <
+        Make Payment <
         /h6> < /
         div >
     );

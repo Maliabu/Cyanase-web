@@ -348,7 +348,7 @@ function Step1(props) {
     // console.log(convertedAmount("usd",5,"ugx"))
     return ( <
         div className = "bg-white px-3 text-dark" > <
-        h6 className = "text-center my-3" > Select an Investment Class < /h6>  <
+        h4 className = "text-center my-3" > Select an Investment Class < /h4>  <
         h6 className = "rounded-3 bk-warning my-3 text-center"
         onClick = { () => {props.setRiskProfile(true)} } >
         Edit my Risk Profile before deposit < /h6>

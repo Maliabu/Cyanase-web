@@ -13,7 +13,7 @@ const ResNotifications = (props) => {
         onClick = {
             () => { props.changeNotificationSetting(false) }
         }
-        className = "my-4 mx-2" / > Notification Settings < /h4>   <
+        className = "my-4" / > Notification Settings < /h4>   <
         p > Check all the notifications you would like to receive < /p>  <
         div className = ""
         key = "default-checkbox" >

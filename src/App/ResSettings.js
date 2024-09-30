@@ -50,7 +50,7 @@ const ResSettings = (props) => {
     return ( < div className="p-4"> 
     <h4 className="bolder p-2">Settings</h4>
     <
-        div className = "row p-2 pt-3 border-top" > <
+        div className = "row p-2 pt-3 " > <
         div className = "col-2 text-end" >
         <
         User size = "25"
@@ -72,7 +72,7 @@ const ResSettings = (props) => {
         /
         div >
         <
-        div className = "row p-2 border-top pt-3" > <
+        div className = "row p-2  pt-3" > <
         div className = "col-2 text-end" >
         <
         Chart size = "25"
@@ -94,7 +94,7 @@ const ResSettings = (props) => {
         /
         div >
         <
-        div className = "row p-2 border-top pt-3" > <
+        div className = "row p-2  pt-3" > <
         div className = "col-2 text-end" >
         <
         Notification size = "25"
@@ -116,7 +116,7 @@ const ResSettings = (props) => {
         /
         div >
         <
-        div className = "row p-2 border-top pt-3" > <
+        div className = "row p-2  pt-3" > <
         div className = "col-2 text-end" >
         <
         Chat size = "25"
@@ -138,7 +138,7 @@ const ResSettings = (props) => {
         /
         div >
         <
-        div className = "row p-2 border-top pt-3" > <
+        div className = "row p-2  pt-3" > <
         div className = "col-2 text-end" >
         <
         Call size = "25"

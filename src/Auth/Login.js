@@ -107,12 +107,12 @@ const Login = (props) => {
     }
         return ( <
             div > <
-            div className = 'row rounded-4 justify-content-center p-4 bg-lighter p-lg-5' >
+            div className = 'row rounded-4 justify-content-center bg-new p-4 p-lg-5' >
             <
             Form className = 'bg-white rounded-4 col-lg-5 col-md-7 col-12'
             onSubmit = { handleSubmit } >
             <
-            div className = 'row justify-center blue-darks p-4 rounded-top-4' > <
+            div className = 'row justify-center p-4 rounded-top-4' > <
             h2 className = 'text-center' > LOGIN < /h2> <
             h6 className = ' text-center active' > Enter your Credentials below to login to your Account < /
             h6 > <

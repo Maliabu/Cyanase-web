@@ -218,9 +218,8 @@ function Goal1(props) {
             /* 
                       render the form steps and pass required props in
                     */
-        } < div className = "mt-5 text-center" > <
-        AddUser className = "border border-dark text-center rounded-circle p-2 mt-5"
-        size = "xlarge" / > < /div> <
+        } < div className = "mt-5 text-center" > 
+        <h3>Create New Goal</h3> < /div> <
         Step1 currentStep = { step }
         handleChange = { handleChange }
         /> <
@@ -263,7 +262,7 @@ function Step1(props) {
         return null
     }
     return ( <
-        div className = "my-5 py-5 rounded-4 bg-light text-center" >
+        div className = "my-5 py-5 rounded-4  text-center" >
         <
         h4 className = "bolder" > Goal Investing < /h4>  <
         h6 className = "mx-5" > Let your dreams come true by investing
@@ -327,7 +326,7 @@ function Step3(props) {
     return ( <
         div className = "text-center p-3" > < h6 className = "" > How much will it cost to accomplish this Goal ? How much do you have to keep depositing(
             default as monthly) < /h6> <
-        div className = "row bg-light p-1 px-3 rounded-25 my-5" >
+        div className = "row  p-1 px-3 rounded-25 my-3" >
         <
         Form.Group className = "mb-5 bg-white rounded-4 p-3 px-5" >
         <
@@ -347,11 +346,11 @@ function Step3(props) {
         This field is required. <
         /Form.Control.Feedback> < /
         Form.Group >
-        <
-        h6 > You will have to make monthly deposists of: {
-            (props.deposit_amount).toFixed(2)
-        } < /h6> < /
-        div >
+        <h6 className="status p-2 rounded-3"> You will have to make monthly deposists of:
+        <div>
+        <h4 className="bolder">
+        {(props.deposit_amount).toFixed(2)}</h4></div> </h6> 
+        </div >
         <
         /div>
     );
@@ -597,7 +596,7 @@ function Step7(props) {
 //         <
 //         /
 //         div > < /div >  <
-//         h6 className = "bolder p-lg-4 p-3 bg-lighter rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Cash | Venture | Credit < /span> < /
+//         h6 className = "bolder p-lg-4 p-3  rounded-3" > This deposit is to(As per your Risk profile): < span className = "active" > Cash | Venture | Credit < /span> < /
 //         h6 > < /
 //         div > );
 // }

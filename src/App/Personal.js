@@ -2,19 +2,16 @@ import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile, UserVerif
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Wallet from '../images/wallet.png';
 import './style.scss';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import TopUp from '../Accounts/TopUp';
 import Goal1 from '../Accounts/Goal1';
 import Modal from 'react-bootstrap/Modal';
-import Learn1 from '../Accounts/Learn1';
 import Goal from '../Accounts/Goal'
 import Withdraw from '../Accounts/Withdraw'
+import GoalPhoto from "../Accounts/goalPhoto";
 import Chart from 'react-apexcharts';
-import { AddUser, Image, Filter, Download } from "react-iconly";
+import { AddUser, Image, Filter } from "react-iconly";
 import { getCurrency } from "../payment/GetCurrency";
-// import ProgressBar from '@ramonak/react-progress-bar';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import PendingWithdraws from '../Accounts/PendingWithdraws'
 import Goals from '../images/house.png'
@@ -49,9 +46,6 @@ const Personal = ({...props }) => {
         const [show1, setShow1] = useState(false);
         const handleClose1 = () => setShow1(false);
         const handleShow1 = () => setShow1(true);
-        const [show2, setShow2] = useState(false);
-        const handleClose2 = () => setShow2(false);
-        const handleShow2 = () => setShow2(true);
         const [show4, setShow4] = useState(false);
         const handleClose4 = () => setShow4(false);
         const handleShow4 = () => setShow4(true);
@@ -236,14 +230,14 @@ const Personal = ({...props }) => {
                 }
                 else return (
                     nextResult.map(option => (
-                        <div className="rounded-4 card mt-2">
+                        <div className="rounded-4 cards mt-2">
                         <div className = "row p-3" >
                         <div className="col-2"><img src={option.logo} width={30} height={40} alt="logo"/></div>
                         <div className="col-6 text-end"><h6 className="bolder"> { option.name }<p>{option.handler}</p> </h6><h6 className="small py-3"><span className="small">Networth:</span><br/>
                         <div className = "d-flex flex-row flex justify-content-end" > { getCurrency(country) } 
                         <h3 className = "font-lighter" > { (option.total).toLocaleString() } </h3></div> </h6></div>
                         <div className="col-4 text-end">
-                        <h6 className=" bk-warning2 rounded-3 small" onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>Withdraw</h6></div>
+                        <h6 className=" btn btn-warning rounded-2 small" onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>Withdraw</h6></div>
                         </div></div> ))
                 )
 
@@ -261,7 +255,7 @@ const Personal = ({...props }) => {
                     }
                     else return (
                         pendingWithdraw.map(withdraw => ( <div className="">
-                        <div className = 'row p-2 mx-3 mt-1 card rounded-3' >
+                        <div className = 'row p-2 mx-3 mt-1 cards rounded-3' >
                             <div className = 'col-4 text-start' ><h6><span className="small"> { withdraw.currency }</span> { (withdraw.withdraw_amount).toLocaleString() } </h6> </div><div className="col-3 text-center">
                                 <h6 className="text-start"><span className="small bolder">option </span><br/><span>{withdraw.investment_option} </span></h6>
                             </div><div className="col-4 text-center">
@@ -275,7 +269,7 @@ const Personal = ({...props }) => {
             const myGoals = () => {
                 if(span.length === 0){
                     return(
-                        <div className='rounded-4 bg-white'>
+                        <div className='rounded-4 bg-whiter'>
                         <img src={Goals} width="100%" height="100%" alt="goals"/>
                         <div className = " py-5 text-center" >
                         <h4 className = "bolder" > Goal Investing </h4>  
@@ -290,7 +284,7 @@ const Personal = ({...props }) => {
                     key = { goal.goal_id } > <
                     div className = "d-flex flex-row" > <
                     span className = "mt-2" > <
-                    AddUser className = "p-2 border rounded-circle"
+                    AddUser className = "p-2 bg-lighter rounded"
                     size = "large" / > < /span>  <
                     h6 className = "mx-4 mt-2 hover-goal-name" onClick = {
                         () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created, goal.goal_status, goal.goal_picture)
@@ -303,7 +297,7 @@ const Personal = ({...props }) => {
                     div ><div className = "goal-image" onClick={() => onlyId(goal.goal_id)}>
                     <img src = {goal.goal_picture} width="100%" height="100%" className = "object-fit-cover rounded-4" alt = "goal" /> </div> 
                     <
-                    p className="small mt-2"><span>Progress: {
+                    p className="small mt-2 mb-0"><span>Progress: {
                         progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
                     } %</span>
                     <
@@ -324,7 +318,7 @@ const Personal = ({...props }) => {
             }
             const myRecentActivity = () => {
                 if (deposits.length === 0) {
-                    return ( < div className = 'p-5 rounded-4 bg-lighter text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
+                    return ( < div className = 'p-5 rounded-4 bg-lighterer text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
                         Image size = "large"
                         set = "broken"
                         className = 'mx-2 grey-text' / > <
@@ -335,7 +329,7 @@ const Personal = ({...props }) => {
                     }
                     else return (
                         rev.map(deposit => ( <
-                            div className = "row mt-2 p-3 bg-white rounded-3"
+                            div className = "row mt-2 p-3 bg-whiter rounded-3"
                             key = { deposit.deposit_id } >
                             <
                             div className = "col" >
@@ -366,11 +360,12 @@ const Personal = ({...props }) => {
                     div className = "row rounded-4 mt-4 mx-3" ><
                     div className = "col-8" > 
                      <
-                    div className = "row justify-content-center rounded-4 p-2" >
+                    div className = "row justify-content-center rounded-4 mx-1" >
                     <
-                    h6 className="text-end p-3"> < span className = "mx-3 p-2 border py-1 rounded-circle" > { results.length } < /span> Personal Investments < /h6> 
+                    h6 className="text-end p-4"> < span className = "mx-3 p-2 py-1 bg-lighter rounded" > { results.length } < /span> PORTFOLIO < /h6> 
                     <
-                    div className = "col-5 text-center" > <
+                    div className = "col-5 text-center" > 
+                    <
                     Chart options = { options.optionsDonut }
                     series = { options.seriesDonut }
                     height = { 300 }
@@ -379,97 +374,39 @@ const Personal = ({...props }) => {
                     >
                     <
                     /div > <
-                    div className = "col-7 px-4 text-center scroll-y5 bg-light rounded-4" > {
+                    div className = "col-7 px-2 text-center scroll-y5" > {
                     myInvestments()
                 } < /
-                div > <
-                    div className = "px-3 d-none text-center " >
-                    <
-                    img src = { Wallet }
-                className = "pt-2 d-none"
-                width = '10%'
-                height = '30%'
-                alt = "investors" / > <
-                    h5 className = "bolder mt-3 d-none" > Account Balance < /h5> <
-                div className = "d-flex flex-row d-none flex justify-content-center w-100" > getCurrency(country) <
-                    h1 className = "px-2 font-lighter" > 0.0 < /h1> < /
                 div >
-                    <
-                    div className = "d-flex flex-row d-none flex justify-content-center" >
-                    <
-                    h6 className = "px-5 py-3 mt-3 warning rounded-3"
-                onClick = { handleShow } >
-                    Top Up < /h6>  <
-                Offcanvas show = { show }
-                placement = "end"
-                className = "side-bar"
-                onHide = { handleClose } {...props } >
-                    <
-                    img src = { Wallet }
-                className = "pt-2 text-center"
-                width = '100'
-                height = '100'
-                alt = "investors" / >
-                    <
-                    Offcanvas.Header
-                    // closeButton
-                    >
-                    <
-                    div className = "row" > <
-                    Offcanvas.Title className = "bolder" > Top Up < /Offcanvas.Title> </div >
-                    <
-                    /
-                Offcanvas.Header > <
-                    Offcanvas.Body className = "px-5" >
-                    <
-                    TopUp / > < /
-                Offcanvas.Body > < /
-                Offcanvas > <
-                    h6 className = "px-5 py-3 mt-3 mx-2 warning rounded-3"
-                onClick = { handleShow2 } >
-                    Deposit < /h6> </div >
-                    <
-                    Modal show = { show2 }
-                onHide = { handleClose2 }
-                dialogClassName = "my-modal1" >
-                    <
-                    Learn1 tab9 = { props.handletab9 }
-                / > < /
-                Modal > < /
-                div >
-                    <
-                    /div>  <
-                div >
-                    <
-                    div className = "row m-2 p-2 light-res-home rounded-4" >
+                <Modal show = { show }
+                onHide = { handleClose } {...props } > 
+                <GoalPhoto goal_id={holdId} / >  </Modal >
+                    
+                    <div className = "row my-3 p-2 light-res-home rounded-4" >
                     <div className="col rounded-4 ">
-                        <
-                    h6 className = "mt-3" > < span className = " px-2 py-1 rounded-circle border mx-2" > { pendingWithdraw.length } < /span> Pending Withdraw Requests < /h6>
+                    <h6 className = "mt-3 bolder" > < span className = " px-2 py-1 d-none bg-lighter rounded mx-2" > { pendingWithdraw.length } < /span> Pending Withdraw Requests < /h6>
+                    <h6 className="small lh-1">After requesting withdraw, your withdraw status becomes pending till approved by your fund manager</h6>
                     </div>
-                    <div className="col-4 p-2 text-end"><h6 className="bk-warning2 rounded-3" onClick={() => {getPendingWithdraws()}}>View pending withdraws</h6></div>
+                    <div className="col-4 p-2 text-end"><h6 className="btn btn-warning rounded-2" onClick={() => {getPendingWithdraws()}}>View pending withdraws</h6></div>
                     <div className="scroll-y3 investments d-none rounded-3"> {pendingWithdraws()}</div>
-                    <span className="d-none">{myRecentActivity()}</span> < /div > < /
-                div >
-                    <
-                    /
-                div > 
+                    <span className="d-none">{myRecentActivity()}</span> </div> 
+                    </div>
+                    </div> 
                 
-                <
-                    div className = "col-4 bg-light rounded-4 pt-3" >  <
-                    div className = "row mx-1" >
-                     <
-                    div className = "text-end col-5 text-end" > <
-                    h6 className = " bk-warning2 rounded-3 px-3"
+                <div className = "col-4 bg-light rounded-4 pt-3" >  
+                <div className = "row" >
+                <div className = "col-7" > 
+                <h6 className = " btn btn-warning rounded-2 px-3"
                 onClick = { handleShow1 } >
-                    Add New Goal < /h6>< /div ><
-                    div className = "text-end col-7 p-2" > < h6 >< span className = "px-2 mx-2 py-1 rounded-4 border" > { span.length } < /span> GOALS < /h6> < /div > < /
-                div > <
-                div className = " pb-5 px-1 mt-2 scroll-y2 rounded-4" > {myGoals()} <
-                    /div> <
-                Modal show = { show3 }
+                    Add New Goal </h6></div>
+                <div className = "text-end col-5 p-2 px-3" > 
+                <h6><span className = "px-2 mx-2 py-1 rounded bg-lighter" > { span.length } </span> GOALS 
+                </h6> </div> </div> 
+                <div className = " pb-5 px-1 mt-2 scroll-y2 rounded-4" > {myGoals()} </div> 
+                <Modal show = { show3 }
                 onHide = { handleClose3 }
-                dialogClassName = "my-modal1" > <
-                    Goal id = { holdId }
+                dialogClassName = "my-modal1" > 
+                <Goal id = { holdId }
                 name = { holdName }
                 fullname = { name }
                 amount = { holdAmount }
@@ -483,19 +420,16 @@ const Personal = ({...props }) => {
                 option = { investmentOption }
                 banks = {banks}
                 status = { goalStatus }
-                / > < /
-                Modal >
+                /> </Modal>
                 <Modal show = { show5 }
                 onHide = { handleClose5 }
                 dialogClassName = "my-modal-pending-withdraws">
                     <PendingWithdraws pendingWith = { pendingWithdraw}/>
                 </Modal>
-                <
-                Modal show = { show4 }
+                <Modal show = { show4 }
                 onHide = { handleClose4 }
                 dialogClassName = "my-modal1" >
-                <
-                Withdraw country = { country }
+                <Withdraw country = { country }
                 phone = { phone }
                 fullname = { name }
                 option_name = {option_name}
@@ -506,14 +440,12 @@ const Personal = ({...props }) => {
                 verification = {verification}
                 banks = {banks}
                 currency = {getCurrency(country)}
-                / > < /
-                Modal >
-                    <
-                    Offcanvas show = { show1 }
+                /> </Modal>
+                <Offcanvas show = { show1 }
                 placement = "end"
-                className = "side-barsy bg-white pt-5"
-                onHide = { handleClose1 } {...props } > <
-                    Goal1 close1 = { handleClose1 }
+                className = "side-barsy bg-white pt-4"
+                onHide = { handleClose1 } {...props } > 
+                <Goal1 close1 = { handleClose1 }
                 name = { holdName }
                 email = { email }
                 amount = { holdAmount }
@@ -527,13 +459,9 @@ const Personal = ({...props }) => {
                 tab9 = { props.handletab9 }
                 complete = {complete}
                 verification = {verification}
-                / > < /
-                Offcanvas > < /
-                div > < /
-                div >
-                    <
-                    /
-                div >
+                /> </Offcanvas> </div> 
+                </div>
+                </div>
             )
         };
 

@@ -12,6 +12,7 @@ import { ValidateForms } from "../Auth/ValidateForms";
 import { API_URL_GOAL_BANK_WITHDRAW, API_URL_GOAL_MM_WITHDRAW, TOKEN } from "../apis";
 import axios from "axios";
 import { preloader, fail, catch_errors, success } from "../Api/RequestFunctions";
+import { InputGroup } from "react-bootstrap";
 
 function Goal(props) {
     const [step, setStep] = useState(0)
@@ -226,7 +227,7 @@ function Goal(props) {
         let networth = parseInt(props.networth)
         if (networth === 0 || props.status === false) { return null } else if (goalAmount === deposit && props.status === true && networth > 0) {
             return ( <
-                h6 className = " bk-warning px-3 mt-3 text-center rounded-3"
+                h6 className = " btn btn-warning mt-3 text-center"
                 type = "button"
                 onClick = { _withdraw } >
                 withdraw <
@@ -321,7 +322,11 @@ function Goal(props) {
         if (step === 5 || step === 6 || step === 7) {
             return (<div className="p-3"><h3 className=" mt-2">Withdraw<span className="bg-lighter p-2 row justify-content-center">{props.name} - Networth: {formData.currency} {(props.networth).toLocaleString()}</span></h3></div> )
         }
-        return ( < div className="p-3"><h4 className="mt-2">Deposit to: <span className="row bg-lighter p-2 mt-1 justify-content-center">{props.name}</span></h4> <
+        return ( < div className="p-3 cards rounded-top-3">
+            <img src = {getName()[8]}
+            className = "rounded-circle object-fit-cover img-head-goal"
+            alt = "goal"/>
+            <h4 className="mt-2 d-none">Deposit to: <span className="row bg-lighter p-2 mt-1 justify-content-center">{props.name}</span></h4> <
             Wallet className = "rounded-circle d-none warning p-2"
             size = "xlarge" / ><
             img src = { DepositPic }
@@ -347,7 +352,7 @@ function Goal(props) {
         }
         if (step === 0 && goalAmount !== deposit && props.status !== false) {
             return ( <
-                h6 className = " my-2 bk-warning px-5 text-center rounded-3"
+                h6 className = " my-2 btn btn-warning"
                 type = "button"
                 onClick = { _next } >
                 Deposit to goal <
@@ -382,7 +387,7 @@ function Goal(props) {
         }
         if (step === 4 && payment_means === "offline") {
             return ( <
-                h6 className = " my-2 text-center bk-warning rounded-3"
+                h6 className = " my-2 btn btn-warning"
                 type = "button"
                 onClick = { _next } >
                 Continue <
@@ -409,7 +414,7 @@ function Goal(props) {
         }
         if (step === 4 && payment_means === "wallet") {
             return ( <
-                h6 className = " my-2 text-center bk-warning rounded-3"
+                h6 className = " my-2 btn btn-warning"
                 type = "button" >
                 OK <
                 /h6>        
@@ -453,6 +458,7 @@ function Goal(props) {
         deposit_category = { formData.deposit_category }
         handleChange = { handleChange }
         currency = { formData.currency }
+        goalPicture = {getName()[8]}
         investmentoption = { props.option }
         /> <
         Step2 currentStep = { step }
@@ -528,47 +534,45 @@ function Step0(props) {
     if (props.id === "personal") {
     }
     return ( 
-        <div className = "bg-light p-3 rounded-4" > 
-        <div className = "row px-1" >
-        <div className = "blue-darks rounded-4 d-none" > <AddUser set = "bulk"
-        className = "my-lg-5 active"
-        size = "xlarge" /> </div >
-        <div className = " px-1 text-start" >
-        <div className = "row p-3" >
-        <div className="col-3">
+        <div className = "bg-white rounded-4" > 
+        <div className = "row" >
+        <div className = " text-start" >
+        <div className = "row" >
+        <div className="img-back">
         <img src = {props.goalPicture}
-            className = "rounded-circle object-fit-cover img-head-goal"
+        height="100%"
+        width="100%"
+            className = "object-fit-cover"
             alt = "goal"/>
         </div>
-        <div className="col-9">
+        <div className="m-3">
         <h3 className="bolder"> {props.name} 
-        <p> created {props.created} </p></h3> </div> </div>
-        <div className="rounded-4 p-3 bg-white">
-        <div className = "flex-row " >
-        <h6 > Goal Amount: </h6>
-        <div className = "d-flex flex-row flex justify-content-center" > { props.currency } 
-        <h3 className = "px-2 font-lighter" > { (props.amount).toLocaleString() } </h3></div> 
-        </div> 
-        <div className = "row px-3" >
-        <span className=" mb-1 mt-3"> Progress: < span className = "font-light" > {
+        <p className="bluey"> created {props.created} </p></h3> </div> </div>
+        <div className = "row py-3 mx-2" >
+        <h5 className=" mb-1 bluey"> Progress: < span className = "font-light" > {
             props.progress
-        } % </span> </span >
+        } % </span> </h5 >
         <ProgressBar now = { props.progress }
-        className="progress-sm mx-2"
+        className="progress-sm"
         max={props.percent}
         variant = "#ff8a00" />
         </div> 
-        <div className = "flex-row bg-white rounded-4 mt-3" >
-        <h6> Total Deposit Made: </h6> 
-        <div className = "d-flex flex-row flex justify-content-center" > { props.currency } 
-        <h3 className = "px-2 font-lighter" > { (props.deposit).toLocaleString() } </h3></div>
-        </div></div>
-        <div className = "row mx-2" >
-        <div className = "col p-2 mt-2" >
-        <h6> Networth: </h6> 
-        <div className = "d-flex flex-row flex" > { props.currency } 
-        <h3 className = "px-2 font-lighter" > { (props.networth).toLocaleString() } </h3></div > </div><div className="col-4"> {props.next} 
-        </div > </div > {props.withdrawMessage} 
+        <div className="rounded-3 m-3">
+        <div className="row">
+            <div className="col-7 bluey"><h5 > Goal Amount: </h5></div>
+            <div className="col-5">
+            <h5 className = "px-2 bolder" >{ props.currency }  { (props.amount).toLocaleString() } </h5></div>
+        </div>
+        <div className="row">
+            <div className="col-7 bluey"><h5> Total Deposit Made: </h5></div>
+            <div className="col-5">
+            <h5 className = "px-2 bolder"> { props.currency } { (props.deposit).toLocaleString() } </h5></div>
+        </div>
+        <div className="row">
+            <div className="col-7 bluey"><h5 > Networth: </h5></div>
+            <div className="col-5">
+            <h5 className = "px-2 bolder" > { props.currency } { (props.networth).toLocaleString() } </h5></div>
+        </div></div> {props.withdrawMessage} 
         </div > </div > </div >
     );
 }
@@ -678,7 +682,10 @@ function Step1(props) {
     }
     if (props.payment_means === "wallet") {
         return ( <
-            div className = "text-center" > <
+            div className = "text-center" >
+            <img src = {props.goalPicture}
+            className = "rounded-circle object-fit-cover img-head-goal"
+            alt = "goal"/> <
             h4 className = "font-lighter my-3" > Deposit from Wallet < /h4> <
             h4 className = "py-3 bolder" > Wallet Balance: < span className = "font-lighter" > < span > { props.currency } < /span> 0.00 < /span >
             <
@@ -700,24 +707,28 @@ function Step1(props) {
             div >
         )
     }
-    return ( <
-        div className = "text-center" > <
-        h6 className = "mt-2" > How much would you like to Deposit to your account ? < /h6>  <
-        Form.Group className = "mb-3 bg-white p-5" >
-        <
-        Form.Label ><h6 className="m-0">Amount to Deposit in { props.currency }</h6>  < /Form.Label>  <
-        Form.Control type = "number"
-        onChange = { props.handleChange }
-        name = "deposit_amount"
-        id = 'phone'
-        required placeholder = "0.00" / ><
-        p id = "errorFirst"
-        className = 'p-2 rounded-2 px-3 bg-red'
-        style = {
-            { display: 'none' }
-        } > hey < /p> < /
-        Form.Group > < /
-        div >
+    return ( 
+        <div className = "text-center" >
+        <Form.Group className = "mb-3 bg-white p-4" >
+            <Form.Label ><h6 className = 'm-0' > How much would you like to deposit? </h6></Form.Label>
+            <InputGroup className="mb-3">
+            <InputGroup.Text id="basic-addon1">{props.currency}</InputGroup.Text>
+            <Form.Control type = "number"
+            onChange = { props.handleChange }
+            name = "deposit_amount"
+            id = 'phone'
+            required placeholder = "0.00" / >
+            <p id = "errorFirst"
+            className = 'p-2 rounded-2 px-3 bg-red'
+            style = {
+                { display: 'none' }
+            } > hey </p>
+            <Form.Control.Feedback type = "invalid" >
+            This field is required
+            </Form.Control.Feedback> 
+            </InputGroup>
+            </Form.Group >
+        </div>
     );
 }
 

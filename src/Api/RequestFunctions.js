@@ -1,4 +1,3 @@
-import { useState } from "react"
 
 export const preloader = () => {
     document.getElementById("successMessage").innerHTML = "processing..."
@@ -19,6 +18,7 @@ export const preloaderCheckouts = () => {
     }, 3000);
 }
 export const success = (message, redirect, successMessage) => {
+    document.getElementById("successMessage").style.display = 'block'
     document.getElementById("successMessage").innerHTML = successMessage
     document.getElementById("successMessage").style.backgroundColor = "#ff8a00"
     document.getElementById("successMessage").style.color = "white"

@@ -10,8 +10,9 @@ import './style.scss';
 import Depo from '../images/depo.png'
 import { Wallet} from "react-iconly";
 import { FaArrowLeft } from "react-icons/fa";
+import Deposit from "../Accounts/Deposit";
 
-const Deposit = ({ id, activeTab, children, ...props }) => {
+const Deposit1 = ({ id, activeTab, children, ...props }) => {
     const [country, setCountry] = useState([])
     const [email, setEmail] = useState([])
     const [name, setName] = useState([])
@@ -146,11 +147,16 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         <div className=" d-flex flex-row">
         <FaArrowLeft onClick={props.handletab1}/> <h4 className="mx-3 bolder">Deposit</h4></div></div>
         <div className="d-lg-none d-md-none d-sm-block ">
-        <Learn1 tab9 = { props.handletab9 }
+        <Deposit tab9 = { props.handletab9 }
         country = { country }
         lastname = { name }
         email = { email }
         phone = { phone }
+        setClass = {props.setClass}
+        setDescription = {props.setDescription}
+        setLogo = {props.setLogo}
+        setId = {props.setId}
+        setOptions = {props.setOptions}
         option = { investmentOption }
         options = {investment_options}
         riskAnalysisPercentages = {riskAnalysisPercentages}
@@ -161,4 +167,4 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
     );
 };
 
-export default Deposit;
+export default Deposit1;
