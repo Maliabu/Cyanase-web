@@ -8,8 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import Learn1 from '../Accounts/Learn1';
 import './style.scss'; 
 import Depo from '../images/depo.png'
-import { Wallet} from "react-iconly";
-import { FaArrowLeft } from "react-icons/fa";
+import { ChevronLeft, Wallet} from "react-iconly";
 
 const Deposit = ({ id, activeTab, children, ...props }) => {
     const [country, setCountry] = useState([])
@@ -144,7 +143,7 @@ const Deposit = ({ id, activeTab, children, ...props }) => {
         </div> </div>
         <div className="fix-top bg-light d-lg-none d-md-none d-sm-block p-3">
         <div className=" d-flex flex-row">
-        <FaArrowLeft onClick={props.handletab1}/> <h4 className="mx-3 bolder">Deposit</h4></div></div>
+        <ChevronLeft onClick={props.handletab1}/> <h4 className="mx-3 bolder">Deposit</h4></div></div>
         <div className="d-lg-none d-md-none d-sm-block ">
         <Learn1 tab9 = { props.handletab9 }
         country = { country }

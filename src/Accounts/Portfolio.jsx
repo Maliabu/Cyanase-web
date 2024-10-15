@@ -5,8 +5,8 @@ import { UserRequests, MainRequests, InvestmentWithdrawRequests } from "../Api/M
 import ResWithdraw from '../App/ResWithdraw.js'
 import Chart from "react-apexcharts";
 import RiskProfile from '../images/Group 212.png'
-import { FaArrowLeft, FaChartBar } from "react-icons/fa";
-import { Download, Wallet } from "react-iconly";
+import { FaChartBar, FaRegLightbulb } from "react-icons/fa";
+import { ChevronLeft } from "react-iconly";
 
 export default function Portfolio(props){
     const [option_name, setOptionName] = useState("")
@@ -82,6 +82,7 @@ export default function Portfolio(props){
         return group;
     }, {});
     const results = Object.values(groupArrayObjects);
+    console.log(results)
     results.forEach(data => {
         data.total = data.networth.reduce((total, value) => total + parseInt(value), 0);
     });
@@ -231,8 +232,8 @@ export default function Portfolio(props){
     }
     const myInvestmentsGraph = () => {
         return(
-                <div className='px-1 rounded-4 m-2 bluey'>
-                    <div className = '' > <Chart options = { options.options }
+            <div className='px-1 rounded-4 m-2 bluey'>
+            <div className = '' > <Chart options = { options.options }
             series = { options.series }
             className = "w-100"
             type = "area"
@@ -241,20 +242,6 @@ export default function Portfolio(props){
         )
     }
     const myWithdraws = () => {
-        // if (investmentWithdraw.length !== 0){
-        // return (<div>
-        //         <h5 className="px-2 py-3 mt-3">Your Withdraws</h5>
-        //         <div className="scroll-y3">
-        //     {investmentWithdraw.map(withdraw => ( 
-        //         <div className = 'row p-2 mt-1 bg-white border-bottom'>
-        //         <div className = 'col-4 text-start' > <h6 className='bolder'><span className='font-light'>{ getCurrency(country) }</span> <br/> { (withdraw.datas).toLocaleString() } </h6> </div> 
-        //         <div className = 'col-7 text-start' > <h6 className=""><span className="text-dark bolder">{withdraw.name} </span><br/> {withdraw.handler}</h6> </div> 
-        //         <div className = 'col-1 text-end bolder' > <h6> { withdraw.date } </h6></div> 
-        //         </div>
-        // ))}</div>
-        // </div>
-        // )}
-        // else {
             return (
                 <div className = " text-center m-1 bg-lighter rounded-4 py-3" > 
                 <div className="text-start mx-4">
@@ -264,11 +251,9 @@ export default function Portfolio(props){
                 <Chart options = { optionsDoughnut.options }
                     series = { optionsDoughnut.series }
                     type = "donut" />
-                    </div >
+                    </div>
             )
-        // }
     }
-    console.log(props)
     const checkPortfolio = () =>{
         if(graph.length === 0){
             return(<div>
@@ -288,10 +273,12 @@ export default function Portfolio(props){
         } else {
             return(
                 <div className="p-1">
-            <FaArrowLeft className="mx-3 text-white" onClick={props.handletab1}/>
+            <ChevronLeft className="mx-3 text-white" onClick={props.handletab1}/>
                 <div className=" rounded-4 m-0">
                 <div className="d-flex flex-row mx-2">
-                <h4 className="p-2 bluey d-none bolder">My Portfolio</h4><div className="p-2 text-center"><Wallet size={40} set="broken" className="p-2 mx-2 bluey bg-lighter rounded-3"/><Download size={40} set="broken" className="p-2 bg-lighter bluey rounded-3"/></div></div>
+                <div className="p-3 bg-lighter rounded-3">
+                <h6><span className="bolder">Tips:</span>  Building an emergency fund is cruicial in securing your future</h6></div>
+                <FaRegLightbulb size={35} set="broken" className="p-2 bluey rounded-3"/></div>
             <div className="mt-2">
             <MultiCarousel2 data={final_data} country={country} getWithdraws={getWithdraws} getCurrency={getCurrency} summ={summ}/></div>
             <div>{myInvestmentsGraph()}</div></div>
@@ -329,7 +316,7 @@ export default function Portfolio(props){
     }
     return(
         <div className="rounded-4">
-<div className='py-2 fix-top bg-white'>
+<div className='py-2 fix-top bg-lighter rounded-bottom-4'>
             <div className = 'row mx-2 justify-content-center'>
             <div className='col-8 p-0'>
             <div className='d-flex'>
@@ -337,7 +324,7 @@ export default function Portfolio(props){
             className = "rounded-circle object-fit-cover img-head mt-1"
             onClick={() => props.changeAccountSetting(true)}
             alt = "investors"/><h5 className='m-2 mx-3 bluey d-none'>Hi {props.name}</h5></div></div>
-            <div className='col-4 text-end p-0 bluey'><FaChartBar className="p-0 mt-2" set='broken' size={20}/><h6 className=' bolder'>My Portfolio</h6> </div> 
+            <div className='col-4 text-end px-2 bluey'><FaChartBar className="p-0 mt-2" set='broken' size={20}/><h6 className=' bolder'>My Portfolio</h6> </div> 
             </div></div>
         <div className=" scroll-y py-5">{checkPortfolio()}</div>
         </div>

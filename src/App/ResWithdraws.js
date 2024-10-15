@@ -8,7 +8,6 @@ import { FaDonate } from 'react-icons/fa';
 import ResWithdraw from './ResWithdraw'
 import PendingWithdraws from '../Accounts/PendingWithdraws'
 import Modal from 'react-bootstrap/Modal';
-import { sum } from 'lodash';
 
 const ResWithdraws = (props) => {
     const [option_name, setOptionName] = useState("")
@@ -42,14 +41,10 @@ const ResWithdraws = (props) => {
                 setUserTrack(res)
             });
         }, []);
-        function summ(array) {
-            let sum = 0
-            array.forEach(item => {
-                sum = sum + item
-            });
+        function summ(num1, num2) {
+            let sum = num1 + num2
             return sum
         }
-        console.log(userTrack)
         function getWithdraws(name,networth,investment_id, deposit, handler){
             setOptionName(name)
             setGroups(networth)
@@ -115,7 +110,6 @@ const ResWithdraws = (props) => {
             return resultList;  // convert map to list, i.e { 'a' => { value: 2000, data: 'first' } } to [ { name: 'a', value: 1200 }]
         }
         let final_data = subtractTwoLists(results, result)
-        console.log(final_data)
         if (withdrawSetting) {
             return ( < ResWithdraw changeWithdrawSetting = { setWithdrawSetting }
                 option_name = {option_name}
@@ -156,7 +150,7 @@ const ResWithdraws = (props) => {
                     } */}
                     {
                         userTrack.map((option, id) => (
-                        <div className={"Venture p-3 mt-1 row rounded-4"} key={id} onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>
+                        <div className={"Venture p-3 mt-1 row rounded-4"} key={id} onClick={() => getWithdraws(option.investment_option,option.closing_balance,option.investment_id,summ(option.opening_balance, option.deposit_amount),option.fund_manager)}>
                             <div className=''><h5 className='bolder pb-1'>{option.investment_option}<h6>{option.fund_manager}</h6></h5> </div>
                                     <div className = "row" >
                                     <div className='col text-start pt-4 px-0'>

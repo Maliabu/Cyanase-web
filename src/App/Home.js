@@ -173,7 +173,7 @@ const MyHome = () => {
             <div className='d-none d-md-block d-lg-block'>
                 {paySubscription()}
                 <div className='row'>
-                    <div className = 'col-2 cards'>
+                    <div className = 'col-2 blue-dark'>
                         <div>
                             <img src = { Header }
                             width = '60%'
@@ -181,7 +181,7 @@ const MyHome = () => {
                             height = '80%'
                             alt = "investors" />
                         </div>   
-                        <div className = 'row my-5 py-2 mx-2 blue-darks rounded-4' >
+                        <div className = 'row my-5 py-2 mx-2 light-res-homey rounded-4' >
                             <div className = 'col-3'>
                                 <img src = {profilePicture}
                                 className = "mt-1 rounded-circle object-fit-cover img-head"
@@ -189,18 +189,18 @@ const MyHome = () => {
                                 height = '80%'
                                 alt = "investors" />
                             </div> 
-                            <div className = 'col-9 px-3 py-1'> <h6 className = 'lh-1 small' > { name } 
-                                <span className = 'bolder' > { whichAccount() } </span>  
-                                </h6> 
+                            <div className = 'col-9 px-3 py-1'> <h5 className = 'lh-1 small' > { name } 
+                                <h5 className = 'bolder' > { whichAccount() } </h5>  
+                                </h5> 
                             </div> 
                         </div> 
                         <div className = ' px-lg-2 my-2 text-start scroll-y2' >
                             <h6 className = 'p-2 grey-text small' > DASHBOARD </h6>  
                             <div className = ' d-flex flex-row' >
                                 <TabNavItem title = { 
-                                    <span> <Home size = "small" set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
+                                    <h5> <Home size = "small" set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
                                     Home 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab1 }
                                     id = "tab1"
                                     className = "home"
@@ -209,9 +209,9 @@ const MyHome = () => {
                             </div> 
                             <div className = ' d-flex flex-row ' >
                                 <TabNavItem title = { 
-                                    <span> <User size = "small"set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
+                                    <h5> <User size = "small"set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
                                     Portfolio 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab2 }
                                     id = "tab2"
                                     activeTab = { activeTab }
@@ -219,9 +219,9 @@ const MyHome = () => {
                             </div> 
                             <div className = ' py-2 d-flex flex-row d-none' >
                                 <TabNavItem title = { 
-                                    <span> <People size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    <h5> <People size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
                                     SACCO Groups 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab3 }
                                     id = "tab3"
                                     activeTab = { activeTab }
@@ -229,9 +229,9 @@ const MyHome = () => {
                             </div>
                             <div className = ' py-2 d-flex flex-row d-none' >
                                 <TabNavItem title = { 
-                                    <span> <FaUniversity className = 'mx-3' />
+                                    <h5> <FaUniversity className = 'mx-3' />
                                     Investment Clubs 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab4 }
                                     id = "tab4"
                                     activeTab = { activeTab }
@@ -240,9 +240,9 @@ const MyHome = () => {
                             <h6 className = 'p-2 pt-5 grey-text small d-none' > ACTIVITY </h6>   
                             <div className = ' d-flex flex-row' >
                                 <TabNavItem title = { 
-                                    <span> <Wallet size = "small"set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
+                                    <h5> <Wallet size = "small"set = 'broken' stroke='bold' className = 'mx-3 bolder' /> 
                                     Deposits
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab5 }
                                     id = "tab5"
                                     activeTab = { activeTab }
@@ -250,9 +250,9 @@ const MyHome = () => {
                             </div> 
                             <div className = ' d-flex flex-row d-none' >
                                 <TabNavItem title = { 
-                                    <span> <FaHandHoldingUsd className = 'mx-3' /> 
+                                    <h5> <FaHandHoldingUsd className = 'mx-3' /> 
                                     Loans 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab6 }
                                     id = "tab6"
                                     activeTab = { activeTab }
@@ -260,9 +260,9 @@ const MyHome = () => {
                             </div> 
                             <div className = 'd-none d-flex flex-row' >
                                 <TabNavItem title = { 
-                                    <span> <FaDonate className = 'mx-3 bolder' /> 
+                                    <h5> <FaDonate className = 'mx-3 bolder' /> 
                                     Withdraws 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab7 }
                                     id = "tab7"
                                     activeTab = { activeTab }
@@ -271,9 +271,9 @@ const MyHome = () => {
                             <h6 className = 'p-2 pt-5 grey-text small' > SETTINGS </h6>   
                             <div className = ' d-flex flex-row' >
                                 <TabNavItem title = { 
-                                    <span> <Setting size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    <h5> <Setting size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
                                     Account 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab8 }
                                     id = "tab8"
                                     activeTab = { activeTab }
@@ -281,9 +281,9 @@ const MyHome = () => {
                             </div> 
                             <div className = 'd-flex flex-row' >
                                 <TabNavItem title = { 
-                                    <span> <Activity size = "small"set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    <h5> <Activity size = "small"set = 'broken' stroke='bold' className = 'mx-3' /> 
                                     Risk Profile 
-                                    </span> }
+                                    </h5> }
                                     onClick = { handleTab9 }
                                     id = "tab9"
                                     activeTab = { activeTab }
@@ -291,9 +291,9 @@ const MyHome = () => {
                             </div> 
                             <div className = ' d-flex flex-row' >
                                 <TabNavItem title = { 
-                                    <span> <Chat size = "small"set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    <h5> <Chat size = "small"set = 'broken' stroke='bold' className = 'mx-3' /> 
                                     FAQs 
-                                    </span> }
+                                    </h5> }
                                 id = "tab10"
                                 onClick = { handleTab10 }
                                 activeTab = { activeTab }
@@ -301,9 +301,9 @@ const MyHome = () => {
                             </div>
                             <div className = ' d-flex flex-row' >
                                 <TabNavItem title = { 
-                                    <span > <Call size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
+                                    <h5> <Call size = "small" set = 'broken' stroke='bold' className = 'mx-3' /> 
                                     Contact Us 
-                                    </span>
+                                    </h5>
                                 }
                                 onClick = { handleTab3 }
                                 id = "tab15"
@@ -313,7 +313,7 @@ const MyHome = () => {
                             <div className = ' mt-5 px-3' > 
                                 <div className='text-start'>
                                     <div className='mt-2'>
-                                        <TabNavItem title = "API Account"
+                                        <TabNavItem title = {<h5>API Account</h5>}
                                         onClick = { handleTab2 }
                                         id = "tab11"
                                         activeTab = { activeTab }
@@ -322,7 +322,7 @@ const MyHome = () => {
                                 </div>
                                 <div className=' text-start'>
                                     <div className=''> 
-                                        <TabNavItem title = "Logout"
+                                        <TabNavItem title = {<h5>LOGOUT</h5>}
                                         onClick = { handleTab2 }
                                         id = "tab14"
                                         activeTab = { activeTab }
@@ -334,21 +334,19 @@ const MyHome = () => {
                         </div> 
                     </div> 
                     <div className = 'col-10' >
-                        <div className = "row bg-light" >
+                        <div className = "row" >
                             <div className = 'col-7' > 
-                                <h6 className = 'mt-2 p-2' > 
-                                <FaRegLightbulb size = "15" className = 'position-relative' /> 
-                                <span className='bolder'> Tips: </span> 
-                                <span className='mx-3 p-2 rounded'>Make tiny daily investments instead of saving your money </span> 
-                                </h6> 
+                                <h5 className = 'mt-2 p-2 bluey bolder' >
+                                <h5 className='rounded bluey'>
+                                <FaRegLightbulb size = "15" className = 'position-relative' /> Tips: Building an emergency fund is cruicial in securing your future </h5> 
+                                </h5> 
                             </div>
                             <div className = "col-lg-5" >
                                 <div className='d-flex flex-row justify-content-end p-1 rounded-2'>
                                     <div> 
-                                        <h6 className = ' px-2' >
-                                        <span className='mx-3'>Subscription</span> 
-                                        <span className = 'btn btn-warning' onClick = { handleShow4 } > { subStatus } </span> 
-                                        </h6> 
+                                        <div className = 'p-2 d-felx' >
+                                        <h5 className = 'btn btn-warning px-3 py-2' onClick = { handleShow4 } > Subscription:  { subStatus } </h5> 
+                                        </div> 
                                     </div>
                                     {apiDocumentation()}
                                 </div>

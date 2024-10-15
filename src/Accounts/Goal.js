@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AddUser, Wallet } from 'react-iconly';
+import { ChevronLeft, Wallet } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import DepositPic from '../images/deposit.png';
 import Button from "react-bootstrap/esm/Button";
@@ -13,6 +13,8 @@ import { API_URL_GOAL_BANK_WITHDRAW, API_URL_GOAL_MM_WITHDRAW, TOKEN } from "../
 import axios from "axios";
 import { preloader, fail, catch_errors, success } from "../Api/RequestFunctions";
 import { InputGroup } from "react-bootstrap";
+import Chart from "react-apexcharts";
+import { FaHatWizard, FaStar, FaStarHalf, FaStarOfDavid, FaStarOfLife } from "react-icons/fa";
 
 function Goal(props) {
     const [step, setStep] = useState(0)
@@ -56,6 +58,17 @@ function Goal(props) {
         let goalNetworth = parseInt(props.networth)
         let goalAmount = parseInt(props.amount)
         let deposit = parseInt(props.deposit)
+        let deposits
+        if(props.deposits === undefined || props.deposits === null){
+            deposits = [
+                {
+                    "investment_option": goalName + ". " + "Start Despositing to your goal",
+                    "deposit_amount": 0
+                }
+            ]
+        } else {
+            deposits = props.deposits
+        }
         let created = (props.created).slice(0, 10)
         let picture = props.goalPicture
         let percent = 100
@@ -65,7 +78,7 @@ function Goal(props) {
         } else{
             goalNewNetworth = goalNetworth
         }
-        return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNewNetworth, picture]
+        return [goalName, goalAmount, deposit, created, progress, percent, goalId, goalNewNetworth, picture, deposits]
     }
     const { handleSubmit } = useForm();
     const getAccountType = () => {
@@ -210,8 +223,8 @@ function Goal(props) {
         let progress = getName()[4]
         let percentage = getName()[5]
         if (progress === percentage){
-            return ( <
-                h6 className = "p-2 status rounded-3 text-center" > You can withdraw once you have achieved your goal at 100 % < /h6>
+            return ( 
+                <h6 className = "p-2 status rounded-3 text-center" > You can withdraw once you have achieved your goal at 100 % </h6>
             )
         } else return null
     }
@@ -226,91 +239,115 @@ function Goal(props) {
         let deposit = parseInt(props.deposit)
         let networth = parseInt(props.networth)
         if (networth === 0 || props.status === false) { return null } else if (goalAmount === deposit && props.status === true && networth > 0) {
-            return ( <
-                h6 className = " btn btn-warning mt-3 text-center"
+            return ( 
+                <h6 className = " btn btn-warning mt-3 text-center"
                 type = "button"
                 onClick = { _withdraw } >
-                withdraw <
-                /h6>        
+                withdraw 
+                </h6>        
             )
         } else return null
     }
+    let deposits
+    if(props.deposits === undefined || props.deposits === null){
+        deposits = []
+    } else {
+        deposits = props.deposits
+    }
+    const groupArrayObjects = deposits.reduce((group, obj) => {
+        let sum = 0
+        const { investment_option, deposit_amount } = obj;
+        if (!group[investment_option]) {
+            group[investment_option] = {
+                name: investment_option,
+                data: [],
+                total: sum
+            };
+        }
+        group[investment_option].data.push(deposit_amount/1000);
+        return group;
+        }, 
+    {});
+    const results = Object.values(groupArrayObjects);
+    results.forEach(data => {
+        data.total = data.data.reduce((total, value) => total + parseInt(value), 0);
+    });
     const submitButton = () => {
         let payment_means = formData.payment_means
         if (step === 2 && payment_means === "online") {
-            return ( <
-                div className = 'mx-3 text-center rounded-4' > <
-                h6 id = "errorMessage"
+            return ( 
+                <div className = 'mx-3 text-center rounded-4' > 
+                <h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /h6> <
-                h6 id = "infoMessage"
+                } > hey </h6> 
+                <h6 id = "infoMessage"
                 className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /h6>  <
-                Button variant = "warning"
+                } > hey </h6>  
+                <Button variant = "warning"
                 className = 'shadow text-center my-2'
                 id = 'successMessage'
                 onClick = { ()=>autoClickable() }
                 type = "button" >
-                Submit <
-                /Button> < /
-                div >
+                Submit 
+                </Button> 
+                </div>
             )
         }
         if (step === 7) {
-            return ( <
-                div className = 'mx-3 text-center rounded-4' > <
-                h6 id = "errorMessage"
+            return ( 
+                <div className = 'mx-3 text-center rounded-4'> 
+                <h6 id = "errorMessage"
                 className = 'py-2 mt-3 rounded border border-danger text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /h6> <
-                h6 id = "infoMessage"
+                } > hey </h6> 
+                <h6 id = "infoMessage"
                 className = 'py-2 mt-3 rounded warning-message text-center'
                 style = {
                     { display: 'none' }
-                } > hey < /h6>  <
-                Button variant = "warning"
+                } > hey </h6>  
+                <Button variant = "warning"
                 className = 'shadow text-center my-2'
                 id = 'successMessage'
                 onClick = { ()=>validate3() }
                 type = "button" >
-                Submit <
-                /Button> < /
-                div >
+                Submit 
+                </Button> 
+                </div>
             )
         }
         return null
     }
     const previousButton = () => {
         if (step === 5 && message === "withdraw"){
-            return ( <
-                h6 className = " warning text-start rounded-3"
+            return ( 
+                <h6 className = " warning text-start rounded-3"
                 type = "button"
                 onClick = { () => {setStep(0)} } >
-                Previous <
-                /h6>
+                Previous 
+                </h6>
             )
         }
         if (step === 7) {
-            return ( <
-                h6 className = " warning text-start rounded-3"
+            return ( 
+                <h6 className = " warning text-start rounded-3"
                 type = "button"
                 onClick = { _prevwithdraw } >
-                Previous <
-                /h6>
+                Previous 
+                </h6>
             )
         }
         if (step !== 0) {
-            return ( <
-                h6 className = " text-start warning rounded-3"
+            return ( 
+                <h6 className = " text-start warning rounded-3"
                 type = "button"
                 onClick = { _prev } >
-                Previous <
-                /h6>
+                Previous 
+                </h6>
             )
         }
         return null;
@@ -322,21 +359,21 @@ function Goal(props) {
         if (step === 5 || step === 6 || step === 7) {
             return (<div className="p-3"><h3 className=" mt-2">Withdraw<span className="bg-lighter p-2 row justify-content-center">{props.name} - Networth: {formData.currency} {(props.networth).toLocaleString()}</span></h3></div> )
         }
-        return ( < div className="p-3 cards rounded-top-3">
+        return ( 
+            <div className="p-3 cards rounded-top-3">
             <img src = {getName()[8]}
             className = "rounded-circle object-fit-cover img-head-goal"
             alt = "goal"/>
-            <h4 className="mt-2 d-none">Deposit to: <span className="row bg-lighter p-2 mt-1 justify-content-center">{props.name}</span></h4> <
-            Wallet className = "rounded-circle d-none warning p-2"
-            size = "xlarge" / ><
-            img src = { DepositPic }
+            <h4 className="mt-2 d-none">Deposit to: <span className="row bg-lighter p-2 mt-1 justify-content-center">{props.name}</span></h4> 
+            <Wallet className = "rounded-circle d-none warning p-2"
+            size = "xlarge" />
+            <img src = { DepositPic }
             width = '25%'
             className = "my-3 d-none"
             height = '80%'
-            alt = "investors" / > < /div>
+            alt = "investors" /> </div>
         )
     }
-
     const nextButton = () => {
         let payment_means = formData.payment_means;
         let goalAmount = parseInt(props.amount)
@@ -344,88 +381,88 @@ function Goal(props) {
         let goalName = props.name
         let networth = props.networth
         if (step === 0 && props.status === false) {
-            return ( <
-                h6 className = " text-end my-1 mx-5 p-2 text-center status rounded-3">
-                This goal is inactive <
-                /h6>        
+            return (
+                <h5 className = " text-end my-1 mx-5 p-2 text-center status rounded-3">
+                This goal is inactive 
+                </h5>        
             )
         }
         if (step === 0 && goalAmount !== deposit && props.status !== false) {
-            return ( <
-                h6 className = " my-2 btn btn-warning"
+            return ( 
+                <h5 className = " my-2 btn px-3 py-2 btn-warning"
                 type = "button"
                 onClick = { _next } >
-                Deposit to goal <
-                /h6>        
+                Deposit to goal 
+                </h5>        
             )
         } else if (step === 0 && goalAmount === deposit && networth <= 0) {
-            return ( <
-                h6 className = "p-2 my-1 bg-lighter grey-text text-center rounded-3 mx-5"
+            return ( 
+                <h5 className = "p-2 my-1 bg-lighter grey-text text-center rounded-3 mx-5"
                 type = "button" >
-                Goal Done: Your networth needs to mature before withdraw <
-                /h6>        
+                Goal Done: Your networth needs to mature before withdraw 
+                </h5>        
             )
         } else if (step === 0 && goalAmount === deposit && networth > 0) {
-            return ( <
-                h6 className = "p-2 my-1 status text-center rounded-3 mx-5"
+            return ( 
+                <h5 className = "p-3 my-1 status text-center rounded-3 mx-5"
                 type = "button" >
-                Congrats!!...You can now { goalName } <
-                /h6>        
+                <FaStar/> Congrats!!...You can now { goalName } <FaStar/>
+                </h5>        
             )
         }
         if (step === 1) {
-            return ( <
-                h6 className = " my-2 text-end warning rounded-3"
+            return ( 
+                <h5 className = " my-2 text-end warning rounded-3"
                 type = "button"
                 onClick = { ()=>validate1() } >
-                Next <
-                /h6>        
+                Next 
+                </h5>        
             )
         }
         if (step === 2) {
             return null
         }
         if (step === 4 && payment_means === "offline") {
-            return ( <
-                h6 className = " my-2 btn btn-warning"
+            return ( 
+                <h6 className = " my-2 btn btn-warning"
                 type = "button"
                 onClick = { _next } >
-                Continue <
-                /h6>        
+                Continue 
+                </h6>        
             )
         }
         if (step === 5) {
-            return ( <
-                h6 className = " my-2 text-center warning rounded-3"
+            return ( 
+                <h6 className = " my-2 text-center warning rounded-3"
                 type = "button"
                 onClick = { _next } >
-                Next <
-                /h6>        
+                Next 
+                </h6>        
             )
         }
         if (step === 6) {
-            return ( <
-                h6 className = " my-2 text-center warning rounded-3"
+            return ( 
+                <h6 className = " my-2 text-center warning rounded-3"
                 type = "button"
                 onClick = { () => validate2() } >
-                Next <
-                /h6>        
+                Next 
+                </h6>        
             )
         }
         if (step === 4 && payment_means === "wallet") {
-            return ( <
-                h6 className = " my-2 btn btn-warning"
+            return ( 
+                <h6 className = " my-2 btn btn-warning"
                 type = "button" >
-                OK <
-                /h6>        
+                OK 
+                </h6>        
             )
         }
         if (step < 4 && props.status !== false) {
-            return ( <
-                h6 className = " text-end my-2 warning rounded-3"
+            return ( 
+                <h6 className = " text-end my-2 warning rounded-3"
                 onClick = { _next } >
-                Next <
-                /h6>        
+                Next 
+                </h6>        
             )
         }
         return null;
@@ -450,6 +487,8 @@ function Goal(props) {
         percent = { getName()[5] }
         networth = { getName()[7] }
         goalPicture = {getName()[8]}
+        deposits = {getName()[9]}
+        results = {results}
         currency = { formData.currency }
         next = { checkWithdrawStatus() }
         withdrawMessage = { withdrawMessage}
@@ -518,11 +557,9 @@ function Goal(props) {
         country = { props.country }
         withdraw_channel = {formData.withdraw_channel}
         options = {props.banks}
-        /> { previousButton() }{ nextButton() } { submitButton() } < /
-        form >
-        <
-        /
-        React.Fragment >
+        /> { previousButton() }{ nextButton() } { submitButton() } 
+        </form>
+        </React.Fragment >
     );
 
 }
@@ -532,6 +569,41 @@ function Step0(props) {
         return null
     }
     if (props.id === "personal") {
+    }
+    const options = {
+        options: {
+            chart: {
+                id: 'apexchart-example'
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                name: '2023',
+                title: {
+                    text: 'Your Investment Activity'
+                },
+                //categories: dates,
+                labels: {
+                    show: false,
+                }
+                // categories: ['jun', 'jul', 'aug'],
+            },
+            yaxis: {
+                show: false,
+                title: {
+                    // text: 'In Thousands(000) of ' + getCurrency(country)
+                }
+            },
+            // colors: ['#000', '#252859', '#ff8810', '#b7b7b7'],
+            colors: ['#E91E63', '#252859', '#FF9800', '#b7b7b7'],
+
+        },
+        series: props.results,
+        // series: [2, 60, 4],
+        stroke: {
+            curve: 'smooth',
+        }
     }
     return ( 
         <div className = "bg-white rounded-4" > 
@@ -545,13 +617,15 @@ function Step0(props) {
             className = "object-fit-cover"
             alt = "goal"/>
         </div>
-        <div className="m-3">
-        <h3 className="bolder"> {props.name} 
-        <p className="bluey"> created {props.created} </p></h3> </div> </div>
+        <div className="d-flex flex-row">
+        <h3 className="bolder p-4 p-lg-3"> {props.name} 
+        <p className="d-none"> created {props.created} </p></h3>
+        <div className="rounded-corner p-4 bg-lighter"><h3>{props.progress}%</h3></div>
+        </div> </div>
         <div className = "row py-3 mx-2" >
-        <h5 className=" mb-1 bluey"> Progress: < span className = "font-light" > {
+        <h5 className=" mb-1 bluey"> Progress: <span className = "font-light" > {
             props.progress
-        } % </span> </h5 >
+        } % </span> </h5>
         <ProgressBar now = { props.progress }
         className="progress-sm"
         max={props.percent}
@@ -559,21 +633,41 @@ function Step0(props) {
         </div> 
         <div className="rounded-3 m-3">
         <div className="row">
-            <div className="col-7 bluey"><h5 > Goal Amount: </h5></div>
-            <div className="col-5">
-            <h5 className = "px-2 bolder" >{ props.currency }  { (props.amount).toLocaleString() } </h5></div>
+            <div className="col-6"><div className="small"> Goal Amount:</div>
+            <div className="d-felx flex-row"><span>
+            { props.currency }</span>
+            <h3 className = "bolder" >{ (props.amount).toLocaleString() } </h3></div></div>
+            <div className="col-6 text-end">
+            <h5 className="small"> Total Deposit: 
+            <h4 className = "bolder"> { props.currency } { (props.deposit).toLocaleString() }
+            </h4></h5>
+            <h5 className="small">Networth: 
+            <h4 className = "bolder" > { props.currency } { (props.networth).toLocaleString() } </h4></h5>
+            </div>
+        </div></div> 
+        <div className="p-4">
+            <h5 className="small">Goal Investments Breakdown</h5>
+            <Chart options = { options.options }
+                series = { options.series }
+                className = "w-100"
+                type = "area"
+                height = { 200 }
+                />
         </div>
-        <div className="row">
-            <div className="col-7 bluey"><h5> Total Deposit Made: </h5></div>
-            <div className="col-5">
-            <h5 className = "px-2 bolder"> { props.currency } { (props.deposit).toLocaleString() } </h5></div>
-        </div>
-        <div className="row">
-            <div className="col-7 bluey"><h5 > Networth: </h5></div>
-            <div className="col-5">
-            <h5 className = "px-2 bolder" > { props.currency } { (props.networth).toLocaleString() } </h5></div>
-        </div></div> {props.withdrawMessage} 
-        </div > </div > </div >
+        <div className="scroll-y3">{
+            props.deposits.map((depo, id) => (
+                <div key={id} className="row p-3 mx-4 mt-1 bg-light rounded-3">
+                <div className="col-8">
+                    <h6 className="small bolder">Deposit Amount: <br/>{ props.currency } {depo.deposit_amount}</h6>
+                </div>
+                <div className="col-4 text-end">
+                    <h6 className="small bolder">{ depo.investment_option }</h6>
+                </div>
+                </div>
+            ))
+        }</div>
+        {props.withdrawMessage} 
+        </div> </div> </div >
     );
 }
 

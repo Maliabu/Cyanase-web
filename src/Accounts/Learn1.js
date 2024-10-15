@@ -1,5 +1,5 @@
 import React from "react";
-import { InfoCircle } from 'react-iconly';
+import { ChevronRight, ChevronUp, InfoCircle } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import Profile1 from '../images/Ellipse 178.png';
 import Button from "react-bootstrap/Button";
@@ -256,7 +256,7 @@ function Learn1(props) {
                 _next()
             }
             return ( 
-                <h6 className = " my-2 mb-4 btn btn-warning"
+                <h6 className = " my-2 mb-4 btn btn-warning p-2"
                 onClick = { () => setOptionFormData() } >
                 Invest with this option 
                 </h6>        
@@ -281,7 +281,7 @@ function Learn1(props) {
         }
         if (step === 6 && payment_means === "offline") {
             return ( 
-                <h6 className = " my-2 btn btn-warning"
+                <h6 className = " my-2 btn btn-warning p-2"
                 onClick = { _next } >
                 Continue to Deposit Offline 
                 </h6>        
@@ -395,12 +395,12 @@ function Step1(props) {
         <div className = "bg-white px-lg-3 text-dark" > 
         <h6 className = "my-3 d-none d-md-block d-lg-block" > Select an Investment Class </h6> 
         <h5 className = "text-start m-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Select an Investment Class </h5> 
-        <h6 className = "btn btn-warning my-3 text-center d-none d-lg-block"
+        <h6 className = "btn btn-warning p-2 my-3 text-center d-none d-lg-block"
         onClick = { props.getTab9 } >
         Edit my Risk Profile before deposit </h6>
-        <h6 className = "btn btn-warning mb-3 text-center d-lg-none d-md-none d-sm-block"
+        <h5 className = "btn btn-warning p-2 mb-3 text-center d-lg-none d-md-none d-sm-block"
         onClick = { () => {props.setRiskProfile(true)} } >
-        Edit my Risk Profile before deposit </h6>
+        Edit my Risk Profile before deposit </h5>
         <div className="scroll-y5 px-3">
         <div>
         {
@@ -408,8 +408,8 @@ function Step1(props) {
                 return <div key={id} onClick={()=> props.getClass(options.investment_class, options.description,options.id,options.logo)}><div className="row bg-lighter mx-1 rounded-3 mb-2">
                 <div className="col-2 text-center p-2"><img src={options.logo} width={30} height={40} alt="logo" className="mt-2"/></div>
                 <div className="col-10 bluey p-3 text-start">
-                <div><h6 className="bolder">{options.investment_class}</h6>
-                <h5 className="lh-1">{options.description}</h5></div></div></div>
+                <div><h5 className="bolder">{options.investment_class}
+                <h5 className="lh-1">{options.description}</h5></h5></div></div></div>
                 </div>
             })
         }
@@ -427,7 +427,7 @@ function Step2(props) {
         <div className = "bg-white px-3 text-dark" > 
         <h6 className = "my-3 d-none d-md-block d-lg-block" > Select an Investment Option </h6> 
         <h5 className = "text-start my-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Invest in {props.className}? </h5> 
-        <div className="bg-light row m-1 p-3 rounded-3">
+        <div className="bg-light row m-1 p-2 rounded-3">
             <div className="col-2"><img src={props.classLogo} width={30} height={40} alt="logo"/></div>
             <div className="col-10 text-start">
                 <h5 className="m-2"><span className="bolder pt-2">{props.className}</span><br/>{props.classDescription}</h5>
@@ -436,7 +436,7 @@ function Step2(props) {
         
         {
             props.classOptions.map((options, id) => {
-                return <div key={id} className="row m-2 border rounded-3"><div className="col-10 p-3 text-start"><h5>{options.investment_option}</h5></div><div className="col-2 black-hover rounded-end-3 p-3" onClick={()=> props.getOptionDetails(options.investment_option) }><FaArrowRight set="broken"/></div></div>
+                return <div key={id} className="row m-2 border rounded-3"><div className="col-10 p-3 text-start"><h5>{options.investment_option}</h5></div><div className="col-2 black-hover rounded-end-3 p-3" onClick={()=> props.getOptionDetails(options.investment_option) }><ChevronRight set="broken"/></div></div>
                         
             })
         }
@@ -470,13 +470,13 @@ function Step3(props) {
         <div className = "bg-white px-3 text-dark" > 
         <h6 className = " my-3 d-none d-md-block d-lg-block" > Select an Investment Option </h6> 
         <h5 className = "text-start my-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Invest in {props.optionName}? </h5> 
-        <div className="bg-lighter row p-3 mx-1 rounded-3">
+        <div className="bg-light row p-2 mx-1 rounded-3">
             <div className="col-2"><img src={props.classLogo} width={30} height={40} alt="logo"/></div>
             <div className="col-10 text-start">
                 <h5 className="m-2"><span className="bolder">{props.className}</span><br/>{props.classDescription}</h5>
             </div>
         </div>
-        <div className="row py-3 mx-1 mt-2"><div className="col-11 text-start"><h5>{props.optionName}</h5></div><div className="col-1"><FaArrowDown onClick={()=> props.setStep(2)}/></div></div>
+        <div className="row py-3 mx-1 mt-2"><div className="col-10 text-start"><h5>{props.optionName}</h5></div><div className="col-2"><ChevronUp onClick={()=> props.setStep(2)}/></div></div>
         <div className="border-top row py-2 mx-2 text-start bluey">
             <h6 className="bolder mt-2">Description:
             <h5 className="lh-1">{props.description}</h5></h6>

@@ -10,6 +10,7 @@ import axios from "axios";
 
 class Withdraw extends React.Component {
     constructor(props) {
+        console.log(props)
         super(props)
         this.state = {
             currentStep: 2,
@@ -305,7 +306,6 @@ class Withdraw extends React.Component {
         }
         return null;
     }
-
     render() {
         return ( <
             React.Fragment >
@@ -324,7 +324,7 @@ class Withdraw extends React.Component {
             <div className="col text-end">
             <h6>Total Deposit: <
         div className = "d-flex flex-row flex justify-content-end" > { getCurrency(this.props.country) } <
-        h3 > {(this.props.deposit*1000).toLocaleString()} < /h3></div ></h6>
+        h3 > {(this.props.deposit).toLocaleString()} < /h3></div ></h6>
             <h6>Total Networth: <
         div className = "d-flex flex-row flex rounded light-res-homey pt-1 justify-content-center" > { getCurrency(this.props.country) } <
         h3 > {this.props.networth.toLocaleString()} < /h3></div ></h6>

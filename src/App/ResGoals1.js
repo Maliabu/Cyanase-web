@@ -1,5 +1,4 @@
 import React from "react";
-import { AddUser } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import '../App.css';
 import Button from "react-bootstrap/esm/Button";
@@ -9,7 +8,7 @@ import { ValidateForms } from "../Auth/ValidateForms";
 import { preloader,fail,catch_errors,success } from "../Api/RequestFunctions";
 import axios from "axios";
 import { API_URL_GOAL, TOKEN } from "../apis";
-import { FaBuilding, FaCar, FaGraduationCap, FaHospital, FaPlaneDeparture, FaSchool, FaShower } from "react-icons/fa";
+import { FaBuilding, FaCar, FaGraduationCap, FaHospital, FaPlaneDeparture, FaSchool } from "react-icons/fa";
 
 function ResGoals1(props) {
     const [step, setStep] = useState(1)
@@ -257,10 +256,10 @@ function Step1(props) {
     if (props.currentStep !== 1) {
         return null
     }
-    return ( <
-        div className = "my-2 py-5 rounded-4 bg-back text-white" >
+    return ( 
+        <div className = "my-3 py-5 rounded-4 bg-back text-white" >
         <h3 className="px-5 bolder">Create a new goal today!</h3>
-        <div className="row bluey mt-5">
+        <div className="row text-white mt-5">
             <div className="col-4 text-center">
                 <FaCar size={60} className="rounded-circle p-2 "/>
             </div>
@@ -271,7 +270,7 @@ function Step1(props) {
                 <FaSchool size={60} className="rounded-circle p-2"/>
             </div>
         </div>
-        <div className="row mt-3 bluey">
+        <div className="row mt-3 text-white">
             <div className="col-4 text-center">
                 <FaHospital size={60} className="rounded-circle border border-light p-2"/>
             </div>
@@ -282,7 +281,7 @@ function Step1(props) {
                 <FaGraduationCap size={60} className="rounded-circle border border-light p-2"/>
             </div>
         </div>
-        <h4 className = "bolder mt-5 bluey px-5" > Goal Investing </h4>  
+        <h4 className = "bolder mt-5 text-white px-5" > Goal Investing </h4>  
         <h5 className = "px-5" > Let your dreams come true by investing
         for them, create your goals here today 
         </h5> </div>

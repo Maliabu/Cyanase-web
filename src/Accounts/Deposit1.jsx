@@ -1,8 +1,7 @@
 import React from "react";
-import { ChevronRight, ChevronUp, InfoCircle } from 'react-iconly';
+import { ChevronUp, InfoCircle } from 'react-iconly';
 import Form from 'react-bootstrap/Form';
 import Profile1 from '../images/Ellipse 178.png';
-import Button from "react-bootstrap/Button";
 import { preloader, autoClickable } from "../Api/RequestFunctions";
 import Checkout from "../payment/checkout";
 import { getCurrency } from "../payment/GetCurrency";
@@ -10,13 +9,13 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { ValidateForms } from "../Auth/ValidateForms";
 import axios from "axios";
-import { API_URL_GET_INVESTMENT_OPTION, TOKEN, API_URL_GET_INVESTMENT_CLASS_OPTIONS } from "../apis";
+import { API_URL_GET_INVESTMENT_OPTION, TOKEN } from "../apis";
 import Conversion from "../payment/conversion";
 import ResRiskProfile from './ResRiskProfile'
 import InputGroup from 'react-bootstrap/InputGroup';
-import { FaArrowDown, FaArrowRight } from "react-icons/fa";
+import Chart from "react-apexcharts";
 
-function Deposit(props) {
+function Deposit1(props) {
     const globalRefId = "";
     const [step, setStep] = useState(2)
     const [minimum, setMinimum] = useState(0)
@@ -89,6 +88,95 @@ function Deposit(props) {
     }
     if(formData.investment_option !== ""){
         convert()
+    }
+    function graph(performance){
+        const groupArrayObjects = performance.reduce((group, obj) => {
+            let sum = 0
+            const { name, data } = obj;
+            if (!group[name]) {
+                group[name] = {
+                    name: name,
+                    data: [],
+                    total: sum
+                };
+            }
+            group[name].data.push(data);
+            return group;
+            }, 
+        {});
+        const results = Object.values(groupArrayObjects);
+        results.forEach(data => {
+            data.total = data.data.reduce((total, value) => total + parseInt(value), 0);
+        });
+        const options = {
+            options: {
+                chart: {
+                    type: "area",
+                    stacked: false,
+                    height: 350,
+                    zoom: {
+                        type: "x",
+                        enabled: true,
+                        autoScaleYaxis: true
+                    },
+                    toolbar: {
+                        autoSelected: "zoom"
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                markers: {
+                    size: 0
+                },
+                grid: {
+                    show: false
+                },
+                toolbar:{
+                    show: false
+                },
+                xaxis: {
+                    title: {
+                        text: 'Performance on cyanase'
+                    },
+                    labels: {
+                        show: false,
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Units'
+                    },
+                    show: false
+                },
+                colors: ['#f08101', '#252859', '#1b1e42', '#10122d'],
+                // colors: [  '#000', '#FF9800', '#252859', '#b7b7b7'],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        inverseColors: false,
+                        opacityFrom: 0.5,
+                        opacityTo: 0,
+                        stops: [0, 90, 100]
+                    }
+                },
+            },
+            series: {
+                name: results[0].name,
+                data: results[0].data
+            },
+            stroke: {
+                curve: 'smooth',
+            }
+        }
+        return(
+            <Chart options = { options.options }
+            series = {[ options.series ]}
+            className = "w-100"
+            type = "area"
+            height = { 150 }
+            />)
     }
     const getAccountType = () => {
         let currency = formData.currency
@@ -186,19 +274,19 @@ function Deposit(props) {
                 _next()
             }
             return ( 
-                <h6 className = " my-2 mb-4 p-2 text-end btn btn-warning"
+                <h5 className = " my-2 mb-4 p-2 text-end btn btn-warning"
                 onClick = { () => setOptionFormData() } >
                 Invest with this option 
-                </h6>        
+                </h5>        
             )
         }
         if (step === 4 && payment_means === "offline") {
             return ( 
-                <h6 className = " my-2 text-end btn-warning btn"
+                <h5 className = " my-2 p-2 text-end btn-warning btn"
                 type = "button"
                 onClick = { _next } >
                 Continue 
-                </h6>        
+                </h5>        
             )
         }
         if (step === 5) {
@@ -211,10 +299,10 @@ function Deposit(props) {
         }
         if (step === 6 && payment_means === "offline") {
             return ( 
-                <h6 className = " my-2 btn btn-warning"
+                <h5 className = " my-2 btn btn-warning p-2"
                 onClick = { _next } >
                 Continue to Deposit Offline 
-                </h6>        
+                </h5>        
             )
         }
         if (step === 6 && payment_means === "online") {
@@ -238,16 +326,13 @@ function Deposit(props) {
     return ( 
         <React.Fragment >
         <form className = "text-center pb-5"
-        onSubmit = { handleSubmit(onSubmit) } > {
-            /* 
-                      render the form steps and pass required props in
-                    */
-        } <div className="d-none d-md-block d-lg-block px-3 rounded-top-3"><h3 className=" py-4">Invest/Deposit</h3></div> 
+        onSubmit = { handleSubmit(onSubmit) } > {}
         <Step2 currentStep = { step }
         className = {props.setClass}
         classDescription = {props.setDescription}
         classOptions = {props.setOptions}
         classLogo = {props.setLogo}
+        graph = {graph}
         getOptionDetails = {getOptionDetails}
         />
         <Step3 currentStep = { step }
@@ -310,22 +395,35 @@ function Step2(props) {
     }
     if(props.classOptions.length !== 0){
     return ( 
-        <div className = "bg-white px-3 text-dark" > 
-        <h6 className = "my-3 d-none d-md-block d-lg-block" > Select an Investment Option </h6> 
-        <h5 className = "text-start my-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Select an Investment Option under class: {props.className}</h5> 
-        <div className="bg-light row m-1 p-2 rounded-3">
-            <div className="col-2"><img src={props.classLogo} width={30} height={40} alt="logo"/></div>
-            <div className="col-10 text-start">
-                <h5 className="m-2"><div className="bolder">{props.className}</div>{props.classDescription}</h5>
+        <div className = "bg-white text-dark" >
+        <div className="img-back">
+        <img src = {props.classLogo}
+        height="100%"
+        width="100%"
+            className = "object-fit-cover"
+            alt = "fund manager logo"/>
+        </div>
+        <div className=" row m-1 p-2 rounded-3">
+            <div className="col-2">
+            <img className = "object-fit-cover rounded-circle" width={60} height={60} alt="logo" src={props.classLogo}/> </div>
+            <div className="col-10 text-end px-3">
+                <h3 className="">{props.classDescription} {props.className}</h3>
             </div>
         </div>
-        
-        {
-            props.classOptions.map((options, id) => {
-                return <div key={id} className="row m-2 border rounded-3"><div className="col-10 p-3 text-start"><h5>{options.investment_option}</h5></div><div className="col-2 black-hover rounded-end-3 p-3" onClick={()=> props.getOptionDetails(options.investment_option) }><ChevronRight set="broken"/></div></div>
-                        
-            })
-        }
+        <div className=" scroll-y5 rounded-4 p-1 m-1">
+        <div className="d-flex m-3">
+        <h6 className="bolder text-start w-50">INVESTMENT OPTIONS</h6>
+        <h6 className="text-end w-50">{props.classOptions.length}</h6>
+        </div>
+            {
+                props.classOptions?.map((options, id) => (
+                    <div className="row px-2 py-3 m-2 bg-light rounded-3" key={id}>
+                        <div className="d-flex"><h5 className="text-start w-75">{options.name}<h6 className="bolder">{options.class}</h6></h5><h5 className="w-25 btn btn-warning rounded p-2" onClick={()=> props.getOptionDetails(options.name) }>INVEST</h5></div>
+                        <div>{props.graph(options.performance)}</div>
+                    </div>
+                ))
+            }
+        </div>
         </div>
     );}
     else {
@@ -357,7 +455,7 @@ function Step3(props) {
         <h6 className = " my-3 d-none d-md-block d-lg-block" > Select an Investment Option </h6> 
         <h5 className = "text-start my-3 d-lg-none d-md-none d-sm-block mt-5 pt-4" > Invest in {props.optionName}? </h5> 
         <div className="bg-light row p-2 mx-1 rounded-3">
-            <div className="col-2"><img src={props.classLogo} width={30} height={40} alt="logo"/></div>
+            <div className="col-2"><img src={props.classLogo} width={40} height={40} alt="logo" className="rounded-circle"/></div>
             <div className="col-10 text-start">
                 <h5 className="mt-2"><div className="bolder">{props.className}</div>{props.classDescription}</h5>
             </div>
@@ -602,4 +700,4 @@ function Step7(props) {
             </div> </div> </div> 
             </div>)
         }
-        export default Deposit;
+        export default Deposit1;

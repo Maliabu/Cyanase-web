@@ -9,8 +9,7 @@ import Goals from '../images/house.png'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Modal from 'react-bootstrap/Modal';
 import GoalPhoto from '../Accounts/goalPhoto';
-import { FaArrowLeft } from 'react-icons/fa';
-import { Camera } from 'react-iconly';
+import { Camera, ChevronLeft } from 'react-iconly';
 
 const ResGoals = (props) => {
     const [goalSetting, setGoalSetting] = useState(false);
@@ -32,6 +31,7 @@ const ResGoals = (props) => {
     const [goalDeposit, setGoalDeposit] = useState(false)
     const [goalStatus, setGoalStatus] = useState("");
     const [goalPicture, setPicture] = useState("")
+    const [holdDeposits, setHoldDeposits] = useState("");
     const [show, setShow] = useState(false);
     const handleShow = () => {
         setShow(true)
@@ -62,7 +62,7 @@ const ResGoals = (props) => {
             setVerification(res.success)
         });
     }, []);
-    function getId(id, name, amount, deposit, networth, created, status, picture) {
+    function getId(id, name, amount, deposit, networth, created, status, picture, deposits) {
         setHoldId(id)
         setHoldName(name)
         setHoldAmount(amount)
@@ -71,6 +71,7 @@ const ResGoals = (props) => {
         setHoldNetworth(networth)
         setGoalStatus(status)
         setPicture(picture)
+        setHoldDeposits(deposits)
         setGoalDeposit(true)
     }
     function onlyId(id) {
@@ -91,42 +92,35 @@ const ResGoals = (props) => {
         } else 
         if (amount !== deposit){
             innertext = "deposit"
-            classname = "hover-goal-name btn btn-warning"
+            classname = "hover-goal-name btn btn-warning p-2"
             return [innertext, classname]
         } else {
             innertext = "withdraw"
-            classname = "hover-goal-name btn btn-warning"
+            classname = "hover-goal-name btn btn-warning p-2"
             return [innertext, classname]
         }
     }
     //  Functions to handle Tab Switching
     if (goalSetting) {
-        return ( < div className='pt-3'>
-            <FaArrowLeft className='m-3' onClick = {
+        return ( 
+            <div className='px-3'>
+            <h4 className='bolder my-3'>
+            <ChevronLeft className='mx-mc' onClick = {
                 () => { setGoalSetting(false) }
-            }/> Back to Goals < ResGoals1 changeGoalSetting = { setGoalSetting }
+            }/> Back to Goals <ResGoals1 changeGoalSetting = { setGoalSetting }
             country = { country } complete = {complete} verification = {verification}
-            /> 
+            /> </h4>
             </div>
         )
     }
     if (goalDeposit) {
         return ( 
             <div className='px-3'>
-            <div className = 'row d-none p-2 px-3' > 
-            <div className = 'col-10 bg-lighter rounded-4' > 
-            <h4 className = ' mx-3 bolder mt-3' > Create New Goal </h4 > </div>
-            <div className = 'rounded-4 d-none light-res-home wide' >
-            <p className = "bolder text-end mx-4 mt-2" > welcome back user 
-            <div className = " justify-content-center" > 
-            <p className = "px-1 font-lighter" > pick up where we left off </p></div > </p>
-            </div> 
-            </div>
-            <h4 className='bolder my-2'>
-            <FaArrowLeft className='m-2' onClick = {
+            <h4 className='bolder my-3'>
+            <ChevronLeft className='mx-mc' onClick = {
                 () => { setGoalDeposit(false) }
             }/>Goals</h4>
-            <div className='scroll-y'>
+            <div className='scroll-y pb-5'>
             <Goal id = { holdId }
             name = { holdName }
             country = {country}
@@ -141,6 +135,7 @@ const ResGoals = (props) => {
             email = { email }
             status = { goalStatus }
             goalPicture = {goalPicture}
+            deposits = { holdDeposits }
             /> 
             </div></div>
         )
@@ -158,12 +153,12 @@ const ResGoals = (props) => {
             <h6 onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = ' btn btn-warning mb-2' > Add a new Goal </h6>
+            className = ' btn btn-warning p-2 mb-2' > Add a new Goal </h6>
             </div>
             )
         } else {
             return(
-                <div className = "scroll-y bg-lighter pb-5" > {
+                <div className = "scroll-y bg-lighter pb-5 px-1" > {
                 span.map(goal => ( 
                     <div className = "bg-white rounded-4 mt-2"
                     key = { goal.goal_id } >
@@ -175,9 +170,9 @@ const ResGoals = (props) => {
                     <p className='bluey'> created {
                         (goal.created).slice(0, 10)
                     } </p>  </h5>  </div>
-                    <div className='col-2 text-end' onClick={() => onlyId(goal.goal_id)}><Camera className="mt-1" size={25} set="broken"/></div>
+                    <div className='col-2 text-end' onClick={() => onlyId(goal.goal_id)}><Camera className="mt-1" size={20} set="broken"/></div>
                     <div className='col-4 text-center'><h6 className = {checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[1]} onClick = {
-                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created, goal.goal_status, goal.goal_picture)
+                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0], goal.deposit[1], goal.created, goal.goal_status, goal.goal_picture, goal.deposit[2])
                     }>{checkWithdraw(goal.goal_amount, goal.deposit[0], goal.goal_status)[0]}</h6></div> 
                     </div>
                     <div className = "goal-image">
@@ -212,7 +207,7 @@ const ResGoals = (props) => {
             <h6 onClick = {
                 () => { setGoalSetting(true) }
             }
-            className = 'btn btn-warning m-0' > Add a new Goal </h6></div>
+            className = 'btn btn-warning p-2 m-0' > Add a new Goal </h6></div>
             </div></div>
             <div className='mt-5 p-2'>
             {myGoals()}</div>

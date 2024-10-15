@@ -3,7 +3,7 @@ import { UserRequests, GetNextOfKin } from "../Api/MainRequests";
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import ChangeDetails from './ChangeDetails';
-import { ArrowLeftSquare, Call, Message, User } from "react-iconly";
+import { Call, ChevronLeft, Message, User } from "react-iconly";
 import Photo from './photo'
 
 const ADetails = (props) => {
@@ -37,13 +37,14 @@ const ADetails = (props) => {
             setEmailNok(res.kin_email)
         });
     }, []);
-    return ( < div className="mx-3">
-        <ArrowLeftSquare size = "medium"
+    return ( 
+        <div className="mx-3">
+        <ChevronLeft size = {20}
         set = "broken"
         onClick = {
             () => { props.changeAccountDetails(false) }
         }
-        className = "active my-3" / > 
+        className = "active my-3" /> 
         <h3> Account Details </h3>  
         <div className = "row px-3" > 
         <div className = "col-6" >
@@ -55,13 +56,13 @@ const ADetails = (props) => {
         <div className = "col-11 mt-3" >
         <h5> Name
         <h6 className="bolder">
-        <div className = 'flexName d-flex' > <h6> { firstName } </h6> &nbsp; <h6>{ lastName }</h6 > </div>  </h6> </h5> </div>
+        <div className = 'flexName d-flex' > <h6> { firstName } </h6> &nbsp; <h6>{ lastName }</h6> </div>  </h6> </h5> </div>
         </div>
         <div className = "row px-3" > 
         <div className = "col-1" >
         <Call size = "medium"
         set = "bold"
-        className = 'my-3 grey-text' / >
+        className = 'my-3 grey-text' />
         </div>
         <div className = "col-11 mt-3" >
         <h5> Phone <h6 className = "bolder" > { phoneNumber }  </h6> </h5>  </div>
@@ -70,7 +71,7 @@ const ADetails = (props) => {
         <div className = "col-1" >
         <Message size = "medium"
         set = "bold"
-        className = 'my-3 grey-text' / >
+        className = 'my-3 grey-text' />
         </div>
         <div className = "col-11 mt-3" >
         <h5> Email <h6 className = "bolder" > { email } </h6></h5>  </div>
@@ -85,13 +86,13 @@ const ADetails = (props) => {
         <div className = "col-11 mt-3" >
         <h5> Name
         <h6>
-        <div className = 'flexName d-flex bolder' > <h6> { firstNok } </h6> &nbsp; <h6>{ lastNok }</h6 > </div>  </h6> </h5> </div>
+        <div className = 'flexName d-flex bolder' > <h6> { firstNok } </h6> &nbsp; <h6>{ lastNok }</h6> </div>  </h6> </h5> </div>
         </div>
         <div className = "row px-3" > 
         <div className = "col-1" >
         <Call size = "medium"
         set = "bold"
-        className = 'my-3 grey-text' / >
+        className = 'my-3 grey-text' />
         </div>
         <div className = "col-11 mt-3" >
         <h5> Phone <h6 className = "bolder" > { phoneNok }  </h6> </h5>  </div>
@@ -100,7 +101,7 @@ const ADetails = (props) => {
         <div className = "col-1" >
         <Message size = "medium"
         set = "bold"
-        className = 'my-3 grey-text' / >
+        className = 'my-3 grey-text' />
         </div>
         <div className = "col-11 mt-3" >
         <h5> Email <h6 className = "bolder" > { emailNok } </h6></h5>  </div>

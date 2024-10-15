@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { UserRequests, SubscriptionRequests,GetNextOfKin } from "../Api/MainRequests";
 import Photo from '../Accounts/photo'
 import ChangeDetails from '../Accounts/ChangeDetails'
-import { ArrowLeftSquare, Call, Camera, Message, User } from "react-iconly";
+import { Call, Camera, ChevronLeft, Message, User } from "react-iconly";
 import Subscribe from '../Accounts/Subscribe'
 import NKin from '../Accounts/NKin'
 
@@ -52,7 +52,7 @@ const ResAccount = (props) => {
         <div>
         <div className = "px-3 res-home pb-5 mb-5" > 
         <h4 className = "mt-2 bolder" >
-        <ArrowLeftSquare size = { 30 }
+        <ChevronLeft size = { 20 }
         onClick = {
             () => { props.changeAccountSetting(false) }
         }

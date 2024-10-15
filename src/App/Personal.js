@@ -1,4 +1,4 @@
-import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile, UserVerificationRequests, PendingWithdrawRequests, InvestmentWithdrawRequests, UserBanks } from "../Api/MainRequests";
+import { PersonalRequests, MainRequests, UserRequests, GetRiskProfile, GetUserTrackRequests, UserVerificationRequests, PendingWithdrawRequests, InvestmentWithdrawRequests, UserBanks } from "../Api/MainRequests";
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,12 +15,12 @@ import { getCurrency } from "../payment/GetCurrency";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import PendingWithdraws from '../Accounts/PendingWithdraws'
 import Goals from '../images/house.png'
+import { FaDonate } from "react-icons/fa";
 
 const Personal = ({...props }) => {
         const [span, setSpan] = useState([])
         const [mine, setMine] = useState([])
         const [name, setName] = useState("")
-        const [deposits, setDeposits] = useState([])
         const [show, setShow] = useState(false);
         const [holdId, setHoldId] = useState("");
         const [country, setCountry] = useState("");
@@ -32,8 +32,10 @@ const Personal = ({...props }) => {
         const [holdNetworth, setHoldNetworth] = useState("");
         const [holdAmount, setHoldAmount] = useState("");
         let [holdDeposit, setHoldDeposit] = useState("");
+        let [holdDeposits, setHoldDeposits] = useState("");
         const [groups, setGroups] = useState(0)
         const [banks, setBanks] = useState("")
+        const [userTrack, setUserTrack] = useState([])
         const [pendingWithdraw, setPendingWithdraw] = useState([])
         const [investmentWithdraw, setInvestmentWithdraw] = useState([])
         const [holdCreated, setHoldCreated] = useState("");
@@ -63,11 +65,13 @@ const Personal = ({...props }) => {
                 setSpan(res[2]); // array(14)
             });
             MainRequests().then(res => {
-                setDeposits(res[6]);
                 setMine(res[4])
             });
             GetRiskProfile().then(res => {
                 setinvestmentoption(res.investment_option)
+            });
+            GetUserTrackRequests().then(res => {
+                setUserTrack(res)
             });
             PendingWithdrawRequests().then(res => {
                 setPendingWithdraw(res)
@@ -134,8 +138,15 @@ const Personal = ({...props }) => {
         results.forEach(data => {
             data.total = data.networth.reduce((total, value) => total + parseInt(value), 0);
         });
+        function summm(array) {
+            let sum = 0
+            array.forEach(item => {
+                sum = sum + item
+            });
+            return sum
+        }
         const options = {
-            seriesDonut: results.map(option => summ(option.data)),
+            seriesDonut: results.map(option => summm(option.data)),
             optionsDonut: {
                 labels: results.map(option => (option.name)),
                 chart: {
@@ -160,7 +171,7 @@ const Personal = ({...props }) => {
                 }
             }
         }
-        function getId(id, name, amount, deposit, networth, created, status, picture) {
+        function getId(id, name, amount, deposit, networth, created, status, picture, deposits) {
             setHoldId(id)
             setHoldName(name)
             setHoldAmount(amount)
@@ -169,32 +180,13 @@ const Personal = ({...props }) => {
             setHoldNetworth(networth)
             setGoalStatus(status)
             setPicture(picture)
+            setHoldDeposits(deposits)
             handleShow3()
         }
         function onlyId(id) {
             setHoldId(id)
             handleShow()
         }
-        // let list1 = [{"name":"a", "total":3000, "data": [1,2]},{"name":"b", "total":1500, "data": [2,3,5]},{"name":"c", "total":5600, "data":[]}]
-        // let list2 = [{"name":"a", "total":500},{"name":"b", "total":300}]
-        function subtractTwoLists(listA, listB) {
-            const mapA = new Map(listA.map(item => [item.name, { total: parseInt(item.total), data: item.data, investment_id: item.investment_id, handler: item.handler, logo: item.logo }])); // convert listA to map as { 'a' => { value: 2000, data: 'first' } }
-          //console.log(mapA)
-            // Subtract values from List B from List A
-            listB.forEach(itemB => {
-              const nameInB = itemB.name; //get name in B
-              const valueInB = parseInt(itemB.total);//get value in B and parse to Int
-              if (mapA.has(nameInB)) {
-                  
-                  const oldValue = mapA.get(nameInB).total;
-                  mapA.set(nameInB, { total: oldValue - valueInB, data: mapA.get(nameInB).data, investment_id: mapA.get(nameInB).investment_id, handler: mapA.get(nameInB).handler, logo: mapA.get(nameInB).logo });
-                 //Updates the value associated with the "name" attribute in List A to the result of the subtraction
-              }
-            });
-           const resultList = Array.from(mapA, ([name, { total, data, investment_id, handler, logo }]) => ({ name, total, data, investment_id, handler, logo }));
-            return resultList;  // convert map to list, i.e { 'a' => { value: 2000, data: 'first' } } to [ { name: 'a', value: 1200 }]
-        }
-        let final_data = subtractTwoLists(results, result)
         function getWithdraws(name,networth,investment_id,deposit,handler){
             setOptionName(name)
             setGroups(networth)
@@ -206,72 +198,78 @@ const Personal = ({...props }) => {
         function getPendingWithdraws(){
             handleShow5()
         }
-        function summ(array) {
-            let sum = 0
-            array.forEach(item => {
-                sum = sum + item
-            });
+        function summ(num1, num2) {
+            let sum = num1 + num2
             return sum
         }
         let progress
-        let nextDeposits = deposits
-        let rev = nextDeposits.reverse()
         const myInvestments = () => {
-            let nextResult = final_data.reverse()
             if (results.length === 0) {
-                return ( < div className = 'p-5 rounded-4 text-center grey-text mt-5' > < div className = 'd-flex flex-row justify-content-center' > <
-                    Image size = "large"
+                return ( 
+                    <div className = 'p-5 rounded-4 text-center grey-text mt-5'> <div className = 'd-flex flex-row justify-content-center'> 
+                    <Image size = "large"
                     set = "broken"
-                    className = 'mx-2 grey-text' / > <
-                    Filter size = "large"
+                    className = 'mx-2 grey-text' /> 
+                    <Filter size = "large"
                     set = "broken"
-                    className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
-                    h6 > < /div > )
+                    className = ' grey-text' /> </div> <h6> You have no data yet to show...  
+                    </h6> </div> )
                 }
                 else return (
-                    nextResult.map(option => (
-                        <div className="rounded-4 cards mt-2">
-                        <div className = "row p-3" >
-                        <div className="col-2"><img src={option.logo} width={30} height={40} alt="logo"/></div>
-                        <div className="col-6 text-end"><h6 className="bolder"> { option.name }<p>{option.handler}</p> </h6><h6 className="small py-3"><span className="small">Networth:</span><br/>
-                        <div className = "d-flex flex-row flex justify-content-end" > { getCurrency(country) } 
-                        <h3 className = "font-lighter" > { (option.total).toLocaleString() } </h3></div> </h6></div>
-                        <div className="col-4 text-end">
-                        <h6 className=" btn btn-warning rounded-2 small" onClick={() => getWithdraws(option.name,option.total,option.investment_id, summ(option.data), option.handler)}>Withdraw</h6></div>
-                        </div></div> ))
-                )
+                        userTrack.map((option, id) => (
+                            <div className={"cards p-3 mt-1 row rounded-4 tab-nav"} key={id} onClick={() => getWithdraws(option.investment_option,option.closing_balance,option.investment_id,summ(option.opening_balance, option.deposit_amount),option.fund_manager)}>
+                                <div className=''><h5 className='bolder text-start pb-1'>{option.investment_option}<h5>{option.fund_manager}</h5></h5> </div>
+                                        <div className = "row">
+                                        <div className='col text-start pt-4 px-0'>
+                                        <span className="light-res-home p-2 rounded-3"><FaDonate/></span>
+                                        </div>
+                                        <div className='col text-end px-0'> 
+                                        <h5 className='m-0'>Deposit:
+                                        <div className = "d-flex flex-row flex m-0 justify-content-end">
+                                        <span className='bolder'> { getCurrency(country) } </span>  
+                                        <h4 className = "bolder text-white"> {
+                                    (option.opening_balance + option.deposit_amount).toLocaleString()
+                                } </h4></div></h5></div><div className='text-end p-0'><h5 className='m-0'>Networth:
+                                <div className = "d-flex flex-row flex m-0 justify-content-end"><span className='bolder'> { getCurrency(country) } </span>  
+                                <h4 className = "px-1 bolder text-white m-0" > {
+                                    option.closing_balance.toLocaleString()
+                                } </h4></div></h5></div> 
+                                </div>
+                            </div>
+                        ))
+                    )
 
             }
             const pendingWithdraws = () => {
                 if (pendingWithdraw.length === 0) {
-                    return ( < div className = 'p-5 rounded-4 mt-2 text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
-                    Image size = "large"
+                    return ( <div className = 'p-5 rounded-4 mt-2 text-center grey-text'> <div className = 'd-flex flex-row justify-content-center'> 
+                    <Image size = "large"
                     set = "broken"
-                    className = 'mx-2 grey-text' / > <
-                    Filter size = "large"
+                    className = 'mx-2 grey-text'/> 
+                    <Filter size = "large"
                     set = "broken"
-                    className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
-                    h6 > < /div > )
+                    className = ' grey-text'/> </div> <h6> You have no data yet to show...  
+                    </h6> </div> )
                     }
                     else return (
                         pendingWithdraw.map(withdraw => ( <div className="">
-                        <div className = 'row p-2 mx-3 mt-1 cards rounded-3' >
-                            <div className = 'col-4 text-start' ><h6><span className="small"> { withdraw.currency }</span> { (withdraw.withdraw_amount).toLocaleString() } </h6> </div><div className="col-3 text-center">
-                                <h6 className="text-start"><span className="small bolder">option </span><br/><span>{withdraw.investment_option} </span></h6>
+                        <div className = 'row p-2 mx-3 mt-1 cards rounded-3'>
+                            <div className = 'col-4 text-start' ><h5><span className="small"> { withdraw.currency }</span> { (withdraw.withdraw_amount).toLocaleString() } </h5> </div><div className="col-3 text-center">
+                                <h5 className="text-start"><span className="small bolder">option </span><br/><span>{withdraw.investment_option} </span></h5>
                             </div><div className="col-4 text-center">
-                                <h6 className="text-start"><span className="small bolder">handler </span><br/><span>{withdraw.handler} </span></h6>
+                                <h5 className="text-start"><span className="small bolder">handler </span><br/><span>{withdraw.handler} </span></h5>
                             </div> 
-                            <div className = 'col-1 text-end bolder' > <h6> { withdraw.created } </h6></div> </div ></div>
+                            <div className = 'col-1 text-end bolder' > <h6> { withdraw.created } </h6></div> </div></div>
                         ))
                     )
         
-                }
+            }
             const myGoals = () => {
                 if(span.length === 0){
                     return(
                         <div className='rounded-4 bg-whiter'>
                         <img src={Goals} width="100%" height="100%" alt="goals"/>
-                        <div className = " py-5 text-center" >
+                        <div className = " py-5 text-center">
                         <h4 className = "bolder" > Goal Investing </h4>  
                         <h6 className = "mx-5" > Let your dreams come true by investing
                             for them, <p className = "mx-5" > create your goals here </p>  </h6> 
@@ -279,138 +277,80 @@ const Personal = ({...props }) => {
                         </div>
                     )
                 } else {return (
-                span.map(goal => ( <
-                    div className = "py-2 px-3 bg-white rounded-4 mt-2"
-                    key = { goal.goal_id } > <
-                    div className = "d-flex flex-row" > <
-                    span className = "mt-2" > <
-                    AddUser className = "p-2 bg-lighter rounded"
-                    size = "large" / > < /span>  <
-                    h6 className = "mx-4 mt-2 hover-goal-name" onClick = {
-                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created, goal.goal_status, goal.goal_picture)
-                    }> < span className="bolder"> {
+                span.map(goal => ( 
+                    <div className = "py-2 px-3 bg-white rounded-4 mt-2"
+                    key = { goal.goal_id }> 
+                    <div className = "d-flex flex-row"> 
+                    <span className = "mt-2 d-none"> 
+                    <AddUser className = "p-2 bg-lighter rounded"
+                    size = "large" /> </span>  
+                    <h6 className = "m-2 hover-goal-name" onClick = {
+                        () => getId(goal.goal_id, goal.goal_name, goal.goal_amount, goal.deposit[0],goal.deposit[1], goal.created, goal.goal_status, goal.goal_picture, goal.deposit[2])
+                    }> <span className="bolder"> {
                         (goal.goal_name)
-                    } < /span><br/ > < p className="small"> created {
+                    } </span><br/> <p className="small"> created {
                         (goal.created).slice(0, 10)
-                    } < /p >  < /
-                    h6 > < /
-                    div ><div className = "goal-image" onClick={() => onlyId(goal.goal_id)}>
+                    } </p>  
+                    </h6> 
+                    </div><div className = "goal-image" onClick={() => onlyId(goal.goal_id)}>
                     <img src = {goal.goal_picture} width="100%" height="100%" className = "object-fit-cover rounded-4" alt = "goal" /> </div> 
-                    <
-                    p className="small mt-2 mb-0"><span>Progress: {
+                    <p className="small mt-2 mb-0"><h5>Progress: {
                         progress = (100 - ((goal.goal_amount - goal.deposit[0]) / goal.goal_amount * 100)).toFixed(2)
-                    } %</span>
-                    <
-                    span >
-                    <
-                    ProgressBar now = { progress }
+                    } %</h5>
+                    <h5>
+                    <ProgressBar now = { progress }
                     className="progress-sm"
-                    variant = "#ff8800" /
-                    >
-                    <
-                    /span> < /
-                    p >  <
-                    span className = "mx-2 small" >Deposit: <span className='font-light'>{ (goal.deposit[0]).toLocaleString() }</span> < /span > <span>|</span> <
-                    span className = "mx-2 small" >Goal: <span className='font-light'>{ (goal.goal_amount).toLocaleString() }</span> < /span > < /
-                    div >
+                    variant = "#ff8800" />
+                    </h5> </p>
+                    </div>
                 )))}
-            
             }
-            const myRecentActivity = () => {
-                if (deposits.length === 0) {
-                    return ( < div className = 'p-5 rounded-4 bg-lighterer text-center grey-text' > < div className = 'd-flex flex-row justify-content-center' > <
-                        Image size = "large"
-                        set = "broken"
-                        className = 'mx-2 grey-text' / > <
-                        Filter size = "large"
-                        set = "broken"
-                        className = ' grey-text' / > < /div> < h6 > You have no data yet to show...  < /
-                        h6 > < /div > )
-                    }
-                    else return (
-                        rev.map(deposit => ( <
-                            div className = "row mt-2 p-3 bg-whiter rounded-3"
-                            key = { deposit.deposit_id } >
-                            <
-                            div className = "col" >
-                            <
-                            h6 className = "" > < span className = "bolder" > Deposit < /span> { deposit.currency } { (deposit.deposit_amount).toLocaleString() }  < /
-                            h6 > <
-                            /
-                            div >
-                            <
-                            div className = "col-4" >
-                            <
-                            h6 className = "px-5 active text-center" > { deposit.deposit_category } < /h6> < /
-                            div >
-                            <
-                            div className = "col text-end" >
-                            <
-                            h6 className = " bolder" > {
-                                (deposit.created)
-                            } < /
-                            h6 > <
-                            /div > < /
-                            div > ))
-                    )
-
-                }
-                return ( <
-                    div > <
-                    div className = "row rounded-4 mt-4 mx-3" ><
-                    div className = "col-8" > 
-                     <
-                    div className = "row justify-content-center rounded-4 mx-1" >
-                    <
-                    h6 className="text-end p-4"> < span className = "mx-3 p-2 py-1 bg-lighter rounded" > { results.length } < /span> PORTFOLIO < /h6> 
-                    <
-                    div className = "col-5 text-center" > 
-                    <
-                    Chart options = { options.optionsDonut }
+            return ( 
+                <div> 
+                    <div className = "row rounded-4 mt-4 mx-3">
+                    <div className = "col-8"> 
+                    <div className = "row justify-content-center rounded-4 mx-1">
+                    <div className = "col-5 text-center"> 
+                    <Chart options = { options.optionsDonut }
                     series = { options.seriesDonut }
                     height = { 300 }
                     width = { 200 }
-                    type = "donut" /
-                    >
-                    <
-                    /div > <
-                    div className = "col-7 px-2 text-center scroll-y5" > {
+                    type = "donut" />
+                    </div> 
+                    <div className = "col-7 px-4 text-center scroll-y5"> {
                     myInvestments()
-                } < /
-                div >
+                } </div>
                 <Modal show = { show }
-                onHide = { handleClose } {...props } > 
-                <GoalPhoto goal_id={holdId} / >  </Modal >
-                    
-                    <div className = "row my-3 p-2 light-res-home rounded-4" >
-                    <div className="col rounded-4 ">
-                    <h6 className = "mt-3 bolder" > < span className = " px-2 py-1 d-none bg-lighter rounded mx-2" > { pendingWithdraw.length } < /span> Pending Withdraw Requests < /h6>
+                onHide = { handleClose } {...props }> 
+                <GoalPhoto goal_id={holdId} />  </Modal>
+                    <div className = "row my-3 p-2 light-res-home rounded-4">
+                    <div className="col-7 rounded-4 ">
+                    <h6 className = "mt-3 bolder"> <span className = " px-2 py-1 d-none bg-lighter rounded mx-2" > { pendingWithdraw.length } </span> Pending Withdraw Requests </h6>
                     <h6 className="small lh-1">After requesting withdraw, your withdraw status becomes pending till approved by your fund manager</h6>
                     </div>
-                    <div className="col-4 p-2 text-end"><h6 className="btn btn-warning rounded-2" onClick={() => {getPendingWithdraws()}}>View pending withdraws</h6></div>
-                    <div className="scroll-y3 investments d-none rounded-3"> {pendingWithdraws()}</div>
-                    <span className="d-none">{myRecentActivity()}</span> </div> 
+                    <div className="col-5 p-2 text-end"><h5 className="btn btn-warning py-2 px-3 rounded-2" onClick={() => {getPendingWithdraws()}}>pending withdraws</h5></div>
+                    <div className="scroll-y3 investments d-none rounded-3"> {pendingWithdraws()}</div></div> 
                     </div>
                     </div> 
                 
-                <div className = "col-4 bg-light rounded-4 pt-3" >  
-                <div className = "row" >
-                <div className = "col-7" > 
-                <h6 className = " btn btn-warning rounded-2 px-3"
-                onClick = { handleShow1 } >
-                    Add New Goal </h6></div>
+                <div className = "col-4 bg-light rounded-4 pt-3">  
+                <div className = "row">
+                <div className = "col-7"> 
+                <h5 className = " btn btn-warning rounded-2 px-3 py-2"
+                onClick = { handleShow1 }>
+                    Add New Goal </h5></div>
                 <div className = "text-end col-5 p-2 px-3" > 
-                <h6><span className = "px-2 mx-2 py-1 rounded bg-lighter" > { span.length } </span> GOALS 
-                </h6> </div> </div> 
+                <h5>GOALS </h5> </div> </div> 
                 <div className = " pb-5 px-1 mt-2 scroll-y2 rounded-4" > {myGoals()} </div> 
                 <Modal show = { show3 }
                 onHide = { handleClose3 }
-                dialogClassName = "my-modal1" > 
+                dialogClassName = "my-modal1"> 
                 <Goal id = { holdId }
                 name = { holdName }
                 fullname = { name }
                 amount = { holdAmount }
                 deposit = { holdDeposit }
+                deposits = { holdDeposits }
                 email = { email }
                 created = { holdCreated }
                 country = { country }
@@ -444,7 +384,7 @@ const Personal = ({...props }) => {
                 <Offcanvas show = { show1 }
                 placement = "end"
                 className = "side-barsy bg-white pt-4"
-                onHide = { handleClose1 } {...props } > 
+                onHide = { handleClose1 } {...props }> 
                 <Goal1 close1 = { handleClose1 }
                 name = { holdName }
                 email = { email }
@@ -465,4 +405,4 @@ const Personal = ({...props }) => {
             )
         };
 
-        export default Personal;
+ export default Personal;

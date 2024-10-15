@@ -3,8 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Risk from '../images/Group 130.png'
 import RProfile from './RProfile';
 import { GetRiskProfile, GetInvestmentOptionsRequests } from "../Api/MainRequests";
-import { ArrowLeft, ArrowLeftSquare } from "react-iconly";
-import { FaArrowLeft } from "react-icons/fa";
+import { ChevronLeft } from "react-iconly";
 
 const ResRiskProfile = (props) => {
     const [complete, setComplete] = useState("Incomplete");
@@ -36,7 +35,7 @@ const ResRiskProfile = (props) => {
         <div className="p-3">
         <h4 className="text-center">Investor Risk Profile</h4> 
         <h4 className = "bolder" >
-        <FaArrowLeft size = { 18 }
+        <ChevronLeft size = { 20 }
         className = "m-3 mt-3"
         onClick = {
             () => { props.changeRiskProfileSetting(false) }

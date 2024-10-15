@@ -9,9 +9,9 @@ import Learn1 from '../Accounts/Learn1';
 import './style.scss'; 
 import Depo from '../images/depo.png'
 import { ChevronLeft, Wallet} from "react-iconly";
-import Deposit from "../Accounts/Deposit";
+import Deposit from "../Accounts/Deposit1";
 
-const Deposit1 = ({ id, activeTab, children, ...props }) => {
+const Deposit2 = ({ id, activeTab, children, ...props }) => {
     const [country, setCountry] = useState([])
     const [email, setEmail] = useState([])
     const [name, setName] = useState([])
@@ -142,9 +142,9 @@ const Deposit1 = ({ id, activeTab, children, ...props }) => {
         </div>
         </div> </div> 
         </div> </div>
-        <div className="fix-top bg-light d-lg-none d-md-none d-sm-block p-3">
-        <div className=" d-flex flex-row">
-        <ChevronLeft onClick={props.handletab1}/> <h4 className="mx-3 bolder">Deposit</h4></div></div>
+        <div className="fix-top light-res-homey d-lg-none d-md-none d-sm-block p-3">
+        <div className=" d-flex flex-row grey-text">
+        <ChevronLeft onClick={props.handletab1} className="mx-mc" size={20}/> <h4 className=" bolder grey-text">Deposit</h4></div></div>
         <div className="d-lg-none d-md-none d-sm-block ">
         <Deposit tab9 = { props.handletab9 }
         country = { country }
@@ -156,6 +156,7 @@ const Deposit1 = ({ id, activeTab, children, ...props }) => {
         setLogo = {props.setLogo}
         setId = {props.setId}
         setOptions = {props.setOptions}
+        setPerformance = {props.setPerformance}
         option = { investmentOption }
         options = {investment_options}
         riskAnalysisPercentages = {riskAnalysisPercentages}
@@ -166,4 +167,4 @@ const Deposit1 = ({ id, activeTab, children, ...props }) => {
     );
 };
 
-export default Deposit1;
+export default Deposit2;

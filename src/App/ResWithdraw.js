@@ -5,10 +5,11 @@ import '../App.css';
 import './style.scss';
 import React from "react";
 import Withdraw from '../Accounts/Withdraw'
-import { ArrowLeftSquare } from 'react-iconly';
+import { ChevronLeft } from 'react-iconly';
 import { getCurrency } from '../payment/GetCurrency';
 
 const ResWithdraw = (props) => {
+    console.log(props)
     const [country, setCountry] = useState("")
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
@@ -28,14 +29,14 @@ const ResWithdraw = (props) => {
             setVerification(res.success)
         });
     }, []);
-    return ( < div className = 'px-2' ><h4 className='bolder my-3'> <
-        ArrowLeftSquare size = { 25 }
+    return ( 
+        <div className = 'px-2' ><h4 className='bolder my-3'> 
+        <ChevronLeft size = { 20 }
         onClick = {
             () => { props.changeWithdrawSetting(false) }
         }
-        className = "mx-2" / > Withdraw</h4>
-        <
-        Withdraw country = { country }
+        className = "mx-mc" /> Withdraw</h4>
+        <Withdraw country = { country }
         phone = { phone }
         networth = { props.networth }
         deposit = {props.deposit}
@@ -45,10 +46,8 @@ const ResWithdraw = (props) => {
         verification = {verification}
         banks = {banks}
         currency = {currency}
-        fullname = { name }/ >
-        <
-        /
-        div >
+        fullname = { name } />
+        </div>
     );
 };
 export default ResWithdraw;
